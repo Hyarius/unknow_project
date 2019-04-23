@@ -18,10 +18,10 @@ vpath %.c $(foreach dir, $(SRC_DIR), $(dir):)
 DWL =		brew
 
 ##List every .c found inside SRC_DIR
-SRC = 		$(foreach dir, $(SRC_DIR), $(foreach file, $(wildcard $(dir)/*.cpp), $(notdir $(file))))
+SRC = 		$(foreach dir, $(SRC_DIR), $(foreach file, $(wildcard $(dir)/*.c), $(notdir $(file))))
 
 ##Transform and place every .o from SRC
-OBJ=		$(addprefix $(OBJ_DIR)/, $(SRC:%.cpp=%.o))
+OBJ=		$(addprefix $(OBJ_DIR)/, $(SRC:%.c=%.o))
 
 ##List of libraries to download and install using the function defined in DWL
 LIB_DWN =	sdl2 sdl2_image sdl2_mixer sdl2_ttf
@@ -33,7 +33,7 @@ LIB =		SDL2 SDL2_image SDL2_mixer SDL2_ttf
 ##
 
 ##Basics flags for 42
-CFLAGS=		-std=c++11 -Werror -Wextra -Wall -g -fsanitize=address
+CFLAGS=		-std=c11 -Werror -Wextra -Wall -g -fsanitize=address
 
 ##Create the flags to includes every .h needed by this program
 IFLAGS =	$(foreach dir, $(INC_DIR), -I$(dir)) $(foreach dir, $(shell find ~/.brew/include -type d), -I$(dir))
@@ -48,10 +48,10 @@ all:
 				make $(NAME)
 
 install:
-				make sdl
+				make libs
 				make $(NAME)
 
-sdl:
+libs:
 				$(foreach lib, $(LIB_DWN), $(DWL) install $(lib); )
 
 $(NAME):		$(OBJ)

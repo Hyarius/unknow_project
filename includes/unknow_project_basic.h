@@ -23,8 +23,8 @@ typedef struct	s_matrice
 typedef struct	s_rect
 {
 
-	float		x; //Coord of the down/left corner in x axis
-	float		y; //Coord of the down/left corner in y axis
+	float		x; //Coord of the top/left corner in x axis
+	float		y; //Coord of the top/left corner in y axis
 	float		w; //Weigth of the rect
 	float		h; //Heigth of the rect
 }				t_rect;
@@ -36,6 +36,21 @@ typedef struct	s_string
 	struct s_string
 				*next;
 }				t_string;
+
+typedef struct	s_color
+{
+	float		r;
+	float		g;
+	float		b;
+	float		a;
+}				t_color;
+
+typedef struct	s_point
+{
+	float		x;
+    float		y;
+	t_color		color;
+}				t_point;
 
 // Store a value, and it max, used by function/struct to store and calculate ratio/percent
 typedef struct	s_value
@@ -62,9 +77,24 @@ typedef struct	s_surface
 typedef struct	s_texture
 {
 	t_surface	surface; //The image content : pixels and format information
-	GLuint		ID; // Equivalent of a pointer, but inside the GPU
+	//GLuint		ID; // Equivalent of a pointer, but inside the GPU
 	t_vector2	size; //How many sprite in x and y in the texture
 	t_rect		rect; //Describ on sprite of the texture
 }				t_texture;
+
+char			*ft_strnew(int size);
+int				ft_strlen(char *str);
+char			*ft_strdup(char *src);
+char			*ft_strjoin(char *src1, char *src2);
+void			ft_stradd(char **src1, char *src2);
+void 			ft_putchar(char c);
+void 			ft_putstr(char *str);
+void 			ft_putnbr(int n);
+char			*ft_strcut(char **src, char delim);
+int				ft_strchr(char *src, char d);
+
+int				get_next_line(const int fd, char **line);
+
+void 			error_exit(int error, char *message);
 
 #endif

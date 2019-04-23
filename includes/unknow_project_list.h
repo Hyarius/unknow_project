@@ -1,5 +1,5 @@
-#ifndef UNKNOW_PROJECT_STRUCTURE_H
-# define UNKNOW_PROJECT_STRUCTURE_H
+#ifndef UNKNOW_PROJECT_LIST_H
+# define UNKNOW_PROJECT_LIST_H
 
 # include "unknow_project_basic.h"
 # include "unknow_project_structure.h"
@@ -58,5 +58,12 @@ typedef struct	s_entity_list
 	struct s_entity_list
 				*next;
 }				t_entity_list;
+
+typedef struct	s_enemy_list
+{
+	t_enemy		enemy;
+	struct s_enemy_list
+				*next;
+}				t_enemy_list;
 
 #endif

@@ -99,7 +99,7 @@ typedef struct	s_object
 {
 	t_entity	entity;
 	t_obj_comp	obj_comp; // Contain information about object's interaction with the world
-}				t_enemy;
+}				t_object;
 
 // - Contain information about an enemy
 typedef struct	s_enemy
@@ -108,21 +108,5 @@ typedef struct	s_enemy
 	t_stat		stat; // - Contain the stat of the enemy
 	t_AI_comp	AI_comp; // - Describ the comportement of the enemy
 }				t_enemy;
-
-// - Contain every information about the world and it's representation
-typedef struct	s_game_engine
-{
-	t_camera	cam;
-	t_chunk_tab	chunks;
-	t_entity_list
-				entities;
-	t_item_list
-				items;
-	t_object_list
-				objects;
-	t_player	player;
-	t_enemy_list
-				enemies;
-}				t_game_engine;
 
 #endif
