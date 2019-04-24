@@ -1,6 +1,6 @@
 #include "unknow_project.h"
 
-void	draw_rectangle(t_window p_win, t_rect p_rect, t_color p_color)
+void	draw_rectangle(t_window *p_win, t_rect p_rect, t_color p_color)
 {
 	t_point a;
 	t_point b;

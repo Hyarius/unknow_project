@@ -8,4 +8,7 @@
 
 # define RATIO 0.8
 
+# define PIXEL_SIZE 4
+# define FPS 60000
+
 #endif

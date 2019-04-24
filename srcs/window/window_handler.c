@@ -71,6 +71,8 @@ t_window		create_t_window(char *p_name, int p_size_x, int p_size_y)
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_ALWAYS);
+	SDL_GL_SetSwapInterval(0);
+
 	return (win);
 }
 
@@ -95,8 +97,10 @@ void				prepare_screen(t_color color)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-void				render_screen(t_window win)
+void				render_screen(t_window *win)
 {
+	check_frame();
+
 	//Swap le buffer et l'ecran (Ca affiche la nouvelle image)
-	SDL_GL_SwapWindow(win.window);
+	SDL_GL_SwapWindow(win->window);
 }

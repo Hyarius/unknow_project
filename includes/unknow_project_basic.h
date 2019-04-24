@@ -14,6 +14,19 @@ typedef struct	s_vector2
     float		y;
 }				t_vector2;
 
+typedef struct	s_vector3_int
+{
+    int			x;
+    int			y;
+    int			z;
+}				t_vector3_int;
+
+typedef struct	s_vector2_int
+{
+    int			x;
+    int			y;
+}				t_vector2_int;
+
 typedef struct	s_matrice
 {
 	float		value[4][4];

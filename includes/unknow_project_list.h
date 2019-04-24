@@ -4,10 +4,40 @@
 # include "unknow_project_basic.h"
 # include "unknow_project_structure.h"
 
+typedef struct	s_vector2_list
+{
+	t_vector2	vector;
+	struct s_vector2_list
+				*next;
+}				t_vector2_list;
+
+typedef struct	s_vector3_list
+{
+	t_vector3	vector;
+	struct s_vector3_list
+				*next;
+}				t_vector3_list;
+
+typedef struct	s_vector2_int_list
+{
+	t_vector2_int
+				vector;
+	struct s_vector2_int_list
+				*next;
+}				t_vector2_int_list;
+
+typedef struct	s_vector3_int_list
+{
+	t_vector3_int
+				vector;
+	struct s_vector3_int_list
+				*next;
+}				t_vector3_int_list;
+
 typedef struct	s_vertex_list
 {
 	t_vertex	vertex;
-	struct s_vertex
+	struct s_vertex_list
 				*next;
 }				t_vertex_list;
 

@@ -18,12 +18,15 @@ typedef struct	s_camera
 
 typedef struct	s_vertex // Store one vertex of a mesh
 {
-	t_vector3	vertex; // - A simple point in world reference
+	double		x;
+	double		y;
+	double		z;
 }				t_vertex;
 
 typedef struct	s_uv // Store one UV of a mesh
 {
-	t_vector2	uv; // - A point inside the texture relative reference
+	double		x;
+	double		y;
 }				t_uv;
 
 typedef struct	s_mesh // Store vertices and UVs of one element
