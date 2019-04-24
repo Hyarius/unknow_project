@@ -6,6 +6,8 @@ typedef struct	s_window
 	SDL_DisplayMode
 				current;
 	SDL_Window	*window;
+	char		*pixels;
+	char		*z_buffer;
 	int			size_x;
 	int			size_y;
 	GLuint 		vertex_array;

@@ -95,6 +95,18 @@ typedef struct	s_texture
 	t_rect		rect; //Describ on sprite of the texture
 }				t_texture;
 
+typedef union	u_pixel
+{
+	int			c;
+	struct
+	{
+		char r;
+		char g;
+		char b;
+		char a;
+	}
+}				t_pixel;
+
 char			*ft_strnew(int size);
 int				ft_strlen(char *str);
 char			*ft_strdup(char *src);

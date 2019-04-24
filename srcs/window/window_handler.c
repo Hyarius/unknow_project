@@ -33,39 +33,46 @@ void			start_sdl()
 	TTF_Init();
 }
 
-t_window		create_t_window(char *p_name, int p_size_x, int p_size_y)
+t_window		*initialize_t_window(char *p_name, int p_size_x, int p_size_y)
 {
-	t_window	win;
+	t_window	*win;
+
+	if (!(win = (t_window *)malloc(sizeof(t_window))))
+		return (NULL);
 
 	// creation de la fenetre
-	win.window = SDL_CreateWindow(p_name, // nom de la fenetre
+	win->window = SDL_CreateWindow(p_name, // nom de la fenetre
 					SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, // position de la fentre sur l'ecran
 					p_size_x, p_size_y, // taille de la fenetre
 					SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL); //parametre de la fenetre
 
-	// stockage de la taille de la fenetre dans win.size_x et win.size_y
-	SDL_GetWindowSize(win.window, &win.size_x, &win.size_y);
+	// stockage de la taille de la fenetre dans win->size_x et win->size_y
+	SDL_GetWindowSize(win->window, &win->size_x, &win->size_y);
+
+
+	if (pixels);
+	char		*z_buffer;
 
 	// creation du context
-	win.context = SDL_GL_CreateContext(win.window);
+	win->context = SDL_GL_CreateContext(win->window);
 
 	// generation du VAO (vertex array object)
-	glGenVertexArrays(1, &win.vertex_array);
+	glGenVertexArrays(1, &win->vertex_array);
 
 	// bind le VAO
-	glBindVertexArray(win.vertex_array);
+	glBindVertexArray(win->vertex_array);
 
 	// generation des VBO (vertex buffer object)
-	glGenBuffers(1, &win.vertex_buffer);
-	glGenBuffers(1, &win.color_buffer);
-	glGenBuffers(1, &win.texture_buffer);
-	glGenBuffers(1, &win.alpha_buffer);
+	glGenBuffers(1, &win->vertex_buffer);
+	glGenBuffers(1, &win->color_buffer);
+	glGenBuffers(1, &win->texture_buffer);
+	glGenBuffers(1, &win->alpha_buffer);
 
 	// bind VAO
-	glBindVertexArray(win.vertex_array);
+	glBindVertexArray(win->vertex_array);
 
 	// create shader program
-	win.program_color = load_shaders("ressources/shader/color_shader.vert", "ressources/shader/color_shader.frag");
+	win->program_color = load_shaders("ressources/shader/color_shader.vert", "ressources/shader/color_shader.frag");
 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
