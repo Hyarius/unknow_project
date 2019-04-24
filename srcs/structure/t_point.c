@@ -10,3 +10,14 @@ t_point		create_t_point(float p_x, float p_y, t_color p_color)
 
 	return (point);
 }
+
+void t_point_swap(t_point *a, t_point *b)
+{
+	t_point tmp;
+
+	tmp.x = a->x;
+	tmp.y = a->y;
+	tmp.color = a->color;
+	*a = *b;
+	*b = tmp;
+}

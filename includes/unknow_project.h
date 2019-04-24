@@ -17,6 +17,14 @@
 t_vector2_int_list
 			calc_line(t_vector2_int start, t_vector2_int end);
 
+
+//
+// ----------------- CPU_DRAWING -----------------
+//
+//			Draw triangle cpu
+void 		draw_triangle_cpu(t_window *p_win,
+		t_point p_a, t_point p_b, t_point p_c);
+
 //
 // ----------------- DRAWING -----------------
 //
@@ -48,6 +56,7 @@ t_color		create_t_color(float p_r, float p_g, float p_b, float p_a);
 t_color		*initialize_t_color(float p_r, float p_g, float p_b, float p_a);
 //			t_point
 t_point		create_t_point(float p_x, float p_y, t_color p_color);
+void 		t_point_swap(t_point *a, t_point *b);
 //			t_rect
 t_rect		create_t_rect(float p_x, float p_y, float p_w, float p_h);
 

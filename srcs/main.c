@@ -22,7 +22,7 @@ int main(int argc, char **argv)
 	{
 		prepare_screen(create_t_color(1.0f, 1.0f, 1.0f, 1.0f));
 
-		draw_triangle(&win, a, b, c);
+		draw_triangle_cpu(&win, a, b, c);
 
 		render_screen(&win);
 
