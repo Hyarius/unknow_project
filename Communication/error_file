@@ -1,4 +1,8 @@
 -1 : Bad argument on start
 -2 : Error while compiling shader
 -3 : Error while computing shader program
--4, "Error while filling a triangle"
+-4 : Error while filling a triangle
+-5 : Can't malloc a char array
+-6 : Can't malloc a t_window
+-7 : Can't malloc a t_pixel array
+-8 : Can't malloc a t_vector2 array

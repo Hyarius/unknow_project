@@ -1,15 +1,13 @@
 #include "unknow_project.h"
 
-void draw_pixel_opengl(t_window *p_win, t_point *p_pixel, int size)
+void draw_pixel_opengl(t_window *p_win, t_vector2 *p_coord, t_color *p_color)
 {
-	glPointSize(size);
-
 	GLfloat vertex_buffer_data[] = {
-		p_pixel->x, p_pixel->y, 0.0f
+		p_coord->x, p_coord->y, 0.0f
 	};
 
 	GLfloat color_buffer_data[] = {
-		p_pixel->color.r,  p_pixel->color.g,  p_pixel->color.b, p_pixel->color.a
+		p_color->r,  p_color->g,  p_color->b, p_color->a
 	};
 
 	// bind VAO
@@ -41,6 +39,50 @@ void draw_pixel_opengl(t_window *p_win, t_point *p_pixel, int size)
 
 	// dessine un point
 	glDrawArrays( GL_POINTS, 0, 1);
+}
+
+void draw_point_opengl(t_window *p_win, t_point *p_point, int size)
+{
+	glPointSize(size);
+
+	GLfloat vertex_buffer_data[] = {
+		p_point->x, p_point->y, 0.0f
+	};
+
+	GLfloat color_buffer_data[] = {
+		p_point->color.r,  p_point->color.g,  p_point->color.b, p_point->color.a
+	};
+
+	// bind VAO
+	glBindVertexArray(p_win->vertex_array);
+
+	// bind vertex_buffer
+	glBindBuffer(GL_ARRAY_BUFFER, p_win->vertex_buffer);
+	// donne a vertex_buffer vertex_buffer_data
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertex_buffer_data), vertex_buffer_data, GL_STATIC_DRAW);
+
+	// bind color_buffer
+	glBindBuffer(GL_ARRAY_BUFFER, p_win->color_buffer);
+	// donne a color_buffer color_buffer_data
+	glBufferData(GL_ARRAY_BUFFER, sizeof(color_buffer_data), color_buffer_data, GL_STATIC_DRAW);
+
+	// indique le shader a utiliser
+	glUseProgram(p_win->program_color);
+
+	// indique la location du shader utiliser
+	glEnableVertexAttribArray(0);
+	// quelle est le buffer a utiliser
+	glBindBuffer(GL_ARRAY_BUFFER, p_win->vertex_buffer);
+	// comment utiliser le buffer
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+
+	glEnableVertexAttribArray(1);
+	glBindBuffer(GL_ARRAY_BUFFER, p_win->color_buffer);
+	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, NULL);
+
+	// dessine un point
+	glDrawArrays( GL_POINTS, 0, 1);
+	glPointSize(1);
 }
 
 void draw_line_opengl(t_window *p_win, t_point *p_a, t_point *p_b)
@@ -129,4 +171,36 @@ void draw_triangle_opengl(t_window *p_win, t_point *p_a, t_point *p_b, t_point *
 
 	// dessine un triangle
 	glDrawArrays(GL_TRIANGLES, 0, 3);
+}
+
+void draw_buffer_opengl(t_window *p_win)
+{
+	glBindVertexArray(p_win->vertex_array);
+
+	// bind vertex_buffer
+	glBindBuffer(GL_ARRAY_BUFFER, p_win->vertex_buffer);
+	// donne a vertex_buffer vertex_buffer_data
+	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * p_win->size_x * p_win->size_y * 3, p_win->vertex_buffer_data, GL_STATIC_DRAW);
+
+	// bind color_buffer
+	glBindBuffer(GL_ARRAY_BUFFER, p_win->color_buffer);
+	// donne a color_buffer color_buffer_data
+	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * p_win->size_x * p_win->size_y * 4, p_win->color_buffer_data, GL_STATIC_DRAW);
+
+	// indique le shader a utiliser
+	glUseProgram(p_win->program_color);
+
+	// indique la location du shader utiliser
+	glEnableVertexAttribArray(0);
+	// quelle est le buffer a utiliser
+	glBindBuffer(GL_ARRAY_BUFFER, p_win->vertex_buffer);
+	// comment utiliser le buffer
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+
+	glEnableVertexAttribArray(1);
+	glBindBuffer(GL_ARRAY_BUFFER, p_win->color_buffer);
+	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, NULL);
+
+	// dessine un point
+	glDrawArrays( GL_POINTS, 0, p_win->size_x * p_win->size_y);
 }

@@ -14,6 +14,7 @@
 //
 // ----------------- ALGORYTHMN -----------------
 //
+//			Bresenham
 t_vector2_int_list
 			calc_line(t_vector2_int start, t_vector2_int end);
 
@@ -21,6 +22,10 @@ t_vector2_int_list
 //
 // ----------------- CPU_DRAWING -----------------
 //
+//			buffer handler
+void 	add_pixel_to_screen(t_window *p_win, int p_coord, t_color *color);
+void	clean_color_buffer(t_window *p_win, t_color *color);
+
 //			Draw triangle cpu
 void 		draw_triangle_cpu(t_window *p_win,
 		t_point p_a, t_point p_b, t_point p_c);
@@ -39,10 +44,12 @@ void 		draw_triangle(t_window *p_win,
 // ----------------- OPENGL -----------------
 //
 //			Draw opengl
-void 		draw_pixel_opengl(t_window *p_win, t_point *p_pixel, int size);
+void 		draw_pixel_opengl(t_window *p_win, t_vector2 *p_coord, t_color *p_color);
+void 		draw_point_opengl(t_window *p_win, t_point *p_point, int size);
 void 		draw_line_opengl(t_window *p_win, t_point *p_a, t_point *p_b);
 void 		draw_triangle_opengl(t_window *p_win,
 					t_point *p_a, t_point *p_b, t_point *p_c);
+void		draw_buffer_opengl(t_window *p_win);
 
 //			Shader - handler
 GLuint		load_shaders(const char * p_vertex_file_path,
@@ -146,15 +153,15 @@ void		set_t_vector3(t_vector3 *src, float p_x, float p_y, float p_z);
 //			convert
 t_vector2	convert_screen_to_opengl(t_window *p_win, t_vector2_int source);
 void		convert_point_to_opengl(t_window *p_win, t_point *source);
+void		convert_coord_to_opengl(t_window *p_win, t_vector2 *source);
 
 //			fps_handler
 void		check_frame();
 
 //			window_handler
 void		start_sdl();
-t_window	create_t_window(char *p_name, int p_size_x, int p_size_y);
 t_window	*initialize_t_window(char *name, int size_x, int size_y);
-void		prepare_screen(t_color color);
+void		prepare_screen(t_window *win, t_color color);
 void		render_screen(t_window *win);
 
 #endif

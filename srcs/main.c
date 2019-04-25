@@ -7,24 +7,24 @@ int main(int argc, char **argv)
 
 	start_sdl();
 
-	t_window win;
-	win = create_t_window(argv[0], 600, 480);
+	t_window *win;
+	win = initialize_t_window(argv[0], 600, 480);
 
 	SDL_Event event;
 	int play = 1;
 	int state = 0;
 	t_color color = create_t_color(1.0, 0.0, 0.0, 1.0);
-	t_point a = create_t_point(50, 50, color);
-	t_point b = create_t_point(350, 50, color);
-	t_point c = create_t_point(50, 550, color);
+	t_point a = create_t_point(50, 93, color);
+	t_point b = create_t_point(72, 60, color);
+	t_point c = create_t_point(250, 150, create_t_color(1.0, 1.0, 0.0, 1.0));
 
 	while (play == 1)
 	{
-		prepare_screen(create_t_color(1.0f, 1.0f, 1.0f, 1.0f));
+		prepare_screen(win, create_t_color(1.0f, 1.0f, 1.0f, 1.0f));
 
-		draw_triangle_cpu(&win, a, b, c);
+		draw_triangle_cpu(win, a, b, c);
 
-		render_screen(&win);
+		render_screen(win);
 
 		//Regarde si il y a un evenement, met dans event la liste des evenements arrives, 0 si aucun, 1 si evenement
 		if (SDL_PollEvent(&event) == 1)

@@ -104,7 +104,7 @@ typedef union	u_pixel
 		char g;
 		char b;
 		char a;
-	}
+	};
 }				t_pixel;
 
 char			*ft_strnew(int size);

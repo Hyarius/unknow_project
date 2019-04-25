@@ -35,10 +35,13 @@ void			start_sdl()
 
 t_window		*initialize_t_window(char *p_name, int p_size_x, int p_size_y)
 {
+	int			i;
 	t_window	*win;
+	t_vector2	coord[2];
+	t_color		color;
 
 	if (!(win = (t_window *)malloc(sizeof(t_window))))
-		return (NULL);
+		error_exit(-6, "Can't malloc a t_window");
 
 	// creation de la fenetre
 	win->window = SDL_CreateWindow(p_name, // nom de la fenetre
@@ -48,10 +51,6 @@ t_window		*initialize_t_window(char *p_name, int p_size_x, int p_size_y)
 
 	// stockage de la taille de la fenetre dans win->size_x et win->size_y
 	SDL_GetWindowSize(win->window, &win->size_x, &win->size_y);
-
-
-	if (pixels);
-	char		*z_buffer;
 
 	// creation du context
 	win->context = SDL_GL_CreateContext(win->window);
@@ -80,23 +79,36 @@ t_window		*initialize_t_window(char *p_name, int p_size_x, int p_size_y)
 	glDepthFunc(GL_ALWAYS);
 	SDL_GL_SetSwapInterval(0);
 
+	coord[0] = convert_screen_to_opengl(win, create_t_vector2_int(0, 0));
+	coord[1] = convert_screen_to_opengl(win, create_t_vector2_int(1, 1));
+	win->pixel_delta = create_t_vector2(coord[1].x - coord[0].x, coord[1].y - coord[0].y);
+
+	if (!(win->z_buffer = (char *)malloc(sizeof(char) * (win->size_x * win->size_y))))
+		error_exit(-5, "Can't malloc a char array");
+
+	if (!(win->vertex_buffer_data = (GLfloat *)malloc(sizeof(GLfloat) * (win->size_x * win->size_y * 3))))
+		error_exit(-9, "Can't malloc a GLfloat array");
+
+	if (!(win->color_buffer_data = (GLfloat *)malloc(sizeof(GLfloat) * (win->size_x * win->size_y * 4))))
+		error_exit(-9, "Can't malloc a GLfloat array");
+
+	color = create_t_color(0.0, 0.0, 0.0, 1.0);
+	i = 0;
+	while (i < win->size_x * win->size_y)
+	{
+		win->z_buffer[i] = 0;
+		win->vertex_buffer_data[i * 3 + 0] = (((i % win->size_x) - win->size_x / 2) + 1) * win->pixel_delta.x;
+		win->vertex_buffer_data[i * 3 + 1] = (((i / win->size_x) - win->size_y / 2)) * win->pixel_delta.y;
+		win->vertex_buffer_data[i * 3 + 2] = 0.0f;
+		i++;
+	}
 	return (win);
 }
 
-t_window		*initialize_t_window(char *name, int size_x, int size_y)
+void				prepare_screen(t_window *win, t_color color)
 {
-	t_window	*win;
+	clean_color_buffer(win, &color);
 
-	if (!(win = (t_window *)malloc(sizeof(t_window))))
-		return (NULL);
-
-	*win = create_t_window(name, size_x, size_y);
-
-	return (win);
-}
-
-void				prepare_screen(t_color color)
-{
 	//Set background color
 	glClearColor((GLclampf)color.r, (GLclampf)color.g, (GLclampf)color.b, 0.0f);
 
@@ -107,6 +119,8 @@ void				prepare_screen(t_color color)
 void				render_screen(t_window *win)
 {
 	check_frame();
+
+	draw_buffer_opengl(win);
 
 	//Swap le buffer et l'ecran (Ca affiche la nouvelle image)
 	SDL_GL_SwapWindow(win->window);
