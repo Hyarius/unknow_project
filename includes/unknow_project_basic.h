@@ -76,7 +76,8 @@ typedef struct	s_value
 typedef struct	s_surface
 {
 	void 		*pixels;
-	t_vector2	size;
+	int			w;
+	int			h;
 	long long	format;
 	int			bits_per_pixel;
 	int			bytes_per_pixel;
@@ -90,22 +91,10 @@ typedef struct	s_surface
 typedef struct	s_texture
 {
 	t_surface	surface; //The image content : pixels and format information
-	//GLuint		ID; // Equivalent of a pointer, but inside the GPU
+	GLuint		id; // Equivalent of a pointer, but inside the GPU
 	t_vector2	size; //How many sprite in x and y in the texture
 	t_rect		rect; //Describ on sprite of the texture
 }				t_texture;
-
-typedef union	u_pixel
-{
-	int			c;
-	struct
-	{
-		char r;
-		char g;
-		char b;
-		char a;
-	};
-}				t_pixel;
 
 char			*ft_strnew(int size);
 int				ft_strlen(char *str);

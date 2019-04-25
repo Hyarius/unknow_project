@@ -24,9 +24,9 @@ SRC = 		$(foreach dir, $(SRC_DIR), $(foreach file, $(wildcard $(dir)/*.c), $(not
 OBJ=		$(addprefix $(OBJ_DIR)/, $(SRC:%.c=%.o))
 
 ##List of libraries to download and install using the function defined in DWL
-LIB_DWN =	sdl2 sdl2_image sdl2_mixer sdl2_ttf
+LIB_DWN =	sdl2 sdl2_image sdl2_mixer sdl2_ttf png
 ##List of libraries to link while compiling
-LIB =		SDL2 SDL2_image SDL2_mixer SDL2_ttf
+LIB =		SDL2 SDL2_image SDL2_mixer SDL2_ttf png
 
 ##
 ##		COMPILER FLAGS

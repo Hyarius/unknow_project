@@ -8,21 +8,33 @@ int main(int argc, char **argv)
 	start_sdl();
 
 	t_window *win;
-	win = initialize_t_window(argv[0], 600, 480);
+	win = initialize_t_window(argv[0], 1840, 1220);
 
 	SDL_Event event;
 	int play = 1;
 	int state = 0;
 	t_color color = create_t_color(1.0, 0.0, 0.0, 1.0);
+	t_color color2 = create_t_color(1.0, 1.0, 0.0, 1.0);
 	t_point a = create_t_point(50, 100, color);
 	t_point b = create_t_point(100, 150, color);
 	t_point c = create_t_point(100, 50, color);
+	t_point d = create_t_point(250, 100, color2);
+	t_point e = create_t_point(300, 150, color2);
+	t_point f = create_t_point(300, 50, color2);
+
+	png_load("003.png");
 
 	while (play == 1)
 	{
 		prepare_screen(win, create_t_color(0.2f, 0.2f, 0.2f, 1.0f));
 
 		draw_triangle_cpu(win, a, b, c);
+		draw_triangle_cpu(win, d, e, f);
+		draw_triangle_cpu(win, a, e, d);
+		draw_triangle_cpu(win, c, b, d);
+		draw_triangle_cpu(win, a, f, c);
+		draw_triangle_cpu(win, c, d, e);
+		draw_triangle_cpu(win, c, f, b);
 
 		render_screen(win);
 

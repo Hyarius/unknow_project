@@ -1,6 +1,7 @@
 #ifndef UNKNOW_PROJECT_INCLUDES_H
 # define UNKNOW_PROJECT_INCLUDES_H
 
+# include <png.h>
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdio.h>

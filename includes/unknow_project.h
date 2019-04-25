@@ -10,6 +10,7 @@
 # include "unknow_project_gui.h"
 # include "unknow_project_game_engine.h"
 # include "unknow_project_window.h"
+# include "unknow_project_png_reader.h"
 
 //
 // ----------------- ALGORYTHMN -----------------

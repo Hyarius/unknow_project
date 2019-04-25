@@ -107,7 +107,7 @@ t_window		*initialize_t_window(char *p_name, int p_size_x, int p_size_y)
 
 void				prepare_screen(t_window *win, t_color color)
 {
-	clean_color_buffer(win, &color);
+	//clean_color_buffer(win, &color);
 
 	//Set background color
 	glClearColor((GLclampf)color.r, (GLclampf)color.g, (GLclampf)color.b, 0.0f);
@@ -120,7 +120,7 @@ void				render_screen(t_window *win)
 {
 	check_frame();
 
-	draw_buffer_opengl(win);
+	//draw_buffer_opengl(win);
 
 	//Swap le buffer et l'ecran (Ca affiche la nouvelle image)
 	SDL_GL_SwapWindow(win->window);
