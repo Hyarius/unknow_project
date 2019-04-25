@@ -24,7 +24,7 @@ void fill_down_flat_triangle(t_window *p_win, t_point *v1, t_point *v2, t_point 
 	t_vector2_int range;
 	float slope[2];
 	float current[2];
-	int scan_line_y = v3->y;
+	int scan_line_y = v1->y;
 
 	slope[0] = (v2->x - v1->x) / (v2->y - v1->y);
 	slope[1] = (v3->x - v1->x) / (v3->y - v1->y);
@@ -32,11 +32,12 @@ void fill_down_flat_triangle(t_window *p_win, t_point *v1, t_point *v2, t_point 
 	current[1] = v1->x;
 	while (scan_line_y <= v2->y)
 	{
-		range.x = current[0];
-		range.y = current[1];
+		range.x = (int)(current[0]);
+		range.y = (int)(current[1]);
 		draw_line_color(p_win, range, scan_line_y, &(v1->color));
 		current[0] += slope[0];
 		current[1] += slope[1];
+
 		scan_line_y++;
 	}
 }
@@ -55,8 +56,8 @@ void fill_top_flat_triangle(t_window *p_win, t_point *v1, t_point *v2, t_point *
 	scan_line_y = v3->y;
 	while (scan_line_y > v1->y)
 	{
-		range.x = current[0];
-		range.y = current[1];
+		range.x = (int)(current[0]);
+		range.y = (int)(current[1]);
 		draw_line_color(p_win, range, scan_line_y, &(v1->color));
 		current[0] -= slope[0];
 		current[1] -= slope[1];
@@ -69,11 +70,11 @@ void draw_triangle_cpu(t_window *p_win, t_point p_a, t_point p_b, t_point p_c)
 {
 	t_point p_d;
 
-	if (p_a.y > p_b.y)
+	if (p_a.y > p_b.y || (p_a.y == p_b.y && p_a.x > p_b.x))
 		t_point_swap(&p_a, &p_b);
-	if (p_b.y > p_c.y)
+	if (p_b.y > p_c.y || (p_b.y == p_c.y && p_b.x > p_c.x))
 		t_point_swap(&p_b, &p_c);
-	if (p_a.y > p_b.y)
+	if (p_a.y > p_b.y || (p_a.y == p_b.y && p_a.x > p_b.x))
 		t_point_swap(&p_a, &p_b);
 
 	if (p_b.y == p_c.y)

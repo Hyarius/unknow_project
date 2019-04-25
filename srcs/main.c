@@ -14,13 +14,13 @@ int main(int argc, char **argv)
 	int play = 1;
 	int state = 0;
 	t_color color = create_t_color(1.0, 0.0, 0.0, 1.0);
-	t_point a = create_t_point(50, 93, color);
-	t_point b = create_t_point(72, 60, color);
-	t_point c = create_t_point(250, 150, create_t_color(1.0, 1.0, 0.0, 1.0));
+	t_point a = create_t_point(50, 100, color);
+	t_point b = create_t_point(100, 150, color);
+	t_point c = create_t_point(100, 50, color);
 
 	while (play == 1)
 	{
-		prepare_screen(win, create_t_color(1.0f, 1.0f, 1.0f, 1.0f));
+		prepare_screen(win, create_t_color(0.2f, 0.2f, 0.2f, 1.0f));
 
 		draw_triangle_cpu(win, a, b, c);
 
