@@ -72,30 +72,6 @@ typedef struct	s_value
 	int			max; // - Maximum value of the bar
 }				t_value;
 
-//Store information about an image, loaded on the CPU
-typedef struct	s_surface
-{
-	void 		*pixels;
-	int			w;
-	int			h;
-	long long	format;
-	int			bits_per_pixel;
-	int			bytes_per_pixel;
-	long long	r;
-	long long	g;
-	long long	b;
-	long long	a;
-}				t_surface;
-
-//Store an surface, and send it to the GPU, saving it inside ID
-typedef struct	s_texture
-{
-	t_surface	surface; //The image content : pixels and format information
-	GLuint		id; // Equivalent of a pointer, but inside the GPU
-	t_vector2	size; //How many sprite in x and y in the texture
-	t_rect		rect; //Describ on sprite of the texture
-}				t_texture;
-
 char			*ft_strnew(int size);
 int				ft_strlen(char *str);
 char			*ft_strdup(char *src);

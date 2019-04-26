@@ -5,7 +5,7 @@ int main(int argc, char **argv)
 	if (argc != 1)
 		error_exit(-1, "Bad argument");
 
-	/*start_sdl();
+	start_sdl();
 
 	t_window *win;
 	win = initialize_t_window(argv[0], 1840, 1220);
@@ -22,19 +22,19 @@ int main(int argc, char **argv)
 	t_point e = create_t_point(300, 150, color2);
 	t_point f = create_t_point(300, 50, color2);
 
-	png_load("003.png");
+	t_texture *texture = png_load("003.png");
+
+	printf("Color = %d / %d / %d / %d\n", texture->surface->pixels[0], texture->surface->pixels[1], texture->surface->pixels[2], texture->surface->pixels[3]);
 
 	while (play == 1)
 	{
 		prepare_screen(win, create_t_color(0.2f, 0.2f, 0.2f, 1.0f));
 
 		draw_triangle_cpu(win, a, b, c);
-		draw_triangle_cpu(win, d, e, f);
-		draw_triangle_cpu(win, a, e, d);
-		draw_triangle_cpu(win, c, b, d);
-		draw_triangle_cpu(win, a, f, c);
-		draw_triangle_cpu(win, c, d, e);
-		draw_triangle_cpu(win, c, f, b);
+		draw_triangle_cpu(win, b, a, e);
+		draw_triangle_cpu(win, e, f, c);
+		draw_triangle_cpu(win, f, c, d);
+		draw_triangle_cpu(win, d, b, c);
 
 		render_screen(win);
 
@@ -50,21 +50,6 @@ int main(int argc, char **argv)
 			if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_q)
 				state = (state + 1) % 2;
 		}
-	}*/
-
-	t_vector2_list list = create_t_vector2_list();
-
-	t_vector2_list_push_back(&list, create_t_vector2(1.0, 2.0));
-	t_vector2_list_push_back(&list, create_t_vector2(2.0, 5.0));
-	t_vector2_list_push_back(&list, create_t_vector2(12.5, 15.0));
-
-	t_vector2 vector = t_vector2_list_at(&list, 2); // return l'element ou null si < 0 || > size
-
-	print_t_vector2(vector, "test");
-
-	float	*test = t_vector2_list_obtain(&list, 0);
-
-	printf("test float = %0.4f / %0.4f\n", test[2], test[3]);
-
+	}
 	return (0);
 }

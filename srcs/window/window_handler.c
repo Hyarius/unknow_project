@@ -83,23 +83,18 @@ t_window		*initialize_t_window(char *p_name, int p_size_x, int p_size_y)
 	coord[1] = convert_screen_to_opengl(win, create_t_vector2_int(1, 1));
 	win->pixel_delta = create_t_vector2(coord[1].x - coord[0].x, coord[1].y - coord[0].y);
 
-	if (!(win->z_buffer = (char *)malloc(sizeof(char) * (win->size_x * win->size_y))))
-		error_exit(-5, "Can't malloc a char array");
-
-	if (!(win->vertex_buffer_data = (GLfloat *)malloc(sizeof(GLfloat) * (win->size_x * win->size_y * 3))))
+	if (!(win->coord_data = (t_vector3 *)malloc(sizeof(t_vector3) * (win->size_x * win->size_y))))
 		error_exit(-9, "Can't malloc a GLfloat array");
 
-	if (!(win->color_buffer_data = (GLfloat *)malloc(sizeof(GLfloat) * (win->size_x * win->size_y * 4))))
-		error_exit(-9, "Can't malloc a GLfloat array");
+	win->vertex_buffer_data = create_t_vector3_list();
+	win->color_buffer_data = create_t_color_list();
 
-	color = create_t_color(0.0, 0.0, 0.0, 1.0);
 	i = 0;
 	while (i < win->size_x * win->size_y)
 	{
-		win->z_buffer[i] = 0;
-		win->vertex_buffer_data[i * 3 + 0] = (((i % win->size_x) - win->size_x / 2) + 1) * win->pixel_delta.x;
-		win->vertex_buffer_data[i * 3 + 1] = (((i / win->size_x) - win->size_y / 2)) * win->pixel_delta.y;
-		win->vertex_buffer_data[i * 3 + 2] = 0.0f;
+		win->coord_data[i].x = (((i % win->size_x) - win->size_x / 2) + 1) * win->pixel_delta.x;
+		win->coord_data[i].y = (((i / win->size_x) - win->size_y / 2)) * win->pixel_delta.y;
+		win->coord_data[i].z = 0.0f;
 		i++;
 	}
 	return (win);
@@ -107,7 +102,7 @@ t_window		*initialize_t_window(char *p_name, int p_size_x, int p_size_y)
 
 void				prepare_screen(t_window *win, t_color color)
 {
-	clean_color_buffer(win, &color);
+	clean_buffers(win);
 
 	//Set background color
 	glClearColor((GLclampf)color.r, (GLclampf)color.g, (GLclampf)color.b, 0.0f);

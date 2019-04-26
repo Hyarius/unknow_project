@@ -12,7 +12,7 @@ void			check_frame()
 		beginsecond = frame_actual;
 	if (frame_actual - beginsecond > 1000)
 	{
-		printf("nb_frame = %d\n", nb_frame);
+		//printf("nb_frame = %d\n", nb_frame);
 		nb_frame = 0;
 		beginsecond = 0;
 	}

@@ -23,7 +23,15 @@
 -19 : Can't create a t_vector3_list array
 -20 : Can't realloc a t_vector3 array
 
--21, "Segfault : t_vector2_int_list out of range"
--22, "Segfault : t_vector2_list out of range"
--23, "Segfault : t_vector3_int_list out of range"
--24, "Segfault : t_vector3_list out of range"
+-21 : Segfault : t_vector2_int_list out of range
+-22 : Segfault : t_vector2_list out of range
+-23 : Segfault : t_vector3_int_list out of range
+-24 : Segfault : t_vector3_list out of range
+
+-25 : Can't malloc a t_color array
+-26 : Can't create a t_color_list array
+-27 : Can't realloc a t_color array
+-28 : Segfault : t_color_list out of range
+
+-29 : Can't malloc a t_surface
+-30 : Bad image format

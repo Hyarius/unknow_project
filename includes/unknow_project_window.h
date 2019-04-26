@@ -8,9 +8,11 @@ typedef struct	s_window
 	SDL_DisplayMode
 				current;
 	SDL_Window	*window;
-	GLfloat 	*vertex_buffer_data;
-	GLfloat 	*color_buffer_data;
-	char		*z_buffer;
+	t_vector3 	*coord_data;
+	t_vector3_list
+				vertex_buffer_data;
+	t_color_list
+				color_buffer_data;
 	int			size_x;
 	int			size_y;
 	GLuint 		vertex_array;

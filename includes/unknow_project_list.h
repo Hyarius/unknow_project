@@ -12,6 +12,7 @@ typedef struct	s_vector2_list
 		float		*value;
 	};
 	int			size;
+	int			max_size;
 }				t_vector2_list;
 
 typedef struct	s_vector3_list
@@ -23,6 +24,7 @@ typedef struct	s_vector3_list
 		float	*value;
 	};
 	int			size;
+	int			max_size;
 }				t_vector3_list;
 
 typedef struct	s_vector2_int_list
@@ -34,6 +36,7 @@ typedef struct	s_vector2_int_list
 		int		*value;
 	};
 	int			size;
+	int			max_size;
 }				t_vector2_int_list;
 
 typedef struct	s_vector3_int_list
@@ -45,6 +48,18 @@ typedef struct	s_vector3_int_list
 		int		*value;
 	};
 	int			size;
+	int			max_size;
 }				t_vector3_int_list;
+
+typedef struct	s_color_list
+{
+	union
+	{
+		t_color	*color;
+		float	*value;
+	};
+	int			size;
+	int			max_size;
+}				t_color_list;
 
 #endif

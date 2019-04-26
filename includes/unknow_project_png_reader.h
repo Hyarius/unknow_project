@@ -4,19 +4,21 @@
 #include "unknow_project_basic.h"
 #include "unknow_project_includes.h"
 
-typedef struct	s_png_info
+typedef struct	s_surface
 {
-	png_structp	png_ptr;
-    png_infop	info_ptr;
-	png_uint_32	width;
-    png_uint_32	height;
-    int			bit_depth;
-    int			color_type;
-    int			interlace_method;
-    int			compression_method;
-    int			filter_method;
-	png_bytepp 	rows;
-    int			rowbytes;
-}				t_png_info;
+	GLuint  w;           /* largeur */
+    GLuint  h;          /* hauteur */
+
+    GLenum  format;          /* RVB, RVBA, Luminance, Luminance Alpha */
+    GLint   internalFormat;  /* composantes d'un texel */
+
+    GLubyte *pixels;         /* données de l'image */
+}				t_surface;
+
+typedef struct	s_texture
+{
+	t_surface	*surface;
+	GLuint		id;
+}				t_texture;
 
 #endif

@@ -7,6 +7,7 @@ t_vector2_list create_t_vector2_list()
 	if (!(list.vector = (t_vector2 *)malloc(sizeof(t_vector2) * PUSH_SIZE)))
 		error_exit(-12, "Can't malloc a t_vector2 array");
 	list.size = 0;
+	list.max_size = PUSH_SIZE;
 	return (list);
 }
 
@@ -27,7 +28,7 @@ void	t_vector2_list_push_back(t_vector2_list *dest, t_vector2 to_add)
 	t_vector2 *tmp;
 	int i;
 
-	if ((dest->size + 1) % PUSH_SIZE == 0)
+	if ((dest->size + 1) >= dest->max_size)
 	{
 		tmp = dest->vector;
 		if (!(dest->vector = (t_vector2 *)malloc(sizeof(t_vector2) * (dest->size + 1 + PUSH_SIZE))))
@@ -39,8 +40,33 @@ void	t_vector2_list_push_back(t_vector2_list *dest, t_vector2 to_add)
 			i++;
 		}
 		free(tmp);
+		dest->max_size += PUSH_SIZE;
 	}
 	dest->vector[dest->size] = to_add;
+	dest->size++;
+}
+
+void	t_vector2_list_add_back(t_vector2_list *dest, t_vector2 *to_add)
+{
+	t_vector2 *tmp;
+	int i;
+
+	if ((dest->size + 1) >= dest->max_size)
+	{
+		tmp = dest->vector;
+		if (!(dest->vector = (t_vector2 *)malloc(sizeof(t_vector2) * (dest->size + 1 + PUSH_SIZE))))
+			error_exit(-20, "Can't realloc a t_vector2 array");
+		i = 0;
+		while (i < dest->size)
+		{
+			dest->vector[i] = tmp[i];
+			i++;
+		}
+		free(tmp);
+		dest->max_size += PUSH_SIZE;
+	}
+	dest->vector[dest->size].x = to_add->x;
+	dest->vector[dest->size].y = to_add->y;
 	dest->size++;
 }
 
@@ -59,10 +85,7 @@ void	delete_t_vector2_list(t_vector2_list *dest)
 
 void	clean_t_vector2_list(t_vector2_list *dest)
 {
-	free(dest->vector);
 	dest->size = 0;
-	if (!(dest->vector = (t_vector2 *)malloc(sizeof(t_vector2) * PUSH_SIZE)))
-		error_exit(-12, "Can't malloc a t_vector2 array");
 }
 
 t_vector2	t_vector2_list_at(t_vector2_list *dest, int index)
@@ -82,6 +105,6 @@ t_vector2	*t_vector2_list_get(t_vector2_list *dest, int index)
 float			*t_vector2_list_obtain(t_vector2_list *dest, int index)
 {
 	if (index < 0 || index >= dest->size)
-		error_exit(-23, "Segfault : t_vector3_list out of range");
+		error_exit(-22, "Segfault : t_vector2_list out of range");
 	return (&dest->value[index * 2]);
 }

@@ -17,17 +17,19 @@
 t_vector2_int_list
 			calc_line(t_vector2_int start, t_vector2_int end);
 
+//			PNG reader
+t_texture	*png_load(char *path);
 
 //
 // ----------------- CPU_DRAWING -----------------
 //
 //			buffer handler
-void 	add_pixel_to_screen(t_window *p_win, int p_coord, t_color *color);
-void	clean_color_buffer(t_window *p_win, t_color *color);
+void 		add_pixel_to_screen(t_window *p_win, int p_coord, t_color *color);
+void 		clean_buffers(t_window *p_win);
 
 //			Draw triangle cpu
 void 		draw_triangle_cpu(t_window *p_win,
-		t_point p_a, t_point p_b, t_point p_c);
+					t_point p_a, t_point p_b, t_point p_c);
 
 //
 // ----------------- DRAWING -----------------
@@ -75,6 +77,7 @@ t_vector2_int_list
 t_vector2_int_list
 			*initialize_t_vector2_int_list();
 void		t_vector2_int_list_push_back(t_vector2_int_list *dest, t_vector2_int to_add);
+void		t_vector2_int_list_add_back(t_vector2_int_list *dest, t_vector2_int *to_add);
 void		free_t_vector2_int_list(t_vector2_int_list dest);
 void		delete_t_vector2_int_list(t_vector2_int_list *dest);
 void		clean_t_vector2_int_list(t_vector2_int_list *dest);
@@ -100,6 +103,7 @@ t_vector2_list
 t_vector2_list
 			*initialize_t_vector2_list();
 void		t_vector2_list_push_back(t_vector2_list *dest, t_vector2 to_add);
+void		t_vector2_list_add_back(t_vector2_list *dest, t_vector2 *to_add);
 void		free_t_vector2_list(t_vector2_list dest);
 void		delete_t_vector2_list(t_vector2_list *dest);
 void		clean_t_vector2_list(t_vector2_list *dest);
@@ -124,6 +128,7 @@ t_vector3_int_list
 t_vector3_int_list
 			*initialize_t_vector3_int_list();
 void		t_vector3_int_list_push_back(t_vector3_int_list *dest, t_vector3_int to_add);
+void		t_vector3_int_list_add_back(t_vector3_int_list *dest, t_vector3_int *to_add);
 void		free_t_vector3_int_list(t_vector3_int_list dest);
 void		delete_t_vector3_int_list(t_vector3_int_list *dest);
 void		clean_t_vector3_int_list(t_vector3_int_list *dest);
@@ -149,6 +154,7 @@ t_vector3_list
 t_vector3_list
 			*initialize_t_vector3_list();
 void		t_vector3_list_push_back(t_vector3_list *dest, t_vector3 to_add);
+void		t_vector3_list_add_back(t_vector3_list *dest, t_vector3 *to_add);
 void		free_t_vector3_list(t_vector3_list dest);
 void		delete_t_vector3_list(t_vector3_list *dest);
 void		clean_t_vector3_list(t_vector3_list *dest);
@@ -163,6 +169,23 @@ void 		t_vector3_swap(t_vector3 *a, t_vector3 *b);
 void 		t_vector3_add(t_vector3 *src, float delta_x, float delta_y);
 void 		set_t_vector3(t_vector3 *src, float p_x, float p_y, float p_z);
 void 		print_t_vector3(t_vector3 vector, char *str);
+
+//
+// ----------------- COLOR ------------------
+//
+//
+t_color_list
+			create_t_color_list();
+t_color_list
+			*initialize_t_color_list();
+void		t_color_list_push_back(t_color_list *dest, t_color to_add);
+void		t_color_list_add_back(t_color_list *dest, t_color *to_add);
+void		free_t_color_list(t_color_list dest);
+void		delete_t_color_list(t_color_list *dest);
+void		clean_t_color_list(t_color_list *dest);
+t_color		t_color_list_at(t_color_list *dest, int index);
+t_color		*t_color_list_get(t_color_list *dest, int index);
+float		*t_color_list_obtain(t_color_list *dest, int index);
 
 //
 // ----------------- WINDOW -----------------
