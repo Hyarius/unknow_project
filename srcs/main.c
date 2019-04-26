@@ -5,7 +5,7 @@ int main(int argc, char **argv)
 	if (argc != 1)
 		error_exit(-1, "Bad argument");
 
-	start_sdl();
+	/*start_sdl();
 
 	t_window *win;
 	win = initialize_t_window(argv[0], 1840, 1220);
@@ -50,7 +50,21 @@ int main(int argc, char **argv)
 			if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_q)
 				state = (state + 1) % 2;
 		}
-	}
+	}*/
+
+	t_vector2_list list = create_t_vector2_list();
+
+	t_vector2_list_push_back(&list, create_t_vector2(1.0, 2.0));
+	t_vector2_list_push_back(&list, create_t_vector2(2.0, 5.0));
+	t_vector2_list_push_back(&list, create_t_vector2(12.5, 15.0));
+
+	t_vector2 vector = t_vector2_list_at(&list, 2); // return l'element ou null si < 0 || > size
+
+	print_t_vector2(vector, "test");
+
+	float	*test = t_vector2_list_obtain(&list, 0);
+
+	printf("test float = %0.4f / %0.4f\n", test[2], test[3]);
 
 	return (0);
 }

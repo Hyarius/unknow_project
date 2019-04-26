@@ -45,3 +45,8 @@ void set_t_vector2_int(t_vector2_int *src, int p_x, int p_y)
 	src->x = p_x;
 	src->y = p_y;
 }
+
+void print_t_vector2_int(t_vector2_int vector, char *str)
+{
+	printf("%s = %d / %d\n", str, vector.x, vector.y);
+}

@@ -7,8 +7,6 @@
 # include "unknow_project_basic.h"
 # include "unknow_project_structure.h"
 # include "unknow_project_list.h"
-# include "unknow_project_gui.h"
-# include "unknow_project_game_engine.h"
 # include "unknow_project_window.h"
 # include "unknow_project_png_reader.h"
 
@@ -73,14 +71,18 @@ t_rect		create_t_rect(float p_x, float p_y, float p_w, float p_h);
 //
 //			vector2_int_list
 t_vector2_int_list
-			create_t_vector2_int_list(t_vector2_int src);
+			create_t_vector2_int_list();
 t_vector2_int_list
-			*initialize_t_vector2_int_list(t_vector2_int src);
-int			t_vector2_int_list_len(t_vector2_int_list *src);
+			*initialize_t_vector2_int_list();
 void		t_vector2_int_list_push_back(t_vector2_int_list *dest, t_vector2_int to_add);
-void		t_vector2_int_list_add(t_vector2_int_list *front, t_vector2_int_list *back);
 void		free_t_vector2_int_list(t_vector2_int_list dest);
 void		delete_t_vector2_int_list(t_vector2_int_list *dest);
+void		clean_t_vector2_int_list(t_vector2_int_list *dest);
+t_vector2_int
+			t_vector2_int_list_at(t_vector2_int_list *dest, int index);
+t_vector2_int
+			*t_vector2_int_list_get(t_vector2_int_list *dest, int index);
+int			*t_vector2_int_list_obtain(t_vector2_int_list *dest, int index);
 
 //			vector2_int
 t_vector2_int
@@ -90,38 +92,46 @@ t_vector2_int
 void 		t_vector2_int_swap(t_vector2_int *a, t_vector2_int *b);
 void 		t_vector2_int_add(t_vector2_int *src, int delta_x, int delta_y);
 void 		set_t_vector2_int(t_vector2_int *src, int p_x, int p_y);
+void 		print_t_vector2_int(t_vector2_int vector, char *str);
 
 //			vector2_list
 t_vector2_list
-			create_t_vector2_list(t_vector2 src);
+			create_t_vector2_list();
 t_vector2_list
-			*initialize_t_vector2_list(t_vector2 src);
-int			t_vector2_list_len(t_vector2_list *src);
+			*initialize_t_vector2_list();
 void		t_vector2_list_push_back(t_vector2_list *dest, t_vector2 to_add);
-void		t_vector2_list_add(t_vector2_list *front, t_vector2_list *back);
 void		free_t_vector2_list(t_vector2_list dest);
 void		delete_t_vector2_list(t_vector2_list *dest);
+void		clean_t_vector2_list(t_vector2_list *dest);
+t_vector2	t_vector2_list_at(t_vector2_list *dest, int index);
+t_vector2	*t_vector2_list_get(t_vector2_list *dest, int index);
+float		*t_vector2_list_obtain(t_vector2_list *dest, int index);
 
 //			vector2
-t_vector2 	create_t_vector2(float p_x, float p_y);
+t_vector2	create_t_vector2(float p_x, float p_y);
 t_vector2	*initialize_t_vector2(float p_x, float p_y);
 void 		t_vector2_swap(t_vector2 *a, t_vector2 *b);
 void 		t_vector2_add(t_vector2 *src, float delta_x, float delta_y);
 void 		set_t_vector2(t_vector2 *src, float p_x, float p_y);
+void 		print_t_vector2(t_vector2 vector, char *str);
 
 //
 // ----------------- VECTOR3 -----------------
 //
 //			vector3_int_list
 t_vector3_int_list
-			create_t_vector3_int_list(t_vector3_int src);
+			create_t_vector3_int_list();
 t_vector3_int_list
-			*initialize_t_vector3_int_list(t_vector3_int src);
-int			t_vector3_int_list_len(t_vector3_int_list *src);
+			*initialize_t_vector3_int_list();
 void		t_vector3_int_list_push_back(t_vector3_int_list *dest, t_vector3_int to_add);
-void		t_vector3_int_list_add(t_vector3_int_list *front, t_vector3_int_list *back);
 void		free_t_vector3_int_list(t_vector3_int_list dest);
 void		delete_t_vector3_int_list(t_vector3_int_list *dest);
+void		clean_t_vector3_int_list(t_vector3_int_list *dest);
+t_vector3_int
+			t_vector3_int_list_at(t_vector3_int_list *dest, int index);
+t_vector3_int
+			*t_vector3_int_list_get(t_vector3_int_list *dest, int index);
+int			*t_vector3_int_list_obtain(t_vector3_int_list *dest, int index);
 
 //			vector3_int
 t_vector3_int
@@ -129,24 +139,30 @@ t_vector3_int
 t_vector3_int
 			*initialize_t_vector3_int(int p_x, int p_y, int p_z);
 void 		t_vector3_int_swap(t_vector3_int *a, t_vector3_int *b);
+void 		t_vector3_int_add(t_vector3_int *src, int delta_x, int delta_y);
 void 		set_t_vector3_int(t_vector3_int *src, int p_x, int p_y, int p_z);
+void 		print_t_vector3_int(t_vector3_int vector, char *str);
 
 //			vector3_list
 t_vector3_list
-			create_t_vector3_list(t_vector3 src);
+			create_t_vector3_list();
 t_vector3_list
-			*initialize_t_vector3_list(t_vector3 src);
-int			t_vector3_list_len(t_vector3_list *src);
+			*initialize_t_vector3_list();
 void		t_vector3_list_push_back(t_vector3_list *dest, t_vector3 to_add);
-void		t_vector3_list_add(t_vector3_list *front, t_vector3_list *back);
 void		free_t_vector3_list(t_vector3_list dest);
 void		delete_t_vector3_list(t_vector3_list *dest);
+void		clean_t_vector3_list(t_vector3_list *dest);
+t_vector3	t_vector3_list_at(t_vector3_list *dest, int index);
+t_vector3	*t_vector3_list_get(t_vector3_list *dest, int index);
+float		*t_vector3_list_obtain(t_vector3_list *dest, int index);
 
 //			vector3
 t_vector3	create_t_vector3(float p_x, float p_y, float p_z);
 t_vector3	*initialize_t_vector3(float p_x, float p_y, float p_z);
-void		t_vector3_swap(t_vector3 *a, t_vector3 *b);
-void		set_t_vector3(t_vector3 *src, float p_x, float p_y, float p_z);
+void 		t_vector3_swap(t_vector3 *a, t_vector3 *b);
+void 		t_vector3_add(t_vector3 *src, float delta_x, float delta_y);
+void 		set_t_vector3(t_vector3 *src, float p_x, float p_y, float p_z);
+void 		print_t_vector3(t_vector3 vector, char *str);
 
 //
 // ----------------- WINDOW -----------------

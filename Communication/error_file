@@ -1,8 +1,29 @@
 -1 : Bad argument on start
+
 -2 : Error while compiling shader
 -3 : Error while computing shader program
+
 -4 : Error while filling a triangle
+
 -5 : Can't malloc a char array
 -6 : Can't malloc a t_window
 -7 : Can't malloc a t_pixel array
 -8 : Can't malloc a t_vector2 array
+
+-9 : Can't malloc a t_vector2_int array
+-10 : Can't create a t_vector2_int_list array
+-11 : Can't realloc a t_vector2_int array
+-12 : Can't malloc a t_vector2 array
+-13 : Can't create a t_vector2_list array
+-14 : Can't realloc a t_vector2 array
+-15 : Can't malloc a t_vector3_int array
+-16 : Can't create a t_vector3_int_list array
+-17 : Can't realloc a t_vector3_int array
+-18 : Can't malloc a t_vector3 array
+-19 : Can't create a t_vector3_list array
+-20 : Can't realloc a t_vector3 array
+
+-21, "Segfault : t_vector2_int_list out of range"
+-22, "Segfault : t_vector2_list out of range"
+-23, "Segfault : t_vector3_int_list out of range"
+-24, "Segfault : t_vector3_list out of range"
