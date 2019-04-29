@@ -14,7 +14,7 @@ int main(int argc, char **argv)
 	int play = 1;
 	int state = 0;
 	t_color color1 = create_t_color(1.0, 0.0, 0.0, 1.0);
-	t_color color2 = create_t_color(1.0, 1.0, 0.0, 1.0);
+	t_color color2 = create_t_color(0.0, 1.0, 0.0, 1.0);
 
 	t_triangle t1 = create_t_triangle(create_t_vector2(50, 50), create_t_vector2(win->size_x - 50, 50), create_t_vector2(50, win->size_y - 50));
 	t_triangle t2 = create_t_triangle(create_t_vector2(win->size_x - 50, 50), create_t_vector2(50, win->size_y - 50), create_t_vector2(win->size_x - 50, win->size_y - 50));

@@ -35,20 +35,15 @@ void use_rasterize(t_window *p_win, t_rasterizer *rast, t_color *p_color, int *v
 	float			beta;
 	float			gamma;
 
-	alpha = -1;
 	p.y = value[2];
 	p.x = value[0];
 	while (p.x < value[1])
 	{
-		calc_rasterizer(&alpha, &(rast[0]), &p);
+		/*calc_rasterizer(&alpha, &(rast[0]), &p);
 		calc_rasterizer(&beta, &(rast[1]), &p);
-		gamma = 1.0f - (alpha + beta);
+		gamma = 1.0f - (alpha + beta);*/
 
-		if (alpha >= 0.0f && alpha <= 1.0f && beta >= 0.0f && beta <= 1.0f
-			&& gamma >= 0.0f && gamma <= 1.0f)
-		{
-			add_pixel_to_screen(p_win, p.x + p.y * p_win->size_x, p_color);
-		}
+		add_pixel_to_screen(p_win, p.x + p.y * p_win->size_x, p_color);
 		p.x++;
 	}
 }
