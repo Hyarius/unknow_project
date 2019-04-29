@@ -41,7 +41,7 @@ void draw_pixel_opengl(t_window *p_win, t_vector2 *p_coord, t_color *p_color)
 	glDrawArrays( GL_POINTS, 0, 1);
 }
 
-void draw_point_opengl(t_window *p_win, t_point *p_point, int size)
+void draw_point_opengl(t_window *p_win, t_vector2 *p_point, t_color *p_color, int size)
 {
 	glPointSize(size);
 
@@ -50,7 +50,7 @@ void draw_point_opengl(t_window *p_win, t_point *p_point, int size)
 	};
 
 	GLfloat color_buffer_data[] = {
-		p_point->color.r,  p_point->color.g,  p_point->color.b, p_point->color.a
+		p_color->r,  p_color->g,  p_color->b, p_color->a
 	};
 
 	// bind VAO
@@ -85,16 +85,16 @@ void draw_point_opengl(t_window *p_win, t_point *p_point, int size)
 	glPointSize(1);
 }
 
-void draw_line_opengl(t_window *p_win, t_point *p_a, t_point *p_b)
+void draw_line_color_opengl(t_window *p_win, t_line *p_line, t_color *p_color)
 {
 	GLfloat vertex_buffer_data[] = {
-		p_a->x, p_a->y, 0.0f,
-		p_b->x, p_b->y, 0.0f,
+		p_line->a.x, p_line->a.y, 0.0f,
+		p_line->b.x, p_line->b.y, 0.0f,
 	};
 
 	GLfloat color_buffer_data[] = {
-		p_a->color.r,  p_a->color.g,  p_a->color.b, p_a->color.a,
-		p_b->color.r,  p_b->color.g,  p_b->color.b, p_b->color.a,
+		p_color->r,  p_color->g,  p_color->b, p_color->a,
+		p_color->r,  p_color->g,  p_color->b, p_color->a,
 	};
 
 	// bind VAO
@@ -128,18 +128,18 @@ void draw_line_opengl(t_window *p_win, t_point *p_a, t_point *p_b)
 	glDrawArrays(GL_LINES, 0, 2);
 }
 
-void draw_triangle_opengl(t_window *p_win, t_point *p_a, t_point *p_b, t_point *p_c)
+void draw_triangle_color_opengl(t_window *p_win, t_triangle *p_triangle, t_color *p_color)
 {
 	GLfloat vertex_buffer_data[] = {
-		p_a->x, p_a->y, 0.0f,
-		p_b->x, p_b->y, 0.0f,
-		p_c->x, p_c->y, 0.0f,
+		p_triangle->a.x, p_triangle->a.y, 0.0f,
+		p_triangle->b.x, p_triangle->b.y, 0.0f,
+		p_triangle->c.x, p_triangle->c.y, 0.0f,
 	};
 
 	GLfloat color_buffer_data[] = {
-		p_a->color.r,  p_a->color.g,  p_a->color.b, p_a->color.a,
-		p_b->color.r,  p_b->color.g,  p_b->color.b, p_b->color.a,
-		p_c->color.r,  p_c->color.g,  p_c->color.b, p_c->color.a,
+		p_color->r,  p_color->g,  p_color->b, p_color->a,
+		p_color->r,  p_color->g,  p_color->b, p_color->a,
+		p_color->r,  p_color->g,  p_color->b, p_color->a,
 	};
 
 	// bind VAO
@@ -171,6 +171,58 @@ void draw_triangle_opengl(t_window *p_win, t_point *p_a, t_point *p_b, t_point *
 
 	// dessine un triangle
 	glDrawArrays(GL_TRIANGLES, 0, 3);
+}
+
+void			draw_triangle_texture_opengl(t_window *p_win, t_triangle *p_triangle_screen, t_triangle *p_triangle_uv, t_texture *p_texture, float alpha)
+{
+	GLfloat vertex_buffer_data[] = {
+		p_triangle_screen->a.x, p_triangle_screen->a.y, 0.0f,
+		p_triangle_screen->b.x, p_triangle_screen->b.y, 0.0f,
+		p_triangle_screen->c.x, p_triangle_screen->c.y, 0.0f,
+	};
+
+	GLfloat uv_buffer_data[] = {
+		p_triangle_uv->a.x,  p_triangle_uv->a.y,
+		p_triangle_uv->b.x,  p_triangle_uv->b.y,
+		p_triangle_uv->c.x,  p_triangle_uv->c.y,
+	};
+
+	GLfloat alpha_buffer_data[] = {
+		alpha,
+		alpha,
+		alpha,
+	};
+
+	glBindTexture(GL_TEXTURE_2D, p_texture->id);
+
+	glBindVertexArray(p_win->vertex_array);
+
+	glBindBuffer(GL_ARRAY_BUFFER, p_win->vertex_buffer);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertex_buffer_data), vertex_buffer_data, GL_DYNAMIC_DRAW);
+
+	glBindBuffer(GL_ARRAY_BUFFER, p_win->texture_buffer);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(uv_buffer_data), uv_buffer_data, GL_DYNAMIC_DRAW);
+
+	glBindBuffer(GL_ARRAY_BUFFER, p_win->alpha_buffer);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(alpha_buffer_data), alpha_buffer_data, GL_DYNAMIC_DRAW);
+
+	glUseProgram(p_win->program_texture);
+
+	glEnableVertexAttribArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, p_win->vertex_buffer);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+
+	glEnableVertexAttribArray(1);
+	glBindBuffer(GL_ARRAY_BUFFER, p_win->texture_buffer);
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, NULL);
+
+	glEnableVertexAttribArray(2);
+	glBindBuffer(GL_ARRAY_BUFFER, p_win->alpha_buffer);
+	glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, 0, NULL);
+
+	glDrawArrays(GL_TRIANGLES, 0, 3);
+
+	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 void draw_buffer_opengl(t_window *p_win)

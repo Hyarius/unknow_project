@@ -13,28 +13,21 @@ int main(int argc, char **argv)
 	SDL_Event event;
 	int play = 1;
 	int state = 0;
-	t_color color = create_t_color(1.0, 0.0, 0.0, 1.0);
+	t_color color1 = create_t_color(1.0, 0.0, 0.0, 1.0);
 	t_color color2 = create_t_color(1.0, 1.0, 0.0, 1.0);
-	t_point a = create_t_point(50, 100, color);
-	t_point b = create_t_point(100, 150, color);
-	t_point c = create_t_point(100, 50, color);
-	t_point d = create_t_point(250, 100, color2);
-	t_point e = create_t_point(300, 150, color2);
-	t_point f = create_t_point(300, 50, color2);
+	t_color color3 = create_t_color(1.0, 1.0, 1.0, 1.0);
 
-	t_texture *texture = png_load("003.png");
+	t_triangle t3 = create_t_triangle(create_t_vector2(50, 50), create_t_vector2(500, 50), create_t_vector2(50, 500));
 
-	printf("Color = %d / %d / %d / %d\n", texture->surface->pixels[0], texture->surface->pixels[1], texture->surface->pixels[2], texture->surface->pixels[3]);
+	t_triangle uv3 = create_t_triangle(create_t_vector2(0, 0), create_t_vector2(1, 0), create_t_vector2(0, 1));
+
+	t_texture *texture = png_load_cpu("003.png");
 
 	while (play == 1)
 	{
 		prepare_screen(win, create_t_color(0.2f, 0.2f, 0.2f, 1.0f));
 
-		draw_triangle_cpu(win, a, b, c);
-		draw_triangle_cpu(win, b, a, e);
-		draw_triangle_cpu(win, e, f, c);
-		draw_triangle_cpu(win, f, c, d);
-		draw_triangle_cpu(win, d, b, c);
+		draw_triangle_texture(win, &t3, &uv3, texture, 1.0);
 
 		render_screen(win);
 

@@ -18,7 +18,8 @@ t_vector2_int_list
 			calc_line(t_vector2_int start, t_vector2_int end);
 
 //			PNG reader
-t_texture	*png_load(char *path);
+t_texture *png_load_cpu(char *path);
+t_texture *png_load_sdl(char *path);
 
 //
 // ----------------- CPU_DRAWING -----------------
@@ -28,33 +29,32 @@ void 		add_pixel_to_screen(t_window *p_win, int p_coord, t_color *color);
 void 		clean_buffers(t_window *p_win);
 
 //			Draw triangle cpu
-void 		draw_triangle_cpu(t_window *p_win,
-					t_point p_a, t_point p_b, t_point p_c);
+void 		draw_triangle_color_cpu(t_window *p_win, t_triangle *p_t, t_color *p_color);
 
 //
 // ----------------- DRAWING -----------------
 //
 //			Draw rectangle
-void		draw_rectangle(t_window *p_win, t_rect p_rect, t_color p_color);
+void		draw_rectangle_color(t_window *p_win, t_rect p_rect, t_color p_color);
 
 //			Draw triangle
-void 		draw_triangle(t_window *p_win,
-					t_point p_a, t_point p_b, t_point p_c);
+void 		draw_triangle_color(t_window *p_win, t_triangle *p_t, t_color *p_color);
+void		draw_triangle_texture(t_window *p_win, t_triangle *p_t_screen, t_triangle *p_t_uv, t_texture *p_texture, float alpha);
 
 //
 // ----------------- OPENGL -----------------
 //
 //			Draw opengl
 void 		draw_pixel_opengl(t_window *p_win, t_vector2 *p_coord, t_color *p_color);
-void 		draw_point_opengl(t_window *p_win, t_point *p_point, int size);
-void 		draw_line_opengl(t_window *p_win, t_point *p_a, t_point *p_b);
-void 		draw_triangle_opengl(t_window *p_win,
-					t_point *p_a, t_point *p_b, t_point *p_c);
+void 		draw_point_opengl(t_window *p_win, t_vector2 *p_point, t_color *p_color, int size);
+void 		draw_line_color_opengl(t_window *p_win, t_line *p_line, t_color *p_color);
+void 		draw_triangle_color_opengl(t_window *p_win, t_triangle *p_triangle, t_color *p_color);
+void		draw_triangle_texture_opengl(t_window *p_win, t_triangle *p_triangle_screen, t_triangle *p_triangle_uv, t_texture *p_texture, float p_alpha);
 void		draw_buffer_opengl(t_window *p_win);
 
 //			Shader - handler
 GLuint		load_shaders(const char * p_vertex_file_path,
-					const char * p_fragment_file_path);
+						const char * p_fragment_file_path);
 
 //
 // ----------------- STRUCTURE -----------------
@@ -62,11 +62,13 @@ GLuint		load_shaders(const char * p_vertex_file_path,
 //			t_color
 t_color		create_t_color(float p_r, float p_g, float p_b, float p_a);
 t_color		*initialize_t_color(float p_r, float p_g, float p_b, float p_a);
-//			t_point
-t_point		create_t_point(float p_x, float p_y, t_color p_color);
-void 		t_point_swap(t_point *a, t_point *b);
+
 //			t_rect
 t_rect		create_t_rect(float p_x, float p_y, float p_w, float p_h);
+
+//			t_triangle
+t_triangle	create_t_triangle(t_vector2 p_a, t_vector2 p_b, t_vector2 p_c);
+t_triangle	*initialize_t_triangle(t_vector2 p_a, t_vector2 p_b, t_vector2 p_c);
 
 //
 // ----------------- VECTOR2 -----------------
@@ -191,9 +193,8 @@ float		*t_color_list_obtain(t_color_list *dest, int index);
 // ----------------- WINDOW -----------------
 //
 //			convert
-t_vector2	convert_screen_to_opengl(t_window *p_win, t_vector2_int source);
-void		convert_point_to_opengl(t_window *p_win, t_point *source);
-void		convert_coord_to_opengl(t_window *p_win, t_vector2 *source);
+t_vector2	convert_screen_to_opengl(t_window *p_win, int p_x, int p_y);
+void		convert_vector2_to_opengl(t_window *p_win, t_vector2 *source);
 
 //			fps_handler
 void		check_frame();

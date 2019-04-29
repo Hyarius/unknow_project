@@ -58,12 +58,18 @@ typedef struct	s_color
 	float		a;
 }				t_color;
 
-typedef struct	s_point
+typedef struct	s_line
 {
-	float		x;
-    float		y;
-	t_color		color;
-}				t_point;
+	t_vector2	a;
+	t_vector2	b;
+}				t_line;
+
+typedef struct	s_triangle
+{
+	t_vector2	a;
+	t_vector2	b;
+	t_vector2	c;
+}				t_triangle;
 
 // Store a value, and it max, used by function/struct to store and calculate ratio/percent
 typedef struct	s_value

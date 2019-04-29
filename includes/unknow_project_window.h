@@ -23,6 +23,7 @@ typedef struct	s_window
 	GLuint		texture_buffer;
 	GLuint		alpha_buffer;
 	GLuint		program_color;
+	GLuint		program_texture;
 	t_vector2	pixel_delta;
 }				t_window;
 

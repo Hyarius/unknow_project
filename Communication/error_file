@@ -35,3 +35,5 @@
 
 -29 : Can't malloc a t_surface
 -30 : Bad image format
+
+-31 : Can't malloc a t_triangle

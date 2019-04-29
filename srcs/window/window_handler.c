@@ -72,6 +72,7 @@ t_window		*initialize_t_window(char *p_name, int p_size_x, int p_size_y)
 
 	// create shader program
 	win->program_color = load_shaders("ressources/shader/color_shader.vert", "ressources/shader/color_shader.frag");
+	win->program_texture = load_shaders("ressources/shader/texture_shader.vert", "ressources/shader/texture_shader.frag");
 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -79,8 +80,8 @@ t_window		*initialize_t_window(char *p_name, int p_size_x, int p_size_y)
 	glDepthFunc(GL_ALWAYS);
 	SDL_GL_SetSwapInterval(0);
 
-	coord[0] = convert_screen_to_opengl(win, create_t_vector2_int(0, 0));
-	coord[1] = convert_screen_to_opengl(win, create_t_vector2_int(1, 1));
+	coord[0] = convert_screen_to_opengl(win, 0, 0);
+	coord[1] = convert_screen_to_opengl(win, 1, 1);
 	win->pixel_delta = create_t_vector2(coord[1].x - coord[0].x, coord[1].y - coord[0].y);
 
 	if (!(win->coord_data = (t_vector3 *)malloc(sizeof(t_vector3) * (win->size_x * win->size_y))))

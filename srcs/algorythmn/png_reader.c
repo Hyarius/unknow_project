@@ -83,7 +83,7 @@ t_surface *read_png_file(const char *filename)
 	return (surface);
 }
 
-t_texture *png_load(char *path)
+t_texture *png_load_cpu(char *path)
 {
 	t_texture *texture;
 
@@ -92,21 +92,65 @@ t_texture *png_load(char *path)
 
 	texture->surface = read_png_file(path);
 
-	/* generate texture */
 	glGenTextures (1, &texture->id);
 	glBindTexture (GL_TEXTURE_2D, texture->id);
 
-	/* setup texture filters */
 	glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
 	glTexImage2D (GL_TEXTURE_2D, 0, texture->surface->internalFormat, texture->surface->w, texture->surface->h,
 	              0, texture->surface->format, GL_UNSIGNED_BYTE, texture->surface->pixels);
 
+	return (texture);
+}
 
-	/* OpenGL has its own copy of texture data */
-	//free (texture->surface->pixels);
-	//free (texture->surface);
+
+t_texture *png_load_sdl(char *path)
+{
+	SDL_Surface *surface;
+	t_texture *texture;
+	int internal_format;
+	int format;
+
+	if (!(texture = (t_texture *)malloc(sizeof(t_texture))))
+		error_exit(-29, "Can't malloc a t_texture");
+
+	texture->surface = NULL;
+	surface = IMG_Load(path);
+
+	if (surface == NULL)
+		error_exit(-32, "Can't load a sdl_surface");
+	if (surface->format->BytesPerPixel == 3)
+	{
+		internal_format = GL_RGB;
+		if (surface->format->Rmask == 0xff)
+			format = GL_RGB;
+		else
+			format = GL_BGR;
+	}
+	else if (surface->format->BytesPerPixel == 4)
+	{
+		internal_format = GL_RGBA;
+		if (surface->format->Rmask == 0xff)
+			format = GL_RGBA;
+		else
+			format = GL_BGRA;
+	}
+	glGenTextures(1, &(texture->id));
+	glBindTexture(GL_TEXTURE_2D, (texture->id));
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+
+	glTexImage2D(GL_TEXTURE_2D, 0, internal_format, surface->w,
+				surface->h, 0, format,
+				GL_UNSIGNED_BYTE, surface->pixels);
+
+	glBindTexture(GL_TEXTURE_2D, 0);
+
+	SDL_FreeSurface(surface);
 
 	return (texture);
 }
