@@ -83,39 +83,18 @@ t_surface *read_png_file(const char *filename)
 	return (surface);
 }
 
-t_texture *png_load_cpu(char *path)
+t_texture *png_load(char *path)
 {
 	t_texture *texture;
-
-	if (!(texture = (t_texture *)malloc(sizeof(t_texture))))
-		error_exit(-29, "Can't malloc a t_texture");
-
-	texture->surface = read_png_file(path);
-
-	glGenTextures (1, &texture->id);
-	glBindTexture (GL_TEXTURE_2D, texture->id);
-
-	glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-
-	glTexImage2D (GL_TEXTURE_2D, 0, texture->surface->internalFormat, texture->surface->w, texture->surface->h,
-	              0, texture->surface->format, GL_UNSIGNED_BYTE, texture->surface->pixels);
-
-	return (texture);
-}
-
-
-t_texture *png_load_sdl(char *path)
-{
 	SDL_Surface *surface;
-	t_texture *texture;
 	int internal_format;
 	int format;
 
 	if (!(texture = (t_texture *)malloc(sizeof(t_texture))))
 		error_exit(-29, "Can't malloc a t_texture");
 
-	texture->surface = NULL;
+	texture->surface = read_png_file(path);
+
 	surface = IMG_Load(path);
 
 	if (surface == NULL)

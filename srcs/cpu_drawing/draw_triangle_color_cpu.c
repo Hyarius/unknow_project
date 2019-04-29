@@ -1,95 +1,104 @@
 #include "unknow_project.h"
 
-void draw_line_color(t_window *p_win, t_vector2_int range, int p_y, t_color *p_color)
+typedef struct	s_rasterizer
 {
-	int delta;
-	int i;
+	int a;
+	int b;
+	int c;
+	int	max;
+}				t_rasterizer;
 
-	i = range.x + p_y * p_win->size_x;
-	delta = (range.x > range.y ? -1 : 1);
-	while (range.x != range.y)
-	{
-		if (range.x >= 0 && range.x < p_win->size_x &&
-			p_y >= 0 && p_y < p_win->size_y)
-		{
-			add_pixel_to_screen(p_win, i, p_color);
-		}
-		range.x += delta;
-		i += delta;
-	}
+int apply_formula(t_rasterizer *rast, t_vector2_int *p)
+{
+	return (rast->a * p->x + rast->b * p->y + rast->c);
 }
 
-void fill_down_flat_triangle(t_window *p_win, t_vector2 *v1, t_vector2 *v2, t_vector2 *v3, t_color *p_color)
+void set_rasterizer(t_rasterizer *rast, t_vector2_int s, t_vector2_int e, t_vector2_int ext)
 {
-	t_vector2_int range;
-	float slope[2];
-	float current[2];
-	int scan_line_y = v1->y;
-
-	slope[0] = (v2->x - v1->x) / (v2->y - v1->y);
-	slope[1] = (v3->x - v1->x) / (v3->y - v1->y);
-	current[0] = v1->x;
-	current[1] = v1->x;
-	while (scan_line_y <= v2->y)
-	{
-		range.x = (int)(current[0]);
-		range.y = (int)(current[1]);
-		draw_line_color(p_win, range, scan_line_y, p_color);
-		current[0] += slope[0];
-		current[1] += slope[1];
-
-		scan_line_y++;
-	}
+	rast->a = (s.y - e.y);
+	rast->b = (e.x - s.x);
+	rast->c = (s.x * e.y) - (s.y * e.x);
+	rast->max = apply_formula(rast, &ext);
 }
 
-void fill_top_flat_triangle(t_window *p_win, t_vector2 *v1, t_vector2 *v2, t_vector2 *v3, t_color *p_color)
+void	calc_rasterizer(float *result, t_rasterizer *rast, t_vector2_int *p)
 {
-	t_vector2_int range;
-	float slope[2];
-	float current[2];
-	int scan_line_y;
-
-	slope[0] = (v3->x - v1->x) / (v3->y - v1->y);
-	slope[1] = (v3->x - v2->x) / (v3->y - v2->y);
-	current[0] = v3->x;
-	current[1] = v3->x;
-	scan_line_y = v3->y;
-	while (scan_line_y > v1->y)
-	{
-		range.x = (int)(current[0]);
-		range.y = (int)(current[1]);
-		draw_line_color(p_win, range, scan_line_y, p_color);
-		current[0] -= slope[0];
-		current[1] -= slope[1];
-		scan_line_y--;
-	}
-
+	*result = ((float)(apply_formula(rast, p))) / ((float)(rast->max));
+	//*result = apply_formula(rast, p);
+	//*result = 1.0f / rast->max;
 }
+
+void	set_limits(t_triangle *p_t, int *limit)
+{
+	limit[0] = p_t->a.x;
+	if (p_t->b.x < limit[0])
+		limit[0] = p_t->b.x;
+	if (p_t->c.x < limit[0])
+		limit[0] = p_t->c.x;
+
+	limit[1] = p_t->a.x;
+	if (p_t->b.x > limit[1])
+		limit[1] = p_t->b.x;
+	if (p_t->c.x > limit[1])
+		limit[1] = p_t->c.x;
+
+	limit[2] = p_t->a.y;
+	if (p_t->b.y < limit[2])
+		limit[2] = p_t->b.y;
+	if (p_t->c.y < limit[2])
+		limit[2] = p_t->c.y;
+
+	limit[3] = p_t->a.y;
+	if (p_t->b.y > limit[3])
+		limit[3] = p_t->b.y;
+	if (p_t->c.y > limit[3])
+		limit[3] = p_t->c.y;
+}
+
+
 
 void draw_triangle_color_cpu(t_window *p_win, t_triangle *p_t, t_color *p_color)
 {
-	t_vector2 p_d;
+	int				limit[4]; // 0 = x min / 1 = x max / 2 = y min / 3 = y max
+	t_vector2_int 	a;
+	t_vector2_int 	b;
+	t_vector2_int 	c;
+	t_vector2_int 	p;
+	float			alpha;
+	float			beta;
+	float			gamma;
+	int				x;
+	int				y;
+	t_rasterizer	ab;
+	t_rasterizer	ac;
 
-	if (p_t->a.y > p_t->b.y || (p_t->a.y == p_t->b.y && p_t->a.x > p_t->b.x))
-		t_vector2_swap(&(p_t->a), &(p_t->b));
-	if (p_t->b.y > p_t->c.y || (p_t->b.y == p_t->c.y && p_t->b.x > p_t->c.x))
-		t_vector2_swap(&(p_t->b), &(p_t->c));
-	if (p_t->a.y > p_t->b.y || (p_t->a.y == p_t->b.y && p_t->a.x > p_t->b.x))
-		t_vector2_swap(&(p_t->a), &(p_t->b));
+	set_limits(p_t, limit);
+	a = convert_vector2_to_vector2_int(&(p_t->a));
+	b = convert_vector2_to_vector2_int(&(p_t->b));
+	c = convert_vector2_to_vector2_int(&(p_t->c));
 
-	if (p_t->b.y == p_t->c.y)
+	set_rasterizer(&ab, a, b, c);
+	set_rasterizer(&ac, a, c, b);
+
+	x = limit[0];
+	while (x < limit[1])
 	{
-		fill_down_flat_triangle(p_win, &(p_t->a), &(p_t->b), &(p_t->c), p_color);
-	}
-	if (p_t->a.y == p_t->b.y || p_t->a.y == p_t->c.y)
-	{
-		fill_top_flat_triangle(p_win, &(p_t->a), &(p_t->b), &(p_t->c), p_color);
-	}
-	else
-	{
-		p_d = create_t_vector2(p_t->a.x + ((p_t->b.y - p_t->a.y) / (p_t->c.y -
-				p_t->a.y) * (p_t->c.x - p_t->a.x)), p_t->b.y);
-		fill_down_flat_triangle(p_win, &(p_t->a), &(p_t->b), &p_d, p_color);
-		fill_top_flat_triangle(p_win, &(p_t->b), &p_d, &(p_t->c), p_color);
+		y = limit[2];
+		while (y < limit[3])
+		{
+			p.x = x;
+			p.y = y;
+			calc_rasterizer(&alpha, &ac, &p);
+			calc_rasterizer(&beta, &ab, &p);
+			gamma = 1.0f - (alpha + beta);
+
+			if (alpha >= 0.0f && alpha <= 1.0f && beta >= 0.0f && beta <= 1.0f
+				&& gamma >= 0.0f && gamma <= 1.0f)
+			{
+				add_pixel_to_screen(p_win, x + y * p_win->size_x, p_color);
+			}
+			y++;
+		}
+		x++;
 	}
 }

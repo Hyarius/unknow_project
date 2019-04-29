@@ -18,8 +18,7 @@ t_vector2_int_list
 			calc_line(t_vector2_int start, t_vector2_int end);
 
 //			PNG reader
-t_texture *png_load_cpu(char *path);
-t_texture *png_load_sdl(char *path);
+t_texture *png_load(char *path);
 
 //
 // ----------------- CPU_DRAWING -----------------
@@ -28,9 +27,11 @@ t_texture *png_load_sdl(char *path);
 void 		add_pixel_to_screen(t_window *p_win, int p_coord, t_color *color);
 void 		clean_buffers(t_window *p_win);
 
-//			Draw triangle cpu
+//			Draw color cpu
 void 		draw_triangle_color_cpu(t_window *p_win, t_triangle *p_t, t_color *p_color);
 
+//			Draw texture CPU
+void 		draw_triangle_texture_cpu(t_window *p_win, t_triangle *p_t, t_triangle *p_triangle_uv, t_texture *p_texture, float alpha);
 //
 // ----------------- DRAWING -----------------
 //
@@ -45,7 +46,7 @@ void		draw_triangle_texture(t_window *p_win, t_triangle *p_t_screen, t_triangle 
 // ----------------- OPENGL -----------------
 //
 //			Draw opengl
-void 		draw_pixel_opengl(t_window *p_win, t_vector2 *p_coord, t_color *p_color);
+void 		draw_pixel_opengl(t_window *p_win, t_vector3 *p_coord, t_color *p_color);
 void 		draw_point_opengl(t_window *p_win, t_vector2 *p_point, t_color *p_color, int size);
 void 		draw_line_color_opengl(t_window *p_win, t_line *p_line, t_color *p_color);
 void 		draw_triangle_color_opengl(t_window *p_win, t_triangle *p_triangle, t_color *p_color);
@@ -195,6 +196,11 @@ float		*t_color_list_obtain(t_color_list *dest, int index);
 //			convert
 t_vector2	convert_screen_to_opengl(t_window *p_win, int p_x, int p_y);
 void		convert_vector2_to_opengl(t_window *p_win, t_vector2 *source);
+t_vector2_int
+			convert_vector2_to_vector2_int(t_vector2 *base);
+t_vector3_int
+			convert_vector3_to_vector3_int(t_vector3 *base);
+t_vector3	*get_opengl_coord(t_window *p_win, int i, int j);
 
 //			fps_handler
 void		check_frame();

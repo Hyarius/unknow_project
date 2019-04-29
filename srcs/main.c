@@ -15,19 +15,16 @@ int main(int argc, char **argv)
 	int state = 0;
 	t_color color1 = create_t_color(1.0, 0.0, 0.0, 1.0);
 	t_color color2 = create_t_color(1.0, 1.0, 0.0, 1.0);
-	t_color color3 = create_t_color(1.0, 1.0, 1.0, 1.0);
 
-	t_triangle t3 = create_t_triangle(create_t_vector2(50, 50), create_t_vector2(500, 50), create_t_vector2(50, 500));
-
-	t_triangle uv3 = create_t_triangle(create_t_vector2(0, 0), create_t_vector2(1, 0), create_t_vector2(0, 1));
-
-	t_texture *texture = png_load_cpu("003.png");
+	t_triangle t1 = create_t_triangle(create_t_vector2(50, 50), create_t_vector2(win->size_x - 50, 50), create_t_vector2(50, win->size_y - 50));
+	t_triangle t2 = create_t_triangle(create_t_vector2(win->size_x - 50, 50), create_t_vector2(50, win->size_y - 50), create_t_vector2(win->size_x - 50, win->size_y - 50));
 
 	while (play == 1)
 	{
 		prepare_screen(win, create_t_color(0.2f, 0.2f, 0.2f, 1.0f));
 
-		draw_triangle_texture(win, &t3, &uv3, texture, 1.0);
+		draw_triangle_color_cpu(win, &t1, &color1);
+		draw_triangle_color_cpu(win, &t2, &color2);
 
 		render_screen(win);
 
