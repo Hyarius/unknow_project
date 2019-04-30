@@ -93,4 +93,8 @@ int				get_next_line(const int fd, char **line);
 
 void 			error_exit(int error, char *message);
 
+int				generate_nbr(int min, int max);
+
+void			ft_bzero(void *src, size_t nb_bytes);
+
 #endif

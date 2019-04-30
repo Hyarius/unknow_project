@@ -7,6 +7,8 @@
 # include <stdio.h>
 # include <time.h>
 
+# include <pthread.h>
+
 # include <SDL.h> // Basic sdl function
 
 # include <OpenGL/gl3.h> // Basic opengl

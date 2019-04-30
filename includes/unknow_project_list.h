@@ -4,6 +4,13 @@
 # include "unknow_project_basic.h"
 # include "unknow_project_structure.h"
 
+typedef struct	s_void_list
+{
+	void		**data;
+	int			size;
+	int			max_size;
+}				t_void_list;
+
 typedef struct	s_vector2_list
 {
 	union

@@ -89,6 +89,7 @@ t_vector2_int
 t_vector2_int
 			*t_vector2_int_list_get(t_vector2_int_list *dest, int index);
 int			*t_vector2_int_list_obtain(t_vector2_int_list *dest, int index);
+void		t_vector2_int_list_resize(t_vector2_int_list *dest, int new_size);
 
 //			vector2_int
 t_vector2_int
@@ -113,6 +114,7 @@ void		clean_t_vector2_list(t_vector2_list *dest);
 t_vector2	t_vector2_list_at(t_vector2_list *dest, int index);
 t_vector2	*t_vector2_list_get(t_vector2_list *dest, int index);
 float		*t_vector2_list_obtain(t_vector2_list *dest, int index);
+void		t_vector2_list_resize(t_vector2_list *dest, int new_size);
 
 //			vector2
 t_vector2	create_t_vector2(float p_x, float p_y);
@@ -140,6 +142,7 @@ t_vector3_int
 t_vector3_int
 			*t_vector3_int_list_get(t_vector3_int_list *dest, int index);
 int			*t_vector3_int_list_obtain(t_vector3_int_list *dest, int index);
+void		t_vector3_int_list_resize(t_vector3_int_list *dest, int new_size);
 
 //			vector3_int
 t_vector3_int
@@ -172,6 +175,21 @@ void 		t_vector3_swap(t_vector3 *a, t_vector3 *b);
 void 		t_vector3_add(t_vector3 *src, float delta_x, float delta_y);
 void 		set_t_vector3(t_vector3 *src, float p_x, float p_y, float p_z);
 void 		print_t_vector3(t_vector3 vector, char *str);
+void		t_vector3_list_resize(t_vector3_list *dest, int new_size);
+
+//
+// ----------------- VOID_LIST --------------
+//
+//
+t_void_list create_t_void_list();
+t_void_list *initialize_t_void_list();
+void	t_void_list_add_back(t_void_list *dest, int nb, ...);
+void	t_void_list_push_back(t_void_list *dest, void *to_add);
+void	free_t_void_list(t_void_list dest);
+void	delete_t_void_list(t_void_list *dest);
+void	clean_t_void_list(t_void_list *dest);
+void	*t_void_list_at(t_void_list *dest, int index);
+void	**t_void_list_get(t_void_list *dest, int index);
 
 //
 // ----------------- COLOR ------------------
@@ -189,6 +207,7 @@ void		clean_t_color_list(t_color_list *dest);
 t_color		t_color_list_at(t_color_list *dest, int index);
 t_color		*t_color_list_get(t_color_list *dest, int index);
 float		*t_color_list_obtain(t_color_list *dest, int index);
+void		t_color_list_resize(t_color_list *dest, int new_size);
 
 //
 // ----------------- WINDOW -----------------

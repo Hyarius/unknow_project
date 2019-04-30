@@ -110,3 +110,25 @@ float	*t_color_list_obtain(t_color_list *dest, int index)
 		error_exit(-28, "Segfault : t_color_list out of range");
 	return (&dest->value[index * 2]);
 }
+
+void			t_color_list_resize(t_color_list *dest, int new_size)
+{
+	t_color *tmp;
+	int i;
+	int old_size;
+
+	old_size = dest->size;
+	tmp = dest->color;
+	if (!(dest->color = (t_color *)malloc(sizeof(t_color) * (new_size))))
+		error_exit(-20, "Can't realloc a t_color array");
+	i = 0;
+	while (i < dest->size && i < new_size && i < old_size)
+	{
+		dest->color[i] = tmp[i];
+		i++;
+	}
+	if (old_size != 0)
+		free(tmp);
+	dest->max_size = new_size;
+	dest->size = new_size;
+}

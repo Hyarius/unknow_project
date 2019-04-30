@@ -1,6 +1,8 @@
 #ifndef UNKNOW_PROJECT_DEFINE_H
 # define UNKNOW_PROJECT_DEFINE_H
 
+# define NB_THREAD 400
+
 # define BOOL_TRUE 1
 # define BOOL_FALSE 0
 

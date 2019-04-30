@@ -108,3 +108,26 @@ float			*t_vector2_list_obtain(t_vector2_list *dest, int index)
 		error_exit(-22, "Segfault : t_vector2_list out of range");
 	return (&dest->value[index * 2]);
 }
+
+void			t_vector2_list_resize(t_vector2_list *dest, int new_size)
+{
+	t_vector2 *tmp;
+	int i;
+	int old_size;
+
+	old_size = dest->size;
+
+	tmp = dest->vector;
+	if (!(dest->vector = (t_vector2 *)malloc(sizeof(t_vector2) * (new_size))))
+		error_exit(-20, "Can't realloc a t_vector2 array");
+	i = 0;
+	while (i < dest->size && i < new_size && i < old_size)
+	{
+		dest->vector[i] = tmp[i];
+		i++;
+	}
+	if (old_size != 0)
+		free(tmp);
+	dest->max_size = new_size;
+	dest->size = new_size;
+}
