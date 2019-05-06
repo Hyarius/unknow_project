@@ -18,7 +18,7 @@ void			check_frame()
 	}
 	else
 		nb_frame++;
-	//if (1000 / FPS > frame_actual - framestart)
-	//	SDL_Delay(1000 / FPS - (frame_actual - framestart));
+	/*if (1000 / FPS > frame_actual - framestart)
+		SDL_Delay(1000 / FPS - (frame_actual - framestart));*/
 	framestart = SDL_GetTicks();
 }

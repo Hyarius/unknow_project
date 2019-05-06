@@ -12,6 +12,6 @@
 
 # define PIXEL_SIZE 4
 # define FPS 60000
-# define PUSH_SIZE 50000
+# define PUSH_SIZE 5000000
 
 #endif

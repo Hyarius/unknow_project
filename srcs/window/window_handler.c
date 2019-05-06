@@ -94,27 +94,6 @@ t_window		*initialize_t_window(char *p_name, int p_size_x, int p_size_y)
 	win->vertex_buffer_data.size = win->size_x * win->size_y;
 	win->color_buffer_data.size = win->size_x * win->size_y;
 
-	/*if (!(win->vertex_buffer_data = (t_vector3_list *)malloc(sizeof(t_vector3_list) * (win->nb_thread))))
-		error_exit(-9, "Can't malloc a GLfloat array");
-
-	if (!(win->color_buffer_data = (t_color_list *)malloc(sizeof(t_color_list) * (win->nb_thread))))
-		error_exit(-9, "Can't malloc a GLfloat array");
-
-	if (!(win->list = (t_void_list **)malloc(sizeof(t_void_list *) * win->nb_thread)))
-		error_exit(-34234, "yolo");
-
-	if (!(win->thread = (pthread_t *)malloc(sizeof(pthread_t) * win->nb_thread)))
-		error_exit(-34234, "yolo");
-
-	i = 0;
-	while (i < win->nb_thread)
-	{
-		win->list[i] = initialize_t_void_list();
-		win->vertex_buffer_data[i] = create_t_vector3_list();
-		win->color_buffer_data[i] = create_t_color_list();
-		i++;
-	}*/
-
 	i = 0;
 	while (i < win->size_x * win->size_y)
 	{
@@ -132,7 +111,7 @@ void				prepare_screen(t_window *win, t_color color)
 	clean_buffers(win);
 
 	//Set background color
-	glClearColor((GLclampf)color.r, (GLclampf)color.g, (GLclampf)color.b, 0.0f);
+	glClearColor((GLclampf)color.r, (GLclampf)color.g, (GLclampf)color.b, 1.0f);
 
 	//Clear la profondeur et la couleur du buffer
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
