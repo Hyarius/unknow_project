@@ -106,7 +106,7 @@ t_window		*initialize_t_window(char *p_name, int p_size_x, int p_size_y)
 
 void				prepare_screen(t_window *win, t_color color)
 {
-	//clean_buffers(win);
+	clean_buffers(win);
 
 	//Set background color
 	glClearColor((GLclampf)color.r, (GLclampf)color.g, (GLclampf)color.b, 1.0f);
