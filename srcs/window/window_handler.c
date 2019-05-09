@@ -89,10 +89,8 @@ t_window		*initialize_t_window(char *p_name, int p_size_x, int p_size_y)
 
 	win->vertex_buffer_data = create_t_vector3_list();
 	win->color_buffer_data = create_t_color_list();
-	t_vector3_list_resize(&(win->vertex_buffer_data), win->size_x * win->size_y);
-	t_color_list_resize(&(win->color_buffer_data), win->size_x * win->size_y);
-	win->vertex_buffer_data.size = win->size_x * win->size_y;
-	win->color_buffer_data.size = win->size_x * win->size_y;
+	//t_vector3_list_resize(&(win->vertex_buffer_data), win->size_x * win->size_y);
+	//t_color_list_resize(&(win->color_buffer_data), win->size_x * win->size_y);
 
 	i = 0;
 	while (i < win->size_x * win->size_y)
@@ -108,7 +106,7 @@ t_window		*initialize_t_window(char *p_name, int p_size_x, int p_size_y)
 
 void				prepare_screen(t_window *win, t_color color)
 {
-	clean_buffers(win);
+	//clean_buffers(win);
 
 	//Set background color
 	glClearColor((GLclampf)color.r, (GLclampf)color.g, (GLclampf)color.b, 1.0f);

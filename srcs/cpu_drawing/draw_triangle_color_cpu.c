@@ -50,48 +50,48 @@ int	get_big(int a, int b, int c)
 	return (result);
 }
 
-void *thread_rasterize_function(void *arg)
-{
-	/*t_void_list *data = arg;
-	t_window *p_win = t_void_list_at(data, 0);
-	int index = (int)(t_void_list_at(data, 3));
-	int y_start;
-	int find;
-
-	float y_delta = *((float *)(t_void_list_at(data, 2)));
-	float alpha;
-	float beta;
-	float gamma;
-
-	t_vector2_int p;
-
-	y_start = (int)(t_void_list_at(data, 1)) + index * y_delta;
-	p.y = (int)(t_void_list_at(data, 1)) + index * y_delta;
-	while (p.y < y_start + y_delta)
-	{
-		find = 0;
-		p.x = (int)(t_void_list_at(data, 4));
-		while (p.x < (int)(t_void_list_at(data, 5)))
-		{
-			calc_rasterizer(&alpha, t_void_list_at(data, 6), &p);
-			calc_rasterizer(&beta, t_void_list_at(data, 7), &p);
-			gamma = 1.0f - (alpha + beta);
-
-			if (alpha >= 0.0f && alpha <= 1.0f && beta >= 0.0f && beta <= 1.0f
-				&& gamma >= 0.0f && gamma <= 1.0f)
-			{
-				find = 1;
-				add_pixel_to_screen(p_win, index, p.x + p.y * p_win->size_x, t_void_list_at(data, 8));
-			}
-			else if (find == 1)
-				break;
-			p.x++;
-		}
-		p.y++;
-	}*/
-	//printf("thread : %d\n", pthread_self());
-	pthread_exit(NULL);
-}
+// void *thread_rasterize_function(void *arg)
+// {
+// 	// t_void_list *data = arg;
+// 	// t_window *p_win = t_void_list_at(data, 0);
+// 	// int index = (int)(t_void_list_at(data, 3));
+// 	// int y_start;
+// 	// int find;
+// 	//
+// 	// float y_delta = *((float *)(t_void_list_at(data, 2)));
+// 	// float alpha;
+// 	// float beta;
+// 	// float gamma;
+// 	//
+// 	// t_vector2_int p;
+// 	//
+// 	// y_start = (int)(t_void_list_at(data, 1)) + index * y_delta;
+// 	// p.y = (int)(t_void_list_at(data, 1)) + index * y_delta;
+// 	// while (p.y < y_start + y_delta)
+// 	// {
+// 	// 	find = 0;
+// 	// 	p.x = (int)(t_void_list_at(data, 4));
+// 	// 	while (p.x < (int)(t_void_list_at(data, 5)))
+// 	// 	{
+// 	// 		calc_rasterizer(&alpha, t_void_list_at(data, 6), &p);
+// 	// 		calc_rasterizer(&beta, t_void_list_at(data, 7), &p);
+// 	// 		gamma = 1.0f - (alpha + beta);
+// 	//
+// 	// 		if (alpha >= 0.0f && alpha <= 1.0f && beta >= 0.0f && beta <= 1.0f
+// 	// 			&& gamma >= 0.0f && gamma <= 1.0f)
+// 	// 		{
+// 	// 			find = 1;
+// 	// 			add_pixel_to_screen(p_win, index, p.x + p.y * p_win->size_x, t_void_list_at(data, 8));
+// 	// 		}
+// 	// 		else if (find == 1)
+// 	// 			break;
+// 	// 		p.x++;
+// 	// 	}
+// 	// 	p.y++;
+// 	// }
+// 	// printf("thread : %d\n", pthread_self());
+// 	// pthread_exit(NULL);
+// }
 
 /*
 void draw_triangle_color_cpu(t_window *p_win, t_triangle *p_t, t_color *p_color)
@@ -231,7 +231,7 @@ void draw_triangle_color_cpu(t_window *p_win, t_triangle *p_t, t_color *p_color)
 			if (alpha > 0.0f && beta > 0.0f && gamma > 0.0f)
 			{
 				find = 1;
-				add_pixel_to_screen(p_win, x + y * p_win->size_x, p_color);
+				//add_pixel_to_screen(p_win, x + y * p_win->size_x, p_color);
 			}
 			else if (find == 1)
 				break;
