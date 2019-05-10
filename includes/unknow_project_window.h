@@ -21,10 +21,12 @@ typedef struct	s_window
 	GLuint 		vertex_array;
 	SDL_GLContext
 				context;
+
 	GLuint		vertex_buffer;
 	GLuint		color_buffer;
 	GLuint		texture_buffer;
 	GLuint		alpha_buffer;
+
 	GLuint		program_color;
 	GLuint		program_texture;
 	t_vector2	pixel_delta;

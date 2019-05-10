@@ -14,12 +14,12 @@ int main(int argc, char **argv)
 	int play = 1;
 	int state = 0;
 
-	int nb = 100;
+	int nb = 1;
 
 	t_color *color;
 	t_vector2	*coord;
 	t_triangle	*t;
-	int delta = 200;
+	int delta = 800;
 
 	color = (t_color *)malloc(sizeof(t_color) * nb);
 	coord = (t_vector2 *)malloc(sizeof(t_vector2) * (nb * 3));
@@ -29,8 +29,8 @@ int main(int argc, char **argv)
 	{
 		color[0] = create_t_color(1.0, 0.0, 0.0, 1.0);
 		coord[0] = create_t_vector2(50, 50);
-		coord[1] = create_t_vector2(250, 50);
-		coord[2] = create_t_vector2(50, 250);
+		coord[1] = create_t_vector2(50 + delta, 50);
+		coord[2] = create_t_vector2(50, 50 + delta);
 		t[0] = create_t_triangle(coord[0], coord[1], coord[2]);
 	}
 	else
@@ -52,13 +52,20 @@ int main(int argc, char **argv)
 		}
 	}
 
+	t_triangle t_sprite;
+
+	t_sprite = create_t_triangle(create_t_vector2(0.0f, 0.0f), create_t_vector2(1.0f, 0.0f), create_t_vector2(0.0f, 1.0f));
+
+	t_texture *texture = png_load("003.png");
+
 	while (play == 1)
 	{
 		prepare_screen(win, create_t_color(0.2f, 0.2f, 0.2f, 1.0f));
 
 		for (int i = 0; i < nb; i++)
 		{
-			draw_triangle_color_cpu(win, &(t[i]), &(color[i]));
+			draw_triangle_color(win, &(t[i]), &(color[i]));
+			draw_triangle_texture(win, &(t[i]), &t_sprite, texture, 1.0f);
 		}
 
 		render_screen(win);
@@ -72,8 +79,6 @@ int main(int argc, char **argv)
 			//Appuyer sur echap et le relacher
 			if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_ESCAPE)
 				play = 0;
-			if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_q)
-				state = (state + 1) % 2;
 		}
 	}
 	return (0);

@@ -1,12 +1,5 @@
 #include "unknow_project.h"
 
-/*
-
-1) Constructeur
-2) Malloceur
-
-*/
-
 void			start_sdl()
 {
 	//initialisation SDL
