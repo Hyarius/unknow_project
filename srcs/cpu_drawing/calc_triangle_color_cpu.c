@@ -43,10 +43,12 @@ void calc_triangle_color_cpu(t_window *p_win, int index, t_triangle *p_t, t_colo
 	int				value[8];
 	float			base[6];
 	t_vector2		delta[3];
+	int				b = 0;
 
 	set_variable(p_t, value, base, delta);
 	value[7] = index;
 	value[4] = value[2];
+
 	while (value[4] < value[3])
 	{
 		value[6] = 0;
@@ -54,8 +56,12 @@ void calc_triangle_color_cpu(t_window *p_win, int index, t_triangle *p_t, t_colo
 		base[3] = base[0] + (value[4] * delta[0].y);
 		base[4] = base[1] + (value[4] * delta[1].y);
 		base[5] = base[2] + (value[4] * delta[2].y);
+		b++;
 		while (value[5] < value[1] && value[6] != -1)
 		{
+			if (b == 1)
+				p_win->vertex_buffer_data[0]->size++;
+			b = 0;
 			apply_pixel(p_win, value, base, p_color);
 			base[3] += delta[0].x;
 			base[4] += delta[1].x;

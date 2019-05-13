@@ -25,6 +25,7 @@ void *thread_triangle_color(void *p_data)
 		tmp_triangle = t_triangle_list_get(p_t, tmp);
 		tmp_color = t_color_list_get(p_color, tmp);
 
+
 		calc_triangle_color_cpu(p_win, index,
 					tmp_triangle,
 					tmp_color);

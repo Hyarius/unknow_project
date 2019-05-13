@@ -14,8 +14,8 @@ typedef struct		s_window
 	pthread_t		threads[NB_THREAD];
 	t_void_list		data[NB_THREAD];
 
-	t_vector3_list	vertex_buffer_data[NB_THREAD];
-	t_color_list	color_buffer_data[NB_THREAD];
+	t_vector3_list	*vertex_buffer_data[NB_THREAD];
+	t_color_list	*color_buffer_data[NB_THREAD];
 
 	int				size_x;
 	int				size_y;

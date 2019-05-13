@@ -14,7 +14,7 @@ int main(int argc, char **argv)
 	int play = 1;
 	int state = 0;
 
-	int nb = 80;
+	int nb = 100;
 
 	t_color_list 	*color;
 	t_vector2		coord[3];
@@ -60,9 +60,10 @@ int main(int argc, char **argv)
 
 	while (play == 1)
 	{
-		//prepare_screen(win, create_t_color(0.2f, 0.2f, 0.2f, 1.0f));
 
 		clean_buffers(win);
+
+		//prepare_screen(win, create_t_color(0.2f, 0.2f, 0.2f, 1.0f));
 
 		draw_triangle_color_cpu(win, t, color);
 

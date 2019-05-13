@@ -137,27 +137,27 @@ void 		print_t_vector2(t_vector2 vector, char *str);
 //
 //			vector3_int_list
 t_vector3_int_list
-				create_t_vector3_int_list();
+			create_t_vector3_int_list();
 t_vector3_int_list
-				*initialize_t_vector3_int_list();
+			*initialize_t_vector3_int_list();
 void		t_vector3_int_list_push_back(t_vector3_int_list *dest, t_vector3_int to_add);
 void		t_vector3_int_list_add_back(t_vector3_int_list *dest, t_vector3_int *to_add);
 void		free_t_vector3_int_list(t_vector3_int_list dest);
 void		delete_t_vector3_int_list(t_vector3_int_list *dest);
 void		clean_t_vector3_int_list(t_vector3_int_list *dest);
 t_vector3_int
-				t_vector3_int_list_at(t_vector3_int_list *dest, int index);
+			t_vector3_int_list_at(t_vector3_int_list *dest, int index);
 t_vector3_int
-				*t_vector3_int_list_get(t_vector3_int_list *dest, int index);
+			*t_vector3_int_list_get(t_vector3_int_list *dest, int index);
 void 		t_vector3_int_list_set(t_vector3_int_list *dest, int index, t_vector3_int *vector);
 int			*t_vector3_int_list_obtain(t_vector3_int_list *dest, int index);
 void		t_vector3_int_list_resize(t_vector3_int_list *dest, int new_size);
 
 //			vector3_int
 t_vector3_int
-				create_t_vector3_int(int p_x, int p_y, int p_z);
+			create_t_vector3_int(int p_x, int p_y, int p_z);
 t_vector3_int
-				*initialize_t_vector3_int(int p_x, int p_y, int p_z);
+			*initialize_t_vector3_int(int p_x, int p_y, int p_z);
 void 		t_vector3_int_swap(t_vector3_int *a, t_vector3_int *b);
 void 		t_vector3_int_add(t_vector3_int *src, int delta_x, int delta_y);
 void 		set_t_vector3_int(t_vector3_int *src, int p_x, int p_y, int p_z);
@@ -165,9 +165,9 @@ void 		print_t_vector3_int(t_vector3_int vector, char *str);
 
 //			vector3_list
 t_vector3_list
-				create_t_vector3_list();
+			create_t_vector3_list();
 t_vector3_list
-				*initialize_t_vector3_list();
+			*initialize_t_vector3_list();
 void		t_vector3_list_push_back(t_vector3_list *dest, t_vector3 to_add);
 void		t_vector3_list_add_back(t_vector3_list *dest, t_vector3 *to_add);
 void		free_t_vector3_list(t_vector3_list dest);
@@ -193,22 +193,22 @@ void		t_vector3_list_resize(t_vector3_list *dest, int new_size);
 //
 t_void_list create_t_void_list();
 t_void_list *initialize_t_void_list();
-void	t_void_list_add_back(t_void_list *dest, int nb, ...);
-void	t_void_list_push_back(t_void_list *dest, void *to_add);
-void	free_t_void_list(t_void_list dest);
-void	delete_t_void_list(t_void_list *dest);
-void	clean_t_void_list(t_void_list *dest);
-void	*t_void_list_at(t_void_list *dest, int index);
-void	**t_void_list_get(t_void_list *dest, int index);
+void		t_void_list_add_back(t_void_list *dest, int nb, ...);
+void		t_void_list_push_back(t_void_list *dest, void *to_add);
+void		free_t_void_list(t_void_list dest);
+void		delete_t_void_list(t_void_list *dest);
+void		clean_t_void_list(t_void_list *dest);
+void		*t_void_list_at(t_void_list *dest, int index);
+void		**t_void_list_get(t_void_list *dest, int index);
 
 //
 // ----------------- COLOR ------------------
 //
 //
 t_color_list
-				create_t_color_list();
+			create_t_color_list();
 t_color_list
-				*initialize_t_color_list();
+			*initialize_t_color_list();
 void		t_color_list_push_back(t_color_list *dest, t_color to_add);
 void		t_color_list_add_back(t_color_list *dest, t_color *to_add);
 void		free_t_color_list(t_color_list dest);

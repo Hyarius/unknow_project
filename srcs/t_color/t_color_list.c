@@ -48,28 +48,28 @@ void	t_color_list_push_back(t_color_list *dest, t_color to_add)
 
 void	t_color_list_add_back(t_color_list *dest, t_color *to_add)
 {
-	t_color *tmp;
-	int i;
-
-	if ((dest->size + 1) >= dest->max_size)
-	{
-		tmp = dest->color;
-		if (!(dest->color = (t_color *)malloc(sizeof(t_color) * (dest->size + 1 + PUSH_SIZE))))
-			error_exit(-20, "Can't realloc a t_color array");
-		i = 0;
-		while (i < dest->size)
-		{
-			dest->color[i] = tmp[i];
-			i++;
-		}
-		free(tmp);
-		dest->max_size += PUSH_SIZE;
-	}
-	dest->color[dest->size].r = to_add->r;
-	dest->color[dest->size].g = to_add->g;
-	dest->color[dest->size].b = to_add->b;
-	dest->color[dest->size].a = to_add->a;
-	dest->size++;
+	// t_color *tmp;
+	// int i;
+	//
+	// if ((dest->size + 1) >= dest->max_size)
+	// {
+	// 	tmp = dest->color;
+	// 	if (!(dest->color = (t_color *)malloc(sizeof(t_color) * (dest->size + 1 + PUSH_SIZE))))
+	// 		error_exit(-20, "Can't realloc a t_color array");
+	// 	i = 0;
+	// 	while (i < dest->size)
+	// 	{
+	// 		dest->color[i] = tmp[i];
+	// 		i++;
+	// 	}
+	// 	free(tmp);
+	// 	dest->max_size += PUSH_SIZE;
+	// }
+	// dest->color[dest->size].r = to_add->r;
+	// dest->color[dest->size].g = to_add->g;
+	// dest->color[dest->size].b = to_add->b;
+	// dest->color[dest->size].a = to_add->a;
+	// (dest->size)++;
 }
 
 void	free_t_color_list(t_color_list dest)

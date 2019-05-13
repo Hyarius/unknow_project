@@ -233,21 +233,21 @@ void draw_buffer_opengl(t_window *p_win)
 	len = 0;
 	while (i < NB_THREAD)
 	{
-		if (p_win->vertex_buffer_data[i].size != 0 && p_win->color_buffer_data[i].size != 0)
+		if (p_win->vertex_buffer_data[i]->size != 0 && p_win->color_buffer_data[i]->size != 0)
 		{
 			glBindVertexArray(p_win->vertex_array);
 
 			// bind vertex_buffer
 			glBindBuffer(GL_ARRAY_BUFFER, p_win->vertex_buffer);
 			// donne a vertex_buffer vertex_buffer_data
-			glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * p_win->vertex_buffer_data[i].size * 3, t_vector3_list_obtain(&p_win->vertex_buffer_data[i], 0), GL_STATIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * p_win->vertex_buffer_data[i]->size * 3, t_vector3_list_obtain(p_win->vertex_buffer_data[i], 0), GL_STATIC_DRAW);
 
-			len += p_win->vertex_buffer_data[i].size;
+			len += p_win->vertex_buffer_data[i]->size;
 
 			// bind color_buffer
 			glBindBuffer(GL_ARRAY_BUFFER, p_win->color_buffer);
 			// donne a color_buffer color_buffer_data
-			glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * p_win->color_buffer_data[i].size * 4, t_color_list_obtain(&p_win->color_buffer_data[i], 0), GL_STATIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * p_win->color_buffer_data[i]->size * 4, t_color_list_obtain(p_win->color_buffer_data[i], 0), GL_STATIC_DRAW);
 
 			// indique le shader a utiliser
 			glUseProgram(p_win->program_color);
@@ -264,7 +264,7 @@ void draw_buffer_opengl(t_window *p_win)
 			glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, NULL);
 
 			// dessine un point
-			glDrawArrays( GL_POINTS, 0, p_win->vertex_buffer_data[i].size);
+			glDrawArrays( GL_POINTS, 0, p_win->vertex_buffer_data[i]->size);
 		}
 		i++;
 	}

@@ -95,8 +95,8 @@ t_window		*initialize_t_window(char *p_name, int p_size_x, int p_size_y)
 	{
 		win->data[i] = create_t_void_list();
 
-		win->vertex_buffer_data[i] = create_t_vector3_list();
-		win->color_buffer_data[i] = create_t_color_list();
+		win->vertex_buffer_data[i] = initialize_t_vector3_list();
+		win->color_buffer_data[i] = initialize_t_color_list();
 
 		i++;
 	}
