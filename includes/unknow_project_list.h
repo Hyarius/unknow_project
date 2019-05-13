@@ -11,6 +11,13 @@ typedef struct	s_void_list
 	int			max_size;
 }				t_void_list;
 
+typedef struct	s_triangle_list
+{
+	t_triangle	*triangle;
+	int			size;
+	int			max_size;
+}				t_triangle_list;
+
 typedef struct	s_vector2_list
 {
 	union

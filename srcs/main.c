@@ -14,24 +14,23 @@ int main(int argc, char **argv)
 	int play = 1;
 	int state = 0;
 
-	int nb = 1;
+	int nb = 80;
 
-	t_color *color;
-	t_vector2	*coord;
-	t_triangle	*t;
-	int delta = 800;
+	t_color_list 	*color;
+	t_vector2		coord[3];
+	t_triangle_list	*t;
+	int delta = 200;
 
-	color = (t_color *)malloc(sizeof(t_color) * nb);
-	coord = (t_vector2 *)malloc(sizeof(t_vector2) * (nb * 3));
-	t = (t_triangle *)malloc(sizeof(t_triangle) * nb);
+	color = initialize_t_color_list();
+	t = initialize_t_triangle_list();
 
 	if (nb == 1)
 	{
-		color[0] = create_t_color(1.0, 0.0, 0.0, 1.0);
+		t_color_list_push_back(color, create_t_color(1.0, 0.0, 0.0, 1.0));
 		coord[0] = create_t_vector2(50, 50);
 		coord[1] = create_t_vector2(50 + delta, 50);
 		coord[2] = create_t_vector2(50, 50 + delta);
-		t[0] = create_t_triangle(coord[0], coord[1], coord[2]);
+		t_triangle_list_push_back(t, create_t_triangle(coord[0], coord[1], coord[2]));
 	}
 	else
 	{
@@ -39,36 +38,37 @@ int main(int argc, char **argv)
 		{
 			int x = generate_nbr(50, win->size_x - 50 - delta);
 			int y = generate_nbr(50, win->size_y - 50 - delta);
-			coord[i * 3] = create_t_vector2(x, y);
-			coord[i * 3 + 1] = create_t_vector2(x + delta, y);
-			coord[i * 3 + 2] = create_t_vector2(x, y + delta);
+			coord[0] = create_t_vector2(x, y);
+			coord[1] = create_t_vector2(x + delta, y);
+			coord[2] = create_t_vector2(x, y + delta);
 
 			float r = (float)(generate_nbr(0, 255)) / 255.0f;
 			float g = (float)(generate_nbr(0, 255)) / 255.0f;
 			float b = (float)(generate_nbr(0, 255)) / 255.0f;
-			color[i] = create_t_color(r, g, b, 1.0f);
 
-			t[i] = create_t_triangle(coord[i * 3], coord[i * 3 + 1], coord[i * 3 + 2]);
+			t_color_list_push_back(color, create_t_color(r, g, b, 1.0f));
+
+			t_triangle_list_push_back(t, create_t_triangle(coord[0], coord[1], coord[2]));
 		}
 	}
 
-	t_triangle t_sprite;
+	//t_triangle t_sprite;
 
-	t_sprite = create_t_triangle(create_t_vector2(0.0f, 0.0f), create_t_vector2(1.0f, 0.0f), create_t_vector2(0.0f, 1.0f));
+	//t_sprite = create_t_triangle(create_t_vector2(0.0f, 0.0f), create_t_vector2(1.0f, 0.0f), create_t_vector2(0.0f, 1.0f));
 
-	t_texture *texture = png_load("003.png");
+	//t_texture *texture = png_load("003.png");
 
 	while (play == 1)
 	{
-		prepare_screen(win, create_t_color(0.2f, 0.2f, 0.2f, 1.0f));
+		//prepare_screen(win, create_t_color(0.2f, 0.2f, 0.2f, 1.0f));
 
-		for (int i = 0; i < nb; i++)
-		{
-			draw_triangle_color(win, &(t[i]), &(color[i]));
-			draw_triangle_texture(win, &(t[i]), &t_sprite, texture, 1.0f);
-		}
+		clean_buffers(win);
 
-		render_screen(win);
+		draw_triangle_color_cpu(win, t, color);
+
+		check_frame();
+
+		//render_screen(win);
 
 		//Regarde si il y a un evenement, met dans event la liste des evenements arrives, 0 si aucun, 1 si evenement
 		if (SDL_PollEvent(&event) == 1)

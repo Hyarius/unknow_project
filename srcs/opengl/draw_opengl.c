@@ -227,44 +227,11 @@ void			draw_triangle_texture_opengl(t_window *p_win, t_triangle *p_triangle_scre
 
 void draw_buffer_opengl(t_window *p_win)
 {
-	if (p_win->vertex_buffer_data.size != 0 && p_win->color_buffer_data.size != 0)
-	{
-		glBindVertexArray(p_win->vertex_array);
-
-		// bind vertex_buffer
-		glBindBuffer(GL_ARRAY_BUFFER, p_win->vertex_buffer);
-		// donne a vertex_buffer vertex_buffer_data
-		glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * p_win->vertex_buffer_data.size * 3, t_vector3_list_obtain(&p_win->vertex_buffer_data, 0), GL_STATIC_DRAW);
-
-		// bind color_buffer
-		glBindBuffer(GL_ARRAY_BUFFER, p_win->color_buffer);
-		// donne a color_buffer color_buffer_data
-		glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * p_win->color_buffer_data.size * 4, t_color_list_obtain(&p_win->color_buffer_data, 0), GL_STATIC_DRAW);
-
-		// indique le shader a utiliser
-		glUseProgram(p_win->program_color);
-
-		// indique la location du shader utiliser
-		glEnableVertexAttribArray(0);
-		// quelle est le buffer a utiliser
-		glBindBuffer(GL_ARRAY_BUFFER, p_win->vertex_buffer);
-		// comment utiliser le buffer
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
-
-		glEnableVertexAttribArray(1);
-		glBindBuffer(GL_ARRAY_BUFFER, p_win->color_buffer);
-		glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, NULL);
-
-		// dessine un point
-		glDrawArrays( GL_POINTS, 0, p_win->vertex_buffer_data.size);
-	}
-}
-
-/*void draw_buffer_opengl(t_window *p_win)
-{
 	int i = 0;
+	int len;
 
-	while (i < p_win->nb_thread)
+	len = 0;
+	while (i < NB_THREAD)
 	{
 		if (p_win->vertex_buffer_data[i].size != 0 && p_win->color_buffer_data[i].size != 0)
 		{
@@ -274,6 +241,8 @@ void draw_buffer_opengl(t_window *p_win)
 			glBindBuffer(GL_ARRAY_BUFFER, p_win->vertex_buffer);
 			// donne a vertex_buffer vertex_buffer_data
 			glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * p_win->vertex_buffer_data[i].size * 3, t_vector3_list_obtain(&p_win->vertex_buffer_data[i], 0), GL_STATIC_DRAW);
+
+			len += p_win->vertex_buffer_data[i].size;
 
 			// bind color_buffer
 			glBindBuffer(GL_ARRAY_BUFFER, p_win->color_buffer);
@@ -299,4 +268,4 @@ void draw_buffer_opengl(t_window *p_win)
 		}
 		i++;
 	}
-}*/
+}

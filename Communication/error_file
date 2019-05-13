@@ -37,3 +37,9 @@
 -30 : Bad image format
 
 -31 : Can't malloc a t_triangle
+
+-32 : Can't malloc a t_triangle array
+-33 : Can't create a t_triangle_list array
+-34 : Can't realloc a t_triangle array
+-35 : Can't realloc a t_triangle array
+-36 : Segfault : t_triangle_list out of range

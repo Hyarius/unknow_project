@@ -78,6 +78,14 @@ typedef struct	s_value
 	int			max; // - Maximum value of the bar
 }				t_value;
 
+typedef struct	s_rasterizer
+{
+	int 		a;
+	int 		b;
+	int 		c;
+	int			max;
+}				t_rasterizer;
+
 char			*ft_strnew(int size);
 int				ft_strlen(char *str);
 char			*ft_strdup(char *src);

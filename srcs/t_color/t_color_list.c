@@ -130,5 +130,5 @@ void			t_color_list_resize(t_color_list *dest, int new_size)
 	if (old_size != 0)
 		free(tmp);
 	dest->max_size = new_size;
-	dest->size = new_size;
+	dest->size = i;
 }

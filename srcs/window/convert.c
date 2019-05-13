@@ -16,13 +16,6 @@ void		convert_vector2_to_opengl(t_window *p_win, t_vector2 *source)
 	source->y = -(source->y / (p_win->size_y / 2.0) - 1.0f);
 }
 
-t_vector3			*get_opengl_coord(t_window *p_win, int i, int j)
-{
-	int coord = i + j * p_win->size_x;
-
-	return (&(p_win->coord_data[coord]));
-}
-
 t_vector2_int	convert_vector2_to_vector2_int(t_vector2 *base)
 {
 	return (create_t_vector2_int((int)(base->x), (int)(base->y)));

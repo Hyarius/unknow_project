@@ -24,22 +24,32 @@ t_texture *png_load(char *path);
 // ----------------- CPU_DRAWING -----------------
 //
 //			buffer handler
-void 		add_pixel_to_screen(t_window *p_win, int p_coord, t_color *color);
+void 		add_pixel_to_screen(t_window *p_win, int index, int p_coord, t_color *color);
 void 		clean_buffers(t_window *p_win);
 
 //			Draw color cpu
-void 		draw_triangle_color_cpu(t_window *p_win, t_triangle *p_t, t_color *p_color);
+void 		calc_triangle_color_cpu(t_window *p_win, int index, t_triangle *p_t, t_color *p_color);
 
 //			Draw texture CPU
 void 		draw_triangle_texture_cpu(t_window *p_win, t_triangle *p_t, t_triangle *p_triangle_uv, t_texture *p_texture, float alpha);
+
+//			Multithread_color
+void 		draw_triangle_color_cpu(t_window *p_win, t_triangle_list *p_t, t_color_list *p_color);
+
+//			T_rasterizer
+int			apply_formula(t_rasterizer *rast, int x, int y);
+void		set_rasterizer(t_rasterizer *rast, t_vector2 *s, t_vector2 *e, t_vector2 *ext);
+float		calc_rasterizer(t_rasterizer *rast, int x, int y);
+int			get_short(int a, int b, int c);
+int			get_big(int a, int b, int c);
+
 //
 // ----------------- DRAWING -----------------
 //
 //			Draw rectangle
-void		draw_rectangle_color(t_window *p_win, t_rect p_rect, t_color p_color);
 
 //			Draw triangle
-void 		draw_triangle_color(t_window *p_win, t_triangle *p_t, t_color *p_color);
+void 		draw_triangle_color(t_window *p_win, t_triangle_list *p_t, t_color_list *p_color);
 void		draw_triangle_texture(t_window *p_win, t_triangle *p_t_screen, t_triangle *p_t_uv, t_texture *p_texture, float alpha);
 
 //
@@ -66,10 +76,6 @@ t_color		*initialize_t_color(float p_r, float p_g, float p_b, float p_a);
 
 //			t_rect
 t_rect		create_t_rect(float p_x, float p_y, float p_w, float p_h);
-
-//			t_triangle
-t_triangle	create_t_triangle(t_vector2 p_a, t_vector2 p_b, t_vector2 p_c);
-t_triangle	*initialize_t_triangle(t_vector2 p_a, t_vector2 p_b, t_vector2 p_c);
 
 //
 // ----------------- VECTOR2 -----------------
@@ -215,6 +221,25 @@ float		*t_color_list_obtain(t_color_list *dest, int index);
 void		t_color_list_resize(t_color_list *dest, int new_size);
 
 //
+// ----------------- T_TRIANGLE -----------------
+//
+//			t_triangle_list
+t_triangle_list create_t_triangle_list();
+t_triangle_list *initialize_t_triangle_list();
+void	t_triangle_list_push_back(t_triangle_list *dest, t_triangle to_add);
+void	t_triangle_list_add_back(t_triangle_list *dest, t_triangle *to_add);
+void	free_t_triangle_list(t_triangle_list dest);
+void	delete_t_triangle_list(t_triangle_list *dest);
+void	clean_t_triangle_list(t_triangle_list *dest);
+t_triangle	t_triangle_list_at(t_triangle_list *dest, int index);
+t_triangle	*t_triangle_list_get(t_triangle_list *dest, int index);
+void			t_triangle_list_resize(t_triangle_list *dest, int new_size);
+
+//			t_triangle
+t_triangle	create_t_triangle(t_vector2 p_a, t_vector2 p_b, t_vector2 p_c);
+t_triangle	*initialize_t_triangle(t_vector2 p_a, t_vector2 p_b, t_vector2 p_c);
+
+//
 // ----------------- WINDOW -----------------
 //
 //			convert
@@ -224,7 +249,6 @@ t_vector2_int
 				convert_vector2_to_vector2_int(t_vector2 *base);
 t_vector3_int
 				convert_vector3_to_vector3_int(t_vector3 *base);
-t_vector3	*get_opengl_coord(t_window *p_win, int i, int j);
 
 //			fps_handler
 void		check_frame();

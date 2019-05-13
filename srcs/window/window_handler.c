@@ -23,7 +23,7 @@ void			start_sdl()
 
 	//initialisation du ramdom et du TTF
 	srand(time(NULL));
-	TTF_Init();
+
 }
 
 t_window		*initialize_t_window(char *p_name, int p_size_x, int p_size_y)
@@ -32,6 +32,7 @@ t_window		*initialize_t_window(char *p_name, int p_size_x, int p_size_y)
 	t_window	*win;
 	t_vector2	coord[2];
 	t_color		color;
+	t_vector3	tmp_coord;
 
 	if (!(win = (t_window *)malloc(sizeof(t_window))))
 		error_exit(-6, "Can't malloc a t_window");
@@ -80,17 +81,23 @@ t_window		*initialize_t_window(char *p_name, int p_size_x, int p_size_y)
 	if (!(win->coord_data = (t_vector3 *)malloc(sizeof(t_vector3) * (win->size_x * win->size_y))))
 		error_exit(-9, "Can't malloc a GLfloat array");
 
-	win->vertex_buffer_data = create_t_vector3_list();
-	win->color_buffer_data = create_t_color_list();
-	//t_vector3_list_resize(&(win->vertex_buffer_data), win->size_x * win->size_y);
-	//t_color_list_resize(&(win->color_buffer_data), win->size_x * win->size_y);
-
 	i = 0;
 	while (i < win->size_x * win->size_y)
 	{
 		win->coord_data[i].x = (((i % win->size_x) - (float)(win->size_x) / 2.0f) + 1.0f) * win->pixel_delta.x;
 		win->coord_data[i].y = (((((float)i / (float)(win->size_x)) - (float)(win->size_y) / 2.0f))) * win->pixel_delta.y;
 		win->coord_data[i].z = 0.0f;
+		i++;
+	}
+
+	i = 0;
+	while (i < NB_THREAD)
+	{
+		win->data[i] = create_t_void_list();
+
+		win->vertex_buffer_data[i] = create_t_vector3_list();
+		win->color_buffer_data[i] = create_t_color_list();
+
 		i++;
 	}
 
@@ -112,7 +119,7 @@ void				render_screen(t_window *win)
 {
 	check_frame();
 
-	draw_buffer_opengl(win);
+	//draw_buffer_opengl(win);
 
 	//Swap le buffer et l'ecran (Ca affiche la nouvelle image)
 	SDL_GL_SwapWindow(win->window);

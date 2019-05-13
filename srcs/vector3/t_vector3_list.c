@@ -50,6 +50,7 @@ void	t_vector3_list_add_back(t_vector3_list *dest, t_vector3 *to_add)
 {
 	t_vector3 *tmp;
 	int i;
+	int *test;
 
 	if ((dest->size + 1) >= dest->max_size)
 	{
@@ -68,7 +69,7 @@ void	t_vector3_list_add_back(t_vector3_list *dest, t_vector3 *to_add)
 	dest->vector[dest->size].x = to_add->x;
 	dest->vector[dest->size].y = to_add->y;
 	dest->vector[dest->size].z = to_add->z;
-	dest->size++;
+	(dest->size)++;
 }
 
 void	free_t_vector3_list(t_vector3_list dest)
@@ -129,5 +130,5 @@ void			t_vector3_list_resize(t_vector3_list *dest, int new_size)
 	if (old_size != 0)
 		free(tmp);
 	dest->max_size = new_size;
-	dest->size = new_size;
+	dest->size = i;
 }
