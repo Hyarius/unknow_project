@@ -18,7 +18,7 @@ t_vector2_int_list
 			calc_line(t_vector2_int start, t_vector2_int end);
 
 //			PNG reader
-t_texture *png_load(char *path);
+t_image *png_load(char *path);
 
 //
 // ----------------- CPU_DRAWING -----------------
@@ -27,14 +27,17 @@ t_texture *png_load(char *path);
 void 		add_pixel_to_screen(t_window *p_win, int index, int p_coord, t_color *color);
 void 		clean_buffers(t_window *p_win);
 
+void 		set_variable(t_triangle *p_t, int *value, float *base, t_vector2 *delta);
+
 //			Draw color cpu
 void 		calc_triangle_color_cpu(t_window *p_win, int index, t_triangle *p_t, t_color *p_color);
 
 //			Draw texture CPU
-void 		draw_triangle_texture_cpu(t_window *p_win, t_triangle *p_t, t_triangle *p_triangle_uv, t_texture *p_texture, float alpha);
+void		calc_triangle_texture_cpu(t_window *p_win, int index, t_triangle *p_t, t_uv *uvs);
 
 //			Multithread_color
 void 		draw_triangle_color_cpu(t_window *p_win, t_triangle_list *p_t, t_color_list *p_color);
+void 		draw_triangle_texture_cpu(t_window *p_win, t_triangle *p_t_screen, t_triangle *p_t_uv, t_image *p_texture, float alpha);
 
 //			T_rasterizer
 int			apply_formula(t_rasterizer *rast, int x, int y);
@@ -50,7 +53,7 @@ int			get_big(int a, int b, int c);
 
 //			Draw triangle
 void 		draw_triangle_color(t_window *p_win, t_triangle_list *p_t, t_color_list *p_color);
-void		draw_triangle_texture(t_window *p_win, t_triangle *p_t_screen, t_triangle *p_t_uv, t_texture *p_texture, float alpha);
+void		draw_triangle_texture(t_window *p_win, t_triangle *p_t_screen, t_triangle *p_t_uv, t_image *p_texture, float alpha);
 
 //
 // ----------------- OPENGL -----------------
@@ -60,7 +63,7 @@ void 		draw_pixel_opengl(t_window *p_win, t_vector3 *p_coord, t_color *p_color);
 void 		draw_point_opengl(t_window *p_win, t_vector2 *p_point, t_color *p_color, int size);
 void 		draw_line_color_opengl(t_window *p_win, t_line *p_line, t_color *p_color);
 void 		draw_triangle_color_opengl(t_window *p_win, t_triangle *p_triangle, t_color *p_color);
-void		draw_triangle_texture_opengl(t_window *p_win, t_triangle *p_triangle_screen, t_triangle *p_triangle_uv, t_texture *p_texture, float p_alpha);
+void		draw_triangle_texture_opengl(t_window *p_win, t_triangle *p_triangle_screen, t_triangle *p_triangle_uv, t_image *p_texture, float p_alpha);
 void		draw_buffer_opengl(t_window *p_win);
 
 //			Shader - handler
@@ -70,12 +73,13 @@ GLuint		load_shaders(const char * p_vertex_file_path,
 //
 // ----------------- STRUCTURE -----------------
 //
-//			t_color
-t_color		create_t_color(float p_r, float p_g, float p_b, float p_a);
-t_color		*initialize_t_color(float p_r, float p_g, float p_b, float p_a);
 
 //			t_rect
 t_rect		create_t_rect(float p_x, float p_y, float p_w, float p_h);
+
+//			t_uv
+t_uv		create_t_uv(t_triangle *p_triangle, t_image *p_image);
+t_uv		*initialize_t_uv(t_triangle *p_triangle, t_image *p_image);
 
 //
 // ----------------- VECTOR2 -----------------
@@ -204,6 +208,12 @@ void		**t_void_list_get(t_void_list *dest, int index);
 //
 // ----------------- COLOR ------------------
 //
+//			t_color
+t_color		create_t_color(float p_r, float p_g, float p_b, float p_a);
+t_color		*initialize_t_color(float p_r, float p_g, float p_b, float p_a);
+t_color 	create_t_color_from_int(int p_r, int p_g, int p_b, int p_a);
+t_color 	*initialize_t_color_from_int(int p_r, int p_g, int p_b, int p_a);
+
 //
 t_color_list
 			create_t_color_list();

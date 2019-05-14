@@ -48,29 +48,27 @@ void	t_vector3_list_push_back(t_vector3_list *dest, t_vector3 to_add)
 
 void	t_vector3_list_add_back(t_vector3_list *dest, t_vector3 *to_add)
 {
-	// t_vector3 *tmp;
-	// int i;
-	// int *test;
-	//
-	// if ((dest->size + 1) >= dest->max_size)
-	// {
-	// 	tmp = dest->vector;
-	// 	if (!(dest->vector = (t_vector3 *)malloc(sizeof(t_vector3) * (dest->size + 1 + PUSH_SIZE))))
-	// 		error_exit(-20, "Can't realloc a t_vector3 array");
-	// 	i = 0;
-	// 	while (i < dest->size)
-	// 	{
-	// 		dest->vector[i] = tmp[i];
-	// 		i++;
-	// 	}
-	// 	free(tmp);
-	// 	dest->max_size += PUSH_SIZE;
-	// }
-	//i = dest->size;
-	//dest->vector[i].x = to_add->x;
-	//dest->vector[dest->size].y = to_add->y;
-	//dest->vector[dest->size].z = to_add->z;
-	//(dest->size)++;
+	t_vector3 *tmp;
+	int i;
+
+	if ((dest->size + 1) >= dest->max_size)
+	{
+		tmp = dest->vector;
+		if (!(dest->vector = (t_vector3 *)malloc(sizeof(t_vector3) * (dest->size + 1 + PUSH_SIZE))))
+			error_exit(-20, "Can't realloc a t_vector3 array");
+		i = 0;
+		while (i < dest->size)
+		{
+			dest->vector[i] = tmp[i];
+			i++;
+		}
+		free(tmp);
+		dest->max_size += PUSH_SIZE;
+	}
+	dest->vector[dest->size].x = to_add->x;
+	dest->vector[dest->size].y = to_add->y;
+	dest->vector[dest->size].z = to_add->z;
+	(dest->size)++;
 }
 
 void	free_t_vector3_list(t_vector3_list dest)

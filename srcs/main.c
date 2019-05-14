@@ -14,10 +14,10 @@ int main(int argc, char **argv)
 	int play = 1;
 	int state = 0;
 
-	int nb = 100;
+	int nb = 1;
 
 	t_color_list 	*color;
-	t_vector2		coord[3];
+	t_vector2		coord[4];
 	t_triangle_list	*t;
 	int delta = 200;
 
@@ -28,9 +28,11 @@ int main(int argc, char **argv)
 	{
 		t_color_list_push_back(color, create_t_color(1.0, 0.0, 0.0, 1.0));
 		coord[0] = create_t_vector2(50, 50);
-		coord[1] = create_t_vector2(50 + delta, 50);
-		coord[2] = create_t_vector2(50, 50 + delta);
+		coord[1] = create_t_vector2(50 + delta * 4, 50);
+		coord[2] = create_t_vector2(50, 50 + delta * 4);
+		coord[3] = create_t_vector2(50 + delta * 4, 50 + delta * 4);
 		t_triangle_list_push_back(t, create_t_triangle(coord[0], coord[1], coord[2]));
+		t_triangle_list_push_back(t, create_t_triangle(coord[1], coord[3], coord[2]));
 	}
 	else
 	{
@@ -52,24 +54,23 @@ int main(int argc, char **argv)
 		}
 	}
 
-	//t_triangle t_sprite;
+	t_triangle uvs[2];
 
-	//t_sprite = create_t_triangle(create_t_vector2(0.0f, 0.0f), create_t_vector2(1.0f, 0.0f), create_t_vector2(0.0f, 1.0f));
+	uvs[0] = create_t_triangle(create_t_vector2(0.0f, 0.0f), create_t_vector2(1.0f, 0.0f), create_t_vector2(0.0f, 1.0f));
+	uvs[1] = create_t_triangle(create_t_vector2(1.0f, 0.0f), create_t_vector2(1.0f, 1.0f), create_t_vector2(0.0f, 1.0f));
 
-	//t_texture *texture = png_load("003.png");
+	t_image *texture = png_load("003.png");
 
 	while (play == 1)
 	{
+		prepare_screen(win, create_t_color(0.2f, 0.2f, 0.2f, 1.0f));
 
-		clean_buffers(win);
+		//draw_triangle_color_cpu(win, t, color);
 
-		//prepare_screen(win, create_t_color(0.2f, 0.2f, 0.2f, 1.0f));
+		draw_triangle_texture(win, &(t->triangle[0]), &(uvs[0]), texture, 1.0f);
+		draw_triangle_texture(win, &(t->triangle[1]), &(uvs[1]), texture, 1.0f);
 
-		draw_triangle_color_cpu(win, t, color);
-
-		check_frame();
-
-		//render_screen(win);
+		render_screen(win);
 
 		//Regarde si il y a un evenement, met dans event la liste des evenements arrives, 0 si aucun, 1 si evenement
 		if (SDL_PollEvent(&event) == 1)

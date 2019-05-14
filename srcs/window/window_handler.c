@@ -68,16 +68,21 @@ t_window		*initialize_t_window(char *p_name, int p_size_x, int p_size_y)
 	win->program_color = load_shaders("ressources/shader/color_shader.vert", "ressources/shader/color_shader.frag");
 	win->program_texture = load_shaders("ressources/shader/texture_shader.vert", "ressources/shader/texture_shader.frag");
 
+	// gere l'alpha
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	// gere la profondeur
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_ALWAYS);
 	SDL_GL_SetSwapInterval(0);
 
+	// calcul la difference entre les coordonnee opengl du point 0;0 et 1;1
 	coord[0] = convert_screen_to_opengl(win, 0, 0);
 	coord[1] = convert_screen_to_opengl(win, 1, 1);
 	win->pixel_delta = create_t_vector2(coord[1].x - coord[0].x, coord[1].y - coord[0].y);
 
+	// permet de stocker les coordonnees de tout les pixels de l'ecran
 	if (!(win->coord_data = (t_vector3 *)malloc(sizeof(t_vector3) * (win->size_x * win->size_y))))
 		error_exit(-9, "Can't malloc a GLfloat array");
 
@@ -90,6 +95,7 @@ t_window		*initialize_t_window(char *p_name, int p_size_x, int p_size_y)
 		i++;
 	}
 
+	// initialise les outils pour les threads
 	i = 0;
 	while (i < NB_THREAD)
 	{
@@ -106,7 +112,7 @@ t_window		*initialize_t_window(char *p_name, int p_size_x, int p_size_y)
 
 void				prepare_screen(t_window *win, t_color color)
 {
-	clean_buffers(win);
+	clean_buffers(win); //permet de tout mettre a 0
 
 	//Set background color
 	glClearColor((GLclampf)color.r, (GLclampf)color.g, (GLclampf)color.b, 1.0f);
@@ -119,7 +125,7 @@ void				render_screen(t_window *win)
 {
 	check_frame();
 
-	//draw_buffer_opengl(win);
+	draw_buffer_opengl(win); //affiche le contenu calcule par les threads
 
 	//Swap le buffer et l'ecran (Ca affiche la nouvelle image)
 	SDL_GL_SwapWindow(win->window);

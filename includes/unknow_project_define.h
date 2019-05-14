@@ -8,9 +8,6 @@
 
 # define BUFF_SIZE 1000
 
-# define RATIO 0.8
-
-# define PIXEL_SIZE 4
 # define FPS 60000
 # define PUSH_SIZE 200000
 
