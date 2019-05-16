@@ -3,19 +3,19 @@
 
 #include "unknow_project_basic.h"
 
-
 typedef struct		s_window
 {
 	SDL_DisplayMode	current; //ecran actuel de travail
 	SDL_Window		*window; //la fenetre
 
+	int				*z_buffer; //Store la profondeur de l'image (CF jeremy pour l'explication)
 	t_vector3		*coord_data; //contient 3 vecteur
 
 	pthread_t		threads[NB_THREAD]; //pointeur pour le multithreading
 	t_void_list		data[NB_THREAD]; //liste qui donne au thread les element dont il a besoin
 
-	t_vector3_list	*vertex_buffer_data[NB_THREAD]; //liste a 3 vecteurs
-	t_color_list	*color_buffer_data[NB_THREAD]; //liste des couleurs des triangle
+	t_vector3_list	*vertex_buffer_data; //liste a 3 vecteurs
+	t_color_list	*color_buffer_data; //liste des couleurs des triangle
 
 	int				size_x; //taille en x de la fenetre
 	int				size_y; // taille en y de la fenetre

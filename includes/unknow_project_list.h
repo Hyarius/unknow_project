@@ -76,4 +76,11 @@ typedef struct	s_color_list
 	int			max_size;
 }				t_color_list;
 
+typedef struct	s_uv_list
+{
+	t_uv		*uvs;
+	int			size;
+	int			max_size;
+}				t_uv_list;
+
 #endif

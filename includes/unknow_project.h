@@ -8,7 +8,6 @@
 # include "unknow_project_structure.h"
 # include "unknow_project_list.h"
 # include "unknow_project_window.h"
-# include "unknow_project_png_reader.h"
 
 //
 // ----------------- ALGORYTHMN -----------------
@@ -24,8 +23,8 @@ t_image *png_load(char *path);
 // ----------------- CPU_DRAWING -----------------
 //
 //			buffer handler
-void 		add_pixel_to_screen(t_window *p_win, int index, int p_coord, t_color *color);
-void 		clean_buffers(t_window *p_win);
+void 		add_pixel_to_screen(t_window *p_win, int p_coord, t_color *color);
+void 		clean_buffers(t_window *p_win, t_color color);
 
 void 		set_variable(t_triangle *p_t, int *value, float *base, t_vector2 *delta);
 
@@ -37,7 +36,7 @@ void		calc_triangle_texture_cpu(t_window *p_win, int index, t_triangle *p_t, t_u
 
 //			Multithread_color
 void 		draw_triangle_color_cpu(t_window *p_win, t_triangle_list *p_t, t_color_list *p_color);
-void 		draw_triangle_texture_cpu(t_window *p_win, t_triangle *p_t_screen, t_triangle *p_t_uv, t_image *p_texture, float alpha);
+void 		draw_triangle_texture_cpu(t_window *p_win, t_triangle_list *p_triangle, t_uv_list *p_uvs);
 
 //			T_rasterizer
 int			apply_formula(t_rasterizer *rast, int x, int y);
@@ -78,8 +77,15 @@ GLuint		load_shaders(const char * p_vertex_file_path,
 t_rect		create_t_rect(float p_x, float p_y, float p_w, float p_h);
 
 //			t_uv
-t_uv		create_t_uv(t_triangle *p_triangle, t_image *p_image);
-t_uv		*initialize_t_uv(t_triangle *p_triangle, t_image *p_image);
+t_uv		create_t_uv(t_triangle *p_triangle, t_image *p_image, float p_alpha);
+t_uv		*initialize_t_uv(t_triangle *p_triangle, t_image *p_image, float p_alpha);
+
+//			t_uv_list
+t_uv_list	create_t_uv_list();
+t_uv_list	*initialize_t_uv_list();
+void		t_uv_list_push_back(t_uv_list *dest, t_uv to_add);
+void		t_uv_list_add_back(t_uv_list *dest, t_uv *to_add);
+t_uv		*t_uv_list_get(t_uv_list *dest, int index);
 
 //
 // ----------------- VECTOR2 -----------------
@@ -101,6 +107,8 @@ t_vector2_int
 void 		t_vector2_int_list_set(t_vector2_int_list *dest, int index, t_vector2_int *vector);
 int			*t_vector2_int_list_obtain(t_vector2_int_list *dest, int index);
 void		t_vector2_int_list_resize(t_vector2_int_list *dest, int new_size);
+void		t_vector2_int_list_edit(t_vector2_int_list *dest, int index, t_vector2_int p_color);
+void		t_vector2_int_list_set(t_vector2_int_list *dest, int index, t_vector2_int *p_color);
 
 //			vector2_int
 t_vector2_int
@@ -127,6 +135,8 @@ t_vector2	*t_vector2_list_get(t_vector2_list *dest, int index);
 void 		t_vector2_list_set(t_vector2_list *dest, int index, t_vector2 *vector);
 float		*t_vector2_list_obtain(t_vector2_list *dest, int index);
 void		t_vector2_list_resize(t_vector2_list *dest, int new_size);
+void		t_vector2_list_edit(t_vector2_list *dest, int index, t_vector2 p_color);
+void		t_vector2_list_set(t_vector2_list *dest, int index, t_vector2 *p_color);
 
 //			vector2
 t_vector2	create_t_vector2(float p_x, float p_y);
@@ -156,6 +166,8 @@ t_vector3_int
 void 		t_vector3_int_list_set(t_vector3_int_list *dest, int index, t_vector3_int *vector);
 int			*t_vector3_int_list_obtain(t_vector3_int_list *dest, int index);
 void		t_vector3_int_list_resize(t_vector3_int_list *dest, int new_size);
+void		t_vector3_int_list_edit(t_vector3_int_list *dest, int index, t_vector3_int p_color);
+void		t_vector3_int_list_set(t_vector3_int_list *dest, int index, t_vector3_int *p_color);
 
 //			vector3_int
 t_vector3_int
@@ -181,6 +193,8 @@ t_vector3	t_vector3_list_at(t_vector3_list *dest, int index);
 t_vector3	*t_vector3_list_get(t_vector3_list *dest, int index);
 void 		t_vector3_list_set(t_vector3_list *dest, int index, t_vector3 *vector);
 float		*t_vector3_list_obtain(t_vector3_list *dest, int index);
+void		t_vector3_list_edit(t_vector3_list *dest, int index, t_vector3 p_color);
+void		t_vector3_list_set(t_vector3_list *dest, int index, t_vector3 *p_color);
 
 //			vector3
 t_vector3	create_t_vector3(float p_x, float p_y, float p_z);
@@ -213,6 +227,7 @@ t_color		create_t_color(float p_r, float p_g, float p_b, float p_a);
 t_color		*initialize_t_color(float p_r, float p_g, float p_b, float p_a);
 t_color 	create_t_color_from_int(int p_r, int p_g, int p_b, int p_a);
 t_color 	*initialize_t_color_from_int(int p_r, int p_g, int p_b, int p_a);
+t_color		fuze_t_color(t_color src1, t_color src2);
 
 //
 t_color_list
@@ -229,6 +244,8 @@ t_color		*t_color_list_get(t_color_list *dest, int index);
 void 		t_color_list_set(t_color_list *dest, int index, t_color *color);
 float		*t_color_list_obtain(t_color_list *dest, int index);
 void		t_color_list_resize(t_color_list *dest, int new_size);
+void		t_color_list_edit(t_color_list *dest, int index, t_color p_color);
+void		t_color_list_set(t_color_list *dest, int index, t_color *p_color);
 
 //
 // ----------------- T_TRIANGLE -----------------

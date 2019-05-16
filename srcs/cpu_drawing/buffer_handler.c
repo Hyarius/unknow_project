@@ -1,19 +1,28 @@
 #include "unknow_project.h"
 
-void add_pixel_to_screen(t_window *p_win, int index, int p_coord, t_color *color)
+void add_pixel_to_screen(t_window *p_win, int p_coord, t_color *color)
 {
-	t_vector3_list_add_back((p_win->vertex_buffer_data[index]), &(p_win->coord_data[p_coord]));
-	t_color_list_add_back((p_win->color_buffer_data[index]), color);
+	t_color result;
+
+	//t_vector3_list_add_back((p_win->vertex_buffer_data[index]), &(p_win->coord_data[p_coord]));
+	result = fuze_t_color(p_win->color_buffer_data->color[p_coord], *color);
+
+	if (p_coord >= 0 && p_coord < p_win->color_buffer_data->size)
+		t_color_list_set(p_win->color_buffer_data, p_coord, &result);
 }
 
-void clean_buffers(t_window *p_win)
+void clean_buffers(t_window *p_win, t_color color)
 {
-	int i = 0;
+	int i;
 
-	while (i < NB_THREAD)
+	i = 0;
+	while (i < p_win->color_buffer_data->size)
 	{
-		clean_t_color_list((p_win->color_buffer_data[i]));
-		clean_t_vector3_list((p_win->vertex_buffer_data[i]));
+		p_win->z_buffer[i] = -1;
+		p_win->color_buffer_data->color[i].r = color.r;
+		p_win->color_buffer_data->color[i].g = color.g;
+		p_win->color_buffer_data->color[i].b = color.b;
+		p_win->color_buffer_data->color[i].a = 0.2f;
 		i++;
 	}
 }

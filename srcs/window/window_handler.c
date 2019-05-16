@@ -39,7 +39,7 @@ t_window		*initialize_t_window(char *p_name, int p_size_x, int p_size_y)
 
 	// creation de la fenetre
 	win->window = SDL_CreateWindow(p_name, // nom de la fenetre
-					SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, // position de la fentre sur l'ecran
+					0, 0, // position de la fentre sur l'ecran
 					p_size_x, p_size_y, // taille de la fenetre
 					SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL); //parametre de la fenetre
 
@@ -86,12 +86,23 @@ t_window		*initialize_t_window(char *p_name, int p_size_x, int p_size_y)
 	if (!(win->coord_data = (t_vector3 *)malloc(sizeof(t_vector3) * (win->size_x * win->size_y))))
 		error_exit(-9, "Can't malloc a GLfloat array");
 
+	win->color_buffer_data = initialize_t_color_list();
+	t_color_list_resize(win->color_buffer_data, win->size_x * win->size_y);
+	win->color_buffer_data->size = win->size_x * win->size_y - 1;
+
+	win->vertex_buffer_data = initialize_t_vector3_list();
+
+	if (!(win->z_buffer = (int *)malloc(sizeof(int) * (win->size_x * win->size_y))))
+		error_exit(-9, "Can't malloc a GLfloat array");
+
 	i = 0;
 	while (i < win->size_x * win->size_y)
 	{
 		win->coord_data[i].x = (((i % win->size_x) - (float)(win->size_x) / 2.0f) + 1.0f) * win->pixel_delta.x;
 		win->coord_data[i].y = (((((float)i / (float)(win->size_x)) - (float)(win->size_y) / 2.0f))) * win->pixel_delta.y;
 		win->coord_data[i].z = 0.0f;
+		t_vector3_list_add_back(win->vertex_buffer_data, &(win->coord_data[i]));
+		win->z_buffer[i] = -1;
 		i++;
 	}
 
@@ -101,18 +112,17 @@ t_window		*initialize_t_window(char *p_name, int p_size_x, int p_size_y)
 	{
 		win->data[i] = create_t_void_list();
 
-		win->vertex_buffer_data[i] = initialize_t_vector3_list();
-		win->color_buffer_data[i] = initialize_t_color_list();
-
 		i++;
 	}
+
+	clean_buffers(win, create_t_color(0.0, 0.0, 0.0, 0.0));
 
 	return (win);
 }
 
 void				prepare_screen(t_window *win, t_color color)
 {
-	clean_buffers(win); //permet de tout mettre a 0
+	clean_buffers(win, color); //permet de tout mettre a 0
 
 	//Set background color
 	glClearColor((GLclampf)color.r, (GLclampf)color.g, (GLclampf)color.b, 1.0f);

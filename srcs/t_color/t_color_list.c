@@ -132,3 +132,19 @@ void			t_color_list_resize(t_color_list *dest, int new_size)
 	dest->max_size = new_size;
 	dest->size = i;
 }
+
+void		t_color_list_edit(t_color_list *dest, int index, t_color p_color)
+{
+	if (index < 0 || index >= dest->size)
+		error_exit(-28, "Segfault : t_color_list out of range");
+
+	dest->color[index] = p_color;
+}
+
+void		t_color_list_set(t_color_list *dest, int index, t_color *p_color)
+{
+	if (index < 0 || index >= dest->size)
+		error_exit(-28, "Segfault : t_color_list out of range in t_color_list_set");
+
+	dest->color[index] = *p_color;
+}

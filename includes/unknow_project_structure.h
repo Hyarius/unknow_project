@@ -3,7 +3,6 @@
 
 # include "unknow_project_includes.h"
 # include "unknow_project_basic.h"
-# include "unknow_project_png_reader.h"
 
 typedef struct	s_surface
 {
@@ -26,6 +25,7 @@ typedef struct	s_uv
 {
 	t_image		*image;
 	t_triangle	*uv;
+	float		alpha;
 }				t_uv;
 
 #endif

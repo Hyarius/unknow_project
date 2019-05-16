@@ -131,3 +131,19 @@ void			t_vector3_int_list_resize(t_vector3_int_list *dest, int new_size)
 	dest->max_size = new_size;
 	dest->size = i;
 }
+
+void		t_vector3_int_list_edit(t_vector3_int_list *dest, int index, t_vector3_int p_vector)
+{
+	if (index < 0 || index >= dest->size)
+		error_exit(-23, "Segfault : t_vector3_int_list out of range");
+
+	dest->vector[index] = p_vector;
+}
+
+void		t_vector3_int_list_set(t_vector3_int_list *dest, int index, t_vector3_int *p_vector)
+{
+	if (index < 0 || index >= dest->size)
+		error_exit(-23, "Segfault : t_vector3_int_list out of range");
+
+	dest->vector[index] = *p_vector;
+}
