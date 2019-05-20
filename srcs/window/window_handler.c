@@ -2,6 +2,7 @@
 
 void			start_sdl()
 {
+	unsigned int seed = 1493368;
 	//initialisation SDL
 	SDL_Init(SDL_INIT_EVERYTHING);
 
@@ -22,7 +23,7 @@ void			start_sdl()
 	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16);
 
 	//initialisation du ramdom et du TTF
-	srand(time(NULL));
+	srand(seed);
 
 }
 
@@ -120,9 +121,10 @@ t_window		*initialize_t_window(char *p_name, int p_size_x, int p_size_y)
 	return (win);
 }
 
-void				prepare_screen(t_window *win, t_color color)
+void				prepare_screen(t_window *win, t_color color, int state)
 {
-	clean_buffers(win, color); //permet de tout mettre a 0
+	if (state == 0)
+		clean_buffers(win, color); //permet de tout mettre a 0
 
 	//Set background color
 	glClearColor((GLclampf)color.r, (GLclampf)color.g, (GLclampf)color.b, 1.0f);
@@ -131,11 +133,12 @@ void				prepare_screen(t_window *win, t_color color)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-void				render_screen(t_window *win)
+void				render_screen(t_window *win, int state)
 {
 	check_frame();
 
-	draw_buffer_opengl(win); //affiche le contenu calcule par les threads
+	if (state == 0)
+		draw_buffer_opengl(win); //affiche le contenu calcule par les threads
 
 	//Swap le buffer et l'ecran (Ca affiche la nouvelle image)
 	SDL_GL_SwapWindow(win->window);

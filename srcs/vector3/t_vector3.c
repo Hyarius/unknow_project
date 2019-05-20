@@ -47,5 +47,5 @@ void set_t_vector3(t_vector3 *src, float p_x, float p_y, float p_z)
 
 void print_t_vector3(t_vector3 vector, char *str)
 {
-	printf("%s = %0.4f / %0.4f / %0.4f\n", str, vector.x, vector.y, vector.z);
+	printf("%s%0.4f / %0.4f / %0.4f", str, vector.x, vector.y, vector.z);
 }

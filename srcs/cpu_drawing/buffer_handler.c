@@ -5,10 +5,29 @@ void add_pixel_to_screen(t_window *p_win, int p_coord, t_color *color)
 	t_color result;
 
 	//t_vector3_list_add_back((p_win->vertex_buffer_data[index]), &(p_win->coord_data[p_coord]));
-	result = fuze_t_color(p_win->color_buffer_data->color[p_coord], *color);
+	//result = *color;
+
+	if (color->a == 1.0f)
+		result = *color;
+	else if (color->a == 0.0f)
+		result = p_win->color_buffer_data->color[p_coord];
+	else
+		result = fuze_t_color(p_win->color_buffer_data->color[p_coord], *color);
 
 	if (p_coord >= 0 && p_coord < p_win->color_buffer_data->size)
 		t_color_list_set(p_win->color_buffer_data, p_coord, &result);
+}
+
+void clean_z_buffer(t_window *p_win)
+{
+	int i;
+
+	i = 0;
+	while (i < p_win->color_buffer_data->size)
+	{
+		p_win->z_buffer[i] = -1;
+		i++;
+	}
 }
 
 void clean_buffers(t_window *p_win, t_color color)

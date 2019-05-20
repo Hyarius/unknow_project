@@ -1,7 +1,9 @@
 #ifndef UNKNOW_PROJECT_WINDOW_H
 # define UNKNOW_PROJECT_WINDOW_H
 
-#include "unknow_project_basic.h"
+# include "unknow_project_includes.h"
+# include "unknow_project_define.h"
+# include "unknow_project_list.h"
 
 typedef struct		s_window
 {
@@ -31,5 +33,14 @@ typedef struct		s_window
 	GLuint			program_texture; //le livre qui explique la texture
 	t_vector2		pixel_delta; //la difference entre le pixel 0;0 et le pixel 1;1
 }					t_window;
+
+//			fps_handler
+void		check_frame();
+
+//			window_handler
+void		start_sdl();
+t_window	*initialize_t_window(char *name, int size_x, int size_y);
+void		prepare_screen(t_window *win, t_color color, int state);
+void		render_screen(t_window *win, int state);
 
 #endif

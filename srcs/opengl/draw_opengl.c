@@ -173,7 +173,7 @@ void draw_triangle_color_opengl(t_window *p_win, t_triangle *p_triangle, t_color
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 }
 
-void			draw_triangle_texture_opengl(t_window *p_win, t_triangle *p_triangle_screen, t_triangle *p_triangle_uv, t_image *p_texture, float alpha)
+void			draw_triangle_texture_opengl(t_window *p_win, t_triangle *p_triangle_screen, t_uv *uv)
 {
 	GLfloat vertex_buffer_data[] = {
 		p_triangle_screen->a.x, p_triangle_screen->a.y, 0.0f,
@@ -182,18 +182,18 @@ void			draw_triangle_texture_opengl(t_window *p_win, t_triangle *p_triangle_scre
 	};
 
 	GLfloat uv_buffer_data[] = {
-		p_triangle_uv->a.x,  p_triangle_uv->a.y,
-		p_triangle_uv->b.x,  p_triangle_uv->b.y,
-		p_triangle_uv->c.x,  p_triangle_uv->c.y,
+		uv->uv->a.x,  uv->uv->a.y,
+		uv->uv->b.x,  uv->uv->b.y,
+		uv->uv->c.x,  uv->uv->c.y,
 	};
 
 	GLfloat alpha_buffer_data[] = {
-		alpha,
-		alpha,
-		alpha,
+		uv->alpha,
+		uv->alpha,
+		uv->alpha,
 	};
 
-	glBindTexture(GL_TEXTURE_2D, p_texture->id);
+	glBindTexture(GL_TEXTURE_2D, uv->image->id);
 
 	glBindVertexArray(p_win->vertex_array);
 

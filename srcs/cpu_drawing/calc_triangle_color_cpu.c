@@ -4,14 +4,14 @@ void apply_pixel(t_window *p_win, int *value, float *base, t_color *p_color)
 {
 	int coord;
 
-	if (base[3] > 0.0f && base[4] > 0.0f && base[5] > 0.0f)
+	if (base[3] >= 0.0f && base[4] >= 0.0f && base[5] >= 0.0f)
 	{
 		value[6] = 1;			//Find est dans le triangle
 		coord = value[5] + value[4] * p_win->size_x;
-		if (p_win->z_buffer[coord] <= value[7])
+		if (p_win->z_buffer[coord] < value[7])
 		{
-		 	p_win->z_buffer[coord] = value[7];
 			add_pixel_to_screen(p_win, coord, p_color);	//affiche le pixel a l'ecran
+			p_win->z_buffer[coord] = value[7];
 		}
 	}
 	else if (value[6] == 1)	//verification de sortie du triangle

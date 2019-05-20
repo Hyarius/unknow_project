@@ -28,6 +28,7 @@ void find_pixel(t_window *p_win, int *value, float *base, t_uv *uvs)
 	color = create_t_color_from_int(rgba[0], rgba[1], rgba[2], rgba[3]); //convertis les 4 int en t_color
 
 	coord = value[5] + value[4] * p_win->size_x;
+
 	if (p_win->z_buffer[coord] < value[7])
 	{
 		p_win->z_buffer[coord] = value[7];
@@ -42,19 +43,19 @@ void calc_triangle_texture_cpu(t_window *p_win, int index, t_triangle *p_t, t_uv
 	t_vector2		delta[3];
 
 	set_variable(p_t, value, base, delta);	//Initialise les variables y, x, index thread, etc etc
-	value[7] = index;						//Thread actuel
+	value[7] = index;						//numero du triangle actuel
 	value[4] = value[2];					//y = y min
 
-	while (value[4] < value[3] && value[4] >= 0 && value[4] < p_win->size_y)         	//tant que y < y_max
+	while (value[4] <= value[3] && value[4] >= 0 && value[4] < p_win->size_y)         	//tant que y < y_max
 	{
 		value[6] = 0;						//find pas encore dans le triangle
 		value[5] = value[0];				//x = x_min
 		base[3] = base[0] + (value[4] * delta[0].y); //Initialisation de alpha | beta | gamma
 		base[4] = base[1] + (value[4] * delta[1].y);
 		base[5] = base[2] + (value[4] * delta[2].y);
-		while (value[5] < value[1] && value[6] != -1 && value[5] >= 0 && value[5] < p_win->size_x)//tant que x < x_max ET find pas encore sorti du triangle
+		while (value[5] <= value[1] && value[6] != -1 && value[5] >= 0 && value[5] < p_win->size_x)//tant que x < x_max ET find pas encore sorti du triangle
 		{
-			if (base[3] > 0.0f && base[4] > 0.0f && base[5] > 0.0f) //si on est dans le triangle
+			if (base[3] >= 0.0f && base[4] >= 0.0f && base[5] >= 0.0f) //si on est dans le triangle
 			{
 				value[6] = 1;										//on indique qu'on est dans le triangle
 				find_pixel(p_win, value, base, uvs); //value[4] -> y  /  value[5] -> x  /  value[7] -> index thread  /  base[3] = alpha  /  base[4] = beta  /  base[5] = gamma
