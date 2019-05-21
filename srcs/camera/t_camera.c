@@ -66,24 +66,23 @@ t_matrix		t_camera_look_at(t_camera *cam, t_vector3 target)
 t_matrix		compute_projection_matrix(t_window *p_win, t_camera *p_cam)
 {
 	t_matrix	result;
-	float a;
-	float f;
-	float q;
 
-	result = create_t_matrix();
+	result = create_t_matrix_empty();
 
-	a = (p_win->size_x / p_win->size_y);
-	f = 1.0f / tan(degree_to_radius(p_cam->fov) / 2.0f);
-	q = (p_cam->far) / (p_cam->far - p_cam->near);
+	float n = p_cam->near;
+	float r = 1.0 / (tan(degree_to_radius(p_cam->fov / 2)));
+	float f = p_cam->far;
+	float t = 1.0 / (tan(degree_to_radius(p_cam->fov / 2))) / (4.0 / 3.0);
 
-	result.value[0][0] = a * f;
 
-	result.value[1][1] = f;
+	result.value[0][0] = t;
 
-	result.value[2][2] = q;
-	result.value[2][3] = -(p_cam->near) * q;
+	result.value[1][1] = r;
 
-	result.value[3][2] = 1.0;
+	result.value[2][2] = -(f) / (f - n);
+	result.value[2][3] = -1;
+
+	result.value[3][2] = -(2 * f * n) / (f - n);
 
 	return (result);
 }

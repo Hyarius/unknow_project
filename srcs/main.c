@@ -21,9 +21,10 @@ int main(int argc, char **argv)
 
 	t_mesh_add_face(mesh, 0, 1, 2);
 
-	t_camera *cam = initialize_t_camera(win, create_t_vector3(0, -2, 0), 70, create_t_vector2(0.1, 15.0));
+	t_camera *cam = initialize_t_camera(win, create_t_vector3(0, -2, 0), 90, create_t_vector2(0.1f, 50.0f));
 
-	t_matrix	*mvp;
+	print_t_matrix(&(cam->projection));
+	/*t_matrix	*mvp;
 	mvp = initialize_t_matrix();
 	*mvp = compute_t_camera(cam);
 
@@ -42,6 +43,6 @@ int main(int argc, char **argv)
 			if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_ESCAPE)
 				play = 0;
 		}
-	}
+	}*/
 	return (0);
 }
