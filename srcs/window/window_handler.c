@@ -78,54 +78,11 @@ t_window		*initialize_t_window(char *p_name, int p_size_x, int p_size_y)
 	glDepthFunc(GL_ALWAYS);
 	SDL_GL_SetSwapInterval(0);
 
-	// calcul la difference entre les coordonnee opengl du point 0;0 et 1;1
-	coord[0] = convert_screen_to_opengl(win, 0, 0);
-	coord[1] = convert_screen_to_opengl(win, 1, 1);
-	win->pixel_delta = create_t_vector2(coord[1].x - coord[0].x, coord[1].y - coord[0].y);
-
-	// permet de stocker les coordonnees de tout les pixels de l'ecran
-	if (!(win->coord_data = (t_vector3 *)malloc(sizeof(t_vector3) * (win->size_x * win->size_y))))
-		error_exit(-9, "Can't malloc a GLfloat array");
-
-	win->color_buffer_data = initialize_t_color_list();
-	t_color_list_resize(win->color_buffer_data, win->size_x * win->size_y);
-	win->color_buffer_data->size = win->size_x * win->size_y - 1;
-
-	win->vertex_buffer_data = initialize_t_vector3_list();
-
-	if (!(win->z_buffer = (int *)malloc(sizeof(int) * (win->size_x * win->size_y))))
-		error_exit(-9, "Can't malloc a GLfloat array");
-
-	i = 0;
-	while (i < win->size_x * win->size_y)
-	{
-		win->coord_data[i].x = (((i % win->size_x) - (float)(win->size_x) / 2.0f) + 1.0f) * win->pixel_delta.x;
-		win->coord_data[i].y = (((((float)i / (float)(win->size_x)) - (float)(win->size_y) / 2.0f))) * win->pixel_delta.y;
-		win->coord_data[i].z = 0.0f;
-		t_vector3_list_add_back(win->vertex_buffer_data, &(win->coord_data[i]));
-		win->z_buffer[i] = -1;
-		i++;
-	}
-
-	// initialise les outils pour les threads
-	i = 0;
-	while (i < NB_THREAD)
-	{
-		win->data[i] = create_t_void_list();
-
-		i++;
-	}
-
-	clean_buffers(win, create_t_color(0.0, 0.0, 0.0, 0.0));
-
 	return (win);
 }
 
-void				prepare_screen(t_window *win, t_color color, int state)
+void				prepare_screen(t_window *win, t_color color)
 {
-	if (state == 0)
-		clean_buffers(win, color); //permet de tout mettre a 0
-
 	//Set background color
 	glClearColor((GLclampf)color.r, (GLclampf)color.g, (GLclampf)color.b, 1.0f);
 
@@ -133,12 +90,9 @@ void				prepare_screen(t_window *win, t_color color, int state)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-void				render_screen(t_window *win, int state)
+void				render_screen(t_window *win)
 {
 	check_frame();
-
-	if (state == 0)
-		draw_buffer_opengl(win); //affiche le contenu calcule par les threads
 
 	//Swap le buffer et l'ecran (Ca affiche la nouvelle image)
 	SDL_GL_SwapWindow(win->window);

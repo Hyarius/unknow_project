@@ -5,15 +5,15 @@ I - GAME ENGINE
 			Definition de ce qu'est reelement une 2D
 		II) Camera isometrique (2.5D) et ray-fucking-casting
 			Definition de ce qu'est la 2.5D et le ray-casting
-		III) Camera 3D a base de matrices
-			Definition de ce qu'est la 3D et les matrices
+		III) Camera 3D a base de matrixs
+			Definition de ce qu'est la 3D et les matrixs
 		IV) Camera 3D a base de quaternion
 			Definition de ce qu'est un quaternion
-	3) Introduction aux matrices
-		I) Matrice 2D et base de la geometrie
-		II) Exemple de matrice 2D, composition et exercice
-		III) Introduction a la matrice 3D
-		(On se garde les exercices sur les matrices 3D pour apres la partie 5)
+	3) Introduction aux matrixs
+		I) matrix 2D et base de la geometrie
+		II) Exemple de matrix 2D, composition et exercice
+		III) Introduction a la matrix 3D
+		(On se garde les exercices sur les matrixs 3D pour apres la partie 5)
 	4) Introduction a la notion de camera
 		I) definition de ce qu'est une camera dans le monde video-ludique
 		II) Les differentes cameras :

@@ -19,4 +19,8 @@ typedef struct	s_line
 	t_vector2	b;
 }				t_line;
 
+t_line		create_t_line(t_vector2 p_a, t_vector2 p_b);
+t_line		*initialize_t_line(t_vector2 p_a, t_vector2 p_b);
+
+
 #endif

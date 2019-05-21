@@ -8,6 +8,7 @@
 # include "unknow_project_mesh.h"
 # include "unknow_project_math.h"
 # include "unknow_project_drawing.h"
+# include "unknow_project_camera.h"
 
 //			PNG reader
 t_image 	*png_load(char *path);
@@ -23,5 +24,7 @@ t_vector2_int
 				convert_vector2_to_vector2_int(t_vector2 *base);
 t_vector3_int
 				convert_vector3_to_vector3_int(t_vector3 *base);
+float			degree_to_radius(float angle);
+float			radius_to_degree(float radian);
 
 #endif

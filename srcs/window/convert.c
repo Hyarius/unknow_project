@@ -25,3 +25,13 @@ t_vector3_int	convert_vector3_to_vector3_int(t_vector3 *base)
 {
 	return (create_t_vector3_int((int)(base->x), (int)(base->y), (int)(base->z)));
 }
+
+float				degree_to_radius(float angle)
+{
+	return ((float)(((float)angle) * M_PI / (float)180));
+}
+
+float				radius_to_degree(float radian)
+{
+	return ((float)((float)(radian * 180) / M_PI));
+}

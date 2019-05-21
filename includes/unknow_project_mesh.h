@@ -2,6 +2,8 @@
 # define UNKNOW_PROJECT_MESH_H
 
 # include "unknow_project_list.h"
+# include "unknow_project_camera.h"
+# include "unknow_project_window.h"
 
 typedef struct	s_faces
 {
@@ -26,9 +28,6 @@ typedef struct	s_mesh
 
 	t_faces		*faces;
 
-	t_color_list
-				*colors;
-
 }				t_mesh;
 
 t_mesh		create_t_mesh();
@@ -36,7 +35,8 @@ t_mesh		*initialize_t_mesh();
 void		free_t_mesh();
 void		delete_t_mesh();
 void		t_mesh_add_point(t_mesh *dest, t_vector3 new_point);
-void		t_mesh_set_face(t_mesh *dest, int a, int b, int c);
-void		t_mesh_set_color(t_mesh *dest, t_color p_color);
+void		t_mesh_add_face(t_mesh *dest, int a, int b, int c);
 
+t_mesh		create_primitive_cube(t_vector3 coord, t_vector3 size);
+void 		draw_t_mesh(t_window *p_win, t_matrix *mvp, t_mesh *mesh);
 #endif

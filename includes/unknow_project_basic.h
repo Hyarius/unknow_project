@@ -14,5 +14,6 @@ int				ft_strchr(char *src, char d);
 int				get_next_line(const int fd, char **line);
 void 			error_exit(int error, char *message);
 void			ft_bzero(void *src, size_t nb_bytes);
+void			endl();
 
 #endif
