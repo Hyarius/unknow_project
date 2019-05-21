@@ -27,4 +27,5 @@ t_camera	*initialize_t_camera(t_window *p_win, t_vector3 p_pos, float p_fov, t_v
 t_matrix	compute_projection_matrix(t_window *p_win, t_camera *p_cam);
 t_matrix	compute_t_camera(t_camera *cam);
 t_matrix	t_camera_look_at(t_camera *cam, t_vector3 target);
+t_vector3	apply_t_camera(t_vector3 *src, t_matrix *mvp);
 #endif

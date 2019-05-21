@@ -2,11 +2,31 @@
 
 void draw_t_mesh(t_window *p_win, t_matrix *mvp, t_mesh *mesh)
 {
-	t_color color;
-	t_line test;
+	t_vector3	p1;
+	t_vector3	p2;
+	t_vector3	p3;
 
-	test = create_t_line(create_t_vector2(50, 50), create_t_vector2(348, 154));
-	color = create_t_color_from_int(255, 255, 255, 255);
+	p1 = t_vector3_list_at(mesh->vertices, t_faces_at(mesh->faces, 0)[0]);
+	p2 = t_vector3_list_at(mesh->vertices, t_faces_at(mesh->faces, 0)[1]);
+	p3 = t_vector3_list_at(mesh->vertices, t_faces_at(mesh->faces, 0)[2]);
 
-	draw_line(p_win, &test, &color);
+	printf("-----------\n");
+
+	print_t_vector3(p1, "P1 = ");
+	endl();
+	print_t_vector3(p2, "P2 = ");
+	endl();
+	print_t_vector3(p3, "P3 = ");
+	endl();
+
+	p1 = apply_t_camera(&p1, mvp);
+	p2 = apply_t_camera(&p2, mvp);
+	p3 = apply_t_camera(&p3, mvp);
+
+	print_t_vector3(p1, "P1 = ");
+	endl();
+	print_t_vector3(p2, "P2 = ");
+	endl();
+	print_t_vector3(p3, "P3 = ");
+	endl();
 }

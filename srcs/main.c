@@ -14,9 +14,14 @@ int main(int argc, char **argv)
 	int play = 1;
 
 	t_mesh *mesh = initialize_t_mesh();
-	*mesh = create_primitive_cube(create_t_vector3(2, 4, 0), create_t_vector3(2, 2, 2));
 
-	t_camera *cam = initialize_t_camera(win, create_t_vector3(0, 0, 0), 70, create_t_vector2(0.0, 15.0));
+	t_mesh_add_point(mesh, create_t_vector3(0, 0, 0));
+	t_mesh_add_point(mesh, create_t_vector3(1, 0, 0));
+	t_mesh_add_point(mesh, create_t_vector3(1, 0, 1));
+
+	t_mesh_add_face(mesh, 0, 1, 2);
+
+	t_camera *cam = initialize_t_camera(win, create_t_vector3(0, -2, 0), 70, create_t_vector2(0.1, 15.0));
 
 	t_matrix	*mvp;
 	mvp = initialize_t_matrix();
@@ -26,7 +31,7 @@ int main(int argc, char **argv)
 	{
 		prepare_screen(win, create_t_color(0.2f, 0.2f, 0.2f, 1.0f));
 
-		draw_t_mesh(win, mvp, mesh);
+		draw_t_mesh(win, &(cam->projection), mesh);
 
 		render_screen(win);
 

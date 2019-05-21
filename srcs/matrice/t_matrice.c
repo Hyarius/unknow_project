@@ -24,6 +24,27 @@ t_matrix create_t_matrix()
 	return (result);
 }
 
+t_matrix create_t_matrix_empty()
+{
+	t_matrix result;
+	int i;
+	int j;
+
+	i = 0;
+	while (i < 4)
+	{
+		j = 0;
+		while (j < 4)
+		{
+			result.value[i][j] = 0.0f;
+			j++;
+		}
+		i++;
+	}
+
+	return (result);
+}
+
 t_matrix *initialize_t_matrix()
 {
 	t_matrix *result;
@@ -71,8 +92,8 @@ t_matrix create_rotation_x_matrix(float angle)
 	radian = degree_to_radius(angle);
 
 	result.value[1][1] = cos(radian);
-	result.value[1][2] = -sin(radian);
-	result.value[2][1] = sin(radian);
+	result.value[2][1] = -sin(radian);
+	result.value[1][2] = sin(radian);
 	result.value[2][2] = cos(radian);
 
 	return (result);
@@ -87,8 +108,8 @@ t_matrix create_rotation_y_matrix(float angle)
 	radian = degree_to_radius(angle);
 
 	result.value[0][0] = cos(radian);
-	result.value[0][2] = sin(radian);
-	result.value[2][0] = -sin(radian);
+	result.value[0][2] = -sin(radian);
+	result.value[2][0] = sin(radian);
 	result.value[2][2] = cos(radian);
 
 	return (result);
@@ -103,8 +124,8 @@ t_matrix create_rotation_z_matrix(float angle)
 	radian = degree_to_radius(angle);
 
 	result.value[0][0] = cos(radian);
-	result.value[0][1] = -sin(radian);
-	result.value[1][0] = sin(radian);
+	result.value[0][1] = sin(radian);
+	result.value[1][0] = -sin(radian);
 	result.value[1][1] = cos(radian);
 
 	return (result);
@@ -130,18 +151,20 @@ t_matrix mult_matrix_by_matrix(t_matrix *m1, t_matrix *m2)
 	t_matrix	result;
 	int			i;
 	int			j;
+	int			k;
 
-	result = create_t_matrix();
+	result = create_t_matrix_empty();
+
 	i = 0;
 	while (i < 4)
 	{
 		j = 0;
 		while (j < 4)
 		{
-			result.value[i][j] = (m1->value[i][0] * m2->value[0][j]) +
-								(m1->value[i][1] * m2->value[1][j]) +
-								(m1->value[i][2] * m2->value[2][j]) +
-								(m1->value[i][3] * m2->value[3][j]);
+			result.value[j][i] = (m1->value[0][i] * m2->value[j][0]) +
+								(m1->value[1][i] * m2->value[j][1]) +
+								(m1->value[2][i] * m2->value[j][2]) +
+								(m1->value[3][i] * m2->value[j][3]);
 			j++;
 		}
 		i++;
@@ -153,20 +176,11 @@ t_vector3 mult_vector3_by_matrix(t_vector3 *vertex, t_matrix *m)
 {
 	float		result[3];
 
-	result[0] = m->value[0][0] * vertex->x
-				+ m->value[0][1] * vertex->y
-				+ m->value[0][2] * vertex->z
-				+ m->value[0][3];
+	result[0] = m->value[0][0] * vertex->x + m->value[1][0] * vertex->y + m->value[2][0] * vertex->z + m->value[3][0];
 
-	result[1] = m->value[1][0] * vertex->x
-				+ m->value[1][1] * vertex->y
-				+ m->value[1][2] * vertex->z
-				+ m->value[1][3];
+	result[1] = m->value[0][1] * vertex->x + m->value[1][1] * vertex->y + m->value[2][1] * vertex->z + m->value[3][1];
 
-	result[2] = m->value[2][0] * vertex->x
-				+ m->value[2][1] * vertex->y
-				+ m->value[2][2] * vertex->z
-				+ m->value[2][3];
+	result[2] = m->value[0][2] * vertex->x + m->value[1][2] * vertex->y + m->value[2][2] * vertex->z + m->value[3][2];
 
 	return (create_t_vector3(result[0], result[1], result[2]));
 }
@@ -179,8 +193,8 @@ void			print_t_matrix(t_matrix *m)
 	printf("-----------------------------------------------------------------\n");
 	while (i < 4)
 	{
-		printf("|\t%-4f|\t%-4f|\t%-4f|\t%-4f|\n", m->value[i][0], m->value[i][1],
-		m->value[i][2], m->value[i][3]);
+		printf("|\t%-.2f|\t%-.2f|\t%-.2f|\t%-.2f|\n", m->value[0][i], m->value[1][i],
+		m->value[2][i], m->value[3][i]);
 		i++;
 	}
 	printf("-----------------------------------------------------------------\n");

@@ -24,6 +24,7 @@ typedef struct	s_matrix
 
 t_matrix 		create_t_matrix();
 t_matrix 		*initialize_t_matrix();
+t_matrix 		create_t_matrix_empty();
 t_matrix 		create_translation_matrix(t_vector3 translation);
 t_matrix 		create_scaling_matrix(t_vector3 scaling);
 t_matrix 		create_rotation_x_matrix(float angle);
@@ -37,5 +38,5 @@ void			print_t_matrix(t_matrix *m);
 int				generate_nbr(int min, int max);
 t_vector2_int_list
 				calc_line(t_vector2_int start, t_vector2_int end);
-
+t_vector3		cross_vector3(t_vector3 *a, t_vector3 *b);
 #endif

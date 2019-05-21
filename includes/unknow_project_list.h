@@ -97,6 +97,35 @@ void		t_vector3_list_edit(t_vector3_list *dest, int index, t_vector3 p_color);
 void		t_vector3_list_set(t_vector3_list *dest, int index, t_vector3 *p_color);
 void		t_vector3_list_resize(t_vector3_list *dest, int new_size);
 
+typedef struct	s_vector4_list
+{
+	union
+	{
+		t_vector4
+				*vector;
+		float	*value;
+	};
+	int			size;
+	int			max_size;
+}				t_vector4_list;
+
+t_vector4_list
+			create_t_vector4_list();
+t_vector4_list
+			*initialize_t_vector4_list();
+void		t_vector4_list_push_back(t_vector4_list *dest, t_vector4 to_add);
+void		t_vector4_list_add_back(t_vector4_list *dest, t_vector4 *to_add);
+void		free_t_vector4_list(t_vector4_list dest);
+void		delete_t_vector4_list(t_vector4_list *dest);
+void		clean_t_vector4_list(t_vector4_list *dest);
+t_vector4	t_vector4_list_at(t_vector4_list *dest, int index);
+t_vector4	*t_vector4_list_get(t_vector4_list *dest, int index);
+void 		t_vector4_list_set(t_vector4_list *dest, int index, t_vector4 *vector);
+float		*t_vector4_list_obtain(t_vector4_list *dest, int index);
+void		t_vector4_list_edit(t_vector4_list *dest, int index, t_vector4 p_color);
+void		t_vector4_list_set(t_vector4_list *dest, int index, t_vector4 *p_color);
+void		t_vector4_list_resize(t_vector4_list *dest, int new_size);
+
 typedef struct	s_vector2_int_list
 {
 	union
@@ -158,6 +187,37 @@ int			*t_vector3_int_list_obtain(t_vector3_int_list *dest, int index);
 void		t_vector3_int_list_resize(t_vector3_int_list *dest, int new_size);
 void		t_vector3_int_list_edit(t_vector3_int_list *dest, int index, t_vector3_int p_color);
 void		t_vector3_int_list_set(t_vector3_int_list *dest, int index, t_vector3_int *p_color);
+
+typedef struct	s_vector4_int_list
+{
+	union
+	{
+		t_vector4_int
+				*vector;
+		int		*value;
+	};
+	int			size;
+	int			max_size;
+}				t_vector4_int_list;
+
+t_vector4_int_list
+			create_t_vector4_int_list();
+t_vector4_int_list
+			*initialize_t_vector4_int_list();
+void		t_vector4_int_list_push_back(t_vector4_int_list *dest, t_vector4_int to_add);
+void		t_vector4_int_list_add_back(t_vector4_int_list *dest, t_vector4_int *to_add);
+void		free_t_vector4_int_list(t_vector4_int_list dest);
+void		delete_t_vector4_int_list(t_vector4_int_list *dest);
+void		clean_t_vector4_int_list(t_vector4_int_list *dest);
+t_vector4_int
+			t_vector4_int_list_at(t_vector4_int_list *dest, int index);
+t_vector4_int
+			*t_vector4_int_list_get(t_vector4_int_list *dest, int index);
+void 		t_vector4_int_list_set(t_vector4_int_list *dest, int index, t_vector4_int *vector);
+int			*t_vector4_int_list_obtain(t_vector4_int_list *dest, int index);
+void		t_vector4_int_list_resize(t_vector4_int_list *dest, int new_size);
+void		t_vector4_int_list_edit(t_vector4_int_list *dest, int index, t_vector4_int p_color);
+void		t_vector4_int_list_set(t_vector4_int_list *dest, int index, t_vector4_int *p_color);
 
 typedef struct	s_color_list
 {

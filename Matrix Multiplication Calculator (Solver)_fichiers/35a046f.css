@@ -1,0 +1,68 @@
+/* line 4, ../sass/matrix.scss */
+.matrix-row input {
+  padding: 2px 3px;
+}
+
+/* line 9, ../sass/matrix.scss */
+input.ui-matrix-control-button {
+  width: 10px;
+  height: 10px;
+}
+
+/* line 14, ../sass/matrix.scss */
+input.add-row {
+  margin-top: 2px;
+}
+
+/* line 18, ../sass/matrix.scss */
+.fright {
+  float: right;
+}
+
+/* line 23, ../sass/matrix.scss */
+.matrix-inner {
+  padding-top: 20px;
+  padding-bottom: 40px;
+  height: 90px;
+  width: 200px;
+}
+/* line 29, ../sass/matrix.scss */
+.matrix-inner input {
+  margin: 5px;
+  height: 15px;
+  width: 58px!important;
+}
+/* line 34, ../sass/matrix.scss */
+.matrix-inner .ignore {
+  display: none;
+  position: absolute;
+  margin: 0;
+}
+
+/* line 41, ../sass/matrix.scss */
+div.row-controls, div.col-controls {
+  position: absolute;
+  font-weight: bold;
+}
+/* line 45, ../sass/matrix.scss */
+div.row-controls button, div.col-controls button {
+  padding: 2px;
+  font-size: 16px !important;
+  width: 30px !important;
+  height: 30px !important;
+}
+
+/* line 53, ../sass/matrix.scss */
+div.matrix-controls {
+  position: absolute;
+}
+/* line 56, ../sass/matrix.scss */
+div.matrix-controls div.row-controls {
+  left: 100px;
+  top: 15px;
+}
+/* line 61, ../sass/matrix.scss */
+div.matrix-controls div.col-controls {
+  left: 40px;
+  top: 100px;
+}
