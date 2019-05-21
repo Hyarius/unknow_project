@@ -38,6 +38,10 @@ t_matrix		t_camera_look_at(t_camera *cam, t_vector3 target)
 	t_vector3 xaxis = normalize_t_vector3(cross_t_vector3(zaxis, create_t_vector3(0, 1, 0)));
 	t_vector3 yaxis = cross_t_vector3(xaxis, zaxis);
 
+	cam->forward = zaxis;
+	cam->right = xaxis;
+	cam->up = yaxis;
+
 	zaxis.x = zaxis.x * -1;
 	zaxis.y = zaxis.y * -1;
 	zaxis.z = zaxis.z * -1;
@@ -88,6 +92,7 @@ t_matrix		compute_t_camera(t_camera *cam)
 {
 	t_matrix result;
 
+	cam->view = t_camera_look_at(cam, cam->forward);
 	result = mult_matrix_by_matrix(&(cam->projection), &(cam->view)); // Attention, danger
 	result = mult_matrix_by_matrix(&(result), &(cam->model)); // tout a fait
 
