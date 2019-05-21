@@ -21,14 +21,20 @@ int main(int argc, char **argv)
 
 	t_mesh_add_face(mesh, 0, 1, 2);
 
-	t_camera *cam = initialize_t_camera(win, create_t_vector3(0, -2, 0), 90, create_t_vector2(0.1f, 50.0f));
+	t_camera *cam = initialize_t_camera(win, create_t_vector3(0, -2, 0), 70, create_t_vector2(0.1f, 50.0f));
 
+
+	print_t_matrix(&(cam->model));
+	print_t_matrix(&(cam->view));
 	print_t_matrix(&(cam->projection));
-	/*t_matrix	*mvp;
+
+	t_matrix	*mvp;
 	mvp = initialize_t_matrix();
 	*mvp = compute_t_camera(cam);
 
-	while (play == 1)
+	print_t_matrix(mvp);
+
+	/*while (play == 1)
 	{
 		prepare_screen(win, create_t_color(0.2f, 0.2f, 0.2f, 1.0f));
 

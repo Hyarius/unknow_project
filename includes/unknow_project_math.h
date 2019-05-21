@@ -38,5 +38,9 @@ void			print_t_matrix(t_matrix *m);
 int				generate_nbr(int min, int max);
 t_vector2_int_list
 				calc_line(t_vector2_int start, t_vector2_int end);
-t_vector3		cross_vector3(t_vector3 *a, t_vector3 *b);
+
+t_vector3		cross_t_vector3(t_vector3 a, t_vector3 b);
+t_vector3 		normalize_t_vector3(t_vector3 v);
+float 			dot_t_vector3(t_vector3 a, t_vector3 b);
+
 #endif
