@@ -22,6 +22,10 @@ typedef struct	s_vector3
 
 t_vector3	create_t_vector3(float p_x, float p_y, float p_z);
 t_vector3	*initialize_t_vector3(float p_x, float p_y, float p_z);
+t_vector3	add_vector3_to_vector3(t_vector3 a,t_vector3 b);
+t_vector3	substract_vector3_to_vector3(t_vector3 a,t_vector3 b);
+t_vector3	mult_vector3_to_vector3(t_vector3 a,t_vector3 b);
+t_vector3	divide_vector3_to_vector3(t_vector3 a,t_vector3 b);
 void 		print_t_vector3(t_vector3 vector, char *str);
 
 typedef struct	s_vector2

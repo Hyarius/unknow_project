@@ -9,6 +9,7 @@
 # include "unknow_project_math.h"
 # include "unknow_project_drawing.h"
 # include "unknow_project_camera.h"
+# include "unknow_project_system.h"
 
 //			PNG reader
 t_image 	*png_load(char *path);

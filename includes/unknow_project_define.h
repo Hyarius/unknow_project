@@ -11,4 +11,10 @@
 # define FPS 60000
 # define PUSH_SIZE 200000
 
+# define MOUSE_BUTTON 3
+# define MOUSE_NULL -1
+# define MOUSE_RIGHT 0
+# define MOUSE_LEFT 1
+# define MOUSE_MIDDLE 2
+
 #endif
