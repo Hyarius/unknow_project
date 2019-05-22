@@ -171,6 +171,5 @@ void			handle_t_camera_view_by_mouse(t_camera *cam, t_mouse *p_mouse)
 	t_vector3	delta;
 
 	delta = create_t_vector3(0, p_mouse->rel_pos.x / 10.0, p_mouse->rel_pos.y / 10.0);
-	printf("here - [%f][%f][%f]\n", delta.x, delta.y, delta.z);
 	t_camera_change_view(cam, delta);
 }

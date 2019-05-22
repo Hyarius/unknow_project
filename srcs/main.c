@@ -25,11 +25,21 @@ int main(int argc, char **argv)
 	SDL_Event event;
 	int play = 1;
 
-	t_mesh *mesh = initialize_t_mesh();
+	t_mesh **mesh_list;
+	int nb = 15;
 
-	*mesh = create_primitive_cube(create_t_vector3(-1, -1, -1), create_t_vector3(2, 2, 2));
+	mesh_list = (t_mesh **)malloc(sizeof(t_mesh *) * nb);
+	for (int i = 0; i < nb; i++)
+	{
+		float x = (float)(generate_nbr(-5, 5)) + 0.5f;
+		float y = (float)(generate_nbr(-5, 5)) + 0.5f;
+		float z = (float)(generate_nbr(-5, 5)) + 0.5f;
+		mesh_list[i] = initialize_t_mesh();
 
-	t_camera *cam = initialize_t_camera(win, create_t_vector3(0, 0, -3), 70, create_t_vector2(0.5f, 50.0f));
+		*(mesh_list[i]) = create_primitive_cube(create_t_vector3(x, y, z), create_t_vector3(1, 1, 1));
+	}
+
+	t_camera *cam = initialize_t_camera(win, create_t_vector3(0, 2, -8), 70, create_t_vector2(0.5f, 50.0f));
 
 	t_matrix	*mvp;
 	mvp = initialize_t_matrix();
@@ -47,7 +57,8 @@ int main(int argc, char **argv)
 
 		prepare_screen(win, create_t_color(0.2f, 0.2f, 0.2f, 1.0f));
 
-		draw_t_mesh(win, mvp, mesh);
+		for (int i = 0; i < nb; i++)
+			draw_t_mesh(win, mvp, mesh_list[i]);
 
 		render_screen(win);
 
