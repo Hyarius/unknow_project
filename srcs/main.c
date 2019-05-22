@@ -26,7 +26,7 @@ int main(int argc, char **argv)
 	int play = 1;
 
 	t_mesh **mesh_list;
-	int nb = 15;
+	int nb = 10;
 
 	mesh_list = (t_mesh **)malloc(sizeof(t_mesh *) * nb);
 	for (int i = 0; i < nb; i++)

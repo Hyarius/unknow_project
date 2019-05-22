@@ -140,29 +140,29 @@ void			t_camera_change_view(t_camera *cam, t_vector3 delta_angle)
 
 void			handle_t_camera_mouvement_by_key(t_camera *cam, int key)
 {
-	if (key == SDLK_DOWN)
+	if (key == SDLK_s)
 		cam->pos = substract_vector3_to_vector3(cam->pos, cam->forward);
-	if (key == SDLK_UP)
+	if (key == SDLK_w)
 		cam->pos = add_vector3_to_vector3(cam->pos, cam->forward);
-	if (key == SDLK_RIGHT)
+	if (key == SDLK_d)
 		cam->pos = add_vector3_to_vector3(cam->pos, cam->right);
-	if (key == SDLK_LEFT)
+	if (key == SDLK_a)
 		cam->pos = substract_vector3_to_vector3(cam->pos, cam->right);
 	if (key == SDLK_SPACE)
 		cam->pos = add_vector3_to_vector3(cam->pos, cam->up);
-	if (key == SDLK_LSHIFT)
+	if (key == SDLK_LCTRL)
 		cam->pos = substract_vector3_to_vector3(cam->pos, cam->up);
 }
 
 void			handle_t_camera_view_by_key(t_camera *cam, int key)
 {
-	if (key == SDLK_d)
+	if (key == SDLK_RIGHT)
 		t_camera_change_view(cam, create_t_vector3(0, -5, 0));
-	if (key == SDLK_a)
+	if (key == SDLK_LEFT)
 		t_camera_change_view(cam, create_t_vector3(0, 5, 0));
-	if (key == SDLK_w)
+	if (key == SDLK_UP)
 		t_camera_change_view(cam, create_t_vector3(0, 0, 5));
-	if (key == SDLK_s)
+	if (key == SDLK_DOWN)
 		t_camera_change_view(cam, create_t_vector3(0, 0, -5));
 }
 
