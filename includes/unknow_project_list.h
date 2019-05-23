@@ -260,4 +260,21 @@ void		t_uv_list_push_back(t_uv_list *dest, t_uv to_add);
 void		t_uv_list_add_back(t_uv_list *dest, t_uv *to_add);
 t_uv		*t_uv_list_get(t_uv_list *dest, int index);
 
+typedef struct	s_face_list
+{
+	t_face		*face;
+	int			size;
+	int			max_size;
+}				t_face_list;
+
+t_face_list	create_t_face_list(); //creer sans malloc
+t_face_list	*initialize_t_face_list(); //creer avec malloc
+void		t_face_list_push_back(t_face_list *dest, t_face to_add); // ajoute une t_face a la liste, a la fin, en la brut
+void		t_face_list_add_back(t_face_list *dest, t_face *to_add); // ajoute une t_face a la liste, a la fin, en la copiant
+void		free_t_face_list(t_face_list dest); //libere le contenu d'un t_face_list sans free le t_face_list
+void		delete_t_face_list(t_face_list *dest); //libere le contenu d'un t_face_list en liberant le t_face_list
+void		clean_t_face_list(t_face_list *dest); //supprime le contenu d'un t_face_list
+t_face		t_face_list_at(t_face_list *dest, int index); //renvoi une copie de l'element situe a la position [index] de la liste
+t_face		*t_face_list_get(t_face_list *dest, int index); //renvoi l'adresse de l'element situe a la position [index] de la liste
+
 #endif

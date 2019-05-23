@@ -74,8 +74,6 @@ void	t_vector3_int_list_add_back(t_vector3_int_list *dest, t_vector3_int *to_add
 void	free_t_vector3_int_list(t_vector3_int_list dest)
 {
 	free(dest.vector);
-	dest.vector = NULL;
-	dest.size = 0;
 }
 
 void	delete_t_vector3_int_list(t_vector3_int_list *dest)

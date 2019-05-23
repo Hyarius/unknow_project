@@ -10,7 +10,7 @@ t_vector3		cross_t_vector3(t_vector3 a, t_vector3 b)
 	return (result);
 }
 
-t_vector3 		normalize_t_vector3(t_vector3 v)
+t_vector3 		normalize_t_vector3(t_vector3 v) // ramener la longueur du vecteur a 1
 {
    float length_of_v = sqrt((v.x * v.x) + (v.y * v.y) + (v.z * v.z));
    return (create_t_vector3(v.x / length_of_v, v.y / length_of_v, v.z / length_of_v));

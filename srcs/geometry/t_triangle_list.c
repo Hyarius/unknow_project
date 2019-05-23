@@ -74,8 +74,6 @@ void	t_triangle_list_add_back(t_triangle_list *dest, t_triangle *to_add)
 void	free_t_triangle_list(t_triangle_list dest)
 {
 	free(dest.triangle);
-	dest.triangle = NULL;
-	dest.size = 0;
 }
 
 void	delete_t_triangle_list(t_triangle_list *dest)

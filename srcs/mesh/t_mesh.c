@@ -5,7 +5,7 @@ t_mesh		create_t_mesh()
 	t_mesh result;
 
 	result.vertices = initialize_t_vector3_list();
-	result.faces = initialize_t_faces();
+	result.faces = initialize_t_face_list();
 
 	return (result);
 }
@@ -25,14 +25,12 @@ t_mesh		*initialize_t_mesh()
 void		free_t_mesh(t_mesh mesh)
 {
 	delete_t_vector3_list(mesh.vertices);
-	delete_t_faces(mesh.faces);
+	delete_t_face_list(mesh.faces);
 }
 
 void		delete_t_mesh(t_mesh *mesh)
 {
 	free_t_mesh(*mesh);
-	mesh->vertices = NULL;
-	mesh->faces = NULL;
 	free(mesh);
 }
 
@@ -41,12 +39,17 @@ void		t_mesh_add_point(t_mesh *dest, t_vector3 new_point)
 	t_vector3_list_push_back(dest->vertices, new_point);
 }
 
-void		t_mesh_add_face(t_mesh *dest, int a, int b, int c)
+void		t_mesh_add_face(t_mesh *dest, t_face new_face)
 {
-	int point_index[3];
+	t_face_list_push_back(dest->faces, new_face);
+}
 
-	point_index[0] = a;
-	point_index[1] = b;
-	point_index[2] = c;
-	t_faces_push_back(dest->faces, point_index);
+void		t_mesh_compute_normales(t_mesh *mesh)
+{
+	int i = 0;
+	while (i < mesh->faces->size)
+	{
+
+		i++;
+	}
 }

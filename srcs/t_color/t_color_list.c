@@ -75,8 +75,6 @@ void	t_color_list_add_back(t_color_list *dest, t_color *to_add)
 void	free_t_color_list(t_color_list dest)
 {
 	free(dest.color);
-	dest.color = NULL;
-	dest.size = 0;
 }
 
 void	delete_t_color_list(t_color_list *dest)

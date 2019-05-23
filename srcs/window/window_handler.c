@@ -6,11 +6,11 @@ void			start_sdl()
 	//initialisation SDL
 	SDL_Init(SDL_INIT_EVERYTHING);
 
-	//version SDL
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
+	//version d'OpenGL utiliser par SDL
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3); //major version, chiffre avant la virgule
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1); //minor version, chiffre apres la virgule
 
-	//utilasation de la carte graphique
+	//utilisation de la carte graphique
 	SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
 
 	//Limitation de l'utilisation d'OpenGL (decrepated functions)
@@ -61,9 +61,6 @@ t_window		*initialize_t_window(char *p_name, int p_size_x, int p_size_y)
 	glGenBuffers(1, &win->color_buffer);
 	glGenBuffers(1, &win->texture_buffer);
 	glGenBuffers(1, &win->alpha_buffer);
-
-	// bind VAO
-	glBindVertexArray(win->vertex_array);
 
 	// create shader program
 	win->program_color = load_shaders("ressources/shader/color_shader.vert", "ressources/shader/color_shader.frag");

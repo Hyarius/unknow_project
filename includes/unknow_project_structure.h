@@ -44,4 +44,13 @@ typedef struct	s_uv
 t_uv		create_t_uv(t_triangle *p_triangle, t_image *p_image, float p_alpha);
 t_uv		*initialize_t_uv(t_triangle *p_triangle, t_image *p_image, float p_alpha);
 
+typedef struct	s_face
+{
+	int			index[3];
+	t_vector3	normale;
+}				t_face;
+
+t_face create_t_face(int a, int b, int c);
+t_face *initialize_t_face(int a, int b, int c);
+
 #endif

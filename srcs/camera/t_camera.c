@@ -4,16 +4,16 @@ t_camera	create_t_camera(t_window *p_win, t_vector3 p_pos, float p_fov, t_vector
 {
 	t_camera result;
 
-	result.pos = p_pos;
-	result.fov = p_fov;
-	result.near = p_dist.x;
-	result.far = p_dist.y;
-	result.angle = create_t_vector3(0, 0, 0);
+	result.pos = p_pos; //position de la camera
+	result.fov = p_fov; // champ de vision
+	result.near = p_dist.x; //distance la plus proche pour voir un objet
+	result.far = p_dist.y; // distance la plus eloigne pour voir un objet
+	result.angle = create_t_vector3(0, 0, 0); //angle a laquel on voit l'objet
 
-	result.model = create_t_matrix();
-	t_camera_look_at(&result);
-	result.view = t_camera_compute_view(&result);
-	result.projection = compute_projection_matrix(p_win, &result);
+	result.model = create_t_matrix(); // creation de la matrice d'identite permettant de faire les calculs matriciel par la suite
+	t_camera_look_at(&result); //calcul de l'angle de la camera
+	result.view = t_camera_compute_view(&result); //calcul de la matrice de vue
+	result.projection = compute_projection_matrix(p_win, &result); //calcul de la matrice de projection
 
 	return (result);
 }
@@ -45,15 +45,10 @@ void			t_camera_look_at(t_camera *cam)
 	cam->up = yaxis;
 }
 
-t_matrix		t_camera_compute_view(t_camera *cam)
+t_matrix		t_camera_compute_view(t_camera *cam) //calcul de la matrice de vue
 {
 	t_matrix	result;
 	t_vector3	inv_forward;
-
-	/*printf("-------------------------------------\n");
-	print_t_vector3(cam->forward, "cam->forward: ");endl();
-	print_t_vector3(cam->right, "cam->right: ");endl();
-	print_t_vector3(cam->up, "cam->up: ");endl();*/
 
 	result = create_t_matrix();
 
@@ -77,7 +72,7 @@ t_matrix		t_camera_compute_view(t_camera *cam)
 	return (result);
 }
 
-t_matrix		compute_projection_matrix(t_window *p_win, t_camera *p_cam)
+t_matrix		compute_projection_matrix(t_window *p_win, t_camera *p_cam) //calcul de la matrice de projection
 {
 	t_matrix	result;
 
@@ -112,7 +107,7 @@ t_matrix		compute_t_camera(t_camera *cam)
 	return (result);
 }
 
-t_vector3		apply_t_camera(t_vector3 *src, t_matrix *mat)
+t_vector3		apply_t_camera(t_vector3 *src, t_matrix *mat) // applique la position de la camera
 {
 	t_vector3	result;
 	float		delta;
@@ -138,7 +133,7 @@ void			t_camera_change_view(t_camera *cam, t_vector3 delta_angle)
 	t_camera_look_at(cam);
 }
 
-void			handle_t_camera_mouvement_by_key(t_camera *cam, int key)
+void			handle_t_camera_mouvement_by_key(t_camera *cam, int key) // calcul du mouvement de la camera a la clavier
 {
 	if (key == SDLK_s)
 		cam->pos = substract_vector3_to_vector3(cam->pos, cam->forward);
@@ -154,7 +149,7 @@ void			handle_t_camera_mouvement_by_key(t_camera *cam, int key)
 		cam->pos = substract_vector3_to_vector3(cam->pos, cam->up);
 }
 
-void			handle_t_camera_view_by_key(t_camera *cam, int key)
+void			handle_t_camera_view_by_key(t_camera *cam, int key) // calcul du mouvement de l'angle de la camera au clavier
 {
 	if (key == SDLK_RIGHT)
 		t_camera_change_view(cam, create_t_vector3(0, -5, 0));
@@ -166,7 +161,7 @@ void			handle_t_camera_view_by_key(t_camera *cam, int key)
 		t_camera_change_view(cam, create_t_vector3(0, 0, -5));
 }
 
-void			handle_t_camera_view_by_mouse(t_camera *cam, t_mouse *p_mouse)
+void			handle_t_camera_view_by_mouse(t_camera *cam, t_mouse *p_mouse) // calcul du mouvement de l'angle de la camera a la souris
 {
 	t_vector3	delta;
 
