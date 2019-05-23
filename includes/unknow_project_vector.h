@@ -27,6 +27,7 @@ t_vector3	substract_vector3_to_vector3(t_vector3 a,t_vector3 b);
 t_vector3	mult_vector3_to_vector3(t_vector3 a,t_vector3 b);
 t_vector3	divide_vector3_to_vector3(t_vector3 a,t_vector3 b);
 void 		print_t_vector3(t_vector3 vector, char *str);
+t_vector3	inv_t_vector3(t_vector3 src);
 
 typedef struct	s_vector2
 {

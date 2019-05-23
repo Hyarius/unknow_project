@@ -73,7 +73,7 @@ t_window		*initialize_t_window(char *p_name, int p_size_x, int p_size_y)
 	// gere la profondeur
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_ALWAYS);
-	SDL_GL_SetSwapInterval(0);
+	SDL_GL_SetSwapInterval(1);
 
 	return (win);
 }

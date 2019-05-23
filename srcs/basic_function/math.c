@@ -1,6 +1,6 @@
 #include "unknow_project.h"
 
-t_vector3		cross_t_vector3(t_vector3 a, t_vector3 b)
+t_vector3		cross_t_vector3(t_vector3 a, t_vector3 b) //Produit vectoriel / cross product
 {
 	t_vector3 result;
 
@@ -16,11 +16,11 @@ t_vector3 		normalize_t_vector3(t_vector3 v) // ramener la longueur du vecteur a
    return (create_t_vector3(v.x / length_of_v, v.y / length_of_v, v.z / length_of_v));
 }
 
-float 			dot_t_vector3(t_vector3 a, t_vector3 b)
+float			dot_t_vector3(t_vector3 a, t_vector3 b) //Produit scalaire / dot product
 {
-    float result = 0.0;
+    float result;
 
-    result = a.x * b.x + a.y * b.y + a.z * b.z;
+	result = a.x * b.x + a.y * b.y + a.z * b.z;
 
-    return result;
+    return (result);
 }

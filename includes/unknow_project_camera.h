@@ -12,11 +12,16 @@ typedef struct	s_camera
 	t_matrix	view;
 	t_matrix	projection;
 
+	t_matrix	mvp;
+
 	t_vector3	pos;
 	t_vector3	angle;
+
 	t_vector3	forward;
 	t_vector3	right;
 	t_vector3	up;
+
+	t_vector3	sun_direction;
 
 	float		fov;
 	float		near;
@@ -26,7 +31,7 @@ typedef struct	s_camera
 t_camera	create_t_camera(t_window *p_win, t_vector3 p_pos, float p_fov, t_vector2 p_dist);
 t_camera	*initialize_t_camera(t_window *p_win, t_vector3 p_pos, float p_fov, t_vector2 p_dist);
 t_matrix	compute_projection_matrix(t_window *p_win, t_camera *p_cam);
-t_matrix	compute_t_camera(t_camera *cam);
+void		compute_t_camera(t_camera *cam);
 t_vector3	apply_t_camera(t_vector3 *src, t_matrix *mvp);
 t_matrix	t_camera_compute_view(t_camera *cam);
 void		t_camera_look_at(t_camera *cam);

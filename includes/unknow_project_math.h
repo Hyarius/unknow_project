@@ -41,6 +41,6 @@ t_vector2_int_list
 
 t_vector3		cross_t_vector3(t_vector3 a, t_vector3 b);
 t_vector3 		normalize_t_vector3(t_vector3 v);
-float 			dot_t_vector3(t_vector3 a, t_vector3 b);
+float			dot_t_vector3(t_vector3 a, t_vector3 b);
 
 #endif

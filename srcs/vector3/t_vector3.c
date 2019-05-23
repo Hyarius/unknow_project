@@ -63,3 +63,14 @@ t_vector3	divide_vector3_to_vector3(t_vector3 a,t_vector3 b)
 
 	return (result);
 }
+
+t_vector3	inv_t_vector3(t_vector3 src)
+{
+	t_vector3	result;
+
+	result.x = -1 * src.x;
+	result.y = -1 * src.y;
+	result.z = -1 * src.z;
+
+	return (result);
+}
