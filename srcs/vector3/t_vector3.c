@@ -46,7 +46,7 @@ t_vector3	substract_vector3_to_vector3(t_vector3 a,t_vector3 b)
 	return (result);
 }
 
-t_vector3	mult_vector3_to_vector3(t_vector3 a,t_vector3 b)
+t_vector3	mult_vector3_by_vector3(t_vector3 a,t_vector3 b)
 {
 	t_vector3	result;
 
@@ -55,7 +55,16 @@ t_vector3	mult_vector3_to_vector3(t_vector3 a,t_vector3 b)
 	return (result);
 }
 
-t_vector3	divide_vector3_to_vector3(t_vector3 a,t_vector3 b)
+t_vector3	mult_vector3_by_float(t_vector3 a, float b)
+{
+	t_vector3	result;
+
+	result = create_t_vector3(a.x * b, a.y * b, a.z * b);
+
+	return (result);
+}
+
+t_vector3	divide_vector3_by_vector3(t_vector3 a,t_vector3 b)
 {
 	t_vector3	result;
 

@@ -20,4 +20,14 @@ t_mouse		*initialize_t_mouse();
 void		get_t_mouse_info(t_mouse *mouse);
 void		print_t_mouse(t_mouse *mouse);
 
+typedef struct	s_keyboard
+{
+	const Uint8	*state; //a ne pas free, ca appartient a sdl2
+						//	!!! DANGER SI FREE DU STATE !!!
+}				t_keyboard;
+
+t_keyboard	create_t_keyboard();
+t_keyboard	*initialize_t_keyboard();
+int			get_key_state(t_keyboard *keyboard, int scan_code);
+
 #endif

@@ -24,6 +24,7 @@ void		t_mesh_add_face(t_mesh *dest, t_face new_face);
 void		t_mesh_compute_normales(t_mesh *mesh);
 
 t_mesh		create_primitive_cube(t_vector3 coord, t_vector3 size);
+t_mesh		create_primitive_plane(t_vector3 pos, t_vector3 size);
 void 		draw_t_mesh(t_window *p_win, t_camera *p_cam, t_mesh *mesh);
 void		rotate_t_mesh(t_mesh *mesh, t_vector3 angle, t_vector3 center);
 

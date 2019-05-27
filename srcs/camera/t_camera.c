@@ -15,6 +15,8 @@ t_camera	create_t_camera(t_window *p_win, t_vector3 p_pos, float p_fov, t_vector
 	result.view = t_camera_compute_view(&result); //calcul de la matrice de vue
 	result.projection = compute_projection_matrix(p_win, &result); //calcul de la matrice de projection
 
+	result.clipping_list = create_t_vector3_list();
+
 	result.sun_direction = normalize_t_vector3(create_t_vector3(0, -1, 0));
 
 	return (result);
@@ -54,7 +56,7 @@ t_matrix		t_camera_compute_view(t_camera *cam) //calcul de la matrice de vue
 
 	result = create_t_matrix();
 
-	inv_forward = mult_vector3_to_vector3(cam->forward, create_t_vector3(-1, -1, -1));
+	inv_forward = mult_vector3_by_vector3(cam->forward, create_t_vector3(-1, -1, -1));
 
 	result.value[0][0] = cam->right.x;
 	result.value[1][0] = cam->right.y;
@@ -115,7 +117,7 @@ t_vector3		apply_t_camera(t_vector3 *src, t_matrix *mat) // applique la position
 	result.z = src->x * mat->value[0][2] + src->y * mat->value[1][2] + src->z * mat->value[2][2] + mat->value[3][2];
 	delta = src->x * mat->value[0][3] + src->y * mat->value[1][3] + src->z * mat->value[2][3] + mat->value[3][3];
 
-	if (delta != 0)
+	if (delta < 0)
 	{
 		result.x /= delta;
 		result.y /= delta;
@@ -131,32 +133,20 @@ void			t_camera_change_view(t_camera *cam, t_vector3 delta_angle)
 	t_camera_look_at(cam);
 }
 
-void			handle_t_camera_mouvement_by_key(t_camera *cam, int key) // calcul du mouvement de la camera a la clavier
+void			handle_t_camera_mouvement_by_key(t_camera *cam, t_keyboard *p_keyboard) // calcul du mouvement de la camera a la clavier
 {
-	if (key == SDLK_s)
-		cam->pos = add_vector3_to_vector3(cam->pos, cam->forward);
-	if (key == SDLK_w)
-		cam->pos = substract_vector3_to_vector3(cam->pos, cam->forward);
-	if (key == SDLK_d)
-		cam->pos = substract_vector3_to_vector3(cam->pos, cam->right);
-	if (key == SDLK_a)
-		cam->pos = add_vector3_to_vector3(cam->pos, cam->right);
-	if (key == SDLK_SPACE)
-		cam->pos = substract_vector3_to_vector3(cam->pos, cam->up);
-	if (key == SDLK_LCTRL)
-		cam->pos = add_vector3_to_vector3(cam->pos, cam->up);
-}
-
-void			handle_t_camera_view_by_key(t_camera *cam, int key) // calcul du mouvement de l'angle de la camera au clavier
-{
-	if (key == SDLK_RIGHT)
-		t_camera_change_view(cam, create_t_vector3(0, 5, 0));
-	if (key == SDLK_LEFT)
-		t_camera_change_view(cam, create_t_vector3(0, -5, 0));
-	if (key == SDLK_UP)
-		t_camera_change_view(cam, create_t_vector3(0, 0, -5));
-	if (key == SDLK_DOWN)
-		t_camera_change_view(cam, create_t_vector3(0, 0, 5));
+	if (get_key_state(p_keyboard, SDL_SCANCODE_S) == 1)
+		cam->pos = add_vector3_to_vector3(cam->pos, mult_vector3_by_vector3(cam->forward, create_t_vector3(0.2, 0.0, 0.2)));
+	if (get_key_state(p_keyboard, SDL_SCANCODE_W) == 1)
+		cam->pos = substract_vector3_to_vector3(cam->pos, mult_vector3_by_vector3(cam->forward, create_t_vector3(0.2, 0.0, 0.2)));
+	if (get_key_state(p_keyboard, SDL_SCANCODE_D) == 1)
+		cam->pos = substract_vector3_to_vector3(cam->pos, mult_vector3_by_vector3(cam->right, create_t_vector3(0.2, 0.0, 0.2)));
+	if (get_key_state(p_keyboard, SDL_SCANCODE_A) == 1)
+		cam->pos = add_vector3_to_vector3(cam->pos, mult_vector3_by_vector3(cam->right, create_t_vector3(0.2, 0.0, 0.2)));
+	if (get_key_state(p_keyboard, SDL_SCANCODE_SPACE) == 1)
+		cam->pos = substract_vector3_to_vector3(cam->pos, create_t_vector3(0.0, -0.2, 0.0));
+	if (get_key_state(p_keyboard, SDL_SCANCODE_LCTRL) == 1)
+		cam->pos = add_vector3_to_vector3(cam->pos, create_t_vector3(0.0, -0.2, 0.0));
 }
 
 void			handle_t_camera_view_by_mouse(t_camera *cam, t_mouse *p_mouse) // calcul du mouvement de l'angle de la camera a la souris

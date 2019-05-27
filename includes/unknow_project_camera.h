@@ -13,6 +13,8 @@ typedef struct	s_camera
 	t_matrix	projection;
 
 	t_matrix	mvp;
+	t_vector3_list
+				clipping_list;
 
 	t_vector3	pos;
 	t_vector3	angle;
@@ -37,9 +39,10 @@ t_matrix	t_camera_compute_view(t_camera *cam);
 void		t_camera_look_at(t_camera *cam);
 void		t_camera_change_view(t_camera *cam, t_vector3 delta_angle);
 
-void		handle_t_camera_mouvement_by_key(t_camera *cam, int key);
-void		handle_t_camera_view_by_key(t_camera *cam, int key);
+void		handle_t_camera_mouvement_by_key(t_camera *cam, t_keyboard *p_keyboard);
+
 void		handle_t_camera_view_by_mouse(t_camera *cam, t_mouse *p_mouse);
 
+void		clip_triangle_to_plane(t_camera *p_camera, t_vector3 *p_points);
 
 #endif

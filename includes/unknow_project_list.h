@@ -40,6 +40,25 @@ t_triangle	t_triangle_list_at(t_triangle_list *dest, int index);
 t_triangle	*t_triangle_list_get(t_triangle_list *dest, int index);
 void			t_triangle_list_resize(t_triangle_list *dest, int new_size);
 
+typedef struct	s_3d_triangle_list
+{
+	t_3d_triangle
+				*triangle;
+	int			size;
+	int			max_size;
+}				t_3d_triangle_list;
+
+t_3d_triangle_list create_t_3d_triangle_list();
+t_3d_triangle_list *initialize_t_3d_triangle_list();
+void	t_3d_triangle_list_push_back(t_3d_triangle_list *dest, t_3d_triangle to_add);
+void	t_3d_triangle_list_add_back(t_3d_triangle_list *dest, t_3d_triangle *to_add);
+void	free_t_3d_triangle_list(t_3d_triangle_list dest);
+void	delete_t_3d_triangle_list(t_3d_triangle_list *dest);
+void	clean_t_3d_triangle_list(t_3d_triangle_list *dest);
+t_3d_triangle	t_3d_triangle_list_at(t_3d_triangle_list *dest, int index);
+t_3d_triangle	*t_3d_triangle_list_get(t_3d_triangle_list *dest, int index);
+void			t_3d_triangle_list_resize(t_3d_triangle_list *dest, int new_size);
+
 typedef struct	s_vector2_list
 {
 	union

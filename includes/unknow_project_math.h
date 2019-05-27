@@ -42,5 +42,6 @@ t_vector2_int_list
 t_vector3		cross_t_vector3(t_vector3 a, t_vector3 b);
 t_vector3 		normalize_t_vector3(t_vector3 v);
 float			dot_t_vector3(t_vector3 a, t_vector3 b);
-
+t_vector3		intersect_plane_by_line(t_vector3 p_normal, t_vector3 p_center, t_vector3 start, t_vector3 end);
+float			calc_distance_to_plane(t_vector3 p_normal, t_vector3 p_center, t_vector3 p_point);
 #endif

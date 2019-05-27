@@ -40,3 +40,25 @@ t_mesh		create_primitive_cube(t_vector3 pos, t_vector3 size)
 
 	return (result);
 }
+
+t_mesh		create_primitive_plane(t_vector3 pos, t_vector3 size)
+{
+	t_mesh result;
+
+	result = create_t_mesh(pos);
+
+	t_mesh_add_point(&result, create_t_vector3(-size.x / 2.0, 0.0, -size.z / 2.0));
+	t_mesh_add_point(&result, create_t_vector3(size.x / 2.0, 0.0, -size.z / 2.0));
+	t_mesh_add_point(&result, create_t_vector3(size.x / 2.0, 0.0, size.z / 2.0));
+	t_mesh_add_point(&result, create_t_vector3(-size.x / 2.0, 0.0, size.z / 2.0));
+
+	t_mesh_add_face(&result, create_t_face(2, 1, 3));
+	//t_mesh_add_face(&result, create_t_face(0, 3, 1));
+
+	//t_mesh_add_face(&result, create_t_face(2, 3, 1));
+	//t_mesh_add_face(&result, create_t_face(0, 1, 3));
+
+	t_mesh_compute_normales(&result);
+
+	return (result);
+}
