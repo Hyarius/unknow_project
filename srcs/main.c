@@ -17,9 +17,9 @@ int main(int argc, char **argv)
 	int play = 1;
 
 	t_mesh **mesh_list;
-	int nb = 1; //nombre de mesh (cube)
+	int nb = 15; //nombre de mesh (cube)
 
-	t_camera *cam = initialize_t_camera(win, create_t_vector3(1, 0.01, 3), 70, create_t_vector2(0.1f, 50.0f)); //creation et initialisation de la camera et des matrices liee a la camera
+	t_camera *cam = initialize_t_camera(win, create_t_vector3(0, 0.01, 8), 70, create_t_vector2(0.1f, 50.0f)); //creation et initialisation de la camera et des matrices liee a la camera
 
 	mesh_list = (t_mesh **)malloc(sizeof(t_mesh *) * nb);
 	int size = 1;
@@ -30,11 +30,8 @@ int main(int argc, char **argv)
 		float z = (float)(generate_nbr(-5, 5)) + 0.5f;
 
 		mesh_list[i] = initialize_t_mesh(create_t_vector3(x, y, z)); //creation d'un mesh vide
-		*(mesh_list[i]) = create_primitive_plane(create_t_vector3(x, y, z), create_t_vector3(size, size, size)); //creation du cube que l'on rentre dans mesh
+		*(mesh_list[i]) = create_primitive_cube(create_t_vector3(x, y, z), create_t_vector3(size, size, size)); //creation du cube que l'on rentre dans mesh
 	}
-
-	mesh_list[0] = initialize_t_mesh(create_t_vector3(0, 0, 0)); //creation d'un mesh vide
-	*(mesh_list[0]) = load_t_mesh(create_t_vector3(0, 0, 0), "teapot.obj");
 
 
 	int state = 1;
@@ -51,12 +48,12 @@ int main(int argc, char **argv)
 
 		handle_t_camera_mouvement_by_key(cam, keyboard); // deplacement camera
 
-		prepare_screen(win, create_t_color(0.2f, 0.2f, 0.2f, 1.0f)); // refresh de l'ecran avec les couleurs par default
+		prepare_screen(win, cam, create_t_color(0.2f, 0.2f, 0.2f, 1.0f)); // refresh de l'ecran avec les couleurs par default
 
 		for (int i = 0; i < nb; i++)
 			draw_t_mesh(win, cam, mesh_list[i]); // dessine le cube
 
-		render_screen(win); // affiche la fenetre
+		render_screen(win, cam); // affiche la fenetre
 
 		if (SDL_PollEvent(&event) == 1)
 		{

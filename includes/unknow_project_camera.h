@@ -5,6 +5,7 @@
 #include "unknow_project_window.h"
 #include "unknow_project_math.h"
 #include "unknow_project_system.h"
+#include "unknow_project_geometry.h"
 
 typedef struct	s_camera
 {
@@ -13,11 +14,19 @@ typedef struct	s_camera
 	t_matrix	projection;
 
 	t_matrix	mvp;
-	t_vector3_list
-				clipping_list;
+	t_vector3	clipping_list[6];
+	t_triangle_list
+				triangle_roaster;
+	t_color_list
+				color_roaster;
+	t_triangle_list
+				triangle_sorted;
+	t_color_list
+				color_sorted;
 
 	t_vector3	pos;
 	t_vector3	angle;
+	float		speed;
 
 	t_vector3	forward;
 	t_vector3	right;
@@ -43,6 +52,7 @@ void		handle_t_camera_mouvement_by_key(t_camera *cam, t_keyboard *p_keyboard);
 
 void		handle_t_camera_view_by_mouse(t_camera *cam, t_mouse *p_mouse);
 
-void		clip_triangle_to_plane(t_camera *p_camera, t_vector3 *p_points);
+int			clip_triangle_to_plane(t_camera *p_camera, t_vector3 *p_points);
+void		draw_triangle_from_camera_on_screen(t_window *p_win, t_camera *p_cam);
 
 #endif

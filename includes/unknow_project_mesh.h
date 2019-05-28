@@ -22,7 +22,7 @@ void		free_t_mesh();
 void		delete_t_mesh();
 void		t_mesh_add_point(t_mesh *dest, t_vector3 new_point);
 void		t_mesh_add_face(t_mesh *dest, t_face new_face);
-void		t_mesh_compute_normales(t_mesh *mesh);
+void		t_mesh_compute_normals(t_mesh *mesh);
 
 t_mesh		create_primitive_cube(t_vector3 coord, t_vector3 size);
 t_mesh		create_primitive_plane(t_vector3 pos, t_vector3 size);

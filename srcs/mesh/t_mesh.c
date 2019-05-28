@@ -12,45 +12,6 @@ t_mesh			create_t_mesh(t_vector3 pos)
 	return (result);
 }
 
-t_mesh			load_t_mesh(t_vector3 pos, char *path)
-{
-	t_mesh	result;
-	char	**tab;
-	char	*line;
-	int		fd;
-
-	result.pos = pos;
-	result.vertices = initialize_t_vector3_list();
-	result.faces = initialize_t_face_list();
-	result.normales = initialize_t_vector3_list();
-
-	fd = open(path, O_RDONLY);
-	line = NULL;
-
-	while (get_next_line(fd, &line) == 1)
-	{
-		tab = ft_strsplit(line, ' ');
-		int i = 0;
-		printf("{");
-		while (i < ft_tablen(tab))
-		{
-			if (i != 0)
-				printf(" - ");
-			printf("[%s]", tab[i]);
-			i++;
-		}
-		printf("}\n");
-	}
-
-	close(fd);
-
-	t_mesh_compute_normales(&result);
-
-	printf("end of mesh reading function\n");
-
-	return (result);
-}
-
 t_mesh			*initialize_t_mesh(t_vector3 pos)
 {
 	t_mesh *result;
@@ -85,7 +46,7 @@ void			t_mesh_add_face(t_mesh *dest, t_face new_face)
 	t_face_list_push_back(dest->faces, new_face);
 }
 
-void			t_mesh_compute_normales(t_mesh *mesh)
+void			t_mesh_compute_normals(t_mesh *mesh)
 {
 	t_face		*face;
 	t_vector3	a;
@@ -129,5 +90,5 @@ void			rotate_t_mesh(t_mesh *mesh, t_vector3 angle, t_vector3 center)
 		*target = mult_vector3_by_matrix(target, &rotation);
 		*target = mult_vector3_by_matrix(target, &inv_translate);
 	}
-	t_mesh_compute_normales(mesh);
+	t_mesh_compute_normals(mesh);
 }

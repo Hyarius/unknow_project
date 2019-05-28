@@ -73,24 +73,31 @@ t_window		*initialize_t_window(char *p_name, int p_size_x, int p_size_y)
 	// gere la profondeur
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_ALWAYS);
-	SDL_GL_SetSwapInterval(1);
+	SDL_GL_SetSwapInterval(0);
 
 	return (win);
 }
 
-void				prepare_screen(t_window *win, t_color color)
+void				prepare_screen(t_window *win, t_camera *p_cam, t_color color)
 {
 	//Set background color
 	glClearColor((GLclampf)color.r, (GLclampf)color.g, (GLclampf)color.b, 1.0f);
+
+	clean_t_triangle_list(&(p_cam->triangle_roaster));
+	clean_t_triangle_list(&(p_cam->triangle_sorted));
+	clean_t_color_list(&(p_cam->color_roaster));
+	clean_t_color_list(&(p_cam->color_sorted));
 
 	//Clear la profondeur et la couleur du buffer
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-void				render_screen(t_window *win)
+void				render_screen(t_window *p_win, t_camera *p_cam)
 {
 	check_frame();
 
+	draw_triangle_from_camera_on_screen(p_win, p_cam);
+
 	//Swap le buffer et l'ecran (Ca affiche la nouvelle image)
-	SDL_GL_SwapWindow(win->window);
+	SDL_GL_SwapWindow(p_win->window);
 }

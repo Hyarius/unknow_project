@@ -1,16 +1,17 @@
 #include "unknow_project.h"
 
-void		clip_triangle_to_plane(t_camera *p_camera, t_vector3 *p_points)
+int			clip_triangle_to_plane(t_camera *p_camera, t_vector3 *p_points)
 {
 	t_vector3		tmp_point[4];
-	t_vector3_list outside_points;
-	t_vector3_list inside_points;
+	t_vector3 		outside_points[3];
+	int				outside_nb;
+	t_vector3 		inside_points[3];
+	int				inside_nb;
 	t_vector3		forward;
 	t_vector3		inv_forward;
 	t_vector3		plane_center;
 	float			dist[3];
 
-	clean_t_vector3_list(&(p_camera->clipping_list));
 	forward = create_t_vector3(0, 0, 1);
 	inv_forward = inv_t_vector3(forward);
 	plane_center = create_t_vector3(0, 0, p_camera->near);
@@ -19,62 +20,63 @@ void		clip_triangle_to_plane(t_camera *p_camera, t_vector3 *p_points)
 	dist[1] = calc_distance_to_plane(forward, plane_center, p_points[1]);
 	dist[2] = calc_distance_to_plane(forward, plane_center, p_points[2]);
 
-
-	outside_points = create_t_vector3_list();
-	inside_points = create_t_vector3_list();
-
-	if (dist[0] >= 0)
-		t_vector3_list_push_back(&inside_points, p_points[0]);
-	else
-		t_vector3_list_push_back(&outside_points, p_points[0]);
-
-	if (dist[1] >= 0)
-		t_vector3_list_push_back(&inside_points, p_points[1]);
-	else
-		t_vector3_list_push_back(&outside_points, p_points[1]);
-
-	if (dist[2] >= 0)
-		t_vector3_list_push_back(&inside_points, p_points[2]);
-	else
-		t_vector3_list_push_back(&outside_points, p_points[2]);
-
-	if (inside_points.size == 0)
+	outside_nb = 0;
+	inside_nb = 0;
+	for (int i = 0; i < 3; i++)
 	{
-		return ;
+		if (dist[i] >= 0)
+		{
+			inside_points[inside_nb] = p_points[i];
+			inside_nb++;
+		}
+		else
+		{
+			outside_points[outside_nb] = p_points[i];
+			outside_nb++;
+		}
 	}
-	else if (inside_points.size == 1)
+
+	if (inside_nb == 0)
 	{
-		tmp_point[0] = t_vector3_list_at(&inside_points, 0);
-		tmp_point[1] = intersect_plane_by_line(forward, plane_center, t_vector3_list_at(&outside_points, 0), t_vector3_list_at(&inside_points, 0));
-		tmp_point[2] = intersect_plane_by_line(forward, plane_center, t_vector3_list_at(&outside_points, 1), t_vector3_list_at(&inside_points, 0));
-
-		t_vector3_list_push_back(&(p_camera->clipping_list), tmp_point[0]);
-		t_vector3_list_push_back(&(p_camera->clipping_list), tmp_point[1]);
-		t_vector3_list_push_back(&(p_camera->clipping_list), tmp_point[2]);
+		return (0);
 	}
-	else if (inside_points.size == 2)
+	else if (inside_nb == 1)
 	{
-		tmp_point[0] = t_vector3_list_at(&inside_points, 0);
-		tmp_point[1] = t_vector3_list_at(&inside_points, 1);
-		tmp_point[2] = intersect_plane_by_line(forward, plane_center, t_vector3_list_at(&inside_points, 0), t_vector3_list_at(&outside_points, 0));
-		tmp_point[3] = intersect_plane_by_line(forward, plane_center, t_vector3_list_at(&inside_points, 1), t_vector3_list_at(&outside_points, 0));
-
-		t_vector3_list_push_back(&(p_camera->clipping_list), tmp_point[0]);
-		t_vector3_list_push_back(&(p_camera->clipping_list), tmp_point[1]);
-		t_vector3_list_push_back(&(p_camera->clipping_list), tmp_point[2]);
-
-		t_vector3_list_push_back(&(p_camera->clipping_list), tmp_point[1]);
-		t_vector3_list_push_back(&(p_camera->clipping_list), tmp_point[2]);
-		t_vector3_list_push_back(&(p_camera->clipping_list), tmp_point[3]);
+		tmp_point[0] = inside_points[0];
+		tmp_point[1] = intersect_plane_by_line(forward, plane_center, outside_points[0], inside_points[0]);
+		tmp_point[2] = intersect_plane_by_line(forward, plane_center, outside_points[1], inside_points[0]);
+		//
+		p_camera->clipping_list[0] = tmp_point[0];
+		p_camera->clipping_list[1] = tmp_point[1];
+		p_camera->clipping_list[2] = tmp_point[2];
+		return (3);
 	}
-	else if (inside_points.size == 3)
+	else if (inside_nb == 2)
 	{
-		tmp_point[0] = t_vector3_list_at(&inside_points, 0);
-		tmp_point[1] = t_vector3_list_at(&inside_points, 1);
-		tmp_point[2] = t_vector3_list_at(&inside_points, 2);
+		tmp_point[0] = inside_points[0];
+		tmp_point[1] = inside_points[1];
+		tmp_point[2] = intersect_plane_by_line(forward, plane_center, inside_points[0], outside_points[0]);
+		tmp_point[3] = intersect_plane_by_line(forward, plane_center, inside_points[1], outside_points[0]);
+		//
+		p_camera->clipping_list[0] = tmp_point[0];
+		p_camera->clipping_list[1] = tmp_point[1];
+		p_camera->clipping_list[2] = tmp_point[2];
 
-		t_vector3_list_push_back(&(p_camera->clipping_list), tmp_point[0]);
-		t_vector3_list_push_back(&(p_camera->clipping_list), tmp_point[1]);
-		t_vector3_list_push_back(&(p_camera->clipping_list), tmp_point[2]);
+		p_camera->clipping_list[3] = tmp_point[1];
+		p_camera->clipping_list[4] = tmp_point[2];
+		p_camera->clipping_list[5] = tmp_point[3];
+		return (6);
 	}
+	else if (inside_nb == 3)
+	{
+		tmp_point[0] = inside_points[0];
+		tmp_point[1] = inside_points[1];
+		tmp_point[2] = inside_points[2];
+		//
+		p_camera->clipping_list[0] = tmp_point[0];
+		p_camera->clipping_list[1] = tmp_point[1];
+		p_camera->clipping_list[2] = tmp_point[2];
+		return (3);
+	}
+	return (0);
 }

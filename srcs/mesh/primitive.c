@@ -36,7 +36,7 @@ t_mesh		create_primitive_cube(t_vector3 pos, t_vector3 size)
 	t_mesh_add_face(&result, create_t_face(7, 4, 3)); // FACE LEFT
 	t_mesh_add_face(&result, create_t_face(0, 3, 4));
 
-	t_mesh_compute_normales(&result);
+	t_mesh_compute_normals(&result);
 
 	return (result);
 }
@@ -58,7 +58,7 @@ t_mesh		create_primitive_plane(t_vector3 pos, t_vector3 size)
 	t_mesh_add_face(&result, create_t_face(2, 3, 1));
 	t_mesh_add_face(&result, create_t_face(0, 1, 3));
 
-	t_mesh_compute_normales(&result);
+	t_mesh_compute_normals(&result);
 
 	return (result);
 }

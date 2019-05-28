@@ -18,5 +18,7 @@ void 			error_exit(int error, char *message);
 void			ft_bzero(void *src, size_t nb_bytes);
 void			endl();
 float			ft_atof(char *s);
+int				ft_strcmp(char *s1, char *s2);
+int				ft_atoi(const char *str);
 
 #endif

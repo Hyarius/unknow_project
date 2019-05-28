@@ -9,15 +9,20 @@ t_camera	create_t_camera(t_window *p_win, t_vector3 p_pos, float p_fov, t_vector
 	result.near = p_dist.x; //distance la plus proche pour voir un objet
 	result.far = p_dist.y; // distance la plus eloigne pour voir un objet
 	result.angle = create_t_vector3(0, 0, 0); //angle a laquel on voit l'objet
+	result.speed = 0.1f;
 
 	result.model = create_t_matrix(); // creation de la matrice d'identite permettant de faire les calculs matriciel par la suite
 	t_camera_look_at(&result); //calcul de l'angle de la camera
 	result.view = t_camera_compute_view(&result); //calcul de la matrice de vue
 	result.projection = compute_projection_matrix(p_win, &result); //calcul de la matrice de projection
 
-	result.clipping_list = create_t_vector3_list();
+	result.sun_direction = normalize_t_vector3(create_t_vector3(0, -1, -0.4));
 
-	result.sun_direction = normalize_t_vector3(create_t_vector3(0, -1, 0));
+	result.triangle_roaster = create_t_triangle_list();
+	result.triangle_sorted = create_t_triangle_list();
+
+	result.color_roaster = create_t_color_list();
+	result.color_sorted = create_t_color_list();
 
 	return (result);
 }
@@ -134,17 +139,17 @@ void			t_camera_change_view(t_camera *cam, t_vector3 delta_angle)
 void			handle_t_camera_mouvement_by_key(t_camera *cam, t_keyboard *p_keyboard) // calcul du mouvement de la camera a la clavier
 {
 	if (get_key_state(p_keyboard, SDL_SCANCODE_S) == 1)
-		cam->pos = add_vector3_to_vector3(cam->pos, mult_vector3_by_vector3(cam->forward, create_t_vector3(0.1, 0.0, 0.1)));
+		cam->pos = add_vector3_to_vector3(cam->pos, mult_vector3_by_vector3(cam->forward, create_t_vector3(cam->speed, 0.0, cam->speed)));
 	if (get_key_state(p_keyboard, SDL_SCANCODE_W) == 1)
-		cam->pos = substract_vector3_to_vector3(cam->pos, mult_vector3_by_vector3(cam->forward, create_t_vector3(0.1, 0.0, 0.1)));
+		cam->pos = substract_vector3_to_vector3(cam->pos, mult_vector3_by_vector3(cam->forward, create_t_vector3(cam->speed, 0.0, cam->speed)));
 	if (get_key_state(p_keyboard, SDL_SCANCODE_D) == 1)
-		cam->pos = substract_vector3_to_vector3(cam->pos, mult_vector3_by_vector3(cam->right, create_t_vector3(0.1, 0.0, 0.1)));
+		cam->pos = substract_vector3_to_vector3(cam->pos, mult_vector3_by_vector3(cam->right, create_t_vector3(cam->speed, 0.0, cam->speed)));
 	if (get_key_state(p_keyboard, SDL_SCANCODE_A) == 1)
-		cam->pos = add_vector3_to_vector3(cam->pos, mult_vector3_by_vector3(cam->right, create_t_vector3(0.1, 0.0, 0.1)));
+		cam->pos = add_vector3_to_vector3(cam->pos, mult_vector3_by_vector3(cam->right, create_t_vector3(cam->speed, 0.0, cam->speed)));
 	if (get_key_state(p_keyboard, SDL_SCANCODE_SPACE) == 1)
-		cam->pos = substract_vector3_to_vector3(cam->pos, create_t_vector3(0.0, -0.1, 0.0));
+		cam->pos = substract_vector3_to_vector3(cam->pos, create_t_vector3(0.0, -cam->speed, 0.0));
 	if (get_key_state(p_keyboard, SDL_SCANCODE_LCTRL) == 1)
-		cam->pos = add_vector3_to_vector3(cam->pos, create_t_vector3(0.0, -0.1, 0.0));
+		cam->pos = add_vector3_to_vector3(cam->pos, create_t_vector3(0.0, -cam->speed, 0.0));
 }
 
 void			handle_t_camera_view_by_mouse(t_camera *cam, t_mouse *p_mouse) // calcul du mouvement de l'angle de la camera a la souris
@@ -153,4 +158,33 @@ void			handle_t_camera_view_by_mouse(t_camera *cam, t_mouse *p_mouse) // calcul 
 
 	delta = create_t_vector3(0, -(p_mouse->rel_pos.x / 10.0), p_mouse->rel_pos.y / 10.0);
 	t_camera_change_view(cam, delta);
+}
+
+void			draw_triangle_from_camera_on_screen(t_window *p_win, t_camera *p_cam)
+{
+	t_triangle	*triangle;
+	t_color		color_black = {0.0, 0.0, 0.0, 1.0};
+	t_line line;
+	int i;
+
+	i = 0;
+	while (i < p_cam->triangle_roaster.size)
+	{
+		triangle = t_triangle_list_get(&(p_cam->triangle_roaster), i);
+		draw_triangle_color_opengl(p_win, triangle, t_color_list_get(&(p_cam->color_roaster), i));
+
+		line.a.x = triangle->a.x;
+		line.a.y = triangle->a.y;
+		line.b.x = triangle->b.x;
+		line.b.y = triangle->b.y;
+		draw_line_color_opengl(p_win, &(line), &color_black); //draw le trait entre deux points
+
+		line.a.x = triangle->a.x;
+		line.a.y = triangle->a.y;
+		line.b.x = triangle->c.x;
+		line.b.y = triangle->c.y;
+
+		draw_line_color_opengl(p_win, &(line), &color_black); //draw le trait entre deux points
+		i++;
+	}
 }

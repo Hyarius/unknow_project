@@ -31,7 +31,5 @@ void		check_frame();
 //			window_handler
 void		start_sdl();
 t_window	*initialize_t_window(char *name, int size_x, int size_y);
-void		prepare_screen(t_window *win, t_color color);
-void		render_screen(t_window *win);
 
 #endif
