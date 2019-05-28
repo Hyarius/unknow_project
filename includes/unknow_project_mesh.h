@@ -16,6 +16,7 @@ typedef struct	s_mesh
 }				t_mesh;
 
 t_mesh		create_t_mesh(t_vector3 pos);
+t_mesh		load_t_mesh(t_vector3 pos, char *path);
 t_mesh		*initialize_t_mesh(t_vector3 pos);
 void		free_t_mesh();
 void		delete_t_mesh();

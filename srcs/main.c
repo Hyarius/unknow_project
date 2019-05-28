@@ -21,14 +21,6 @@ int main(int argc, char **argv)
 
 	t_camera *cam = initialize_t_camera(win, create_t_vector3(1, 0.01, 3), 70, create_t_vector2(0.1f, 50.0f)); //creation et initialisation de la camera et des matrices liee a la camera
 
-	/*t_vector3	points[3];
-
-	points[0] = create_t_vector3(2.0, 0.0, 2.0);
-	points[1] = create_t_vector3(1.0, 0.0, 3.0);
-	points[2] = create_t_vector3(3.0, 0.0, 3.0);
-
-	clip_triangle_to_plane(cam, points);*/
-
 	mesh_list = (t_mesh **)malloc(sizeof(t_mesh *) * nb);
 	int size = 1;
 	for (int i = 0; i < nb; i++)
@@ -38,8 +30,12 @@ int main(int argc, char **argv)
 		float z = (float)(generate_nbr(-5, 5)) + 0.5f;
 
 		mesh_list[i] = initialize_t_mesh(create_t_vector3(x, y, z)); //creation d'un mesh vide
-		*(mesh_list[i]) = create_primitive_cube(create_t_vector3(x, y, z), create_t_vector3(size, size, size)); //creation du cube que l'on rentre dans mesh
+		*(mesh_list[i]) = create_primitive_plane(create_t_vector3(x, y, z), create_t_vector3(size, size, size)); //creation du cube que l'on rentre dans mesh
 	}
+
+	mesh_list[0] = initialize_t_mesh(create_t_vector3(0, 0, 0)); //creation d'un mesh vide
+	*(mesh_list[0]) = load_t_mesh(create_t_vector3(0, 0, 0), "teapot.obj");
+
 
 	int state = 1;
 	while (play == 1)

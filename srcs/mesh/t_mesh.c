@@ -12,6 +12,45 @@ t_mesh			create_t_mesh(t_vector3 pos)
 	return (result);
 }
 
+t_mesh			load_t_mesh(t_vector3 pos, char *path)
+{
+	t_mesh	result;
+	char	**tab;
+	char	*line;
+	int		fd;
+
+	result.pos = pos;
+	result.vertices = initialize_t_vector3_list();
+	result.faces = initialize_t_face_list();
+	result.normales = initialize_t_vector3_list();
+
+	fd = open(path, O_RDONLY);
+	line = NULL;
+
+	while (get_next_line(fd, &line) == 1)
+	{
+		tab = ft_strsplit(line, ' ');
+		int i = 0;
+		printf("{");
+		while (i < ft_tablen(tab))
+		{
+			if (i != 0)
+				printf(" - ");
+			printf("[%s]", tab[i]);
+			i++;
+		}
+		printf("}\n");
+	}
+
+	close(fd);
+
+	t_mesh_compute_normales(&result);
+
+	printf("end of mesh reading function\n");
+
+	return (result);
+}
+
 t_mesh			*initialize_t_mesh(t_vector3 pos)
 {
 	t_mesh *result;

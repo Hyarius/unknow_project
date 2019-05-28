@@ -12,8 +12,11 @@ void 			ft_putnbr(int n);
 char			*ft_strcut(char **src, char delim);
 int				ft_strchr(char *src, char d);
 int				get_next_line(const int fd, char **line);
+char			**ft_strsplit(char const *s, char c);
+int				ft_tablen(char **tab);
 void 			error_exit(int error, char *message);
 void			ft_bzero(void *src, size_t nb_bytes);
 void			endl();
+float			ft_atof(char *s);
 
 #endif

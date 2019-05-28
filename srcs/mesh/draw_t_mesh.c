@@ -62,9 +62,9 @@ void draw_t_mesh(t_window *p_win, t_camera *p_cam, t_mesh *mesh)
 												create_t_vector2(points[2].x, points[2].y));
 				draw_line_color_opengl(p_win, &line, &color_black);
 
-				// line = create_t_line(			create_t_vector2(points[2].x, points[2].y),
-				// 								create_t_vector2(points[1].x, points[1].y));
-				// draw_line_color_opengl(p_win, &line, &color_black);
+				line = create_t_line(			create_t_vector2(points[2].x, points[2].y),
+												create_t_vector2(points[1].x, points[1].y));
+				draw_line_color_opengl(p_win, &line, &color_black);
 			}
 		}
 	}
