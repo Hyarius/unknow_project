@@ -103,8 +103,6 @@ t_matrix		compute_projection_matrix(t_window *p_win, t_camera *p_cam) //calcul d
 void		compute_t_camera(t_camera *cam)
 {
 	cam->view = t_camera_compute_view(cam);
-	cam->mvp = mult_matrix_by_matrix(&(cam->projection), &(cam->view)); // Attention, danger
-	cam->mvp = mult_matrix_by_matrix(&(cam->mvp), &(cam->model)); // tout a fait
 }
 
 t_vector3		apply_t_camera(t_vector3 *src, t_matrix *mat) // applique la position de la camera
@@ -136,17 +134,17 @@ void			t_camera_change_view(t_camera *cam, t_vector3 delta_angle)
 void			handle_t_camera_mouvement_by_key(t_camera *cam, t_keyboard *p_keyboard) // calcul du mouvement de la camera a la clavier
 {
 	if (get_key_state(p_keyboard, SDL_SCANCODE_S) == 1)
-		cam->pos = add_vector3_to_vector3(cam->pos, mult_vector3_by_vector3(cam->forward, create_t_vector3(0.2, 0.0, 0.2)));
+		cam->pos = add_vector3_to_vector3(cam->pos, mult_vector3_by_vector3(cam->forward, create_t_vector3(0.1, 0.0, 0.1)));
 	if (get_key_state(p_keyboard, SDL_SCANCODE_W) == 1)
-		cam->pos = substract_vector3_to_vector3(cam->pos, mult_vector3_by_vector3(cam->forward, create_t_vector3(0.2, 0.0, 0.2)));
+		cam->pos = substract_vector3_to_vector3(cam->pos, mult_vector3_by_vector3(cam->forward, create_t_vector3(0.1, 0.0, 0.1)));
 	if (get_key_state(p_keyboard, SDL_SCANCODE_D) == 1)
-		cam->pos = substract_vector3_to_vector3(cam->pos, mult_vector3_by_vector3(cam->right, create_t_vector3(0.2, 0.0, 0.2)));
+		cam->pos = substract_vector3_to_vector3(cam->pos, mult_vector3_by_vector3(cam->right, create_t_vector3(0.1, 0.0, 0.1)));
 	if (get_key_state(p_keyboard, SDL_SCANCODE_A) == 1)
-		cam->pos = add_vector3_to_vector3(cam->pos, mult_vector3_by_vector3(cam->right, create_t_vector3(0.2, 0.0, 0.2)));
+		cam->pos = add_vector3_to_vector3(cam->pos, mult_vector3_by_vector3(cam->right, create_t_vector3(0.1, 0.0, 0.1)));
 	if (get_key_state(p_keyboard, SDL_SCANCODE_SPACE) == 1)
-		cam->pos = substract_vector3_to_vector3(cam->pos, create_t_vector3(0.0, -0.2, 0.0));
+		cam->pos = substract_vector3_to_vector3(cam->pos, create_t_vector3(0.0, -0.1, 0.0));
 	if (get_key_state(p_keyboard, SDL_SCANCODE_LCTRL) == 1)
-		cam->pos = add_vector3_to_vector3(cam->pos, create_t_vector3(0.0, -0.2, 0.0));
+		cam->pos = add_vector3_to_vector3(cam->pos, create_t_vector3(0.0, -0.1, 0.0));
 }
 
 void			handle_t_camera_view_by_mouse(t_camera *cam, t_mouse *p_mouse) // calcul du mouvement de l'angle de la camera a la souris
