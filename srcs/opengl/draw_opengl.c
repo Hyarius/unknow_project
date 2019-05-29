@@ -225,34 +225,28 @@ void			draw_triangle_texture_opengl(t_window *p_win, t_triangle *p_triangle_scre
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-void draw_buffer_opengl(t_window *p_win, t_vector3_list *vertex_data, t_color_list *color_data)
+void draw_buffer_opengl(t_window *p_win, t_color *color_data)
 {
+	int screen_len;
+
+	screen_len = p_win->size_x * p_win->size_y;
+
 	glBindVertexArray(p_win->vertex_array);
 
-	// bind vertex_buffer
-	glBindBuffer(GL_ARRAY_BUFFER, p_win->vertex_buffer);
-	// donne a vertex_buffer vertex_buffer_data
-	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * vertex_data->size * 3, t_vector3_list_obtain(vertex_data, 0), GL_DYNAMIC_DRAW);
-
-	// bind color_buffer
-	glBindBuffer(GL_ARRAY_BUFFER, p_win->color_buffer);
-	// donne a color_buffer color_buffer_data
-	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * color_data->size * 4, t_color_list_obtain(color_data, 0), GL_DYNAMIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, p_win->color_fixed_buffer);
+	glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(GLfloat) * 4 * screen_len, color_data);
 
 	// indique le shader a utiliser
 	glUseProgram(p_win->program_color);
 
-	// indique la location du shader utiliser
 	glEnableVertexAttribArray(0);
-	// quelle est le buffer a utiliser
-	glBindBuffer(GL_ARRAY_BUFFER, p_win->vertex_buffer);
-	// comment utiliser le buffer
+	glBindBuffer(GL_ARRAY_BUFFER, p_win->vertex_fixed_buffer);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
 
 	glEnableVertexAttribArray(1);
-	glBindBuffer(GL_ARRAY_BUFFER, p_win->color_buffer);
+	glBindBuffer(GL_ARRAY_BUFFER, p_win->color_fixed_buffer);
 	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, NULL);
 
 	// dessine un point
-	glDrawArrays( GL_POINTS, 0, vertex_data->size);
+	glDrawArrays( GL_POINTS, 0, screen_len);
 }

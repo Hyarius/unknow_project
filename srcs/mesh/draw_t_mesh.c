@@ -42,16 +42,12 @@ void draw_t_mesh(t_window *p_win, t_camera *p_cam, t_mesh *mesh)
 
 			for (int j = 0; j < nb_clipped; j += 3)
 			{
-				points[0] = apply_t_camera(&(p_cam->clipping_list[j + 0]), &(p_cam->projection)); // applique la position de la camera
-				points[1] = apply_t_camera(&(p_cam->clipping_list[j + 1]), &(p_cam->projection));
-				points[2] = apply_t_camera(&(p_cam->clipping_list[j + 2]), &(p_cam->projection));
+				triangle.a = apply_t_camera(&(p_cam->clipping_list[j + 0]), &(p_cam->projection)); // applique la position de la camera
+				triangle.b = apply_t_camera(&(p_cam->clipping_list[j + 1]), &(p_cam->projection));
+				triangle.c = apply_t_camera(&(p_cam->clipping_list[j + 2]), &(p_cam->projection));
 
-				triangle.a = create_t_vector2(points[0].x, points[0].y);
-				triangle.b = create_t_vector2(points[1].x, points[1].y);
-				triangle.c = create_t_vector2(points[2].x, points[2].y);
-
-				t_color_list_push_back(&(p_cam->color_roaster), tmp_color);
-				t_triangle_list_push_back(&(p_cam->triangle_roaster), triangle);
+				t_color_list_push_back(&(p_cam->color_list), tmp_color);
+				t_triangle_list_push_back(&(p_cam->triangle_list), triangle);
 			}
 		}
 	}

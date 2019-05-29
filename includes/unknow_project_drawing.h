@@ -22,6 +22,12 @@ void 		draw_point_opengl(t_window *p_win, t_vector2 *p_point, t_color *p_color, 
 void 		draw_line_color_opengl(t_window *p_win, t_line *p_line, t_color *p_color);
 void 		draw_triangle_color_opengl(t_window *p_win, t_triangle *p_triangle, t_color *p_color);
 void		draw_triangle_texture_opengl(t_window *p_win, t_triangle *p_triangle_screen, t_uv *us);
-void		draw_buffer_opengl(t_window *p_win, t_vector3_list *vertex_data, t_color_list *color_data);
+void		draw_buffer_opengl(t_window *p_win, t_color *color_data);
+
+//
+// ----------------- CPU_DRAWING -----------------
+//
+//			draw color cpu
+void 		draw_triangle_color_cpu(t_window *p_win, t_triangle *p_triangle, t_color *p_color);
 
 #endif

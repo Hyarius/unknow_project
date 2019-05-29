@@ -16,13 +16,9 @@ typedef struct	s_camera
 	t_matrix	mvp;
 	t_vector3	clipping_list[6];
 	t_triangle_list
-				triangle_roaster;
+				triangle_list;
 	t_color_list
-				color_roaster;
-	t_triangle_list
-				triangle_sorted;
-	t_color_list
-				color_sorted;
+				color_list;
 
 	t_vector3	pos;
 	t_vector3	angle;

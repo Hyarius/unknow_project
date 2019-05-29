@@ -16,12 +16,18 @@ typedef struct		s_window
 	SDL_GLContext	context; //la toile du peintre
 
 	GLuint			vertex_buffer; //le pot de peinture vertex
+	GLuint			vertex_fixed_buffer; //le pot de peinture vertex
 	GLuint			color_buffer; //le pot de peinture color
+	GLuint			color_fixed_buffer; //le pot de peinture color
 	GLuint			texture_buffer; //le pot de peinture texture
 	GLuint			alpha_buffer; //le pot de peinture alpha
 
 	GLuint			program_color; //le livre qui explique la couleur
 	GLuint			program_texture; //le livre qui explique la texture
+
+	t_vector3		*vertex_data;
+	t_color			*color_data;
+	float			*depth_buffer;
 
 }					t_window;
 

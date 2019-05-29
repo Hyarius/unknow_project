@@ -1,5 +1,16 @@
 # include "unknow_project.h"
 
+int		ft_floor(float source)
+{
+	int result;
+
+	result = source;
+	if (source - result >= 0.5)
+		result++;
+		
+	return (result);
+}
+
 int		is_digit(char c)
 {
 	if (c >= '0' && c <= '9')

@@ -18,11 +18,9 @@ t_camera	create_t_camera(t_window *p_win, t_vector3 p_pos, float p_fov, t_vector
 
 	result.sun_direction = normalize_t_vector3(create_t_vector3(0, -1, -0.4));
 
-	result.triangle_roaster = create_t_triangle_list();
-	result.triangle_sorted = create_t_triangle_list();
+	result.triangle_list = create_t_triangle_list();
 
-	result.color_roaster = create_t_color_list();
-	result.color_sorted = create_t_color_list();
+	result.color_list = create_t_color_list();
 
 	return (result);
 }
@@ -168,23 +166,27 @@ void			draw_triangle_from_camera_on_screen(t_window *p_win, t_camera *p_cam)
 	int i;
 
 	i = 0;
-	while (i < p_cam->triangle_roaster.size)
+	while (i < p_cam->triangle_list.size)
 	{
-		triangle = t_triangle_list_get(&(p_cam->triangle_roaster), i);
-		draw_triangle_color_opengl(p_win, triangle, t_color_list_get(&(p_cam->color_roaster), i));
+		triangle = t_triangle_list_get(&(p_cam->triangle_list), i);
+		//draw_triangle_color_opengl(p_win, triangle, t_color_list_get(&(p_cam->color_list), i));
+		draw_triangle_color_cpu(p_win, triangle, t_color_list_get(&(p_cam->color_list), i));
 
-		line.a.x = triangle->a.x;
-		line.a.y = triangle->a.y;
-		line.b.x = triangle->b.x;
-		line.b.y = triangle->b.y;
-		draw_line_color_opengl(p_win, &(line), &color_black); //draw le trait entre deux points
+		//
+		// line.a.x = triangle->a.x;
+		// line.a.y = triangle->a.y;
+		// line.b.x = triangle->b.x;
+		// line.b.y = triangle->b.y;
+		// draw_line_color_opengl(p_win, &(line), &color_black); //draw le trait entre deux points
+		//
+		// line.a.x = triangle->a.x;
+		// line.a.y = triangle->a.y;
+		// line.b.x = triangle->c.x;
+		// line.b.y = triangle->c.y;
+		//
+		// draw_line_color_opengl(p_win, &(line), &color_black); //draw le trait entre deux points
+		//
 
-		line.a.x = triangle->a.x;
-		line.a.y = triangle->a.y;
-		line.b.x = triangle->c.x;
-		line.b.y = triangle->c.y;
-
-		draw_line_color_opengl(p_win, &(line), &color_black); //draw le trait entre deux points
 		i++;
 	}
 }

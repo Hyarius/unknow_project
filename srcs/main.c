@@ -17,9 +17,9 @@ int main(int argc, char **argv)
 	int play = 1;
 
 	t_mesh **mesh_list;
-	int nb = 15; //nombre de mesh (cube)
+	int nb = 20; //nombre de mesh (cube)
 
-	t_camera *cam = initialize_t_camera(win, create_t_vector3(0, 0.01, 8), 70, create_t_vector2(0.1f, 50.0f)); //creation et initialisation de la camera et des matrices liee a la camera
+	t_camera *cam = initialize_t_camera(win, create_t_vector3(-1, 0.5, 3), 70, create_t_vector2(0.1f, 50.0f)); //creation et initialisation de la camera et des matrices liee a la camera
 
 	mesh_list = (t_mesh **)malloc(sizeof(t_mesh *) * nb);
 	int size = 1;
@@ -33,12 +33,9 @@ int main(int argc, char **argv)
 		*(mesh_list[i]) = create_primitive_cube(create_t_vector3(x, y, z), create_t_vector3(size, size, size)); //creation du cube que l'on rentre dans mesh
 	}
 
-
 	int state = 1;
 	while (play == 1)
 	{
-		if (state == 0)
-			cam->pos.z -= 0.01;
 		//rotate_t_mesh(mesh_list[0], create_t_vector3(0.25, 0.25, 0.25), create_t_vector3(1.5, 1.5, 1.5));
 		compute_t_camera(cam); //calcul du mvp
 

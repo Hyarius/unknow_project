@@ -9,7 +9,7 @@ void		ft_bzero(void *src, size_t nb_bytes)
 	p_src = src;
 	while (nb_bytes > i)
 	{
-		p_src[i] = '\0';
+		p_src[i] = 0;
 		i++;
 	}
 }

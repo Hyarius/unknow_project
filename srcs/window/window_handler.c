@@ -29,11 +29,9 @@ void			start_sdl()
 
 t_window		*initialize_t_window(char *p_name, int p_size_x, int p_size_y)
 {
-	int			i;
 	t_window	*win;
-	t_vector2	coord[2];
-	t_color		color;
 	t_vector3	tmp_coord;
+	t_color		tmp_color;
 
 	if (!(win = (t_window *)malloc(sizeof(t_window))))
 		error_exit(-6, "Can't malloc a t_window");
@@ -58,7 +56,9 @@ t_window		*initialize_t_window(char *p_name, int p_size_x, int p_size_y)
 
 	// generation des VBO (vertex buffer object)
 	glGenBuffers(1, &win->vertex_buffer);
+	glGenBuffers(1, &win->vertex_fixed_buffer);
 	glGenBuffers(1, &win->color_buffer);
+	glGenBuffers(1, &win->color_fixed_buffer);
 	glGenBuffers(1, &win->texture_buffer);
 	glGenBuffers(1, &win->alpha_buffer);
 
@@ -75,7 +75,51 @@ t_window		*initialize_t_window(char *p_name, int p_size_x, int p_size_y)
 	glDepthFunc(GL_ALWAYS);
 	SDL_GL_SetSwapInterval(0);
 
+	if (!(win->vertex_data = (t_vector3 *)malloc(sizeof(t_vector3) * win->size_x * win->size_y)))
+		error_exit(-456, "Can't malloc a t_vector3 array properly");
+
+	if (!(win->color_data = (t_color *)malloc(sizeof(t_color) * win->size_x * win->size_y)))
+		error_exit(-456, "Can't malloc a t_color array properly");
+
+	if (!(win->depth_buffer = (float *)malloc(sizeof(float) * win->size_x * win->size_y)))
+		error_exit(-456, "Can't malloc a float array properly");
+
+	tmp_color = create_t_color_from_int(255, 255, 255, 0);
+
+	for (int i = 0; i < win->size_x; i++)
+	{
+		for (int j = 0; j < win->size_y; j++)
+		{
+			tmp_coord.x = i;
+			tmp_coord.y = j;
+			tmp_coord.z = 0.0f;
+
+			win->vertex_data[i + j * win->size_x] = convert_screen_to_opengl(win, &tmp_coord);
+		}
+	}
+	glBindVertexArray(win->vertex_array);
+
+	// bind vertex_buffer
+	glBindBuffer(GL_ARRAY_BUFFER, win->vertex_fixed_buffer);
+	// donne a vertex_buffer vertex_buffer_data
+	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * win->size_x * win->size_y * 3, win->vertex_data, GL_STATIC_DRAW);
+
+	glBindBuffer(GL_ARRAY_BUFFER, win->color_fixed_buffer);
+	// donne a color_buffer color_buffer_data
+	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * win->size_x * win->size_y * 4, NULL, GL_DYNAMIC_DRAW);
+
+	// win->color_data = (t_color *)glMapBuffer(GL_ARRAY_BUFFER, GL_READ_WRITE);
+
 	return (win);
+}
+
+void 				clear_buffers(t_window *win)
+{
+	for (int i = 0; i < win->size_x * win->size_y; i++)
+	{
+		win->depth_buffer[i] = 0.0f;
+		win->color_data[i].a = 0;
+	}
 }
 
 void				prepare_screen(t_window *win, t_camera *p_cam, t_color color)
@@ -83,10 +127,10 @@ void				prepare_screen(t_window *win, t_camera *p_cam, t_color color)
 	//Set background color
 	glClearColor((GLclampf)color.r, (GLclampf)color.g, (GLclampf)color.b, 1.0f);
 
-	clean_t_triangle_list(&(p_cam->triangle_roaster));
-	clean_t_triangle_list(&(p_cam->triangle_sorted));
-	clean_t_color_list(&(p_cam->color_roaster));
-	clean_t_color_list(&(p_cam->color_sorted));
+	clean_t_triangle_list(&(p_cam->triangle_list));
+	clean_t_color_list(&(p_cam->color_list));
+
+	clear_buffers(win);
 
 	//Clear la profondeur et la couleur du buffer
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -97,6 +141,8 @@ void				render_screen(t_window *p_win, t_camera *p_cam)
 	check_frame();
 
 	draw_triangle_from_camera_on_screen(p_win, p_cam);
+
+	draw_buffer_opengl(p_win, p_win->color_data);
 
 	//Swap le buffer et l'ecran (Ca affiche la nouvelle image)
 	SDL_GL_SwapWindow(p_win->window);
