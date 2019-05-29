@@ -162,32 +162,18 @@ void			handle_t_camera_view_by_mouse(t_camera *cam, t_mouse *p_mouse) // calcul 
 
 void			draw_triangle_from_camera_on_screen(t_window *p_win, t_camera *p_cam)
 {
-	t_triangle	*triangle;
-	t_color		color_black = {0.0, 0.0, 0.0, 1.0};
-	t_line line;
+	t_triangle	triangle;
+	t_line 		line1;
+	t_line 		line2;
 	int i;
 
 	i = 0;
 	while (i < p_cam->triangle_list.size)
 	{
-		triangle = t_triangle_list_get(&(p_cam->triangle_list), i);
-		//draw_triangle_color_opengl(p_win, triangle, t_color_list_get(&(p_cam->color_list), i));
-		draw_triangle_color_cpu(p_win, triangle, t_color_list_get(&(p_cam->color_list), i));
+		triangle = t_triangle_list_at(&(p_cam->triangle_list), i);
 
-		//
-		// line.a.x = triangle->a.x;
-		// line.a.y = triangle->a.y;
-		// line.b.x = triangle->b.x;
-		// line.b.y = triangle->b.y;
-		// draw_line_color_opengl(p_win, &(line), &color_black); //draw le trait entre deux points
-		//
-		// line.a.x = triangle->a.x;
-		// line.a.y = triangle->a.y;
-		// line.b.x = triangle->c.x;
-		// line.b.y = triangle->c.y;
-		//
-		// draw_line_color_opengl(p_win, &(line), &color_black); //draw le trait entre deux points
-		//
+		//draw_triangle_color_opengl(p_win, triangle, t_color_list_get(&(p_cam->color_list), i));
+		draw_triangle_color_cpu(p_win, &triangle, t_color_list_get(&(p_cam->color_list), i));
 
 		i++;
 	}

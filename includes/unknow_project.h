@@ -32,5 +32,5 @@ float		radius_to_degree(float radian);
 void		prepare_screen(t_window *win, t_camera *p_cam, t_color color);
 void		render_screen(t_window *win, t_camera *p_cam);
 void 		clear_buffers(t_window *win);
-
+void		draw_pixel(t_window *p_win, int x, int y, t_color *color);
 #endif

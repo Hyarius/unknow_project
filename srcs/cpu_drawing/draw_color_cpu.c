@@ -2,12 +2,13 @@
 
 void 	draw_scan_line(t_window *p_win, t_vector3 left, t_vector3 right, t_color *p_color)
 {
-	float dist;
+	t_color		black;
+	t_vector3 current;
 	float z_delta;
-	t_vector3 tmp;
 	int delta;
 	int i;
 
+	black = create_t_color(0.0, 0.0, 0.0, 1.0);
 	if (left.x > right.x)
 	{
 		i = left.x;
@@ -17,22 +18,27 @@ void 	draw_scan_line(t_window *p_win, t_vector3 left, t_vector3 right, t_color *
 		left.z = right.z;
 		right.z = i;
 	}
-	i = (int)(left.x) + (int)(left.y) * p_win->size_x;
-	z_delta = (right.z - left.z) / (right.x - left.x);
+	current = left;
+	i = (int)(current.x) + (int)(current.y) * p_win->size_x;
+	z_delta = (right.z - current.z) / (right.x - current.x);
 	delta = 1;
-	while ((int)(left.x) <= (int)(right.x))
+	while (current.x <= right.x)
 	{
-		if ((left.x) >= 0 && (left.x) < p_win->size_x &&
-			(left.y) >= 0 && (left.y) < p_win->size_y)
+		if ((current.x) >= 0 && (current.x) < p_win->size_x &&
+			(current.y) >= 0 && (current.y) < p_win->size_y)
 		{
-			if (p_win->depth_buffer[i] == 0 || left.z < p_win->depth_buffer[i])
+			if (p_win->depth_buffer[i] == 0 || current.z == 0 || current.z <= p_win->depth_buffer[i])
 			{
-				p_win->depth_buffer[i] = left.z;
-				p_win->color_data[i] = *p_color;
+				if (current.z <= p_win->depth_buffer[i])
+				{
+					//printf("Coord = %f / %f -> %f vs %f\n", current.x, current.y, current.z, p_win->depth_buffer[i]);
+				}
+				p_win->depth_buffer[i] = current.z;
+				draw_pixel(p_win, (int)(current.x), (int)(current.y), p_color);
 			}
 		}
-		left.x += delta;
-		left.z -= z_delta;
+		current.x += delta;
+		current.z += z_delta;
 		i += delta;
 	}
 }
@@ -126,7 +132,6 @@ void draw_triangle_color_cpu(t_window *p_win, t_triangle *p_triangle, t_color *p
 		p_x = p_triangle->a.x + ((p_triangle->b.y - p_triangle->a.y) / (p_triangle->c.y - p_triangle->a.y) * (p_triangle->c.x - p_triangle->a.x));
 		p_y = p_triangle->b.y;
 		p_z = p_triangle->a.z + ((p_triangle->b.y - p_triangle->a.y) / (p_triangle->c.y - p_triangle->a.y) * (p_triangle->c.z - p_triangle->a.z));
-
 		tmp = create_t_triangle(p_triangle->b, create_t_vector3(p_x, p_y, p_z), p_triangle->c);
 
 		p_triangle->c = tmp.b;
