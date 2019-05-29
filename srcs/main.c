@@ -56,11 +56,12 @@ int main(int argc, char **argv)
 		{
 			if (event.type == SDL_QUIT)
 				play = 0;
-			if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_ESCAPE)
+			if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
 				play = 0;
 			if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_y)
 				state = (state + 1) % 2;
 		}
+		SDL_FlushEvents(SDL_FIRSTEVENT, SDL_LASTEVENT);
 	}
 	return (0);
 }
