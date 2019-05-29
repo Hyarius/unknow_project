@@ -5,7 +5,6 @@ void draw_t_mesh(t_window *p_win, t_camera *p_cam, t_mesh *mesh)
 	t_color		tmp_color;
 	t_color		color_white = {1.0, 1.0, 1.0, 1.0};
 	float		darkness;
-	t_line		line;
 	t_triangle	triangle;
 	t_vector3	points[3];
 

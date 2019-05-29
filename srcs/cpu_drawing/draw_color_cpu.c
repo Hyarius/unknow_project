@@ -13,6 +13,9 @@ void 	draw_scan_line(t_window *p_win, t_vector3 left, t_vector3 right, t_color *
 		i = left.x;
 		left.x = right.x;
 		right.x = i;
+		i = left.z;
+		left.z = right.z;
+		right.z = i;
 	}
 	i = (int)(left.x) + (int)(left.y) * p_win->size_x;
 	z_delta = (right.z - left.z) / (right.x - left.x);
@@ -22,9 +25,9 @@ void 	draw_scan_line(t_window *p_win, t_vector3 left, t_vector3 right, t_color *
 		if ((left.x) >= 0 && (left.x) < p_win->size_x &&
 			(left.y) >= 0 && (left.y) < p_win->size_y)
 		{
-			if (p_win->depth_buffer[i] == 0)
+			if (p_win->depth_buffer[i] == 0 || left.z < p_win->depth_buffer[i])
 			{
-				p_win->depth_buffer[i] = 0;
+				p_win->depth_buffer[i] = left.z;
 				p_win->color_data[i] = *p_color;
 			}
 		}

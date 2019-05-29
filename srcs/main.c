@@ -22,7 +22,7 @@ int main(int argc, char **argv)
 	t_camera *cam = initialize_t_camera(win, create_t_vector3(-1, 0.5, 3), 70, create_t_vector2(0.1f, 50.0f)); //creation et initialisation de la camera et des matrices liee a la camera
 
 	mesh_list = (t_mesh **)malloc(sizeof(t_mesh *) * nb);
-	int size = 1;
+	float size = 1;
 	for (int i = 0; i < nb; i++)
 	{
 		float x = (float)(generate_nbr(-5, 5)) + 0.5f; //generer position aleatoire des cube

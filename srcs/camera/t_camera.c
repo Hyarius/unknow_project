@@ -125,6 +125,8 @@ t_vector3		apply_t_camera(t_vector3 *src, t_matrix *mat) // applique la position
 		result.z /= delta;
 	}
 
+	result.z = sqrt(src->x * src->x + src->y * src->y + src->z * src->z);
+
 	return (result);
 }
 
