@@ -7,7 +7,7 @@ int		ft_floor(float source)
 	result = source;
 	if (source - result >= 0.5)
 		result++;
-		
+
 	return (result);
 }
 
@@ -18,14 +18,14 @@ int		is_digit(char c)
 	return (0);
 }
 
-float ft_atof(char *s)
+float 	ft_atof(char *s)
 {
-	float a = 0.0;
-	int neg = 1;
-	int e = 0;
-	int c;
-	int sign;
-	int i;
+	float	a = 0.0;
+	int		neg = 1;
+	int		e = 0;
+	int		c;
+	int		sign;
+	int		i;
 
 	if (s[0] == '-')
 	{

@@ -83,3 +83,12 @@ t_vector3	inv_t_vector3(t_vector3 src)
 
 	return (result);
 }
+
+void		swap_t_vector3(t_vector3 *a, t_vector3 *b)
+{
+	t_vector3	tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
+}

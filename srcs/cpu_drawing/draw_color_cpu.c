@@ -2,13 +2,12 @@
 
 void 	draw_scan_line(t_window *p_win, t_vector3 left, t_vector3 right, t_color *p_color)
 {
-	t_color		black;
-	t_vector3 current;
-	float z_delta;
-	int delta;
-	int i;
+	t_color		tmp;
+	t_vector3	current;
+	float		z_delta;
+	int			delta;
+	int			i;
 
-	black = create_t_color(0.0, 0.0, 0.0, 1.0);
 	if (left.x > right.x)
 	{
 		i = left.x;
@@ -20,19 +19,16 @@ void 	draw_scan_line(t_window *p_win, t_vector3 left, t_vector3 right, t_color *
 	}
 	current = left;
 	i = (int)(current.x) + (int)(current.y) * p_win->size_x;
-	z_delta = (right.z - current.z) / (right.x - current.x);
+	z_delta = (right.z - left.z) / (right.x - left.x);
 	delta = 1;
+	//printf("left.z => %f --- right.z => %f --- z_delta = %f\n",  left.z, right.z, z_delta);
 	while (current.x <= right.x)
 	{
 		if ((current.x) >= 0 && (current.x) < p_win->size_x &&
 			(current.y) >= 0 && (current.y) < p_win->size_y)
 		{
-			if (p_win->depth_buffer[i] == 0 || current.z == 0 || current.z <= p_win->depth_buffer[i])
+			if (p_win->depth_buffer[i] == 0.0 || current.z < p_win->depth_buffer[i])
 			{
-				if (current.z <= p_win->depth_buffer[i])
-				{
-					//printf("Coord = %f / %f -> %f vs %f\n", current.x, current.y, current.z, p_win->depth_buffer[i]);
-				}
 				p_win->depth_buffer[i] = current.z;
 				draw_pixel(p_win, (int)(current.x), (int)(current.y), p_color);
 			}
@@ -43,7 +39,7 @@ void 	draw_scan_line(t_window *p_win, t_vector3 left, t_vector3 right, t_color *
 	}
 }
 
-void fill_down_flat_triangle(t_window *p_win, t_triangle *p_triangle, t_color *p_color)
+void	fill_down_flat_triangle(t_window *p_win, t_triangle *p_triangle, t_color *p_color)
 {
 	t_vector3	delta[2];
 	t_vector3	left;
@@ -74,14 +70,15 @@ void fill_down_flat_triangle(t_window *p_win, t_triangle *p_triangle, t_color *p
 	}
 }
 
-void fill_top_flat_triangle(t_window *p_win, t_triangle *p_triangle, t_color *p_color)
+void	fill_top_flat_triangle(t_window *p_win, t_triangle *p_triangle, t_color *p_color)
 {
-	int find = 0;
+	int			find;
 	t_vector3	delta[2];
 	t_vector3	left;
 	t_vector3	right;
 	int			scan_line;
 
+	find = 0;
 	delta[0].x = (p_triangle->c.x - p_triangle->a.x) / (p_triangle->c.y - p_triangle->a.y);
 	delta[1].x = (p_triangle->c.x - p_triangle->b.x) / (p_triangle->c.y - p_triangle->b.y);
 	delta[0].y = 1.0f;
@@ -106,12 +103,12 @@ void fill_top_flat_triangle(t_window *p_win, t_triangle *p_triangle, t_color *p_
 	}
 }
 
-void draw_triangle_color_cpu(t_window *p_win, t_triangle *p_triangle, t_color *p_color)
+void	draw_triangle_color_cpu(t_window *p_win, t_triangle *p_triangle, t_color *p_color)
 {
-	float	p_x;
-	float	p_y;
-	float	p_z;
-	t_triangle tmp;
+	float		p_x;
+	float		p_y;
+	float		p_z;
+	t_triangle	tmp;
 
 	p_triangle->a = convert_opengl_to_vector3(p_win, &(p_triangle->a));
 	p_triangle->b = convert_opengl_to_vector3(p_win, &(p_triangle->b));
@@ -120,22 +117,19 @@ void draw_triangle_color_cpu(t_window *p_win, t_triangle *p_triangle, t_color *p
 	sort_t_triangle_points(p_triangle);
 
 	if (p_triangle->b.y == p_triangle->c.y)
-	{
 		fill_down_flat_triangle(p_win, p_triangle, p_color);
-	}
+
 	if (p_triangle->a.y == p_triangle->b.y || p_triangle->a.y == p_triangle->c.y)
-	{
 		fill_top_flat_triangle(p_win, p_triangle, p_color);
-	}
+
 	else
 	{
 		p_x = p_triangle->a.x + ((p_triangle->b.y - p_triangle->a.y) / (p_triangle->c.y - p_triangle->a.y) * (p_triangle->c.x - p_triangle->a.x));
 		p_y = p_triangle->b.y;
 		p_z = p_triangle->a.z + ((p_triangle->b.y - p_triangle->a.y) / (p_triangle->c.y - p_triangle->a.y) * (p_triangle->c.z - p_triangle->a.z));
+
 		tmp = create_t_triangle(p_triangle->b, create_t_vector3(p_x, p_y, p_z), p_triangle->c);
-
 		p_triangle->c = tmp.b;
-
 		fill_down_flat_triangle(p_win, p_triangle, p_color);
 		fill_top_flat_triangle(p_win, &tmp, p_color);
 	}

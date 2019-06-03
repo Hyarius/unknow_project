@@ -30,6 +30,9 @@ void		draw_buffer_opengl(t_window *p_win, t_color *color_data);
 //			draw color cpu
 void 		draw_triangle_color_cpu(t_window *p_win, t_triangle *p_triangle, t_color *p_color);
 
+//			draw depth cpu
+void		draw_triangle_depth_cpu(t_window *p_win, t_triangle *p_triangle, t_color *p_color);
+
 //			draw line cpu
 void 		draw_line_color_cpu(t_window *p_win, t_line *p_line, t_color *p_color);
 

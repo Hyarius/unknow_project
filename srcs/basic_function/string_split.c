@@ -2,7 +2,7 @@
 
 static char		*ft_strncpy_end(char *dst, char const *src, size_t len)
 {
-	size_t	i;
+	size_t		i;
 
 	i = 0;
 	while (src[i] != '\0' && i < len)
@@ -28,8 +28,8 @@ static int		ft_is_sep(char const str, char c)
 
 static int		ft_count_word(char const *str, char c)
 {
-	int		i;
-	int		word;
+	int			i;
+	int			word;
 
 	i = 0;
 	word = 0;
@@ -48,8 +48,8 @@ static int		ft_count_word(char const *str, char c)
 
 static int		ft_let(char const *str, char c)
 {
-	int		i;
-	int		size;
+	int			i;
+	int			size;
 
 	i = 0;
 	size = 0;
@@ -70,9 +70,9 @@ static int		ft_let(char const *str, char c)
 
 char			**ft_strsplit(char const *s, char c)
 {
-	char	**array;
-	int		nb_word;
-	int		i;
+	char		**array;
+	int			nb_word;
+	int			i;
 
 	i = 0;
 	if (s == NULL)

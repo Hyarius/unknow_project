@@ -35,17 +35,12 @@ int			clip_triangle_to_plane(t_camera *p_camera, t_vector3 *p_points)
 			outside_nb++;
 		}
 	}
-
-	if (inside_nb == 0)
-	{
-		return (0);
-	}
-	else if (inside_nb == 1)
+	if (inside_nb == 1)
 	{
 		tmp_point[0] = inside_points[0];
 		tmp_point[1] = intersect_plane_by_line(forward, plane_center, outside_points[0], inside_points[0]);
 		tmp_point[2] = intersect_plane_by_line(forward, plane_center, outside_points[1], inside_points[0]);
-		//
+
 		p_camera->clipping_list[0] = tmp_point[0];
 		p_camera->clipping_list[1] = tmp_point[1];
 		p_camera->clipping_list[2] = tmp_point[2];
@@ -57,7 +52,7 @@ int			clip_triangle_to_plane(t_camera *p_camera, t_vector3 *p_points)
 		tmp_point[1] = inside_points[1];
 		tmp_point[2] = intersect_plane_by_line(forward, plane_center, inside_points[0], outside_points[0]);
 		tmp_point[3] = intersect_plane_by_line(forward, plane_center, inside_points[1], outside_points[0]);
-		//
+
 		p_camera->clipping_list[0] = tmp_point[0];
 		p_camera->clipping_list[1] = tmp_point[1];
 		p_camera->clipping_list[2] = tmp_point[2];
@@ -72,7 +67,7 @@ int			clip_triangle_to_plane(t_camera *p_camera, t_vector3 *p_points)
 		tmp_point[0] = inside_points[0];
 		tmp_point[1] = inside_points[1];
 		tmp_point[2] = inside_points[2];
-		//
+
 		p_camera->clipping_list[0] = tmp_point[0];
 		p_camera->clipping_list[1] = tmp_point[1];
 		p_camera->clipping_list[2] = tmp_point[2];

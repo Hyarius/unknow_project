@@ -1,6 +1,6 @@
 #include "unknow_project.h"
 
-t_vector4_int_list create_t_vector4_int_list()
+t_vector4_int_list	create_t_vector4_int_list()
 {
 	t_vector4_int_list list;
 
@@ -11,22 +11,20 @@ t_vector4_int_list create_t_vector4_int_list()
 	return (list);
 }
 
-t_vector4_int_list *initialize_t_vector4_int_list()
+t_vector4_int_list	*initialize_t_vector4_int_list()
 {
 	t_vector4_int_list *list;
 
 	if (!(list = (t_vector4_int_list *)malloc(sizeof(t_vector4_int_list))))
 		error_exit(-16, "Can't create a t_vector4_int_list array");
-
 	*list = create_t_vector4_int_list();
-
 	return (list);
 }
 
-void	t_vector4_int_list_push_back(t_vector4_int_list *dest, t_vector4_int to_add)
+void				t_vector4_int_list_push_back(t_vector4_int_list *dest, t_vector4_int to_add)
 {
-	t_vector4_int *tmp;
-	int i;
+	t_vector4_int	*tmp;
+	int				i;
 
 	if ((dest->size + 1) >= dest->max_size)
 	{
@@ -46,10 +44,10 @@ void	t_vector4_int_list_push_back(t_vector4_int_list *dest, t_vector4_int to_add
 	dest->size++;
 }
 
-void	t_vector4_int_list_add_back(t_vector4_int_list *dest, t_vector4_int *to_add)
+void				t_vector4_int_list_add_back(t_vector4_int_list *dest, t_vector4_int *to_add)
 {
-	t_vector4_int *tmp;
-	int i;
+	t_vector4_int	*tmp;
+	int				i;
 
 	if ((dest->size + 1) >= dest->max_size)
 	{
@@ -72,50 +70,50 @@ void	t_vector4_int_list_add_back(t_vector4_int_list *dest, t_vector4_int *to_add
 	dest->size++;
 }
 
-void	free_t_vector4_int_list(t_vector4_int_list dest)
+void				free_t_vector4_int_list(t_vector4_int_list dest)
 {
 	free(dest.vector);
 	dest.vector = NULL;
 	dest.size = 0;
 }
 
-void	delete_t_vector4_int_list(t_vector4_int_list *dest)
+void				delete_t_vector4_int_list(t_vector4_int_list *dest)
 {
 	free_t_vector4_int_list(*dest);
 	free(dest);
 }
 
-void	clean_t_vector4_int_list(t_vector4_int_list *dest)
+void				clean_t_vector4_int_list(t_vector4_int_list *dest)
 {
 	dest->size = 0;
 }
 
-t_vector4_int	t_vector4_int_list_at(t_vector4_int_list *dest, int index)
+t_vector4_int		t_vector4_int_list_at(t_vector4_int_list *dest, int index)
 {
 	if (index < 0 || index >= dest->size)
 		error_exit(-23, "Segfault : t_vector4_int_list out of range");
 	return (dest->vector[index]);
 }
 
-t_vector4_int	*t_vector4_int_list_get(t_vector4_int_list *dest, int index)
+t_vector4_int		*t_vector4_int_list_get(t_vector4_int_list *dest, int index)
 {
 	if (index < 0 || index >= dest->size)
 		error_exit(-23, "Segfault : t_vector4_int_list out of range");
 	return (&dest->vector[index]);
 }
 
-int				*t_vector4_int_list_obtain(t_vector4_int_list *dest, int index)
+int					*t_vector4_int_list_obtain(t_vector4_int_list *dest, int index)
 {
 	if (index < 0 || index >= dest->size)
 		error_exit(-23, "Segfault : t_vector4_int_list out of range");
 	return (&dest->value[index * 3]);
 }
 
-void			t_vector4_int_list_resize(t_vector4_int_list *dest, int new_size)
+void				t_vector4_int_list_resize(t_vector4_int_list *dest, int new_size)
 {
-	t_vector4_int *tmp;
-	int i;
-	int old_size;
+	t_vector4_int	*tmp;
+	int				i;
+	int				old_size;
 
 	old_size = dest->size;
 	tmp = dest->vector;
@@ -133,18 +131,16 @@ void			t_vector4_int_list_resize(t_vector4_int_list *dest, int new_size)
 	dest->size = i;
 }
 
-void		t_vector4_int_list_edit(t_vector4_int_list *dest, int index, t_vector4_int p_vector)
+void				t_vector4_int_list_edit(t_vector4_int_list *dest, int index, t_vector4_int p_vector)
 {
 	if (index < 0 || index >= dest->size)
 		error_exit(-23, "Segfault : t_vector4_int_list out of range");
-
 	dest->vector[index] = p_vector;
 }
 
-void		t_vector4_int_list_set(t_vector4_int_list *dest, int index, t_vector4_int *p_vector)
+void				t_vector4_int_list_set(t_vector4_int_list *dest, int index, t_vector4_int *p_vector)
 {
 	if (index < 0 || index >= dest->size)
 		error_exit(-23, "Segfault : t_vector4_int_list out of range");
-
 	dest->vector[index] = *p_vector;
 }

@@ -1,5 +1,7 @@
 {
 	"files.associations": {
-		"unknow_project.h": "c"
+		"unknow_project.h": "c",
+		"limits": "c",
+		"type_traits": "c"
 	}
 }

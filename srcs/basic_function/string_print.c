@@ -1,13 +1,15 @@
 #include "unknow_project.h"
 
-void ft_putchar(char c)
+void	ft_putchar(char c)
 {
 	write(1, &c, 1);
 }
 
-void ft_putstr(char *str)
+void	ft_putstr(char *str)
 {
-	int i = 0;
+	int i;
+
+	i = 0;
 	while (str[i] != '\0')
 	{
 		ft_putchar(str[i]);
@@ -36,7 +38,7 @@ void	ft_putnbr(int n)
 		ft_putchar(n + '0');
 }
 
-void endl()
+void	endl()
 {
 	printf("\n");
 }

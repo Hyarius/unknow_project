@@ -17,17 +17,18 @@ int main(int argc, char **argv)
 	int play = 1;
 
 	t_mesh **mesh_list;
-	int nb = 20; //nombre de mesh (cube)
+	int nb = 30; //nombre de mesh (cube)
 
-	t_camera *cam = initialize_t_camera(win, create_t_vector3(0.5, 0.5, -1.2), 70, create_t_vector2(0.1f, 50.0f)); //creation et initialisation de la camera et des matrices liee a la camera
+	t_camera *cam = initialize_t_camera(win, create_t_vector3(1, 1, 3), 70, create_t_vector2(0.1f, 50.0f)); //creation et initialisation de la camera et des matrices liee a la camera
 
 	mesh_list = (t_mesh **)malloc(sizeof(t_mesh *) * nb);
 	float size = 1;
+	int range = 8;
 	for (int i = 0; i < nb; i++)
 	{
-		float x = (float)(generate_nbr(-5, 5)) + 0.5f; //generer position aleatoire des cube
-		float y = (float)(generate_nbr(-5, 5)) + 0.5f;
-		float z = (float)(generate_nbr(-5, 5)) + 0.5f;
+		float x = (float)(generate_nbr(-range, range)) + 0.5f; //generer position aleatoire des cube
+		float y = (float)(generate_nbr(-range, range)) + 0.5f;
+		float z = (float)(generate_nbr(-range, range)) + 0.5f;
 
 		mesh_list[i] = initialize_t_mesh(create_t_vector3(x, y, z)); //creation d'un mesh vide
 		*(mesh_list[i]) = create_primitive_cube(create_t_vector3(x, y, z), create_t_vector3(size, size, size)); //creation du cube que l'on rentre dans mesh

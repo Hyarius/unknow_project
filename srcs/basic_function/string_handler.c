@@ -1,10 +1,11 @@
 #include "unknow_project.h"
 
-char *ft_strnew(int size)
+char		*ft_strnew(int size)
 {
-	char *ret = NULL;
-	int i;
+	char	*ret;
+	int		i;
 
+	ret = NULL;
 	if (!(ret = (char *)malloc(sizeof(char) * (size + 1))))
 		return (NULL);
 	i = 0;
@@ -16,25 +17,25 @@ char *ft_strnew(int size)
 	return (ret);
 }
 
-int ft_strlen(char *str)
+int			ft_strlen(char *str)
 {
+	int		i;
+
 	if (str == NULL)
 		return (0);
-	int i;
-
 	i = 0;
 	while (str[i] != '\0')
 		i++;
-
 	return (i);
 }
 
-char *ft_strdup(char *src)
+char		*ft_strdup(char *src)
 {
-	char *ret = ft_strnew(ft_strlen(src));
-	int i;
+	char	*ret;
+	int		i;
 
 	i = 0;
+	ret = ft_strnew(ft_strlen(src));
 	while (src[i] != '\0')
 	{
 		ret[i] = src[i];
@@ -44,19 +45,20 @@ char *ft_strdup(char *src)
 	return (ret);
 }
 
-char *ft_strjoin(char *src1, char *src2)
+char		*ft_strjoin(char *src1, char *src2)
 {
-	char *ret;
+	char	*ret;
+	int 	i;
+	int		j;
 
 	ret = ft_strnew(ft_strlen(src1) + ft_strlen(src2));
-
-	int i = 0;
+	i = 0;
 	while (i < ft_strlen(src1))
 	{
 		ret[i] = src1[i];
 		i++;
 	}
-	int j = 0;
+	j = 0;
 	while (j < ft_strlen(src2))
 	{
 		ret[i + j] = src2[j];
@@ -66,7 +68,7 @@ char *ft_strjoin(char *src1, char *src2)
 	return (ret);
 }
 
-void ft_stradd(char **src1, char *src2)
+void		ft_stradd(char **src1, char *src2)
 {
 	if (*src1 == NULL)
 		*src1 = ft_strdup(src2);

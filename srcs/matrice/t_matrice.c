@@ -1,10 +1,10 @@
 #include "unknow_project.h"
 
-t_matrix create_t_matrix()
+t_matrix	create_t_matrix()
 {
-	t_matrix result;
-	int i;
-	int j;
+	t_matrix	result;
+	int			i;
+	int			j;
 
 	i = 0;
 	while (i < 4)
@@ -24,11 +24,11 @@ t_matrix create_t_matrix()
 	return (result);
 }
 
-t_matrix create_t_matrix_empty()
+t_matrix	create_t_matrix_empty()
 {
-	t_matrix result;
-	int i;
-	int j;
+	t_matrix	result;
+	int			i;
+	int			j;
 
 	i = 0;
 	while (i < 4)

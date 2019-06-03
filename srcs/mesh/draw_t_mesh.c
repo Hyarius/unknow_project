@@ -1,6 +1,6 @@
 #include "unknow_project.h"
 
-void draw_t_mesh(t_window *p_win, t_camera *p_cam, t_mesh *mesh)
+void	draw_t_mesh(t_window *p_win, t_camera *p_cam, t_mesh *mesh)
 {
 	t_color		tmp_color;
 	t_color		color_white = {1.0, 1.0, 1.0, 1.0};
@@ -51,3 +51,13 @@ void draw_t_mesh(t_window *p_win, t_camera *p_cam, t_mesh *mesh)
 		}
 	}
 }
+//
+// Pythagore 2D : Result^2 = A^2 + B^2 ---> Result = racine(A^2 + B^2)
+// Pythagore 3D : Result^2 = A^2 + B^2 + C^2 ---> Result = racine(A^2 + B^2 + C^2)
+//
+// 1) 1.500
+// 2) 1.802
+// 3) 1.802
+// 4) 2.060
+// 5) 1.802
+// 6) 1.802

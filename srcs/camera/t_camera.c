@@ -1,5 +1,8 @@
 #include "unknow_project.h"
 
+extern float dist_max;
+extern float dist_min;
+
 t_camera	create_t_camera(t_window *p_win, t_vector3 p_pos, float p_fov, t_vector2 p_dist)
 {
 	t_camera result;
@@ -37,7 +40,7 @@ t_camera	*initialize_t_camera(t_window *p_win, t_vector3 p_pos, float p_fov, t_v
 	return (result);
 }
 
-void			t_camera_look_at(t_camera *cam)
+void		t_camera_look_at(t_camera *cam)
 {
 	t_vector3 zaxis = normalize_t_vector3(create_t_vector3(cos(degree_to_radius(cam->angle.z)) * sin(degree_to_radius(cam->angle.y)),
 						sin(degree_to_radius(cam->angle.z)),
@@ -52,7 +55,7 @@ void			t_camera_look_at(t_camera *cam)
 	cam->up = inv_t_vector3(yaxis);
 }
 
-t_matrix		t_camera_compute_view(t_camera *cam) //calcul de la matrice de vue
+t_matrix	t_camera_compute_view(t_camera *cam) //calcul de la matrice de vue
 {
 	t_matrix	result;
 	t_vector3	inv_forward;
@@ -79,27 +82,24 @@ t_matrix		t_camera_compute_view(t_camera *cam) //calcul de la matrice de vue
 	return (result);
 }
 
-t_matrix		compute_projection_matrix(t_window *p_win, t_camera *p_cam) //calcul de la matrice de projection
+t_matrix	compute_projection_matrix(t_window *p_win, t_camera *p_cam) //calcul de la matrice de projection
 {
 	t_matrix	result;
+	float		n;
+	float		r;
+	float		f;
+	float		t;
 
 	result = create_t_matrix_empty();
-
-	float n = p_cam->near;
-	float r = 1.0 / (tan(degree_to_radius(p_cam->fov / 2)));
-	float f = p_cam->far;
-	float t = 1.0 / (tan(degree_to_radius(p_cam->fov / 2))) / (4.0 / 3.0);
-
-
+	n = p_cam->near;
+	r = 1.0 / (tan(degree_to_radius(p_cam->fov / 2)));
+	f = p_cam->far;
+	t = 1.0 / (tan(degree_to_radius(p_cam->fov / 2))) / (4.0 / 3.0);
 	result.value[0][0] = t;
-
 	result.value[1][1] = r;
-
 	result.value[2][2] = -(f) / (f - n);
 	result.value[2][3] = -1;
-
 	result.value[3][2] = -(2 * f * n) / (f - n);
-
 	return (result);
 }
 
@@ -108,35 +108,32 @@ void		compute_t_camera(t_camera *cam)
 	cam->view = t_camera_compute_view(cam);
 }
 
-t_vector3		apply_t_camera(t_vector3 *src, t_matrix *mat) // applique la position de la camera
+t_vector3	apply_t_camera(t_vector3 *src, t_matrix *mat) // applique la position de la camera
 {
-	t_vector3	result;
+	t_vector3	result; // x -> coord a l'ecran en x de ce point / y -> coord a l'ecran en y de ce point / z -> distance reelle entre ce point et l'oeil de la camera
 	float		delta;
 
 	result.x = src->x * mat->value[0][0] + src->y * mat->value[1][0] + src->z * mat->value[2][0] + mat->value[3][0];
 	result.y = src->x * mat->value[0][1] + src->y * mat->value[1][1] + src->z * mat->value[2][1] + mat->value[3][1];
 	result.z = src->x * mat->value[0][2] + src->y * mat->value[1][2] + src->z * mat->value[2][2] + mat->value[3][2];
 	delta = src->x * mat->value[0][3] + src->y * mat->value[1][3] + src->z * mat->value[2][3] + mat->value[3][3];
-
 	if (delta < 0)
 	{
 		result.x /= delta;
 		result.y /= delta;
 		result.z /= delta;
 	}
-
 	result.z = sqrt(src->x * src->x + src->y * src->y + src->z * src->z);
-
 	return (result);
 }
 
-void			t_camera_change_view(t_camera *cam, t_vector3 delta_angle)
+void		t_camera_change_view(t_camera *cam, t_vector3 delta_angle)
 {
 	cam->angle = add_vector3_to_vector3(cam->angle, delta_angle);
 	t_camera_look_at(cam);
 }
 
-void			handle_t_camera_mouvement_by_key(t_camera *cam, t_keyboard *p_keyboard) // calcul du mouvement de la camera a la clavier
+void		handle_t_camera_mouvement_by_key(t_camera *cam, t_keyboard *p_keyboard) // calcul du mouvement de la camera a la clavier
 {
 	if (get_key_state(p_keyboard, SDL_SCANCODE_S) == 1)
 		cam->pos = add_vector3_to_vector3(cam->pos, mult_vector3_by_vector3(cam->forward, create_t_vector3(cam->speed, 0.0, cam->speed)));
@@ -152,7 +149,7 @@ void			handle_t_camera_mouvement_by_key(t_camera *cam, t_keyboard *p_keyboard) /
 		cam->pos = add_vector3_to_vector3(cam->pos, create_t_vector3(0.0, -cam->speed, 0.0));
 }
 
-void			handle_t_camera_view_by_mouse(t_camera *cam, t_mouse *p_mouse) // calcul du mouvement de l'angle de la camera a la souris
+void		handle_t_camera_view_by_mouse(t_camera *cam, t_mouse *p_mouse) // calcul du mouvement de l'angle de la camera a la souris
 {
 	t_vector3	delta;
 
@@ -160,21 +157,42 @@ void			handle_t_camera_view_by_mouse(t_camera *cam, t_mouse *p_mouse) // calcul 
 	t_camera_change_view(cam, delta);
 }
 
-void			draw_triangle_from_camera_on_screen(t_window *p_win, t_camera *p_cam)
+void		draw_triangle_from_camera_on_screen(t_window *p_win, t_camera *p_cam)
 {
 	t_triangle	triangle;
-	t_line 		line1;
-	t_line 		line2;
-	int i;
+	t_line		line1;
+	t_line		line2;
+	int			i;
+
+	dist_min = 9999.0f;
+	dist_max = 0.0f;
 
 	i = 0;
 	while (i < p_cam->triangle_list.size)
 	{
 		triangle = t_triangle_list_at(&(p_cam->triangle_list), i);
+		if (triangle.a.z > dist_max)
+			dist_max = triangle.a.z;
+		if (triangle.b.z > dist_max)
+			dist_max = triangle.b.z;
+		if (triangle.c.z > dist_max)
+			dist_max = triangle.c.z;
 
+		if (triangle.a.z < dist_min)
+			dist_min = triangle.a.z;
+		if (triangle.b.z < dist_min)
+			dist_min = triangle.b.z;
+		if (triangle.c.z < dist_min)
+			dist_min = triangle.c.z;
+		i++;
+	}
+
+	i = 0;
+	while (i < p_cam->triangle_list.size)
+	{
+		triangle = t_triangle_list_at(&(p_cam->triangle_list), i);
 		//draw_triangle_color_opengl(p_win, triangle, t_color_list_get(&(p_cam->color_list), i));
-		draw_triangle_color_cpu(p_win, &triangle, t_color_list_get(&(p_cam->color_list), i));
-
+		draw_triangle_depth_cpu(p_win, &triangle, t_color_list_get(&(p_cam->color_list), i));
 		i++;
 	}
 }

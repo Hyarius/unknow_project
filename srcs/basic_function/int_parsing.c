@@ -1,6 +1,6 @@
 #include "unknow_project.h"
 
-int		ft_atoi(const char *str)
+int				ft_atoi(const char *str)
 {
 	int			i;
 	long long	number;
