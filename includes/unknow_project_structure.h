@@ -3,6 +3,21 @@
 
 # include "unknow_project_geometry.h"
 
+typedef struct	s_color
+{
+	float		r;
+	float		g;
+	float		b;
+	float		a;
+}				t_color;
+
+t_color		create_t_color(float p_r, float p_g, float p_b, float p_a);
+t_color		*initialize_t_color(float p_r, float p_g, float p_b, float p_a);
+t_color 	create_t_color_from_int(int p_r, int p_g, int p_b, int p_a);
+t_color 	*initialize_t_color_from_int(int p_r, int p_g, int p_b, int p_a);
+t_color		fuze_t_color(t_color src1, t_color src2);
+void 		print_t_color(t_color p_color, char *str);
+
 typedef struct	s_surface
 {
 	GLuint  	w;           /* largeur */
@@ -20,19 +35,7 @@ typedef struct	s_texture
 	GLuint		id;
 }				t_texture;
 
-typedef struct	s_color
-{
-	float		r;
-	float		g;
-	float		b;
-	float		a;
-}				t_color;
-
-t_color		create_t_color(float p_r, float p_g, float p_b, float p_a);
-t_color		*initialize_t_color(float p_r, float p_g, float p_b, float p_a);
-t_color 	create_t_color_from_int(int p_r, int p_g, int p_b, int p_a);
-t_color 	*initialize_t_color_from_int(int p_r, int p_g, int p_b, int p_a);
-t_color		fuze_t_color(t_color src1, t_color src2);
+t_color			get_pixel_color(t_texture *texture, float f_x, float f_y);
 
 typedef struct	s_uv
 {

@@ -19,7 +19,7 @@ int main(int argc, char **argv)
 	t_mesh **mesh_list;
 	int nb = 100; //nombre de mesh (cube)
 
-	t_texture *texture = png_load("ressources/assets/texture/cube_test.png");
+	t_texture *texture = png_load("ressources/assets/texture/cube_test_blue.png");
 
 	t_camera *cam = initialize_t_camera(win, create_t_vector3(0, 0, 3), 70, create_t_vector2(0.1f, 50.0f)); //creation et initialisation de la camera et des matrices liee a la camera
 
@@ -33,7 +33,7 @@ int main(int argc, char **argv)
 		float z = (float)(generate_nbr(-range, range)) + 0.5f;
 
 		mesh_list[i] = initialize_t_mesh(create_t_vector3(x, y, z)); //creation d'un mesh vide
-		*(mesh_list[i]) = create_primitive_cube(create_t_vector3(x, y, z), create_t_vector3(size, size, size), NULL); //creation du cube que l'on rentre dans mesh
+		*(mesh_list[i]) = create_primitive_cube(create_t_vector3(x, y, z), create_t_vector3(size, size, size), texture); //creation du cube que l'on rentre dans mesh
 	}
 
 	int state = 1;

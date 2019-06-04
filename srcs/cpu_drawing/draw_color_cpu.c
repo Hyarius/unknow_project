@@ -3,7 +3,7 @@
 static void 	draw_scan_line(t_window *p_win, t_vector3 left, t_vector3 right, t_color *p_color)
 {
 	int pixel_index;
-	
+
 	if (left.x > right.x)
 	{
 		swap_t_vector3(&left, &right);

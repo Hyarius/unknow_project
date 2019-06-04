@@ -1,33 +1,48 @@
 #include "unknow_project.h"
 
-static void 	draw_scan_line(t_window *p_win, t_vector3 left, t_vector3 right, t_uv *p_uv, t_color *darkness)
+static void 	draw_scan_line(t_window *p_win, t_vector3 left, t_vector3 right, t_vector3 uv_left, t_vector3 uv_right, t_texture *texture, t_color *darkness)
 {
-	t_color black = create_t_color(0.0, 0.0, 0.0, 1.0);
+	t_vector3 current;
+	t_vector3 target;
+	t_color color;
+	t_vector3 delta_uv;
 	int pixel_index;
 
 	if (left.x > right.x)
 	{
 		swap_t_vector3(&left, &right);
+		swap_t_vector3(&uv_left, &uv_right);
 	}
-	if (left.x < 0)
-		left.x = 0;
-	if (right.x >= p_win->size_x)
-		right.x = p_win->size_x - 1;
-
-	float delta_z = (right.z - left.z) / (right.x - left.x);
-	pixel_index = (int)(left.x) + ((int)(left.y) * p_win->size_x);
-	while (left.x <= right.x)
+	current = left;
+	target = right;
+	delta_uv = create_t_vector3((uv_right.x - uv_left.x) / (right.x - left.x), (uv_right.y - uv_left.y) / (right.x - left.x), 0.0);
+	if (current.x < 0)
 	{
-		if (left.x >= 0 && left.x < p_win->size_x && left.y >= 0 && left.y < p_win->size_y)
+		uv_left = mult_vector3_by_vector3(uv_left, mult_vector3_by_float(delta_uv, -current.x));
+		current.x = 0;
+	}
+	if (target.x >= p_win->size_x)
+	{
+		uv_left = mult_vector3_by_vector3(uv_left, mult_vector3_by_float(delta_uv, current.x - p_win->size_x));
+		target.x = p_win->size_x - 1;
+	}
+	float delta_z = (target.z - current.z) / (target.x - current.x);
+	pixel_index = (int)(current.x) + ((int)(current.y) * p_win->size_x);
+	while (current.x <= target.x)
+	{
+
+		if (current.x >= 0 && current.x < p_win->size_x && current.y >= 0 && current.y < p_win->size_y)
 		{
-			if (left.z < p_win->depth_buffer[pixel_index] || p_win->depth_buffer[pixel_index] == 0)
+			if (current.z < p_win->depth_buffer[pixel_index] || p_win->depth_buffer[pixel_index] == 0)
 			{
-				draw_pixel(p_win, (int)(left.x), (int)(left.y), &black);
-				p_win->depth_buffer[pixel_index] = left.z;
+				color = get_pixel_color(texture, uv_left.x, uv_left.y);
+				draw_pixel(p_win, (int)(current.x), (int)(current.y), &color);
+				p_win->depth_buffer[pixel_index] = current.z;
 			}
 		}
-		left.x++;
-		left.z += delta_z;
+		current.x++;
+		current.z += delta_z;
+		uv_left = substract_vector3_to_vector3(uv_left, delta_uv);
 		pixel_index++;
 	}
 }
@@ -37,13 +52,21 @@ static void	fill_down_flat_triangle(t_window *p_win, t_triangle *p_triangle, t_u
 	t_vector3	target;
 	t_vector3	left;
 	t_vector3	right;
+	t_vector3	uv_left;
+	t_vector3	uv_right;
 	t_vector3	delta_left;
 	t_vector3	delta_right;
+	t_vector3	delta_uv_left;
+	t_vector3	delta_uv_right;
 
 	delta_left = create_t_vector3((p_triangle->a.x - p_triangle->b.x) / (p_triangle->a.y - p_triangle->b.y), 1.0, (p_triangle->a.z - p_triangle->b.z) / (p_triangle->a.y - p_triangle->b.y));
 	delta_right = create_t_vector3((p_triangle->a.x - p_triangle->c.x) / (p_triangle->a.y - p_triangle->c.y), 1.0, (p_triangle->a.z - p_triangle->c.z) / (p_triangle->a.y - p_triangle->c.y));
+	delta_uv_left = create_t_vector3((p_uv->uv->a.x - p_uv->uv->b.x) / (p_triangle->a.y - p_triangle->b.y), (p_uv->uv->a.y - p_uv->uv->b.y) / (p_triangle->a.y - p_triangle->b.y), 1.0);
+	delta_uv_right = create_t_vector3((p_uv->uv->a.x - p_uv->uv->c.x) / (p_triangle->a.y - p_triangle->b.y), (p_uv->uv->a.y - p_uv->uv->b.y) / (p_triangle->a.y - p_triangle->b.y), 1.0);
 	left = p_triangle->b;
 	right = p_triangle->c;
+	uv_left = p_uv->uv->b;
+	uv_right = p_uv->uv->c;
 	target = p_triangle->a;
 	if (target.y < 0)
 		target.y = 0;
@@ -53,12 +76,16 @@ static void	fill_down_flat_triangle(t_window *p_win, t_triangle *p_triangle, t_u
 	{
 		left = substract_vector3_to_vector3(left, delta_left);
 		right = substract_vector3_to_vector3(right, delta_right);
+		uv_left = substract_vector3_to_vector3(uv_left, delta_uv_left);
+		uv_right = substract_vector3_to_vector3(uv_right, delta_uv_right);
 	}
 	while (target.y <= left.y)
 	{
-		draw_scan_line(p_win, left, right, p_uv, darkness);
+		draw_scan_line(p_win, left, right, uv_left, uv_right, p_uv->image, darkness);
 		left = substract_vector3_to_vector3(left, delta_left);
 		right = substract_vector3_to_vector3(right, delta_right);
+		uv_left = add_vector3_to_vector3(uv_left, delta_uv_left);
+		uv_right = add_vector3_to_vector3(uv_right, delta_uv_right);
 	}
 }
 
@@ -67,13 +94,21 @@ static void	fill_top_flat_triangle(t_window *p_win, t_triangle *p_triangle, t_uv
 	t_vector3	target;
 	t_vector3	left;
 	t_vector3	right;
+	t_vector3	uv_left;
+	t_vector3	uv_right;
 	t_vector3	delta_left;
 	t_vector3	delta_right;
+	t_vector3	delta_uv_left;
+	t_vector3	delta_uv_right;
 
 	delta_left = create_t_vector3((p_triangle->c.x - p_triangle->a.x) / (p_triangle->c.y - p_triangle->a.y), 1.0, (p_triangle->c.z - p_triangle->a.z) / (p_triangle->c.y - p_triangle->a.y));
 	delta_right = create_t_vector3((p_triangle->c.x - p_triangle->b.x) / (p_triangle->c.y - p_triangle->b.y), 1.0, (p_triangle->c.z - p_triangle->b.z) / (p_triangle->c.y - p_triangle->b.y));
+	delta_uv_left = create_t_vector3((p_uv->uv->c.x - p_uv->uv->a.x) / (p_triangle->c.y - p_triangle->a.y), (p_uv->uv->c.z - p_uv->uv->a.z) / (p_triangle->c.y - p_triangle->a.y), 1.0);
+	delta_uv_right = create_t_vector3((p_uv->uv->c.x - p_uv->uv->b.x) / (p_triangle->c.y - p_triangle->b.y), (p_uv->uv->c.z - p_uv->uv->b.z) / (p_triangle->c.y - p_triangle->b.y), 1.0);
 	left = p_triangle->a;
 	right = p_triangle->b;
+	uv_left = p_uv->uv->a;
+	uv_right = p_uv->uv->b;
 	target = p_triangle->c;
 	if (target.y < 0)
 		target.y = 0;
@@ -83,12 +118,16 @@ static void	fill_top_flat_triangle(t_window *p_win, t_triangle *p_triangle, t_uv
 	{
 		left = add_vector3_to_vector3(left, delta_left);
 		right = add_vector3_to_vector3(right, delta_right);
+		uv_left = add_vector3_to_vector3(uv_left, delta_uv_left);
+		uv_right = add_vector3_to_vector3(uv_right, delta_uv_right);
 	}
 	while (target.y >= left.y)
 	{
-		draw_scan_line(p_win, left, right, p_uv, darkness);
+		draw_scan_line(p_win, left, right, uv_left, uv_right, p_uv->image, darkness);
 		left = add_vector3_to_vector3(left, delta_left);
 		right = add_vector3_to_vector3(right, delta_right);
+		uv_left = add_vector3_to_vector3(uv_left, delta_uv_left);
+		uv_right = add_vector3_to_vector3(uv_right, delta_uv_right);
 	}
 }
 

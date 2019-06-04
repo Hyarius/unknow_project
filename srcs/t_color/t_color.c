@@ -60,3 +60,8 @@ t_color	fuze_t_color(t_color src1, t_color src2)
 
 	return (result);
 }
+
+void print_t_color(t_color p_color, char *str)
+{
+	printf("%s : %.3f / %.3f / %.3f / %.3f", str, p_color.r, p_color.g, p_color.b, p_color.a);
+}
