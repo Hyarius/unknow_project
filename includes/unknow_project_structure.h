@@ -14,11 +14,11 @@ typedef struct	s_surface
     GLubyte 	*pixels;         /* données de l'image */
 }				t_surface;
 
-typedef struct	s_image
+typedef struct	s_texture
 {
 	t_surface	*surface;
 	GLuint		id;
-}				t_image;
+}				t_texture;
 
 typedef struct	s_color
 {
@@ -36,21 +36,22 @@ t_color		fuze_t_color(t_color src1, t_color src2);
 
 typedef struct	s_uv
 {
-	t_image		*image;
+	t_texture	*image;
 	t_triangle	*uv;
-	float		alpha;
 }				t_uv;
 
-t_uv		create_t_uv(t_triangle *p_triangle, t_image *p_image, float p_alpha);
-t_uv		*initialize_t_uv(t_triangle *p_triangle, t_image *p_image, float p_alpha);
+t_uv		create_t_uv(t_triangle *p_triangle, t_texture *p_image);
+t_uv		*initialize_t_uv(t_triangle *p_triangle, t_texture *p_image);
 
 typedef struct	s_face
 {
-	int			index[3];
+	int			index_vertices[3];
+	int			index_uvs[3];
 	t_vector3	normale;
 }				t_face;
 
-t_face create_t_face(int a, int b, int c);
-t_face *initialize_t_face(int a, int b, int c);
-
+t_face 			create_t_face();
+t_face 			*initialize_t_face();
+void 			set_t_face_vertices(t_face *face, int a, int b, int c);
+void 			set_t_face_uvs(t_face *face, int a, int b, int c);
 #endif

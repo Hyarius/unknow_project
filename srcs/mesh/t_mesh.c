@@ -5,7 +5,9 @@ t_mesh			create_t_mesh(t_vector3 pos)
 	t_mesh result;
 
 	result.pos = pos;
+	result.texture = NULL;
 	result.vertices = initialize_t_vector3_list();
+	result.uvs = initialize_t_vector2_list();
 	result.faces = initialize_t_face_list();
 	result.normales = initialize_t_vector3_list();
 
@@ -27,6 +29,7 @@ t_mesh			*initialize_t_mesh(t_vector3 pos)
 void			free_t_mesh(t_mesh mesh)
 {
 	delete_t_vector3_list(mesh.vertices);
+	delete_t_vector2_list(mesh.uvs);
 	delete_t_face_list(mesh.faces);
 }
 
@@ -34,6 +37,11 @@ void			delete_t_mesh(t_mesh *mesh)
 {
 	free_t_mesh(*mesh);
 	free(mesh);
+}
+
+void		t_mesh_add_uv(t_mesh *dest, t_vector2 new_uv)
+{
+	t_vector2_list_push_back(dest->uvs, new_uv);
 }
 
 void			t_mesh_add_point(t_mesh *dest, t_vector3 new_point)
@@ -44,6 +52,11 @@ void			t_mesh_add_point(t_mesh *dest, t_vector3 new_point)
 void			t_mesh_add_face(t_mesh *dest, t_face new_face)
 {
 	t_face_list_push_back(dest->faces, new_face);
+}
+
+void 			t_mesh_set_texture(t_mesh *dest, t_texture *p_texture)
+{
+	dest->texture = p_texture;
 }
 
 void			t_mesh_compute_normals(t_mesh *mesh)
@@ -60,9 +73,9 @@ void			t_mesh_compute_normals(t_mesh *mesh)
 	{
 		face = t_face_list_get(mesh->faces, i);
 
-		a = t_vector3_list_at(mesh->vertices, face->index[0]);
-		b = substract_vector3_to_vector3(t_vector3_list_at(mesh->vertices, face->index[1]), a);
-		c = substract_vector3_to_vector3(t_vector3_list_at(mesh->vertices, face->index[2]), a);
+		a = t_vector3_list_at(mesh->vertices, face->index_vertices[0]);
+		b = substract_vector3_to_vector3(t_vector3_list_at(mesh->vertices, face->index_vertices[1]), a);
+		c = substract_vector3_to_vector3(t_vector3_list_at(mesh->vertices, face->index_vertices[2]), a);
 
 		face->normale = normalize_t_vector3(cross_t_vector3(b, c));
 

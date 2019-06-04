@@ -70,15 +70,15 @@ t_surface *read_png_file(const char *filename)
 	return (surface);
 }
 
-t_image *png_load(char *path)
+t_texture *png_load(char *path)
 {
-	t_image *texture;
+	t_texture *texture;
 	SDL_Surface *tmp_surface;
 	int internal_format;
 	int format;
 
-	if (!(texture = (t_image *)malloc(sizeof(t_image))))	//malloc du t_image
-		error_exit(-29, "Can't malloc a t_image");			//sortie si probleme
+	if (!(texture = (t_texture *)malloc(sizeof(t_texture))))	//malloc du t_texture
+		error_exit(-29, "Can't malloc a t_texture");			//sortie si probleme
 
 	texture->surface = read_png_file(path);					//lecture du fichier .png
 

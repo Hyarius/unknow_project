@@ -3,20 +3,6 @@
 
 # include "unknow_project_camera.h"
 
-typedef struct	s_rasterizer
-{
-	int 		a;
-	int 		b;
-	int 		c;
-	int			max;
-}				t_rasterizer;
-
-int				apply_formula(t_rasterizer *rast, int x, int y);
-int				get_short(int a, int b, int c);
-int				get_big(int a, int b, int c);
-void			set_rasterizer(t_rasterizer *rast, t_vector2 *s, t_vector2 *e, t_vector2 *ext);
-float			calc_rasterizer(t_rasterizer *rast, int x, int y);
-
 typedef struct	s_matrix
 {
 	float		value[4][4];
@@ -38,10 +24,12 @@ void			print_t_matrix(t_matrix *m);
 int				generate_nbr(int min, int max);
 t_vector2_int_list
 				calc_line(t_vector2_int start, t_vector2_int end);
-
 t_vector3		cross_t_vector3(t_vector3 a, t_vector3 b);
 t_vector3 		normalize_t_vector3(t_vector3 v);
 float			dot_t_vector3(t_vector3 a, t_vector3 b);
 t_vector3		intersect_plane_by_line(t_vector3 p_normal, t_vector3 p_center, t_vector3 start, t_vector3 end);
 float			calc_distance_to_plane(t_vector3 p_normal, t_vector3 p_center, t_vector3 p_point);
+void			clamp_float_value(float min, float *value, float max);
+void			clamp_int_value(int min, int *value, int max);
+
 #endif

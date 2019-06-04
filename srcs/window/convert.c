@@ -37,6 +37,11 @@ t_vector2_int	convert_vector2_to_vector2_int(t_vector2 *base)
 	return (create_t_vector2_int((int)(base->x), (int)(base->y)));
 }
 
+t_vector3		convert_vector2_to_vector3(t_vector2 *base)
+{
+	return (create_t_vector3(base->x, base->y, 0.0));
+}
+
 t_vector3_int	convert_vector3_to_vector3_int(t_vector3 *base)
 {
 	return (create_t_vector3_int((int)(base->x), (int)(base->y), (int)(base->z)));

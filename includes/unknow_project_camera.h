@@ -16,13 +16,21 @@ typedef struct	s_camera
 	t_matrix	mvp;
 	t_vector3	clipping_list[6];
 	t_triangle_list
-				triangle_list;
+				triangle_color_list;
 	t_color_list
 				color_list;
+
+	t_triangle_list
+				triangle_texture_list;
+	t_uv_list	uv_list;
+	t_color_list
+				darkness_list;
 
 	t_vector3	pos;
 	t_vector3	angle;
 	float		speed;
+	float		running;
+	float		slowing;
 
 	t_vector3	forward;
 	t_vector3	right;
@@ -43,12 +51,11 @@ t_vector3	apply_t_camera(t_vector3 *src, t_matrix *mvp);
 t_matrix	t_camera_compute_view(t_camera *cam);
 void		t_camera_look_at(t_camera *cam);
 void		t_camera_change_view(t_camera *cam, t_vector3 delta_angle);
-
 void		handle_t_camera_mouvement_by_key(t_camera *cam, t_keyboard *p_keyboard);
-
 void		handle_t_camera_view_by_mouse(t_camera *cam, t_mouse *p_mouse);
-
 int			clip_triangle_to_plane(t_camera *p_camera, t_vector3 *p_points);
 void		draw_triangle_from_camera_on_screen(t_window *p_win, t_camera *p_cam);
+void 		t_camera_calc_depth(t_window *p_win, t_camera *p_cam);
+void		draw_depth_from_camera_on_screen(t_window *p_win, t_camera *p_cam);
 
 #endif

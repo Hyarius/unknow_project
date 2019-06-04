@@ -47,7 +47,6 @@ t_vector3		intersect_plane_by_line(t_vector3 p_normal, t_vector3 p_center, t_vec
 
 float			calc_distance_to_plane(t_vector3 p_normal, t_vector3 p_center, t_vector3 p_point)
 {
-	t_vector3	normalized_point;
 	t_vector3	normalized_plane;
 	float		result;
 
@@ -57,4 +56,20 @@ float			calc_distance_to_plane(t_vector3 p_normal, t_vector3 p_center, t_vector3
 			+ p_point.z * normalized_plane.z
 			- dot_t_vector3(normalized_plane, p_center);
 	return (result);
+}
+
+void			clamp_float_value(float min, float *value, float max)
+{
+	if (*value < min)
+		*value = min;
+	if (*value > max)
+		*value = max;
+}
+
+void			clamp_int_value(int min, int *value, int max)
+{
+	if (*value < min)
+		*value = min;
+	if (*value > max)
+		*value = max;
 }

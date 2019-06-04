@@ -1,8 +1,10 @@
 #include "unknow_project.h"
 
-t_mesh		create_primitive_cube(t_vector3 pos, t_vector3 size)
+t_mesh		create_primitive_cube(t_vector3 pos, t_vector3 size, t_texture *p_texture)
 {
-	t_mesh result;
+	t_mesh 	result;
+	t_face	tmp_face1;
+	t_face	tmp_face2;
 
 	result = create_t_mesh(pos);
 
@@ -18,32 +20,77 @@ t_mesh		create_primitive_cube(t_vector3 pos, t_vector3 size)
 	t_mesh_add_point(&result, create_t_vector3(size.x, size.y, size.z)); //G
 	t_mesh_add_point(&result, create_t_vector3(0, size.y, size.z)); //H
 
-	t_mesh_add_face(&result, create_t_face(2, 3, 1)); // FACE DOWN
-	t_mesh_add_face(&result, create_t_face(0, 1, 3));
+	t_mesh_add_uv(&result, create_t_vector2(0.0f, 0.0f));
+	t_mesh_add_uv(&result, create_t_vector2(1.0f / 3.0f, 0.0f));
+	t_mesh_add_uv(&result, create_t_vector2(2.0f / 3.0f, 0.0f));
+	t_mesh_add_uv(&result, create_t_vector2(0.0f, 1.0f / 3.0f));
+	t_mesh_add_uv(&result, create_t_vector2(1.0f / 3.0f, 1.0f / 3.0f));
+	t_mesh_add_uv(&result, create_t_vector2(2.0f / 3.0f, 1.0f / 3.0f));
+	t_mesh_add_uv(&result, create_t_vector2(1.0f, 1.0f / 3.0f));
+	t_mesh_add_uv(&result, create_t_vector2(0.0f, 2.0f / 3.0f));
+	t_mesh_add_uv(&result, create_t_vector2(1.0f / 3.0f, 2.0f / 3.0f));
+	t_mesh_add_uv(&result, create_t_vector2(2.0f / 3.0f, 2.0f / 3.0f));
+	t_mesh_add_uv(&result, create_t_vector2(1.0f, 2.0f / 3.0f));
+	t_mesh_add_uv(&result, create_t_vector2(1.0f / 3.0f, 1.0f));
+	t_mesh_add_uv(&result, create_t_vector2(2.0f / 3.0f, 1.0f));
 
-	t_mesh_add_face(&result, create_t_face(6, 5, 7)); // FACE TOP
-	t_mesh_add_face(&result, create_t_face(4, 7, 5));
+	tmp_face1 = create_t_face();
+	tmp_face2 = create_t_face();
 
-	t_mesh_add_face(&result, create_t_face(5, 1, 4)); // FACE FRONT
-	t_mesh_add_face(&result, create_t_face(0, 4, 1));
+	set_t_face_vertices(&tmp_face1, 2, 3, 1); // FACE DOWN
+	set_t_face_uvs(&tmp_face1, 4, 3, 1);
+	set_t_face_vertices(&tmp_face2, 0, 1, 3);
+	set_t_face_uvs(&tmp_face2, 0, 1, 3);
+	t_mesh_add_face(&result, tmp_face1);
+	t_mesh_add_face(&result, tmp_face2);
 
-	t_mesh_add_face(&result, create_t_face(6, 7, 2)); // FACE BACK
-	t_mesh_add_face(&result, create_t_face(3, 2, 7));
+	set_t_face_vertices(&tmp_face1, 6, 5, 7); // FACE TOP
+	set_t_face_uvs(&tmp_face1, 9, 5, 8);
+	set_t_face_vertices(&tmp_face2, 4, 7, 5);
+	set_t_face_uvs(&tmp_face2, 4, 8, 5);
+	t_mesh_add_face(&result, tmp_face1);
+	t_mesh_add_face(&result, tmp_face2);
 
-	t_mesh_add_face(&result, create_t_face(6, 2, 5)); // FACE RIGHT
-	t_mesh_add_face(&result, create_t_face(1, 5, 2));
+	set_t_face_vertices(&tmp_face1, 5, 1, 4); // FACE FRONT
+	set_t_face_uvs(&tmp_face1, 5, 2, 4);
+	set_t_face_vertices(&tmp_face2, 0, 4, 1);
+	set_t_face_uvs(&tmp_face2, 1, 4, 2);
+	t_mesh_add_face(&result, tmp_face1);
+	t_mesh_add_face(&result, tmp_face2);
 
-	t_mesh_add_face(&result, create_t_face(7, 4, 3)); // FACE LEFT
-	t_mesh_add_face(&result, create_t_face(0, 3, 4));
+	set_t_face_vertices(&tmp_face1, 6, 7, 2); // FACE BACK
+	set_t_face_uvs(&tmp_face1, 9, 8, 11);
+	set_t_face_vertices(&tmp_face2, 3, 2, 7);
+	set_t_face_uvs(&tmp_face2, 12, 11, 8);
+	t_mesh_add_face(&result, tmp_face1);
+	t_mesh_add_face(&result, tmp_face2);
+
+	set_t_face_vertices(&tmp_face1, 6, 2, 5); // FACE RIGHT
+	set_t_face_uvs(&tmp_face1, 9, 10, 5);
+	set_t_face_vertices(&tmp_face2, 1, 5, 2);
+	set_t_face_uvs(&tmp_face2, 6, 5, 10);
+	t_mesh_add_face(&result, tmp_face1);
+	t_mesh_add_face(&result, tmp_face2);
+
+	set_t_face_vertices(&tmp_face1, 7, 4, 3); // FACE LEFT
+	set_t_face_uvs(&tmp_face1, 8, 4, 7);
+	set_t_face_vertices(&tmp_face2, 0, 3, 4);
+	set_t_face_uvs(&tmp_face2, 3, 7, 4);
+	t_mesh_add_face(&result, tmp_face1);
+	t_mesh_add_face(&result, tmp_face2);
 
 	t_mesh_compute_normals(&result);
+
+	t_mesh_set_texture(&result, p_texture);
 
 	return (result);
 }
 
-t_mesh		create_primitive_plane(t_vector3 pos, t_vector3 size)
+t_mesh		create_primitive_plane(t_vector3 pos, t_vector3 size, t_texture *p_texture)
 {
 	t_mesh result;
+	t_face	tmp_face1;
+	t_face	tmp_face2;
 
 	result = create_t_mesh(pos);
 
@@ -52,13 +99,24 @@ t_mesh		create_primitive_plane(t_vector3 pos, t_vector3 size)
 	t_mesh_add_point(&result, create_t_vector3(size.x / 2.0, 0.0, size.z / 2.0));
 	t_mesh_add_point(&result, create_t_vector3(-size.x / 2.0, 0.0, size.z / 2.0));
 
-	t_mesh_add_face(&result, create_t_face(2, 1, 3));
-	t_mesh_add_face(&result, create_t_face(0, 3, 1));
+	t_mesh_add_uv(&result, create_t_vector2(0.0f, 0.0f));
+	t_mesh_add_uv(&result, create_t_vector2(1.0f, 0.0f));
+	t_mesh_add_uv(&result, create_t_vector2(0.0f, 1.0f));
+	t_mesh_add_uv(&result, create_t_vector2(1.0f, 1.0f));
 
-	t_mesh_add_face(&result, create_t_face(2, 3, 1));
-	t_mesh_add_face(&result, create_t_face(0, 1, 3));
+	tmp_face1 = create_t_face();
+	tmp_face2 = create_t_face();
+
+	set_t_face_vertices(&tmp_face1, 2, 1, 3); // FACE DOWN
+	set_t_face_uvs(&tmp_face1, 4, 3, 1);
+	set_t_face_vertices(&tmp_face2, 0, 1, 3);
+	set_t_face_uvs(&tmp_face2, 0, 1, 3);
+	t_mesh_add_face(&result, tmp_face1);
+	t_mesh_add_face(&result, tmp_face2);
 
 	t_mesh_compute_normals(&result);
+
+	t_mesh_set_texture(&result, p_texture);
 
 	return (result);
 }

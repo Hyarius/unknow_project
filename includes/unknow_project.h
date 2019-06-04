@@ -12,7 +12,7 @@
 # include "unknow_project_system.h"
 
 //			PNG reader
-t_image 	*png_load(char *path);
+t_texture 	*png_load(char *path);
 
 //			Shader - handler
 GLuint		load_shaders(const char * p_vertex_file_path,
@@ -26,6 +26,7 @@ t_vector2_int
 			convert_vector2_to_vector2_int(t_vector2 *base);
 t_vector3_int
 			convert_vector3_to_vector3_int(t_vector3 *base);
+t_vector3		convert_vector2_to_vector3(t_vector2 *base);
 float		degree_to_radius(float angle);
 float		radius_to_degree(float radian);
 
@@ -33,4 +34,5 @@ void		prepare_screen(t_window *win, t_camera *p_cam, t_color color);
 void		render_screen(t_window *win, t_camera *p_cam);
 void 		clear_buffers(t_window *win);
 void		draw_pixel(t_window *p_win, int x, int y, t_color *color);
+
 #endif

@@ -127,8 +127,12 @@ void				prepare_screen(t_window *win, t_camera *p_cam, t_color color)
 	//Set background color
 	glClearColor((GLclampf)color.r, (GLclampf)color.g, (GLclampf)color.b, 1.0f);
 
-	clean_t_triangle_list(&(p_cam->triangle_list));
+	clean_t_triangle_list(&(p_cam->triangle_color_list));
 	clean_t_color_list(&(p_cam->color_list));
+
+	clean_t_triangle_list(&(p_cam->triangle_texture_list));
+	clean_t_color_list(&(p_cam->darkness_list));
+	clean_t_uv_list(&(p_cam->uv_list));
 
 	clear_buffers(win);
 

@@ -70,7 +70,6 @@ void		t_uv_list_add_back(t_uv_list *dest, t_uv *to_add)
 	}
 	dest->uvs[dest->size].image = to_add->image;
 	dest->uvs[dest->size].uv = to_add->uv;
-	dest->uvs[dest->size].alpha = to_add->alpha;
 	dest->size++;
 }
 
@@ -79,4 +78,9 @@ t_uv	*t_uv_list_get(t_uv_list *dest, int index)
 	if (index < 0 || index >= dest->size)
 		error_exit(-28, "Segfault : t_color_list out of range");
 	return (&dest->uvs[index]);
+}
+
+void	clean_t_uv_list(t_uv_list *dest)
+{
+	dest->size = 0;
 }

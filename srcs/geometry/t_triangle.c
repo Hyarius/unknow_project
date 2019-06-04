@@ -25,24 +25,16 @@ t_triangle	*initialize_t_triangle(t_vector3 p_a, t_vector3 p_b, t_vector3 p_c)
 
 void 		sort_t_triangle_points(t_triangle *p_triangle)
 {
-	t_vector3 tmp;
-
 	if (p_triangle->a.y > p_triangle->b.y || (p_triangle->a.y == p_triangle->b.y && p_triangle->a.x > p_triangle->b.x))
 	{
-		tmp = p_triangle->a;
-		p_triangle->a = p_triangle->b;
-		p_triangle->b = tmp;
+		swap_t_vector3(&(p_triangle->a), &(p_triangle->b));
 	}
 	if (p_triangle->b.y > p_triangle->c.y || (p_triangle->b.y == p_triangle->c.y && p_triangle->b.x > p_triangle->c.x))
 	{
-		tmp = p_triangle->b;
-		p_triangle->b = p_triangle->c;
-		p_triangle->c = tmp;
+		swap_t_vector3(&(p_triangle->b), &(p_triangle->c));
 	}
 	if (p_triangle->a.y > p_triangle->b.y || (p_triangle->a.y == p_triangle->b.y && p_triangle->a.x > p_triangle->b.x))
 	{
-		tmp = p_triangle->a;
-		p_triangle->a = p_triangle->b;
-		p_triangle->b = tmp;
+		swap_t_vector3(&(p_triangle->a), &(p_triangle->b));
 	}
 }

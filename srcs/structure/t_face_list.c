@@ -65,9 +65,12 @@ void	t_face_list_add_back(t_face_list *dest, t_face *to_add)
 		free(tmp);
 		dest->max_size += PUSH_SIZE;
 	}
-	dest->face[dest->size].index[0] = to_add->index[0];
-	dest->face[dest->size].index[1] = to_add->index[1];
-	dest->face[dest->size].index[2] = to_add->index[2];
+	dest->face[dest->size].index_vertices[0] = to_add->index_vertices[0];
+	dest->face[dest->size].index_vertices[1] = to_add->index_vertices[1];
+	dest->face[dest->size].index_vertices[2] = to_add->index_vertices[2];
+	dest->face[dest->size].index_uvs[0] = to_add->index_uvs[0];
+	dest->face[dest->size].index_uvs[1] = to_add->index_uvs[1];
+	dest->face[dest->size].index_uvs[2] = to_add->index_uvs[2];
 	dest->face[dest->size].normale = to_add->normale;
 	(dest->size)++;
 }
