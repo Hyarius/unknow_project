@@ -35,14 +35,14 @@ static void 	draw_scan_line(t_window *p_win, t_vector3 left, t_vector3 right, t_
 		{
 			if (current.z < p_win->depth_buffer[pixel_index] || p_win->depth_buffer[pixel_index] == 0)
 			{
-				color = get_pixel_color(texture, uv_left.x, uv_left.y);
+				color = get_pixel_color(texture, (int)(uv_left.x * texture->surface->w - 0.5), (int)(uv_left.y * texture->surface->h - 0.5));
 				draw_pixel(p_win, (int)(current.x), (int)(current.y), &color);
 				p_win->depth_buffer[pixel_index] = current.z;
 			}
 		}
 		current.x++;
 		current.z += delta_z;
-		uv_left = substract_vector3_to_vector3(uv_left, delta_uv);
+		uv_left = add_vector3_to_vector3(uv_left, delta_uv);
 		pixel_index++;
 	}
 }
@@ -61,12 +61,13 @@ static void	fill_down_flat_triangle(t_window *p_win, t_triangle *p_triangle, t_u
 
 	delta_left = create_t_vector3((p_triangle->a.x - p_triangle->b.x) / (p_triangle->a.y - p_triangle->b.y), 1.0, (p_triangle->a.z - p_triangle->b.z) / (p_triangle->a.y - p_triangle->b.y));
 	delta_right = create_t_vector3((p_triangle->a.x - p_triangle->c.x) / (p_triangle->a.y - p_triangle->c.y), 1.0, (p_triangle->a.z - p_triangle->c.z) / (p_triangle->a.y - p_triangle->c.y));
-	delta_uv_left = create_t_vector3((p_uv->uv->a.x - p_uv->uv->b.x) / (p_triangle->a.y - p_triangle->b.y), (p_uv->uv->a.y - p_uv->uv->b.y) / (p_triangle->a.y - p_triangle->b.y), 1.0);
-	delta_uv_right = create_t_vector3((p_uv->uv->a.x - p_uv->uv->c.x) / (p_triangle->a.y - p_triangle->b.y), (p_uv->uv->a.y - p_uv->uv->b.y) / (p_triangle->a.y - p_triangle->b.y), 1.0);
+	delta_uv_left = create_t_vector3((p_uv->uv.a.x - p_uv->uv.b.x) / (p_triangle->a.y - p_triangle->b.y), (p_uv->uv.a.y - p_uv->uv.b.y) / (p_triangle->a.y - p_triangle->b.y), 1.0);
+	delta_uv_right = create_t_vector3((p_uv->uv.a.x - p_uv->uv.c.x) / (p_triangle->a.y - p_triangle->b.y), (p_uv->uv.a.y - p_uv->uv.b.y) / (p_triangle->a.y - p_triangle->b.y), 1.0);
+
 	left = p_triangle->b;
 	right = p_triangle->c;
-	uv_left = p_uv->uv->b;
-	uv_right = p_uv->uv->c;
+	uv_left = p_uv->uv.b;
+	uv_right = p_uv->uv.c;
 	target = p_triangle->a;
 	if (target.y < 0)
 		target.y = 0;
@@ -84,8 +85,8 @@ static void	fill_down_flat_triangle(t_window *p_win, t_triangle *p_triangle, t_u
 		draw_scan_line(p_win, left, right, uv_left, uv_right, p_uv->image, darkness);
 		left = substract_vector3_to_vector3(left, delta_left);
 		right = substract_vector3_to_vector3(right, delta_right);
-		uv_left = add_vector3_to_vector3(uv_left, delta_uv_left);
-		uv_right = add_vector3_to_vector3(uv_right, delta_uv_right);
+		uv_left = substract_vector3_to_vector3(uv_left, delta_uv_left);
+		uv_right = substract_vector3_to_vector3(uv_right, delta_uv_right);
 	}
 }
 
@@ -103,12 +104,12 @@ static void	fill_top_flat_triangle(t_window *p_win, t_triangle *p_triangle, t_uv
 
 	delta_left = create_t_vector3((p_triangle->c.x - p_triangle->a.x) / (p_triangle->c.y - p_triangle->a.y), 1.0, (p_triangle->c.z - p_triangle->a.z) / (p_triangle->c.y - p_triangle->a.y));
 	delta_right = create_t_vector3((p_triangle->c.x - p_triangle->b.x) / (p_triangle->c.y - p_triangle->b.y), 1.0, (p_triangle->c.z - p_triangle->b.z) / (p_triangle->c.y - p_triangle->b.y));
-	delta_uv_left = create_t_vector3((p_uv->uv->c.x - p_uv->uv->a.x) / (p_triangle->c.y - p_triangle->a.y), (p_uv->uv->c.z - p_uv->uv->a.z) / (p_triangle->c.y - p_triangle->a.y), 1.0);
-	delta_uv_right = create_t_vector3((p_uv->uv->c.x - p_uv->uv->b.x) / (p_triangle->c.y - p_triangle->b.y), (p_uv->uv->c.z - p_uv->uv->b.z) / (p_triangle->c.y - p_triangle->b.y), 1.0);
+	delta_uv_left = create_t_vector3((p_uv->uv.c.x - p_uv->uv.a.x) / (p_triangle->c.y - p_triangle->a.y), (p_uv->uv.c.y - p_uv->uv.a.y) / (p_triangle->c.y - p_triangle->a.y), 1.0);
+	delta_uv_right = create_t_vector3((p_uv->uv.c.x - p_uv->uv.b.x) / (p_triangle->c.y - p_triangle->b.y), (p_uv->uv.c.y - p_uv->uv.b.y) / (p_triangle->c.y - p_triangle->b.y), 1.0);
 	left = p_triangle->a;
 	right = p_triangle->b;
-	uv_left = p_uv->uv->a;
-	uv_right = p_uv->uv->b;
+	uv_left = p_uv->uv.a;
+	uv_right = p_uv->uv.b;
 	target = p_triangle->c;
 	if (target.y < 0)
 		target.y = 0;
@@ -136,17 +137,17 @@ static void 	parse_triangle(t_triangle *p_triangle, t_uv *p_uv)
 	if (p_triangle->a.y > p_triangle->b.y || (p_triangle->a.y == p_triangle->b.y && p_triangle->a.x > p_triangle->b.x))
 	{
 		swap_t_vector3(&(p_triangle->a), &(p_triangle->b));
-		swap_t_vector3(&(p_uv->uv->a), &(p_uv->uv->b));
+		swap_t_vector3(&(p_uv->uv.a), &(p_uv->uv.b));
 	}
 	if (p_triangle->b.y > p_triangle->c.y || (p_triangle->b.y == p_triangle->c.y && p_triangle->b.x > p_triangle->c.x))
 	{
 		swap_t_vector3(&(p_triangle->b), &(p_triangle->c));
-		swap_t_vector3(&(p_uv->uv->b), &(p_uv->uv->c));
+		swap_t_vector3(&(p_uv->uv.b), &(p_uv->uv.c));
 	}
 	if (p_triangle->a.y > p_triangle->b.y || (p_triangle->a.y == p_triangle->b.y && p_triangle->a.x > p_triangle->b.x))
 	{
 		swap_t_vector3(&(p_triangle->a), &(p_triangle->b));
-		swap_t_vector3(&(p_uv->uv->a), &(p_uv->uv->b));
+		swap_t_vector3(&(p_uv->uv.a), &(p_uv->uv.b));
 	}
 }
 
@@ -154,41 +155,56 @@ void	draw_triangle_texture_cpu(t_window *p_win, t_triangle *p_triangle, t_uv *p_
 {
 	t_vector3	point_d_triangle;
 	t_vector3	point_d_uv;
-
+	t_triangle	base_triangle;
 	t_triangle	tmp_triangle;
+	t_uv		base_uv;
 	t_uv		tmp_uv;
 
-	p_triangle->a = convert_opengl_to_vector3(p_win, &(p_triangle->a));
-	p_triangle->b = convert_opengl_to_vector3(p_win, &(p_triangle->b));
-	p_triangle->c = convert_opengl_to_vector3(p_win, &(p_triangle->c));
+	base_triangle.a = convert_opengl_to_vector3(p_win, &(p_triangle->a));
+	base_triangle.b = convert_opengl_to_vector3(p_win, &(p_triangle->b));
+	base_triangle.c = convert_opengl_to_vector3(p_win, &(p_triangle->c));
+	base_uv = *p_uv;
+	parse_triangle(&base_triangle, p_uv);
 
-	parse_triangle(p_triangle, p_uv);
-
-	if (p_triangle->b.y == p_triangle->c.y)
-		fill_down_flat_triangle(p_win, p_triangle, p_uv, darkness);
-	else if (p_triangle->a.y == p_triangle->b.y || p_triangle->a.y == p_triangle->c.y)
-		fill_top_flat_triangle(p_win, p_triangle, p_uv, darkness);
+	if (base_triangle.b.y == base_triangle.c.y)
+	{
+		fill_down_flat_triangle(p_win, &base_triangle, p_uv, darkness);
+	}
+	else if (base_triangle.a.y == base_triangle.b.y || base_triangle.a.y == base_triangle.c.y)
+	{
+		fill_top_flat_triangle(p_win, &base_triangle, p_uv, darkness);
+	}
 	else
 	{
-		point_d_triangle.x = p_triangle->a.x + ((p_triangle->b.y - p_triangle->a.y) / (p_triangle->c.y - p_triangle->a.y) * (p_triangle->c.x - p_triangle->a.x));
-		point_d_triangle.y = p_triangle->b.y;
-		point_d_triangle.z = p_triangle->a.z + ((p_triangle->b.y - p_triangle->a.y) / (p_triangle->c.y - p_triangle->a.y) * (p_triangle->c.z - p_triangle->a.z));
+		point_d_triangle.x = base_triangle.a.x + ((base_triangle.b.y - base_triangle.a.y) / (base_triangle.c.y - base_triangle.a.y) * (base_triangle.c.x - base_triangle.a.x));
+		point_d_triangle.y = base_triangle.b.y;
+		point_d_triangle.z = base_triangle.a.z + ((base_triangle.b.y - base_triangle.a.y) / (base_triangle.c.y - base_triangle.a.y) * (base_triangle.c.z - base_triangle.a.z));
 
-		tmp_triangle = create_t_triangle(p_triangle->b, point_d_triangle, p_triangle->c);
+		float ratio_x;
+		float ratio_y;
 
-		p_triangle->c = tmp_triangle.b;
+		if (base_triangle.c.x != base_triangle.a.x)
+			ratio_x = ((point_d_triangle.x - base_triangle.a.x) / (base_triangle.c.x - base_triangle.a.x));
+		else
+			ratio_x = 0.0;
 
-		point_d_uv.x = p_uv->uv->a.x + ((p_uv->uv->b.y - p_uv->uv->a.y) / (p_uv->uv->c.y - p_uv->uv->a.y) * (p_uv->uv->c.x - p_uv->uv->a.x));
-		point_d_uv.y = p_uv->uv->b.y;
-		point_d_uv.z = p_uv->uv->a.z + ((p_uv->uv->b.y - p_uv->uv->a.y) / (p_uv->uv->c.y - p_uv->uv->a.y) * (p_uv->uv->c.z - p_uv->uv->a.z));
+		if (base_triangle.c.y != base_triangle.a.y)
+			ratio_y = ((point_d_triangle.y - base_triangle.a.y) / (base_triangle.c.y - base_triangle.a.y));
+		else
+			ratio_y = 0.0;
 
-		tmp_uv = *p_uv;
+		point_d_uv.x = ((base_uv.uv.c.x - base_uv.uv.a.x) * ratio_x) + base_uv.uv.a.x;// * (p_uv->uv.c.x - p_uv->uv.a.x);
+		point_d_uv.y = ((base_uv.uv.c.y - base_uv.uv.a.y) * ratio_y) + base_uv.uv.a.y;// * (p_uv->uv.c.y - p_uv->uv.a.y);
+		point_d_uv.z = 1.0;
 
-		*(tmp_uv.uv) = create_t_triangle(p_uv->uv->b, point_d_uv, p_uv->uv->c);
+		tmp_triangle = create_t_triangle(base_triangle.b, point_d_triangle, base_triangle.c);
+		tmp_uv = base_uv;
+		tmp_uv.uv = create_t_triangle(base_uv.uv.b, point_d_uv, base_uv.uv.c);
 
-		p_uv->uv->c = tmp_uv.uv->b;
+		base_triangle.c = tmp_triangle.b;
+		base_uv.uv.c = tmp_uv.uv.b;
 
-		fill_down_flat_triangle(p_win, p_triangle, p_uv, darkness);
+		fill_down_flat_triangle(p_win, &base_triangle, &base_uv, darkness);
 		fill_top_flat_triangle(p_win, &tmp_triangle, &tmp_uv, darkness);
 	}
 }

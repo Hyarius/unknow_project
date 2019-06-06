@@ -20,6 +20,7 @@ GLuint		load_shaders(const char * p_vertex_file_path,
 
 //			convert
 t_vector3	convert_screen_to_opengl(t_window *p_win, t_vector3 *source);
+t_vector3	convert_coord_to_opengl(t_window *p_win, t_vector3 source);
 t_vector2	convert_vector2_to_opengl(t_window *p_win, t_vector2 *source);
 t_vector3	convert_opengl_to_vector3(t_window *p_win, t_vector3 *source);
 t_vector2_int

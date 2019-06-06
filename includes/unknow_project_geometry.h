@@ -13,6 +13,7 @@ typedef struct	s_triangle
 t_triangle	create_t_triangle(t_vector3 p_a, t_vector3 p_b, t_vector3 p_c);
 t_triangle	*initialize_t_triangle(t_vector3 p_a, t_vector3 p_b, t_vector3 p_c);
 void 		sort_t_triangle_points(t_triangle *p_triangle);
+void		print_t_triangle(t_triangle p_triangle, char *triangle_name);
 
 typedef struct	s_line
 {

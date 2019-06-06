@@ -10,6 +10,31 @@ int main(int argc, char **argv)
 	t_window *win;
 	win = initialize_t_window(argv[0], 1840, 1220);	//creation et initialisation de la window
 
+	t_texture *texture = png_load("ressources/assets/texture/cube_test.png");
+
+	// t_vector3	coord[4];
+	// t_vector3	uv_coord[4];
+	// coord[0] = convert_coord_to_opengl(win, create_t_vector3(150, 100, 0));
+	// coord[1] = convert_coord_to_opengl(win, create_t_vector3(250, 150, 0));
+	// coord[2] = convert_coord_to_opengl(win, create_t_vector3(150, 170, 0));
+	// // coord[3] = convert_coord_to_opengl(win, create_t_vector3(250, 300, 0));
+	// uv_coord[0] = create_t_vector3(0.0, 0.0, 0.0);
+	// uv_coord[1] = create_t_vector3(1.0, 0.0, 0.0);
+	// uv_coord[2] = create_t_vector3(0.0, 1.0, 0.0);
+	// // uv_coord[3] = create_t_vector3(1.0, 1.0, 0.0);
+
+	// t_triangle	triangle = create_t_triangle(coord[0], coord[1], coord[2]);
+	// t_triangle	uv_triangle = create_t_triangle(uv_coord[0], uv_coord[1], uv_coord[2]);
+	// t_uv		uv = create_t_uv(uv_triangle, texture);
+
+	// // t_triangle	triangle2 = create_t_triangle(coord[1], coord[2], coord[3]);
+	// // t_triangle	uv_triangle2 = create_t_triangle(uv_coord[1], uv_coord[2], uv_coord[3]);
+
+	// // t_uv		uv2 = create_t_uv(uv_triangle2, texture);
+	// t_color darkness = create_t_color(1.0, 1.0, 1.0, 1.0);
+
+	// draw_triangle_texture_cpu(win, &triangle, &uv, &darkness);
+
 	t_mouse	*mouse = initialize_t_mouse(); //creation de l'evenement mouse, et set des variables mouse par default
 	t_keyboard *keyboard = initialize_t_keyboard(); //creation du keyboard, preparaton aux tests des touches
 
@@ -18,8 +43,6 @@ int main(int argc, char **argv)
 
 	t_mesh **mesh_list;
 	int nb = 100; //nombre de mesh (cube)
-
-	t_texture *texture = png_load("ressources/assets/texture/cube_test_blue.png");
 
 	t_camera *cam = initialize_t_camera(win, create_t_vector3(0, 0, 3), 70, create_t_vector2(0.1f, 50.0f)); //creation et initialisation de la camera et des matrices liee a la camera
 
@@ -36,7 +59,7 @@ int main(int argc, char **argv)
 		*(mesh_list[i]) = create_primitive_cube(create_t_vector3(x, y, z), create_t_vector3(size, size, size), texture); //creation du cube que l'on rentre dans mesh
 	}
 
-	int state = 1;
+	// int state = 1;
 	while (play == 1)
 	{
 		//rotate_t_mesh(mesh_list[0], create_t_vector3(0.25, 0.25, 0.25), create_t_vector3(1.5, 1.5, 1.5));
@@ -50,6 +73,9 @@ int main(int argc, char **argv)
 
 		prepare_screen(win, cam, create_t_color(0.2f, 0.2f, 0.2f, 1.0f)); // refresh de l'ecran avec les couleurs par default
 
+		// draw_triangle_texture_cpu(win, &triangle, &uv, &darkness);
+		// draw_triangle_texture_cpu(win, &triangle2, &uv2, &darkness);
+
 		for (int i = 0; i < nb; i++)
 			draw_t_mesh(win, cam, mesh_list[i]); // dessine le cube
 
@@ -61,8 +87,6 @@ int main(int argc, char **argv)
 				play = 0;
 			if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
 				play = 0;
-			if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_y)
-				state = (state + 1) % 2;
 		}
 		SDL_FlushEvents(SDL_FIRSTEVENT, SDL_LASTEVENT);
 	}

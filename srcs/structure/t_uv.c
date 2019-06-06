@@ -1,6 +1,6 @@
 #include "unknow_project.h"
 
-t_uv	create_t_uv(t_triangle *p_triangle, t_texture *p_image)
+t_uv	create_t_uv(t_triangle p_triangle, t_texture *p_image)
 {
 	t_uv result;
 
@@ -10,7 +10,7 @@ t_uv	create_t_uv(t_triangle *p_triangle, t_texture *p_image)
 	return (result);
 }
 
-t_uv	*initialize_t_uv(t_triangle *p_triangle, t_texture *p_image)
+t_uv	*initialize_t_uv(t_triangle p_triangle, t_texture *p_image)
 {
 	t_uv *result;
 
@@ -20,4 +20,15 @@ t_uv	*initialize_t_uv(t_triangle *p_triangle, t_texture *p_image)
 	*result = create_t_uv(p_triangle, p_image);
 
 	return (result);
+}
+
+void	print_t_uv(t_uv uv, char *texture_name)
+{
+	printf("Texture : %s\n", texture_name);
+	printf("Texture size : %d / %d\n", uv.image->surface->w, uv.image->surface->h);
+	printf("Texture Internal Format : %d\n", uv.image->surface->internalFormat);
+	printf("UV coordinate :\n");
+	print_t_vector3(uv.uv.a, "A : ");endl();
+	print_t_vector3(uv.uv.b, "B : ");endl();
+	print_t_vector3(uv.uv.c, "C : ");endl();
 }

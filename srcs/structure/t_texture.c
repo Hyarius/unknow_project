@@ -1,17 +1,12 @@
 #include "unknow_project.h"
 
-t_color			get_pixel_color(t_texture *texture, float f_x, float f_y)
+t_color			get_pixel_color(t_texture *texture, int x, int y)
 {
-	int			x;
-	int			y;
 	int			i;
 	unsigned char
 				info[4];
 	int			pixel_index;
 	t_color		result;
-
-	x = (int)(f_x * texture->surface->w);
-	y = (int)(f_y * texture->surface->h);
 
 	if (x < 0 || x >= texture->surface->w ||
 		y < 0 || y >= texture->surface->h)

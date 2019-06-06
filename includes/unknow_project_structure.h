@@ -35,16 +35,17 @@ typedef struct	s_texture
 	GLuint		id;
 }				t_texture;
 
-t_color			get_pixel_color(t_texture *texture, float f_x, float f_y);
+t_color			get_pixel_color(t_texture *texture, int x, int y);
 
 typedef struct	s_uv
 {
 	t_texture	*image;
-	t_triangle	*uv;
+	t_triangle	uv;
 }				t_uv;
 
-t_uv		create_t_uv(t_triangle *p_triangle, t_texture *p_image);
-t_uv		*initialize_t_uv(t_triangle *p_triangle, t_texture *p_image);
+t_uv		create_t_uv(t_triangle p_triangle, t_texture *p_image);
+t_uv		*initialize_t_uv(t_triangle p_triangle, t_texture *p_image);
+void		print_t_uv(t_uv uv, char *texture_name);
 
 typedef struct	s_face
 {

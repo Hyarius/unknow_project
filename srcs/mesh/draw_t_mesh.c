@@ -56,7 +56,7 @@ void	draw_t_mesh(t_window *p_win, t_camera *p_cam, t_mesh *mesh)
 					triangle.a = convert_vector2_to_vector3(t_vector2_list_get(mesh->uvs, face.index_uvs[0]));
 					triangle.b = convert_vector2_to_vector3(t_vector2_list_get(mesh->uvs, face.index_uvs[1]));
 					triangle.c = convert_vector2_to_vector3(t_vector2_list_get(mesh->uvs, face.index_uvs[2]));
-					tmp_uv = create_t_uv(&triangle, mesh->texture);
+					tmp_uv = create_t_uv(triangle, mesh->texture);
 					t_uv_list_push_back(&(p_cam->uv_list), tmp_uv);
 					t_color_list_push_back(&(p_cam->darkness_list), tmp_color);
 				}

@@ -11,6 +11,17 @@ t_vector3		convert_screen_to_opengl(t_window *p_win, t_vector3 *source)
 	return (result);
 }
 
+t_vector3		convert_coord_to_opengl(t_window *p_win, t_vector3 source)
+{
+	t_vector3 result;
+
+	result.x = source.x / (p_win->size_x / 2.0) - 1.0f;
+	result.y = -(source.y / (p_win->size_y / 2.0) - 1.0f);
+	result.z = source.z;
+
+	return (result);
+}
+
 t_vector2		convert_vector2_to_opengl(t_window *p_win, t_vector2 *source)
 {
 	t_vector2 result;

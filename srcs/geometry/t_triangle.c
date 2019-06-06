@@ -38,3 +38,11 @@ void 		sort_t_triangle_points(t_triangle *p_triangle)
 		swap_t_vector3(&(p_triangle->a), &(p_triangle->b));
 	}
 }
+
+void		print_t_triangle(t_triangle p_triangle, char *triangle_name)
+{
+	printf("Triangle Name : %s\n", triangle_name);
+	print_t_vector3(p_triangle.a, "A : ");endl();
+	print_t_vector3(p_triangle.b, "B : ");endl();
+	print_t_vector3(p_triangle.c, "C : ");endl();
+}

@@ -6,7 +6,7 @@ float dist_min;
 void 	draw_scan_line_depth(t_window *p_win, t_vector3 left, t_vector3 right, t_color *p_color)
 {
 	float	ratio;
-	int pixel_index;
+	int		pixel_index;
 	t_color	tmp_color;
 
 	if (left.x > right.x)
