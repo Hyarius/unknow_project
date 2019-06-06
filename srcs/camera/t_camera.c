@@ -20,7 +20,7 @@ t_camera	create_t_camera(t_window *p_win, t_vector3 p_pos, float p_fov, t_vector
 	t_camera_look_at(&result); //calcul de l'angle de la camera
 	result.view = t_camera_compute_view(&result); //calcul de la matrice de vue
 	result.projection = compute_projection_matrix(p_win, &result); //calcul de la matrice de projection
-	result.sun_direction = normalize_t_vector3(create_t_vector3(0.2, -1, -0.4)); // direction de la lumiere
+	result.sun_direction = normalize_t_vector3(create_t_vector3(0.0, -1, -0.4)); // direction de la lumiere
 	result.triangle_color_list = create_t_triangle_list(); // list des triangles
 	result.color_list = create_t_color_list(); //list des couleurs
 

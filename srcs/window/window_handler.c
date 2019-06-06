@@ -94,7 +94,7 @@ t_window		*initialize_t_window(char *p_name, int p_size_x, int p_size_y)
 			tmp_coord.y = j;
 			tmp_coord.z = 0.0f;
 
-			win->vertex_data[i + j * win->size_x] = convert_screen_to_opengl(win, &tmp_coord);
+			win->vertex_data[i + j * win->size_x] = convert_screen_to_opengl(win, tmp_coord);
 		}
 	}
 	glBindVertexArray(win->vertex_array);

@@ -10,7 +10,10 @@ t_color			get_pixel_color(t_texture *texture, int x, int y)
 
 	if (x < 0 || x >= texture->surface->w ||
 		y < 0 || y >= texture->surface->h)
-		return (create_t_color(1.0, 0.0, 0.0, 1.0));
+		{
+			//printf("Error at %d / %d\n", x, y);
+			return (create_t_color(1.0, 0.0, 0.0, 1.0));
+		}
 
 	pixel_index = (x + y * texture->surface->w) * texture->surface->internalFormat;
 

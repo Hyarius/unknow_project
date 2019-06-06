@@ -103,9 +103,9 @@ void	draw_triangle_depth_cpu(t_window *p_win, t_triangle *p_triangle, t_color *p
 	t_vector3	point_d;
 	t_triangle	tmp;
 
-	p_triangle->a = convert_opengl_to_vector3(p_win, &(p_triangle->a));
-	p_triangle->b = convert_opengl_to_vector3(p_win, &(p_triangle->b));
-	p_triangle->c = convert_opengl_to_vector3(p_win, &(p_triangle->c));
+	p_triangle->a = convert_opengl_to_vector3(p_win, p_triangle->a);
+	p_triangle->b = convert_opengl_to_vector3(p_win, p_triangle->b);
+	p_triangle->c = convert_opengl_to_vector3(p_win, p_triangle->c);
 
 	sort_t_triangle_points(p_triangle);
 

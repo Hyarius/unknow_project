@@ -28,14 +28,13 @@ static void 	draw_scan_line(t_window *p_win, t_vector3 left, t_vector3 right, t_
 	}
 	float delta_z = (target.z - current.z) / (target.x - current.x);
 	pixel_index = (int)(current.x) + ((int)(current.y) * p_win->size_x);
-	while (current.x <= target.x)
+	while ((int)(current.x) < (int)(target.x))
 	{
-
 		if (current.x >= 0 && current.x < p_win->size_x && current.y >= 0 && current.y < p_win->size_y)
 		{
 			if (current.z < p_win->depth_buffer[pixel_index] || p_win->depth_buffer[pixel_index] == 0)
 			{
-				color = get_pixel_color(texture, (int)(uv_left.x * texture->surface->w - 0.5), (int)(uv_left.y * texture->surface->h - 0.5));
+				color = get_pixel_color(texture, (int)(uv_left.x * texture->surface->w), (int)(uv_left.y * texture->surface->h));
 				draw_pixel(p_win, (int)(current.x), (int)(current.y), &color);
 				p_win->depth_buffer[pixel_index] = current.z;
 			}
@@ -66,8 +65,8 @@ static void	fill_down_flat_triangle(t_window *p_win, t_triangle *p_triangle, t_u
 
 	left = p_triangle->b;
 	right = p_triangle->c;
-	uv_left = p_uv->uv.b;
-	uv_right = p_uv->uv.c;
+	uv_left = substract_vector3_to_vector3(p_uv->uv.b, delta_uv_left);
+	uv_right = substract_vector3_to_vector3(p_uv->uv.c, delta_uv_right);
 	target = p_triangle->a;
 	if (target.y < 0)
 		target.y = 0;
@@ -160,11 +159,11 @@ void	draw_triangle_texture_cpu(t_window *p_win, t_triangle *p_triangle, t_uv *p_
 	t_uv		base_uv;
 	t_uv		tmp_uv;
 
-	base_triangle.a = convert_opengl_to_vector3(p_win, &(p_triangle->a));
-	base_triangle.b = convert_opengl_to_vector3(p_win, &(p_triangle->b));
-	base_triangle.c = convert_opengl_to_vector3(p_win, &(p_triangle->c));
-	base_uv = *p_uv;
-	parse_triangle(&base_triangle, p_uv);
+	base_triangle.a = convert_opengl_to_vector3(p_win, p_triangle->a);
+	base_triangle.b = convert_opengl_to_vector3(p_win, p_triangle->b);
+	base_triangle.c = convert_opengl_to_vector3(p_win, p_triangle->c);
+	base_uv = *(p_uv);
+	parse_triangle(&base_triangle, &base_uv);
 
 	if (base_triangle.b.y == base_triangle.c.y)
 	{
