@@ -19,16 +19,9 @@ static void 	draw_scan_line(t_window *p_win, t_vector3 left, t_vector3 right, t_
 	target = right;
 	delta_uv = create_t_vector3((uv_right.x - uv_left.x) / (right.x - left.x), (uv_right.y - uv_left.y) / (right.x - left.x), 0.0);
 
-	if (current.x < 0)
-	{
-		uv_left = mult_vector3_by_vector3(uv_left, mult_vector3_by_float(delta_uv, -current.x));
-		current.x = 0;
-	}
-	if (target.x >= p_win->size_x)
-	{
-		uv_left = mult_vector3_by_vector3(uv_left, mult_vector3_by_float(delta_uv, current.x - p_win->size_x));
-		target.x = p_win->size_x - 1;
-	}
+	if (current.x >= p_win->size_x || target.x < 0)
+		return ;
+
 	float delta_z = (target.z - current.z) / (target.x - current.x);
 	pixel_index = (int)(current.x) + ((int)(current.y) * p_win->size_x);
 	while ((int)(current.x) <= (int)(target.x))

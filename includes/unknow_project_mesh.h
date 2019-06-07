@@ -31,6 +31,8 @@ void		t_mesh_compute_normals(t_mesh *mesh);
 
 t_mesh		create_primitive_cube(t_vector3 coord, t_vector3 size, t_texture *texture);
 t_mesh		create_primitive_plane(t_vector3 pos, t_vector3 size, t_texture *texture);
+t_mesh		create_primitive_vertical_plane(t_vector3 pos, t_vector3 size, t_texture *p_texture);
+
 void 		draw_t_mesh(t_window *p_win, t_camera *p_cam, t_mesh *mesh);
 void		rotate_t_mesh(t_mesh *mesh, t_vector3 angle, t_vector3 center);
 

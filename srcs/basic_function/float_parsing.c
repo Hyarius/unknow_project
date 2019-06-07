@@ -5,10 +5,6 @@ int		ft_floor(float source)
 	int result;
 
 	result = (int)(source);
-	if (source < 0)
-	{
-		return (0);
-	}
 	if (source - (float)(result) >= 0.5)
 		result++;
 
