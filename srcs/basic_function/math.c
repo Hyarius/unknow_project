@@ -73,3 +73,20 @@ void			clamp_int_value(int min, int *value, int max)
 	if (*value > max)
 		*value = max;
 }
+
+t_vector3		interpolate_vector3_over_line(float ratio_x, float ratio_y, t_vector3 ua, t_vector3 ub)
+{
+	t_vector3 result;
+
+	result.x = ((ub.x - ua.x) * ratio_x) + ua.x;
+	result.y = ((ub.y - ua.y) * ratio_y) + ua.y;
+
+	return (result);
+}
+
+float		interpolate_ratio(float a, float b, float c)
+{
+	if (b - a == 0)
+		return (0);
+	return ((c - a) / (b - a));
+}

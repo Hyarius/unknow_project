@@ -11,7 +11,7 @@ typedef struct	s_mesh
 	t_texture	*texture;
 	t_vector3_list
 				*vertices;
-	t_vector2_list
+	t_vector3_list
 				*uvs;
 	t_vector3_list
 				*normales;
@@ -24,7 +24,7 @@ t_mesh		*initialize_t_mesh(t_vector3 pos);
 void		free_t_mesh();
 void		delete_t_mesh();
 void		t_mesh_add_point(t_mesh *dest, t_vector3 new_point);
-void		t_mesh_add_uv(t_mesh *dest, t_vector2 new_uv);
+void		t_mesh_add_uv(t_mesh *dest, t_vector3 new_uv);
 void		t_mesh_add_face(t_mesh *dest, t_face new_face);
 void 		t_mesh_set_texture(t_mesh *dest, t_texture *p_texture);
 void		t_mesh_compute_normals(t_mesh *mesh);

@@ -14,10 +14,10 @@
 
 // 	t_vector3	coord[4];
 // 	t_vector3	uv_coord[4];
-// 	coord[0] = convert_screen_to_opengl(win, create_t_vector3(100, 200, 0));
-// 	coord[1] = convert_screen_to_opengl(win, create_t_vector3(500, 100, 0));
-// 	coord[2] = convert_screen_to_opengl(win, create_t_vector3(600, 500, 0));
-// 	coord[3] = convert_screen_to_opengl(win, create_t_vector3(200, 600, 0));
+// 	coord[0] = convert_screen_to_opengl(win, create_t_vector3(200, 400, 0));
+// 	coord[1] = convert_screen_to_opengl(win, create_t_vector3(1000, 200, 0));
+// 	coord[2] = convert_screen_to_opengl(win, create_t_vector3(1200, 1000, 0));
+// 	coord[3] = convert_screen_to_opengl(win, create_t_vector3(400, 1200, 0));
 // 	uv_coord[0] = create_t_vector3(0.0, 1.0, 0.0);
 // 	uv_coord[1] = create_t_vector3(1.0, 1.0, 0.0);
 // 	uv_coord[2] = create_t_vector3(1.0, 0.0, 0.0);
@@ -67,7 +67,7 @@ int main(int argc, char **argv)
 	t_window *win;
 	win = initialize_t_window(argv[0], 1840, 1220);	//creation et initialisation de la window
 
-	t_texture *texture = png_load("ressources/assets/texture/cube_number.png");
+	t_texture *texture = png_load("ressources/assets/texture/cube_test.png");
 
 	t_mouse	*mouse = initialize_t_mouse(); //creation de l'evenement mouse, et set des variables mouse par default
 	t_keyboard *keyboard = initialize_t_keyboard(); //creation du keyboard, preparaton aux tests des touches
@@ -76,17 +76,17 @@ int main(int argc, char **argv)
 	int play = 1;
 
 	t_mesh **mesh_list;
-	int nb = 15; //nombre de mesh (cube)
+	int nb = 100; //nombre de mesh (cube)
 
-	t_camera *cam = initialize_t_camera(win, create_t_vector3(1, 2, 4), 70, create_t_vector2(0.1f, 50.0f)); //creation et initialisation de la camera et des matrices liee a la camera
+	t_camera *cam = initialize_t_camera(create_t_vector3(1, 2, 4), 70, create_t_vector2(0.1f, 50.0f)); //creation et initialisation de la camera et des matrices liee a la camera
 
 	mesh_list = (t_mesh **)malloc(sizeof(t_mesh *) * nb);
 	float size = 1;
-	int range = 4;
+	int range = 20;
 	for (int i = 0; i < nb; i++)
 	{
 		float x = (float)(generate_nbr(-range, range)) + 0.5f; //generer position aleatoire des cube
-		float y = (float)(generate_nbr(-range, range)) + 0.5f;
+		float y = (float)(generate_nbr(-2, 3)) + 0.5f;
 		float z = (float)(generate_nbr(-range, range)) + 0.5f;
 
 		mesh_list[i] = initialize_t_mesh(create_t_vector3(x, y, z)); //creation d'un mesh vide

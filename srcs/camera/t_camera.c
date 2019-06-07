@@ -3,7 +3,7 @@
 extern float dist_max;
 extern float dist_min;
 
-t_camera	create_t_camera(t_window *p_win, t_vector3 p_pos, float p_fov, t_vector2 p_dist)
+t_camera	create_t_camera(t_vector3 p_pos, float p_fov, t_vector2 p_dist)
 {
 	t_camera result;
 
@@ -19,7 +19,7 @@ t_camera	create_t_camera(t_window *p_win, t_vector3 p_pos, float p_fov, t_vector
 	result.model = create_t_matrix(); // creation de la matrice d'identite permettant de faire les calculs matriciel par la suite
 	t_camera_look_at(&result); //calcul de l'angle de la camera
 	result.view = t_camera_compute_view(&result); //calcul de la matrice de vue
-	result.projection = compute_projection_matrix(p_win, &result); //calcul de la matrice de projection
+	result.projection = compute_projection_matrix(&result); //calcul de la matrice de projection
 	result.sun_direction = normalize_t_vector3(create_t_vector3(0.0, -1, -0.4)); // direction de la lumiere
 	result.triangle_color_list = create_t_triangle_list(); // list des triangles
 	result.color_list = create_t_color_list(); //list des couleurs
@@ -31,14 +31,14 @@ t_camera	create_t_camera(t_window *p_win, t_vector3 p_pos, float p_fov, t_vector
 	return (result);
 }
 
-t_camera	*initialize_t_camera(t_window *p_win, t_vector3 p_pos, float p_fov, t_vector2 p_dist)
+t_camera	*initialize_t_camera(t_vector3 p_pos, float p_fov, t_vector2 p_dist)
 {
 	t_camera *result;
 
 	if (!(result = (t_camera *)malloc(sizeof(t_camera))))
 		error_exit(-31, "Can't malloc a t_camera");
 
-	*result = create_t_camera(p_win, p_pos, p_fov, p_dist);
+	*result = create_t_camera(p_pos, p_fov, p_dist);
 
 	return (result);
 }
@@ -85,7 +85,15 @@ t_matrix	t_camera_compute_view(t_camera *cam) //calcul de la matrice de vue
 	return (result);
 }
 
-t_matrix	compute_projection_matrix(t_window *p_win, t_camera *p_cam) //calcul de la matrice de projection
+void		t_camera_change_fov(t_camera *cam, float delta)
+{
+	if (delta > 1 && cam->fov >= 60)
+		cam->fov /= delta;
+	if (delta < 1 && cam->fov < 90)
+		cam->fov /= delta;
+}
+
+t_matrix	compute_projection_matrix(t_camera *p_cam) //calcul de la matrice de projection
 {
 	t_matrix	result;
 	float		n;
@@ -97,7 +105,7 @@ t_matrix	compute_projection_matrix(t_window *p_win, t_camera *p_cam) //calcul de
 	n = p_cam->near;
 	r = 1.0 / (tan(degree_to_radius(p_cam->fov / 2)));
 	f = p_cam->far;
-	t = 1.0 / (tan(degree_to_radius(p_cam->fov / 2))) / (4.0 / 3.0);
+	t = 1.0 / (tan(degree_to_radius(p_cam->fov / 2))) / (4.0 / 3.0); // changer le (4/3) en (16/9) va changer le ratio de l'ecran, changeant l'apparence des cubes a l'ecran
 	result.value[0][0] = t;
 	result.value[1][1] = r;
 	result.value[2][2] = -(f) / (f - n);
@@ -109,6 +117,7 @@ t_matrix	compute_projection_matrix(t_window *p_win, t_camera *p_cam) //calcul de
 void		compute_t_camera(t_camera *cam)
 {
 	cam->view = t_camera_compute_view(cam);
+	cam->projection = compute_projection_matrix(cam);
 }
 
 t_vector3	apply_t_camera(t_vector3 *src, t_matrix *mat) // applique la position de la camera

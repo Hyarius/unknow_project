@@ -31,5 +31,9 @@ t_vector3		intersect_plane_by_line(t_vector3 p_normal, t_vector3 p_center, t_vec
 float			calc_distance_to_plane(t_vector3 p_normal, t_vector3 p_center, t_vector3 p_point);
 void			clamp_float_value(float min, float *value, float max);
 void			clamp_int_value(int min, int *value, int max);
+t_vector3		interpolate_vector3_over_line(float ratio_x, float ratio_y, t_vector3 ua, t_vector3 ub);
+float			interpolate_ratio(float a, float b, float c);
+
+
 
 #endif
