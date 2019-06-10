@@ -23,3 +23,27 @@ int				ft_atoi(const char *str)
 	}
 	return (number * neg);
 }
+
+int	get_short(int a, int b, int c)
+{
+	int result;
+
+	result = a;
+	if (result > b)
+		result = b;
+	if (result > c)
+		result = c;
+	return (result);
+}
+
+int	get_big(int a, int b, int c)
+{
+	int result;
+
+	result = a;
+	if (result < b)
+		result = b;
+	if (result < c)
+		result = c;
+	return (result);
+}

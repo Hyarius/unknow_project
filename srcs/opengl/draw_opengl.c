@@ -132,50 +132,50 @@
 // 	glDrawArrays(GL_LINES, 0, 2);
 // }
 //
-// void draw_triangle_color_opengl(t_window *p_win, t_triangle *p_triangle, t_color *p_color)
-// {
-// 	GLfloat vertex_buffer_data[] = {
-// 		p_triangle->a.x, p_triangle->a.y, 0.0f,
-// 		p_triangle->b.x, p_triangle->b.y, 0.0f,
-// 		p_triangle->c.x, p_triangle->c.y, 0.0f,
-// 	};
-//
-// 	GLfloat color_buffer_data[] = {
-// 		p_color->r,  p_color->g,  p_color->b, p_color->a,
-// 		p_color->r,  p_color->g,  p_color->b, p_color->a,
-// 		p_color->r,  p_color->g,  p_color->b, p_color->a,
-// 	};
-//
-// 	// bind VAO
-// 	glBindVertexArray(p_win->vertex_array);
-//
-// 	// bind vertex_buffer
-// 	glBindBuffer(GL_ARRAY_BUFFER, p_win->vertex_buffer);
-// 	// donne a vertex_buffer vertex_buffer_data
-// 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertex_buffer_data), vertex_buffer_data, GL_STATIC_DRAW);
-//
-// 	// bind color_buffer
-// 	glBindBuffer(GL_ARRAY_BUFFER, p_win->color_buffer);
-// 	// donne a color_buffer color_buffer_data
-// 	glBufferData(GL_ARRAY_BUFFER, sizeof(color_buffer_data), color_buffer_data, GL_STATIC_DRAW);
-//
-// 	// indique le shader a utiliser
-// 	glUseProgram(p_win->program_color);
-//
-// 	// indique la location du shader utiliser
-// 	glEnableVertexAttribArray(0);
-// 	// quelle est le buffer a utiliser
-// 	glBindBuffer(GL_ARRAY_BUFFER, p_win->vertex_buffer);
-// 	// comment utiliser le buffer
-// 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
-//
-// 	glEnableVertexAttribArray(1);
-// 	glBindBuffer(GL_ARRAY_BUFFER, p_win->color_buffer);
-// 	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, NULL);
-//
-// 	// dessine un triangle
-// 	glDrawArrays(GL_TRIANGLES, 0, 3);
-// }
+void draw_triangle_color_opengl(t_window *p_win, t_triangle *p_triangle, t_color *p_color)
+{
+	GLfloat vertex_buffer_data[] = {
+		p_triangle->a.x, p_triangle->a.y, 0.0f,
+		p_triangle->b.x, p_triangle->b.y, 0.0f,
+		p_triangle->c.x, p_triangle->c.y, 0.0f,
+	};
+
+	GLfloat color_buffer_data[] = {
+		p_color->r,  p_color->g,  p_color->b, p_color->a,
+		p_color->r,  p_color->g,  p_color->b, p_color->a,
+		p_color->r,  p_color->g,  p_color->b, p_color->a,
+	};
+
+	// bind VAO
+	glBindVertexArray(p_win->vertex_array);
+
+	// bind vertex_buffer
+	glBindBuffer(GL_ARRAY_BUFFER, p_win->vertex_buffer);
+	// donne a vertex_buffer vertex_buffer_data
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertex_buffer_data), vertex_buffer_data, GL_STATIC_DRAW);
+
+	// bind color_buffer
+	glBindBuffer(GL_ARRAY_BUFFER, p_win->color_buffer);
+	// donne a color_buffer color_buffer_data
+	glBufferData(GL_ARRAY_BUFFER, sizeof(color_buffer_data), color_buffer_data, GL_STATIC_DRAW);
+
+	// indique le shader a utiliser
+	glUseProgram(p_win->program_color);
+
+	// indique la location du shader utiliser
+	glEnableVertexAttribArray(0);
+	// quelle est le buffer a utiliser
+	glBindBuffer(GL_ARRAY_BUFFER, p_win->vertex_buffer);
+	// comment utiliser le buffer
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+
+	glEnableVertexAttribArray(1);
+	glBindBuffer(GL_ARRAY_BUFFER, p_win->color_buffer);
+	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, NULL);
+
+	// dessine un triangle
+	glDrawArrays(GL_TRIANGLES, 0, 3);
+}
 //
 // void			draw_triangle_texture_opengl(t_window *p_win, t_triangle *p_triangle_screen, t_uv *uv)
 // {

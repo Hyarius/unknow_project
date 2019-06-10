@@ -37,5 +37,7 @@ void		check_frame();
 //			window_handler
 void		start_sdl();
 t_window	*initialize_t_window(char *name, int size_x, int size_y);
+int 		is_point_in_screen(t_window *p_win, t_vector3 p_point);
+int			is_t_triangle_in_screen(t_window *p_win, t_triangle *p_triangle);
 
 #endif

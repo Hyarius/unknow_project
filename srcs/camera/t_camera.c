@@ -1,7 +1,6 @@
 #include "unknow_project.h"
 
 extern float dist_max;
-extern float dist_min;
 
 t_camera	create_t_camera(t_vector3 p_pos, float p_fov, t_vector2 p_dist)
 {
@@ -103,14 +102,14 @@ t_matrix	compute_projection_matrix(t_camera *p_cam) //calcul de la matrice de pr
 
 	result = create_t_matrix_empty();
 	n = p_cam->near;
-	r = 1.0 / (tan(degree_to_radius(p_cam->fov / 2)));
+	r = 1.0 / (tan(degree_to_radius(p_cam->fov / 2.0)));
 	f = p_cam->far;
-	t = 1.0 / (tan(degree_to_radius(p_cam->fov / 2))) / (4.0 / 3.0); // changer le (4/3) en (16/9) va changer le ratio de l'ecran, changeant l'apparence des cubes a l'ecran
+	t = 1.0 / (tan(degree_to_radius(p_cam->fov / 2.0))) / (4.0 / 3.0); // changer le (4/3) en (16/9) va changer le ratio de l'ecran, changeant l'apparence des cubes a l'ecran
 	result.value[0][0] = t;
 	result.value[1][1] = r;
 	result.value[2][2] = -(f) / (f - n);
-	result.value[2][3] = -1;
-	result.value[3][2] = -(2 * f * n) / (f - n);
+	result.value[2][3] = -1.0;
+	result.value[3][2] = -(2.0 * f * n) / (f - n);
 	return (result);
 }
 
@@ -135,7 +134,7 @@ t_vector3	apply_t_camera(t_vector3 *src, t_matrix *mat) // applique la position 
 		result.y /= delta;
 		result.z /= delta;
 	}
-	result.z = sqrt(src->x * src->x + src->y * src->y + src->z * src->z);
+	result.z = (float)(sqrt(src->x * src->x + src->y * src->y + src->z * src->z));
 	return (result);
 }
 
@@ -194,13 +193,6 @@ void 		t_camera_calc_depth(t_window *p_win, t_camera *p_cam)
 			dist_max = triangle.b.z;
 		if (triangle.c.z > dist_max)
 			dist_max = triangle.c.z;
-
-		if (triangle.a.z < dist_min)
-			dist_min = triangle.a.z;
-		if (triangle.b.z < dist_min)
-			dist_min = triangle.b.z;
-		if (triangle.c.z < dist_min)
-			dist_min = triangle.c.z;
 		i++;
 	}
 
@@ -214,13 +206,6 @@ void 		t_camera_calc_depth(t_window *p_win, t_camera *p_cam)
 			dist_max = triangle.b.z;
 		if (triangle.c.z > dist_max)
 			dist_max = triangle.c.z;
-
-		if (triangle.a.z < dist_min)
-			dist_min = triangle.a.z;
-		if (triangle.b.z < dist_min)
-			dist_min = triangle.b.z;
-		if (triangle.c.z < dist_min)
-			dist_min = triangle.c.z;
 		i++;
 	}
 }
@@ -232,7 +217,6 @@ void		draw_depth_from_camera_on_screen(t_window *p_win, t_camera *p_cam)
 	t_line		line2;
 	int			i;
 
-	dist_min = 9999.0f;
 	dist_max = 0.0f;
 
 	t_camera_calc_depth(p_win, p_cam);
@@ -241,7 +225,14 @@ void		draw_depth_from_camera_on_screen(t_window *p_win, t_camera *p_cam)
 	while (i < p_cam->triangle_color_list.size)
 	{
 		triangle = t_triangle_list_at(&(p_cam->triangle_color_list), i);
-		draw_triangle_depth_cpu(p_win, &triangle, t_color_list_get(&(p_cam->color_list), i));
+		draw_triangle_depth_cpu(p_win, &triangle);
+		i++;
+	}
+	i = 0;
+	while (i < p_cam->triangle_texture_list.size)
+	{
+		triangle = t_triangle_list_at(&(p_cam->triangle_texture_list), i);
+		draw_triangle_depth_cpu(p_win, &triangle);
 		i++;
 	}
 }

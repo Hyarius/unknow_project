@@ -8,6 +8,7 @@ void	draw_t_mesh(t_window *p_win, t_camera *p_cam, t_mesh *mesh)
 	t_triangle	triangle;
 	t_vector3	points[3];
 	t_vector3	points_uv[3];
+	t_color 	color2 = create_t_color_from_int(255, 0, 0, 255);
 
 	for (int i = 0; i < mesh->faces->size; i++)
 	{
@@ -27,9 +28,11 @@ void	draw_t_mesh(t_window *p_win, t_camera *p_cam, t_mesh *mesh)
 		{
 			darkness = - dot_t_vector3(face.normale, p_cam->sun_direction);
 
-			darkness += 1;
+			darkness += 2;
 			darkness = darkness / (2 / (1 - 0.1));
 
+			if (darkness > 1)
+				darkness = 1;
 			if (darkness < 0.3)
 				darkness = 0.3;
 

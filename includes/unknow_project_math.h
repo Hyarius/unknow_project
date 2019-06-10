@@ -27,12 +27,15 @@ t_vector2_int_list
 t_vector3		cross_t_vector3(t_vector3 a, t_vector3 b);
 t_vector3 		normalize_t_vector3(t_vector3 v);
 float			dot_t_vector3(t_vector3 a, t_vector3 b);
+float			edge_vector3(t_vector3 a, t_vector3 b, t_vector3 c);
 t_vector3		intersect_plane_by_line(t_vector3 p_normal, t_vector3 p_center, t_vector3 start, t_vector3 end);
 float			calc_distance_to_plane(t_vector3 p_normal, t_vector3 p_center, t_vector3 p_point);
 void			clamp_float_value(float min, float *value, float max);
 void			clamp_int_value(int min, int *value, int max);
 t_vector3		interpolate_vector3_over_line(float ratio_x, float ratio_y, t_vector3 ua, t_vector3 ub);
 float			interpolate_ratio(float a, float b, float c);
+int				get_short(int a, int b, int c);
+int				get_big(int a, int b, int c);
 
 
 

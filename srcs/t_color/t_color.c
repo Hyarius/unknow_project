@@ -61,6 +61,18 @@ t_color	fuze_t_color(t_color src1, t_color src2)
 	return (result);
 }
 
+t_color	merge_t_color(t_color src1, t_color delta)
+{
+	t_color result;
+
+	result.r = src1.r * delta.r;
+	result.g = src1.g * delta.g;
+	result.b = src1.b * delta.b;
+	result.a = src1.a * delta.a;
+
+	return (result);
+}
+
 void print_t_color(t_color p_color, char *str)
 {
 	printf("%s : %.3f / %.3f / %.3f / %.3f", str, p_color.r, p_color.g, p_color.b, p_color.a);

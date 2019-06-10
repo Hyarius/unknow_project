@@ -16,7 +16,7 @@ static void 	draw_scan_line(t_window *p_win, t_vector3 left, t_vector3 right, t_
 	pixel_index = (int)(left.x) + ((int)(left.y) * p_win->size_x);
 	while (left.x <= right.x)
 	{
-		if (left.x >= 0 && left.x < p_win->size_x && left.y >= 0 && left.y < p_win->size_y)
+		if (left.x + 0.5 >= 0 && left.x - 0.5 < p_win->size_x && left.y + 0.5 >= 0 && left.y - 0.5 < p_win->size_y)
 		{
 			if (left.z < p_win->depth_buffer[pixel_index] || p_win->depth_buffer[pixel_index] == 0)
 			{

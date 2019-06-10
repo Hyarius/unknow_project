@@ -149,11 +149,40 @@ void				render_screen(t_window *p_win, t_camera *p_cam)
 
 	if (p_cam != NULL)
 	{
-		draw_triangle_from_camera_on_screen(p_win, p_cam);
+		draw_depth_from_camera_on_screen(p_win, p_cam);
 	}
 
 	draw_buffer_opengl(p_win, p_win->color_data);
 
 	//Swap le buffer et l'ecran (Ca affiche la nouvelle image)
 	SDL_GL_SwapWindow(p_win->window);
+}
+
+
+int 		is_point_in_screen(t_window *p_win, t_vector3 p_point)
+{
+	if (p_point.x < 0 || p_point.x >= p_win->size_x ||
+		p_point.y < 0 || p_point.y >= p_win->size_y)
+		return (0);
+	return (1);
+}
+
+int			is_t_triangle_in_screen(t_window *p_win, t_triangle *p_triangle)
+{
+	int nb_left;
+	int nb_up;
+	int nb_right;
+	int nb_down;
+
+	if (p_triangle->a.x < 0 && p_triangle->b.x < 0 && p_triangle->c.x < 0)
+		return (0);
+	if (p_triangle->a.x >= p_win->size_x && p_triangle->b.x >= p_win->size_x && p_triangle->c.x >= p_win->size_x)
+		return (0);
+
+	if (p_triangle->a.y < 0 && p_triangle->b.y < 0 && p_triangle->c.y < 0)
+		return (0);
+	if (p_triangle->a.y >= p_win->size_y && p_triangle->b.y >= p_win->size_y && p_triangle->c.y >= p_win->size_y)
+		return (0);
+
+	return (1);
 }

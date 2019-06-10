@@ -6,6 +6,7 @@ static void 	draw_scan_line(t_window *p_win, t_vector3 left, t_vector3 right, t_
 	t_vector3 target;
 	t_color color;
 	t_vector3 delta_uv;
+	t_vector3 corrected_uv;
 	int pixel_index;
 	int pixel_x;
 	int pixel_y;
@@ -17,7 +18,7 @@ static void 	draw_scan_line(t_window *p_win, t_vector3 left, t_vector3 right, t_
 	}
 	current = left;
 	target = right;
-	delta_uv = create_t_vector3((uv_right.x - uv_left.x) / (right.x - left.x), (uv_right.y - uv_left.y) / (right.x - left.x), 0.0);
+	delta_uv = create_t_vector3((uv_right.x - uv_left.x) / (right.x - left.x), (uv_right.y - uv_left.y) / (right.x - left.x), (uv_right.z - uv_left.z) / (right.x - left.x));
 
 	if (current.x >= p_win->size_x || target.x < 0)
 		return ;
@@ -34,6 +35,7 @@ static void 	draw_scan_line(t_window *p_win, t_vector3 left, t_vector3 right, t_
 				pixel_x >= 0 && pixel_x < texture->surface->w && pixel_y >= 0 && pixel_y < texture->surface->h)
 			{
 				color = get_pixel_color(texture, pixel_x, pixel_y);
+				color = merge_t_color(color, *darkness);
 				draw_pixel(p_win, (int)(current.x), (int)(current.y), &color);
 				p_win->depth_buffer[pixel_index] = current.z;
 			}
@@ -132,17 +134,17 @@ static void	fill_top_flat_triangle(t_window *p_win, t_triangle *p_triangle, t_uv
 
 static void 	parse_triangle(t_triangle *p_triangle, t_uv *p_uv)
 {
-	if (p_triangle->a.y > p_triangle->b.y)
+	if (p_triangle->a.y > p_triangle->b.y || (p_triangle->a.y == p_triangle->b.y && p_triangle->a.x < p_triangle->b.x))
 	{
 		swap_t_vector3(&(p_triangle->a), &(p_triangle->b));
 		swap_t_vector3(&(p_uv->uv.a), &(p_uv->uv.b));
 	}
-	if (p_triangle->b.y > p_triangle->c.y)
+	if (p_triangle->b.y > p_triangle->c.y || (p_triangle->b.y == p_triangle->c.y && p_triangle->b.x < p_triangle->c.x))
 	{
 		swap_t_vector3(&(p_triangle->b), &(p_triangle->c));
 		swap_t_vector3(&(p_uv->uv.b), &(p_uv->uv.c));
 	}
-	if (p_triangle->a.y > p_triangle->b.y)
+	if (p_triangle->a.y > p_triangle->b.y || (p_triangle->a.y == p_triangle->b.y && p_triangle->a.x < p_triangle->b.x))
 	{
 		swap_t_vector3(&(p_triangle->a), &(p_triangle->b));
 		swap_t_vector3(&(p_uv->uv.a), &(p_uv->uv.b));
@@ -162,6 +164,9 @@ void	draw_triangle_texture_cpu(t_window *p_win, t_triangle *p_triangle, t_uv *p_
 	base_triangle.b = convert_opengl_to_vector3(p_win, p_triangle->b);
 	base_triangle.c = convert_opengl_to_vector3(p_win, p_triangle->c);
 	base_uv = *(p_uv);
+	base_uv.uv.a.z = base_triangle.a.z;
+	base_uv.uv.b.z = base_triangle.b.z;
+	base_uv.uv.c.z = base_triangle.c.z;
 
 	parse_triangle(&base_triangle, &base_uv);
 
@@ -183,14 +188,17 @@ void	draw_triangle_texture_cpu(t_window *p_win, t_triangle *p_triangle, t_uv *p_
 													interpolate_ratio(base_triangle.a.y, base_triangle.c.y, point_d_triangle.y),
 													base_uv.uv.a, base_uv.uv.c); // ((base_uv.uv.c.x - base_uv.uv.a.x) * ratio_x) + base_uv.uv.a.x;// * (p_uv->uv.c.x - p_uv->uv.a.x);
 
+
 		tmp_triangle = create_t_triangle(base_triangle.b, point_d_triangle, base_triangle.c);
 		tmp_uv = base_uv;
 		tmp_uv.uv = create_t_triangle(base_uv.uv.b, point_d_uv, base_uv.uv.c);
 
-		base_triangle.c = tmp_triangle.b;
-		base_uv.uv.c = tmp_uv.uv.b;
+		base_triangle.c = point_d_triangle;
+		base_uv.uv.c = point_d_uv;
 
-		fill_down_flat_triangle(p_win, &base_triangle, &base_uv, darkness);
-		fill_top_flat_triangle(p_win, &tmp_triangle, &tmp_uv, darkness);
+		if (is_t_triangle_in_screen(p_win, &base_triangle))
+			fill_down_flat_triangle(p_win, &base_triangle, &base_uv, darkness);
+		if (is_t_triangle_in_screen(p_win, &tmp_triangle))
+			fill_top_flat_triangle(p_win, &tmp_triangle, &tmp_uv, darkness);
 	}
 }

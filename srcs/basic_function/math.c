@@ -25,6 +25,14 @@ float			dot_t_vector3(t_vector3 a, t_vector3 b) //Produit scalaire / dot product
     return (result);
 }
 
+float			edge_vector3(t_vector3 a, t_vector3 b, t_vector3 c)
+{
+    float result;
+
+	result = ((c.x - a.x) * (b.y - a.y)) - ((c.y - a.y) * (b.x - a.x));
+    return (result);
+}
+
 t_vector3		intersect_plane_by_line(t_vector3 p_normal, t_vector3 p_center, t_vector3 start, t_vector3 end)
 {
 	t_vector3	intersection;
@@ -80,6 +88,7 @@ t_vector3		interpolate_vector3_over_line(float ratio_x, float ratio_y, t_vector3
 
 	result.x = ((ub.x - ua.x) * ratio_x) + ua.x;
 	result.y = ((ub.y - ua.y) * ratio_y) + ua.y;
+	result.z = 0;
 
 	return (result);
 }

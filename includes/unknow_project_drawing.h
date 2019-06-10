@@ -18,10 +18,9 @@
 // void 		draw_pixel_opengl(t_window *p_win, t_vector3 *p_coord, t_color *p_color);
 // void 		draw_point_opengl(t_window *p_win, t_vector2 *p_point, t_color *p_color, int size);
 // void 		draw_line_color_opengl(t_window *p_win, t_line *p_line, t_color *p_color);
-// void 		draw_triangle_color_opengl(t_window *p_win, t_triangle *p_triangle, t_color *p_color);
+void 		draw_triangle_color_opengl(t_window *p_win, t_triangle *p_triangle, t_color *p_color);
 // void		draw_triangle_texture_opengl(t_window *p_win, t_triangle *p_triangle_screen, t_uv *us);
 void		draw_buffer_opengl(t_window *p_win, t_color *color_data);
-
 //
 // ----------------- CPU_DRAWING -----------------
 //
@@ -32,7 +31,7 @@ void 		draw_triangle_color_cpu(t_window *p_win, t_triangle *p_triangle, t_color 
 void		draw_triangle_texture_cpu(t_window *p_win, t_triangle *p_triangle, t_uv *p_uv, t_color *p_darkness);
 
 //			draw depth cpu
-void		draw_triangle_depth_cpu(t_window *p_win, t_triangle *p_triangle, t_color *p_color);
+void		draw_triangle_depth_cpu(t_window *p_win, t_triangle *p_triangle);
 
 //			draw line cpu
 void 		draw_line_color_cpu(t_window *p_win, t_line *p_line, t_color *p_color);
