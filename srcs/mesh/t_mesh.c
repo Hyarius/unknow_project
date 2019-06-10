@@ -84,6 +84,7 @@ void			t_mesh_compute_normals(t_mesh *mesh)
 
 		i++;
 	}
+
 }
 
 void			rotate_t_mesh(t_mesh *mesh, t_vector3 angle, t_vector3 center)

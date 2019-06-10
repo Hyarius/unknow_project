@@ -18,22 +18,9 @@ int main(int argc, char **argv)
 	SDL_Event event; //va retenir toute les entrees utilisateur (key and mouse)
 	int play = 1;
 
-	t_mesh **mesh_list;
-	int nb = 100; //nombre de mesh (cube)
-	t_camera *cam = initialize_t_camera(create_t_vector3(1, 2, 4), 70, create_t_vector2(0.1f, 50.0f)); //creation et initialisation de la camera et des matrices liee a la camera
+	t_camera *cam = initialize_t_camera(create_t_vector3(0, 1, 4), 70, create_t_vector2(0.1f, 50.0f)); //creation et initialisation de la camera et des matrices liee a la camera
+	t_mesh mesh = read_obj_file("Rock1.obj", create_t_vector3(0.0, 0.0, 0.0));
 
-	mesh_list = (t_mesh **)malloc(sizeof(t_mesh *) * nb);
-	float size = 1;
-	int range = 20;
-	for (int i = 0; i < nb; i++)
-	{
-		float x = (float)(generate_nbr(-range, range)) + 0.5f; //generer position aleatoire des cube
-		float y = (float)(generate_nbr(-2, 3)) + 0.5f;
-		float z = (float)(generate_nbr(-range, range)) + 0.5f;
-
-		mesh_list[i] = initialize_t_mesh(create_t_vector3(x, y, z)); //creation d'un mesh vide
-		*(mesh_list[i]) = create_primitive_cube(create_t_vector3(x, y, z), create_t_vector3(size, size, size), texture); //creation du cube que l'on rentre dans mesh
-}
 
 	while (play == 1)
 	{
@@ -49,8 +36,8 @@ int main(int argc, char **argv)
 
 		prepare_screen(win, cam, create_t_color(0.2f, 0.2f, 0.2f, 1.0f)); // refresh de l'ecran avec les couleurs par default
 
-		for (int k = 0; k < nb; k++)
-			draw_t_mesh(win, cam, mesh_list[k]); // dessine le cube
+		draw_t_mesh(win, cam, &mesh); // dessine le cube
+
 
 		render_screen(win, cam); // affiche la fenetre
 

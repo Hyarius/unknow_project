@@ -59,6 +59,7 @@ static void	fill_down_flat_triangle(t_window *p_win, t_triangle *p_triangle, t_u
 	t_vector3	delta_uv_left;
 	t_vector3	delta_uv_right;
 
+
 	delta_left = create_t_vector3((p_triangle->a.x - p_triangle->b.x) / (p_triangle->a.y - p_triangle->b.y), 1.0, (p_triangle->a.z - p_triangle->b.z) / (p_triangle->a.y - p_triangle->b.y));
 	delta_right = create_t_vector3((p_triangle->a.x - p_triangle->c.x) / (p_triangle->a.y - p_triangle->c.y), 1.0, (p_triangle->a.z - p_triangle->c.z) / (p_triangle->a.y - p_triangle->c.y));
 	delta_uv_left = create_t_vector3((p_uv->uv.a.x - p_uv->uv.b.x) / (p_triangle->a.y - p_triangle->b.y), (p_uv->uv.a.y - p_uv->uv.b.y) / (p_triangle->a.y - p_triangle->b.y), 1.0);
@@ -69,6 +70,7 @@ static void	fill_down_flat_triangle(t_window *p_win, t_triangle *p_triangle, t_u
 	uv_left = p_uv->uv.b;
 	uv_right = p_uv->uv.c;
 	target = p_triangle->a;
+
 	if (target.y < 0)
 		target.y = 0;
 	if (target.y >= p_win->size_y)
@@ -77,16 +79,15 @@ static void	fill_down_flat_triangle(t_window *p_win, t_triangle *p_triangle, t_u
 	{
 		left = substract_vector3_to_vector3(left, delta_left);
 		right = substract_vector3_to_vector3(right, delta_right);
-		uv_left = substract_vector3_to_vector3(uv_left, delta_uv_left);
-		uv_right = substract_vector3_to_vector3(uv_right, delta_uv_right);
 	}
 	while (target.y <= left.y)
 	{
-		draw_scan_line(p_win, left, right, uv_left, uv_right, p_uv->image, darkness);
-		uv_left = substract_vector3_to_vector3(uv_left, delta_uv_left);
-		uv_right = substract_vector3_to_vector3(uv_right, delta_uv_right);
+		draw_scan_line(p_win, left, right,  uv_left, uv_right, p_uv->image, darkness);
 		left = substract_vector3_to_vector3(left, delta_left);
 		right = substract_vector3_to_vector3(right, delta_right);
+
+		uv_left = substract_vector3_to_vector3(uv_left, delta_uv_left);
+		uv_right = substract_vector3_to_vector3(uv_right, delta_uv_right);
 	}
 }
 

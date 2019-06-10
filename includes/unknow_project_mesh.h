@@ -16,9 +16,12 @@ typedef struct	s_mesh
 	t_vector3_list
 				*normales;
 	t_face_list	*faces;
+	t_material_list
+				*materials;
 }				t_mesh;
 
 t_mesh		create_t_mesh(t_vector3 pos);
+t_mesh		read_obj_file(char *path, t_vector3 pos);
 t_mesh		load_t_mesh(t_vector3 pos, char *path);
 t_mesh		*initialize_t_mesh(t_vector3 pos);
 void		free_t_mesh();
