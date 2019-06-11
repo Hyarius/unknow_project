@@ -8,7 +8,17 @@
 typedef struct	s_mesh
 {
 	t_vector3	pos;
+
+	t_vector3	angle;
+	t_vector3	forward;
+	t_vector3	right;
+	t_vector3	up;
+
+	t_vector3	velocity; // express in Ud / f in 3 axis
+
 	t_texture	*texture;
+	t_color		color;
+
 	t_vector3_list
 				*vertices;
 	t_vector3_list
@@ -16,12 +26,10 @@ typedef struct	s_mesh
 	t_vector3_list
 				*normales;
 	t_face_list	*faces;
-	t_material_list
-				*materials;
 }				t_mesh;
 
 t_mesh		create_t_mesh(t_vector3 pos);
-t_mesh		read_obj_file(char *path, t_vector3 pos);
+t_mesh		read_obj_file(char *path, t_vector3 pos, t_vector3 size);
 t_mesh		load_t_mesh(t_vector3 pos, char *path);
 t_mesh		*initialize_t_mesh(t_vector3 pos);
 void		free_t_mesh();
@@ -30,13 +38,21 @@ void		t_mesh_add_point(t_mesh *dest, t_vector3 new_point);
 void		t_mesh_add_uv(t_mesh *dest, t_vector3 new_uv);
 void		t_mesh_add_face(t_mesh *dest, t_face new_face);
 void 		t_mesh_set_texture(t_mesh *dest, t_texture *p_texture);
+void 		t_mesh_set_color(t_mesh *dest, t_color p_color);
 void		t_mesh_compute_normals(t_mesh *mesh);
+
+void		t_mesh_apply_velocity(t_mesh *dest);
+void		t_mesh_add_velocity(t_mesh *dest, t_vector3 delta_velocity);
+void		t_mesh_set_velocity(t_mesh *dest, t_vector3 new_velocity);
 
 t_mesh		create_primitive_cube(t_vector3 coord, t_vector3 size, t_texture *texture);
 t_mesh		create_primitive_plane(t_vector3 pos, t_vector3 size, t_texture *texture);
 t_mesh		create_primitive_vertical_plane(t_vector3 pos, t_vector3 size, t_texture *p_texture);
 
 void 		draw_t_mesh(t_window *p_win, t_camera *p_cam, t_mesh *mesh);
-void		rotate_t_mesh(t_mesh *mesh, t_vector3 angle, t_vector3 center);
+void		t_mesh_rotate(t_mesh *mesh, t_vector3 delta_angle);
+void		t_mesh_rotate_around_point(t_mesh *mesh, t_vector3 delta_angle, t_vector3 center);
+void		t_mesh_look_at(t_mesh *mesh);
+void		t_mesh_translate(t_mesh *dest, t_vector3 delta);
 
 #endif

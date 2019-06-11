@@ -2,6 +2,7 @@
 
 void	draw_t_mesh(t_window *p_win, t_camera *p_cam, t_mesh *mesh)
 {
+	int			nb_clipped;
 	t_uv 		tmp_uv;
 	t_color		tmp_color;
 	float		darkness;
@@ -18,9 +19,13 @@ void	draw_t_mesh(t_window *p_win, t_camera *p_cam, t_mesh *mesh)
 		points[1] = add_vector3_to_vector3(t_vector3_list_at(mesh->vertices, face.index_vertices[1]), mesh->pos);
 		points[2] = add_vector3_to_vector3(t_vector3_list_at(mesh->vertices, face.index_vertices[2]), mesh->pos);
 
-		points_uv[0] = t_vector3_list_at(mesh->uvs, face.index_uvs[0]);
-		points_uv[1] = t_vector3_list_at(mesh->uvs, face.index_uvs[1]);
-		points_uv[2] = t_vector3_list_at(mesh->uvs, face.index_uvs[2]);
+		if (mesh->texture != NULL)
+		{
+			points_uv[0] = t_vector3_list_at(mesh->uvs, face.index_uvs[0]);
+			points_uv[1] = t_vector3_list_at(mesh->uvs, face.index_uvs[1]);
+			points_uv[2] = t_vector3_list_at(mesh->uvs, face.index_uvs[2]);
+		}
+
 
 		float result = dot_t_vector3(face.normale, normalize_t_vector3(substract_vector3_to_vector3(points[0], p_cam->pos)));
 
@@ -33,19 +38,22 @@ void	draw_t_mesh(t_window *p_win, t_camera *p_cam, t_mesh *mesh)
 
 			if (darkness > 1)
 				darkness = 1;
-			if (darkness < 0.3)
-				darkness = 0.3;
+			if (darkness < 0.1)
+				darkness = 0.1;
 
 			tmp_color.r = darkness;
 			tmp_color.g = darkness;
 			tmp_color.b = darkness;
-			tmp_color.a = 1.0f;
+			tmp_color.a = 0.4f;
 
 			points[0] = mult_vector3_by_matrix(&points[0], &(p_cam->view));
 			points[1] = mult_vector3_by_matrix(&points[1], &(p_cam->view));
 			points[2] = mult_vector3_by_matrix(&points[2], &(p_cam->view));
 
-			int nb_clipped = clip_triangle_to_plane(p_cam, points, points_uv);
+			if (mesh->texture != NULL)
+				nb_clipped = clip_triangle_to_plane(p_cam, points, points_uv);
+			else
+				nb_clipped = clip_triangle_to_plane(p_cam, points, NULL);
 
 			for (int j = 0; j < nb_clipped; j += 3)
 			{
@@ -55,7 +63,7 @@ void	draw_t_mesh(t_window *p_win, t_camera *p_cam, t_mesh *mesh)
 
 				if (mesh->texture == NULL)
 				{
-					t_color_list_push_back(&(p_cam->color_list), tmp_color);
+					t_color_list_push_back(&(p_cam->color_list), fuze_t_color(mesh->color, tmp_color));
 					t_triangle_list_push_back(&(p_cam->triangle_color_list), triangle);
 				}
 				else

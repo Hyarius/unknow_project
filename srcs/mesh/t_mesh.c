@@ -1,16 +1,25 @@
 #include "unknow_project.h"
 
+#define grav_x 0.00
+#define grav_y -0.02
+#define grav_z 0.00
+
 t_mesh			create_t_mesh(t_vector3 pos)
 {
 	t_mesh result;
 
 	result.pos = pos;
+	result.velocity = create_t_vector3(0.0, 0.0, 0.0);
+	result.angle = create_t_vector3(0.0, 90.0, 0.0);
+
 	result.texture = NULL;
+	result.color = create_t_color(1.0, 1.0, 1.0, 1.0);
+
 	result.vertices = initialize_t_vector3_list();
 	result.uvs = initialize_t_vector3_list();
 	result.faces = initialize_t_face_list();
 	result.normales = initialize_t_vector3_list();
-
+	t_mesh_look_at(&result);
 	return (result);
 }
 
@@ -87,7 +96,22 @@ void			t_mesh_compute_normals(t_mesh *mesh)
 
 }
 
-void			rotate_t_mesh(t_mesh *mesh, t_vector3 angle, t_vector3 center)
+void		t_mesh_look_at(t_mesh *mesh) // calcul de l'angle de vue du t_mesh (forward, right, up)
+{
+	t_vector3 zaxis = normalize_t_vector3(create_t_vector3(cos(degree_to_radius(mesh->angle.z)) * sin(degree_to_radius(mesh->angle.y)),
+						sin(degree_to_radius(mesh->angle.z)),
+						cos(degree_to_radius(mesh->angle.z)) * cos(degree_to_radius(mesh->angle.y))));
+	t_vector3 xaxis = normalize_t_vector3(create_t_vector3(sin(degree_to_radius(mesh->angle.y) - 3.14f / 2.0f),
+						0,
+						cos(degree_to_radius(mesh->angle.y) - 3.14f / 2.0f)));
+	t_vector3 yaxis = normalize_t_vector3(cross_t_vector3(xaxis, zaxis));
+
+	mesh->forward = zaxis;
+	mesh->right = xaxis;
+	mesh->up = inv_t_vector3(yaxis);
+}
+
+void			t_mesh_rotate_around_point(t_mesh *mesh, t_vector3 delta_angle, t_vector3 center)
 {
 	t_matrix	translate;
 	t_matrix	rotation;
@@ -96,7 +120,9 @@ void			rotate_t_mesh(t_mesh *mesh, t_vector3 angle, t_vector3 center)
 
 	translate = create_translation_matrix(center);
 	inv_translate = create_translation_matrix(inv_t_vector3(center));
-	rotation = create_rotation_matrix(angle.x, angle.y, angle.z);
+	rotation = create_rotation_matrix(delta_angle.x, delta_angle.y, delta_angle.z);
+	mesh->angle = add_vector3_to_vector3(mesh->angle, delta_angle);
+	t_mesh_look_at(mesh);
 	for (int i = 0; i < mesh->vertices->size; i++)
 	{
 		target = t_vector3_list_get(mesh->vertices, i);
@@ -105,4 +131,60 @@ void			rotate_t_mesh(t_mesh *mesh, t_vector3 angle, t_vector3 center)
 		*target = mult_vector3_by_matrix(target, &inv_translate);
 	}
 	t_mesh_compute_normals(mesh);
+}
+
+void			t_mesh_rotate(t_mesh *mesh, t_vector3 delta_angle)
+{
+	t_matrix	rotation;
+	t_vector3	*target;
+
+	rotation = create_rotation_matrix(delta_angle.x, delta_angle.y, delta_angle.z);
+	mesh->angle = add_vector3_to_vector3(mesh->angle, delta_angle);
+	t_mesh_look_at(mesh);
+	for (int i = 0; i < mesh->vertices->size; i++)
+	{
+		target = t_vector3_list_get(mesh->vertices, i);
+		*target = mult_vector3_by_matrix(target, &rotation);
+	}
+	t_mesh_compute_normals(mesh);
+}
+
+void 			t_mesh_set_color(t_mesh *dest, t_color p_color)
+{
+	dest->color = p_color;
+}
+
+void			t_mesh_apply_velocity(t_mesh *dest)
+{
+	dest->pos = add_vector3_to_vector3(dest->pos, dest->velocity);
+	dest->velocity.y += grav_y;
+	if (dest->pos.y < 0)
+	{
+		dest->pos.y = 0;
+		dest->velocity.y = 0;
+	}
+}
+
+void			t_mesh_set_velocity(t_mesh *dest, t_vector3 new_velocity)
+{
+	dest->velocity = new_velocity;
+}
+
+void			t_mesh_add_velocity(t_mesh *dest, t_vector3 delta_velocity)
+{
+	dest->velocity = add_vector3_to_vector3(dest->velocity, delta_velocity);
+}
+
+void			t_mesh_move(t_mesh *dest, t_vector3 delta)
+{
+	dest->velocity = add_vector3_to_vector3(dest->velocity, mult_vector3_by_float(dest->forward, delta.x));
+	dest->velocity = add_vector3_to_vector3(dest->velocity, mult_vector3_by_float(dest->right, delta.z));
+	dest->velocity = add_vector3_to_vector3(dest->velocity, mult_vector3_by_float(dest->up, delta.y));
+}
+
+void			t_mesh_translate(t_mesh *dest, t_vector3 delta)
+{
+	dest->pos = add_vector3_to_vector3(dest->pos, mult_vector3_by_float(dest->forward, delta.x));
+	dest->pos = add_vector3_to_vector3(dest->pos, mult_vector3_by_float(dest->right, delta.z));
+	dest->pos = add_vector3_to_vector3(dest->pos, mult_vector3_by_float(dest->up, delta.y));
 }

@@ -5,5 +5,5 @@ int		generate_nbr(int min, int max)
 	int	value;
 
 	value = rand();
-	return(rand() % max + min);
+	return (rand() % max + min);
 }

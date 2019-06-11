@@ -24,9 +24,9 @@ int				ft_atoi(const char *str)
 	return (number * neg);
 }
 
-int	get_short(int a, int b, int c)
+int				get_short(int a, int b, int c)
 {
-	int result;
+	int			result;
 
 	result = a;
 	if (result > b)
@@ -36,9 +36,9 @@ int	get_short(int a, int b, int c)
 	return (result);
 }
 
-int	get_big(int a, int b, int c)
+int				get_big(int a, int b, int c)
 {
-	int result;
+	int			result;
 
 	result = a;
 	if (result < b)

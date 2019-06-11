@@ -13,14 +13,14 @@ char		*ft_strcut(char **src, char delim)
 		i++;
 	ret = ft_strnew(i);
 	j = 0;
-	while(j < i)
+	while (j < i)
 	{
 		ret[j] = tmp[j];
 		j++;
 	}
 	ret[j] = '\0';
 	if (ft_strlen(*src) > j)
-		*src = ft_strdup(&(tmp[j+1]));
+		*src = ft_strdup(&(tmp[j + 1]));
 	else
 		*src = NULL;
 	free(tmp);
@@ -29,7 +29,7 @@ char		*ft_strcut(char **src, char delim)
 
 int			ft_strchr(char *src, char d)
 {
-	int i;
+	int		i;
 
 	if (src == NULL)
 		return (0);
@@ -43,7 +43,7 @@ int			ft_strchr(char *src, char d)
 
 int			ft_strcmp(char *s1, char *s2)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (s1[i] && s2[i] && s1[i] == s2[i])

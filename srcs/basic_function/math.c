@@ -9,28 +9,29 @@ t_vector3		cross_t_vector3(t_vector3 a, t_vector3 b) //Produit vectoriel / cross
 	return (result);
 }
 
-t_vector3 		normalize_t_vector3(t_vector3 v) // ramener la longueur du vecteur a 1
+t_vector3		normalize_t_vector3(t_vector3 v) // ramene la longueur du vecteur a 1
 {
-   float	length_of_v;
+	float		length_of_v;
 
-   length_of_v = sqrt((v.x * v.x) + (v.y * v.y) + (v.z * v.z));
-   return (create_t_vector3(v.x / length_of_v, v.y / length_of_v, v.z / length_of_v));
+	length_of_v = sqrt((v.x * v.x) + (v.y * v.y) + (v.z * v.z));
+	return (create_t_vector3(v.x / length_of_v, v.y
+							/ length_of_v, v.z / length_of_v));
 }
 
 float			dot_t_vector3(t_vector3 a, t_vector3 b) //Produit scalaire / dot product
 {
-    float result;
+	float		result;
 
 	result = a.x * b.x + a.y * b.y + a.z * b.z;
-    return (result);
+	return (result);
 }
 
 float			edge_vector3(t_vector3 a, t_vector3 b, t_vector3 c)
 {
-    float result;
+	float		result;
 
 	result = ((c.x - a.x) * (b.y - a.y)) - ((c.y - a.y) * (b.x - a.x));
-    return (result);
+	return (result);
 }
 
 t_vector3		intersect_plane_by_line(t_vector3 p_normal, t_vector3 p_center, t_vector3 start, t_vector3 end)
@@ -84,16 +85,15 @@ void			clamp_int_value(int min, int *value, int max)
 
 t_vector3		interpolate_vector3_over_line(float ratio_x, float ratio_y, t_vector3 ua, t_vector3 ub)
 {
-	t_vector3 result;
+	t_vector3	result;
 
 	result.x = ((ub.x - ua.x) * ratio_x) + ua.x;
 	result.y = ((ub.y - ua.y) * ratio_y) + ua.y;
 	result.z = 0;
-
 	return (result);
 }
 
-float		interpolate_ratio(float a, float b, float c)
+float			interpolate_ratio(float a, float b, float c)
 {
 	if (b - a == 0)
 		return (0);
