@@ -1,15 +1,15 @@
 #include "unknow_project.h"
 
-#define grav_x 0.00
-#define grav_y -0.02
-#define grav_z 0.00
-
 t_mesh			create_t_mesh(t_vector3 pos)
 {
 	t_mesh result;
 
 	result.pos = pos;
+	result.center = pos;
+	result.bubble_radius = 0.0;
 	result.velocity = create_t_vector3(0.0, 0.0, 0.0);
+	result.kinetic = 0.0;
+
 	result.angle = create_t_vector3(0.0, 90.0, 0.0);
 
 	result.texture = NULL;
@@ -48,7 +48,7 @@ void			delete_t_mesh(t_mesh *mesh)
 	free(mesh);
 }
 
-void		t_mesh_add_uv(t_mesh *dest, t_vector3 new_uv)
+void			t_mesh_add_uv(t_mesh *dest, t_vector3 new_uv)
 {
 	t_vector3_list_push_back(dest->uvs, new_uv);
 }
@@ -96,7 +96,32 @@ void			t_mesh_compute_normals(t_mesh *mesh)
 
 }
 
-void		t_mesh_look_at(t_mesh *mesh) // calcul de l'angle de vue du t_mesh (forward, right, up)
+void			t_mesh_compute_bubble_box(t_mesh *mesh)
+{
+	int			i = 0;
+	float 		tmp;
+	t_vector3	total;
+
+	total = create_t_vector3(0.0, 0.0, 0.0);
+	while (i < mesh->vertices->size)
+	{
+		total = add_vector3_to_vector3(total, t_vector3_list_at(mesh->vertices, i));
+		i++;
+	}
+	if (i != 0)
+		total = divide_vector3_by_float(total, (float)(i));
+	mesh->center = add_vector3_to_vector3(total, mesh->pos);
+	i = 0;
+	while (i < mesh->vertices->size)
+	{
+		tmp = calc_dist_vector3_to_vector3(total, t_vector3_list_at(mesh->vertices, i));
+		if (mesh->bubble_radius < tmp)
+			mesh->bubble_radius = tmp;
+		i++;
+	}
+}
+
+void			t_mesh_look_at(t_mesh *mesh) // calcul de l'angle de vue du t_mesh (forward, right, up)
 {
 	t_vector3 zaxis = normalize_t_vector3(create_t_vector3(cos(degree_to_radius(mesh->angle.z)) * sin(degree_to_radius(mesh->angle.y)),
 						sin(degree_to_radius(mesh->angle.z)),
@@ -157,12 +182,7 @@ void 			t_mesh_set_color(t_mesh *dest, t_color p_color)
 void			t_mesh_apply_velocity(t_mesh *dest)
 {
 	dest->pos = add_vector3_to_vector3(dest->pos, dest->velocity);
-	dest->velocity.y += grav_y;
-	if (dest->pos.y < 0)
-	{
-		dest->pos.y = 0;
-		dest->velocity.y = 0;
-	}
+	dest->center = add_vector3_to_vector3(dest->center, dest->velocity);
 }
 
 void			t_mesh_set_velocity(t_mesh *dest, t_vector3 new_velocity)
@@ -187,4 +207,9 @@ void			t_mesh_translate(t_mesh *dest, t_vector3 delta)
 	dest->pos = add_vector3_to_vector3(dest->pos, mult_vector3_by_float(dest->forward, delta.x));
 	dest->pos = add_vector3_to_vector3(dest->pos, mult_vector3_by_float(dest->right, delta.z));
 	dest->pos = add_vector3_to_vector3(dest->pos, mult_vector3_by_float(dest->up, delta.y));
+}
+
+void			t_mesh_activate_gravity(t_mesh *mesh, float gravity)
+{
+	mesh->kinetic = gravity;
 }

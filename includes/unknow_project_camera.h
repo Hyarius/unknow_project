@@ -1,7 +1,7 @@
 #ifndef UNKNOW_PROJECT_CAMERA_H
 # define UNKNOW_PROJECT_CAMERA_H
 
-#include "unknow_project_vector.h"
+// #include "unknow_project_vector.h"
 #include "unknow_project_window.h"
 #include "unknow_project_math.h"
 #include "unknow_project_system.h"
@@ -46,6 +46,8 @@ typedef struct	s_camera
 
 t_camera	create_t_camera(t_vector3 p_pos, float p_fov, t_vector2 p_dist);
 t_camera	*initialize_t_camera(t_vector3 p_pos, float p_fov, t_vector2 p_dist);
+void		free_t_cam(t_camera dest);
+void		delete_t_cam(t_camera *dest);
 t_matrix	compute_projection_matrix(t_camera *p_cam);
 void		compute_t_camera(t_camera *cam);
 void		t_camera_change_fov(t_camera *cam, float delta);

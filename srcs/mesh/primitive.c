@@ -1,12 +1,14 @@
 #include "unknow_project.h"
 
-t_mesh		create_primitive_cube(t_vector3 pos, t_vector3 size, t_texture *p_texture)
+t_mesh		create_primitive_cube(t_vector3 pos, t_vector3 size, t_texture *p_texture, float gravity)
 {
 	t_mesh 	result;
 	t_face	tmp_face1;
 	t_face	tmp_face2;
 
 	result = create_t_mesh(pos);
+
+	t_mesh_activate_gravity(&result, gravity);
 
 	//Bottom part
 	t_mesh_add_point(&result, create_t_vector3(0, 0, 0)); //A
@@ -81,18 +83,22 @@ t_mesh		create_primitive_cube(t_vector3 pos, t_vector3 size, t_texture *p_textur
 
 	t_mesh_compute_normals(&result);
 
+	t_mesh_compute_bubble_box(&result);
+
 	t_mesh_set_texture(&result, p_texture);
 
 	return (result);
 }
 
-t_mesh		create_primitive_plane(t_vector3 pos, t_vector3 size, t_texture *p_texture)
+t_mesh		create_primitive_plane(t_vector3 pos, t_vector3 size, t_texture *p_texture, float gravity)
 {
 	t_mesh result;
 	t_face	tmp_face1;
 	t_face	tmp_face2;
 
 	result = create_t_mesh(pos);
+
+	t_mesh_activate_gravity(&result, gravity);
 
 	t_mesh_add_point(&result, create_t_vector3(-size.x, 0.0, -size.z));
 	t_mesh_add_point(&result, create_t_vector3(size.x, 0.0, -size.z));
@@ -116,18 +122,22 @@ t_mesh		create_primitive_plane(t_vector3 pos, t_vector3 size, t_texture *p_textu
 
 	t_mesh_compute_normals(&result);
 
+	t_mesh_compute_bubble_box(&result);
+
 	t_mesh_set_texture(&result, p_texture);
 
 	return (result);
 }
 
-t_mesh		create_primitive_vertical_plane(t_vector3 pos, t_vector3 size, t_texture *p_texture)
+t_mesh		create_primitive_vertical_plane(t_vector3 pos, t_vector3 size, t_texture *p_texture, float gravity)
 {
 	t_mesh result;
 	t_face	tmp_face1;
 	t_face	tmp_face2;
 
 	result = create_t_mesh(pos);
+
+	t_mesh_activate_gravity(&result, gravity);
 
 	t_mesh_add_point(&result, create_t_vector3(-size.x, -size.z, 0.0));
 	t_mesh_add_point(&result, create_t_vector3(size.x, -size.z, 0.0));
@@ -150,6 +160,8 @@ t_mesh		create_primitive_vertical_plane(t_vector3 pos, t_vector3 size, t_texture
 	t_mesh_add_face(&result, tmp_face2);
 
 	t_mesh_compute_normals(&result);
+
+	t_mesh_compute_bubble_box(&result);
 
 	t_mesh_set_texture(&result, p_texture);
 

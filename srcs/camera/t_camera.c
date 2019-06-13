@@ -42,6 +42,21 @@ t_camera	*initialize_t_camera(t_vector3 p_pos, float p_fov, t_vector2 p_dist)
 	return (result);
 }
 
+void		free_t_cam(t_camera dest)
+{
+	free_t_triangle_list(dest.triangle_color_list);
+	free_t_color_list(dest.color_list);
+	free_t_triangle_list(dest.triangle_texture_list);
+	free_t_uv_list(dest.uv_list);
+	free_t_color_list(dest.darkness_list);
+}
+
+void		delete_t_cam(t_camera *dest)
+{
+	free_t_cam(*dest);
+	free(dest);
+}
+
 void		t_camera_look_at(t_camera *cam) // calcul de l'angle de vue de la camera (forward, right, up)
 {
 	t_vector3 zaxis = normalize_t_vector3(create_t_vector3(cos(degree_to_radius(cam->angle.z)) * sin(degree_to_radius(cam->angle.y)),

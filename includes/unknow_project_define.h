@@ -17,4 +17,10 @@
 # define MOUSE_LEFT 1
 # define MOUSE_MIDDLE 2
 
+# define GRAVITY 0.002
+
+# define FOV 70
+# define NEAR 0.1f
+# define FAR 50.0f
+
 #endif

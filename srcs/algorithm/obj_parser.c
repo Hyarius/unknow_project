@@ -1,6 +1,6 @@
 #include "unknow_project.h"
 
-t_mesh		read_obj_file(char *path, t_vector3 pos, t_vector3 size)
+t_mesh		read_obj_file(char *path, t_vector3 pos, t_vector3 size, float gravity)
 {
 	t_mesh	result;
 	char	*line;
@@ -13,6 +13,7 @@ t_mesh		read_obj_file(char *path, t_vector3 pos, t_vector3 size)
 	t_face	tmp_face;
 
 	result = create_t_mesh(pos);
+	t_mesh_activate_gravity(&result, gravity);
 	tmp_face = create_t_face();
 
 	fd = open(path, O_RDONLY);
@@ -81,6 +82,8 @@ t_mesh		read_obj_file(char *path, t_vector3 pos, t_vector3 size)
 
 	}
 	t_mesh_compute_normals(&result);
+
+	t_mesh_compute_bubble_box(&result);
 	t_mesh_set_texture(&result, NULL);
 	return(result);
 }

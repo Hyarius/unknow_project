@@ -73,3 +73,27 @@ float 	ft_atof(char *s)
 	}
 	return (a * neg);
 }
+
+float			get_short_float(float a, float b, float c)
+{
+	float			result;
+
+	result = a;
+	if (result > b)
+		result = b;
+	if (result > c)
+		result = c;
+	return (result);
+}
+
+float			get_big_float(float a, float b, float c)
+{
+	float			result;
+
+	result = a;
+	if (result < b)
+		result = b;
+	if (result < c)
+		result = c;
+	return (result);
+}
