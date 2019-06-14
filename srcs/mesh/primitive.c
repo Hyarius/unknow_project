@@ -113,7 +113,7 @@ t_mesh		create_primitive_plane(t_vector3 pos, t_vector3 size, t_texture *p_textu
 	tmp_face1 = create_t_face();
 	tmp_face2 = create_t_face();
 
-	set_t_face_vertices(&tmp_face1, 2, 1, 3); // FACE DOWN
+	set_t_face_vertices(&tmp_face1, 2, 1, 3); // FACE UP
 	set_t_face_uvs(&tmp_face1, 3, 2, 1);
 	set_t_face_vertices(&tmp_face2, 0, 3, 1);
 	set_t_face_uvs(&tmp_face2, 0, 1, 2);

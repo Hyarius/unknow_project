@@ -104,3 +104,10 @@ float			calc_dist_vector3_to_vector3(t_vector3 a, t_vector3 b)
 {
 	return (sqrt((b.x - a.x) * (b.x - a.x) + (b.y - a.y) * (b.y - a.y) + (b.z - a.z) * (b.z - a.z)));
 }
+
+float			ft_abs_float(float src)
+{
+	if (src < 0)
+		return (-src);
+	return (src);
+}

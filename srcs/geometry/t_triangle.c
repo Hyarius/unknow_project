@@ -39,10 +39,72 @@ void 		sort_t_triangle_points(t_triangle *p_triangle)
 	}
 }
 
+t_triangle		t_triangle_add_vector3(t_triangle triangle, t_vector3 to_add)
+{
+	t_triangle result;
+
+	result.a = add_vector3_to_vector3(triangle.a, to_add);
+	result.b = add_vector3_to_vector3(triangle.b, to_add);
+	result.c = add_vector3_to_vector3(triangle.c, to_add);
+
+	return (result);
+}
+
 void		print_t_triangle(t_triangle p_triangle, char *triangle_name)
 {
 	printf("Triangle Name : %s\n", triangle_name);
 	print_t_vector3(p_triangle.a, "A : ");endl();
 	print_t_vector3(p_triangle.b, "B : ");endl();
 	print_t_vector3(p_triangle.c, "C : ");endl();
+}
+
+t_triangle	mult_triangle_by_vector3(t_triangle triangle, t_vector3 to_add)
+{
+	t_triangle result;
+
+	result.a = mult_vector3_by_vector3(triangle.a, to_add);
+	result.b = mult_vector3_by_vector3(triangle.b, to_add);
+	result.c = mult_vector3_by_vector3(triangle.c, to_add);
+
+	return (result);
+}
+
+t_triangle		compose_t_triangle_from_t_mesh(t_mesh *src, int *index)
+{
+	t_triangle result;
+	int i;
+
+	i = 0;
+	while (i < 3)
+	{
+		if (src->vertices->size <= index[i])
+			error_exit(-14, "can't compose a triangle");
+		i++;
+	}
+
+	result.a = add_vector3_to_vector3(t_vector3_list_at(src->vertices, index[0]), src->pos);
+	result.b = add_vector3_to_vector3(t_vector3_list_at(src->vertices, index[1]), src->pos);
+	result.c = add_vector3_to_vector3(t_vector3_list_at(src->vertices, index[2]), src->pos);
+
+	return (result);
+}
+
+t_triangle		compose_t_triangle_from_t_vertices(t_vector3_list *src, int *index)
+{
+	t_triangle result;
+	int i;
+
+	i = 0;
+	while (i < 3)
+	{
+		if (src->size <= index[i])
+			error_exit(-14, "can't compose a triangle");
+		i++;
+	}
+
+	result.a = t_vector3_list_at(src, index[0]);
+	result.b = t_vector3_list_at(src, index[1]);
+	result.c = t_vector3_list_at(src, index[2]);
+
+	return (result);
 }

@@ -87,3 +87,5 @@ C : 0.2151 / 0.8569 / 2.9584
 2 - calcul d'une bubble box qui englobe l'objet en entier a la creation
 3 - calcul de distance entre les 2 centres de graviter de 2 objets
 4 - si distance entre 2 objets > a rayon bubble box ne pas faire le test
+
+calcul de la distance 3D 			D = sqrt((x2 - x1)^2 + (y2 - y1)^2 + (z2 - z1)^2)

@@ -21,5 +21,5 @@ float			ft_atof(char *s);
 int				ft_strcmp(char *s1, char *s2);
 int				ft_atoi(const char *str);
 int				ft_floor(float source);
-
+float			ft_abs_float(float src);
 #endif

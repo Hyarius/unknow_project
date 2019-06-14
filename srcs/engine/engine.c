@@ -57,6 +57,24 @@ void		t_engine_handle_event(t_engine *engine)
 	if (t_user_engine_poll_event(engine->user_engine) > 0)
 	{
 		t_user_engine_handle_quit(engine->user_engine, &(engine->playing));
+		if (engine->user_engine->event.type == SDL_KEYDOWN && engine->user_engine->event.key.keysym.sym == SDLK_u)
+		{
+			int i = 0;
+
+			while (i < engine->physic_engine->mesh_list->size)
+			{
+				t_mesh *mesh;
+
+				mesh = t_mesh_list_get(engine->physic_engine->mesh_list, i);
+
+				if (mesh->kinetic > 0)
+					mesh->kinetic = 0;
+				else
+					mesh->kinetic = 1;
+
+				i++;
+			}
+		}
 	}
 }
 

@@ -19,7 +19,8 @@ void			t_physic_engine_draw_mesh(t_physic_engine *p_physic_engine, t_window *p_w
 void			t_physic_engine_add_mesh(t_physic_engine *physic_engine, t_mesh p_mesh);
 t_mesh			*t_physic_engine_get_mesh(t_physic_engine *physic_engine, int index);
 void			t_physic_engine_apply_gravity(t_physic_engine *physic_engine);
-void			t_physic_engine_check_hitbox(t_physic_engine *physic_engine, int index);
+
+
 
 typedef struct	s_user_engine
 {
