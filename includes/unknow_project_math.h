@@ -22,6 +22,19 @@ t_matrix 		mult_matrix_by_matrix(t_matrix *m1, t_matrix *m2);
 t_vector3 		mult_vector3_by_matrix(t_vector3 *vertex, t_matrix *m);
 void			print_t_matrix(t_matrix *m);
 
+typedef struct	s_rasterizer
+{
+	float 		a;
+	float 		b;
+	float 		c;
+	float		max;
+} 				t_rasterizer;
+
+t_rasterizer 	create_t_rasterizer(t_vector3 s, t_vector3 e, t_vector3 ext);
+t_rasterizer	*initialize_t_rasterizer(t_vector3 s, t_vector3 e, t_vector3 ext);
+float 			apply_formula(t_rasterizer *rast, float x, float y);
+float			calc_rasterizer(t_rasterizer *rast, float x, float y);
+
 int				generate_nbr(int min, int max);
 t_vector2_int_list
 				calc_line(t_vector2_int start, t_vector2_int end);

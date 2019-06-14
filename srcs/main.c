@@ -16,13 +16,14 @@ int main(int argc, char **argv)
 	t_texture *texture = png_load("ressources/assets/texture/cube_test.png");
 
 	t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(-0.5, -1, -4), create_t_vector3(5, 0.2, 5), NULL, 0.0));
-	t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(-0.5, 4, -4), create_t_vector3(4, 4, 4), NULL, 1.0));
-	t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(-0.5, 10, -4), create_t_vector3(1.5, 1.5, 1.5), NULL, 1.0));
-	t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(-0.5, 15, -4), create_t_vector3(3, 3, 3), NULL, 1.0));
-	t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(-0.5, 20, -4), create_t_vector3(2.5, 2.5, 2.5), NULL, 1.0));
-	t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(-0.5, 25, -4), create_t_vector3(2, 2, 2), NULL, 1.0));
-	t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(-0.5, 30, -4), create_t_vector3(1.5, 1.5, 1.5), NULL, 1.0));
-	t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(-0.5, 35, -4), create_t_vector3(1, 1, 1), NULL, 1.0));
+
+	t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(-0.5, 15, -4), create_t_vector3(1.5, 1.5, 1.5), NULL, 100.0));
+	t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(-0.5, 30, -4), create_t_vector3(3, 3, 3), NULL, 100.0));
+	t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(-0.5, 45, -4), create_t_vector3(2.5, 2.5, 2.5), NULL, 100.0));
+	t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(-0.5, 60, -4), create_t_vector3(2, 2, 2), NULL, 100.0));
+	t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(-0.5, 75, -4), create_t_vector3(1.5, 1.5, 1.5), NULL, 100.0));
+	t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(-0.5, 90, -4), create_t_vector3(1, 1, 1), NULL, 100.0));
+	t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(-0.5, 5, -4), create_t_vector3(4, 1, 4), NULL, 100.0));
 	t_mesh *mesh = t_engine_get_mesh(engine, 1);
 	t_mesh_set_color(mesh, create_t_color(1.0, 0.2, 0.6, 1.0));
 	mesh = t_engine_get_mesh(engine, 2);
@@ -33,6 +34,16 @@ int main(int argc, char **argv)
 	t_mesh_set_color(mesh, create_t_color(1.2, 0.2, 1.0, 1.0));
 	mesh = t_engine_get_mesh(engine, 5);
 	t_mesh_set_color(mesh, create_t_color(0.2, 0.2, 0.2, 1.0));
+
+	t_color test = create_t_color(0.3, 0.3, 0.3, 1.0);
+	t_triangle tmp = create_t_triangle(create_t_vector3(0, 0, 1), create_t_vector3(1, 0, 1), create_t_vector3(0, 1, 2));
+
+	// prepare_screen(win, engine->cam, create_t_color(0.2f, 0.2f, 0.2f, 1.0f)); // refresh de l'ecran avec les couleurs par default
+	//
+	// draw_triangle_color_cpu(win, &tmp, &test);
+	// //t_engine_draw_mesh(engine, win);
+	//
+	// render_screen(win, engine->cam); // affiche la fenetre
 
 	while (engine->playing == 1)
 	{

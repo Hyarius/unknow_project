@@ -49,6 +49,8 @@ void			t_user_engine_handle_camera(t_user_engine *user_engine, t_camera *cam)
 
 void			t_user_engine_handle_quit(t_user_engine *user_engine, int *play)
 {
+	if (get_key_state(user_engine->keyboard, SDL_SCANCODE_ESCAPE))
+		*play = 0;
 	if (user_engine->event.type == SDL_QUIT)
 		*play = 0;
 	if (user_engine->event.type == SDL_KEYDOWN && user_engine->event.key.keysym.sym == SDLK_ESCAPE)
