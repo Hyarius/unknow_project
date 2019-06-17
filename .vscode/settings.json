@@ -10,6 +10,7 @@
 		"unknow_project_math.h": "c",
 		"unknow_project_system.h": "c",
 		"unknow_project_vector.h": "c",
-		"unknow_project_geometry.h": "c"
+		"unknow_project_geometry.h": "c",
+		"unknow_project_window.h": "c"
 	}
 }

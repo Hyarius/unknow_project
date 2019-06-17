@@ -89,3 +89,17 @@ C : 0.2151 / 0.8569 / 2.9584
 4 - si distance entre 2 objets > a rayon bubble box ne pas faire le test
 
 calcul de la distance 3D 			D = sqrt((x2 - x1)^2 + (y2 - y1)^2 + (z2 - z1)^2)
+
+
+
+
+
+
+nb thread = 8
+list triangle : 21
+
+21 / 8 = 2.65
+21 % 8 = 5
+
+w
+3 3 3 3 3 2 2 2

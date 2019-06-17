@@ -29,6 +29,9 @@ typedef struct		s_window
 	t_color			*color_data;
 	float			*depth_buffer;
 
+	pthread_t		threads[NB_THREAD_MAX]; //pointeur pour le multithreading
+	t_void_list		data[NB_THREAD_MAX]; //liste qui donne au thread les element dont il a besoin
+
 }					t_window;
 
 //			fps_handler

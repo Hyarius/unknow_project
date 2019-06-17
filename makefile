@@ -19,6 +19,7 @@ DWL =		brew
 
 ##List every .c found inside SRC_DIR
 SRC = 		$(foreach dir, $(SRC_DIR), $(foreach file, $(wildcard $(dir)/*.c), $(notdir $(file))))
+INC = 		$(foreach dir, $(INC_DIR), $(foreach file, $(wildcard $(dir)/*.h), $(addprefix $(INC_DIR)/, $(notdir $(file)))))
 
 ##Transform and place every .o from SRC
 OBJ=		$(addprefix $(OBJ_DIR)/, $(SRC:%.c=%.o))
@@ -54,7 +55,7 @@ install:
 libs:
 				$(foreach lib, $(LIB_DWN), $(DWL) install $(lib); )
 
-$(NAME):		$(OBJ)
+$(NAME):		$(OBJ) $(INC) Makefile
 				@echo "Compiling $(NAME) ...\c"
 				@$(CC) $(CFLAGS) $(IFLAGS) -o $(NAME) $(OBJ) $(LFLAGS)
 				@echo " DONE"

@@ -27,7 +27,7 @@ t_vector3	convert_opengl_to_vector3(t_window *p_win, t_vector3 source)
 
 	result.x = (source.x + 1.0f) * ((float)(p_win->size_x) / 2.0);
 	result.y = ((source.y) + 1.0f) * ((float)(p_win->size_y) / 2.0);
-	result.z = source.z;
+	result.z = 1.0 / source.z;
 
 	return (result);
 }

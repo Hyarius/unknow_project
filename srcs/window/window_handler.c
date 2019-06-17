@@ -32,6 +32,7 @@ t_window		*initialize_t_window(char *p_name, int p_size_x, int p_size_y)
 	t_window	*win;
 	t_vector3	tmp_coord;
 	t_color		tmp_color;
+	int			i;
 
 	if (!(win = (t_window *)malloc(sizeof(t_window))))
 		error_exit(-6, "Can't malloc a t_window");
@@ -62,6 +63,14 @@ t_window		*initialize_t_window(char *p_name, int p_size_x, int p_size_y)
 	glGenBuffers(1, &win->texture_buffer);
 	glGenBuffers(1, &win->alpha_buffer);
 
+	// initialisation du multi_thread
+	i = 0;
+	while (i < NB_THREAD_MAX)
+	{
+		win->data[i] = create_t_void_list();
+		i++;
+	}
+
 	// create shader program
 	win->program_color = load_shaders("ressources/shader/color_shader.vert", "ressources/shader/color_shader.frag");
 	win->program_texture = load_shaders("ressources/shader/texture_shader.vert", "ressources/shader/texture_shader.frag");
@@ -86,7 +95,7 @@ t_window		*initialize_t_window(char *p_name, int p_size_x, int p_size_y)
 
 	tmp_color = create_t_color_from_int(255, 255, 255, 0);
 
-	for (int i = 0; i < win->size_x; i++)
+	for (i = 0; i < win->size_x; i++)
 	{
 		for (int j = 0; j < win->size_y; j++)
 		{

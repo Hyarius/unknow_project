@@ -143,19 +143,12 @@ t_vector3	apply_t_camera(t_vector3 *src, t_matrix *mat) // applique la position 
 	result.y = src->x * mat->value[0][1] + src->y * mat->value[1][1] + src->z * mat->value[2][1] + mat->value[3][1];
 	result.z = src->x * mat->value[0][2] + src->y * mat->value[1][2] + src->z * mat->value[2][2] + mat->value[3][2];
 	delta = src->x * mat->value[0][3] + src->y * mat->value[1][3] + src->z * mat->value[2][3] + mat->value[3][3];
-	// if (delta < 0)
-	// {
-	// 	result.x /= delta;
-	// 	result.y /= delta;
-	// 	result.z /= delta;
-	// }
-	// if (delta < 0)
-	// {
+	if (delta != 0)
+	{
 		result.x /= delta;
 		result.y /= delta;
 		result.z /= -delta;
-	// }
-	//result.z = (float)(sqrt(src->x * src->x + src->y * src->y + src->z * src->z));
+	}
 	return (result);
 }
 
@@ -266,14 +259,15 @@ void		draw_triangle_from_camera_on_screen(t_window *p_win, t_camera *p_cam)
 	t_color		*darkness;
 	int			i;
 
-	i = 0;
-	while (i < p_cam->triangle_color_list.size)
-	{
-		triangle = t_triangle_list_get(&(p_cam->triangle_color_list), i);
-		color = t_color_list_get(&(p_cam->color_list), i);
-		draw_triangle_color_cpu(p_win, triangle, color);
-		i++;
-	}
+	multithreading_draw_triangle_color_cpu(p_win, &(p_cam->triangle_color_list), &(p_cam->color_list));
+	// i = 0;
+	// while (i < p_cam->triangle_color_list.size)
+	// {
+	// 	triangle = t_triangle_list_get(&(p_cam->triangle_color_list), i);
+	// 	color = t_color_list_get(&(p_cam->color_list), i);
+	// 	draw_triangle_color_cpu(p_win, triangle, color);
+	// 	i++;
+	// }
 
 	i = 0;
 	while (i < p_cam->triangle_texture_list.size)

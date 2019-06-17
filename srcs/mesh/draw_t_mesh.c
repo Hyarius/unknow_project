@@ -4,12 +4,11 @@ void	draw_t_mesh(t_window *p_win, t_camera *p_cam, t_mesh *mesh)
 {
 	int			nb_clipped;
 	t_uv 		tmp_uv;
-	t_color		tmp_color;
+	t_color		darkness_color;
 	float		darkness;
 	t_triangle	triangle;
 	t_vector3	points[3];
 	t_vector3	points_uv[3];
-	t_color 	color2 = create_t_color_from_int(255, 0, 0, 255);
 
 	for (int i = 0; i < mesh->faces->size; i++)
 	{
@@ -41,10 +40,10 @@ void	draw_t_mesh(t_window *p_win, t_camera *p_cam, t_mesh *mesh)
 			if (darkness < 0.1)
 				darkness = 0.1;
 
-			tmp_color.r = darkness;
-			tmp_color.g = darkness;
-			tmp_color.b = darkness;
-			tmp_color.a = 0.4f;
+			darkness_color.r = darkness;
+			darkness_color.g = darkness;
+			darkness_color.b = darkness;
+			darkness_color.a = 0.4f;
 
 			points[0] = mult_vector3_by_matrix(&points[0], &(p_cam->view));
 			points[1] = mult_vector3_by_matrix(&points[1], &(p_cam->view));
@@ -63,7 +62,7 @@ void	draw_t_mesh(t_window *p_win, t_camera *p_cam, t_mesh *mesh)
 
 				if (mesh->texture == NULL)
 				{
-					t_color_list_push_back(&(p_cam->color_list), fuze_t_color(mesh->color, tmp_color));
+					t_color_list_push_back(&(p_cam->color_list), fuze_t_color(mesh->color, darkness_color));
 					t_triangle_list_push_back(&(p_cam->triangle_color_list), triangle);
 				}
 				else
@@ -74,7 +73,7 @@ void	draw_t_mesh(t_window *p_win, t_camera *p_cam, t_mesh *mesh)
 					triangle.c = p_cam->clipping_list_uv[j + 2];
 					tmp_uv = create_t_uv(triangle, mesh->texture);
 					t_uv_list_push_back(&(p_cam->uv_list), tmp_uv);
-					t_color_list_push_back(&(p_cam->darkness_list), tmp_color);
+					t_color_list_push_back(&(p_cam->darkness_list), darkness_color);
 				}
 			}
 		}
