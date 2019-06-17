@@ -13,6 +13,7 @@ void	draw_triangle_color_cpu(t_window *p_win, t_triangle *p_triangle, t_color *p
 	float			alpha;
 	float			beta;
 	float			gamma;
+	int				pixel_index;
 
 	triangle.a = convert_opengl_to_vector3(p_win, p_triangle->a);
 	triangle.b = convert_opengl_to_vector3(p_win, p_triangle->b);
@@ -33,12 +34,14 @@ void	draw_triangle_color_cpu(t_window *p_win, t_triangle *p_triangle, t_color *p
 	if (max.y >= p_win->size_y)
 		max.y = p_win->size_y - 1;
 
+	triangle.a.z = 1.0 / triangle.a.z;
+	triangle.b.z = 1.0 / triangle.b.z;
+	triangle.c.z = 1.0 / triangle.c.z;
+
 	current = min;
-	int pixel_index;
 	while (current.y <= max.y)
 	{
 		pixel_index = (int)(current.x) + ((int)(current.y) * p_win->size_x);
-		current.x = min.x;
 		while (current.x <= max.x)
 		{
 			alpha = calc_rasterizer(&ab, current.x, current.y);
@@ -46,9 +49,9 @@ void	draw_triangle_color_cpu(t_window *p_win, t_triangle *p_triangle, t_color *p
 			gamma = calc_rasterizer(&bc, current.x, current.y);
 			if (alpha >= 0 && beta >= 0 && gamma >= 0)
 			{
-				float z = alpha * triangle.a.z + beta * triangle.b.z + gamma * triangle.c.z;
-				//printf("%f = %f * %f + %f * %f + %f * %f\n", z, alpha, triangle.a.z, beta, triangle.b.z, gamma, triangle.c.z);
-				if (z < p_win->depth_buffer[pixel_index] || p_win->depth_buffer[pixel_index] == 0)
+				float z = 1.0f / ((triangle.a.z * gamma) + (triangle.b.z * beta) + (triangle.c.z * alpha));
+
+				if (z < p_win->depth_buffer[pixel_index] || p_win->depth_buffer[pixel_index] == -1)
 				{
 					draw_pixel(p_win, (int)(current.x), (int)(current.y), p_color);
 					p_win->depth_buffer[pixel_index] = z;
@@ -57,17 +60,17 @@ void	draw_triangle_color_cpu(t_window *p_win, t_triangle *p_triangle, t_color *p
 			current.x++;
 			pixel_index++;
 		}
+		current.x = min.x;
 		current.y++;
 	}
-
-	int size = 5;
-	for (int i = -size; i < size; i++)
-	{
-		for (int j = -size; j < size; j++)
-		{
-			draw_pixel(p_win, (int)(triangle.a.x + i), (int)(triangle.a.y + j), &red);
-			draw_pixel(p_win, (int)(triangle.b.x + i), (int)(triangle.b.y + j), &red);
-			draw_pixel(p_win, (int)(triangle.c.x + i), (int)(triangle.c.y + j), &red);
-		}
-	}
+	// int size = 5;
+	// for (int i = -size; i < size; i++)
+	// {
+	// 	for (int j = -size; j < size; j++)
+	// 	{
+	// 		draw_pixel(p_win, (int)(triangle.a.x + i), (int)(triangle.a.y + j), &red);
+	// 		draw_pixel(p_win, (int)(triangle.b.x + i), (int)(triangle.b.y + j), &red);
+	// 		draw_pixel(p_win, (int)(triangle.c.x + i), (int)(triangle.c.y + j), &red);
+	// 	}
+	// }
 }

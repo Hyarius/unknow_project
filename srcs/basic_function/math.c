@@ -26,7 +26,7 @@ float			dot_t_vector3(t_vector3 a, t_vector3 b) //Produit scalaire / dot product
 	return (result);
 }
 
-float			edge_vector3(t_vector3 a, t_vector3 b, t_vector3 c)
+float			edge_t_vector3(t_vector3 a, t_vector3 b, t_vector3 c)
 {
 	float		result;
 

@@ -143,13 +143,19 @@ t_vector3	apply_t_camera(t_vector3 *src, t_matrix *mat) // applique la position 
 	result.y = src->x * mat->value[0][1] + src->y * mat->value[1][1] + src->z * mat->value[2][1] + mat->value[3][1];
 	result.z = src->x * mat->value[0][2] + src->y * mat->value[1][2] + src->z * mat->value[2][2] + mat->value[3][2];
 	delta = src->x * mat->value[0][3] + src->y * mat->value[1][3] + src->z * mat->value[2][3] + mat->value[3][3];
-	if (delta < 0)
-	{
+	// if (delta < 0)
+	// {
+	// 	result.x /= delta;
+	// 	result.y /= delta;
+	// 	result.z /= delta;
+	// }
+	// if (delta < 0)
+	// {
 		result.x /= delta;
 		result.y /= delta;
-		result.z /= delta;
-	}
-	result.z = (float)(sqrt(src->x * src->x + src->y * src->y + src->z * src->z));
+		result.z /= -delta;
+	// }
+	//result.z = (float)(sqrt(src->x * src->x + src->y * src->y + src->z * src->z));
 	return (result);
 }
 

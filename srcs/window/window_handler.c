@@ -117,7 +117,7 @@ void 				clear_buffers(t_window *win)
 {
 	for (int i = 0; i < win->size_x * win->size_y; i++)
 	{
-		win->depth_buffer[i] = 0.0f;
+		win->depth_buffer[i] = -1;
 		win->color_data[i].a = 0;
 	}
 }

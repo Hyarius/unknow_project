@@ -146,7 +146,7 @@ void			t_physic_engine_apply_gravity(t_physic_engine *physic_engine)
 			{
 				if (mesh->velocity.x == 0 && mesh->velocity.y == 0 && mesh->velocity.z == 0)
 					break;
-				mesh->velocity = divide_vector3_by_float(mesh->velocity, 2);
+				mesh->velocity = create_t_vector3(0.0, 0.0, 0.0);
 			}
 			if (mesh->velocity.x != 0 || mesh->velocity.y != 0 || mesh->velocity.z != 0)
 				t_mesh_apply_velocity(mesh);

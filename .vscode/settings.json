@@ -2,6 +2,14 @@
 	"files.associations": {
 		"unknow_project.h": "c",
 		"limits": "c",
-		"type_traits": "c"
+		"type_traits": "c",
+		"unknow_project_engine.h": "c",
+		"unknow_project_camera.h": "c",
+		"unknow_project_engine_module.h": "c",
+		"unknow_project_drawing.h": "c",
+		"unknow_project_math.h": "c",
+		"unknow_project_system.h": "c",
+		"unknow_project_vector.h": "c",
+		"unknow_project_geometry.h": "c"
 	}
 }
