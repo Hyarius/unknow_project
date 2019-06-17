@@ -53,6 +53,7 @@ void		compute_t_camera(t_camera *cam);
 void		t_camera_change_fov(t_camera *cam, float delta);
 t_vector3	apply_t_camera(t_vector3 *src, t_matrix *mvp);
 t_matrix	t_camera_compute_view(t_camera *cam);
+void		t_camera_look_at_point(t_camera *cam, t_vector3 target);
 void		t_camera_look_at(t_camera *cam);
 void		t_camera_change_view(t_camera *cam, t_vector3 delta_angle);
 void		handle_t_camera_mouvement_by_key(t_camera *cam, t_keyboard *p_keyboard);

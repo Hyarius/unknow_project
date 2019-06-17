@@ -85,3 +85,14 @@ void		t_engine_apply_physic(t_engine *engine)
 {
 	t_physic_engine_apply_gravity(engine->physic_engine);
 }
+
+void		t_engine_place_camera(t_engine *engine, t_vector3 p_new_pos)
+{
+	engine->cam->pos = p_new_pos;
+}
+
+void		t_engine_camera_look_at(t_engine *engine, t_vector3 target)
+{
+	t_camera_look_at_point(engine->cam, target);
+	compute_t_camera(engine->cam);
+}

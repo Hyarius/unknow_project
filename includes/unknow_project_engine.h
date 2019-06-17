@@ -28,6 +28,8 @@ void		t_engine_draw_mesh(t_engine *p_engine, t_window *p_win);
 void		t_engine_handle_event(t_engine *engine);
 
 void		t_engine_apply_physic(t_engine *engine);
+void		t_engine_place_camera(t_engine *engine, t_vector3 p_new_pos);
+void		t_engine_camera_look_at(t_engine *engine, t_vector3 target);
 
 
 #endif

@@ -57,6 +57,19 @@ void		delete_t_cam(t_camera *dest)
 	free(dest);
 }
 
+void		t_camera_look_at_point(t_camera *cam, t_vector3 target) // calcul de l'angle de vue de la camera (forward, right, up)
+{
+	t_vector3 zaxis = normalize_t_vector3(create_t_vector3(target.x - cam->pos.x,
+															-(target.y - cam->pos.y),
+															-(target.z - cam->pos.z)));
+
+	cam->angle.x = 0;
+	cam->angle.y = radius_to_degree(asin(zaxis.z));
+	cam->angle.z = radius_to_degree(asin(zaxis.y));
+
+	t_camera_look_at(cam);
+}
+
 void		t_camera_look_at(t_camera *cam) // calcul de l'angle de vue de la camera (forward, right, up)
 {
 	t_vector3 zaxis = normalize_t_vector3(create_t_vector3(cos(degree_to_radius(cam->angle.z)) * sin(degree_to_radius(cam->angle.y)),
@@ -159,7 +172,7 @@ void		t_camera_change_view(t_camera *cam, t_vector3 delta_angle)
 	t_camera_look_at(cam);
 }
 
-void		handle_t_camera_mouvement_by_key(t_camera *cam, t_keyboard *p_keyboard) // calcul du mouvement de la camera a la clavier
+void		handle_t_camera_mouvement_by_key(t_camera *cam, t_keyboard *p_keyboard) // calcul du mouvement de la camera au clavier
 {
 	t_vector3	tmp;
 

@@ -118,6 +118,8 @@ void	multithreading_draw_triangle_color_cpu(t_window *p_win, t_triangle_list *p_
 	modulo = p_triangle_list->size % NB_THREAD_MAX;
 	i = 0;
 	nb_thread = p_triangle_list->size / (NB_TRIANGLE_MAX);
+	if (nb_thread == 0)
+		nb_thread++;
 	while (i < nb_thread)
 	{
 		len = p_triangle_list->size / nb_thread;
