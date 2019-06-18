@@ -24,15 +24,15 @@
 // 	list_color[6] = create_t_color(0.9, 0.2, 0.2, 1.0);
 // 	list_color[7] = create_t_color(0.9, 0.9, 0.9, 1.0);
 
-// 	t_engine_add_mesh(engine, create_primitive_plane(create_t_vector3(0, -1, 0), create_t_vector3(30, 0, 30), NULL, 0.0));
+// 	t_engine_add_mesh(engine, create_primitive_plane(create_t_vector3(0, -1, 0), create_t_vector3(60, 0, 60), NULL, 0.0));
 
-// 	int nb = 100; //nombre de mesh (cube)
+// 	int nb = 800; //nombre de mesh (cube)
 // 	float size = 1;
-// 	int range = 26;
+// 	int range = 50;
 // 	for (int i = 0; i < nb; i++)
 // 	{
 // 		float x = (float)(generate_nbr(-range, range)) + 0.5f; //generer position aleatoire des cube
-// 		float y = (float)(generate_nbr(3, 6)) + 0.5f;
+// 		float y = (float)(generate_nbr(range, range * 2)) + 0.5f;
 // 		float z = (float)(generate_nbr(-range, range)) + 0.5f;
 // 		int	color = generate_nbr(0, 8);
 
@@ -43,7 +43,7 @@
 
 // 	while (engine->playing == 1)
 // 	{
-// 		t_engine_apply_physic(engine);
+// 		//t_engine_apply_physic(engine);
 
 // 		t_engine_handle_camera(engine);
 
@@ -70,18 +70,22 @@ int main(int argc, char **argv)
 	win = initialize_t_window(argv[0], 1840, 1220);	//creation et initialisation de la window
 
 	t_engine *engine = initialize_t_engine();
-	t_engine_place_camera(engine, create_t_vector3(0.0, 0.0, 10.0));
+	t_engine_place_camera(engine, create_t_vector3(0.0, -0.0, 11.0));
 	t_engine_camera_look_at(engine, create_t_vector3(0, 0, 0));
 
-	t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(0, 0, 0), create_t_vector3(1, 1, 1), NULL, 0.0));
 
-	// t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(-0.5, 7, -4), create_t_vector3(1.5, 1.5, 1.5), NULL, 0.0));
-	// t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(-0.5, 14, -4), create_t_vector3(3, 3, 3), NULL, 0.0));
-	// t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(-0.5, 21, -4), create_t_vector3(2.5, 2.5, 2.5), NULL, 0.0));
-	// t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(-0.5, 28, -4), create_t_vector3(2, 2, 2), NULL, 0.0));
-	// t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(-0.5, 35, -4), create_t_vector3(1.5, 1.5, 1.5), NULL, 0.0));
-	// t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(-0.5, 42, -4), create_t_vector3(1, 1, 1), NULL, 0.0));
-	// t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(-0.5, 49, -4), create_t_vector3(4, 1, 4), NULL, 0.0));
+	t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(0, 0, 0), create_t_vector3(1, 1, 1), NULL, 0.0));
+	t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(0.2, 2, -0.4), create_t_vector3(0.2, 0.2, 0.2), NULL, 0.0));
+	t_mesh *mesh = t_engine_get_mesh(engine, 1);
+	t_mesh_set_color(mesh, create_t_color(1.0, 0.2, 0.6, 1.0));
+
+	// t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(-0.5, 15, -4), create_t_vector3(1.5, 1.5, 1.5), NULL, 0.0));
+	// t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(-0.5, 30, -4), create_t_vector3(3, 3, 3), NULL, 0.0));
+	// t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(-0.5, 45, -4), create_t_vector3(2.5, 2.5, 2.5), NULL, 0.0));
+	// t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(-0.5, 60, -4), create_t_vector3(2, 2, 2), NULL, 0.0));
+	// t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(-0.5, 75, -4), create_t_vector3(1.5, 1.5, 1.5), NULL, 0.0));
+	// t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(-0.5, 90, -4), create_t_vector3(1, 1, 1), NULL, 0.0));
+	// t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(-0.5, 105, -4), create_t_vector3(4, 1, 4), NULL, 0.0));
 	// t_mesh *mesh = t_engine_get_mesh(engine, 1);
 	// t_mesh_set_color(mesh, create_t_color(1.0, 0.2, 0.6, 1.0));
 	// mesh = t_engine_get_mesh(engine, 2);
@@ -93,9 +97,17 @@ int main(int argc, char **argv)
 	// mesh = t_engine_get_mesh(engine, 5);
 	// t_mesh_set_color(mesh, create_t_color(0.2, 0.2, 0.2, 1.0));
 
+	float x = 0;
+	float y = 0;
+	float z = 0;
+
 	while (engine->playing == 1)
 	{
-		print_t_vector3(engine->cam->angle, "Angle : ");endl();
+		if (get_key_state(engine->user_engine->keyboard, SDL_SCANCODE_R))
+		{
+			t_engine_camera_look_at(engine, create_t_vector3(0, 0, 0));
+		}
+
 		t_engine_apply_physic(engine);
 
 		t_engine_handle_camera(engine);

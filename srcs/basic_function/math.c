@@ -67,20 +67,22 @@ float			calc_distance_to_plane(t_vector3 p_normal, t_vector3 p_center, t_vector3
 	return (result);
 }
 
-void			clamp_float_value(float min, float *value, float max)
+float			clamp_float_value(float min, float value, float max)
 {
-	if (*value < min)
-		*value = min;
-	if (*value > max)
-		*value = max;
+	if (value < min)
+		return (min);
+	if (value > max)
+		return (max);
+	return (value);
 }
 
-void			clamp_int_value(int min, int *value, int max)
+int			clamp_int_value(int min, int value, int max)
 {
-	if (*value < min)
-		*value = min;
-	if (*value > max)
-		*value = max;
+	if (value < min)
+		return (min);
+	if (value > max)
+		return (max);
+	return (value);
 }
 
 t_vector3		interpolate_vector3_over_line(float ratio_x, float ratio_y, t_vector3 ua, t_vector3 ub)

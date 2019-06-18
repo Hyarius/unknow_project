@@ -151,9 +151,9 @@ void			t_mesh_rotate_around_point(t_mesh *mesh, t_vector3 delta_angle, t_vector3
 	for (int i = 0; i < mesh->vertices->size; i++)
 	{
 		target = t_vector3_list_get(mesh->vertices, i);
-		*target = mult_vector3_by_matrix(target, &translate);
-		*target = mult_vector3_by_matrix(target, &rotation);
-		*target = mult_vector3_by_matrix(target, &inv_translate);
+		*target = mult_vector3_by_matrix(*target, translate);
+		*target = mult_vector3_by_matrix(*target, rotation);
+		*target = mult_vector3_by_matrix(*target, inv_translate);
 	}
 	t_mesh_compute_normals(mesh);
 }
@@ -169,7 +169,7 @@ void			t_mesh_rotate(t_mesh *mesh, t_vector3 delta_angle)
 	for (int i = 0; i < mesh->vertices->size; i++)
 	{
 		target = t_vector3_list_get(mesh->vertices, i);
-		*target = mult_vector3_by_matrix(target, &rotation);
+		*target = mult_vector3_by_matrix(*target, rotation);
 	}
 	t_mesh_compute_normals(mesh);
 }

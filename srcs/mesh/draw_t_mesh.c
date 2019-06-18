@@ -45,9 +45,9 @@ void	draw_t_mesh(t_window *p_win, t_camera *p_cam, t_mesh *mesh)
 			darkness_color.b = darkness;
 			darkness_color.a = 0.4f;
 
-			points[0] = mult_vector3_by_matrix(&points[0], &(p_cam->view));
-			points[1] = mult_vector3_by_matrix(&points[1], &(p_cam->view));
-			points[2] = mult_vector3_by_matrix(&points[2], &(p_cam->view));
+			points[0] = mult_vector3_by_matrix(points[0], (p_cam->view));
+			points[1] = mult_vector3_by_matrix(points[1], (p_cam->view));
+			points[2] = mult_vector3_by_matrix(points[2], (p_cam->view));
 
 			if (mesh->texture != NULL)
 				nb_clipped = clip_triangle_to_plane(p_cam, points, points_uv);

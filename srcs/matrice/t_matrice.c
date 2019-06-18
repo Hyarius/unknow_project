@@ -140,13 +140,13 @@ t_matrix create_rotation_matrix(float x, float y, float z)
 	tmp[1] = create_rotation_y_matrix(y);
 	tmp[2] = create_rotation_z_matrix(z);
 
-	tmp[3] = mult_matrix_by_matrix(&tmp[0], &tmp[1]);
-	result = mult_matrix_by_matrix(&tmp[3], &tmp[2]);
+	tmp[3] = mult_matrix_by_matrix(tmp[0], tmp[1]);
+	result = mult_matrix_by_matrix(tmp[3], tmp[2]);
 
 	return (result);
 }
 
-t_matrix mult_matrix_by_matrix(t_matrix *m1, t_matrix *m2)
+t_matrix mult_matrix_by_matrix(t_matrix m1, t_matrix m2)
 {
 	t_matrix	result;
 	int			i;
@@ -161,10 +161,10 @@ t_matrix mult_matrix_by_matrix(t_matrix *m1, t_matrix *m2)
 		j = 0;
 		while (j < 4)
 		{
-			result.value[j][i] = (m1->value[0][i] * m2->value[j][0]) +
-								(m1->value[1][i] * m2->value[j][1]) +
-								(m1->value[2][i] * m2->value[j][2]) +
-								(m1->value[3][i] * m2->value[j][3]);
+			result.value[j][i] = (m1.value[0][i] * m2.value[j][0]) +
+								(m1.value[1][i] * m2.value[j][1]) +
+								(m1.value[2][i] * m2.value[j][2]) +
+								(m1.value[3][i] * m2.value[j][3]);
 			j++;
 		}
 		i++;
@@ -172,15 +172,15 @@ t_matrix mult_matrix_by_matrix(t_matrix *m1, t_matrix *m2)
 	return (result);
 }
 
-t_vector3 mult_vector3_by_matrix(t_vector3 *vertex, t_matrix *m)
+t_vector3 mult_vector3_by_matrix(t_vector3 vertex, t_matrix m)
 {
 	float		result[3];
 
-	result[0] = m->value[0][0] * vertex->x + m->value[1][0] * vertex->y + m->value[2][0] * vertex->z + m->value[3][0];
+	result[0] = m.value[0][0] * vertex.x + m.value[1][0] * vertex.y + m.value[2][0] * vertex.z + m.value[3][0];
 
-	result[1] = m->value[0][1] * vertex->x + m->value[1][1] * vertex->y + m->value[2][1] * vertex->z + m->value[3][1];
+	result[1] = m.value[0][1] * vertex.x + m.value[1][1] * vertex.y + m.value[2][1] * vertex.z + m.value[3][1];
 
-	result[2] = m->value[0][2] * vertex->x + m->value[1][2] * vertex->y + m->value[2][2] * vertex->z + m->value[3][2];
+	result[2] = m.value[0][2] * vertex.x + m.value[1][2] * vertex.y + m.value[2][2] * vertex.z + m.value[3][2];
 
 	return (create_t_vector3(result[0], result[1], result[2]));
 }

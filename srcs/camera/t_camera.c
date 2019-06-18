@@ -59,13 +59,43 @@ void		delete_t_cam(t_camera *dest)
 
 void		t_camera_look_at_point(t_camera *cam, t_vector3 target) // calcul de l'angle de vue de la camera (forward, right, up)
 {
-	t_vector3 zaxis = normalize_t_vector3(create_t_vector3(target.x - cam->pos.x,
-															-(target.y - cam->pos.y),
-															-(target.z - cam->pos.z)));
+	t_vector3 V1 = normalize_t_vector3(substract_vector3_to_vector3(cam->pos, target));
+	t_vector3 V2 = create_t_vector3(0, 0, 1);
 
-	cam->angle.x = 0;
-	cam->angle.y = radius_to_degree(asin(zaxis.z));
-	cam->angle.z = radius_to_degree(asin(zaxis.y));
+	t_vector3 V3;
+
+	/*
+
+	V1.x = sin(alpha) * cos(beta);
+ 	V1.y = sin(alpha) * sin(beta);
+ 	V1.z = cos(beta);
+
+	float base_alpha = 30;
+	float base_beta = 60;
+
+	V3.x = sin(degree_to_radius(base_alpha)) * cos(degree_to_radius(base_beta));
+	V3.y = sin(degree_to_radius(base_alpha)) * sin(degree_to_radius(base_beta));
+	V3.z = cos(degree_to_radius(base_beta));
+
+	V1.y = sin(base_alpha) * sin((base_beta));
+	0 = sin(base_alpha) * sin((acosf(V1.z))) - V1.y;
+	0 = base_alpha * (acosf(V1.z)) - asinf(V1.y);
+	asinf(V1.y) = base_alpha * (acosf(V1.z));
+	asinf(V1.y) / acosf(V1.z) = base_alpha;
+	*/
+	float alpha;
+	float beta;
+
+	beta = radius_to_degree(acosf(V1.z));
+	alpha = 0;
+
+	print_t_vector3(V1, "V1 : ");endl();
+	printf("Alpha : %f\n", alpha);
+	printf("Beta : %f\n", beta);
+	print_t_vector3(cam->angle, "angle : ");endl();
+
+	cam->angle.x = alpha;
+	cam->angle.y = beta;
 
 	t_camera_look_at(cam);
 }
@@ -168,7 +198,7 @@ t_vector3	apply_t_camera(t_vector3 *src, t_matrix *mat) // applique la position 
 void		t_camera_change_view(t_camera *cam, t_vector3 delta_angle)
 {
 	cam->angle = add_vector3_to_vector3(cam->angle, delta_angle);
-	clamp_float_value(-89, &(cam->angle.z), 89);
+	cam->angle.z = clamp_float_value(-89, cam->angle.z, 89);
 	t_camera_look_at(cam);
 }
 

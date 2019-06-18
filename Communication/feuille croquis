@@ -103,3 +103,7 @@ list triangle : 21
 
 w
 3 3 3 3 3 2 2 2
+
+alpha = arccos(u.v / ||u||.||v||)
+
+(acosf(dot_t_vector3(zaxis, cam->forward) / ((ft_abs_float(zaxis.z) * ft_abs_float(cam->forward.z)))))

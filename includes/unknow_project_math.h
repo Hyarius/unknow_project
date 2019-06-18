@@ -18,8 +18,8 @@ t_matrix 		create_rotation_x_matrix(float angle);
 t_matrix 		create_rotation_y_matrix(float angle);
 t_matrix 		create_rotation_z_matrix(float angle);
 t_matrix 		create_rotation_matrix(float x, float y, float z);
-t_matrix 		mult_matrix_by_matrix(t_matrix *m1, t_matrix *m2);
-t_vector3 		mult_vector3_by_matrix(t_vector3 *vertex, t_matrix *m);
+t_matrix 		mult_matrix_by_matrix(t_matrix m1, t_matrix m2);
+t_vector3 		mult_vector3_by_matrix(t_vector3 vertex, t_matrix m);
 void			print_t_matrix(t_matrix *m);
 
 typedef struct	s_rasterizer
@@ -44,9 +44,9 @@ float			dot_t_vector3(t_vector3 a, t_vector3 b);
 float			edge_t_vector3(t_vector3 a, t_vector3 b, t_vector3 c);
 t_vector3		intersect_plane_by_line(t_vector3 p_normal, t_vector3 p_center, t_vector3 start, t_vector3 end);
 float			calc_distance_to_plane(t_vector3 p_normal, t_vector3 p_center, t_vector3 p_point);
-void			clamp_float_value(float min, float *value, float max);
+float			clamp_float_value(float min, float value, float max);
 float			calc_dist_vector3_to_vector3(t_vector3 a, t_vector3 b);
-void			clamp_int_value(int min, int *value, int max);
+int				clamp_int_value(int min, int value, int max);
 t_vector3		interpolate_vector3_over_line(float ratio_x, float ratio_y, t_vector3 ua, t_vector3 ub);
 float			interpolate_ratio(float a, float b, float c);
 int				get_short(int a, int b, int c);
