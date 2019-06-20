@@ -28,7 +28,8 @@ typedef struct	s_camera
 				darkness_list;
 
 	t_vector3	pos;
-	t_vector3	angle;
+	float		pitch; // l'angle pour l'axis y
+	float		yaw; // l'angle pour l'axis x
 	float		speed;
 	float		running;
 	float		slowing;
@@ -55,7 +56,7 @@ t_vector3	apply_t_camera(t_vector3 *src, t_matrix *mvp);
 t_matrix	t_camera_compute_view(t_camera *cam);
 void		t_camera_look_at_point(t_camera *cam, t_vector3 target);
 void		t_camera_look_at(t_camera *cam);
-void		t_camera_change_view(t_camera *cam, t_vector3 delta_angle);
+void		t_camera_change_view(t_camera *cam, float delta_yaw, float delta_pitch);
 void		handle_t_camera_mouvement_by_key(t_camera *cam, t_keyboard *p_keyboard);
 void		handle_t_camera_view_by_mouse(t_camera *cam, t_mouse *p_mouse);
 int			clip_triangle_to_plane(t_camera *p_camera, t_vector3 *p_points, t_vector3 *p_points_uv);

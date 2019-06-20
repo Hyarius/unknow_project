@@ -10,7 +10,8 @@ t_camera	create_t_camera(t_vector3 p_pos, float p_fov, t_vector2 p_dist)
 	result.fov = p_fov; // champ de vision
 	result.near = p_dist.x; //distance la plus proche pour voir un objet
 	result.far = p_dist.y; // distance la plus eloigne pour voir un objet
-	result.angle = create_t_vector3(0, 0, 0); // angle a laquel on voit l'objet
+	result.yaw = 0; // angle a laquel on voit l'objet
+	result.pitch = 0; // angle a laquel on voit l'objet
 	result.speed = 0.1f; // vitesse de deplacement
 	result.running = 3.4f; // action de courir
 	result.slowing = 1.0f; // ralentissement pour le recul
@@ -59,55 +60,25 @@ void		delete_t_cam(t_camera *dest)
 
 void		t_camera_look_at_point(t_camera *cam, t_vector3 target) // calcul de l'angle de vue de la camera (forward, right, up)
 {
-	t_vector3 V1 = normalize_t_vector3(substract_vector3_to_vector3(cam->pos, target));
-	t_vector3 V2 = create_t_vector3(0, 0, 1);
+	if (target.x == cam->pos.x && target.y == cam->pos.y && target.z == cam->pos.z)
+		return ;
 
-	t_vector3 V3;
+	t_vector3 result = normalize_t_vector3(substract_vector3_to_vector3(cam->pos, target));
 
-	/*
-
-	V1.x = sin(alpha) * cos(beta);
- 	V1.y = sin(alpha) * sin(beta);
- 	V1.z = cos(beta);
-
-	float base_alpha = 30;
-	float base_beta = 60;
-
-	V3.x = sin(degree_to_radius(base_alpha)) * cos(degree_to_radius(base_beta));
-	V3.y = sin(degree_to_radius(base_alpha)) * sin(degree_to_radius(base_beta));
-	V3.z = cos(degree_to_radius(base_beta));
-
-	V1.y = sin(base_alpha) * sin((base_beta));
-	0 = sin(base_alpha) * sin((acosf(V1.z))) - V1.y;
-	0 = base_alpha * (acosf(V1.z)) - asinf(V1.y);
-	asinf(V1.y) = base_alpha * (acosf(V1.z));
-	asinf(V1.y) / acosf(V1.z) = base_alpha;
-	*/
-	float alpha;
-	float beta;
-
-	beta = radius_to_degree(acosf(V1.z));
-	alpha = 0;
-
-	print_t_vector3(V1, "V1 : ");endl();
-	printf("Alpha : %f\n", alpha);
-	printf("Beta : %f\n", beta);
-	print_t_vector3(cam->angle, "angle : ");endl();
-
-	cam->angle.x = alpha;
-	cam->angle.y = beta;
+	cam->yaw = radius_to_degree(atan2(result.z, -result.x)) - 90;
+	cam->pitch = radius_to_degree(atan2(result.y, sqrt(result.x * result.x + result.z * result.z)));
 
 	t_camera_look_at(cam);
 }
 
 void		t_camera_look_at(t_camera *cam) // calcul de l'angle de vue de la camera (forward, right, up)
 {
-	t_vector3 zaxis = normalize_t_vector3(create_t_vector3(cos(degree_to_radius(cam->angle.z)) * sin(degree_to_radius(cam->angle.y)),
-						sin(degree_to_radius(cam->angle.z)),
-						cos(degree_to_radius(cam->angle.z)) * cos(degree_to_radius(cam->angle.y))));
-	t_vector3 xaxis = normalize_t_vector3(create_t_vector3(sin(degree_to_radius(cam->angle.y) - 3.14f / 2.0f),
+	t_vector3 zaxis = normalize_t_vector3(create_t_vector3(cos(degree_to_radius(cam->pitch)) * sin(degree_to_radius(cam->yaw)),
+						sin(degree_to_radius(cam->pitch)),
+						cos(degree_to_radius(cam->pitch)) * cos(degree_to_radius(cam->yaw))));
+	t_vector3 xaxis = normalize_t_vector3(create_t_vector3(sin(degree_to_radius(cam->yaw) - 3.14f / 2.0f),
 						0,
-						cos(degree_to_radius(cam->angle.y) - 3.14f / 2.0f)));
+						cos(degree_to_radius(cam->yaw) - 3.14f / 2.0f)));
 	t_vector3 yaxis = normalize_t_vector3(cross_t_vector3(xaxis, zaxis));
 
 	cam->forward = zaxis;
@@ -195,10 +166,10 @@ t_vector3	apply_t_camera(t_vector3 *src, t_matrix *mat) // applique la position 
 	return (result);
 }
 
-void		t_camera_change_view(t_camera *cam, t_vector3 delta_angle)
+void		t_camera_change_view(t_camera *cam, float delta_pitch, float delta_yaw)
 {
-	cam->angle = add_vector3_to_vector3(cam->angle, delta_angle);
-	cam->angle.z = clamp_float_value(-89, cam->angle.z, 89);
+	cam->pitch = clamp_float_value(-89, cam->pitch + delta_pitch , 89);
+	cam->yaw += delta_yaw;
 	t_camera_look_at(cam);
 }
 
@@ -229,10 +200,12 @@ void		handle_t_camera_mouvement_by_key(t_camera *cam, t_keyboard *p_keyboard) //
 
 void		handle_t_camera_view_by_mouse(t_camera *cam, t_mouse *p_mouse) // calcul du mouvement de l'angle de la camera a la souris
 {
-	t_vector3	delta;
+	float delta_pitch;
+	float delta_yaw;
 
-	delta = create_t_vector3(0, -(p_mouse->rel_pos.x / 10.0), p_mouse->rel_pos.y / 10.0);
-	t_camera_change_view(cam, delta);
+	delta_pitch = -(p_mouse->rel_pos.x / 10.0);
+	delta_yaw = p_mouse->rel_pos.y / 10.0;
+	t_camera_change_view(cam, delta_yaw, delta_pitch);
 }
 
 void 		t_camera_calc_depth(t_window *p_win, t_camera *p_cam)

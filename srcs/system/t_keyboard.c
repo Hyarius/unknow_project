@@ -27,3 +27,8 @@ int			get_key_state(t_keyboard *keyboard, int scan_code)
 	    return (1);
 	return (0);
 }
+
+void		reset_key_state(t_keyboard *keyboard, int scan_code)
+{
+	((Uint8 *)(keyboard->state))[scan_code] = 0;
+}

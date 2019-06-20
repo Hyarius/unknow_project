@@ -55,6 +55,8 @@ void			t_user_engine_handle_quit(t_user_engine *user_engine, int *play)
 		*play = 0;
 	if (user_engine->event.type == SDL_KEYDOWN && user_engine->event.key.keysym.sym == SDLK_ESCAPE)
 		*play = 0;
+
+
 }
 
 int				t_user_engine_poll_event(t_user_engine *engine)

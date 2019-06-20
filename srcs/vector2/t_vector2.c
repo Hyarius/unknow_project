@@ -48,5 +48,5 @@ void set_t_vector2(t_vector2 *src, float p_x, float p_y)
 
 void print_t_vector2(t_vector2 vector, char *str)
 {
-	printf("%s%0.20f / %0.20f", str, vector.x, vector.y);
+	printf("%s%0.20f / %0.20f\n", str, vector.x, vector.y);
 }

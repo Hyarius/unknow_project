@@ -70,14 +70,42 @@ int main(int argc, char **argv)
 	win = initialize_t_window(argv[0], 1840, 1220);	//creation et initialisation de la window
 
 	t_engine *engine = initialize_t_engine();
-	t_engine_place_camera(engine, create_t_vector3(0.0, -0.0, 11.0));
-	t_engine_camera_look_at(engine, create_t_vector3(0, 0, 0));
+	t_engine_place_camera(engine, create_t_vector3(0, 0, 0));
+	//t_engine_camera_look_at(engine, create_t_vector3(0, 0, 0));
 
 
-	t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(0, 0, 0), create_t_vector3(1, 1, 1), NULL, 0.0));
-	t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(0.2, 2, -0.4), create_t_vector3(0.2, 0.2, 0.2), NULL, 0.0));
-	t_mesh *mesh = t_engine_get_mesh(engine, 1);
-	t_mesh_set_color(mesh, create_t_color(1.0, 0.2, 0.6, 1.0));
+	t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(0, 0, 5), create_t_vector3(1, 1, 1), NULL, 0.0));
+	t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(5, 0, 0), create_t_vector3(1, 1, 1), NULL, 0.0));
+	t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(5, 0, 5), create_t_vector3(1, 1, 1), NULL, 0.0));
+	t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(-5, 0, -5), create_t_vector3(1, 1, 1), NULL, 0.0));
+	t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(0, 0, -5), create_t_vector3(1, 1, 1), NULL, 0.0));
+	t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(-5, 0, 0), create_t_vector3(1, 1, 1), NULL, 0.0));
+	t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(-5, 0, 5), create_t_vector3(1, 1, 1), NULL, 0.0));
+	t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(5, 0, -5), create_t_vector3(1, 1, 1), NULL, 0.0));
+	t_mesh *mesh;
+	t_color color[8];
+	color[0] = create_t_color_from_int(255, 255, 255, 255);
+	color[1] = create_t_color_from_int(0, 0, 0, 255);
+	color[2] = create_t_color_from_int(255, 0, 0, 255);
+	color[3] = create_t_color_from_int(0, 255, 0, 255);
+	color[4] = create_t_color_from_int(0, 0, 255, 255);
+	color[5] = create_t_color_from_int(255, 0, 255, 255);
+	color[6] = create_t_color_from_int(0, 255, 255, 255);
+	color[7] = create_t_color_from_int(255, 255, 0, 255);
+
+	for (int i = 0; i < 8; i++)
+	{
+		mesh = t_engine_get_mesh(engine, i);
+		t_mesh_set_color(mesh, color[i]);
+	}
+
+	/*
+
+	713
+	602
+	458
+
+	*/
 
 	// t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(-0.5, 15, -4), create_t_vector3(1.5, 1.5, 1.5), NULL, 0.0));
 	// t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(-0.5, 30, -4), create_t_vector3(3, 3, 3), NULL, 0.0));
@@ -97,15 +125,20 @@ int main(int argc, char **argv)
 	// mesh = t_engine_get_mesh(engine, 5);
 	// t_mesh_set_color(mesh, create_t_color(0.2, 0.2, 0.2, 1.0));
 
-	float x = 0;
-	float y = 0;
-	float z = 0;
+	int state = 0;
 
 	while (engine->playing == 1)
 	{
+
 		if (get_key_state(engine->user_engine->keyboard, SDL_SCANCODE_R))
 		{
-			t_engine_camera_look_at(engine, create_t_vector3(0, 0, 0));
+			printf("State = %d\n", state);
+			mesh = t_engine_get_mesh(engine, state);
+
+			t_engine_camera_look_at(engine, mesh->pos);
+
+			//state = (state + 1) % 8;
+			reset_key_state(engine->user_engine->keyboard, SDL_SCANCODE_R);
 		}
 
 		t_engine_apply_physic(engine);

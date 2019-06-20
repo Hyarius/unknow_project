@@ -29,5 +29,6 @@ typedef struct	s_keyboard
 t_keyboard	create_t_keyboard();
 t_keyboard	*initialize_t_keyboard();
 int			get_key_state(t_keyboard *keyboard, int scan_code);
+void		reset_key_state(t_keyboard *keyboard, int scan_code);
 
 #endif
