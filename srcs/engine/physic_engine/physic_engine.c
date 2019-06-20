@@ -83,16 +83,15 @@ int can_move(t_mesh *mesh, t_mesh_list *mesh_list)
 	t_face	*mesh_face;
 	t_face	*target_face;
 	t_mesh	*target;
-	t_vector3_list vertices;
 	int i;
 	int j;
 	int k;
 
-	vertices = create_t_vector3_list();
+	clean_t_vector3_list(mesh->check_list);
 	i = 0;
 	while (i < mesh->vertices->size)
 	{
-		t_vector3_list_push_back(&vertices, add_vector3_to_vector3(t_vector3_list_at(mesh->vertices, i), add_vector3_to_vector3(mesh->pos, mesh->velocity)));
+		t_vector3_list_push_back(mesh->check_list, add_vector3_to_vector3(t_vector3_list_at(mesh->vertices, i), add_vector3_to_vector3(mesh->pos, mesh->velocity)));
 		i++;
 	}
 	i = 0;
@@ -101,14 +100,14 @@ int can_move(t_mesh *mesh, t_mesh_list *mesh_list)
 		target = t_mesh_list_get(mesh_list, i);
 		if (target != mesh)
 		{
-			if (mesh->bubble_radius >= calc_dist_vector3_to_vector3(mesh->center, target->center) ||
-				target->bubble_radius >= calc_dist_vector3_to_vector3(mesh->center, target->center))
+			if (target->bubble_radius >= calc_dist_vector3_to_vector3(mesh->center, target->center) ||
+				mesh->bubble_radius >= calc_dist_vector3_to_vector3(mesh->center, target->center))
 			{
 				j = 0;
 				while (j < mesh->faces->size)
 				{
 					mesh_face = t_face_list_get(mesh->faces, j);
-					triangle_mesh = compose_t_triangle_from_t_vertices(&vertices, mesh_face->index_vertices);
+					triangle_mesh = compose_t_triangle_from_t_vertices(mesh->check_list, mesh_face->index_vertices);
 
 					k = 0;
 					while (k < target->faces->size)
@@ -142,13 +141,7 @@ void			t_physic_engine_apply_gravity(t_physic_engine *physic_engine)
 		{
 			mesh->velocity = mult_vector3_by_float(physic_engine->gravity_force, mesh->kinetic);
 
-			while (can_move(mesh, physic_engine->mesh_list) == BOOL_FALSE)
-			{
-				if (mesh->velocity.x == 0 && mesh->velocity.y == 0 && mesh->velocity.z == 0)
-					break;
-				mesh->velocity = create_t_vector3(0.0, 0.0, 0.0);
-			}
-			if (mesh->velocity.x != 0 || mesh->velocity.y != 0 || mesh->velocity.z != 0)
+			if (can_move(mesh, physic_engine->mesh_list) == BOOL_TRUE)
 				t_mesh_apply_velocity(mesh);
 		}
 		i++;

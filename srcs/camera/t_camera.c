@@ -67,6 +67,7 @@ void		t_camera_look_at_point(t_camera *cam, t_vector3 target) // calcul de l'ang
 
 	cam->yaw = radius_to_degree(atan2(result.z, -result.x)) - 90;
 	cam->pitch = radius_to_degree(atan2(result.y, sqrt(result.x * result.x + result.z * result.z)));
+	cam->pitch = clamp_float_value(-89, cam->pitch, 89);
 
 	t_camera_look_at(cam);
 }

@@ -9,6 +9,7 @@ typedef struct	s_mesh
 {
 	t_vector3	pos;
 	t_vector3	center;
+	int			is_visible;
 	float		bubble_radius;
 
 	t_vector3	angle;
@@ -21,6 +22,8 @@ typedef struct	s_mesh
 
 	t_texture	*texture;
 	t_color		color;
+
+	t_vector3_list *check_list; // utils for gravity
 
 	t_vector3_list
 				*vertices;
@@ -47,7 +50,7 @@ void		t_mesh_compute_bubble_box(t_mesh *mesh);
 void		t_mesh_apply_velocity(t_mesh *dest);
 void		t_mesh_add_velocity(t_mesh *dest, t_vector3 delta_velocity);
 void		t_mesh_set_velocity(t_mesh *dest, t_vector3 new_velocity);
-void		t_mesh_activate_gravity(t_mesh *mesh, float gravity);
+void		t_mesh_activate_gravity(t_mesh *dest, float gravity);
 
 t_mesh		create_primitive_cube(t_vector3 coord, t_vector3 size, t_texture *texture, float gravity);
 t_mesh		create_primitive_plane(t_vector3 pos, t_vector3 size, t_texture *texture, float gravity);
@@ -58,5 +61,7 @@ void		t_mesh_rotate(t_mesh *mesh, t_vector3 delta_angle);
 void		t_mesh_rotate_around_point(t_mesh *mesh, t_vector3 delta_angle, t_vector3 center);
 void		t_mesh_look_at(t_mesh *mesh);
 void		t_mesh_translate(t_mesh *dest, t_vector3 delta);
+
+void		t_mesh_set_visibility(t_mesh *dest, int new_state);
 
 #endif

@@ -5,6 +5,7 @@ t_mesh			create_t_mesh(t_vector3 pos)
 	t_mesh result;
 
 	result.pos = pos;
+	result.is_visible = BOOL_TRUE;
 	result.center = pos;
 	result.bubble_radius = 0.0;
 	result.velocity = create_t_vector3(0.0, 0.0, 0.0);
@@ -14,6 +15,8 @@ t_mesh			create_t_mesh(t_vector3 pos)
 
 	result.texture = NULL;
 	result.color = create_t_color(1.0, 1.0, 1.0, 1.0);
+
+	result.check_list = initialize_t_vector3_list();
 
 	result.vertices = initialize_t_vector3_list();
 	result.uvs = initialize_t_vector3_list();
@@ -209,7 +212,12 @@ void			t_mesh_translate(t_mesh *dest, t_vector3 delta)
 	dest->pos = add_vector3_to_vector3(dest->pos, mult_vector3_by_float(dest->up, delta.y));
 }
 
-void			t_mesh_activate_gravity(t_mesh *mesh, float gravity)
+void			t_mesh_activate_gravity(t_mesh *dest, float gravity)
 {
-	mesh->kinetic = gravity;
+	dest->kinetic = gravity;
+}
+
+void			t_mesh_set_visibility(t_mesh *dest, int new_state)
+{
+	dest->is_visible = new_state;
 }

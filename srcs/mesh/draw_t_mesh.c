@@ -10,6 +10,9 @@ void	draw_t_mesh(t_window *p_win, t_camera *p_cam, t_mesh *mesh)
 	t_vector3	points[3];
 	t_vector3	points_uv[3];
 
+	if (mesh->is_visible == BOOL_FALSE)
+		return ;
+
 	for (int i = 0; i < mesh->faces->size; i++)
 	{
 		t_face face = t_face_list_at(mesh->faces, i); // recuperation la face du volume a draw
