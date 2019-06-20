@@ -107,3 +107,14 @@ w
 alpha = arccos(u.v / ||u||.||v||)
 
 (acosf(dot_t_vector3(zaxis, cam->forward) / ((ft_abs_float(zaxis.z) * ft_abs_float(cam->forward.z)))))
+
+
+
+
+
+1 -> compter le nombre de points dans identiques de l'un et l'autre
+si 3 -> return (true) anyway
+si < 2 -> calculer les points non identiques
+		-> si un seul est dans le triangle -> return true
+			else
+		-> return (false)

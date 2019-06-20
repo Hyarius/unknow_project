@@ -31,6 +31,8 @@ t_vector3	divide_vector3_by_float(t_vector3 a, float b);
 t_vector3	inv_t_vector3(t_vector3 src);
 void		swap_t_vector3(t_vector3 *a, t_vector3 *b);
 void 		print_t_vector3(t_vector3 vector, char *str);
+t_vector3	substract_float_to_vector3(float a, t_vector3 b);
+t_vector3	add_float_to_vector3(float a, t_vector3 b);
 
 typedef struct	s_vector2
 {

@@ -66,15 +66,15 @@ static int 	is_triangle_contact(t_triangle *a, t_triangle *b)
 	t_triangle_get_min_max_value(a, &min1, &max1);
 	t_triangle_get_min_max_value(b, &min2, &max2);
 
-	if ((min1.x < max2.x && max1.x > min2.x)
-		&& (min1.y < max2.y && max1.y > min2.y)
-		&& (min1.z < max2.z && max1.z > min2.z))
+	if ((min1.x <= max2.x && max1.x >= min2.x)
+		&& (min1.y <= max2.y && max1.y >= min2.y)
+		&& (min1.z <= max2.z && max1.z >= min2.z))
 	{
 		return (BOOL_TRUE);
 	}
-	if ((min2.x < max1.x && max2.x > min1.x)
-		&& (min2.y < max1.y && max2.y > min1.y)
-		&& (min2.z < max1.z && max2.z > min1.z))
+	if ((min2.x <= max1.x && max2.x >= min1.x)
+		&& (min2.y <= max1.y && max2.y >= min1.y)
+		&& (min2.z <= max1.z && max2.z >= min1.z))
 	{
 		return (BOOL_TRUE);
 	}
@@ -83,6 +83,7 @@ static int 	is_triangle_contact(t_triangle *a, t_triangle *b)
 
 int can_move_axis(t_mesh *mesh, t_mesh *target, t_vector3 axis)
 {
+	t_vector3	tmp;
 	t_triangle	triangle_mesh;
 	t_triangle	triangle_target;
 	t_face	*mesh_face;
@@ -91,7 +92,8 @@ int can_move_axis(t_mesh *mesh, t_mesh *target, t_vector3 axis)
 	int i;
 	int j;
 
-	delta_pos = add_vector3_to_vector3(mesh->pos, mult_vector3_by_vector3(mesh->velocity, axis));
+	tmp = mult_vector3_by_vector3(mesh->velocity, axis);
+	delta_pos = add_vector3_to_vector3(mesh->pos, tmp);
 	clean_t_vector3_list(mesh->check_list);
 	i = 0;
 	while (i < mesh->vertices->size)
@@ -103,24 +105,22 @@ int can_move_axis(t_mesh *mesh, t_mesh *target, t_vector3 axis)
 	while (j < mesh->faces->size)
 	{
 		mesh_face = t_face_list_get(mesh->faces, j);
-		// if (dot_t_vector3(mesh_face->normale, axis) != 0)
-		// {
+		if (dot_t_vector3(mesh_face->normale, tmp) >= 0)
+		{
 			triangle_mesh = compose_t_triangle_from_t_vertices(mesh->check_list, mesh_face->index_vertices);
 			i = 0;
 			while (i < target->faces->size)
 			{
 				target_face = t_face_list_get(target->faces, i);
-				if (dot_t_vector3(target_face->normale, mesh_face->normale) <= 0)
+				if (dot_t_vector3(target_face->normale, tmp) <= 0)
 				{
 					if (is_triangle_contact(&triangle_mesh, t_triangle_list_get(target->triangle_check_list, i)) == BOOL_TRUE)
 					{
-							// mesh->connected = j;
-							// target->connected = i;
-							return (BOOL_FALSE);
+						return (BOOL_FALSE);
 					}
 				 }
 				i++;
-			// }
+			}
 		}
 		j++;
 	}

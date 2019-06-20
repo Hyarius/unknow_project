@@ -43,12 +43,24 @@ int main(int argc, char **argv)
 			t_mesh *mesh = t_engine_get_mesh(engine, j + i * size_x);
 			t_mesh_set_color(mesh, list_color[color]);
 		}
-}
-t_engine_place_camera(engine, create_t_vector3(-5, 15, -5));
+	}
+	for (i = 0; i < size_y; i++)
+	{
+		for (int j = 0; j < size_x; j++)
+		{
+			int h = generate_nbr(5 + height, 5 + height + height);
+			int	color = generate_nbr(0, 8);
+
+			t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(j, h, i), create_t_vector3(size, size, size), NULL, 100.0));
+			t_mesh *mesh = t_engine_get_mesh(engine, j + i * size_x);
+			t_mesh_set_color(mesh, list_color[color]);
+		}
+	}
+	t_engine_place_camera(engine, create_t_vector3(-10, 15, -10));
+	t_engine_camera_look_at(engine, t_mesh_list_get(engine->physic_engine->mesh_list, 7 + 15 * 7)->pos);
 
 	while (engine->playing == 1)
 	{
-		t_engine_camera_look_at(engine, t_mesh_list_get(engine->physic_engine->mesh_list, 7 + 15 * 7)->pos);
 		t_engine_apply_physic(engine);
 
 		t_engine_handle_camera(engine);

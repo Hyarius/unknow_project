@@ -46,6 +46,24 @@ t_vector3	substract_vector3_to_vector3(t_vector3 a,t_vector3 b)
 	return (result);
 }
 
+t_vector3	substract_float_to_vector3(float a, t_vector3 b)
+{
+	t_vector3	result;
+
+	result = create_t_vector3(b.x - a, b.y - a, b.z - a);
+
+	return (result);
+}
+
+t_vector3	add_float_to_vector3(float a, t_vector3 b)
+{
+	t_vector3	result;
+
+	result = create_t_vector3(b.x + a, b.y + a, b.z + a);
+
+	return (result);
+}
+
 t_vector3	mult_vector3_by_vector3(t_vector3 a,t_vector3 b)
 {
 	t_vector3	result;
