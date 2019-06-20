@@ -17,6 +17,7 @@ t_mesh			create_t_mesh(t_vector3 pos)
 	result.color = create_t_color(1.0, 1.0, 1.0, 1.0);
 
 	result.check_list = initialize_t_vector3_list();
+	result.triangle_check_list = initialize_t_triangle_list();
 
 	result.vertices = initialize_t_vector3_list();
 	result.uvs = initialize_t_vector3_list();
@@ -220,4 +221,25 @@ void			t_mesh_activate_gravity(t_mesh *dest, float gravity)
 void			t_mesh_set_visibility(t_mesh *dest, int new_state)
 {
 	dest->is_visible = new_state;
+}
+
+void			t_mesh_compute_check_list(t_mesh *dest)
+{
+	t_face *dest_face;
+	int i = 0;
+
+	clean_t_vector3_list(dest->check_list);
+	while (i < dest->vertices->size)
+	{
+		t_vector3_list_push_back(dest->check_list, add_vector3_to_vector3(t_vector3_list_at(dest->vertices, i), dest->pos));
+		i++;
+	}
+	i = 0;
+	clean_t_triangle_list(dest->triangle_check_list);
+	while (i < dest->faces->size)
+	{
+		dest_face = t_face_list_get(dest->faces, i);
+		t_triangle_list_push_back(dest->triangle_check_list, compose_t_triangle_from_t_vertices(dest->check_list, dest_face->index_vertices));
+		i++;
+	}
 }

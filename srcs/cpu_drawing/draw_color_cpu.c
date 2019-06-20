@@ -23,7 +23,7 @@ void	draw_triangle_color_cpu(t_window *p_win, t_triangle *p_triangle, t_color *p
 	ac = create_t_rasterizer(triangle.a, triangle.c, triangle.b);
 	bc = create_t_rasterizer(triangle.b, triangle.c, triangle.a);
 
-	t_triangle_get_min_max_value(triangle, &min, &max);
+	t_triangle_get_min_max_value(&triangle, &min, &max);
 
 	if (min.x < 0)
 		min.x = 0;

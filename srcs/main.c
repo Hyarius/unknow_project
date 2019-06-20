@@ -24,14 +24,12 @@ int main(int argc, char **argv)
 	list_color[6] = create_t_color(0.9, 0.2, 0.2, 1.0);
 	list_color[7] = create_t_color(0.9, 0.9, 0.9, 1.0);
 
-	t_engine_add_mesh(engine, create_primitive_plane(create_t_vector3(0, -1, 0), create_t_vector3(60, 0, 60), NULL, 0.0));
+	t_engine_add_mesh(engine, create_primitive_plane(create_t_vector3(0, -1, 0), create_t_vector3(50, 0, 50), NULL, 0.0));
 	t_mesh_set_visibility(t_engine_get_mesh(engine, 0), BOOL_FALSE);
-	t_engine_place_camera(engine, create_t_vector3(0, 15 , 0));
-	t_engine_camera_look_at(engine, create_t_vector3(0, 0, 0));
 
 	int size_x = 15; //nombre de mesh (cube)
 	int size_y = 15; //nombre de mesh (cube)
-	int height = 8;
+	int height = 80;
 	float size = 1;
 	int range = 50;
 	for (int i = 0; i < size_y; i++)
@@ -45,10 +43,12 @@ int main(int argc, char **argv)
 			t_mesh *mesh = t_engine_get_mesh(engine, j + i * size_x);
 			t_mesh_set_color(mesh, list_color[color]);
 		}
-	}
+}
+t_engine_place_camera(engine, create_t_vector3(-5, 15, -5));
 
 	while (engine->playing == 1)
 	{
+		t_engine_camera_look_at(engine, t_mesh_list_get(engine->physic_engine->mesh_list, 7 + 15 * 7)->pos);
 		t_engine_apply_physic(engine);
 
 		t_engine_handle_camera(engine);

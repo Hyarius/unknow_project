@@ -109,12 +109,12 @@ t_triangle		compose_t_triangle_from_t_vertices(t_vector3_list *src, int *index)
 	return (result);
 }
 
-void			t_triangle_get_min_max_value(t_triangle triangle, t_vector3 *min, t_vector3 *max)
+void			t_triangle_get_min_max_value(t_triangle *triangle, t_vector3 *min, t_vector3 *max)
 {
-	max->x = get_big_float(triangle.a.x, triangle.b.x, triangle.c.x);
-	max->y = get_big_float(triangle.a.y, triangle.b.y, triangle.c.y);
-	max->z = get_big_float(triangle.a.z, triangle.b.z, triangle.c.z);
-	min->x = get_short_float(triangle.a.x, triangle.b.x, triangle.c.x);
-	min->y = get_short_float(triangle.a.y, triangle.b.y, triangle.c.y);
-	min->z = get_short_float(triangle.a.z, triangle.b.z, triangle.c.z);
+	max->x = get_big_float(triangle->a.x, triangle->b.x, triangle->c.x);
+	max->y = get_big_float(triangle->a.y, triangle->b.y, triangle->c.y);
+	max->z = get_big_float(triangle->a.z, triangle->b.z, triangle->c.z);
+	min->x = get_short_float(triangle->a.x, triangle->b.x, triangle->c.x);
+	min->y = get_short_float(triangle->a.y, triangle->b.y, triangle->c.y);
+	min->z = get_short_float(triangle->a.z, triangle->b.z, triangle->c.z);
 }

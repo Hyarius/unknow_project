@@ -24,6 +24,8 @@ typedef struct	s_mesh
 	t_color		color;
 
 	t_vector3_list *check_list; // utils for gravity
+	t_triangle_list	*triangle_check_list; //utils for gravity
+	int			connected;
 
 	t_vector3_list
 				*vertices;
@@ -63,5 +65,6 @@ void		t_mesh_look_at(t_mesh *mesh);
 void		t_mesh_translate(t_mesh *dest, t_vector3 delta);
 
 void		t_mesh_set_visibility(t_mesh *dest, int new_state);
+void		t_mesh_compute_check_list(t_mesh *dest);
 
 #endif
