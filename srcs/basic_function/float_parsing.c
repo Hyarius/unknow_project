@@ -97,3 +97,17 @@ float			get_big_float(float a, float b, float c)
 		result = c;
 	return (result);
 }
+
+float			float_min(float a, float b)
+{
+	if (a <= b)
+		return (a);
+	return (b);
+}
+
+float			float_max(float a, float b)
+{
+	if (a >= b)
+		return (a);
+	return (b);
+}

@@ -53,9 +53,9 @@ t_triangle		t_triangle_add_vector3(t_triangle triangle, t_vector3 to_add)
 void		print_t_triangle(t_triangle p_triangle, char *triangle_name)
 {
 	printf("Triangle Name : %s\n", triangle_name);
-	print_t_vector3(p_triangle.a, "A : ");endl();
-	print_t_vector3(p_triangle.b, "B : ");endl();
-	print_t_vector3(p_triangle.c, "C : ");endl();
+	print_t_vector3(p_triangle.a, "A : ");
+	print_t_vector3(p_triangle.b, "B : ");
+	print_t_vector3(p_triangle.c, "C : ");
 }
 
 t_triangle	mult_triangle_by_vector3(t_triangle triangle, t_vector3 to_add)
@@ -117,4 +117,49 @@ void			t_triangle_get_min_max_value(t_triangle *triangle, t_vector3 *min, t_vect
 	min->x = get_short_float(triangle->a.x, triangle->b.x, triangle->c.x);
 	min->y = get_short_float(triangle->a.y, triangle->b.y, triangle->c.y);
 	min->z = get_short_float(triangle->a.z, triangle->b.z, triangle->c.z);
+}
+
+int				t_triangle_is_bigger(t_triangle a, t_triangle b)
+{
+	float p1a;
+	float p1b;
+	float p1c;
+	float p2a;
+	float p2b;
+	float p2c;
+
+	float p1;
+	float p2;
+
+	float s1;
+	float s2;
+
+	p1a = calc_dist_vector3_to_vector3(a.a, a.b);
+	p1b = calc_dist_vector3_to_vector3(a.a, a.c);
+	p1c = calc_dist_vector3_to_vector3(a.b, a.c);
+	p2a = calc_dist_vector3_to_vector3(b.a, b.b);
+	p2b = calc_dist_vector3_to_vector3(b.a, b.c);
+	p2c = calc_dist_vector3_to_vector3(b.b, b.c);
+
+	p1 = p1a + p1b + p1c;
+	p2 = p2a + p2b + p2c;
+
+	s1 = sqrt(p1 * (p1 - p1a) * (p1 - p1b) * (p1 * p1c));
+	s2 = sqrt(p2 * (p2 - p2a) * (p2 - p2b) * (p2 * p2c));
+
+	if (s1 >= s2)
+		return (BOOL_TRUE);
+	return (BOOL_FALSE);
+}
+
+int				t_triangle_equal(t_triangle a, t_triangle b)
+{
+	sort_t_triangle_points(&a);
+	sort_t_triangle_points(&b);
+
+	if (t_vector3_equal(a.a, b.a) == BOOL_FALSE ||
+		t_vector3_equal(a.b, b.b) == BOOL_FALSE ||
+		t_vector3_equal(a.c, b.c) == BOOL_FALSE)
+		return (BOOL_FALSE);
+	return (BOOL_TRUE);
 }

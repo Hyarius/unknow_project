@@ -47,3 +47,17 @@ int				get_big(int a, int b, int c)
 		result = c;
 	return (result);
 }
+
+int			min(int a, int b)
+{
+	if (a <= b)
+		return (a);
+	return (b);
+}
+
+int			max(int a, int b)
+{
+	if (a >= b)
+		return (a);
+	return (b);
+}

@@ -55,29 +55,41 @@ t_mesh			*t_physic_engine_get_mesh(t_physic_engine *physic_engine, int index)
 	return (t_mesh_list_get(physic_engine->mesh_list, index));
 }
 
-static int 	is_triangle_contact(t_triangle *a, t_triangle *b)
+static int 	is_triangle_contact(t_triangle a, t_triangle b)
 {
-	t_vector3	min1;
-	t_vector3	max1;
-	t_vector3	min2;
-	t_vector3	max2;
+	t_vector3 normal;
+	t_vector3 normal2;
+	t_triangle tmp;
 
+	sort_t_triangle_points(&a);
+	sort_t_triangle_points(&b);
 
-	t_triangle_get_min_max_value(a, &min1, &max1);
-	t_triangle_get_min_max_value(b, &min2, &max2);
-
-	if ((min1.x <= max2.x && max1.x >= min2.x)
-		&& (min1.y <= max2.y && max1.y >= min2.y)
-		&& (min1.z <= max2.z && max1.z >= min2.z))
+	if (t_triangle_is_bigger(a, b) == BOOL_FALSE)
 	{
-		return (BOOL_TRUE);
+		tmp = a;
+		a = b;
+		b = tmp;
 	}
-	if ((min2.x <= max1.x && max2.x >= min1.x)
-		&& (min2.y <= max1.y && max2.y >= min1.y)
-		&& (min2.z <= max1.z && max2.z >= min1.z))
+
+	normal = cross_t_vector3(substract_vector3_to_vector3(a.b, a.a), substract_vector3_to_vector3(a.c, a.a));
+	int ab = intersect_triangle_by_segment(a, normal, b.a, b.b);
+	int ac = intersect_triangle_by_segment(a, normal, b.a, b.c);
+	int bc = intersect_triangle_by_segment(a, normal, b.b, b.c);
+
+	if (ab == 1)
+		return (BOOL_TRUE);
+
+	if (ac == 1)
+		return (BOOL_TRUE);
+
+	if (bc == 1)
+		return (BOOL_TRUE);
+
+	if (ab + bc + ac != 0)
 	{
-		return (BOOL_TRUE);
+		printf("%d / %d / %d\n", ab, bc, ac);
 	}
+
 	return (BOOL_FALSE);
 }
 
@@ -105,38 +117,21 @@ int can_move_axis(t_mesh *mesh, t_mesh *target, t_vector3 axis)
 	while (j < mesh->faces->size)
 	{
 		mesh_face = t_face_list_get(mesh->faces, j);
-		if (dot_t_vector3(mesh_face->normale, tmp) >= 0)
+		triangle_mesh = compose_t_triangle_from_t_vertices(mesh->check_list, mesh_face->index_vertices);
+		i = 0;
+		while (i < target->faces->size)
 		{
-			triangle_mesh = compose_t_triangle_from_t_vertices(mesh->check_list, mesh_face->index_vertices);
-			i = 0;
-			while (i < target->faces->size)
-			{
-				target_face = t_face_list_get(target->faces, i);
-				if (dot_t_vector3(target_face->normale, tmp) <= 0)
+			target_face = t_face_list_get(target->faces, i);
+			if (is_triangle_contact(triangle_mesh, t_triangle_list_at(target->triangle_check_list, i)) == BOOL_TRUE)
 				{
-					if (is_triangle_contact(&triangle_mesh, t_triangle_list_get(target->triangle_check_list, i)) == BOOL_TRUE)
-					{
-						return (BOOL_FALSE);
-					}
-				 }
-				i++;
-			}
+					return (BOOL_FALSE);
+				}
+			i++;
 		}
 		j++;
 	}
 	return (BOOL_TRUE);
 }
-
-// int	calc_max_velocity(t_mesh *mesh, t_mesh *target, t_vector3 axis)
-// {
-// 	t_triangle	*mesh_triangle;
-// 	t_triangle	*target_triangle;
-//
-// 	mesh_triangle = t_triangle_list_get(mesh->triangle_check_list, mesh->connected);
-// 	target_triangle = t_triangle_list_get(target->triangle_check_list, target->connected);
-//
-// 	return (0);
-// }
 
 int can_move(t_mesh *mesh, t_mesh_list *mesh_list)
 {
@@ -150,9 +145,9 @@ int can_move(t_mesh *mesh, t_mesh_list *mesh_list)
 		target = t_mesh_list_get(mesh_list, i);
 		if (mesh != target && target->bubble_radius + mesh->bubble_radius >= calc_dist_vector3_to_vector3(mesh->center, target->center))
 		{
-			delta[0] = mesh->velocity.x / 30.0;
-			delta[1] = mesh->velocity.y / 30.0;
-			delta[2] = mesh->velocity.z / 30.0;
+			delta[0] = mesh->velocity.x / 50.0;
+			delta[1] = mesh->velocity.y / 50.0;
+			delta[2] = mesh->velocity.z / 50.0;
 			while (mesh->velocity.x != 0 && can_move_axis(mesh, target, create_t_vector3(1, 0, 0)) == BOOL_FALSE)
 			{
 				mesh->velocity.x -= delta[0];

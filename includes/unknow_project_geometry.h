@@ -17,6 +17,8 @@ void			print_t_triangle(t_triangle p_triangle, char *triangle_name);
 t_triangle		t_triangle_add_vector3(t_triangle triangle, t_vector3 to_add);
 t_triangle		mult_triangle_by_vector3(t_triangle triangle, t_vector3 to_add);
 void			t_triangle_get_min_max_value(t_triangle *triangle, t_vector3 *min, t_vector3 *max);
+int				t_triangle_equal(t_triangle a, t_triangle b);
+int				t_triangle_is_bigger(t_triangle a, t_triangle b);
 
 typedef struct	s_line
 {

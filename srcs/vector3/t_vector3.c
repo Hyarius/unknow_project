@@ -46,7 +46,7 @@ t_vector3	substract_vector3_to_vector3(t_vector3 a,t_vector3 b)
 	return (result);
 }
 
-t_vector3	substract_float_to_vector3(float a, t_vector3 b)
+t_vector3	substract_float_to_vector3(t_vector3 b, float a)
 {
 	t_vector3	result;
 
@@ -55,7 +55,7 @@ t_vector3	substract_float_to_vector3(float a, t_vector3 b)
 	return (result);
 }
 
-t_vector3	add_float_to_vector3(float a, t_vector3 b)
+t_vector3	add_float_to_vector3(t_vector3 b, float a)
 {
 	t_vector3	result;
 
@@ -118,4 +118,11 @@ void		swap_t_vector3(t_vector3 *a, t_vector3 *b)
 	tmp = *a;
 	*a = *b;
 	*b = tmp;
+}
+
+int			t_vector3_equal(t_vector3 a, t_vector3 b)
+{
+	if (a.x != b.x || a.y != b.y)
+		return (BOOL_FALSE);
+	return (BOOL_TRUE);
 }

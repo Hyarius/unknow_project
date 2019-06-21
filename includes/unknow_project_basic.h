@@ -22,4 +22,10 @@ int				ft_strcmp(char *s1, char *s2);
 int				ft_atoi(const char *str);
 int				ft_floor(float source);
 float			ft_abs_float(float src);
+
+int				min(int a, int b);
+int				max(int a, int b);
+float			float_min(float a, float b);
+float			float_max(float a, float b);
+
 #endif
