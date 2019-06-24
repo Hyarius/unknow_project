@@ -122,7 +122,12 @@ void		swap_t_vector3(t_vector3 *a, t_vector3 *b)
 
 int			t_vector3_equal(t_vector3 a, t_vector3 b)
 {
-	if (a.x != b.x || a.y != b.y)
+	if (a.x != b.x || a.y != b.y || a.z != b.z)
 		return (BOOL_FALSE);
 	return (BOOL_TRUE);
+}
+
+float			t_vector3_length(t_vector3 a)
+{
+	return (sqrt(a.x * a.x + a.y * a.y + a.z * a.z));
 }

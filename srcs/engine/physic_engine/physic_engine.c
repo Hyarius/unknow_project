@@ -4,7 +4,7 @@ t_physic_engine	create_t_physic_engine()
 {
 	t_physic_engine	result;
 
-	result.gravity_force = create_t_vector3(0, -GRAVITY, 0);
+	result.gravity_force = create_t_vector3(0, -GRAVITY * 3, 0);
 	result.mesh_list = initialize_t_mesh_list();
 
 	return (result);
@@ -55,11 +55,11 @@ t_mesh			*t_physic_engine_get_mesh(t_physic_engine *physic_engine, int index)
 	return (t_mesh_list_get(physic_engine->mesh_list, index));
 }
 
-static int 	is_triangle_contact(t_triangle a, t_triangle b)
+int 			is_triangle_contact(t_triangle a, t_triangle b)
 {
 	t_vector3 normal;
-	t_vector3 normal2;
 	t_triangle tmp;
+	int			count;
 
 	sort_t_triangle_points(&a);
 	sort_t_triangle_points(&b);
@@ -85,11 +85,6 @@ static int 	is_triangle_contact(t_triangle a, t_triangle b)
 	if (bc == 1)
 		return (BOOL_TRUE);
 
-	if (ab + bc + ac != 0)
-	{
-		printf("%d / %d / %d\n", ab, bc, ac);
-	}
-
 	return (BOOL_FALSE);
 }
 
@@ -97,6 +92,7 @@ int can_move_axis(t_mesh *mesh, t_mesh *target, t_vector3 axis)
 {
 	t_vector3	tmp;
 	t_triangle	triangle_mesh;
+	t_triangle	triangle_mesh2;
 	t_triangle	triangle_target;
 	t_face	*mesh_face;
 	t_face *target_face;
@@ -123,9 +119,9 @@ int can_move_axis(t_mesh *mesh, t_mesh *target, t_vector3 axis)
 		{
 			target_face = t_face_list_get(target->faces, i);
 			if (is_triangle_contact(triangle_mesh, t_triangle_list_at(target->triangle_check_list, i)) == BOOL_TRUE)
-				{
-					return (BOOL_FALSE);
-				}
+			{
+				return (BOOL_FALSE);
+			}
 			i++;
 		}
 		j++;
@@ -145,9 +141,9 @@ int can_move(t_mesh *mesh, t_mesh_list *mesh_list)
 		target = t_mesh_list_get(mesh_list, i);
 		if (mesh != target && target->bubble_radius + mesh->bubble_radius >= calc_dist_vector3_to_vector3(mesh->center, target->center))
 		{
-			delta[0] = mesh->velocity.x / 50.0;
-			delta[1] = mesh->velocity.y / 50.0;
-			delta[2] = mesh->velocity.z / 50.0;
+			delta[0] = mesh->velocity.x / 10.0;
+			delta[1] = mesh->velocity.y / 10.0;
+			delta[2] = mesh->velocity.z / 10.0;
 			while (mesh->velocity.x != 0 && can_move_axis(mesh, target, create_t_vector3(1, 0, 0)) == BOOL_FALSE)
 			{
 				mesh->velocity.x -= delta[0];

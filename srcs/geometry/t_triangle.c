@@ -163,3 +163,62 @@ int				t_triangle_equal(t_triangle a, t_triangle b)
 		return (BOOL_FALSE);
 	return (BOOL_TRUE);
 }
+
+int				t_triangle_similarity(t_triangle p_a, t_triangle p_b)
+{
+	t_vector3	a[3];
+	t_vector3	b[3];
+	int			result;
+	int			i;
+	int			j;
+
+	a[0] = p_a.a;
+	a[1] = p_a.b;
+	a[2] = p_a.c;
+	b[0] = p_b.a;
+	b[1] = p_b.b;
+	b[2] = p_b.c;
+	result = 0;
+	i = 0;
+	while (i < 3)
+	{
+		j = 0;
+		while (j < 3)
+		{
+			if (t_vector3_equal(a[i], b[j]) == BOOL_TRUE)
+				result++;
+			j++;
+		}
+		i++;
+	}
+	return (result);
+}
+
+int				t_triangle_similarity_segment(t_triangle p_a, t_vector3 p_b, t_vector3 p_c)
+{
+	t_vector3	a[3];
+	t_vector3	b[2];
+	int			result;
+	int			i;
+	int			j;
+
+	a[0] = p_a.a;
+	a[1] = p_a.b;
+	a[2] = p_a.c;
+	b[0] = p_b;
+	b[1] = p_c;
+	result = 0;
+	i = 0;
+	while (i < 3)
+	{
+		j = 0;
+		while (j < 2)
+		{
+			if (t_vector3_equal(a[i], b[j]) == BOOL_TRUE)
+				result++;
+			j++;
+		}
+		i++;
+	}
+	return (result);
+}

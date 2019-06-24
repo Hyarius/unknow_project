@@ -64,6 +64,10 @@ int				is_point_on_line(t_vector3 a, t_vector3 b, t_vector3 c)
 	dist_part_one = calc_dist_vector3_to_vector3(a, c);
 	dist_part_two = calc_dist_vector3_to_vector3(c, b);
 
+	if (dist_part_one == 0)
+		return (-1);
+	if (dist_part_two == 0)
+		return (-2);
 	if (dist_tot == dist_part_one + dist_part_two)
 		return (1);
 	return (0);
@@ -71,6 +75,7 @@ int				is_point_on_line(t_vector3 a, t_vector3 b, t_vector3 c)
 
 int				intersect_triangle_by_segment(t_triangle p_triangle, t_vector3 p_normal, t_vector3 point_one, t_vector3 point_two)
 {
+	int		point_type;
 	float dist_one;
 	float dist_two;
 	t_vector3 intersection;
@@ -90,7 +95,7 @@ int				intersect_triangle_by_segment(t_triangle p_triangle, t_vector3 p_normal, 
 
 	intersection = intersect_plane_by_line(p_normal, p_triangle.a, point_one, point_two);
 
-	if (is_point_on_line(point_one, point_two, intersection) == 0)
+	if (is_point_on_line(point_one, point_two, intersection) != 1)
 		return (0);
 
 	w = substract_vector3_to_vector3(intersection, p_triangle.a);
@@ -104,110 +109,11 @@ int				intersect_triangle_by_segment(t_triangle p_triangle, t_vector3 p_normal, 
 	s = ((uv * wv) - (vv * wu)) / ((uv * uv) - (uu * vv));
 	t = ((uv * wu) - (uu * wv)) / ((uv * uv) - (uu * vv));
 
-
-	if (s < 0.0 || s > 1.0 - 0.0 || t < 0.0 || t > 1.0 - 0.0 || s + t < 0.0 || s + t > 1.0 - 0.0)
+	if (s <= 0.0 || s >= 1.0 || t <= 0.0 || t >= 1.0 || s + t <= 0.0 || s + t >= 1.0)
 		return (0);
-	if ((s == 0.0 && t == 1.0 - 0.0) || (t == 0.0 && s == 1.0 - 0.0) || s + t == 0.0 || s + t == 1.0 - 0.0)
-	{
-		printf("----\n");
-		print_t_triangle(p_triangle, "Triangle test");
-		print_t_vector3(point_one, "One : ");
-		print_t_vector3(point_two, "Two : ");
-		printf("Result -> s = %f / t = %f\n", s, t);
-		printf("----\n");
-		return (-1);
-	}
 	return (1);
 }
 
-int				intersect_segment_by_segment(t_vector3 a, t_vector3 b, t_vector3 c, t_vector3 d)
-{
-	t_vector3 u;
-	t_vector3 v;
-	t_vector3 w;
-
-	float uv;
-	float wv;
-	float vv;
-	float wu;
-	float uu;
-
-	float denominator;
-	float s;
-	float t;
-
-	u = substract_vector3_to_vector3(b, a);
-	v = substract_vector3_to_vector3(d, c);
-	w = substract_vector3_to_vector3(a, c);
-
-	uu = dot_t_vector3(u, u);
-	uv = dot_t_vector3(u, v);
-	vv = dot_t_vector3(v, v);
-	wu = dot_t_vector3(w, u);
-	wv = dot_t_vector3(w, v);
-
-	denominator = (uu * vv) - (uv * uv);
-
-    float    sc, sN, sD = denominator;       // sc = sN / sD, default sD = D >= 0
-    float    tc, tN, tD = denominator;       // tc = tN / tD, default tD = D >= 0
-
-    // compute the line parameters of the two closest points
-    if (denominator < EPSILON) { // the lines are almost parallel
-        sN = 0.0;         // force using point P0 on segment S1
-        sD = 1.0;         // to prevent possible division by 0.0 later
-        tN = wv;
-        tD = vv;
-    }
-    else {                 // get the closest points on the infinite lines
-        sN = (uv*wv - vv*wu);
-        tN = (uu*wv - uv*wu);
-        if (sN < 0.0) {        // sc < 0 => the s=0 edge is visible
-            sN = 0.0;
-            tN = wv;
-            tD = vv;
-        }
-        else if (sN > sD) {  // sc > 1  => the s=1 edge is visible
-            sN = sD;
-            tN = wv + uv;
-            tD = vv;
-        }
-    }
-
-    if (tN < 0.0) {            // tc < 0 => the t=0 edge is visible
-        tN = 0.0;
-        // recompute sc for this edge
-        if (-wu < 0.0)
-            sN = 0.0;
-        else if (-wu > uu)
-            sN = sD;
-        else {
-            sN = -wu;
-            sD = uu;
-        }
-    }
-    else if (tN > tD) {      // tc > 1  => the t=1 edge is visible
-        tN = tD;
-        // recompute sc for this edge
-        if ((-wu + uv) < 0.0)
-            sN = 0;
-        else if ((-wu + uv) > uu)
-            sN = sD;
-        else {
-            sN = (-wu +  uv);
-            sD = uu;
-        }
-    }
-    // finally do the division to get sc and tc
-    sc = (fabsf(sN) < EPSILON ? 0.0 : sN / sD);
-    tc = (fabsf(tN) < EPSILON ? 0.0 : tN / tD);
-
-    // get the difference of the two closest points
-    t_vector3   result = add_vector3_to_vector3(w, substract_vector3_to_vector3(mult_vector3_by_float(u,sc), mult_vector3_by_float(v, tc)));  // =  S1(sc) - S2(tc)
-
-	if (result.x == 0 && result.y == 0 && result.z == 0)
-		return (BOOL_TRUE);
-	return (BOOL_FALSE);
-}
 
 float			calc_distance_to_plane(t_vector3 p_normal, t_vector3 p_center, t_vector3 p_point)
 {
