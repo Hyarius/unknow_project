@@ -1,120 +1,43 @@
 
-a) 10 / 10 - 20
-b) 50 / 10 - 0
-c) 40 / 10 - ?
+	x0	   x1		x2	   x3
 
+    E ---- F		U ---- V		z0 - y0
+  / |	 / |	  / |	 / |
+A ---- B   |	Q ---- R   |	z1
+|   |  |   |	|   |  |   |
+|   H--|-- G	|   X--|-- W		y1
+| /    | /		| /    | /
+C ---- D		T ---- S
 
-b.x - a.x / c.x - a.x = q
+	M ---- N						y2
+  / |	 / |
+I ---- J   |
+|   |  |   |
+|   P--|-- O						y3
+| /    | /
+L ---- K
 
-a.z - (a.z - b.z / q) = ?
-
-
-A			B
-
-
-
-
-			C
-
-A - C
-B - C
-
-GOOD
-Triangle :
-A : 1.0720 / 0.4760 / 2.1803
-B : 0.3579 / 0.4760 / 1.6587
-C : 0.6435 / 0.2856 / 2.9590
-Triangle :
-A : 0.2151 / 0.2856 / 2.5985
-B : 0.6435 / 0.2856 / 2.9590
-C : 0.3579 / 0.4760 / 1.6587
-Triangle :
-A : 1.0720 / 1.4281 / 2.5988
-B : 0.3579 / 1.4281 / 2.1797
-C : 1.0720 / 0.4760 / 2.1803
-Triangle :
-A : 0.3579 / 0.4760 / 1.6587
-B : 1.0720 / 0.4760 / 2.1803
-C : 0.3579 / 1.4281 / 2.1797
-Triangle :
-A : 0.3579 / 1.4281 / 2.1797
-B : 0.2151 / 0.8569 / 2.9584
-C : 0.3579 / 0.4760 / 1.6587
-Triangle :
-A : 0.2151 / 0.2856 / 2.5985
-B : 0.3579 / 0.4760 / 1.6587
-C : 0.2151 / 0.8569 / 2.9584
-
-Triangle :
-A : 1.0720 / 0.4760 / 2.1803
-B : 0.3579 / 0.4760 / 1.6587
-C : 0.6435 / 0.2856 / 2.9590
-Triangle :
-A : 0.2151 / 0.2856 / 2.5985
-B : 0.6435 / 0.2856 / 2.9590
-C : 0.3579 / 0.4760 / 1.6587
-Triangle :
-A : 1.0720 / 1.4281 / 2.5988
-B : 0.3579 / 1.4281 / 2.1797
-C : 1.0720 / 0.4760 / 2.1803
-Triangle :
-A : 0.3579 / 0.4760 / 1.6587
-B : 1.0720 / 0.4760 / 2.1803
-C : 0.3579 / 1.4281 / 2.1797
-Triangle :
-A : 0.3579 / 1.4281 / 2.1797
-B : 0.2151 / 0.8569 / 2.9584
-C : 0.3579 / 0.4760 / 1.6587
-Triangle :
-A : 0.2151 / 0.2856 / 2.5985
-B : 0.3579 / 0.4760 / 1.6587
-C : 0.2151 / 0.8569 / 2.9584
-
-
-
-020000
-413000
-050000
-
-000000
-00000
-000000
-
-
-
-
-1 - implementation de centre de graviter pour les objets a la creation
-2 - calcul d'une bubble box qui englobe l'objet en entier a la creation
-3 - calcul de distance entre les 2 centres de graviter de 2 objets
-4 - si distance entre 2 objets > a rayon bubble box ne pas faire le test
-
-calcul de la distance 3D 			D = sqrt((x2 - x1)^2 + (y2 - y1)^2 + (z2 - z1)^2)
-
-
-
-
-
-
-nb thread = 8
-list triangle : 21
-
-21 / 8 = 2.65
-21 % 8 = 5
-
-w
-3 3 3 3 3 2 2 2
-
-alpha = arccos(u.v / ||u||.||v||)
-
-(acosf(dot_t_vector3(zaxis, cam->forward) / ((ft_abs_float(zaxis.z) * ft_abs_float(cam->forward.z)))))
-
-
-
-
-
-1 -> compter le nombre de points dans identiques de l'un et l'autre
-si 3 -> return (true) anyway
-si < 2 -> calculer les points non identiques
-		-> si un seul est dans le triangle -> return true
-			else
-		-> return (false)
+A = {0, 0, 1}
+B = {1, 0, 1}
+C = {0, 1, 1}
+D = {1, 1, 1}
+E = {0, 0, 0}
+F = {1, 0, 0}
+G = {0, 1, 0}
+H = {1, 1, 0}
+I = {0, 2, 1}
+J = {1, 2, 1}
+K = {0, 3, 1}
+L = {1, 3, 1}
+M = {0, 2, 0}
+N = {1, 2, 0}
+O = {0, 3, 0}
+P = {1, 3, 0}
+Q = {2, 0, 1}
+R = {3, 0, 1}
+S = {2, 1, 1}
+T = {3, 1, 1}
+U = {2, 0, 0}
+V = {3, 0, 0}
+W = {2, 1, 0}
+X = {3, 1, 0}
