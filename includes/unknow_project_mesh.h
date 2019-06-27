@@ -28,8 +28,6 @@ typedef struct	s_mesh
 
 	t_vector3_list
 				*vertices;
-	t_int_list
-				*block_status;
 	t_vector3_list
 				*uvs;
 	t_vector3_list

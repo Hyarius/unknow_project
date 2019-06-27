@@ -42,10 +42,11 @@ t_vector3		cross_t_vector3(t_vector3 a, t_vector3 b);
 t_vector3 		normalize_t_vector3(t_vector3 v);
 float			dot_t_vector3(t_vector3 a, t_vector3 b);
 float			edge_t_vector3(t_vector3 a, t_vector3 b, t_vector3 c);
-int				intersect_segment_by_segment(t_vector3 line_a_a, t_vector3 line_a_b, t_vector3 line_b_a, t_vector3 line_b_b);
+int				intersect_segment_by_segment(t_vector3 a, t_vector3 b, t_vector3 c, t_vector3 d);
 t_vector3		intersect_plane_by_line(t_vector3 p_normal, t_vector3 p_center, t_vector3 start, t_vector3 end);
 int				intersect_triangle_by_segment(t_triangle p_triangle, t_vector3 p_normal, t_line line, t_vector3 *intersection);
 int				is_point_on_line(t_vector3 a, t_vector3 b, t_vector3 c);
+float			calc_distance_to_triangle(t_triangle p_triangle, t_vector3 point);
 float			calc_distance_to_plane(t_vector3 p_normal, t_vector3 p_center, t_vector3 p_point);
 float			clamp_float_value(float min, float value, float max);
 float			calc_dist_vector3_to_vector3(t_vector3 a, t_vector3 b);
@@ -58,5 +59,11 @@ float			get_short_float(float a, float b, float c);
 float			get_big_float(float a, float b, float c);
 
 int				is_point_on_triangle(t_triangle a, t_vector3 point);
+int				is_triangle_parallele(t_triangle p_a, t_triangle p_b);
+int 			is_triangle_cut_triangle(t_triangle p_a, t_triangle p_b);
+int 			is_triangle_in_triangle(t_triangle p_a, t_triangle p_b);
+
+int				old_intersect(t_triangle p_triangle, t_vector3 p_normal, t_line line, t_vector3 *intersection);
+int				is_same_sign(float a, float b);
 
 #endif

@@ -23,6 +23,21 @@ t_triangle	*initialize_t_triangle(t_vector3 p_a, t_vector3 p_b, t_vector3 p_c)
 	return (result);
 }
 
+void		sort_t_triangles(t_triangle *a, t_triangle *b)
+{
+	t_triangle tmp;
+
+	sort_t_triangle_points(a);
+	sort_t_triangle_points(b);
+
+	if (t_triangle_is_bigger(*a, *b) == BOOL_FALSE)
+	{
+		tmp = *a;
+		*a = *b;
+		*b = tmp;
+	}
+}
+
 void 		sort_t_triangle_points(t_triangle *p_triangle)
 {
 	if (p_triangle->a.y > p_triangle->b.y || (p_triangle->a.y == p_triangle->b.y && p_triangle->a.x > p_triangle->b.x))

@@ -4,6 +4,7 @@
 # define NB_THREAD_MAX 100
 # define NB_TRIANGLE_MAX 25
 
+# define BOOL_ERROR -1
 # define BOOL_TRUE 1
 # define BOOL_FALSE 0
 
@@ -18,7 +19,7 @@
 # define MOUSE_LEFT 1
 # define MOUSE_MIDDLE 2
 
-# define GRAVITY 0.002
+# define GRAVITY 0.0002
 # define EPSILON 0.00005
 
 # define FOV 70

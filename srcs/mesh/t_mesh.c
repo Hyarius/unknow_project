@@ -22,7 +22,9 @@ t_mesh			create_t_mesh(t_vector3 pos)
 	result.uvs = initialize_t_vector3_list();
 	result.faces = initialize_t_face_list();
 	result.normales = initialize_t_vector3_list();
+
 	t_mesh_look_at(&result);
+
 	return (result);
 }
 
