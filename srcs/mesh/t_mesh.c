@@ -14,7 +14,6 @@ t_mesh			create_t_mesh(t_vector3 pos)
 	result.angle = create_t_vector3(0.0, 90.0, 0.0);
 
 	result.texture = NULL;
-	result.color = create_t_color(1.0, 1.0, 1.0, 1.0);
 
 	result.check_list = initialize_t_vector3_list();
 	result.triangle_check_list = initialize_t_triangle_list();
@@ -180,7 +179,12 @@ void			t_mesh_rotate(t_mesh *mesh, t_vector3 delta_angle)
 
 void 			t_mesh_set_color(t_mesh *dest, t_color p_color)
 {
-	dest->color = p_color;
+	int i = 0;
+	while (i < dest->faces->size)
+	{
+		set_t_face_color(t_face_list_get(dest->faces, i), p_color);
+		i++;
+	}
 }
 
 void			t_mesh_apply_velocity(t_mesh *dest)

@@ -21,7 +21,6 @@ typedef struct	s_mesh
 	float		kinetic;
 
 	t_texture	*texture;
-	t_color		color;
 
 	t_vector3_list *check_list; // utils for gravity
 	t_triangle_list	*triangle_check_list; //utils for gravity
@@ -29,6 +28,8 @@ typedef struct	s_mesh
 
 	t_vector3_list
 				*vertices;
+	t_int_list
+				*block_status;
 	t_vector3_list
 				*uvs;
 	t_vector3_list

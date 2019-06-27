@@ -73,12 +73,27 @@ int				is_point_on_line(t_vector3 a, t_vector3 b, t_vector3 c)
 	return (0);
 }
 
-int				intersect_triangle_by_segment(t_triangle p_triangle, t_vector3 p_normal, t_vector3 point_one, t_vector3 point_two)
+int				intersect_triangle_by_segment(t_triangle p_triangle, t_vector3 p_normal, t_line line, t_vector3 *intersection)
 {
-	int		point_type;
-	float dist_one;
-	float dist_two;
-	t_vector3 intersection;
+	int			point_type;
+	float 		dist_one;
+	float 		dist_two;
+
+	if (dot_t_vector3(p_normal, normalize_t_vector3(substract_vector3_to_vector3(line.b, line.a))) == 0)
+		return (BOOL_FALSE);
+
+	*intersection = intersect_plane_by_line(p_normal, p_triangle.a, line.a, line.b);
+
+	if (is_point_on_line(line.a, line.b, *intersection) != 1)
+		return (BOOL_FALSE);
+
+	return (BOOL_TRUE);
+
+}
+
+int				is_point_on_triangle(t_triangle a, t_vector3 point)
+{
+	t_vector3 normale;
 	t_vector3 w;
 	t_vector3 u;
 	t_vector3 v;
@@ -90,17 +105,14 @@ int				intersect_triangle_by_segment(t_triangle p_triangle, t_vector3 p_normal, 
 	float s;
 	float t;
 
-	if (dot_t_vector3(p_normal, normalize_t_vector3(substract_vector3_to_vector3(point_two, point_one))) == 0)
-		return (0);
+	normale = cross_t_vector3(substract_vector3_to_vector3(a.b, a.a), substract_vector3_to_vector3(a.c, a.a));
 
-	intersection = intersect_plane_by_line(p_normal, p_triangle.a, point_one, point_two);
+	if (calc_distance_to_plane(normale, a.a, point) != 0)
+		return (BOOL_FALSE);
 
-	if (is_point_on_line(point_one, point_two, intersection) != 1)
-		return (0);
-
-	w = substract_vector3_to_vector3(intersection, p_triangle.a);
-	u = substract_vector3_to_vector3(p_triangle.b, p_triangle.a);
-	v = substract_vector3_to_vector3(p_triangle.c, p_triangle.a);
+	w = substract_vector3_to_vector3(point, a.a);
+	u = substract_vector3_to_vector3(a.b, a.a);
+	v = substract_vector3_to_vector3(a.c, a.a);
 	uv = dot_t_vector3(u, v);
 	wv = dot_t_vector3(w, v);
 	vv = dot_t_vector3(v, v);
@@ -110,10 +122,9 @@ int				intersect_triangle_by_segment(t_triangle p_triangle, t_vector3 p_normal, 
 	t = ((uv * wu) - (uu * wv)) / ((uv * uv) - (uu * vv));
 
 	if (s <= 0.0 || s >= 1.0 || t <= 0.0 || t >= 1.0 || s + t <= 0.0 || s + t >= 1.0)
-		return (0);
-	return (1);
+		return (BOOL_TRUE);
+	return (BOOL_FALSE);
 }
-
 
 float			calc_distance_to_plane(t_vector3 p_normal, t_vector3 p_center, t_vector3 p_point)
 {

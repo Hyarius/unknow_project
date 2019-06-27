@@ -49,39 +49,42 @@ int main(int argc, char **argv)
 	t_engine_add_mesh(engine, create_primitive_plane(create_t_vector3(7.5, -1, 7.5), create_t_vector3(10, 0, 10), NULL, 0.0));
 	t_mesh_set_visibility(t_engine_get_mesh(engine, 0), BOOL_FALSE);
 
-	int size_x = 1; //nombre de mesh (cube)
-	int size_y = 1; //nombre de mesh (cube)
+	int size_x = 10; //nombre de mesh (cube)
+	int size_y = 10; //nombre de mesh (cube)
 	int height = 1;
 	float size = 1;
 	int range = 50;
-	for (int i = 0; i < size_y; i++)
-	{
-		for (int j = 0; j < size_x; j++)
-		{
-			int h = 1;
-
-			t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(j, h, i), create_t_vector3(size, size, size), NULL, 30.0));
-			t_mesh *mesh = t_engine_get_mesh(engine, j + i * size_x + 1);
-			t_mesh_set_color(mesh, list_color[2]);
-		}
-	}
-	for (i = 0; i < size_y; i++)
-	{
-		for (int j = 0; j < size_x; j++)
-		{
-			int h = 2;
-
-			t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(j+ 0.02, h + 0.02, i ), create_t_vector3(size, size, size), NULL, 3.0));
-			t_mesh *mesh = t_engine_get_mesh(engine, j + i * size_x + 1);
-			t_mesh_set_color(mesh, list_color[4]);
-		}
-	}
+	t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(0, 0, 0), create_t_vector3(size, size, size), NULL, 30.0));
 	t_mesh *mesh = t_engine_get_mesh(engine, 1);
-	t_mesh_set_color(mesh, list_color[3]);
+	t_mesh_set_color(mesh, list_color[2]);
+	//t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(0, 4, 0), create_t_vector3(size, size, size), NULL, 30.0));
+	t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(1, 5, 1), create_t_vector3(size, size, size), NULL, 2.0));
 	mesh = t_engine_get_mesh(engine, 2);
-	t_mesh_set_color(mesh, list_color[5]);
-	t_engine_place_camera(engine, create_t_vector3(-size_x, height / 2, size_y));
-	t_engine_camera_look_at(engine, t_mesh_list_get(engine->physic_engine->mesh_list, (size_x / 2) + (size_x * (size_y / 2)))->pos);
+	t_mesh_set_color(mesh, list_color[4]);
+	// for (int i = 0; i < size_y; i++)
+	// {
+	// 	for (int j = 0; j < size_x; j++)
+	// 	{
+	// 		int h = generate_nbr(height, height * 2);
+	//
+	// 		t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(j, h, i), create_t_vector3(size, size, size), NULL, 30.0));
+	// 		t_mesh *mesh = t_engine_get_mesh(engine, j + i * size_x + 1);
+	// 		t_mesh_set_color(mesh, list_color[2]);
+	// 	}
+	// }
+	// for (i = 0; i < size_y; i++)
+	// {
+	// 	for (int j = 0; j < size_x; j++)
+	// 	{
+	// 		int h = generate_nbr(height * 4, height * 5);
+	//
+	// 		t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(j, h + 0.02, i ), create_t_vector3(size, size, size), NULL, 1.1));
+	// 		t_mesh *mesh = t_engine_get_mesh(engine, j + i * size_x + 1);
+	// 		t_mesh_set_color(mesh, list_color[4]);
+	// 	}
+	// }
+	//t_engine_place_camera(engine, create_t_vector3(-size_x, height / 2, size_y));
+	//t_engine_camera_look_at(engine, t_mesh_list_get(engine->physic_engine->mesh_list, (size_x / 2) + (size_x * (size_y / 2)))->pos);
 
 	while (engine->playing == 1)
 	{

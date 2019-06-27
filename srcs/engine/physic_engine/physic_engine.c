@@ -57,8 +57,9 @@ t_mesh			*t_physic_engine_get_mesh(t_physic_engine *physic_engine, int index)
 
 int 			is_triangle_contact(t_triangle a, t_triangle b)
 {
-	t_vector3 normal;
-	t_triangle tmp;
+	t_triangle	intersection;
+	t_vector3	normal;
+	t_triangle	tmp;
 	int			count;
 
 	sort_t_triangle_points(&a);
@@ -72,27 +73,52 @@ int 			is_triangle_contact(t_triangle a, t_triangle b)
 	}
 
 	normal = cross_t_vector3(substract_vector3_to_vector3(a.b, a.a), substract_vector3_to_vector3(a.c, a.a));
-	int ab = intersect_triangle_by_segment(a, normal, b.a, b.b);
-	int ac = intersect_triangle_by_segment(a, normal, b.a, b.c);
-	int bc = intersect_triangle_by_segment(a, normal, b.b, b.c);
+	int calc_c = intersect_triangle_by_segment(a, normal, create_t_line(b.a, b.b), &(intersection.c));
+	int calc_b = intersect_triangle_by_segment(a, normal, create_t_line(b.a, b.c), &(intersection.b));
+	int calc_a = intersect_triangle_by_segment(a, normal, create_t_line(b.b, b.c), &(intersection.a));
 
-	if (ab == 1)
+	if (calc_a == -1 || calc_b == -1 || calc_c == -1)
 		return (BOOL_TRUE);
 
-	if (ac == 1)
+	int point_a = is_point_on_triangle(a, intersection.a);
+	int point_b = is_point_on_triangle(a, intersection.b);
+	int point_c = is_point_on_triangle(a, intersection.c);
+
+	int similarity = t_triangle_similarity(a, intersection);
+	//
+	// if (similarity > 0)
+	// {
+	// 	printf("similarity : %d\n", similarity);
+	// 	return (BOOL_FALSE);
+	// }
+
+	if (similarity == 1)
+		return (BOOL_FALSE);
+
+	if (similarity == 0 && point_a + point_b + point_c == 0)
+		return (BOOL_FALSE);
+
+	// if (similarity == 0 && point_a + point_b + point_c == 0)
+	// 	return (BOOL_FALSE);
+
+	if (calc_a == 1 && point_a == 1)
 		return (BOOL_TRUE);
 
-	if (bc == 1)
+	if (calc_b == 1 && point_b == 1)
 		return (BOOL_TRUE);
+
+	if (calc_c == 1 && point_c == 1)
+		return (BOOL_TRUE);
+
 
 	return (BOOL_FALSE);
 }
 
 int can_move_axis(t_mesh *mesh, t_mesh *target, t_vector3 axis)
 {
+	int			result;
 	t_vector3	tmp;
 	t_triangle	triangle_mesh;
-	t_triangle	triangle_mesh2;
 	t_triangle	triangle_target;
 	t_face	*mesh_face;
 	t_face *target_face;
@@ -100,6 +126,7 @@ int can_move_axis(t_mesh *mesh, t_mesh *target, t_vector3 axis)
 	int i;
 	int j;
 
+	result = 0;
 	tmp = mult_vector3_by_vector3(mesh->velocity, axis);
 	delta_pos = add_vector3_to_vector3(mesh->pos, tmp);
 	clean_t_vector3_list(mesh->check_list);
@@ -113,6 +140,7 @@ int can_move_axis(t_mesh *mesh, t_mesh *target, t_vector3 axis)
 	while (j < mesh->faces->size)
 	{
 		mesh_face = t_face_list_get(mesh->faces, j);
+		//set_t_face_color(mesh_face, create_t_color(0.0, 1.0, 0.0, 1.0));
 		triangle_mesh = compose_t_triangle_from_t_vertices(mesh->check_list, mesh_face->index_vertices);
 		i = 0;
 		while (i < target->faces->size)
@@ -120,12 +148,15 @@ int can_move_axis(t_mesh *mesh, t_mesh *target, t_vector3 axis)
 			target_face = t_face_list_get(target->faces, i);
 			if (is_triangle_contact(triangle_mesh, t_triangle_list_at(target->triangle_check_list, i)) == BOOL_TRUE)
 			{
-				return (BOOL_FALSE);
+				set_t_face_color(mesh_face, create_t_color(1.0, 0.0, 0.0, 1.0));
+				result++;
 			}
 			i++;
 		}
 		j++;
 	}
+	if (result > 0)
+		return (BOOL_FALSE);
 	return (BOOL_TRUE);
 }
 

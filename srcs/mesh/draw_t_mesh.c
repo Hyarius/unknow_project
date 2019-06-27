@@ -65,7 +65,7 @@ void	draw_t_mesh(t_window *p_win, t_camera *p_cam, t_mesh *mesh)
 
 				if (mesh->texture == NULL)
 				{
-					t_color_list_push_back(&(p_cam->color_list), fuze_t_color(mesh->color, darkness_color));
+					t_color_list_push_back(&(p_cam->color_list), fuze_t_color(face.color, darkness_color));
 					t_triangle_list_push_back(&(p_cam->triangle_color_list), triangle);
 				}
 				else

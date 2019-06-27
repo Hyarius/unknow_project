@@ -9,6 +9,7 @@ t_face create_t_face()
 	i = 0;
 	while (i < 3)
 	{
+		result.color = create_t_color(1.0, 1.0, 1.0, 1.0);
 		result.index_vertices[i] = -1;
 		result.index_uvs[i] = -1;
 		i++;
@@ -40,4 +41,9 @@ void 	set_t_face_uvs(t_face *face, int a, int b, int c)
 	face->index_uvs[0] = a;
 	face->index_uvs[1] = b;
 	face->index_uvs[2] = c;
+}
+
+void	set_t_face_color(t_face *face, t_color color)
+{
+	face->color = color;
 }

@@ -50,6 +50,7 @@ void		print_t_uv(t_uv uv, char *texture_name);
 
 typedef struct	s_face
 {
+	t_color		color;
 	int			index_vertices[3];
 	int			index_uvs[3];
 	t_vector3	normale;
@@ -59,5 +60,6 @@ t_face 			create_t_face();
 t_face 			*initialize_t_face();
 void 			set_t_face_vertices(t_face *face, int a, int b, int c);
 void 			set_t_face_uvs(t_face *face, int a, int b, int c);
+void			set_t_face_color(t_face *face, t_color color);
 
 #endif
