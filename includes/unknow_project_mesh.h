@@ -22,9 +22,8 @@ typedef struct	s_mesh
 
 	t_texture	*texture;
 
-	t_vector3_list *check_list; // utils for gravity
-	t_triangle_list	*triangle_check_list; //utils for gravity
-	int			connected;
+	t_vector3_list *vertices_in_world; // utils for gravity
+	t_vector3_list *next_vertices_in_world;
 
 	t_vector3_list
 				*vertices;
@@ -64,6 +63,7 @@ void		t_mesh_look_at(t_mesh *mesh);
 void		t_mesh_translate(t_mesh *dest, t_vector3 delta);
 
 void		t_mesh_set_visibility(t_mesh *dest, int new_state);
-void		t_mesh_compute_check_list(t_mesh *dest);
+void		t_mesh_compute_vertices_in_world(t_mesh *dest);
+void		t_mesh_compute_next_vertices_in_world(t_mesh *dest, t_vector3 axis);
 
 #endif

@@ -96,7 +96,7 @@ int				intersect_triangle_by_segment(t_triangle p_triangle, t_vector3 p_normal, 
 
 	*intersection = intersect_plane_by_line(p_normal, p_triangle.a, line.a, line.b);
 
-	if (is_point_on_line(line.a, line.b, *intersection) == 0)
+	if (is_point_on_line(line.a, line.b, *intersection) == BOOL_FALSE)
 		return (BOOL_FALSE);
 
 	if (is_point_on_triangle(p_triangle, *intersection) == BOOL_FALSE)
@@ -256,6 +256,13 @@ float			calc_distance_to_plane(t_vector3 p_normal, t_vector3 p_center, t_vector3
 			+ p_point.z * normalized_plane.z
 			- dot_t_vector3(normalized_plane, p_center);
 	return (result);
+}
+
+int				is_middle(float min, float max, float value)
+{
+	if (value >= min && value <= max)
+		return (BOOL_TRUE);
+	return (BOOL_FALSE);
 }
 
 float			clamp_float_value(float min, float value, float max)

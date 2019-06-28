@@ -39,9 +39,6 @@ int			clip_triangle_to_plane(t_camera *p_camera, t_vector3 *p_points, t_vector3 
 		}
 	}
 
-	// for (int j = 0; j < 6; j++)
-	// 	p_camera->clipping_list_uv[j] = create_t_vector3(0.5, 0.5, 0.5);
-
 	if (inside_nb == 1) // si 1 point a l'interieur, creation de 2 nouveaux point pour refaire le triangle
 	{
 		p_camera->clipping_list[0] = inside_points[0];

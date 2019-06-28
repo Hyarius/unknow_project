@@ -10,6 +10,7 @@
 # include "unknow_project_system.h"
 # include "unknow_project_engine.h"
 # include "unknow_project_list.h"
+# include "unknow_project_algorythm.h"
 
 //			PNG reader
 t_texture 	*png_load(char *path);

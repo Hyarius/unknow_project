@@ -15,8 +15,8 @@ t_mesh			create_t_mesh(t_vector3 pos)
 
 	result.texture = NULL;
 
-	result.check_list = initialize_t_vector3_list();
-	result.triangle_check_list = initialize_t_triangle_list();
+	result.vertices_in_world = initialize_t_vector3_list();
+	result.next_vertices_in_world = initialize_t_vector3_list();
 
 	result.vertices = initialize_t_vector3_list();
 	result.uvs = initialize_t_vector3_list();
@@ -229,23 +229,30 @@ void			t_mesh_set_visibility(t_mesh *dest, int new_state)
 	dest->is_visible = new_state;
 }
 
-void			t_mesh_compute_check_list(t_mesh *dest)
+void			t_mesh_compute_vertices_in_world(t_mesh *dest)
 {
 	t_face *dest_face;
 	int i = 0;
 
-	clean_t_vector3_list(dest->check_list);
+	clean_t_vector3_list(dest->vertices_in_world);
 	while (i < dest->vertices->size)
 	{
-		t_vector3_list_push_back(dest->check_list, add_vector3_to_vector3(t_vector3_list_at(dest->vertices, i), dest->pos));
+		t_vector3_list_push_back(dest->vertices_in_world, add_vector3_to_vector3(t_vector3_list_at(dest->vertices, i), dest->pos));
 		i++;
 	}
-	i = 0;
-	clean_t_triangle_list(dest->triangle_check_list);
-	while (i < dest->faces->size)
+}
+
+void			t_mesh_compute_next_vertices_in_world(t_mesh *dest, t_vector3 axis)
+{
+	t_vector3 next_pos;
+	t_face *dest_face;
+	int i = 0;
+
+	clean_t_vector3_list(dest->next_vertices_in_world);
+	next_pos = add_vector3_to_vector3(dest->pos, mult_vector3_by_vector3(dest->velocity, axis));
+	while (i < dest->vertices->size)
 	{
-		dest_face = t_face_list_get(dest->faces, i);
-		t_triangle_list_push_back(dest->triangle_check_list, compose_t_triangle_from_t_vertices(dest->check_list, dest_face->index_vertices));
+		t_vector3_list_push_back(dest->next_vertices_in_world, add_vector3_to_vector3(t_vector3_list_at(dest->vertices, i), next_pos));
 		i++;
 	}
 }
