@@ -20,7 +20,7 @@
 # define MOUSE_MIDDLE 2
 
 # define GRAVITY 0.0002
-# define EPSILON 0.0000005
+# define EPSILON 0.0005
 
 # define FOV 70
 # define NEAR 0.1f

@@ -68,7 +68,7 @@ int				can_move(t_mesh *mesh, t_mesh_list *mesh_list)
 	t_mesh	*target;
 	int		i;
 
-	subdivision = 30;
+	subdivision = 10;
 	delta[0] = mesh->velocity.x / subdivision;
 	delta[1] = mesh->velocity.y / subdivision;
 	delta[2] = mesh->velocity.z / subdivision;

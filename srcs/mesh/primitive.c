@@ -10,6 +10,10 @@ t_mesh		create_primitive_cube(t_vector3 pos, t_vector3 size, t_texture *p_textur
 
 	t_mesh_activate_gravity(&result, gravity);
 
+	size.x -= EPSILON;
+	size.y -= EPSILON;
+	size.z -= EPSILON;
+
 	//Bottom part
 	t_mesh_add_point(&result, create_t_vector3(0, 0, 0)); //A
 	t_mesh_add_point(&result, create_t_vector3(size.x, 0, 0)); //B
