@@ -63,9 +63,9 @@ t_matrix create_translation_matrix(t_vector3 translation)
 
 	result = create_t_matrix();
 
-	result.value[0][3] = translation.x;
-	result.value[1][3] = translation.y;
-	result.value[2][3] = translation.z;
+	result.value[3][0] = translation.x;
+	result.value[3][1] = translation.y;
+	result.value[3][2] = translation.z;
 
 	return (result);
 }

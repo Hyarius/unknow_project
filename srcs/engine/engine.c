@@ -73,6 +73,22 @@ void		t_engine_handle_event(t_engine *engine)
 				i++;
 			}
 		}
+		if (engine->user_engine->event.type == SDL_KEYDOWN && engine->user_engine->event.key.keysym.sym == SDLK_RETURN)
+		{
+			static int heigth = 2;
+			static float rot_y = 0;
+			float r = generate_nbr(0, 255);
+			float g = generate_nbr(0, 255);
+			float b = generate_nbr(0, 255);
+
+			t_mesh mesh = create_primitive_cube(create_t_vector3(0, heigth, 0), create_t_vector3(1, 1, 1), NULL, 100);
+			t_mesh_set_color(&mesh, create_t_color_from_int(r, g, b, 255));
+			t_mesh_rotate_around_point(&mesh, create_t_vector3(0, rot_y, 0), create_t_vector3(-0.5, heigth, -0.5));
+
+			heigth++;
+			rot_y += 6;
+			t_engine_add_mesh(engine, mesh);
+		}
 	}
 }
 

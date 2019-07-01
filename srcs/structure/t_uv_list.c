@@ -68,7 +68,7 @@ void		t_uv_list_add_back(t_uv_list *dest, t_uv *to_add)
 		free(tmp);
 		dest->max_size += PUSH_SIZE;
 	}
-	dest->uvs[dest->size].image = to_add->image;
+	dest->uvs[dest->size].texture = to_add->texture;
 	dest->uvs[dest->size].uv = to_add->uv;
 	dest->size++;
 }

@@ -59,7 +59,7 @@ void	draw_triangle_depth_cpu(t_window *p_win, t_triangle *p_triangle)
 
 				if (z < p_win->depth_buffer[pixel_index] || p_win->depth_buffer[pixel_index] == -1)
 				{
-					draw_pixel(p_win, (int)(current.x), (int)(current.y), &test);
+					draw_pixel(p_win, (int)(current.x), (int)(current.y), test);
 					p_win->depth_buffer[pixel_index] = z;
 				}
 			}

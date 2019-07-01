@@ -35,7 +35,7 @@ t_uv 		convert_t_uv_to_texture(t_uv *source);
 void		prepare_screen(t_window *win, t_camera *p_cam, t_color color);
 void		render_screen(t_window *win, t_camera *p_cam);
 void 		clear_buffers(t_window *win);
-void		draw_pixel(t_window *p_win, int x, int y, t_color *color);
+void		draw_pixel(t_window *p_win, int x, int y, t_color color);
 
 t_triangle	compose_t_triangle_from_t_mesh(t_mesh *src, int *index);
 t_triangle	compose_t_triangle_from_t_vertices(t_vector3_list *src, int *index);

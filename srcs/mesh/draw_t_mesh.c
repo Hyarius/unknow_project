@@ -9,6 +9,7 @@ void	draw_t_mesh(t_window *p_win, t_camera *p_cam, t_mesh *mesh)
 	t_triangle	triangle;
 	t_vector3	points[3];
 	t_vector3	points_uv[3];
+	float 		result;
 
 	if (mesh->is_visible == BOOL_FALSE)
 		return ;
@@ -29,7 +30,7 @@ void	draw_t_mesh(t_window *p_win, t_camera *p_cam, t_mesh *mesh)
 		}
 
 
-		float result = dot_t_vector3(face.normale, normalize_t_vector3(substract_vector3_to_vector3(points[0], p_cam->pos)));
+		result = dot_t_vector3(face.normale, normalize_t_vector3(substract_vector3_to_vector3(points[0], p_cam->pos)));
 
 		if (result < 0)
 		{

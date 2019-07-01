@@ -2,7 +2,7 @@
 
 void	draw_triangle_color_cpu(t_window *p_win, t_triangle *p_triangle, t_color *p_color)
 {
-	t_color			red = create_t_color(1.0, 0, 0, 1);
+	t_color			color = *p_color;
 	t_triangle		triangle;
 	t_vector3		min;
 	t_vector3		max;
@@ -18,6 +18,10 @@ void	draw_triangle_color_cpu(t_window *p_win, t_triangle *p_triangle, t_color *p
 	triangle.a = convert_opengl_to_vector3(p_win, p_triangle->a);
 	triangle.b = convert_opengl_to_vector3(p_win, p_triangle->b);
 	triangle.c = convert_opengl_to_vector3(p_win, p_triangle->c);
+
+	triangle.a.z = 1.0 / triangle.a.z;
+	triangle.b.z = 1.0 / triangle.b.z;
+	triangle.c.z = 1.0 / triangle.c.z;
 
 	ab = create_t_rasterizer(triangle.a, triangle.b, triangle.c);
 	ac = create_t_rasterizer(triangle.a, triangle.c, triangle.b);
@@ -47,9 +51,10 @@ void	draw_triangle_color_cpu(t_window *p_win, t_triangle *p_triangle, t_color *p
 			{
 				float z = 1.0f / ((triangle.a.z * gamma) + (triangle.b.z * beta) + (triangle.c.z * alpha));
 
-				if (z < p_win->depth_buffer[pixel_index])
+				//printf("z = %f\n", z);
+				if (z <= p_win->depth_buffer[pixel_index] || p_win->depth_buffer[pixel_index] == -1)
 				{
-					draw_pixel(p_win, (int)(current.x), (int)(current.y), p_color);
+					draw_pixel(p_win, (int)(current.x), (int)(current.y), color);
 					p_win->depth_buffer[pixel_index] = z;
 				}
 			}
@@ -60,22 +65,6 @@ void	draw_triangle_color_cpu(t_window *p_win, t_triangle *p_triangle, t_color *p
 		current.y++;
 	}
 }
-
-/*
-
-nb thread = 8
-
-size totale = 16
-
-thread 1 ->
-start 0
-len 2
-
-thread 2 _>
-start 2
-len 2
-
-*/
 
 void	*thread_draw_color_cpu(void *void_list)
 {

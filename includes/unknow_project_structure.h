@@ -40,7 +40,7 @@ t_color			get_pixel_color(t_texture *texture, int x, int y);
 
 typedef struct	s_uv
 {
-	t_texture	*image;
+	t_texture	*texture;
 	t_triangle	uv;
 }				t_uv;
 

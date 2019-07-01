@@ -162,8 +162,9 @@ t_vector3	apply_t_camera(t_vector3 *src, t_matrix *mat) // applique la position 
 	{
 		result.x /= delta;
 		result.y /= delta;
-		result.z /= -delta;
+		result.z /= delta;
 	}
+	result.z = calc_dist_vector3_to_vector3(create_t_vector3(0, 0, 0), *src);
 	return (result);
 }
 
@@ -270,29 +271,12 @@ void		draw_depth_from_camera_on_screen(t_window *p_win, t_camera *p_cam)
 
 void		draw_triangle_from_camera_on_screen(t_window *p_win, t_camera *p_cam)
 {
-	t_triangle	*triangle;
-	t_uv		*uv;
-	t_color		*color;
-	t_color		*darkness;
-	int			i;
-
-	multithreading_draw_triangle_color_cpu(p_win, &(p_cam->triangle_color_list), &(p_cam->color_list));
-	// i = 0;
-	// while (i < p_cam->triangle_color_list.size)
-	// {
-	// 	triangle = t_triangle_list_get(&(p_cam->triangle_color_list), i);
-	// 	color = t_color_list_get(&(p_cam->color_list), i);
-	// 	draw_triangle_color_cpu(p_win, triangle, color);
-	// 	i++;
-	// }
-
-	i = 0;
-	while (i < p_cam->triangle_texture_list.size)
+	if (p_cam->triangle_color_list.size > 0)
 	{
-		triangle = t_triangle_list_get(&(p_cam->triangle_texture_list), i);
-		uv = t_uv_list_get(&(p_cam->uv_list), i);
-		darkness = t_color_list_get(&(p_cam->darkness_list), i);
-		draw_triangle_texture_cpu(p_win, triangle, uv, darkness);
-		i++;
+		multithreading_draw_triangle_color_cpu(p_win, &(p_cam->triangle_color_list), &(p_cam->color_list));
+	}
+	if (p_cam->triangle_texture_list.size > 0)
+	{
+		multithreading_draw_triangle_texture_cpu(p_win, &(p_cam->triangle_texture_list), &(p_cam->uv_list));
 	}
 }

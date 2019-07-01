@@ -156,6 +156,7 @@ void				render_screen(t_window *p_win, t_camera *p_cam)
 {
 	check_frame();
 
+
 	if (p_cam != NULL)
 	{
 		draw_triangle_from_camera_on_screen(p_win, p_cam);

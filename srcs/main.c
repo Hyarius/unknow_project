@@ -1,5 +1,48 @@
 #include "unknow_project.h"
 
+int main(int argc, char **argv)
+{
+
+	if (argc != 1)
+		error_exit(-1, "Bad argument");
+
+	start_sdl(); //initialisation de la SDL
+
+	t_window *win;
+	win = initialize_t_window(argv[0], 1840, 1220);	//creation et initialisation de la window
+	int play = 0;
+	SDL_Event event;
+
+	t_vector3 point[3];
+	point[0] = create_t_vector3(50.0, 50.0, 0.0);
+	point[1] = create_t_vector3(250.0, 50.0, 0.0);
+	point[2] = create_t_vector3(50.0, 250.0, 1.0);
+	t_triangle triangle = create_t_triangle(convert_screen_to_opengl(win, point[0]), convert_screen_to_opengl(win, point[1]), convert_screen_to_opengl(win, point[2]));
+
+	t_triangle uv_triangle = create_t_triangle(create_t_vector3(0, 0, 0), create_t_vector3(1, 0, 0), create_t_vector3(0, 1, 0));
+	t_texture *texture = png_load("ressources/assets/texture/cube_number.png");
+	t_uv uv = create_t_uv(uv_triangle, texture);
+
+	prepare_screen(win, NULL, create_t_color(0.2, 0.2, 0.2, 1.0));
+
+	draw_triangle_texture_cpu(win, &triangle, &uv);
+
+	render_screen(win, NULL);
+
+	while (play == 0)
+	{
+		if(SDL_PollEvent(&event) == 1)
+		{
+			if (event.type == SDL_QUIT)
+				play = 1;
+			if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
+				play = 1;
+		}
+	}
+
+	return (0);
+}
+
 // int main(int argc, char **argv)
 // {
 
@@ -55,72 +98,73 @@
 // 	return (0);
 // }
 
-int main(int argc, char **argv)
-{
-	if (argc != 1)
-		error_exit(-1, "Bad argument");
+// int main(int argc, char **argv)
+// {
+// 	if (argc != 1)
+// 		error_exit(-1, "Bad argument");
 
-	start_sdl(); //initialisation de la SDL
+// 	start_sdl(); //initialisation de la SDL
 
-	t_window *win;
-	win = initialize_t_window(argv[0], 1840, 1220);	//creation et initialisation de la window
+// 	t_window *win;
+// 	win = initialize_t_window(argv[0], 1840, 1220);	//creation et initialisation de la window
 
-	t_engine *engine = initialize_t_engine();
+// 	t_engine *engine = initialize_t_engine();
 
-	t_color		list_color[8];
+// 	t_engine_add_mesh(engine, create_primitive_plane(create_t_vector3(0, -1, 0), create_t_vector3(3, 0, 3), NULL, 0.0));
+// 	t_mesh_set_visibility(t_engine_get_mesh(engine, 0), BOOL_TRUE);
 
-	list_color[0] = create_t_color(0.2, 0.2, 0.2, 1.0);
-	list_color[1] = create_t_color(0.2, 0.9, 0.9, 1.0);
-	list_color[2] = create_t_color(0.9, 0.2, 0.9, 1.0);
-	list_color[3] = create_t_color(0.9, 0.9, 0.2, 1.0);
-	list_color[4] = create_t_color(0.2, 0.2, 0.9, 1.0);
-	list_color[5] = create_t_color(0.2, 0.9, 0.2, 1.0);
-	list_color[6] = create_t_color(0.9, 0.2, 0.2, 1.0);
-	list_color[7] = create_t_color(0.9, 0.9, 0.9, 1.0);
+// 	t_engine_place_camera(engine, create_t_vector3(3, 3, 3));
+// 	t_engine_camera_look_at(engine, create_t_vector3(0, 0, 0));
 
-	t_engine_add_mesh(engine, create_primitive_plane(create_t_vector3(7.5, -1, 7.5), create_t_vector3(10, 0, 10), NULL, 0.0));
-	t_mesh_set_visibility(t_engine_get_mesh(engine, 0), BOOL_TRUE);
+// 	while (engine->playing == 1)
+// 	{
+// 		t_engine_apply_physic(engine);
 
-	int nb_state = 5;
-	int size_x = 10; //nombre de mesh (cube)
-	int size_y = 10; //nombre de mesh (cube)
-	int state_height = 8;
-	int state_space = 5;
-	t_vector3 size = create_t_vector3(1, 1, 1);
-	int range = 50;
-	int count = 1;
-	t_mesh *mesh;
-	for (int i = 0; i < nb_state; i++)
-	{
-		for (int j = 0; j < size_x; j++)
-		{
-			for (int k = 0; k < size_y; k++)
-			{
-				int color = generate_nbr(0, 8);
-				int heigth = generate_nbr(state_space * (i * 2), state_space * (i * 2) + state_height);
-				t_engine_add_mesh(engine, create_primitive_cube(mult_vector3_by_vector3(create_t_vector3(j, heigth, k), size), size, NULL, 100));
-				mesh = t_engine_get_mesh(engine, count);
-				t_mesh_set_color(mesh, list_color[color]);
-				count++;
-			}
-		}
-	}
+// 		t_engine_handle_camera(engine);
 
-	t_engine_place_camera(engine, create_t_vector3(0, 1, 0));
+// 		prepare_screen(win, engine->cam, create_t_color(0.2f, 0.2f, 0.2f, 1.0f)); // refresh de l'ecran avec les couleurs par default
 
-	while (engine->playing == 1)
-	{
-		t_engine_apply_physic(engine);
+// 		t_engine_draw_mesh(engine, win);
 
-		t_engine_handle_camera(engine);
+// 		render_screen(win, engine->cam); // affiche la fenetre
 
-		prepare_screen(win, engine->cam, create_t_color(0.2f, 0.2f, 0.2f, 1.0f)); // refresh de l'ecran avec les couleurs par default
+// 		t_engine_handle_event(engine);
+// 	}
+// 	return (0);
+// }
 
-		t_engine_draw_mesh(engine, win);
+// int main(int argc, char **argv)
+// {
+// 	if (argc != 1)
+// 		error_exit(-1, "Bad argument");
 
-		render_screen(win, engine->cam); // affiche la fenetre
+// 	start_sdl(); //initialisation de la SDL
 
-		t_engine_handle_event(engine);
-	}
-	return (0);
-}
+// 	t_window *win;
+// 	win = initialize_t_window(argv[0], 1840, 1220);	//creation et initialisation de la window
+
+// 	t_texture *texture = png_load("ressources/assets/texture/cube_number.png");
+
+
+// 	t_engine	*engine = initialize_t_engine();
+
+// 	t_engine_add_mesh(engine, create_primitive_cube(create_t_vector3(1.0, 1.0, 1.0), create_t_vector3(1.0, 1.0, 1.0), texture, 0.0));
+
+// 	t_engine_place_camera(engine, create_t_vector3(0, 1, 0));
+
+// 	t_camera_look_at_point(engine->cam, t_engine_get_mesh(engine, 0)->center);
+
+// 	while (engine->playing == 1)
+// 	{
+// 		t_engine_handle_camera(engine);
+
+// 		prepare_screen(win, engine->cam, create_t_color(0.2f, 0.2f, 0.2f, 1.0f)); // refresh de l'ecran avec les couleurs par default
+
+// 		t_engine_draw_mesh(engine, win);
+
+// 		render_screen(win, engine->cam); // affiche la fenetre
+
+// 		t_engine_handle_event(engine);
+// 	}
+// 	return (0);
+// }
