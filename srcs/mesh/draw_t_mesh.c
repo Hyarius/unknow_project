@@ -54,9 +54,9 @@ void	draw_t_mesh(t_window *p_win, t_camera *p_cam, t_mesh *mesh)
 			points[2] = mult_vector3_by_matrix(points[2], (p_cam->view));
 
 			if (mesh->texture != NULL)
-				nb_clipped = clip_triangle_to_plane(p_cam, points, points_uv);
+			 	nb_clipped = clip_triangle_to_plane(p_cam, points, points_uv);
 			else
-				nb_clipped = clip_triangle_to_plane(p_cam, points, NULL);
+			 	nb_clipped = clip_triangle_to_plane(p_cam, points, NULL);
 
 			for (int j = 0; j < nb_clipped; j += 3)
 			{

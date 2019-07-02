@@ -36,7 +36,7 @@ void		multithreading_draw_triangle_texture_cpu(t_window *p_win, t_triangle_list 
 
 
 //			draw depth cpu
-void		draw_triangle_depth_cpu(t_window *p_win, t_triangle *p_triangle);
+void		draw_triangle_depth_cpu(t_window *p_win, t_triangle *p_triangle, float dist_max);
 
 //			draw line cpu
 void 		draw_line_color_cpu(t_window *p_win, t_line *p_line, t_color *p_color);

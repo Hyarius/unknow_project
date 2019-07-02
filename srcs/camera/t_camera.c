@@ -1,7 +1,5 @@
 #include "unknow_project.h"
 
-extern float dist_max;
-
 t_camera	create_t_camera(t_vector3 p_pos, float p_fov, t_vector2 p_dist)
 {
 	t_camera result;
@@ -215,16 +213,17 @@ void 		t_camera_calc_depth(t_window *p_win, t_camera *p_cam)
 	t_triangle	triangle;
 	int			i;
 
+	p_cam->dist_max = 0.0f;
 	i = 0;
 	while (i < p_cam->triangle_color_list.size)
 	{
 		triangle = t_triangle_list_at(&(p_cam->triangle_color_list), i);
-		if (triangle.a.z > dist_max)
-			dist_max = triangle.a.z;
-		if (triangle.b.z > dist_max)
-			dist_max = triangle.b.z;
-		if (triangle.c.z > dist_max)
-			dist_max = triangle.c.z;
+		if (triangle.a.z > p_cam->dist_max)
+			p_cam->dist_max = triangle.a.z;
+		if (triangle.b.z > p_cam->dist_max)
+			p_cam->dist_max = triangle.b.z;
+		if (triangle.c.z > p_cam->dist_max)
+			p_cam->dist_max = triangle.c.z;
 		i++;
 	}
 
@@ -232,12 +231,12 @@ void 		t_camera_calc_depth(t_window *p_win, t_camera *p_cam)
 	while (i < p_cam->triangle_texture_list.size)
 	{
 		triangle = t_triangle_list_at(&(p_cam->triangle_texture_list), i);
-		if (triangle.a.z > dist_max)
-			dist_max = triangle.a.z;
-		if (triangle.b.z > dist_max)
-			dist_max = triangle.b.z;
-		if (triangle.c.z > dist_max)
-			dist_max = triangle.c.z;
+		if (triangle.a.z > p_cam->dist_max)
+			p_cam->dist_max = triangle.a.z;
+		if (triangle.b.z > p_cam->dist_max)
+			p_cam->dist_max = triangle.b.z;
+		if (triangle.c.z > p_cam->dist_max)
+			p_cam->dist_max = triangle.c.z;
 		i++;
 	}
 }
@@ -249,22 +248,20 @@ void		draw_depth_from_camera_on_screen(t_window *p_win, t_camera *p_cam)
 	t_line		line2;
 	int			i;
 
-	dist_max = 0.0f;
-
 	t_camera_calc_depth(p_win, p_cam);
 
 	i = 0;
 	while (i < p_cam->triangle_color_list.size)
 	{
 		triangle = t_triangle_list_at(&(p_cam->triangle_color_list), i);
-		draw_triangle_depth_cpu(p_win, &triangle);
+		draw_triangle_depth_cpu(p_win, &triangle, p_cam->dist_max);
 		i++;
 	}
 	i = 0;
 	while (i < p_cam->triangle_texture_list.size)
 	{
 		triangle = t_triangle_list_at(&(p_cam->triangle_texture_list), i);
-		draw_triangle_depth_cpu(p_win, &triangle);
+		draw_triangle_depth_cpu(p_win, &triangle, p_cam->dist_max);
 		i++;
 	}
 }

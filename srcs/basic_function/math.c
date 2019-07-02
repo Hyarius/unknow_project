@@ -30,7 +30,7 @@ float			edge_t_vector3(t_vector3 a, t_vector3 b, t_vector3 c)
 {
 	float		result;
 
-	result = ((c.x - a.x) * (b.y - a.y)) - ((c.y - a.y) * (b.x - a.x));
+	result = (c.x - a.x) * (b.y - a.y) - (c.y - a.y) * (b.x - a.x);
 	return (result);
 }
 

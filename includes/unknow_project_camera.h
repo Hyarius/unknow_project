@@ -13,6 +13,8 @@ typedef struct	s_camera
 	t_matrix	view;
 	t_matrix	projection;
 
+	float		dist_max;
+
 	t_matrix	mvp;
 	t_vector3	clipping_list[6];
 	t_vector3	clipping_list_uv[6];

@@ -2,7 +2,7 @@
 
 void	draw_triangle_texture_cpu(t_window *p_win, t_triangle *p_triangle, t_uv *p_uv)
 {
-	t_color red = create_t_color(1.0, 0.0, 0.0, 1.0);
+	// t_color			red = create_t_color(1.0, 0.0, 0.0, 1.0);
 	t_texture		*texture;
 	t_triangle		triangle;
 	t_vector3		min;
@@ -15,12 +15,12 @@ void	draw_triangle_texture_cpu(t_window *p_win, t_triangle *p_triangle, t_uv *p_
 	float			beta;
 	float			gamma;
 	int				pixel_index;
+	float			z;
 	t_color			color;
+	t_vector3		pixel;
+	t_triangle		uv;
 
 	texture = p_uv->texture;
-
-	t_vector3 pixel;
-	t_triangle uv;
 
 	triangle.a = convert_opengl_to_vector3(p_win, p_triangle->a);
 	triangle.b = convert_opengl_to_vector3(p_win, p_triangle->b);
@@ -29,7 +29,6 @@ void	draw_triangle_texture_cpu(t_window *p_win, t_triangle *p_triangle, t_uv *p_
 	p_uv->uv.a.z = triangle.a.z;
 	p_uv->uv.b.z = triangle.b.z;
 	p_uv->uv.c.z = triangle.c.z;
-
 	if (triangle.a.z != 0)
 		triangle.a.z = 1.0 / triangle.a.z;
 	if (triangle.b.z != 0)
@@ -37,12 +36,10 @@ void	draw_triangle_texture_cpu(t_window *p_win, t_triangle *p_triangle, t_uv *p_
 	if (triangle.c.z != 0)
 		triangle.c.z = 1.0 / triangle.c.z;
 
-
 	ab = create_t_rasterizer(triangle.a, triangle.b, triangle.c);
 	ac = create_t_rasterizer(triangle.a, triangle.c, triangle.b);
 	bc = create_t_rasterizer(triangle.b, triangle.c, triangle.a);
 
-	t_triangle_get_min_max_value(&triangle, &min, &max);
 	t_triangle_get_min_max_value(&triangle, &min, &max);
 
 	if (min.x < 0)
@@ -54,7 +51,13 @@ void	draw_triangle_texture_cpu(t_window *p_win, t_triangle *p_triangle, t_uv *p_
 	if (max.y >= p_win->size_y)
 		max.y = p_win->size_y - 1;
 
-	int truc = 0;
+	float cx = p_uv->uv.c.x / p_uv->uv.c.z;
+	float cy = p_uv->uv.c.y / p_uv->uv.c.z;
+	float bx = p_uv->uv.b.x / p_uv->uv.b.z;
+	float by = p_uv->uv.b.y / p_uv->uv.b.z;
+	float ax = p_uv->uv.a.x / p_uv->uv.a.z;
+	float ay = p_uv->uv.a.y / p_uv->uv.a.z;
+
 	current = min;
 	while (current.y <= max.y)
 	{
@@ -68,26 +71,19 @@ void	draw_triangle_texture_cpu(t_window *p_win, t_triangle *p_triangle, t_uv *p_
 
 			if (alpha >= 0 && beta >= 0 && gamma >= 0)
 			{
-				float z = 1;
-				if (triangle.a.z != 0 || triangle.b.z != 0 || triangle.c.z != 0)
-					z = 1.0f / ((triangle.a.z * gamma) + (triangle.b.z * beta) + (triangle.c.z * alpha));
+				z = 1 / ((triangle.a.z * gamma) + (triangle.b.z * beta) + (triangle.c.z * alpha));
 
-				pixel.x = alpha * p_uv->uv.c.x + beta * p_uv->uv.b.x + gamma * p_uv->uv.a.x;
-                pixel.y = 1.0 - (alpha * p_uv->uv.c.y + beta * p_uv->uv.b.y + gamma * p_uv->uv.a.y);
-				printf("Z = %f\n", z);
-				print_t_vector3(pixel, "Pixel 1 : ");
-				pixel.x *= z;
-				pixel.y *= z;
-				print_t_vector3(pixel, "Pixel 2 : ");
+				pixel.x = ((alpha * cx) + (beta * bx) + (gamma * ax)) * z;
+                pixel.y = 1 - ((alpha * cy) + (beta * by) + (gamma * ay)) * z;
+
 				pixel.x *= texture->surface->w;
 				pixel.y *= texture->surface->h;
-				print_t_vector3(pixel, "Pixel 3 : ");
+
 				if (z <= p_win->depth_buffer[pixel_index] || p_win->depth_buffer[pixel_index] == -1)
 				{
 					color = get_pixel_color(texture, (int)(pixel.x - EPSILON), (int)(pixel.y - EPSILON));
 					draw_pixel(p_win, (int)(current.x), (int)(current.y), color);
 					p_win->depth_buffer[pixel_index] = z;
-					truc++;
 				}
 			}
 			current.x++;

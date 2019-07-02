@@ -61,7 +61,7 @@ int				can_move_axis(t_mesh *mesh, t_mesh *target, t_vector3 axis)
 	return (BOOL_FALSE);
 }
 
-int				can_move(t_mesh *mesh, t_mesh_list *mesh_list)
+int				can_fall(t_mesh *mesh, t_mesh_list *mesh_list)
 {
 	float	delta[3];
 	int subdivision;
@@ -108,6 +108,53 @@ int				can_move(t_mesh *mesh, t_mesh_list *mesh_list)
 	}
 	return (BOOL_TRUE);
 }
+int				can_move(t_mesh *mesh, t_mesh_list *mesh_list)
+{
+	float	delta[3];
+	int subdivision;
+	t_mesh	*target;
+	int		i;
+
+	subdivision = 10;
+	delta[0] = mesh->force.x / subdivision;
+	delta[1] = mesh->force.y / subdivision;
+	delta[2] = mesh->force.z / subdivision;
+	//printf("Delta %f - %f - %f\n", delta[0], delta[1], delta[2]);
+	i = 0;
+	while (i < mesh_list->size)
+	{
+		target = t_mesh_list_get(mesh_list, i);
+		if (mesh != target && target->bubble_radius + mesh->bubble_radius >= calc_dist_vector3_to_vector3(mesh->center, target->center))
+		{
+			t_mesh_compute_next_vertices_in_world(mesh, create_t_vector3(1, 0, 0));
+			while (mesh->force.x != 0 && is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
+			{
+				mesh->force.x -= delta[0];
+				if (ft_abs_float(mesh->force.x) <= EPSILON)
+					mesh->force.x = 0;
+				t_mesh_compute_next_vertices_in_world(mesh, create_t_vector3(1, 0, 0));
+			}
+			t_mesh_compute_next_vertices_in_world(mesh, create_t_vector3(0, 1, 0));
+			while (mesh->force.y != 0 && is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
+			{
+				mesh->force.y -= delta[1];
+				if (ft_abs_float(mesh->force.y) <= EPSILON)
+					mesh->force.y = 0;
+				t_mesh_compute_next_vertices_in_world(mesh, create_t_vector3(0, 1, 0));
+			}
+			t_mesh_compute_next_vertices_in_world(mesh, create_t_vector3(0, 0, 1));
+			while (mesh->force.z != 0 && is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
+			{
+				mesh->force.z -= delta[2];
+				if (ft_abs_float(mesh->force.z) <= EPSILON)
+					mesh->force.z = 0;
+				t_mesh_compute_next_vertices_in_world(mesh, create_t_vector3(0, 0, 1));
+			}
+		}
+		i++;
+	}
+	return (BOOL_TRUE);
+}
 
 void			t_physic_engine_compute_vertices_in_world(t_physic_engine *physic_engine)
 {
@@ -132,9 +179,12 @@ void			t_physic_engine_apply_velocity(t_physic_engine *physic_engine)
 		{
 			mesh->velocity = mult_vector3_by_float(physic_engine->gravity_force, mesh->kinetic);
 
-			if (can_move(mesh, physic_engine->mesh_list) == BOOL_TRUE)
+			if (can_fall(mesh, physic_engine->mesh_list) == BOOL_TRUE)
 				t_mesh_apply_velocity(mesh);
 		}
+		if (mesh->force.x != 0 || mesh->force.y != 0 || mesh->force.z != 0)
+			if (can_move(mesh, physic_engine->mesh_list) == BOOL_TRUE)
+				t_mesh_apply_force(mesh);
 		i++;
 	}
 }

@@ -1,10 +1,8 @@
 #include "unknow_project.h"
 
-float	dist_max;
-
-void	draw_triangle_depth_cpu(t_window *p_win, t_triangle *p_triangle)
+void	draw_triangle_depth_cpu(t_window *p_win, t_triangle *p_triangle, float dist_max)
 {
-	t_color			test = create_t_color(1.0, 0, 0, 1);
+	t_color			test = create_t_color(1.0, 0.0, 0.0, 1.0);
 	t_triangle		triangle;
 	t_vector3		min;
 	t_vector3		max;
@@ -21,6 +19,13 @@ void	draw_triangle_depth_cpu(t_window *p_win, t_triangle *p_triangle)
 	triangle.b = convert_opengl_to_vector3(p_win, p_triangle->b);
 	triangle.c = convert_opengl_to_vector3(p_win, p_triangle->c);
 
+	if (triangle.a.z != 0)
+		triangle.a.z = 1.0 / triangle.a.z;
+	if (triangle.b.z != 0)
+		triangle.b.z = 1.0 / triangle.b.z;
+	if (triangle.c.z != 0)
+		triangle.c.z = 1.0 / triangle.c.z;
+
 	ab = create_t_rasterizer(triangle.a, triangle.b, triangle.c);
 	ac = create_t_rasterizer(triangle.a, triangle.c, triangle.b);
 	bc = create_t_rasterizer(triangle.b, triangle.c, triangle.a);
@@ -36,10 +41,6 @@ void	draw_triangle_depth_cpu(t_window *p_win, t_triangle *p_triangle)
 	if (max.y >= p_win->size_y)
 		max.y = p_win->size_y - 1;
 
-	triangle.a.z = 1.0 / triangle.a.z;
-	triangle.b.z = 1.0 / triangle.b.z;
-	triangle.c.z = 1.0 / triangle.c.z;
-
 	current = min;
 	while (current.y <= max.y)
 	{
@@ -51,7 +52,7 @@ void	draw_triangle_depth_cpu(t_window *p_win, t_triangle *p_triangle)
 			gamma = calc_rasterizer(&bc, current.x, current.y);
 			if (alpha >= 0 && beta >= 0 && gamma >= 0)
 			{
-				float z = 1.0f / ((triangle.a.z * gamma) + (triangle.b.z * beta) + (triangle.c.z * alpha));
+				float z = (((1.0f / triangle.a.z) * gamma) + ((1.0f / triangle.b.z) * beta) + ((1.0f / triangle.c.z) * alpha));
 
 				test.r = 1.0f - (z / dist_max);
 				test.g = 1.0f - (z / dist_max);

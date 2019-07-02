@@ -12,7 +12,7 @@ t_color			get_pixel_color(t_texture *texture, int x, int y)
 	if (x < 0 || x >= texture->surface->w ||
 		y < 0 || y >= texture->surface->h)
 		{
-			printf("%d / %d\n", x, y);
+			// printf("getting pixel : %d / %d -> error\n", x, y);
 			return (create_t_color(1.0, 0.0, 0.0, 1.0));
 		}
 

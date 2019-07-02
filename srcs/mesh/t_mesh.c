@@ -9,6 +9,7 @@ t_mesh			create_t_mesh(t_vector3 pos)
 	result.center = pos;
 	result.bubble_radius = 0.0;
 	result.velocity = create_t_vector3(0.0, 0.0, 0.0);
+	result.force = create_t_vector3(0.0, 0.0, 0.0);
 	result.kinetic = 0.0;
 
 	result.angle = create_t_vector3(0.0, 90.0, 0.0);
@@ -195,6 +196,12 @@ void			t_mesh_apply_velocity(t_mesh *dest)
 	dest->center = add_vector3_to_vector3(dest->center, dest->velocity);
 }
 
+void			t_mesh_apply_force(t_mesh *dest)
+{
+	dest->pos = add_vector3_to_vector3(dest->pos, dest->force);
+	dest->center = add_vector3_to_vector3(dest->center, dest->force);
+}
+
 void			t_mesh_set_velocity(t_mesh *dest, t_vector3 new_velocity)
 {
 	dest->velocity = new_velocity;
@@ -205,11 +212,21 @@ void			t_mesh_add_velocity(t_mesh *dest, t_vector3 delta_velocity)
 	dest->velocity = add_vector3_to_vector3(dest->velocity, delta_velocity);
 }
 
+void			t_mesh_set_force(t_mesh *dest, t_vector3 new_force)
+{
+	dest->force = new_force;
+}
+
+void			t_mesh_add_force(t_mesh *dest, t_vector3 delta_force)
+{
+	dest->force = add_vector3_to_vector3(dest->force, delta_force);
+}
+
 void			t_mesh_move(t_mesh *dest, t_vector3 delta)
 {
-	dest->velocity = add_vector3_to_vector3(dest->velocity, mult_vector3_by_float(dest->forward, delta.x));
-	dest->velocity = add_vector3_to_vector3(dest->velocity, mult_vector3_by_float(dest->right, delta.z));
-	dest->velocity = add_vector3_to_vector3(dest->velocity, mult_vector3_by_float(dest->up, delta.y));
+	dest->force = add_vector3_to_vector3(dest->force, mult_vector3_by_float(dest->forward, delta.x));
+	dest->force = add_vector3_to_vector3(dest->force, mult_vector3_by_float(dest->right, delta.z));
+	dest->force = add_vector3_to_vector3(dest->force, mult_vector3_by_float(dest->up, delta.y));
 }
 
 void			t_mesh_translate(t_mesh *dest, t_vector3 delta)
@@ -249,7 +266,7 @@ void			t_mesh_compute_next_vertices_in_world(t_mesh *dest, t_vector3 axis)
 	int i = 0;
 
 	clean_t_vector3_list(dest->next_vertices_in_world);
-	next_pos = add_vector3_to_vector3(dest->pos, mult_vector3_by_vector3(dest->velocity, axis));
+	next_pos = add_vector3_to_vector3(dest->pos, mult_vector3_by_vector3(add_vector3_to_vector3(dest->velocity, dest->force), axis));
 	while (i < dest->vertices->size)
 	{
 		t_vector3_list_push_back(dest->next_vertices_in_world, add_vector3_to_vector3(t_vector3_list_at(dest->vertices, i), next_pos));

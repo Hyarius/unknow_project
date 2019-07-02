@@ -17,7 +17,8 @@ typedef struct	s_mesh
 	t_vector3	right;
 	t_vector3	up;
 
-	t_vector3	velocity; // express in Ud / f in 3 axis
+	t_vector3	velocity; // related to kinetic
+	t_vector3	force; // related to kinetic
 	float		kinetic;
 
 	t_texture	*texture;
@@ -51,6 +52,10 @@ void		t_mesh_apply_velocity(t_mesh *dest);
 void		t_mesh_add_velocity(t_mesh *dest, t_vector3 delta_velocity);
 void		t_mesh_set_velocity(t_mesh *dest, t_vector3 new_velocity);
 void		t_mesh_activate_gravity(t_mesh *dest, float gravity);
+
+void		t_mesh_apply_force(t_mesh *dest);
+void		t_mesh_set_force(t_mesh *dest, t_vector3 new_force);
+void		t_mesh_add_force(t_mesh *dest, t_vector3 delta_force);
 
 t_mesh		create_primitive_cube(t_vector3 coord, t_vector3 size, t_texture *texture, float gravity);
 t_mesh		create_primitive_plane(t_vector3 pos, t_vector3 size, t_texture *texture, float gravity);

@@ -49,7 +49,7 @@ void	draw_triangle_color_cpu(t_window *p_win, t_triangle *p_triangle, t_color *p
 			gamma = 1.0 - alpha - beta;
 			if (alpha >= 0 && beta >= 0 && gamma >= 0)
 			{
-				float z = 1.0f / ((triangle.a.z * gamma) + (triangle.b.z * beta) + (triangle.c.z * alpha));
+				float z = (((1.0f / triangle.a.z) * gamma) + ((1.0f / triangle.b.z) * beta) + ((1.0f / triangle.c.z) * alpha));
 
 				//printf("z = %f\n", z);
 				if (z <= p_win->depth_buffer[pixel_index] || p_win->depth_buffer[pixel_index] == -1)
