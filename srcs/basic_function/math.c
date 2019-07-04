@@ -34,8 +34,6 @@ float			edge_t_vector3(t_vector3 a, t_vector3 b, t_vector3 c)
 	return (result);
 }
 
-
-
 t_vector3		intersect_plane_by_line(t_vector3 p_normal, t_vector3 p_center, t_vector3 start, t_vector3 end)
 {
 	t_vector3	intersection;

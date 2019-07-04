@@ -27,7 +27,6 @@ typedef struct		s_window
 
 	t_vector3		*vertex_data;
 	t_color			*color_data;
-	float			*depth_buffer;
 
 	pthread_t		threads[NB_THREAD_MAX]; //pointeur pour le multithreading
 	t_void_list		data[NB_THREAD_MAX]; //liste qui donne au thread les element dont il a besoin
@@ -42,5 +41,24 @@ void		start_sdl();
 t_window	*initialize_t_window(char *name, int size_x, int size_y);
 int 		is_point_in_screen(t_window *p_win, t_vector3 p_point);
 int			is_t_triangle_in_screen(t_window *p_win, t_triangle *p_triangle);
+
+typedef struct		s_view_port
+{
+	t_window		*window;
+
+	t_vector2_int	pos;
+
+	t_vector2_int	size;
+
+	float			*depth_buffer;
+
+}					t_view_port;
+
+t_view_port	create_t_view_port(t_window *window, t_vector2_int pos, t_vector2_int size);
+t_view_port	*initialize_t_view_port(t_window *window, t_vector2_int pos, t_vector2_int size);
+void		move_t_view_port(t_view_port *view, t_vector2_int new_pos);
+void		resize_t_view_port(t_view_port *view, t_vector2_int new_size);
+void		t_view_port_change_window(t_view_port *view, t_window *p_window);
+void 		t_view_port_clear_buffers(t_view_port *view);
 
 #endif

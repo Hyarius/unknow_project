@@ -9,6 +9,8 @@
 
 typedef struct	s_camera
 {
+	t_view_port *view_port;
+
 	t_matrix	model;
 	t_matrix	view;
 	t_matrix	projection;
@@ -47,8 +49,11 @@ typedef struct	s_camera
 	float		far;
 }				t_camera;
 
-t_camera	create_t_camera(t_vector3 p_pos, float p_fov, t_vector2 p_dist);
-t_camera	*initialize_t_camera(t_vector3 p_pos, float p_fov, t_vector2 p_dist);
+t_camera	create_t_camera(t_window *window, t_vector3 p_pos, float p_fov, t_vector2 p_dist);
+t_camera	*initialize_t_camera(t_window *window, t_vector3 p_pos, float p_fov, t_vector2 p_dist);
+void		t_camera_set_view_port(t_camera *camera, t_vector2_int new_pos, t_vector2_int new_size);
+void		t_camera_change_window(t_camera *camera, t_window *new_window);
+void		t_camera_change_view_port(t_camera *camera, t_view_port *new_view_port);
 void		free_t_cam(t_camera dest);
 void		delete_t_cam(t_camera *dest);
 t_matrix	compute_projection_matrix(t_camera *p_cam);
@@ -62,8 +67,9 @@ void		t_camera_change_view(t_camera *cam, float delta_yaw, float delta_pitch);
 void		handle_t_camera_mouvement_by_key(t_camera *cam, t_keyboard *p_keyboard);
 void		handle_t_camera_view_by_mouse(t_camera *cam, t_mouse *p_mouse);
 int			clip_triangle_to_plane(t_camera *p_camera, t_vector3 *p_points, t_vector3 *p_points_uv);
-void		draw_triangle_from_camera_on_screen(t_window *p_win, t_camera *p_cam);
-void 		t_camera_calc_depth(t_window *p_win, t_camera *p_cam);
-void		draw_depth_from_camera_on_screen(t_window *p_win, t_camera *p_cam);
+void		draw_triangle_from_camera_on_screen(t_camera *p_cam);
+void 		t_camera_calc_depth(t_camera *p_cam);
+void		draw_depth_from_camera_on_screen(t_camera *p_cam);
+void		clean_t_camera(t_camera *camera);
 
 #endif

@@ -38,4 +38,20 @@ void			t_user_engine_handle_camera(t_user_engine *user_engine, t_camera *cam);
 void			t_user_engine_handle_quit(t_user_engine *user_engine, int *play);
 int				t_user_engine_poll_event(t_user_engine *engine);
 
+typedef struct	s_visual_engine
+{
+	int			main_camera;
+	t_camera_list
+				*camera_list;
+}				t_visual_engine;
+
+t_visual_engine	create_t_visual_engine(t_window *p_window);
+t_visual_engine	*initialize_t_visual_engine(t_window *p_window);
+void			free_t_visual_engine(t_visual_engine dest);
+void			delete_t_visual_engine(t_visual_engine *dest);
+void			t_visual_engine_render_camera(t_visual_engine *engine);
+void			t_visual_engine_prepare_camera(t_visual_engine *engine);
+void			t_visual_engine_add_camera(t_visual_engine *engine, t_camera new_camera);
+t_camera		*t_visual_engine_get_main_camera(t_visual_engine *engine);
+
 #endif

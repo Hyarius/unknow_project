@@ -1,32 +1,32 @@
 #include "unknow_project.h"
 
-t_vector3		convert_screen_to_opengl(t_window *p_win, t_vector3 source)
+t_vector3		convert_screen_to_opengl(t_view_port *p_view_port, t_vector3 source)
 {
 	t_vector3 result;
 
-	result.x = source.x / (p_win->size_x / 2.0) - 1.0f;
-	result.y = -(source.y / (p_win->size_y / 2.0) - 1.0f);
+	result.x = source.x / ((float)(p_view_port->size.x) / 2.0) - 1.0f;
+	result.y = -(source.y / ((float)(p_view_port->size.y) / 2.0) - 1.0f);
 	result.z = source.z;
 
 	return (result);
 }
 
-t_vector2		convert_vector2_to_opengl(t_window *p_win, t_vector2 source)
+t_vector2		convert_vector2_to_opengl(t_view_port *p_view_port, t_vector2 source)
 {
 	t_vector2 result;
 
-	result.x = source.x / (p_win->size_x / 2.0) - 1.0f;
-	result.y = -(source.y / (p_win->size_y / 2.0) - 1.0f);
+	result.x = source.x / ((float)(p_view_port->size.x) / 2.0) - 1.0f;
+	result.y = -(source.y / ((float)(p_view_port->size.y) / 2.0) - 1.0f);
 
 	return (result);
 }
 
-t_vector3	convert_opengl_to_vector3(t_window *p_win, t_vector3 source)
+t_vector3	convert_opengl_to_vector3(t_view_port *p_view_port, t_vector3 source)
 {
 	t_vector3 result;
 
-	result.x = (source.x + 1.0f) * ((float)(p_win->size_x) / 2.0);
-	result.y = (-(source.y) + 1.0f) * ((float)(p_win->size_y) / 2.0);
+	result.x = (source.x + 1.0f) * ((float)(p_view_port->size.x) / 2.0);
+	result.y = (-(source.y) + 1.0f) * ((float)(p_view_port->size.y) / 2.0);
 	result.z = source.z;
 
 	return (result);

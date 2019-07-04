@@ -1,8 +1,10 @@
 #include "unknow_project.h"
 
-t_camera	create_t_camera(t_vector3 p_pos, float p_fov, t_vector2 p_dist)
+t_camera	create_t_camera(t_window *window, t_vector3 p_pos, float p_fov, t_vector2 p_dist)
 {
 	t_camera result;
+
+	result.view_port = initialize_t_view_port(window, create_t_vector2_int(0, 0), create_t_vector2_int(window->size_x, window->size_y));
 
 	result.pos = p_pos; //position de la camera
 	result.fov = p_fov; // champ de vision
@@ -29,16 +31,33 @@ t_camera	create_t_camera(t_vector3 p_pos, float p_fov, t_vector2 p_dist)
 	return (result);
 }
 
-t_camera	*initialize_t_camera(t_vector3 p_pos, float p_fov, t_vector2 p_dist)
+t_camera	*initialize_t_camera(t_window *window, t_vector3 p_pos, float p_fov, t_vector2 p_dist)
 {
 	t_camera *result;
 
 	if (!(result = (t_camera *)malloc(sizeof(t_camera))))
 		error_exit(-31, "Can't malloc a t_camera");
 
-	*result = create_t_camera(p_pos, p_fov, p_dist);
+	*result = create_t_camera(window, p_pos, p_fov, p_dist);
 
 	return (result);
+}
+
+void		t_camera_set_view_port(t_camera *camera, t_vector2_int new_pos, t_vector2_int new_size)
+{
+	move_t_view_port(camera->view_port, new_pos);
+	resize_t_view_port(camera->view_port, new_size);
+}
+
+void		t_camera_change_window(t_camera *camera, t_window *new_window)
+{
+	t_view_port_change_window(camera->view_port, new_window);
+}
+
+void		t_camera_change_view_port(t_camera *camera, t_view_port *new_view_port)
+{
+	free(camera->view_port);
+	camera->view_port = new_view_port;
 }
 
 void		free_t_cam(t_camera dest)
@@ -48,6 +67,7 @@ void		free_t_cam(t_camera dest)
 	free_t_triangle_list(dest.triangle_texture_list);
 	free_t_uv_list(dest.uv_list);
 	free_t_color_list(dest.darkness_list);
+	free(dest.view_port);
 }
 
 void		delete_t_cam(t_camera *dest)
@@ -160,9 +180,9 @@ t_vector3	apply_t_camera(t_vector3 *src, t_matrix *mat) // applique la position 
 	{
 		result.x /= delta;
 		result.y /= delta;
-		result.z /= delta;
+		result.z /= -delta;
 	}
-	result.z = calc_dist_vector3_to_vector3(create_t_vector3(0, 0, 0), *src);
+	//result.z = calc_dist_vector3_to_vector3(create_t_vector3(0, 0, 0), *src);
 	return (result);
 }
 
@@ -208,7 +228,7 @@ void		handle_t_camera_view_by_mouse(t_camera *cam, t_mouse *p_mouse) // calcul d
 	t_camera_change_view(cam, delta_yaw, delta_pitch);
 }
 
-void 		t_camera_calc_depth(t_window *p_win, t_camera *p_cam)
+void 		t_camera_calc_depth(t_camera *p_cam)
 {
 	t_triangle	triangle;
 	int			i;
@@ -241,39 +261,51 @@ void 		t_camera_calc_depth(t_window *p_win, t_camera *p_cam)
 	}
 }
 
-void		draw_depth_from_camera_on_screen(t_window *p_win, t_camera *p_cam)
+void		draw_depth_from_camera_on_screen(t_camera *p_cam)
 {
 	t_triangle	triangle;
 	t_line		line1;
 	t_line		line2;
 	int			i;
 
-	t_camera_calc_depth(p_win, p_cam);
+	t_camera_calc_depth(p_cam);
 
 	i = 0;
 	while (i < p_cam->triangle_color_list.size)
 	{
 		triangle = t_triangle_list_at(&(p_cam->triangle_color_list), i);
-		draw_triangle_depth_cpu(p_win, &triangle, p_cam->dist_max);
+		draw_triangle_depth_cpu(p_cam->view_port, &triangle, p_cam->dist_max);
 		i++;
 	}
 	i = 0;
 	while (i < p_cam->triangle_texture_list.size)
 	{
 		triangle = t_triangle_list_at(&(p_cam->triangle_texture_list), i);
-		draw_triangle_depth_cpu(p_win, &triangle, p_cam->dist_max);
+		draw_triangle_depth_cpu(p_cam->view_port, &triangle, p_cam->dist_max);
 		i++;
 	}
 }
 
-void		draw_triangle_from_camera_on_screen(t_window *p_win, t_camera *p_cam)
+void		draw_triangle_from_camera_on_screen(t_camera *p_cam)
 {
 	if (p_cam->triangle_color_list.size > 0)
 	{
-		multithreading_draw_triangle_color_cpu(p_win, &(p_cam->triangle_color_list), &(p_cam->color_list));
+		multithreading_draw_triangle_color_cpu(p_cam->view_port, &(p_cam->triangle_color_list), &(p_cam->color_list));
 	}
 	if (p_cam->triangle_texture_list.size > 0)
 	{
-		multithreading_draw_triangle_texture_cpu(p_win, &(p_cam->triangle_texture_list), &(p_cam->uv_list));
+		multithreading_draw_triangle_texture_cpu(p_cam->view_port, &(p_cam->triangle_texture_list), &(p_cam->uv_list));
 	}
+}
+
+void		clean_t_camera(t_camera *camera)
+{
+	clean_t_triangle_list(&(camera->triangle_color_list));
+	clean_t_color_list(&(camera->color_list));
+
+	clean_t_triangle_list(&(camera->triangle_texture_list));
+	clean_t_color_list(&(camera->darkness_list));
+	clean_t_uv_list(&(camera->uv_list));
+
+	t_view_port_clear_buffers(camera->view_port);
 }

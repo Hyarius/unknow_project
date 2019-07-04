@@ -90,9 +90,6 @@ t_window		*initialize_t_window(char *p_name, int p_size_x, int p_size_y)
 	if (!(win->color_data = (t_color *)malloc(sizeof(t_color) * win->size_x * win->size_y)))
 		error_exit(-456, "Can't malloc a t_color array properly");
 
-	if (!(win->depth_buffer = (float *)malloc(sizeof(float) * win->size_x * win->size_y)))
-		error_exit(-456, "Can't malloc a float array properly");
-
 	tmp_color = create_t_color_from_int(255, 255, 255, 0);
 
 	for (i = 0; i < win->size_x; i++)
@@ -103,7 +100,9 @@ t_window		*initialize_t_window(char *p_name, int p_size_x, int p_size_y)
 			tmp_coord.y = j;
 			tmp_coord.z = 0.0f;
 
-			win->vertex_data[i + j * win->size_x] = convert_screen_to_opengl(win, tmp_coord);
+			win->vertex_data[i + j * win->size_x].x = tmp_coord.x / ((float)(win->size_x) / 2.0) - 1.0f;
+			win->vertex_data[i + j * win->size_x].y = -(tmp_coord.y / ((float)(win->size_y) / 2.0) - 1.0f);
+			win->vertex_data[i + j * win->size_x].z = tmp_coord.z;
 		}
 	}
 	glBindVertexArray(win->vertex_array);
@@ -126,41 +125,24 @@ void 				clear_buffers(t_window *win)
 {
 	for (int i = 0; i < win->size_x * win->size_y; i++)
 	{
-		win->depth_buffer[i] = -1;
 		win->color_data[i].a = 0;
 	}
 }
 
-void				prepare_screen(t_window *win, t_camera *p_cam, t_color color)
+void				prepare_screen(t_window *p_win, t_color color)
 {
 	//Set background color
 	glClearColor((GLclampf)color.r, (GLclampf)color.g, (GLclampf)color.b, 1.0f);
 
-	if (p_cam != NULL)
-	{
-		clean_t_triangle_list(&(p_cam->triangle_color_list));
-		clean_t_color_list(&(p_cam->color_list));
-
-		clean_t_triangle_list(&(p_cam->triangle_texture_list));
-		clean_t_color_list(&(p_cam->darkness_list));
-		clean_t_uv_list(&(p_cam->uv_list));
-	}
-
-	clear_buffers(win);
+	clear_buffers(p_win);
 
 	//Clear la profondeur et la couleur du buffer
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-void				render_screen(t_window *p_win, t_camera *p_cam)
+void				render_screen(t_window *p_win)
 {
 	check_frame();
-
-
-	if (p_cam != NULL)
-	{
-		draw_triangle_from_camera_on_screen(p_win, p_cam);
-	}
 
 	draw_buffer_opengl(p_win, p_win->color_data);
 
