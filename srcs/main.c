@@ -59,41 +59,37 @@ int main(int argc, char **argv)
 	t_engine	*engine = initialize_t_engine(win);
 	//resize_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 0)->view_port, create_t_vector2_int(2, 2));
 
-	t_engine_add_mesh(engine, create_primitive_plane(create_t_vector3(1.0, 0, 1.0), create_t_vector3(8.0, 0.0, 8.0), NULL, 0.0));
+	t_engine_add_mesh(engine, create_primitive_plane(create_t_vector3(0.0, 0, 0.0), create_t_vector3(8.0, 0.0, 8.0), NULL, 0.0));
 
-	t_engine_add_mesh(engine, read_obj_file("pawn.obj", create_t_vector3(0.0, 2.0, 5.0), create_t_vector3(0.1, 0.11, 0.1), 100.0));
+	t_mesh mesh = create_primitive_cube(create_t_vector3(-0.25, 2.0, -0.25), create_t_vector3(0.45, 0.45, 0.45), NULL, 100.0);
+	t_mesh_set_color(&mesh, create_t_color(0.5, 0.6, 0.8 ,1.0));
+	t_engine_add_mesh(engine, mesh);
 
-	t_mesh *mesh = t_engine_get_mesh(engine, 1);
+	mesh = read_obj_file("pawn.obj", create_t_vector3(2.0, 2.0, 0.0), create_t_vector3(0.1, 0.11, 0.1), 100.0);
+	t_mesh_set_color(&mesh, create_t_color(0.4, 0.3, 0.3, 1.0));
+	t_engine_add_mesh(engine, mesh);
 
-	t_mesh_set_color(mesh, create_t_color(0.5, 0.6, 0.8 ,1.0));
+	mesh = read_obj_file("pawn.obj", create_t_vector3(0.0, 2.0, 2.0), create_t_vector3(0.1, 0.11, 0.1), 100.0);
+	t_mesh_set_color(&mesh, create_t_color(0.3, 0.3, 1.0, 1.0));
+	t_engine_add_mesh(engine, mesh);
 
-	t_mesh_add_force(mesh, create_t_vector3(0.0, 0.0, -0.01));
+	t_engine_place_camera(engine, 0, create_t_vector3(0, 3.0, -1.5));
+	t_camera_look_at_point(t_camera_list_get(engine->visual_engine->camera_list, 0), create_t_vector3(0, 3, 0));
 
-	int heigth = 2;
-	float rot_y = 34;
-	float r = generate_nbr(0, 255);
-	float g = generate_nbr(0, 255);
-	float b = generate_nbr(0, 255);
-
-	t_mesh mesh2 = read_obj_file("pawn.obj", create_t_vector3(0.0, 0.0, 0.0), create_t_vector3(0.1, 0.13, 0.1), 100.0);
-	t_mesh_set_color(&mesh2, create_t_color_from_int(r, g, b, 255));
-	t_mesh_rotate_around_point(&mesh2, create_t_vector3(0, rot_y, 0), create_t_vector3(-0.5, heigth, -0.5));
-
-	t_engine_add_mesh(engine, mesh2);
-
-	t_engine_place_camera(engine, 0, create_t_vector3(-2.0, 4.0, 1.2));
-
-	t_camera_look_at_point(t_camera_list_get(engine->visual_engine->camera_list, 0), create_t_vector3(0, 0, 0));
-
-	t_engine_add_camera(engine, create_t_camera(win, create_t_vector3(-2.0, 4.0, 1.2), 70, create_t_vector2(NEAR, FAR)));
-
+	t_engine_add_camera(engine, create_t_camera(win, create_t_vector3(0.25, 1.5, 3.5), 70, create_t_vector2(NEAR, FAR)));
+	resize_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 1)->view_port, create_t_vector2_int(400, 340));
+	move_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 1)->view_port, create_t_vector2_int(1440, 0));
 	t_camera_look_at_point(t_camera_list_get(engine->visual_engine->camera_list, 1), create_t_vector3(0, 0, 0));
 
-	resize_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 1)->view_port, create_t_vector2_int(400, 340));
-	move_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 1)->view_port, create_t_vector2_int(1440, 1));
+	t_engine_add_camera(engine, create_t_camera(win, create_t_vector3(3.5, 1.5, 0.25), 70, create_t_vector2(NEAR, FAR)));
+	resize_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 2)->view_port, create_t_vector2_int(400, 340));
+	move_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 2)->view_port, create_t_vector2_int(0, 0));
+	t_camera_look_at_point(t_camera_list_get(engine->visual_engine->camera_list, 2), create_t_vector3(0, 0, 0));
 
 	while (engine->playing == 1)
 	{
+		//t_mesh_rotate_around_point(t_engine_get_mesh(engine, 2), create_t_vector3(0, 2, 0), create_t_vector3(0, 0, 0));
+		//t_mesh_rotate_around_point(t_engine_get_mesh(engine, 3), create_t_vector3(0, 2, 0), create_t_vector3(0, 0, 0));
 		t_engine_apply_physic(engine);
 
 		t_engine_handle_camera(engine);

@@ -2,6 +2,8 @@
 # define UNKNOW_PROJECT_DRAWING_H
 
 # include "unknow_project_window.h"
+# include "unknow_project_camera.h"
+# include "unknow_project_mesh.h"
 
 //
 // ----------------- DRAWING -----------------
@@ -37,5 +39,7 @@ void		multithreading_draw_triangle_texture_cpu(t_view_port *p_view_port, t_trian
 
 //			draw depth cpu
 void		draw_triangle_depth_cpu(t_view_port *p_view_port, t_triangle *p_triangle, float dist_max);
+
+void 		draw_t_mesh(t_window *p_win, t_camera *p_cam, t_mesh *mesh);
 
 #endif

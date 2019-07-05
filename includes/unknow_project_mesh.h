@@ -2,11 +2,11 @@
 # define UNKNOW_PROJECT_MESH_H
 
 # include "unknow_project_basic_list.h"
-# include "unknow_project_camera.h"
 # include "unknow_project_window.h"
 
 typedef struct	s_mesh
 {
+	struct s_camera *camera;
 	t_vector3	pos;
 	t_vector3	center;
 	int			is_visible;
@@ -48,6 +48,7 @@ void 		t_mesh_set_color(t_mesh *dest, t_color p_color);
 void		t_mesh_compute_normals(t_mesh *mesh);
 void		t_mesh_compute_bubble_box(t_mesh *mesh);
 
+void		t_mesh_move(t_mesh *dest, t_vector3 delta);
 void		t_mesh_apply_velocity(t_mesh *dest);
 void		t_mesh_add_velocity(t_mesh *dest, t_vector3 delta_velocity);
 void		t_mesh_set_velocity(t_mesh *dest, t_vector3 new_velocity);
@@ -61,7 +62,6 @@ t_mesh		create_primitive_cube(t_vector3 coord, t_vector3 size, t_texture *textur
 t_mesh		create_primitive_plane(t_vector3 pos, t_vector3 size, t_texture *texture, float gravity);
 t_mesh		create_primitive_vertical_plane(t_vector3 pos, t_vector3 size, t_texture *p_texture, float gravity);
 
-void 		draw_t_mesh(t_window *p_win, t_camera *p_cam, t_mesh *mesh);
 void		t_mesh_rotate(t_mesh *mesh, t_vector3 delta_angle);
 void		t_mesh_rotate_around_point(t_mesh *mesh, t_vector3 delta_angle, t_vector3 center);
 void		t_mesh_look_at(t_mesh *mesh);

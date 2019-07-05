@@ -84,21 +84,21 @@ void		t_engine_handle_event(t_engine *engine)
 		}
 		if (engine->user_engine->event.type == SDL_KEYDOWN && engine->user_engine->event.key.keysym.sym == SDLK_RETURN)
 		{
-			static int heigth = 2;
-			static float rot_y = 34;
+			t_camera *main_camera;
+			t_mesh	*main_mesh;
 			float r = generate_nbr(0, 255);
 			float g = generate_nbr(0, 255);
 			float b = generate_nbr(0, 255);
-			static test = 100;
 
-			t_mesh mesh = create_primitive_cube(create_t_vector3(0, heigth, 0), create_t_vector3(size, size, size), NULL, test);
+			main_camera = t_camera_list_get(engine->visual_engine->camera_list, 0);
+			main_mesh = main_camera->body;
+			t_vector3 pos;
+			pos = add_vector3_to_vector3(main_mesh->center, create_t_vector3(-size / 2, 3, -size / 2));
+			t_mesh mesh = create_primitive_cube(pos, create_t_vector3(size, size, size), NULL, 100);
 			t_mesh_set_color(&mesh, create_t_color_from_int(r, g, b, 255));
-			t_mesh_rotate_around_point(&mesh, create_t_vector3(0, rot_y, 0), create_t_vector3(-0.5, heigth, -0.5));
+			t_mesh_rotate_around_point(&mesh, create_t_vector3(0, main_camera->yaw, 0), main_mesh->center);
 
-			heigth += size * 2;
-			rot_y += 6;
 			t_engine_add_mesh(engine, mesh);
-			test -= 5;
 		}
 		if (engine->user_engine->event.type == SDL_KEYDOWN && engine->user_engine->event.key.keysym.sym == SDLK_r)
 		{
@@ -112,8 +112,20 @@ void		t_engine_handle_event(t_engine *engine)
 				size = 0.2;
 			printf("Size decrease !\n");
 		}
+		if (engine->user_engine->event.type == SDL_KEYDOWN && engine->user_engine->event.key.keysym.sym == SDLK_c)
+		{
+			t_camera *cam;
+
+			cam = t_camera_list_get(engine->visual_engine->camera_list, 0);
+			if (cam->body == NULL)
+				link_t_camera_to_t_mesh(cam, t_engine_get_mesh(engine, 1), 100.0);
+			else
+				link_t_camera_to_t_mesh(cam, NULL, 100.0);
+
+		}
 	}
 }
+
 
 t_mesh		*t_engine_get_mesh(t_engine *p_engine, int index)
 {

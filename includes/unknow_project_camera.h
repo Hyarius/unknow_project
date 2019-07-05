@@ -6,9 +6,11 @@
 #include "unknow_project_math.h"
 #include "unknow_project_system.h"
 #include "unknow_project_geometry.h"
+#include "unknow_project_mesh.h"
 
 typedef struct	s_camera
 {
+	t_mesh *body;
 	t_view_port *view_port;
 
 	t_matrix	model;
@@ -47,6 +49,7 @@ typedef struct	s_camera
 	float		fov;
 	float		near;
 	float		far;
+
 }				t_camera;
 
 t_camera	create_t_camera(t_window *window, t_vector3 p_pos, float p_fov, t_vector2 p_dist);
@@ -56,6 +59,8 @@ void		t_camera_change_window(t_camera *camera, t_window *new_window);
 void		t_camera_change_view_port(t_camera *camera, t_view_port *new_view_port);
 void		free_t_cam(t_camera dest);
 void		delete_t_cam(t_camera *dest);
+void		move_camera(t_camera *camera, t_vector3 mouvement);
+void		translate_camera(t_camera *camera, t_vector3 mouvement);
 t_matrix	compute_projection_matrix(t_camera *p_cam);
 void		compute_t_camera(t_camera *cam);
 void		t_camera_change_fov(t_camera *cam, float delta);
@@ -71,5 +76,7 @@ void		draw_triangle_from_camera_on_screen(t_camera *p_cam);
 void 		t_camera_calc_depth(t_camera *p_cam);
 void		draw_depth_from_camera_on_screen(t_camera *p_cam);
 void		clean_t_camera(t_camera *camera);
+
+void		link_t_camera_to_t_mesh(t_camera *camera, t_mesh *mesh, float new_kinetic);
 
 #endif
