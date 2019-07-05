@@ -281,3 +281,9 @@ void			t_mesh_compute_next_vertices_in_world(t_mesh *dest, t_vector3 axis)
 		i++;
 	}
 }
+
+void			t_mesh_jump(t_mesh *body)
+{
+	if (body->velocity.y == 0)
+		body->velocity.y += 0.08;
+}

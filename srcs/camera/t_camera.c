@@ -219,9 +219,10 @@ void		translate_camera(t_camera *camera, t_vector3 mouvement)
 
 void		move_camera(t_camera *camera, t_vector3 mouvement)
 {
-	translate_camera(camera, mouvement);
+	if (camera->body == NULL)
+		translate_camera(camera, mouvement);
 	if (camera->body != NULL)
-		t_mesh_move(camera->body, mouvement);
+		t_mesh_add_velocity(camera->body, mouvement);
 }
 
 void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard) // calcul du mouvement de la cameraera au clavier
@@ -247,11 +248,30 @@ void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard)
 	if (get_key_state(p_keyboard, SDL_SCANCODE_A) == 1)
 		mouvement = add_vector3_to_vector3(mult_vector3_by_vector3(camera->right, tmp), mouvement);
 	if (get_key_state(p_keyboard, SDL_SCANCODE_SPACE) == 1)
-		mouvement = add_vector3_to_vector3(create_t_vector3(0.0, camera->speed, 0.0), mouvement);
+	{
+		if (camera->body == NULL)
+		{
+			mouvement = add_vector3_to_vector3(create_t_vector3(0.0, camera->speed, 0.0), mouvement);
+		}
+		else
+		{
+			t_mesh_jump(camera->body);
+		}
+
+	}
 	if (get_key_state(p_keyboard, SDL_SCANCODE_LCTRL) == 1)
 		mouvement = add_vector3_to_vector3(create_t_vector3(0.0, -camera->speed, 0.0), mouvement);
 
-	move_camera(camera, mouvement);
+	if (camera->body == NULL)
+	{
+		move_camera(camera, mouvement);
+	}
+	else
+	{
+		if (camera->body->velocity.y == 0)
+			move_camera(camera, mouvement);
+	}
+
 }
 
 void		handle_t_camera_view_by_mouse(t_camera *cam, t_mouse *p_mouse) // calcul du mouvement de l'angle de la camera a la souris

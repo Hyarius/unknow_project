@@ -62,7 +62,7 @@ void		t_engine_add_mesh(t_engine *engine, t_mesh p_mesh)
 
 void		t_engine_handle_event(t_engine *engine)
 {
-	static float size = 1.0;
+	static float size = 0.45;
 	t_mesh	*mesh;
 	int		i;
 
@@ -82,47 +82,59 @@ void		t_engine_handle_event(t_engine *engine)
 				i++;
 			}
 		}
-		if (engine->user_engine->event.type == SDL_KEYDOWN && engine->user_engine->event.key.keysym.sym == SDLK_RETURN)
-		{
-			t_camera *main_camera;
-			t_mesh	*main_mesh;
-			float r = generate_nbr(0, 255);
-			float g = generate_nbr(0, 255);
-			float b = generate_nbr(0, 255);
+	}
+	if (get_key_state(engine->user_engine->keyboard, SDL_SCANCODE_RETURN) == 1)
+	{
 
-			main_camera = t_camera_list_get(engine->visual_engine->camera_list, 0);
+		t_camera *main_camera;
+		t_mesh	*main_mesh;
+		float r = generate_nbr(0, 255);
+		float g = generate_nbr(0, 255);
+		float b = generate_nbr(0, 255);
+
+		main_camera = t_camera_list_get(engine->visual_engine->camera_list, 0);
+		if (main_camera->body != NULL)
+		{
 			main_mesh = main_camera->body;
 			t_vector3 pos;
-			pos = add_vector3_to_vector3(main_mesh->center, create_t_vector3(-size / 2, 3, -size / 2));
+			pos = add_vector3_to_vector3(main_mesh->center, create_t_vector3(-size / 2.0, 3, -size / 2.0));
 			t_mesh mesh = create_primitive_cube(pos, create_t_vector3(size, size, size), NULL, 100);
 			t_mesh_set_color(&mesh, create_t_color_from_int(r, g, b, 255));
 			t_mesh_rotate_around_point(&mesh, create_t_vector3(0, main_camera->yaw, 0), main_mesh->center);
 
 			t_engine_add_mesh(engine, mesh);
 		}
-		if (engine->user_engine->event.type == SDL_KEYDOWN && engine->user_engine->event.key.keysym.sym == SDLK_r)
-		{
-			printf("Size increse !\n");
-			size += 0.2;
-		}
-		if (engine->user_engine->event.type == SDL_KEYDOWN && engine->user_engine->event.key.keysym.sym == SDLK_t)
-		{
-			size -= 0.2;
-			if (size <= 0.2)
-				size = 0.2;
-			printf("Size decrease !\n");
-		}
-		if (engine->user_engine->event.type == SDL_KEYDOWN && engine->user_engine->event.key.keysym.sym == SDLK_c)
-		{
-			t_camera *cam;
 
-			cam = t_camera_list_get(engine->visual_engine->camera_list, 0);
-			if (cam->body == NULL)
-				link_t_camera_to_t_mesh(cam, t_engine_get_mesh(engine, 1), 100.0);
-			else
-				link_t_camera_to_t_mesh(cam, NULL, 100.0);
+		reset_key_state(engine->user_engine->keyboard, SDL_SCANCODE_RETURN);
+	}
+	if (get_key_state(engine->user_engine->keyboard, SDL_SCANCODE_R) == 1)
+	{
+		printf("Size increse !\n");
 
-		}
+		reset_key_state(engine->user_engine->keyboard, SDL_SCANCODE_R);
+		size += 0.2;
+	}
+	if (get_key_state(engine->user_engine->keyboard, SDL_SCANCODE_T) == 1)
+	{
+		size -= 0.2;
+		if (size <= 0.2)
+			size = 0.2;
+		printf("Size decrease !\n");
+
+		reset_key_state(engine->user_engine->keyboard, SDL_SCANCODE_T);
+	}
+	if (get_key_state(engine->user_engine->keyboard, SDL_SCANCODE_C) == 1)
+	{
+		t_camera *cam;
+
+		cam = t_camera_list_get(engine->visual_engine->camera_list, 0);
+		if (cam->body == NULL)
+			link_t_camera_to_t_mesh(cam, t_engine_get_mesh(engine, 1), 100.0);
+		else
+			link_t_camera_to_t_mesh(cam, NULL, 100.0);
+
+		reset_key_state(engine->user_engine->keyboard, SDL_SCANCODE_C);
+
 	}
 }
 
