@@ -192,11 +192,16 @@ void			t_physic_engine_apply_velocity(t_physic_engine *physic_engine)
 				t_mesh_apply_force(mesh);
 		i++;
 		if (mesh->velocity.y != 0)
-			mesh->velocity.y -= GRAVITY * mesh->kinetic * time_passed;
-		if (mesh->velocity.y == 0)
+		{
+			mesh->velocity.y -= (GRAVITY * mesh->kinetic * time_passed);
+			mesh->velocity.x = mesh->forward.x + (mesh->kinetic / 5000);
+			mesh->velocity.z = mesh->right.z + (mesh->kinetic / 5000);
+		}
+		else if (mesh->velocity.y == 0)
+		{
 			mesh->velocity.x = 0;
-		if (mesh->velocity.y == 0)
 			mesh->velocity.z = 0;
+		}
 	}
 	last_frame = actual_frame;
 }

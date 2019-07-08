@@ -129,7 +129,7 @@ void		t_engine_handle_event(t_engine *engine)
 
 		cam = t_camera_list_get(engine->visual_engine->camera_list, 0);
 		if (cam->body == NULL)
-			link_t_camera_to_t_mesh(cam, t_engine_get_mesh(engine, 1), 100.0);
+			link_t_camera_to_t_mesh(cam, t_engine_get_mesh(engine, 6), 100.0);
 		else
 			link_t_camera_to_t_mesh(cam, NULL, 100.0);
 

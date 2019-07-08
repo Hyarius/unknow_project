@@ -34,7 +34,7 @@ void 		print_t_vector3(t_vector3 vector, char *str);
 t_vector3	substract_float_to_vector3(t_vector3 b, float a);
 t_vector3	add_float_to_vector3(t_vector3 b, float a);
 int			t_vector3_equal(t_vector3 a, t_vector3 b);
-float			t_vector3_length(t_vector3 a);
+float		t_vector3_length(t_vector3 a);
 
 typedef struct	s_vector2
 {
