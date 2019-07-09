@@ -138,3 +138,8 @@ void		t_engine_add_camera(t_engine *p_engine, t_camera new_camera)
 {
 	t_visual_engine_add_camera(p_engine->visual_engine, new_camera);
 }
+
+int			t_engine_return_mesh_len(t_engine *engine)
+{
+	return (engine->physic_engine->mesh_list->size);
+}
