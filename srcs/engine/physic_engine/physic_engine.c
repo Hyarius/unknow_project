@@ -65,22 +65,23 @@ void			test_move_axis(t_mesh *mesh, float *force, t_vector3 axis, t_mesh *target
 {
 	float	max;
 	int		subdivision;
+	int		i;
 	float	delta;
 
+	i = 0;
 	subdivision = 10;
 	delta = *force / subdivision;
 	max = *force;
 	*force = 0;
-	t_mesh_compute_next_vertices_in_world(mesh, axis);
-	while (*force != max && is_t_mesh_intersecting(mesh, target) == BOOL_FALSE)
+
+	while (i < subdivision && is_t_mesh_intersecting(mesh, target) == BOOL_FALSE)
 	{
+		i++;
 		*force += delta;
-		if (ft_abs_float(*force) >= max - EPSILON)
+		if (i == subdivision)
 			*force = max;
 		t_mesh_compute_next_vertices_in_world(mesh, axis);
 	}
-	if (is_t_mesh_intersecting(mesh, target) == BOOL_TRUE && *force != 0)
-		*force -= delta;
 }
 
 int				can_move(t_mesh *mesh, t_mesh_list *mesh_list)
@@ -101,6 +102,7 @@ int				can_move(t_mesh *mesh, t_mesh_list *mesh_list)
 		}
 		i++;
 	}
+	printf("Y = %f\n", mesh->pos.y);
 	return (BOOL_TRUE);
 }
 
