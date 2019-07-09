@@ -102,7 +102,6 @@ int				can_move(t_mesh *mesh, t_mesh_list *mesh_list)
 		}
 		i++;
 	}
-	printf("Y = %f\n", mesh->pos.y);
 	return (BOOL_TRUE);
 }
 

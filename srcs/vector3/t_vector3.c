@@ -25,7 +25,7 @@ t_vector3	*initialize_t_vector3(float p_x, float p_y, float p_z)
 
 void print_t_vector3(t_vector3 vector, char *str)
 {
-	printf("%s%0.4f / %0.4f / %0.4f\n", str, vector.x, vector.y, vector.z);
+	printf("%s : %0.4f / %0.4f / %0.4f\n", str, vector.x, vector.y, vector.z);
 }
 
 t_vector3	add_vector3_to_vector3(t_vector3 a,t_vector3 b)

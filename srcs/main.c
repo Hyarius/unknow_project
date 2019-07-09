@@ -5,41 +5,27 @@
 // 	if (argc != 1)
 // 		error_exit(-1, "Bad argument");
 
+
+
 // 	start_sdl(); //initialisation de la SDL
 
 // 	t_window *win;
 // 	win = initialize_t_window(argv[0], 1840, 1220);	//creation et initialisation de la window
-// 	int play = 0;
-// 	SDL_Event event;
 
-// 	t_vector3 point[4];
-// 	point[0] = create_t_vector3(300.0, 100.0, 0.0);
-// 	point[1] = create_t_vector3(100.0, 200.0, 0.0);
-// 	point[2] = create_t_vector3(300.0, 300.0, 0.0);
-// 	t_triangle triangle = create_t_triangle(convert_screen_to_opengl(win, point[0]), convert_screen_to_opengl(win, point[1]), convert_screen_to_opengl(win, point[2]));
+// 	t_vector3 p1 = create_t_vector3(0, 0, 0);
+// 	t_vector3 dir = create_t_vector3(100, 100, 0);
 
-// 	t_triangle uv_triangle = create_t_triangle(create_t_vector3(0, 0, 0), create_t_vector3(1, 0, 0), create_t_vector3(0, 1, 0));
-// 	t_texture *texture = png_load("ressources/assets/texture/cube_number.png");
-// 	t_uv uv = create_t_uv(uv_triangle, texture);
+// 	t_engine	*engine = initialize_t_engine(win);
+// 	resize_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 0)->view_port, create_t_vector2_int(2, 2));
 
-// 	t_color color = create_t_color(1.0, 0.0, 0.0, 1.0);
+// 	t_mesh mesh = create_primitive_cube(create_t_vector3(1.0, 1.0, 0.0), create_t_vector3(1.0, 1.0, 1.0), NULL, 100.0);
+// 	t_engine_add_mesh(engine, mesh);
 
-// 	while (play == 0)
-// 	{
-// 		prepare_screen(win, NULL, create_t_color(0.2, 0.2, 0.2, 1.0));
+// 	if (cast_ray(engine, p1, dir) == NULL)
+// 		printf("Miss\n");
+// 	else
+// 		printf("Hit\n");
 
-// 		test_draw(win, &triangle, &color);
-
-// 		render_screen(win, NULL);
-// 		if (SDL_PollEvent(&event) == 1)
-// 		{
-// 			if (event.type == SDL_QUIT)
-// 				play = 1;
-// 			if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
-// 				play = 1;
-// 		}
-
-// 	}
 // 	return (0);
 // }
 
@@ -101,10 +87,10 @@ int main(int argc, char **argv)
 	t_engine_add_mesh(engine, mesh);
 
 
+	t_camera *main_camera = t_camera_list_get(engine->visual_engine->camera_list, 0);
 
-
-	t_engine_place_camera(engine, 0, create_t_vector3(0, 6.0, -6.5));
-	t_camera_look_at_point(t_camera_list_get(engine->visual_engine->camera_list, 0), create_t_vector3(0, 0, 0));
+	t_engine_place_camera(engine, 0, create_t_vector3(0, 1.0, -16.5));
+	t_camera_look_at_point(main_camera, create_t_vector3(0, 0, 0));
 
 
 	// t_engine_add_camera(engine, create_t_camera(win, create_t_vector3(0.0, 11.0, 0.0), 70, create_t_vector2(NEAR, FAR)));
@@ -121,6 +107,12 @@ int main(int argc, char **argv)
 
 	while (engine->playing == 1)
 	{
+		t_mesh *target = cast_ray(engine, main_camera->pos, create_t_vector3(1, 0, 0));
+
+		if (target != NULL)
+		{
+			t_mesh_set_color(target, create_t_color(1, 0, 0, 1));
+		}
 		t_engine_apply_physic(engine);
 
 		t_engine_handle_camera(engine);
