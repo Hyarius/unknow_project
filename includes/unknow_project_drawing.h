@@ -30,11 +30,13 @@ void		draw_buffer_opengl(t_window *p_win, t_color *color_data);
 //			draw color cpu
 void 		draw_triangle_color_cpu(t_view_port *p_view_port, t_triangle *p_triangle, t_color *p_color);
 void		multithreading_draw_triangle_color_cpu(t_view_port *p_view_port, t_triangle_list *p_triangle_list, t_color_list *p_color_list);
+void    draw_rectangle_color_cpu(t_view_port *p_view_port, t_vector2 p_pos, t_vector2 size, t_color *p_color);
 
 //			draw_texture cpu
 void		draw_triangle_texture_cpu(t_view_port *p_view_port, t_triangle *p_triangle, t_uv *p_uv);
 void		*thread_draw_texture_cpu(void *void_list);
 void		multithreading_draw_triangle_texture_cpu(t_view_port *p_view_port, t_triangle_list *p_triangle_list, t_uv_list *p_uv_list);
+void    draw_rectangle_texture_cpu(t_view_port *p_view_port, t_vector2 p_pos, t_vector2 size, t_texture *p_texture);
 
 
 //			draw depth cpu
