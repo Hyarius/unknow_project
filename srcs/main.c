@@ -107,10 +107,10 @@ int main(int argc, char **argv)
 	t_camera_look_at_point(t_camera_list_get(engine->visual_engine->camera_list, 0), create_t_vector3(0, 0, 0));
 
 
-	t_engine_add_camera(engine, create_t_camera(win, create_t_vector3(0.0, 11.0, 0.0), 70, create_t_vector2(NEAR, FAR)));
-	resize_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 1)->view_port, create_t_vector2_int(400, 340));
-	move_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 1)->view_port, create_t_vector2_int(1440, 0));
-	t_camera_look_at_point(t_camera_list_get(engine->visual_engine->camera_list, 1), create_t_vector3(0, 0, 0));
+	// t_engine_add_camera(engine, create_t_camera(win, create_t_vector3(0.0, 11.0, 0.0), 70, create_t_vector2(NEAR, FAR)));
+	// resize_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 1)->view_port, create_t_vector2_int(400, 340));
+	// move_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 1)->view_port, create_t_vector2_int(1440, 0));
+	// t_camera_look_at_point(t_camera_list_get(engine->visual_engine->camera_list, 1), create_t_vector3(0, 0, 0));
 
 
 
@@ -121,8 +121,6 @@ int main(int argc, char **argv)
 
 	while (engine->playing == 1)
 	{
-		//t_mesh_rotate_around_point(t_engine_get_mesh(engine, 2), create_t_vector3(0, 2, 0), create_t_vector3(0, 0, 0));
-		//t_mesh_rotate_around_point(t_engine_get_mesh(engine, 3), create_t_vector3(0, 2, 0), create_t_vector3(0, 0, 0));
 		t_engine_apply_physic(engine);
 
 		t_engine_handle_camera(engine);

@@ -4,13 +4,11 @@ t_mesh			create_t_mesh(t_vector3 pos)
 {
 	t_mesh result;
 
-	result.camera = NULL;
-
 	result.pos = pos;
 	result.is_visible = BOOL_TRUE;
 	result.center = pos;
 	result.bubble_radius = 0.0;
-	result.velocity = create_t_vector3(0.0, 0.0, 0.0);
+
 	result.force = create_t_vector3(0.0, 0.0, 0.0);
 	result.kinetic = 0.0;
 
@@ -164,6 +162,7 @@ void			t_mesh_rotate_around_point(t_mesh *mesh, t_vector3 delta_angle, t_vector3
 		*target = mult_vector3_by_matrix(*target, translate);
 	}
 	t_mesh_compute_normals(mesh);
+	t_mesh_compute_bubble_box(mesh);
 }
 
 void			t_mesh_rotate(t_mesh *mesh, t_vector3 delta_angle)
@@ -180,6 +179,7 @@ void			t_mesh_rotate(t_mesh *mesh, t_vector3 delta_angle)
 		*target = mult_vector3_by_matrix(*target, rotation);
 	}
 	t_mesh_compute_normals(mesh);
+	t_mesh_compute_bubble_box(mesh);
 }
 
 void 			t_mesh_set_color(t_mesh *dest, t_color p_color)
@@ -198,30 +198,10 @@ void			t_mesh_move(t_mesh *dest, t_vector3 delta)
 	dest->center = add_vector3_to_vector3(dest->center, delta);
 }
 
-void			t_mesh_apply_velocity(t_mesh *dest)
-{
-	dest->pos = add_vector3_to_vector3(dest->pos, dest->velocity);
-	dest->center = add_vector3_to_vector3(dest->center, dest->velocity);
-	if (dest->camera != NULL)
-		translate_camera(dest->camera, dest->velocity);
-}
-
 void			t_mesh_apply_force(t_mesh *dest)
 {
 	dest->pos = add_vector3_to_vector3(dest->pos, dest->force);
 	dest->center = add_vector3_to_vector3(dest->center, dest->force);
-	if (dest->camera != NULL)
-		translate_camera(dest->camera, dest->force);
-}
-
-void			t_mesh_set_velocity(t_mesh *dest, t_vector3 new_velocity)
-{
-	dest->velocity = new_velocity;
-}
-
-void			t_mesh_add_velocity(t_mesh *dest, t_vector3 delta_velocity)
-{
-	dest->velocity = add_vector3_to_vector3(dest->velocity, delta_velocity);
 }
 
 void			t_mesh_set_force(t_mesh *dest, t_vector3 new_force)
@@ -232,16 +212,6 @@ void			t_mesh_set_force(t_mesh *dest, t_vector3 new_force)
 void			t_mesh_add_force(t_mesh *dest, t_vector3 delta_force)
 {
 	dest->force = add_vector3_to_vector3(dest->force, delta_force);
-}
-
-void			t_mesh_translate(t_mesh *dest, t_vector3 delta)
-{
-	dest->pos = add_vector3_to_vector3(dest->pos, mult_vector3_by_float(dest->forward, delta.x));
-	dest->pos = add_vector3_to_vector3(dest->pos, mult_vector3_by_float(dest->right, delta.z));
-	dest->pos = add_vector3_to_vector3(dest->pos, mult_vector3_by_float(dest->up, delta.y));
-	dest->center = add_vector3_to_vector3(dest->center, mult_vector3_by_float(dest->forward, delta.x));
-	dest->center = add_vector3_to_vector3(dest->center, mult_vector3_by_float(dest->right, delta.z));
-	dest->center = add_vector3_to_vector3(dest->center, mult_vector3_by_float(dest->up, delta.y));
 }
 
 void			t_mesh_activate_gravity(t_mesh *dest, float gravity)
@@ -274,16 +244,10 @@ void			t_mesh_compute_next_vertices_in_world(t_mesh *dest, t_vector3 axis)
 	int i = 0;
 
 	clean_t_vector3_list(dest->next_vertices_in_world);
-	next_pos = add_vector3_to_vector3(dest->pos, mult_vector3_by_vector3(add_vector3_to_vector3(dest->velocity, dest->force), axis));
+	next_pos = add_vector3_to_vector3(dest->pos, mult_vector3_by_vector3(dest->force, axis));
 	while (i < dest->vertices->size)
 	{
 		t_vector3_list_push_back(dest->next_vertices_in_world, add_vector3_to_vector3(t_vector3_list_at(dest->vertices, i), next_pos));
 		i++;
 	}
-}
-
-void			t_mesh_jump(t_mesh *body)
-{
-	if (body->velocity.y == 0)
-		body->velocity.y += 0.08;
 }

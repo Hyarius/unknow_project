@@ -6,7 +6,6 @@
 
 typedef struct		s_mesh
 {
-	struct s_camera	*camera;
 	t_vector3		pos;
 	t_vector3		center;
 	int				is_visible;
@@ -17,7 +16,6 @@ typedef struct		s_mesh
 	t_vector3		right;
 	t_vector3		up;
 
-	t_vector3		velocity; // related to kinetic
 	t_vector3		force; // related to kinetic
 	float			kinetic;
 
@@ -46,11 +44,8 @@ void			t_mesh_compute_normals(t_mesh *mesh);
 void			t_mesh_compute_bubble_box(t_mesh *mesh);
 
 void			t_mesh_move(t_mesh *dest, t_vector3 delta);
-void			t_mesh_apply_velocity(t_mesh *dest);
-void			t_mesh_add_velocity(t_mesh *dest, t_vector3 delta_velocity);
-void			t_mesh_set_velocity(t_mesh *dest, t_vector3 new_velocity);
-void			t_mesh_activate_gravity(t_mesh *dest, float gravity);
 
+void			t_mesh_activate_gravity(t_mesh *dest, float gravity);
 void			t_mesh_apply_force(t_mesh *dest);
 void			t_mesh_set_force(t_mesh *dest, t_vector3 new_force);
 void			t_mesh_add_force(t_mesh *dest, t_vector3 delta_force);
@@ -62,7 +57,6 @@ t_mesh			create_primitive_vertical_plane(t_vector3 pos, t_vector3 size, t_textur
 void			t_mesh_rotate(t_mesh *mesh, t_vector3 delta_angle);
 void			t_mesh_rotate_around_point(t_mesh *mesh, t_vector3 delta_angle, t_vector3 center);
 void			t_mesh_look_at(t_mesh *mesh);
-void			t_mesh_translate(t_mesh *dest, t_vector3 delta);
 
 void			t_mesh_set_visibility(t_mesh *dest, int new_state);
 void			t_mesh_compute_vertices_in_world(t_mesh *dest);
