@@ -294,4 +294,11 @@ void			clean_t_texture_list(t_texture_list *dest);
 t_texture		t_texture_list_at(t_texture_list *dest, int index);
 t_texture		*t_texture_list_get(t_texture_list *dest, int index);
 
+typedef struct			s_list_fd
+{
+	char				*rest;
+	int					fd;
+	struct s_list_fd	*next;
+}						t_list_fd;
+
 #endif

@@ -8,7 +8,7 @@
 # define BOOL_TRUE 1
 # define BOOL_FALSE 0
 
-# define BUFF_SIZE 1000
+# define BUFF_SIZE 2500
 
 # define FPS 60000
 # define PUSH_SIZE 200000

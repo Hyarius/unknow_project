@@ -64,7 +64,7 @@ int				can_move_axis(t_mesh *mesh, t_mesh *target, t_vector3 axis)
 int				can_fall(t_mesh *mesh, t_mesh_list *mesh_list)
 {
 	float	delta[3];
-	int subdivision;
+	int		subdivision;
 	t_mesh	*target;
 	int		i;
 
@@ -111,11 +111,11 @@ int				can_fall(t_mesh *mesh, t_mesh_list *mesh_list)
 int				can_move(t_mesh *mesh, t_mesh_list *mesh_list)
 {
 	float	delta[3];
-	int subdivision;
+	int		subdivision;
 	t_mesh	*target;
 	int		i;
 
-	subdivision = 10;
+	subdivision = 1000;
 	delta[0] = mesh->force.x / subdivision;
 	delta[1] = mesh->force.y / subdivision;
 	delta[2] = mesh->force.z / subdivision;
@@ -194,8 +194,14 @@ void			t_physic_engine_apply_velocity(t_physic_engine *physic_engine)
 		if (mesh->velocity.y != 0)
 		{
 			mesh->velocity.y -= (GRAVITY * mesh->kinetic * time_passed);
-			mesh->velocity.x = mesh->forward.x + (mesh->kinetic / 5000);
-			mesh->velocity.z = mesh->right.z + (mesh->kinetic / 5000);
+
+			// if (mesh->velocity.x > )
+			// mesh->velocity.x -= mesh->velocity.x * time_passed / 10;
+			// if (ft_abs_float(mesh->velocity.x) <= EPSILON)
+			// 	mesh->velocity.x = 0;
+			// mesh->velocity.z -= mesh->velocity.z * time_passed / 10;
+			// if (ft_abs_float(mesh->velocity.z) <= EPSILON)
+			// 	mesh->velocity.z = 0;
 		}
 		else if (mesh->velocity.y == 0)
 		{

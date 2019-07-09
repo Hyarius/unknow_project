@@ -28,4 +28,8 @@ int				max(int a, int b);
 float			float_min(float a, float b);
 float			float_max(float a, float b);
 
+int				get_next_line(const int fd, char **line);
+char			*ft_strcpy(char *dest, const char *str);
+char			*ft_strcat(char *dest, const char *src);
+
 #endif
