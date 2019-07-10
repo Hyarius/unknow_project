@@ -39,12 +39,10 @@ t_mesh_list		read_map_file(char *path)
 											ft_atof(line_split[10 + i]),
 											ft_atof(line_split[11 + i]));
 
-
 				if (ft_strcmp(line_split[7 + i], "NULL") != 0)
 					texture = png_load(line_split[7 + i]);
 				else if (ft_tablen(line_split) == 16 + i)
 					color = initialize_t_color(ft_atof(line_split[12 + i]), ft_atof(line_split[13 + i]), ft_atof(line_split[14 + i]), ft_atof(line_split[15 + i]));
-
 
 				if (ft_strcmp(line_split[0], "plane:") == 0)
 					mesh = create_primitive_plane(vector[0], vector[1], texture, ft_atof(line_split[8]));
