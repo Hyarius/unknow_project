@@ -82,14 +82,14 @@ int main(int argc, char **argv)
 	t_mesh_set_color(&mesh, create_t_color(0.4, 0.3, 0.3, 1.0));
 	t_engine_add_mesh(engine, mesh);
 
-	mesh = read_obj_file("pawn.obj", create_t_vector3(0.0, 0.1, 2.0), create_t_vector3(0.1, 0.11, 0.1), 10.0);
+	mesh = read_obj_file("pawn.obj", create_t_vector3(-3.0, 1.0, 2.0), create_t_vector3(0.1, 0.11, 0.1), 10.0);
 	t_mesh_set_color(&mesh, create_t_color(0.3, 0.3, 1.0, 1.0));
 	t_engine_add_mesh(engine, mesh);
 
 
 	t_camera *main_camera = t_camera_list_get(engine->visual_engine->camera_list, 0);
 
-	t_engine_place_camera(engine, 0, create_t_vector3(0, 1.0, -16.5));
+	t_engine_place_camera(engine, 0, create_t_vector3(0.0, 5.0, -10.5));
 	t_camera_look_at_point(main_camera, create_t_vector3(0, 0, 0));
 
 
@@ -105,24 +105,30 @@ int main(int argc, char **argv)
 	// move_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 2)->view_port, create_t_vector2_int(0, 0));
 	// t_camera_look_at_point(t_camera_list_get(engine->visual_engine->camera_list, 2), create_t_vector3(0, 0, 0));
 
+	t_mesh *target;
+
+	printf("nb of meshes = %d\n", t_engine_return_mesh_len(engine));
+
 	while (engine->playing == 1)
 	{
-		t_mesh *target = cast_ray(engine, main_camera->pos, create_t_vector3(1, 0, 0));
-
+		target = NULL;
+		target = cast_ray(engine, main_camera->pos, main_camera->forward);
 		if (target != NULL)
 		{
+			// printf("Object hit : \n");
 			t_mesh_set_color(target, create_t_color(1, 0, 0, 1));
 		}
 		t_engine_apply_physic(engine);
 
 		t_engine_handle_camera(engine);
 
-		prepare_screen(win, create_t_color(0.2f, 0.2f, 0.2f, 1.0f)); // refresh de l'ecran avec les couleurs par default
+		prepare_screen(win, create_t_color(0.2f, 0.2f, 0.2f, 1.0f)); // refresh de l'ecran avec les couleurs par defaut
 
 		t_engine_prepare_camera(engine);
 
 		t_engine_draw_mesh(engine, win);
 
+		// draw_rectangle_texture_cpu(main_camera->view_port, create_t_vector2(-1, 1), create_t_vector2(2, -2), texture);
 		t_engine_render_camera(engine);
 
 		render_screen(win); // affiche la fenetre
