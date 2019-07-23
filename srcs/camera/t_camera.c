@@ -100,7 +100,7 @@ void		t_camera_look_at(t_camera *cam) // calcul de l'angle de vue de la camera (
 						cos(degree_to_radius(cam->yaw) - 3.14f / 2.0f)));
 	t_vector3 yaxis = normalize_t_vector3(cross_t_vector3(xaxis, zaxis));
 
-	cam->forward = zaxis;
+	cam->forward = inv_t_vector3(zaxis);
 	cam->right = xaxis;
 	cam->up = inv_t_vector3(yaxis);
 }
@@ -108,11 +108,8 @@ void		t_camera_look_at(t_camera *cam) // calcul de l'angle de vue de la camera (
 t_matrix	t_camera_compute_view(t_camera *cam) //calcul de la matrice de vue
 {
 	t_matrix	result;
-	t_vector3	inv_forward;
 
 	result = create_t_matrix();
-
-	inv_forward = mult_vector3_by_vector3(cam->forward, create_t_vector3(-1, -1, -1));
 
 	result.value[0][0] = cam->right.x;
 	result.value[1][0] = cam->right.y;
@@ -124,10 +121,10 @@ t_matrix	t_camera_compute_view(t_camera *cam) //calcul de la matrice de vue
 	result.value[2][1] = cam->up.z;
 	result.value[3][1] = - (dot_t_vector3(cam->up, cam->pos));
 
-	result.value[0][2] = inv_forward.x;
-	result.value[1][2] = inv_forward.y;
-	result.value[2][2] = inv_forward.z;
-	result.value[3][2] = - (dot_t_vector3(inv_forward, cam->pos));
+	result.value[0][2] = cam->forward.x;
+	result.value[1][2] = cam->forward.y;
+	result.value[2][2] = cam->forward.z;
+	result.value[3][2] = -(dot_t_vector3(cam->forward, cam->pos));
 
 	return (result);
 }
@@ -212,10 +209,10 @@ void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard)
 	if (get_key_state(p_keyboard, SDL_SCANCODE_S) == 1)
 	{
 		tmp = create_t_vector3(camera->speed / camera->slowing, 0.0, camera->speed / camera->slowing);
-		mouvement = add_vector3_to_vector3(mult_vector3_by_vector3(normalize_t_vector3(mult_vector3_by_vector3(camera->forward, create_t_vector3(1.0, 0.0, 1.0))), tmp), mouvement);
+		mouvement = add_vector3_to_vector3(mult_vector3_by_vector3(normalize_t_vector3(mult_vector3_by_vector3(camera->forward, create_t_vector3(-1.0, 0.0, -1.0))), tmp), mouvement);
 	}
 	if (get_key_state(p_keyboard, SDL_SCANCODE_W) == 1)
-		mouvement = add_vector3_to_vector3(mult_vector3_by_vector3(normalize_t_vector3(mult_vector3_by_vector3(camera->forward, create_t_vector3(-1.0, 0.0, -1.0))), tmp), mouvement);
+		mouvement = add_vector3_to_vector3(mult_vector3_by_vector3(normalize_t_vector3(mult_vector3_by_vector3(camera->forward, create_t_vector3(1.0, 0.0, 1.0))), tmp), mouvement);
 	if (get_key_state(p_keyboard, SDL_SCANCODE_D) == 1)
 		mouvement = add_vector3_to_vector3(mult_vector3_by_vector3(inv_t_vector3(camera->right), tmp), mouvement);
 	if (get_key_state(p_keyboard, SDL_SCANCODE_A) == 1)

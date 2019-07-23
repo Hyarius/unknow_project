@@ -119,8 +119,13 @@ void	multithreading_draw_triangle_color_cpu(t_view_port *p_view_port, t_triangle
 	}
 }
 
-void    draw_rectangle_color_cpu(t_view_port *p_view_port, t_vector2 p_pos, t_vector2 size, t_color *p_color)
+void    draw_rectangle_color_cpu(t_view_port *p_view_port, t_rectangle p_rec, t_color *p_color)
 {
-	draw_triangle_color_cpu(p_view_port, initialize_t_triangle(create_t_vector3(p_pos.x, p_pos.y, 0.0), create_t_vector3(p_pos.x + size.x, p_pos.y, 0.0), create_t_vector3(p_pos.x, p_pos.y + size.y, 0.0)), p_color);
-	draw_triangle_color_cpu(p_view_port, initialize_t_triangle(create_t_vector3(p_pos.x + size.x, p_pos.y + size.y, 0.0), create_t_vector3(p_pos.x + size.x, p_pos.y, 0.0), create_t_vector3(p_pos.x, p_pos.y + size.y, 0.0)), p_color);
+	draw_triangle_color_cpu(p_view_port, initialize_t_triangle(create_t_vector3(p_rec.pos.x, p_rec.pos.y, 0.0),
+										create_t_vector3(p_rec.pos.x + p_rec.size.x, p_rec.pos.y, 0.0),
+										create_t_vector3(p_rec.pos.x, p_rec.pos.y + p_rec.size.y, 0.0)), p_color);
+
+	draw_triangle_color_cpu(p_view_port, initialize_t_triangle(create_t_vector3(p_rec.pos.x + p_rec.size.x, p_rec.pos.y + p_rec.size.y, 0.0),
+										create_t_vector3(p_rec.pos.x + p_rec.size.x, p_rec.pos.y, 0.0),
+										create_t_vector3(p_rec.pos.x, p_rec.pos.y + p_rec.size.y, 0.0)), p_color);
 }

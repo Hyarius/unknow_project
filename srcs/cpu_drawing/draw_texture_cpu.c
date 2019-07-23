@@ -2,7 +2,6 @@
 
 void	draw_triangle_texture_cpu(t_view_port *p_view_port, t_triangle *p_triangle, t_uv *p_uv)
 {
-	t_color red = create_t_color(1.0, 0.0, 0.0, 1.0);
 	t_texture		*texture;
 	t_triangle		triangle;
 	t_vector3		min;
@@ -54,7 +53,6 @@ void	draw_triangle_texture_cpu(t_view_port *p_view_port, t_triangle *p_triangle,
 	if (max.y >= p_view_port->size.y)
 		max.y = p_view_port->size.y - 1;
 
-	int truc = 0;
 	current = min;
 	while (current.y <= max.y)
 	{
@@ -83,7 +81,6 @@ void	draw_triangle_texture_cpu(t_view_port *p_view_port, t_triangle *p_triangle,
 					color = get_pixel_color(texture, (int)(pixel.x - EPSILON), (int)(pixel.y - EPSILON));
 					draw_pixel(p_view_port->window, (int)(current.x), (int)(current.y), color);
 					p_view_port->depth_buffer[pixel_index] = z;
-					truc++;
 				}
 			}
 			current.x++;
@@ -159,10 +156,15 @@ void	multithreading_draw_triangle_texture_cpu(t_view_port *p_view_port, t_triang
 	}
 }
 
-void    draw_rectangle_texture_cpu(t_view_port *p_view_port, t_vector2 p_pos, t_vector2 size, t_texture *p_texture)
+void    draw_rectangle_texture_cpu(t_view_port *p_view_port, t_rectangle p_rec, t_texture *p_texture)
 {
-	draw_triangle_texture_cpu(p_view_port, initialize_t_triangle(create_t_vector3(p_pos.x, p_pos.y, 0.0), create_t_vector3(p_pos.x + size.x, p_pos.y, 0.0), create_t_vector3(p_pos.x, p_pos.y + size.y, 0.0)),
-													initialize_t_uv(create_t_triangle(create_t_vector3(0, 0, 0), create_t_vector3(1, 0, 0), create_t_vector3(0, 1, 0)), p_texture));
-	draw_triangle_texture_cpu(p_view_port, initialize_t_triangle(create_t_vector3(p_pos.x + size.x, p_pos.y + size.y, 0.0), create_t_vector3(p_pos.x + size.x, p_pos.y, 0.0), create_t_vector3(p_pos.x, p_pos.y + size.y, 0.0)),
-													initialize_t_uv(create_t_triangle(create_t_vector3(1, 1, 0), create_t_vector3(1, 0, 0), create_t_vector3(0, 1, 0)), p_texture));
+	draw_triangle_texture_cpu(p_view_port, initialize_t_triangle(create_t_vector3(p_rec.pos.x, p_rec.pos.y, 0.0),
+										create_t_vector3(p_rec.pos.x + p_rec.size.x, p_rec.pos.y, 0.0),
+										create_t_vector3(p_rec.pos.x, p_rec.pos.y + p_rec.size.y, 0.0)),
+										initialize_t_uv(create_t_triangle(create_t_vector3(0, 0, 0), create_t_vector3(1, 0, 0), create_t_vector3(0, 1, 0)), p_texture));
+
+	draw_triangle_texture_cpu(p_view_port, initialize_t_triangle(create_t_vector3(p_rec.pos.x + p_rec.size.x, p_rec.pos.y + p_rec.size.y, 0.0),
+										create_t_vector3(p_rec.pos.x + p_rec.size.x, p_rec.pos.y, 0.0),
+										create_t_vector3(p_rec.pos.x, p_rec.pos.y + p_rec.size.y, 0.0)),
+										initialize_t_uv(create_t_triangle(create_t_vector3(1, 1, 0), create_t_vector3(1, 0, 0), create_t_vector3(0, 1, 0)), p_texture));
 }

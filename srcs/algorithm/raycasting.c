@@ -109,29 +109,24 @@ t_mesh	*cast_ray(t_engine *engine, t_vector3 pos, t_vector3 direction)
 	t_face		*face;
 
 	i = 0;
-	direction = divide_vector3_by_float(direction, subdivision);
 	direction = normalize_t_vector3(direction);
+	direction = divide_vector3_by_float(direction, subdivision);
 	while (i < FAR * subdivision)
 	{
 		j = 0;
 		dest_pos = add_vector3_to_vector3(pos, direction);
-		// print_t_vector3(pos, "--------\npos");
-		// print_t_vector3(direction, "dir");
-		// print_t_vector3(dest_pos, "dest_pos");
 		while (j < t_engine_return_mesh_len(engine))
 		{
 			k = 0;
 			mesh = t_engine_get_mesh(engine, j);
 			line = create_t_line(pos, dest_pos);
+			t_mesh_set_color(mesh, create_t_color(1, 0, 0, 1));
 			while (k < mesh->faces->size)
 			{
 				face = t_face_list_get(mesh->faces, k);
 				triangle = compose_t_triangle_from_t_mesh(mesh, face->index_vertices);
 				if (intersect_triangle_by_segment(triangle, face->normale, line, &intersection) == BOOL_TRUE)
-				{
-					printf("HIT : %d\n", j);
 					return (mesh);
-				}
 				k++;
 			}
 			j++;

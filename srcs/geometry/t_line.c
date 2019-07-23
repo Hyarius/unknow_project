@@ -21,3 +21,10 @@ t_line		*initialize_t_line(t_vector3 p_a, t_vector3 p_b)
 
 	return (result);
 }
+
+void print_t_line(t_line line, char *str)
+{
+	printf("Line : %s\n", str);
+	print_t_vector3(line.a, "Point A");
+	print_t_vector3(line.b, "Point B");
+}

@@ -1,8 +1,10 @@
 #include "unknow_project.h"
 
-t_mesh			create_t_mesh(t_vector3 pos)
+t_mesh			create_t_mesh(t_vector3 pos, char *name)
 {
-	t_mesh result;
+	t_mesh		result;
+	static int	num = 1;
+	char		*str;
 
 	result.pos = pos;
 	result.is_visible = BOOL_TRUE;
@@ -24,6 +26,16 @@ t_mesh			create_t_mesh(t_vector3 pos)
 	result.faces = initialize_t_face_list();
 	result.normales = initialize_t_vector3_list();
 
+	if (name != NULL)
+		result.name = name;
+	else
+	{
+		str = ft_strnew(ft_strlen("Mesh ") + ft_strlen(ft_itoa(num)));
+		str = ft_strcpy(str, "Mesh ");
+		str = ft_strcat(str, ft_itoa(num++));
+		result.name = str;
+	}
+	printf("Mesh name = %s\n", result.name);
 	t_mesh_look_at(&result);
 
 	return (result);
@@ -36,7 +48,7 @@ t_mesh			*initialize_t_mesh(t_vector3 pos)
 	if (!(result = (t_mesh *)malloc(sizeof(t_mesh))))
 		error_exit(-13, "Can't create a t_mesh array");
 
-	*result = create_t_mesh(pos);
+	*result = create_t_mesh(pos, NULL);
 
 	return(result);
 }

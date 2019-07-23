@@ -1,12 +1,12 @@
 #include "unknow_project.h"
 
-t_mesh		create_primitive_cube(t_vector3 pos, t_vector3 size, t_texture *p_texture, float gravity)
+t_mesh		create_primitive_cube(t_vector3 pos, t_vector3 size, t_texture *p_texture, float gravity, char *name)
 {
 	t_mesh 	result;
 	t_face	tmp_face1;
 	t_face	tmp_face2;
 
-	result = create_t_mesh(pos);
+	result = create_t_mesh(pos, name);
 
 	t_mesh_activate_gravity(&result, gravity);
 
@@ -100,7 +100,7 @@ t_mesh		create_primitive_plane(t_vector3 pos, t_vector3 size, t_texture *p_textu
 	t_face	tmp_face1;
 	t_face	tmp_face2;
 
-	result = create_t_mesh(pos);
+	result = create_t_mesh(pos, NULL);
 
 	t_mesh_activate_gravity(&result, gravity);
 
@@ -139,7 +139,7 @@ t_mesh		create_primitive_vertical_plane(t_vector3 pos, t_vector3 size, t_texture
 	t_face	tmp_face1;
 	t_face	tmp_face2;
 
-	result = create_t_mesh(pos);
+	result = create_t_mesh(pos, NULL);
 
 	t_mesh_activate_gravity(&result, gravity);
 
