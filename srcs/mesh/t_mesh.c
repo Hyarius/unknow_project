@@ -35,9 +35,7 @@ t_mesh			create_t_mesh(t_vector3 pos, char *name)
 		str = ft_strcat(str, ft_itoa(num++));
 		result.name = str;
 	}
-	printf("Mesh name = %s\n", result.name);
 	t_mesh_look_at(&result);
-
 	return (result);
 }
 

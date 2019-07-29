@@ -55,6 +55,7 @@ void			t_mesh_add_force(t_mesh *dest, t_vector3 delta_force);
 t_mesh			create_primitive_cube(t_vector3 coord, t_vector3 size, t_texture *texture, float gravity, char *name);
 t_mesh			create_primitive_plane(t_vector3 pos, t_vector3 size, t_texture *texture, float gravity);
 t_mesh			create_primitive_vertical_plane(t_vector3 pos, t_vector3 size, t_texture *p_texture, float gravity);
+t_mesh			create_primitive_skybox(t_vector3 pos, t_vector3 size, t_texture *p_texture);
 
 void			t_mesh_rotate(t_mesh *mesh, t_vector3 delta_angle);
 void			t_mesh_rotate_around_point(t_mesh *mesh, t_vector3 delta_angle, t_vector3 center);
