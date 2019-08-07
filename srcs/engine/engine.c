@@ -4,7 +4,7 @@ t_engine	create_t_engine(t_window *p_window)
 {
 	t_engine	result;
 
-	result.playing = BOOL_TRUE;
+	result.playing = 2;
 	result.visual_engine = initialize_t_visual_engine(p_window);
 	result.physic_engine = initialize_t_physic_engine();
 	result.user_engine = initialize_t_user_engine();
@@ -60,7 +60,7 @@ void		t_engine_add_mesh(t_engine *engine, t_mesh p_mesh)
 	t_physic_engine_add_mesh(engine->physic_engine, p_mesh);
 }
 
-void		t_engine_handle_event(t_engine *engine, t_gui *gui, t_engine *engine)
+void		t_engine_handle_event(t_camera *main_camera, t_gui *gui, t_engine *engine)
 {
 	static float size = 0.45;
 	t_mesh	*mesh;
