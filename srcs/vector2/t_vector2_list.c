@@ -70,14 +70,14 @@ void	t_vector2_list_add_back(t_vector2_list *dest, t_vector2 *to_add)
 	dest->size++;
 }
 
-void	free_t_vector2_list(t_vector2_list dest)
+void	delete_t_vector2_list(t_vector2_list dest)
 {
 	free(dest.vector);
 }
 
-void	delete_t_vector2_list(t_vector2_list *dest)
+void	free_t_vector2_list(t_vector2_list *dest)
 {
-	free_t_vector2_list(*dest);
+	delete_t_vector2_list(*dest);
 	free(dest);
 }
 

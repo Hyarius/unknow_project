@@ -24,22 +24,24 @@ t_engine	*initialize_t_engine(t_window *p_window)
 	return (result);
 }
 
-void		free_t_engine(t_engine dest)
+void		delete_t_engine(t_engine dest)
 {
-	delete_t_physic_engine(dest.physic_engine);
-	delete_t_user_engine(dest.user_engine);
-	delete_t_visual_engine(dest.visual_engine);
+	free_t_physic_engine(dest.physic_engine);
+	free_t_user_engine(dest.user_engine);
+	free_t_visual_engine(dest.visual_engine);
 }
 
-void		delete_t_engine(t_engine *dest)
+void		free_t_engine(t_engine *dest)
 {
-	free_t_engine(*dest);
+	delete_t_engine(*dest);
 	free(dest);
 }
 
 void		t_engine_handle_camera(t_engine *p_engine)
 {
-	t_user_engine_handle_camera(p_engine->user_engine, t_visual_engine_get_main_camera(p_engine->visual_engine));
+	t_user_engine_handle_camera(p_engine->user_engine,
+								t_visual_engine_get_main_camera(p_engine->visual_engine),
+								p_engine->physic_engine);
 }
 
 void		t_engine_draw_mesh(t_engine *p_engine, t_window *p_win)
@@ -90,6 +92,19 @@ void		t_engine_handle_event(t_engine *engine)
 		reset_key_state(engine->user_engine->keyboard, SDL_SCANCODE_R);
 		size += 0.2;
 	}
+	if (get_key_state(engine->user_engine->keyboard, SDL_SCANCODE_C) == 1)
+	{
+		t_camera *cam;
+
+ 		cam = t_camera_list_get(engine->visual_engine->camera_list, 0);
+		if (cam->body == NULL)
+			link_t_camera_to_t_mesh(cam, t_engine_get_mesh(engine, 6), 100.0);
+		else
+			link_t_camera_to_t_mesh(cam, NULL, 100.0);
+
+ 		reset_key_state(engine->user_engine->keyboard, SDL_SCANCODE_C);
+
+ 	}
 	if (get_key_state(engine->user_engine->keyboard, SDL_SCANCODE_T) == 1)
 	{
 		size -= 0.2;

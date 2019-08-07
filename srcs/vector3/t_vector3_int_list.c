@@ -71,14 +71,14 @@ void	t_vector3_int_list_add_back(t_vector3_int_list *dest, t_vector3_int *to_add
 	dest->size++;
 }
 
-void	free_t_vector3_int_list(t_vector3_int_list dest)
+void	delete_t_vector3_int_list(t_vector3_int_list dest)
 {
 	free(dest.vector);
 }
 
-void	delete_t_vector3_int_list(t_vector3_int_list *dest)
+void	free_t_vector3_int_list(t_vector3_int_list *dest)
 {
-	free_t_vector3_int_list(*dest);
+	delete_t_vector3_int_list(*dest);
 	free(dest);
 }
 

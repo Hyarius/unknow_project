@@ -49,16 +49,22 @@ void			t_mesh_list_push_back(t_mesh_list *dest, t_mesh to_add)
 void			t_mesh_list_erase(t_mesh_list *dest, int index)
 {
 
+	delete_t_mesh(t_mesh_list_get(dest, index));
+	while (index < dest->size)
+	{
+		dest[index + 1] = dest[index];
+		index++;
+	}
 }
 
-void			free_t_mesh_list(t_mesh_list dest)
+void			delete_t_mesh_list(t_mesh_list dest)
 {
 	free(dest.mesh);
 }
 
-void			delete_t_mesh_list(t_mesh_list *dest)
+void			free_t_mesh_list(t_mesh_list *dest)
 {
-	free_t_mesh_list(*dest);
+	delete_t_mesh_list(*dest);
 	free(dest);
 }
 

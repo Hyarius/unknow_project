@@ -22,14 +22,14 @@ t_physic_engine	*initialize_t_physic_engine()
 	return (result);
 }
 
-void			free_t_physic_engine(t_physic_engine dest)
+void			delete_t_physic_engine(t_physic_engine dest)
 {
-	delete_t_mesh_list(dest.mesh_list);
+	free_t_mesh_list(dest.mesh_list);
 }
 
-void			delete_t_physic_engine(t_physic_engine *dest)
+void			free_t_physic_engine(t_physic_engine *dest)
 {
-	free_t_physic_engine(*dest);
+	delete_t_physic_engine(*dest);
 	free(dest);
 }
 
@@ -86,9 +86,15 @@ void			test_move_axis(t_mesh *mesh, float *force, t_vector3 axis, t_mesh *target
 
 int				can_move(t_mesh *mesh, t_mesh_list *mesh_list)
 {
+	float	delta[3];
+	int subdivision;
 	t_mesh	*target;
 	int		i;
 
+	subdivision = 10;
+	delta[0] = mesh->force.x / subdivision;
+	delta[1] = mesh->force.y / subdivision;
+	delta[2] = mesh->force.z / subdivision;
 	//printf("Delta %f - %f - %f\n", delta[0], delta[1], delta[2]);
 	i = 0;
 	while (i < mesh_list->size)
@@ -96,9 +102,30 @@ int				can_move(t_mesh *mesh, t_mesh_list *mesh_list)
 		target = t_mesh_list_get(mesh_list, i);
 		if (mesh != target && target->bubble_radius + mesh->bubble_radius >= calc_dist_vector3_to_vector3(mesh->center, target->center))
 		{
-			test_move_axis(mesh, &(mesh->force.x), create_t_vector3(1, 0, 0), target);
-			test_move_axis(mesh, &(mesh->force.y), create_t_vector3(0, 1, 0), target);
-			test_move_axis(mesh, &(mesh->force.z), create_t_vector3(0, 0, 1), target);
+			t_mesh_compute_next_vertices_in_world(mesh, create_t_vector3(1, 0, 0));
+			while (mesh->force.x != 0 && is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
+			{
+				mesh->force.x -= delta[0];
+				if (ft_abs_float(mesh->force.x) <= EPSILON)
+					mesh->force.x = 0;
+				t_mesh_compute_next_vertices_in_world(mesh, create_t_vector3(1, 0, 0));
+			}
+			t_mesh_compute_next_vertices_in_world(mesh, create_t_vector3(0, 1, 0));
+			while (mesh->force.y != 0 && is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
+			{
+				mesh->force.y -= delta[1];
+				if (ft_abs_float(mesh->force.y) <= EPSILON)
+					mesh->force.y = 0;
+				t_mesh_compute_next_vertices_in_world(mesh, create_t_vector3(0, 1, 0));
+			}
+			t_mesh_compute_next_vertices_in_world(mesh, create_t_vector3(0, 0, 1));
+			while (mesh->force.z != 0 && is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
+			{
+				mesh->force.z -= delta[2];
+				if (ft_abs_float(mesh->force.z) <= EPSILON)
+					mesh->force.z = 0;
+				t_mesh_compute_next_vertices_in_world(mesh, create_t_vector3(0, 0, 1));
+			}
 		}
 		i++;
 	}

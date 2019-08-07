@@ -72,14 +72,14 @@ void	t_color_list_add_back(t_color_list *dest, t_color *to_add)
 	(dest->size)++;
 }
 
-void	free_t_color_list(t_color_list dest)
+void	delete_t_color_list(t_color_list dest)
 {
 	free(dest.color);
 }
 
-void	delete_t_color_list(t_color_list *dest)
+void	free_t_color_list(t_color_list *dest)
 {
-	free_t_color_list(*dest);
+	delete_t_color_list(*dest);
 	free(dest);
 }
 

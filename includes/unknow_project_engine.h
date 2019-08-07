@@ -18,8 +18,8 @@ typedef struct	s_engine
 
 t_engine	create_t_engine(t_window *p_window);
 t_engine	*initialize_t_engine(t_window *p_window);
-void		free_t_engine(t_engine dest);
-void		delete_t_engine(t_engine *dest);
+void		delete_t_engine(t_engine dest);
+void		free_t_engine(t_engine *dest);
 void		t_engine_add_mesh(t_engine *engine, t_mesh p_mesh);
 t_mesh		*t_engine_get_mesh(t_engine *p_engine, int index);
 

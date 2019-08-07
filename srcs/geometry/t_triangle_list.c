@@ -71,14 +71,14 @@ void	t_triangle_list_add_back(t_triangle_list *dest, t_triangle *to_add)
 	dest->size++;
 }
 
-void	free_t_triangle_list(t_triangle_list dest)
+void	delete_t_triangle_list(t_triangle_list dest)
 {
 	free(dest.triangle);
 }
 
-void	delete_t_triangle_list(t_triangle_list *dest)
+void	free_t_triangle_list(t_triangle_list *dest)
 {
-	free_t_triangle_list(*dest);
+	delete_t_triangle_list(*dest);
 	free(dest);
 }
 

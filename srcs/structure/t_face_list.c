@@ -75,14 +75,14 @@ void	t_face_list_add_back(t_face_list *dest, t_face *to_add)
 	(dest->size)++;
 }
 
-void	free_t_face_list(t_face_list dest)
+void	delete_t_face_list(t_face_list dest)
 {
 	free(dest.face);
 }
 
-void	delete_t_face_list(t_face_list *dest)
+void	free_t_face_list(t_face_list *dest)
 {
-	free_t_face_list(*dest);
+	delete_t_face_list(*dest);
 	free(dest);
 }
 

@@ -26,6 +26,7 @@ t_mesh	*cast_ray(t_engine *engine, t_vector3 pos, t_vector3 direction)
 			mesh = t_engine_get_mesh(engine, j);
 			line = create_t_line(pos, add_vector3_to_vector3(pos, direction));
 			t_mesh_set_color(mesh, create_t_color(1, 0, 0, 1));
+			// t_mesh_set_visibility(mesh, 1);
 			while (k < mesh->faces->size)
 			{
 				// face = t_face_list_get(mesh->faces, k);

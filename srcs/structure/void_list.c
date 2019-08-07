@@ -64,16 +64,16 @@ void	t_void_list_push_back(t_void_list *dest, void * to_add)
 	dest->size++;
 }
 
-void	free_t_void_list(t_void_list dest)
+void	delete_t_void_list(t_void_list dest)
 {
 	free(dest.data);
 	dest.data = NULL;
 	dest.size = 0;
 }
 
-void	delete_t_void_list(t_void_list *dest)
+void	free_t_void_list(t_void_list *dest)
 {
-	free_t_void_list(*dest);
+	delete_t_void_list(*dest);
 	free(dest);
 }
 
