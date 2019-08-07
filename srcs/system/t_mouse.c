@@ -48,6 +48,13 @@ void			get_t_mouse_info(t_mouse *mouse) //recuperation des informationd e la sou
 
 }
 
+int				get_mouse_state(t_mouse *mouse, int type)
+{
+	if (type < 0 || type > 3)
+		return (-1);
+	return (mouse->button[type]);
+}
+
 void			print_t_mouse(t_mouse *mouse) // affiche les infos de la souris
 {
 	char		*button_text[] = {

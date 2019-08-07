@@ -56,7 +56,10 @@ t_color	fuze_t_color(t_color src1, t_color src2)
 	result.r = src2.r * base_alpha + inv_alpha * src1.r;
 	result.g = src2.g * base_alpha + inv_alpha * src1.g;
 	result.b = src2.b * base_alpha + inv_alpha * src1.b;
-	result.a = src2.a * base_alpha + inv_alpha * src1.a;
+	if (src1.a == 1)
+		result.a = 1.0f;
+	else
+		result.a = src2.a * base_alpha + inv_alpha * src1.a;
 
 	return (result);
 }

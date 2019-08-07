@@ -60,12 +60,13 @@ void		t_engine_add_mesh(t_engine *engine, t_mesh p_mesh)
 	t_physic_engine_add_mesh(engine->physic_engine, p_mesh);
 }
 
-void		t_engine_handle_event(t_engine *engine)
+void		t_engine_handle_event(t_engine *engine, t_gui *gui, t_engine *engine)
 {
 	static float size = 0.45;
 	t_mesh	*mesh;
 	int		i;
 
+	t_user_engine_handle_menu(main_camera, gui, engine->user_engine, &(engine->playing));
 	if (t_user_engine_poll_event(engine->user_engine) > 0)
 	{
 		t_user_engine_handle_quit(engine->user_engine, &(engine->playing));
@@ -83,22 +84,22 @@ void		t_engine_handle_event(t_engine *engine)
 			}
 		}
 	}
-	if (get_key_state(engine->user_engine->keyboard, SDL_SCANCODE_R) == 1)
-	{
-		printf("Size increased !\n");
-
-		reset_key_state(engine->user_engine->keyboard, SDL_SCANCODE_R);
-		size += 0.2;
-	}
-	if (get_key_state(engine->user_engine->keyboard, SDL_SCANCODE_T) == 1)
-	{
-		size -= 0.2;
-		if (size <= 0.2)
-			size = 0.2;
-		printf("Size decreased !\n");
-
-		reset_key_state(engine->user_engine->keyboard, SDL_SCANCODE_T);
-	}
+	// if (get_key_state(engine->user_engine->keyboard, SDL_SCANCODE_R) == 1)
+	// {
+	// 	printf("Size increased !\n");
+	//
+	// 	reset_key_state(engine->user_engine->keyboard, SDL_SCANCODE_R);
+	// 	size += 0.2;
+	// }
+	// if (get_key_state(engine->user_engine->keyboard, SDL_SCANCODE_T) == 1)
+	// {
+	// 	size -= 0.2;
+	// 	if (size <= 0.2)
+	// 		size = 0.2;
+	// 	printf("Size decreased !\n");
+	//
+	// 	reset_key_state(engine->user_engine->keyboard, SDL_SCANCODE_T);
+	// }
 }
 
 
