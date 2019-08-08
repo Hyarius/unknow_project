@@ -100,7 +100,12 @@ int main(int argc, char **argv)
 		prepare_screen(win, create_t_color(0.2f, 0.2f, 0.2f, 1.0f));
 		t_engine_prepare_camera(engine);
 
-
+		if (engine->playing <= -1)
+		{
+			t_engine_draw_mesh(engine, win);
+			t_engine_render_camera(engine);
+			drawing_front_pause(main_camera, gui);
+		}
 		if (engine->playing == 2)
 		{
 			draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->menu[0]);
@@ -135,7 +140,7 @@ int main(int argc, char **argv)
 			drawing_front_hp(main_camera, gui);
 			drawing_front_mun(main_camera, gui, texture2);
 			draw_minimap(main_camera, engine, win, texture);
-			print_texte(main_camera, gui);
+			print_info_bar(main_camera, gui);
 		}
 
 		t_engine_handle_event(main_camera, gui, engine);

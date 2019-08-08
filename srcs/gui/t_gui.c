@@ -87,7 +87,7 @@ void	print_letter(t_camera *main_camera, t_gui *gui, char *str, t_rectangle rec)
 	draw_buffer_opengl(main_camera->view_port->window, main_camera->view_port->window->color_data);
 }
 
-void	print_texte(t_camera *main_camera, t_gui *gui)
+void	print_info_bar(t_camera *main_camera, t_gui *gui)
 {
 	char	*str;
 

@@ -25,6 +25,7 @@ int			get_mouse_state(t_mouse *mouse, int type);
 typedef struct	s_keyboard
 {
 	int			key[232];
+	char		clicked;
 	const Uint8	*state; //a ne pas free, ca appartient a sdl2
 						//	!!! DANGER SI FREE DU STATE !!!
 }				t_keyboard;
