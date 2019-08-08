@@ -92,7 +92,7 @@ void		t_engine_handle_event(t_engine *engine)
 		reset_key_state(engine->user_engine->keyboard, SDL_SCANCODE_R);
 		size += 0.2;
 	}
-	if (get_key_state(engine->user_engine->keyboard, SDL_SCANCODE_C) == 1)
+	if (get_key_state(engine->user_engine->keyboard, SDL_SCANCODE_C) == 1) // a supprimer
 	{
 		t_camera *cam;
 

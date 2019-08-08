@@ -140,6 +140,7 @@ int main(int argc, char **argv)
 	// t_engine_add_mesh(engine, mesh);
 	// mesh = create_primitive_skybox(main_camera->pos, create_t_vector3(1.0, 1.0, 1.0), texture);
 	// t_mesh_set_color(&mesh, create_t_color(0.0, 1.0, 0.0, 0.5));
+	link_t_camera_to_t_mesh(main_camera, t_engine_get_mesh(engine, 6), 100.0);
 
 	while (engine->playing == 1)
 	{
