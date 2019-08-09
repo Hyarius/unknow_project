@@ -221,28 +221,28 @@ void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard,
 
 	mouvement = create_t_vector3(0, 0, 0);
 
-	if (get_key_state(p_keyboard, SDL_SCANCODE_LSHIFT) == 0)
+	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_LSHIFT]) == 0)
 		tmp = create_t_vector3(camera->speed, 0.0, camera->speed);
 	else
 		tmp = create_t_vector3(camera->speed * camera->running, 0.0, camera->speed * camera->running);
-	if (get_key_state(p_keyboard, SDL_SCANCODE_S) == 1)
+	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_S]) == 1)
 	{
 		tmp = create_t_vector3(camera->speed / camera->slowing, 0.0, camera->speed / camera->slowing);
 		mouvement = add_vector3_to_vector3(mult_vector3_by_vector3(normalize_t_vector3(mult_vector3_by_vector3(camera->forward, create_t_vector3(-1.0, 0.0, -1.0))), tmp), mouvement);
 	}
-	if (get_key_state(p_keyboard, SDL_SCANCODE_W) == 1)
+	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_W]) == 1)
 		mouvement = add_vector3_to_vector3(mult_vector3_by_vector3(normalize_t_vector3(mult_vector3_by_vector3(camera->forward, create_t_vector3(1.0, 0.0, 1.0))), tmp), mouvement);
-	if (get_key_state(p_keyboard, SDL_SCANCODE_D) == 1)
+	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_D]) == 1)
 		mouvement = add_vector3_to_vector3(mult_vector3_by_vector3(inv_t_vector3(camera->right), tmp), mouvement);
-	if (get_key_state(p_keyboard, SDL_SCANCODE_A) == 1)
+	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_A]) == 1)
 		mouvement = add_vector3_to_vector3(mult_vector3_by_vector3(camera->right, tmp), mouvement);
-	if (get_key_state(p_keyboard, SDL_SCANCODE_SPACE) == 1)
+	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_SPACE]) == 1)
 	{
 		mouvement = add_vector3_to_vector3(create_t_vector3(0.0, camera->speed, 0.0), mouvement);
 		if (camera->body != NULL)
 			t_mesh_jump(camera->body, mouvement);
 	}
-	if (get_key_state(p_keyboard, SDL_SCANCODE_LCTRL) == 1)
+	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_LCTRL]) == 1)
 		mouvement = add_vector3_to_vector3(create_t_vector3(0.0, -camera->speed, 0.0), mouvement);
 
 	move_camera(camera, mouvement, physic_engine);

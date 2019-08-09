@@ -210,8 +210,11 @@ int main(int argc, char **argv)
 	printf("segfault\n");
 	set_t_gui_texte(gui);
 	//resize_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 0)->view_port, create_t_vector2_int(2, 2));
+	t_mesh mesh = read_obj_file("pawn.obj", create_t_vector3(2.9, 10.0, 2.9), create_t_vector3(0.1, 0.11, 0.1), 100.0);
+	t_mesh_set_color(&mesh, create_t_color(0.4, 0.3, 0.3, 1.0));
+	t_engine_add_mesh(engine, mesh);
 
-	t_mesh mesh = create_primitive_plane(create_t_vector3(0.0, 0, 0.0), create_t_vector3(10.0, 0.0, 10.0), NULL, 0.0);
+	mesh = create_primitive_plane(create_t_vector3(0.0, 0, 0.0), create_t_vector3(10.0, 0.0, 10.0), NULL, 0.0);
 	// t_mesh_rotate(&mesh, create_t_vector3(45.0, 0.0, 0.0));
 	t_mesh_set_color(&mesh, create_t_color(0.5, 0.5, 0.5 ,1.0));
 	t_engine_add_mesh(engine, mesh);
@@ -245,9 +248,6 @@ int main(int argc, char **argv)
 
 
 	t_rectangle rec = create_t_rectangle(create_t_vector2(-1, 1), create_t_vector2(2, -2));
-	mesh = read_obj_file("pawn.obj", create_t_vector3(2.9, 10.0, 2.9), create_t_vector3(0.1, 0.11, 0.1), 100.0);
-	t_mesh_set_color(&mesh, create_t_color(0.4, 0.3, 0.3, 1.0));
-	t_engine_add_mesh(engine, mesh);
 
 	// mesh = read_obj_file("pawn.obj", create_t_vector3(-3.0, 1.0, 2.0), create_t_vector3(0.1, 0.11, 0.1), 10.0);
 	// t_mesh_set_color(&mesh, create_t_color(0.3, 0.3, 1.0, 1.0));
@@ -269,7 +269,7 @@ int main(int argc, char **argv)
 	// t_camera_look_at_point(t_camera_list_get(engine->visual_engine->camera_list, 2), create_t_vector3(0, 0, 0));
 
 	//t_mesh *target;
-
+	link_t_camera_to_t_mesh(main_camera, t_engine_get_mesh(engine, 0), 100);
 	while (engine->playing != 0)
 	{
 		//target = NULL;
