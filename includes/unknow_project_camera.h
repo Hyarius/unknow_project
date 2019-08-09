@@ -1,13 +1,11 @@
 #ifndef UNKNOW_PROJECT_CAMERA_H
 # define UNKNOW_PROJECT_CAMERA_H
 
-// #include "unknow_project_vector.h"
 #include "unknow_project_window.h"
 #include "unknow_project_math.h"
 #include "unknow_project_system.h"
 #include "unknow_project_geometry.h"
 #include "unknow_project_mesh.h"
-// #include "unknow_project_engine_module.h"
 
 typedef struct	s_camera
 {
