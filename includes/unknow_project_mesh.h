@@ -6,7 +6,6 @@
 
 typedef struct		s_mesh
 {
-	struct s_camera	*camera;
 	t_vector3		pos;
 	t_vector3		center;
 	int				is_visible;
@@ -36,8 +35,8 @@ typedef struct		s_mesh
 t_mesh			create_t_mesh(t_vector3 pos, char *name);
 t_mesh			read_obj_file(char *path, t_vector3 pos, t_vector3 size, float gravity);
 t_mesh			*initialize_t_mesh(t_vector3 pos);
-void			delete_t_mesh(t_mesh mesh);
-void			free_t_mesh(t_mesh *mesh);
+void			delete_t_mesh();
+void			free_t_mesh();
 void			t_mesh_add_point(t_mesh *dest, t_vector3 new_point);
 void			t_mesh_add_uv(t_mesh *dest, t_vector3 new_uv);
 void			t_mesh_add_face(t_mesh *dest, t_face new_face);
@@ -56,7 +55,6 @@ void			t_mesh_add_force(t_mesh *dest, t_vector3 delta_force);
 t_mesh			create_primitive_cube(t_vector3 coord, t_vector3 size, t_texture *texture, float gravity, char *name);
 t_mesh			create_primitive_plane(t_vector3 pos, t_vector3 size, t_texture *texture, float gravity);
 t_mesh			create_primitive_vertical_plane(t_vector3 pos, t_vector3 size, t_texture *p_texture, float gravity);
-t_mesh			create_primitive_skybox(t_vector3 pos, t_vector3 size, t_texture *p_texture);
 
 void			t_mesh_rotate(t_mesh *mesh, t_vector3 delta_angle);
 void			t_mesh_rotate_around_point(t_mesh *mesh, t_vector3 delta_angle, t_vector3 center);
@@ -65,7 +63,5 @@ void			t_mesh_look_at(t_mesh *mesh);
 void			t_mesh_set_visibility(t_mesh *dest, int new_state);
 void			t_mesh_compute_vertices_in_world(t_mesh *dest);
 void			t_mesh_compute_next_vertices_in_world(t_mesh *dest, t_vector3 axis);
-
-void			t_mesh_jump(t_mesh *body, t_vector3 jump);
 
 #endif

@@ -48,8 +48,7 @@ void			t_mesh_list_push_back(t_mesh_list *dest, t_mesh to_add)
 
 void			t_mesh_list_erase(t_mesh_list *dest, int index)
 {
-
-	delete_t_mesh(*t_mesh_list_get(dest, index));
+	free_t_mesh(t_mesh_list_get(dest, index));
 	while (index < dest->size)
 	{
 		dest[index + 1] = dest[index];
@@ -85,4 +84,18 @@ t_mesh			*t_mesh_list_get(t_mesh_list *dest, int index)
 	if (index < 0 || index >= dest->size)
 		error_exit(-24, "Segfault : t_mesh_list out of range");
 	return (&(dest->mesh[index]));
+}
+
+int			t_mesh_list_get_index(t_mesh_list *dest, t_mesh *mesh)
+{
+	int i;
+
+	i = 0;
+	while (i < dest->size)
+	{
+		if (dest[i].mesh == mesh)
+			return (i);
+		i++;
+	}
+	return (-1);
 }

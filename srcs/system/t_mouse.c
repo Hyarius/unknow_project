@@ -26,7 +26,7 @@ t_mouse			*initialize_t_mouse()
 	return (result);
 }
 
-void			get_t_mouse_info(t_mouse *mouse) //recuperation des informationd e la souris
+void			get_t_mouse_info(t_mouse *mouse) //recuperation des information de la souris
 {
 	mouse->old_pos = mouse->pos;
 	Uint32 mousestate = SDL_GetMouseState(&(mouse->pos.x), &(mouse->pos.y)); //recuperation de la position actuelle de la souris

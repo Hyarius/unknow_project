@@ -6,8 +6,6 @@ t_mesh			create_t_mesh(t_vector3 pos, char *name)
 	static int	num = 1;
 	char		*str;
 
-	result.camera = NULL;
-
 	result.pos = pos;
 	result.is_visible = BOOL_TRUE;
 	result.center = pos;
@@ -37,7 +35,9 @@ t_mesh			create_t_mesh(t_vector3 pos, char *name)
 		str = ft_strcat(str, ft_itoa(num++));
 		result.name = str;
 	}
+	printf("Mesh name = %s\n", result.name);
 	t_mesh_look_at(&result);
+
 	return (result);
 }
 
@@ -55,8 +55,11 @@ t_mesh			*initialize_t_mesh(t_vector3 pos)
 
 void			delete_t_mesh(t_mesh mesh)
 {
+	free_t_vector3_list(mesh.vertices_in_world);
+	free_t_vector3_list(mesh.next_vertices_in_world);
 	free_t_vector3_list(mesh.vertices);
 	free_t_vector3_list(mesh.uvs);
+	free_t_vector3_list(mesh.normales);
 	free_t_face_list(mesh.faces);
 }
 
@@ -262,9 +265,4 @@ void			t_mesh_compute_next_vertices_in_world(t_mesh *dest, t_vector3 axis)
 		t_vector3_list_push_back(dest->next_vertices_in_world, add_vector3_to_vector3(t_vector3_list_at(dest->vertices, i), next_pos));
 		i++;
 	}
-}
-
-void			t_mesh_jump(t_mesh *body, t_vector3 jump)
-{
-	t_mesh_move(body, jump);
 }

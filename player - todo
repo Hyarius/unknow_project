@@ -1,0 +1,19 @@
+- Creer une structure pour le joueur:
+	- Camera 						|
+	- Mesh   						|
+	- HP    						|
+	- Bouclier 						|
+	- Speed							|
+	- Armes							|
+	- Munitions & Munitions max		|
+
+- Faire que la hitbox suive la camera (pos et rotation)
+	- Ajouter un mesh a la camera
+	- trouver comment faire que le mesh du joueur suive la camera
+
+- changer vitesse joueur
+
+- faire les pickups:
+	- creer les differents packs
+	- les faire disparaitre quand on marche dessus
+	- recuperer son contenu
