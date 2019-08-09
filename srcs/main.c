@@ -66,7 +66,12 @@ int main(int argc, char **argv)
 	t_engine *engine = initialize_t_engine(win);
 	//resize_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 0)->view_port, create_t_vector2_int(2, 2));
 
-	t_mesh mesh = create_primitive_plane(create_t_vector3(0.0, 0, 0.0), create_t_vector3(10.0, 0.0, 10.0), NULL, 0.0);
+	t_mesh mesh = read_obj_file("pawn.obj", create_t_vector3(2.0, 10.0, 2.9), create_t_vector3(0.1, 0.11, 0.1), 100.0);
+	t_mesh_set_color(&mesh, create_t_color(0.4, 0.3, 0.3, 1.0));
+	// t_mesh_set_visibility(&mesh, 0);
+	t_engine_add_mesh(engine, mesh);
+
+	mesh = create_primitive_plane(create_t_vector3(0.0, 0, 0.0), create_t_vector3(10.0, 0.0, 10.0), NULL, 0.0);
 	t_mesh_set_color(&mesh, create_t_color(0.5, 0.5, 0.5 ,1.0));
 	t_engine_add_mesh(engine, mesh);
 
@@ -97,16 +102,9 @@ int main(int argc, char **argv)
 	t_mesh_set_color(&mesh, create_t_color(0.5, 0.6, 0.0 ,1.0));
 	t_engine_add_mesh(engine, mesh);
 
-	// mesh = create_primitive_cube(create_t_vector3(0.0, 0.0, 0.0), create_t_vector3(5.0, 5.0, 5.0), NULL, 100.0);
-	// t_mesh_rotate(&mesh, create_t_vector3(0.0, 0.0, 0.0));
-	// t_mesh_set_color(&mesh, create_t_color(0.5, 0.6, 0.0 ,1.0));
-	// t_engine_add_mesh(engine, mesh);
-
-
-
-	mesh = read_obj_file("pawn.obj", create_t_vector3(2.0, 10.0, 2.9), create_t_vector3(0.1, 0.11, 0.1), 100.0);
-	t_mesh_set_color(&mesh, create_t_color(0.4, 0.3, 0.3, 1.0));
-	// t_mesh_set_visibility(&mesh, 0);
+	mesh = create_primitive_cube(create_t_vector3(0.0, 0.0, 0.0), create_t_vector3(2.0, 2.0, 5.0), NULL, 100.0, NULL);
+	t_mesh_rotate(&mesh, create_t_vector3(0.0, 0.0, 0.0));
+	t_mesh_set_color(&mesh, create_t_color(0.5, 0.6, 0.0 ,1.0));
 	t_engine_add_mesh(engine, mesh);
 
 	mesh = read_obj_file("pawn.obj", create_t_vector3(1.0, 1.0, 2.0), create_t_vector3(0.1, 0.11, 0.1), 100.0);
@@ -140,7 +138,7 @@ int main(int argc, char **argv)
 	// t_engine_add_mesh(engine, mesh);
 	// mesh = create_primitive_skybox(main_camera->pos, create_t_vector3(1.0, 1.0, 1.0), texture);
 	// t_mesh_set_color(&mesh, create_t_color(0.0, 1.0, 0.0, 0.5));
-	link_t_camera_to_t_mesh(main_camera, t_engine_get_mesh(engine, 6), 100.0);
+	link_t_camera_to_t_mesh(main_camera, t_engine_get_mesh(engine, 0), 100.0);
 
 	while (engine->playing == 1)
 	{

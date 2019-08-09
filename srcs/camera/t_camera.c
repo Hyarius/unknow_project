@@ -193,14 +193,24 @@ void		t_camera_change_view(t_camera *cam, float delta_pitch, float delta_yaw)
 
 void		move_camera(t_camera *camera, t_vector3 mouvement, t_physic_engine *physic_engine)
 {
-	camera->pos = add_vector3_to_vector3(camera->pos, mouvement);
+	int i;
+
+	i = 0;
 	if (camera->body != NULL)
 	{
-			t_physic_engine_apply_force(physic_engine);
-			t_mesh_apply_force(camera->body);
-			t_mesh_move(camera->body, mouvement);
-			camera->pos = add_vector3_to_vector3(camera->body->pos,
-							 create_t_vector3(0.0, 0.5, 0.0));
+		while (i < physic_engine->mesh_list->size)
+		{
+			if (is_t_mesh_intersecting(camera->body, t_mesh_list_get(physic_engine->mesh_list, i)) == BOOL_TRUE)
+			{
+				// t_physic_engine_apply_force(physic_engine);
+				// t_mesh_apply_force(camera->body);
+				t_mesh_move(camera->body, mouvement);
+				camera->pos = add_vector3_to_vector3(camera->pos, mouvement);
+				camera->pos = add_vector3_to_vector3(camera->body->pos,
+								create_t_vector3(0.0, 0.5, 0.0));
+			}
+			i++;
+		}
 	}
 }
 
