@@ -196,7 +196,6 @@ int main(int argc, char **argv)
 	t_window *win;
 	win = initialize_t_window(argv[0], WIN_X, WIN_Y);	//creation et initialisation de la window
 
-	// printf("segfault\n");
 	t_texture *texture2 = png_load("ressources/assets/texture/ammo.png");
 	t_texture *texture = png_load("ressources/assets/texture/cube_number.png");
 
@@ -208,6 +207,7 @@ int main(int argc, char **argv)
 
 	load_menu(gui);
 	TTF_Init();
+	printf("segfault\n");
 	set_t_gui_texte(gui);
 	//resize_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 0)->view_port, create_t_vector2_int(2, 2));
 
