@@ -26,7 +26,7 @@ t_mesh		*t_engine_get_mesh(t_engine *p_engine, int index);
 void		t_engine_handle_camera(t_engine *p_engine);
 void		t_engine_draw_mesh(t_engine *p_engine, t_window *p_win);
 
-void		t_engine_handle_event(t_engine *engine);
+// void		t_engine_handle_event(t_engine *engine);
 
 void		t_engine_apply_physic(t_engine *engine);
 void		t_engine_place_camera(t_engine *engine, int index, t_vector3 p_new_pos);

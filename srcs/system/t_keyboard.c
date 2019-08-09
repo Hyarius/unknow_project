@@ -4,6 +4,15 @@ t_keyboard	create_t_keyboard()
 {
 	t_keyboard result;
 
+	result.key[SDL_SCANCODE_W] = SDL_SCANCODE_W;
+	result.key[SDL_SCANCODE_A] = SDL_SCANCODE_A;
+	result.key[SDL_SCANCODE_S] = SDL_SCANCODE_S;
+	result.key[SDL_SCANCODE_D] = SDL_SCANCODE_D;
+	result.key[SDL_SCANCODE_F] = SDL_SCANCODE_F;
+	result.key[SDL_SCANCODE_I] = SDL_SCANCODE_I;
+	result.key[SDL_SCANCODE_LCTRL] = SDL_SCANCODE_LCTRL;
+	result.key[SDL_SCANCODE_LSHIFT] = SDL_SCANCODE_LSHIFT;
+	result.key[SDL_SCANCODE_SPACE] = SDL_SCANCODE_SPACE;
 	result.state = SDL_GetKeyboardState(NULL);
 
 	return (result);

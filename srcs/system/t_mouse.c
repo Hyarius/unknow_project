@@ -33,19 +33,26 @@ void			get_t_mouse_info(t_mouse *mouse) //recuperation des informationd e la sou
 
 	if (mouse->old_pos.x != -1)
 		mouse->rel_pos = create_t_vector2_int((mouse->pos.x - mouse->old_pos.x), (mouse->pos.y - mouse->old_pos.y));
-	if(mousestate & SDL_BUTTON(SDL_BUTTON_LEFT))
+	if (mousestate & SDL_BUTTON(SDL_BUTTON_LEFT))
 		mouse->button[MOUSE_LEFT] = BOOL_TRUE;
 	else
 		mouse->button[MOUSE_LEFT] = BOOL_FALSE;
-	if(mousestate & SDL_BUTTON(SDL_BUTTON_RIGHT))
+	if (mousestate & SDL_BUTTON(SDL_BUTTON_RIGHT))
 		mouse->button[MOUSE_RIGHT] = BOOL_TRUE;
 	else
 		mouse->button[MOUSE_RIGHT] = BOOL_FALSE;
-	if(mousestate & SDL_BUTTON(SDL_BUTTON_MIDDLE))
+	if (mousestate & SDL_BUTTON(SDL_BUTTON_MIDDLE))
 		mouse->button[MOUSE_MIDDLE] = BOOL_TRUE;
 	else
 		mouse->button[MOUSE_MIDDLE] = BOOL_FALSE;
 
+}
+
+int				get_mouse_state(t_mouse *mouse, int type)
+{
+	if (type < 0 || type > 3)
+		return (-1);
+	return (mouse->button[type]);
 }
 
 void			print_t_mouse(t_mouse *mouse) // affiche les infos de la souris
