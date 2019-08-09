@@ -230,7 +230,6 @@ int main(int argc, char **argv)
 	t_mesh_set_color(&mesh, create_t_color(0.3, 0.3, 1.0, 1.0));
 	t_engine_add_mesh(engine, mesh);
 
-
 	t_camera *main_camera = t_camera_list_get(engine->visual_engine->camera_list, 0);
 
 	t_engine_place_camera(engine, 0, create_t_vector3(0.0, 1.0, -1.5));
@@ -252,22 +251,37 @@ int main(int argc, char **argv)
 	// t_camera_look_at_point(t_camera_list_get(engine->visual_engine->camera_list, 2), create_t_vector3(0, 0, 0));
 
 	t_item *target;
+	t_mesh *test;
 
+	/*
+	*/
 	t_color color = create_t_color(1.0, 0.0, 1.0, 1.0);
-	target = t_item_list_get(item_list, 0);
+	is_collectible(engine, engine->physic_engine->mesh_list, item_list);
+	//target = t_item_list_get(item_list, 0);
 	while (engine->playing == 1)
 	{
 		/*
-		arriver a recuperer target dans item_list
+		penser a faire un initialize t_item
 		*/
+		// if ((target->mesh = cast_ray(engine, main_camera->pos, create_t_vector3(0.0, -1.0, 0.0))) != NULL)
+		// {
+		// 	// if (target->mesh->collectible == 1)
+		// 	// 	t_mesh_set_visibility(target->mesh, 0);
+		// 	// target->pf(player);
+		// }	
 		// target->mesh = cast_ray(engine, player.camera.pos ,create_t_vector3(0.0, -1.0, 0.0));
-		if ((target->type == 0 || target->type == 1 || target->type == 2))
-		{
-			//target->pf(player);
-			//t_mesh_set_visibility(target->mesh, 0);
-			//t_mesh_list_erase(engine->physic_engine->mesh_list, t_mesh_list_get_index(engine->physic_engine->mesh_list, target));
-			//printf("test\n");
-		}
+		// target->name = target->mesh->name;
+		// if (ft_strcmp("Health Pack", target->name))
+		// 	target->type = 0;
+		// printf("target name = %s\n", target->name);
+		// printf("target type = %d\n", target->type);
+		// if ((target->type == 0 || target->type == 1 || target->type == 2))
+		// {
+		// 	//target->pf(player);
+		// 	//t_mesh_set_visibility(target->mesh, 0);
+		// 	//t_mesh_list_erase(engine->physic_engine->mesh_list, t_mesh_list_get_index(engine->physic_engine->mesh_list, target));
+		// 	//printf("test\n");
+		// }
 		t_engine_apply_physic(engine);
 		t_engine_handle_camera(engine);
 		prepare_screen(win, create_t_color(0.2f, 0.2f, 0.2f, 1.0f)); // refresh de l'ecran avec les couleurs par defaut

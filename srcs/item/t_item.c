@@ -6,7 +6,7 @@
 /*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/30 13:23:52 by spuisais          #+#    #+#             */
-/*   Updated: 2019/08/09 13:23:44 by spuisais         ###   ########.fr       */
+/*   Updated: 2019/08/09 14:56:34 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 void		heal(t_player player)
 {
 	printf("Current hp = %d\n", player.hp);
-	int to_heal;
+	// int to_heal;
 
-	to_heal = 20;
-	if (player.hp < 100)
-	{
-		while (player.hp < 100 && to_heal > 0)
-			player.hp += to_heal--;
-	}
-	printf("Now = %d\n", player.hp);
+	// to_heal = 20;
+	// if (player.hp < 100)
+	// {
+	// 	while (player.hp < 100 && to_heal > 0)
+	// 		player.hp += to_heal--;
+	// }
+	// printf("Now = %d\n", player.hp);
 }
 
 void		refill(t_player player)
@@ -96,4 +96,29 @@ t_item		create_armor_pack(t_vector3 pos, t_engine *engine)
 	item.mesh = &result;
 	item.pf = protect;
 	return (item);
+}
+
+/*
+Creer un item pour chaque condition bonne
+*/
+void	is_collectible(t_engine *engine, t_mesh_list *mesh_list, t_item_list *item_list)
+{
+	int i;
+	t_item item;
+	
+	i = -1;
+	while (++i < mesh_list->size)
+	{
+		if (ft_strcmp(mesh_list->mesh[i].name, "Health Pack") == 0 ||
+			ft_strcmp(mesh_list->mesh[i].name, "Ammo Pack") == 0 ||
+			ft_strcmp(mesh_list->mesh[i].name, "Armor Pack") == 0 )
+			mesh_list->mesh[i].collectible = 1;
+		// if (ft_strcmp(mesh_list->mesh[i].name, "Health Pack") == 0)
+		// 	item = create_health_pack(create_t_vector3(0.0, 0.0, 0.0), engine);
+		// else if (ft_strcmp(mesh_list->mesh[i].name, "Ammo Pack") == 0)
+		// 	item = create_ammo_pack(create_t_vector3(0.0, 0.0, 0.0), engine);
+		// else if (ft_strcmp(mesh_list->mesh[i].name, "Armor Pack") == 0)
+		// 	item = create_armor_pack(create_t_vector3(0.0, 0.0, 0.0), engine);
+	}
+	// t_item_list_push_back(item_list, item);
 }

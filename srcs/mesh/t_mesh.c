@@ -10,6 +10,7 @@ t_mesh			create_t_mesh(t_vector3 pos, char *name)
 	result.is_visible = BOOL_TRUE;
 	result.center = pos;
 	result.bubble_radius = 0.0;
+	result.collectible = 0;
 
 	result.force = create_t_vector3(0.0, 0.0, 0.0);
 	result.kinetic = 0.0;

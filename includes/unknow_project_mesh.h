@@ -10,6 +10,7 @@ typedef struct		s_mesh
 	t_vector3		center;
 	int				is_visible;
 	float			bubble_radius;
+	int				collectible; // 0 false 1 true
 
 	t_vector3		angle;
 	t_vector3		forward;
