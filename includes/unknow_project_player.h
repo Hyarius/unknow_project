@@ -56,7 +56,7 @@ typedef struct  s_ammo
 
 typedef struct  s_player
 {
-	t_camera	camera;
+	t_camera	*camera;
 	t_mesh		hitbox;
 	int			hp;
 	int			armor;

@@ -15,11 +15,12 @@ void	draw_triangle_texture_cpu(t_view_port *p_view_port, t_triangle *p_triangle,
 	float			gamma;
 	int				pixel_index;
 	t_color			color;
+	t_vector3 		pixel;
+	t_triangle 		uv;
+	float			z;
 
 	texture = p_uv->texture;
 
-	t_vector3 pixel;
-	t_triangle uv;
 
 	triangle.a = convert_opengl_to_vector3(p_view_port, p_triangle->a);
 	triangle.b = convert_opengl_to_vector3(p_view_port, p_triangle->b);
@@ -53,7 +54,6 @@ void	draw_triangle_texture_cpu(t_view_port *p_view_port, t_triangle *p_triangle,
 	if (max.y >= p_view_port->size.y)
 		max.y = p_view_port->size.y - 1;
 
-	int truc = 0;
 	current = min;
 	while (current.y <= max.y)
 	{
@@ -67,7 +67,7 @@ void	draw_triangle_texture_cpu(t_view_port *p_view_port, t_triangle *p_triangle,
 
 			if (alpha >= 0 && beta >= 0 && gamma >= 0)
 			{
-				float z = 1;
+				z = 1.0;
 				if (triangle.a.z != 0 || triangle.b.z != 0 || triangle.c.z != 0)
 					z = 1.0f / ((triangle.a.z * gamma) + (triangle.b.z * beta) + (triangle.c.z * alpha));
 
@@ -82,7 +82,6 @@ void	draw_triangle_texture_cpu(t_view_port *p_view_port, t_triangle *p_triangle,
 					color = get_pixel_color(texture, (int)(pixel.x - EPSILON), (int)(pixel.y - EPSILON));
 					draw_pixel(p_view_port->window, (int)(current.x), (int)(current.y), color);
 					p_view_port->depth_buffer[pixel_index] = z;
-					truc++;
 				}
 			}
 			current.x++;

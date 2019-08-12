@@ -1,8 +1,25 @@
 #include "unknow_project.h"
 
+void	t_mesh_init_uv_point(t_mesh *result)
+{
+	t_mesh_add_uv(result, create_t_vector3(0.0f, 0.0f, 0.0f)); // 0
+	t_mesh_add_uv(result, create_t_vector3(1.0f / 3.0f, 0.0f, 0.0f)); // 1
+	t_mesh_add_uv(result, create_t_vector3(2.0f / 3.0f, 0.0f, 0.0f)); // 2
+	t_mesh_add_uv(result, create_t_vector3(0.0f, 1.0f / 3.0f, 0.0f)); // 3
+	t_mesh_add_uv(result, create_t_vector3(1.0f / 3.0f, 1.0f / 3.0f, 0.0f)); // 4
+	t_mesh_add_uv(result, create_t_vector3(2.0f / 3.0f, 1.0f / 3.0f, 0.0f)); // 5
+	t_mesh_add_uv(result, create_t_vector3(1.0f, 1.0f / 3.0f, 0.0f)); // 6
+	t_mesh_add_uv(result, create_t_vector3(0.0f, 2.0f / 3.0f, 0.0f)); // 7
+	t_mesh_add_uv(result, create_t_vector3(1.0f / 3.0f, 2.0f / 3.0f, 0.0f)); // 8
+	t_mesh_add_uv(result, create_t_vector3(2.0f / 3.0f, 2.0f / 3.0f, 0.0f)); // 9
+	t_mesh_add_uv(result, create_t_vector3(1.0f, 2.0f / 3.0f, 0.0f)); // 10
+	t_mesh_add_uv(result, create_t_vector3(1.0f / 3.0f, 1.0f, 0.0f)); // 11
+	t_mesh_add_uv(result, create_t_vector3(2.0f / 3.0f, 1.0f, 0.0f)); // 12
+}
+
 t_mesh		create_primitive_cube(t_vector3 pos, t_vector3 size, t_texture *p_texture, float gravity, char *name)
 {
-	t_mesh 	result;
+	t_mesh	result;
 	t_face	tmp_face1;
 	t_face	tmp_face2;
 
@@ -26,19 +43,7 @@ t_mesh		create_primitive_cube(t_vector3 pos, t_vector3 size, t_texture *p_textur
 	t_mesh_add_point(&result, create_t_vector3(size.x, size.y, size.z)); //G
 	t_mesh_add_point(&result, create_t_vector3(0, size.y, size.z)); //H
 
-	t_mesh_add_uv(&result, create_t_vector3(0.0f, 0.0f, 0.0f)); // 0
-	t_mesh_add_uv(&result, create_t_vector3(1.0f / 3.0f, 0.0f, 0.0f)); // 1
-	t_mesh_add_uv(&result, create_t_vector3(2.0f / 3.0f, 0.0f, 0.0f)); // 2
-	t_mesh_add_uv(&result, create_t_vector3(0.0f, 1.0f / 3.0f, 0.0f)); // 3
-	t_mesh_add_uv(&result, create_t_vector3(1.0f / 3.0f, 1.0f / 3.0f, 0.0f)); // 4
-	t_mesh_add_uv(&result, create_t_vector3(2.0f / 3.0f, 1.0f / 3.0f, 0.0f)); // 5
-	t_mesh_add_uv(&result, create_t_vector3(1.0f, 1.0f / 3.0f, 0.0f)); // 6
-	t_mesh_add_uv(&result, create_t_vector3(0.0f, 2.0f / 3.0f, 0.0f)); // 7
-	t_mesh_add_uv(&result, create_t_vector3(1.0f / 3.0f, 2.0f / 3.0f, 0.0f)); // 8
-	t_mesh_add_uv(&result, create_t_vector3(2.0f / 3.0f, 2.0f / 3.0f, 0.0f)); // 9
-	t_mesh_add_uv(&result, create_t_vector3(1.0f, 2.0f / 3.0f, 0.0f)); // 10
-	t_mesh_add_uv(&result, create_t_vector3(1.0f / 3.0f, 1.0f, 0.0f)); // 11
-	t_mesh_add_uv(&result, create_t_vector3(2.0f / 3.0f, 1.0f, 0.0f)); // 12
+	t_mesh_init_uv_point(&result);
 
 	tmp_face1 = create_t_face();
 	tmp_face2 = create_t_face();
