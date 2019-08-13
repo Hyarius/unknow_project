@@ -44,14 +44,14 @@ void		t_engine_handle_camera(t_engine *p_engine)
 								p_engine->physic_engine);
 }
 
-void		t_engine_draw_mesh(t_engine *p_engine, t_window *p_win)
+void		t_engine_draw_mesh(t_engine *p_engine)
 {
 	int i;
 
 	i = 0;
 	while (i < p_engine->visual_engine->camera_list->size)
 	{
-		t_physic_engine_draw_mesh(p_engine->physic_engine, p_win, t_camera_list_get(p_engine->visual_engine->camera_list, i));
+		t_physic_engine_draw_mesh(p_engine->physic_engine, t_camera_list_get(p_engine->visual_engine->camera_list, i));
 		i++;
 	}
 

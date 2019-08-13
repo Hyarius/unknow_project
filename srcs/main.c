@@ -325,7 +325,7 @@ int main(int argc, char **argv)
 
 		if (engine->playing <= -1)
 		{
-			t_engine_draw_mesh(engine, win);
+			t_engine_draw_mesh(engine);
 			t_engine_render_camera(engine);
 			drawing_front_pause(main_camera, gui);
 		}
@@ -355,7 +355,7 @@ int main(int argc, char **argv)
 
 			t_engine_handle_camera(engine);
 
-			t_engine_draw_mesh(engine, win);
+			t_engine_draw_mesh(engine);
 
 
 			//draw_rectangle_color_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(-1, 1), create_t_vector2(2, -2)), initialize_t_color(0.2, 0.2, 0.3, 1.0));

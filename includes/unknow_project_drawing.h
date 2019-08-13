@@ -42,6 +42,6 @@ void        draw_rectangle_texture_cpu(t_view_port *p_view_port, t_rectangle p_r
 //			draw depth cpu
 void		draw_triangle_depth_cpu(t_view_port *p_view_port, t_triangle *p_triangle, float dist_max);
 
-void 		draw_t_mesh(t_window *p_win, t_camera *p_cam, t_mesh *mesh);
+void 		draw_t_mesh(t_camera *p_cam, t_mesh *mesh);
 
 #endif

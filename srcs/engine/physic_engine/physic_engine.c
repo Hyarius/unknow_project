@@ -33,14 +33,14 @@ void			free_t_physic_engine(t_physic_engine *dest)
 	free(dest);
 }
 
-void			t_physic_engine_draw_mesh(t_physic_engine *p_physic_engine, t_window *p_win, t_camera *p_cam)
+void			t_physic_engine_draw_mesh(t_physic_engine *p_physic_engine, t_camera *p_cam)
 {
 	int			i;
 
 	i = 0;
 	while (i < p_physic_engine->mesh_list->size)
 	{
-		draw_t_mesh(p_win, p_cam, t_mesh_list_get(p_physic_engine->mesh_list, i));
+		draw_t_mesh(p_cam, t_mesh_list_get(p_physic_engine->mesh_list, i));
 		i++;
 	}
 }
