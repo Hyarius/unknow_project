@@ -50,27 +50,27 @@ int main(int argc, char **argv)
 
 
 
-	mesh = create_primitive_cube(create_t_vector3(0.0, 0.0, 0.0), create_t_vector3(1.0, 1.0, 1.0), texture, 0.0, "cube texture");
+	// mesh = create_primitive_cube(create_t_vector3(5.0, 0.0, 5.0), create_t_vector3(1.0, 1.0, 1.0), texture, 0.0, "cube texture");
+	// t_mesh_rotate(&mesh, create_t_vector3(0.0, 0.0, 0.0));
+	// t_mesh_set_color(&mesh, create_t_color(0.5, 0.6, 0.8 ,1.0));
+	// t_engine_add_mesh(engine, mesh);
+
+	mesh = create_primitive_cube(create_t_vector3(-5.0, 0.0, 5.0), create_t_vector3(10.0, 2.0, 0.1), NULL, 0.0, "mur bleu");
 	t_mesh_rotate(&mesh, create_t_vector3(0.0, 0.0, 0.0));
 	t_mesh_set_color(&mesh, create_t_color(0.5, 0.6, 0.8 ,1.0));
 	t_engine_add_mesh(engine, mesh);
 
-	mesh = create_primitive_cube(create_t_vector3(-5.0, 0.0, 5.0), create_t_vector3(10.0, 2.0, 0.1), texture, 0.0, "mur bleu");
-	t_mesh_rotate(&mesh, create_t_vector3(0.0, 0.0, 0.0));
-	t_mesh_set_color(&mesh, create_t_color(0.5, 0.6, 0.8 ,1.0));
-	t_engine_add_mesh(engine, mesh);
-
-	mesh = create_primitive_cube(create_t_vector3(-5.0, 0.0, -5.0), create_t_vector3(10.0, 2.0, 0.1), texture, 0.0, "mur rose");
+	mesh = create_primitive_cube(create_t_vector3(-5.0, 0.0, -5.0), create_t_vector3(10.0, 2.0, 0.1), NULL, 0.0, "mur rose");
 	t_mesh_rotate(&mesh, create_t_vector3(0.0, 0.0, 0.0));
 	t_mesh_set_color(&mesh, create_t_color(1.0, 0.6, 0.8 ,1.0));
 	t_engine_add_mesh(engine, mesh);
 
-	mesh = create_primitive_cube(create_t_vector3(-5.0, 0.0, 5.0), create_t_vector3(10.0, 2.0, 0.1), texture, 0.0, "mur violet");
+	mesh = create_primitive_cube(create_t_vector3(-5.0, 0.0, 5.0), create_t_vector3(10.0, 2.0, 0.1), NULL, 0.0, "mur violet");
 	t_mesh_rotate(&mesh, create_t_vector3(0.0, 90.0, 0.0));
 	t_mesh_set_color(&mesh, create_t_color(0.5, 0.0, 0.8 ,1.0));
 	t_engine_add_mesh(engine, mesh);
 
-	mesh = create_primitive_cube(create_t_vector3(5.0, 0.0, 5.0), create_t_vector3(10.0, 2.0, 0.1), texture, 0.0, "mur vert");
+	mesh = create_primitive_cube(create_t_vector3(5.0, 0.0, 5.0), create_t_vector3(10.0, 2.0, 0.1), NULL, 0.0, "mur vert");
 	t_mesh_rotate(&mesh, create_t_vector3(0.0, 90.0, 0.0));
 	t_mesh_set_color(&mesh, create_t_color(0.5, 0.6, 0.0 ,1.0));
 	t_engine_add_mesh(engine, mesh);
@@ -110,6 +110,9 @@ int main(int argc, char **argv)
 
 	t_color color2 = create_t_color(1.0, 0.0, 1.0, 1.0);
 	is_collectible(engine, engine->physic_engine->mesh_list, item_list);
+
+	mesh = create_primitive_skybox(main_camera->pos, create_t_vector3(1.0, 1.0, 1.0), texture);
+	t_mesh_set_color(&mesh, create_t_color(0.0, 1.0, 0.0, 0.5));
 	while (engine->playing != 0)
 	{
 		//target = NULL;
@@ -173,6 +176,9 @@ int main(int argc, char **argv)
 		}
 		if (engine->playing == 1)
 		{
+			mesh.pos = main_camera->pos;
+
+			draw_skybox(win, main_camera, &mesh); // skybox
 			t_engine_apply_physic(engine);
 
 			t_engine_handle_camera(engine);
