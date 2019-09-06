@@ -24,32 +24,34 @@ t_engine	*initialize_t_engine(t_window *p_window)
 	return (result);
 }
 
-void		free_t_engine(t_engine dest)
+void		delete_t_engine(t_engine dest)
 {
-	delete_t_physic_engine(dest.physic_engine);
-	delete_t_user_engine(dest.user_engine);
-	delete_t_visual_engine(dest.visual_engine);
+	free_t_physic_engine(dest.physic_engine);
+	free_t_user_engine(dest.user_engine);
+	free_t_visual_engine(dest.visual_engine);
 }
 
-void		delete_t_engine(t_engine *dest)
+void		free_t_engine(t_engine *dest)
 {
-	free_t_engine(*dest);
+	delete_t_engine(*dest);
 	free(dest);
 }
 
 void		t_engine_handle_camera(t_engine *p_engine)
 {
-	t_user_engine_handle_camera(p_engine->user_engine, t_visual_engine_get_main_camera(p_engine->visual_engine));
+	t_user_engine_handle_camera(p_engine->user_engine,
+								t_visual_engine_get_main_camera(p_engine->visual_engine),
+								p_engine->physic_engine);
 }
 
-void		t_engine_draw_mesh(t_engine *p_engine, t_window *p_win)
+void		t_engine_draw_mesh(t_engine *p_engine)
 {
 	int i;
 
 	i = 0;
 	while (i < p_engine->visual_engine->camera_list->size)
 	{
-		t_physic_engine_draw_mesh(p_engine->physic_engine, p_win, t_camera_list_get(p_engine->visual_engine->camera_list, i));
+		t_physic_engine_draw_mesh(p_engine->physic_engine, t_camera_list_get(p_engine->visual_engine->camera_list, i));
 		i++;
 	}
 
@@ -106,7 +108,6 @@ void		t_engine_handle_event(t_camera *main_camera, t_gui *gui, t_engine *engine)
 	// 	reset_key_state(engine->user_engine->keyboard, SDL_SCANCODE_T);
 	// }
 }
-
 
 t_mesh		*t_engine_get_mesh(t_engine *p_engine, int index)
 {

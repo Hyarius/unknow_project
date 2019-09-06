@@ -129,25 +129,15 @@ int				is_triangle_parallele(t_triangle p_a, t_triangle p_b)
 
 int				intersect_triangle_by_segment(t_triangle p_triangle, t_vector3 p_normal, t_line line, t_vector3 *intersection)
 {
-	int			point_type;
-	float 		dist_one;
-	float 		dist_two;
-
 	if (dot_t_vector3(p_normal, normalize_t_vector3(substract_vector3_to_vector3(line.b, line.a))) == 0)
 		return (BOOL_ERROR);
-
 	*intersection = intersect_plane_by_line(p_normal, p_triangle.a, line.a, line.b);
-
 	if (is_point_on_line(line.a, line.b, *intersection) == BOOL_FALSE)
 		return (BOOL_FALSE);
-
 	if (is_point_on_triangle(p_triangle, *intersection) == BOOL_FALSE)
 		return (BOOL_FALSE);
-
 	return (BOOL_TRUE);
-
 }
-
 
 int				same_side(t_vector3 p1, t_vector3 p2, t_vector3 a, t_vector3 b)
 {

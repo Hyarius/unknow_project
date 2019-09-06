@@ -42,6 +42,13 @@ void        draw_rectangle_texture_cpu(t_view_port *p_view_port, t_rectangle p_r
 //			draw depth cpu
 void		draw_triangle_depth_cpu(t_view_port *p_view_port, t_triangle *p_triangle, float dist_max);
 
-void 		draw_t_mesh(t_window *p_win, t_camera *p_cam, t_mesh *mesh);
+void 		draw_t_mesh(t_camera *p_cam, t_mesh *mesh);
+void		init_points_uv(t_mesh *mesh, t_face face, t_vector3 *points_uv);
+void		init_points(t_mesh *mesh, t_face face, t_vector3 *points);
+t_triangle	init_triangle_clipped(t_mesh *mesh, t_camera *p_cam, int j);
+void		apply_darkness_on_mesh_with_texture(t_mesh *mesh, t_camera *p_cam, t_color darkness_color, t_triangle triangle);
+void		apply_darkness_on_mesh_without_texture(t_camera *p_cam, t_face face, t_color darkness_color, t_triangle triangle);
+void		find_darkness(t_mesh *mesh, t_face face, t_camera *p_cam, int nb_clip);
+void		how_many_points_clipped(t_mesh *mesh, t_face face, t_camera *p_cam);
 
 #endif
