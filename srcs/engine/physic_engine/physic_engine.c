@@ -57,8 +57,50 @@ t_mesh			*t_physic_engine_get_mesh(t_physic_engine *physic_engine, int index)
 
 int				can_move_axis(t_mesh *mesh, t_mesh *target, t_vector3 axis)
 {
+	int			result;
+	t_vector3	tmp;
+	t_triangle	triangle_mesh;
+	t_triangle	triangle_mesh2;
+	t_triangle	triangle_target;
+	t_face	*mesh_face;
+	t_face *target_face;
+	t_vector3 delta_pos;
+	int i;
+	int j;
 
-	return (BOOL_FALSE);
+	result = 0;
+	tmp = mult_vector3_by_vector3(mesh->force, axis);
+	delta_pos = add_vector3_to_vector3(mesh->pos, tmp);
+	clean_t_vector3_list(mesh->vertices_in_world);
+	i = 0;
+	while (i < mesh->vertices->size)
+	{
+		t_vector3_list_push_back(mesh->vertices_in_world, add_vector3_to_vector3(t_vector3_list_at(mesh->vertices, i), delta_pos));
+		i++;
+	}
+	j = 0;
+	while (j < mesh->faces->size)
+	{
+		mesh_face = t_face_list_get(mesh->faces, j);
+		//set_t_face_color(mesh_face, create_t_color(0.0, 1.0, 0.0, 1.0));
+		triangle_mesh = compose_t_triangle_from_t_vertices(mesh->vertices_in_world, mesh_face->index_vertices);
+		i = 0;
+		while (i < target->faces->size)
+		{
+			target_face = t_face_list_get(target->faces, i);
+			triangle_target = compose_t_triangle_from_t_vertices(target->vertices_in_world, target_face->index_vertices);
+			if (is_triangle_in_triangle(triangle_mesh, triangle_target) == BOOL_TRUE)
+			{
+				set_t_face_color(mesh_face, create_t_color(1.0, 0.0, 0.0, 1.0));
+				result++;
+			}
+			i++;
+		}
+		j++;
+	}
+	if (result > 0)
+		return (BOOL_FALSE);
+	return (BOOL_TRUE);
 }
 
 void			test_move_axis(t_mesh *mesh, float *force, t_vector3 axis, t_mesh *target)
@@ -103,7 +145,7 @@ int				can_move(t_mesh *mesh, t_mesh_list *mesh_list)
 	// 	if (mesh != target && target->bubble_radius + mesh->bubble_radius >= calc_dist_vector3_to_vector3(mesh->center, target->center))
 	// 	{
 	// 		t_mesh_compute_next_vertices_in_world(mesh, create_t_vector3(1, 0, 0));
-	// 		while (mesh->force.x != 0 && is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
+	// 		while (mesh->force.x != 0 && is_t_mesh_intersecting(mesh, target) == BOOL_FALSE)
 	// 		{
 	// 			mesh->force.x -= delta[0];
 	// 			if (ft_abs_float(mesh->force.x) <= EPSILON)
@@ -111,7 +153,7 @@ int				can_move(t_mesh *mesh, t_mesh_list *mesh_list)
 	// 			t_mesh_compute_next_vertices_in_world(mesh, create_t_vector3(1, 0, 0));
 	// 		}
 	// 		t_mesh_compute_next_vertices_in_world(mesh, create_t_vector3(0, 1, 0));
-	// 		while (mesh->force.y != 0 && is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
+	// 		while (mesh->force.y != 0 && is_t_mesh_intersecting(mesh, target) == BOOL_FALSE)
 	// 		{
 	// 			mesh->force.y -= delta[1];
 	// 			if (ft_abs_float(mesh->force.y) <= EPSILON)
@@ -119,7 +161,7 @@ int				can_move(t_mesh *mesh, t_mesh_list *mesh_list)
 	// 			t_mesh_compute_next_vertices_in_world(mesh, create_t_vector3(0, 1, 0));
 	// 		}
 	// 		t_mesh_compute_next_vertices_in_world(mesh, create_t_vector3(0, 0, 1));
-	// 		while (mesh->force.z != 0 && is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
+	// 		while (mesh->force.z != 0 && is_t_mesh_intersecting(mesh, target) == BOOL_FALSE)
 	// 		{
 	// 			mesh->force.z -= delta[2];
 	// 			if (ft_abs_float(mesh->force.z) <= EPSILON)
@@ -130,19 +172,66 @@ int				can_move(t_mesh *mesh, t_mesh_list *mesh_list)
 	// 	i++;
 	// }
 	// return (BOOL_TRUE);
+
+	// t_mesh	*target;
+	// int		i;
+
+	// //printf("Delta %f - %f - %f\n", delta[0], delta[1], delta[2]);
+	// i = 0;
+	// while (i < mesh_list->size)
+	// {
+	// 	target = t_mesh_list_get(mesh_list, i);
+	// 	if (mesh != target && target->bubble_radius + mesh->bubble_radius >= calc_dist_vector3_to_vector3(mesh->center, target->center))
+	// 	{
+	// 		test_move_axis(mesh, &(mesh->force.x), create_t_vector3(1, 0, 0), target);
+	// 		test_move_axis(mesh, &(mesh->force.y), create_t_vector3(0, 1, 0), target);
+	// 		test_move_axis(mesh, &(mesh->force.z), create_t_vector3(0, 0, 1), target);
+	// 	}
+	// 	i++;
+	// }
+	// return (BOOL_TRUE);
+
+	float	delta[3];
 	t_mesh	*target;
 	int		i;
 
-	//printf("Delta %f - %f - %f\n", delta[0], delta[1], delta[2]);
 	i = 0;
 	while (i < mesh_list->size)
 	{
 		target = t_mesh_list_get(mesh_list, i);
 		if (mesh != target && target->bubble_radius + mesh->bubble_radius >= calc_dist_vector3_to_vector3(mesh->center, target->center))
 		{
-			test_move_axis(mesh, &(mesh->force.x), create_t_vector3(1, 0, 0), target);
-			test_move_axis(mesh, &(mesh->force.y), create_t_vector3(0, 1, 0), target);
-			test_move_axis(mesh, &(mesh->force.z), create_t_vector3(0, 0, 1), target);
+			float subdivision = 60.0;
+			delta[0] = mesh->force.x / subdivision;
+			delta[1] = mesh->force.y / subdivision;
+			delta[2] = mesh->force.z / subdivision;
+			mesh->force.x = delta[0];
+			for (int j = 0; j <= subdivision; j++)
+			{
+				if (can_move_axis(mesh, target, create_t_vector3(1, 0, 0)) == BOOL_TRUE)
+				{
+					mesh->force.x -= delta[0];
+					break;
+				}
+			}
+			mesh->force.y = delta[1];
+			for (int k = 0; k <= subdivision; k++, mesh->force.y += delta[1])
+			{
+				if (can_move_axis(mesh, target, create_t_vector3(0, 1, 0)) == BOOL_TRUE)
+				{
+					mesh->force.y -= delta[1];
+					break;
+				}
+			}
+			mesh->force.z = delta[2];
+			for (int l = 0; l <= subdivision; l++, mesh->force.z += delta[2])
+			{
+				if (can_move_axis(mesh, target, create_t_vector3(0, 0, 1)) == BOOL_TRUE)
+				{
+					mesh->force.z -= delta[2];
+					break;
+				}
+			}
 		}
 		i++;
 	}

@@ -11,6 +11,7 @@ t_mesh	create_t_mesh(t_vector3 pos, char *name)
 	result.is_visible = BOOL_TRUE;
 	result.center = pos;
 	result.bubble_radius = 0.0;
+	result.collectible = 0;
 	result.force = create_t_vector3(0.0, 0.0, 0.0);
 	result.kinetic = 0.0;
 	result.angle = create_t_vector3(0.0, 90.0, 0.0);
@@ -265,5 +266,6 @@ void	t_mesh_compute_next_vertices_in_world(t_mesh *dest, t_vector3 axis)
 
 void	t_mesh_jump(t_mesh *body, t_vector3 jump)
 {
-	t_mesh_move(body, jump);
+	if (body->kinetic < -12.0f)
+		body->kinetic = -12.0f;
 }

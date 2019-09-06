@@ -37,7 +37,7 @@ t_gui           create_t_gui(float x, int y);
 t_gui           *initialize_t_gui(float x, int y);
 void            drawing_front_hp(t_camera *main_camera, t_gui *gui);
 void            drawing_front_mun(t_camera *main_camera, t_gui *gui, t_texture *texture);
-void            draw_minimap(t_camera *main_camera, t_engine *engine, t_window *win, t_texture *texture);
+void            draw_minimap(t_camera *main_camera, t_engine *engine, t_window *win);
 void            load_letter(t_gui *gui, char *str, int idx);
 void            set_t_gui_texte(t_gui *gui);
 void            print_info_bar(t_camera *main_camera, t_gui *gui);

@@ -193,24 +193,22 @@ void		t_camera_change_view(t_camera *cam, float delta_pitch, float delta_yaw)
 
 void		move_camera(t_camera *camera, t_vector3 mouvement, t_physic_engine *physic_engine)
 {
+	t_mesh tmp;
 	int i;
 
 	i = 0;
-	if (camera->body != NULL)
+	tmp.pos = add_vector3_to_vector3(camera->body->pos, mouvement);
+	if (camera->body == NULL)
+		return ;
+	while (i < physic_engine->mesh_list->size)
 	{
-		while (i < physic_engine->mesh_list->size)
+		if (can_move(t_mesh_list_get(physic_engine->mesh_list, 1), physic_engine->mesh_list) == BOOL_TRUE)
 		{
-			if (is_t_mesh_intersecting(camera->body, t_mesh_list_get(physic_engine->mesh_list, i)) == BOOL_TRUE)
-			{
-				// t_physic_engine_apply_force(physic_engine);
-				// t_mesh_apply_force(camera->body);
-				t_mesh_move(camera->body, mouvement);
-				camera->pos = add_vector3_to_vector3(camera->pos, mouvement);
-				camera->pos = add_vector3_to_vector3(camera->body->pos,
-								create_t_vector3(0.0, 0.5, 0.0));
-			}
-			i++;
+			t_mesh_move(t_mesh_list_get(physic_engine->mesh_list, 1), mouvement);
+			camera->pos = add_vector3_to_vector3(camera->pos, mouvement);
+			camera->pos = add_vector3_to_vector3(camera->body->pos, create_t_vector3(0.0, 0.5, 0.0));
 		}
+		i++;
 	}
 }
 
@@ -220,7 +218,6 @@ void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard,
 	t_vector3	mouvement;
 
 	mouvement = create_t_vector3(0, 0, 0);
-
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_LSHIFT]) == 0)
 		tmp = create_t_vector3(camera->speed, 0.0, camera->speed);
 	else
@@ -244,8 +241,8 @@ void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard,
 	}
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_LCTRL]) == 1)
 		mouvement = add_vector3_to_vector3(create_t_vector3(0.0, -camera->speed, 0.0), mouvement);
-
-	move_camera(camera, mouvement, physic_engine);
+	if (can_move(camera->body, physic_engine->mesh_list) == BOOL_TRUE)
+		move_camera(camera, mouvement, physic_engine);
 }
 
 void		handle_t_camera_view_by_mouse(t_camera *cam, t_mouse *p_mouse) // calcul du mouvement de l'angle de la camera a la souris

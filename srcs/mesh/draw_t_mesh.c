@@ -37,14 +37,16 @@ t_triangle	init_triangle_clipped(t_mesh *mesh, t_camera *p_cam, int j)
 	return (triangle);
 }
 
-void		apply_darkness_on_mesh_with_texture(t_mesh *mesh, t_camera *p_cam, t_color darkness_color, t_triangle triangle)
+void		apply_darkness_on_mesh_with_texture(t_mesh *mesh, t_camera *p_cam,\
+								t_color darkness_color, t_triangle triangle)
 {
 	t_uv_list_push_back(&(p_cam->uv_list),\
 						create_t_uv(triangle, mesh->texture));
 	t_color_list_push_back(&(p_cam->darkness_list), darkness_color);
 }
 
-void		apply_darkness_on_mesh_without_texture(t_camera *p_cam, t_face face, t_color darkness_color, t_triangle triangle)
+void		apply_darkness_on_mesh_without_texture(t_camera *p_cam, \
+					t_face face, t_color darkness_color, t_triangle triangle)
 {
 	t_color_list_push_back(&(p_cam->color_list),\
 					fuze_t_color(face.color, darkness_color));
@@ -52,31 +54,32 @@ void		apply_darkness_on_mesh_without_texture(t_camera *p_cam, t_face face, t_col
 													triangle);
 }
 
-void		find_darkness(t_mesh *mesh, t_face face, t_camera *p_cam, int nb_clip)
+void		find_darkness(t_mesh *mesh, t_face face, t_camera *cam,\
+														int nb_clip)
 {
-	t_triangle	triangle;
-	t_color		darkness_color;
+	t_triangle	trgl;
+	t_color		darkcol;
 	float		darkness;
 	int			j;
 
-	darkness = (-dot_t_vector3(face.normale, p_cam->sun_direction) + 2)\
+	darkness = (-dot_t_vector3(face.normale, cam->sun_direction) + 2)\
 													/ (2 / (1 - 0.1));
 	if (darkness > 1)
 		darkness = 1;
 	if (darkness < 0.1)
 		darkness = 0.1;
-	darkness_color.r = darkness;
-	darkness_color.g = darkness;
-	darkness_color.b = darkness;
-	darkness_color.a = 0.4f;
+	darkcol.r = darkness;
+	darkcol.g = darkness;
+	darkcol.b = darkness;
+	darkcol.a = 0.4f;
 	j = 0;
 	while (j < nb_clip)
 	{
-		triangle = init_triangle_clipped(mesh, p_cam, j);
+		trgl = init_triangle_clipped(mesh, cam, j);
 		if (mesh->texture == NULL)
-			apply_darkness_on_mesh_without_texture(p_cam, face, darkness_color, triangle);
+			apply_darkness_on_mesh_without_texture(cam, face, darkcol, trgl);
 		else
-			apply_darkness_on_mesh_with_texture(mesh, p_cam, darkness_color, triangle);
+			apply_darkness_on_mesh_with_texture(mesh, cam, darkcol, trgl);
 		j += 3;
 	}
 }
