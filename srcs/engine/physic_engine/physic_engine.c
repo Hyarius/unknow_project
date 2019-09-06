@@ -123,75 +123,13 @@ void			test_move_axis(t_mesh *mesh, float *force, t_vector3 axis, t_mesh *target
 		if (i == subdivision)
 			*force = max;
 		t_mesh_compute_next_vertices_in_world(mesh, axis);
+		if (is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
+			*force -= delta;
 	}
 }
 
 int				can_move(t_mesh *mesh, t_mesh_list *mesh_list)
 {
-	// float	delta[3];
-	// int subdivision;
-	// t_mesh	*target;
-	// int		i;
-
-	// subdivision = 10;
-	// delta[0] = mesh->force.x / subdivision;
-	// delta[1] = mesh->force.y / subdivision;
-	// delta[2] = mesh->force.z / subdivision;
-	// //printf("Delta %f - %f - %f\n", delta[0], delta[1], delta[2]);
-	// i = 0;
-	// while (i < mesh_list->size)
-	// {
-	// 	target = t_mesh_list_get(mesh_list, i);
-	// 	if (mesh != target && target->bubble_radius + mesh->bubble_radius >= calc_dist_vector3_to_vector3(mesh->center, target->center))
-	// 	{
-	// 		t_mesh_compute_next_vertices_in_world(mesh, create_t_vector3(1, 0, 0));
-	// 		while (mesh->force.x != 0 && is_t_mesh_intersecting(mesh, target) == BOOL_FALSE)
-	// 		{
-	// 			mesh->force.x -= delta[0];
-	// 			if (ft_abs_float(mesh->force.x) <= EPSILON)
-	// 				mesh->force.x = 0;
-	// 			t_mesh_compute_next_vertices_in_world(mesh, create_t_vector3(1, 0, 0));
-	// 		}
-	// 		t_mesh_compute_next_vertices_in_world(mesh, create_t_vector3(0, 1, 0));
-	// 		while (mesh->force.y != 0 && is_t_mesh_intersecting(mesh, target) == BOOL_FALSE)
-	// 		{
-	// 			mesh->force.y -= delta[1];
-	// 			if (ft_abs_float(mesh->force.y) <= EPSILON)
-	// 				mesh->force.y = 0;
-	// 			t_mesh_compute_next_vertices_in_world(mesh, create_t_vector3(0, 1, 0));
-	// 		}
-	// 		t_mesh_compute_next_vertices_in_world(mesh, create_t_vector3(0, 0, 1));
-	// 		while (mesh->force.z != 0 && is_t_mesh_intersecting(mesh, target) == BOOL_FALSE)
-	// 		{
-	// 			mesh->force.z -= delta[2];
-	// 			if (ft_abs_float(mesh->force.z) <= EPSILON)
-	// 				mesh->force.z = 0;
-	// 			t_mesh_compute_next_vertices_in_world(mesh, create_t_vector3(0, 0, 1));
-	// 		}
-	// 	}
-	// 	i++;
-	// }
-	// return (BOOL_TRUE);
-
-	// t_mesh	*target;
-	// int		i;
-
-	// //printf("Delta %f - %f - %f\n", delta[0], delta[1], delta[2]);
-	// i = 0;
-	// while (i < mesh_list->size)
-	// {
-	// 	target = t_mesh_list_get(mesh_list, i);
-	// 	if (mesh != target && target->bubble_radius + mesh->bubble_radius >= calc_dist_vector3_to_vector3(mesh->center, target->center))
-	// 	{
-	// 		test_move_axis(mesh, &(mesh->force.x), create_t_vector3(1, 0, 0), target);
-	// 		test_move_axis(mesh, &(mesh->force.y), create_t_vector3(0, 1, 0), target);
-	// 		test_move_axis(mesh, &(mesh->force.z), create_t_vector3(0, 0, 1), target);
-	// 	}
-	// 	i++;
-	// }
-	// return (BOOL_TRUE);
-
-	float	delta[3];
 	t_mesh	*target;
 	int		i;
 
@@ -201,37 +139,9 @@ int				can_move(t_mesh *mesh, t_mesh_list *mesh_list)
 		target = t_mesh_list_get(mesh_list, i);
 		if (mesh != target && target->bubble_radius + mesh->bubble_radius >= calc_dist_vector3_to_vector3(mesh->center, target->center))
 		{
-			float subdivision = 60.0;
-			delta[0] = mesh->force.x / subdivision;
-			delta[1] = mesh->force.y / subdivision;
-			delta[2] = mesh->force.z / subdivision;
-			mesh->force.x = delta[0];
-			for (int j = 0; j <= subdivision; j++)
-			{
-				if (can_move_axis(mesh, target, create_t_vector3(1, 0, 0)) == BOOL_TRUE)
-				{
-					mesh->force.x -= delta[0];
-					break;
-				}
-			}
-			mesh->force.y = delta[1];
-			for (int k = 0; k <= subdivision; k++, mesh->force.y += delta[1])
-			{
-				if (can_move_axis(mesh, target, create_t_vector3(0, 1, 0)) == BOOL_TRUE)
-				{
-					mesh->force.y -= delta[1];
-					break;
-				}
-			}
-			mesh->force.z = delta[2];
-			for (int l = 0; l <= subdivision; l++, mesh->force.z += delta[2])
-			{
-				if (can_move_axis(mesh, target, create_t_vector3(0, 0, 1)) == BOOL_TRUE)
-				{
-					mesh->force.z -= delta[2];
-					break;
-				}
-			}
+			test_move_axis(mesh, &(mesh->force.x), create_t_vector3(1, 0, 0), target);
+			test_move_axis(mesh, &(mesh->force.y), create_t_vector3(0, 1, 0), target);
+			test_move_axis(mesh, &(mesh->force.z), create_t_vector3(0, 0, 1), target);
 		}
 		i++;
 	}

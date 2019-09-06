@@ -39,7 +39,7 @@ int main(int argc, char **argv)
 	t_engine_add_mesh(engine, player.hitbox);
 
 	t_mesh mesh = read_obj_file("pawn.obj", create_t_vector3(2.9, 10.0, 2.9), create_t_vector3(0.1, 0.11, 0.1), 100.0);
-	t_mesh_set_color(&mesh, create_t_color(0.4, 0.3, 0.3, 1.0));
+	t_mesh_set_color(&mesh, create_t_color(1.5, 0.4, 1.5, 1.0));
 	t_engine_add_mesh(engine, mesh);
 	link_t_camera_to_t_mesh(main_camera, t_engine_get_mesh(engine, 0), 100);
 
@@ -55,22 +55,22 @@ int main(int argc, char **argv)
 	t_mesh_set_color(&mesh, create_t_color(0.5, 0.6, 0.8 ,1.0));
 	t_engine_add_mesh(engine, mesh);
 
-	mesh = create_primitive_cube(create_t_vector3(-5.0, 0.0, 5.0), create_t_vector3(10.0, 2.0, 0.1), NULL, 0.0, "mur bleu");
+	mesh = create_primitive_cube(create_t_vector3(-5.0, 0.0, 5.0), create_t_vector3(10.0, 2.0, 0.1), texture, 0.0, "mur bleu");
 	t_mesh_rotate(&mesh, create_t_vector3(0.0, 0.0, 0.0));
 	t_mesh_set_color(&mesh, create_t_color(0.5, 0.6, 0.8 ,1.0));
 	t_engine_add_mesh(engine, mesh);
 
-	mesh = create_primitive_cube(create_t_vector3(-5.0, 0.0, -5.0), create_t_vector3(10.0, 2.0, 0.1), NULL, 0.0, "mur rose");
+	mesh = create_primitive_cube(create_t_vector3(-5.0, 0.0, -5.0), create_t_vector3(10.0, 2.0, 0.1), texture, 0.0, "mur rose");
 	t_mesh_rotate(&mesh, create_t_vector3(0.0, 0.0, 0.0));
 	t_mesh_set_color(&mesh, create_t_color(1.0, 0.6, 0.8 ,1.0));
 	t_engine_add_mesh(engine, mesh);
 
-	mesh = create_primitive_cube(create_t_vector3(-5.0, 0.0, 5.0), create_t_vector3(10.0, 2.0, 0.1), NULL, 0.0, "mur violet");
+	mesh = create_primitive_cube(create_t_vector3(-5.0, 0.0, 5.0), create_t_vector3(10.0, 2.0, 0.1), texture, 0.0, "mur violet");
 	t_mesh_rotate(&mesh, create_t_vector3(0.0, 90.0, 0.0));
 	t_mesh_set_color(&mesh, create_t_color(0.5, 0.0, 0.8 ,1.0));
 	t_engine_add_mesh(engine, mesh);
 
-	mesh = create_primitive_cube(create_t_vector3(5.0, 0.0, 5.0), create_t_vector3(10.0, 2.0, 0.1), NULL, 0.0, "mur vert");
+	mesh = create_primitive_cube(create_t_vector3(5.0, 0.0, 5.0), create_t_vector3(10.0, 2.0, 0.1), texture, 0.0, "mur vert");
 	t_mesh_rotate(&mesh, create_t_vector3(0.0, 90.0, 0.0));
 	t_mesh_set_color(&mesh, create_t_color(0.5, 0.6, 0.0 ,1.0));
 	t_engine_add_mesh(engine, mesh);

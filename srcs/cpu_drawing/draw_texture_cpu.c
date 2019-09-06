@@ -86,31 +86,35 @@ void	draw_triangle_texture_cpu(t_view_port *p_view_port, t_triangle *p_triangle,
 				s = (w.x * st.a.x + w.y * st.b.x + w.z * st.c.x) * z * p_uv->texture->surface->w;
 				t = (w.x * st.a.y + w.y * st.b.y + w.z * st.c.y) * z * p_uv->texture->surface->h;
 				rgb = get_pixel_color(p_uv->texture, s, t);
-				draw_pixel(p_view_port->window, i, j, rgb);
+				if (z <= p_view_port->depth_buffer[i + (j * p_view_port->window->size_x)])
+				{
+					p_view_port->depth_buffer[i + (j * p_view_port->window->size_x)] = z;
+					draw_pixel(p_view_port->window, (int)(i + p_view_port->pos.x), (int)(j + p_view_port->pos.y), rgb);
+				}
 			}
-			//triangle du bas
-			p = create_t_vector3(i - EPSILON, p_view_port->window->size_y - j - EPSILON, 0);
-			w = create_t_vector3(edge_t_vector3(tri.c, tri.b, p),
-								edge_t_vector3(tri.a, tri.c, p),
-								edge_t_vector3(tri.b, tri.a, p));
-			if (w.x >= 0.0 && w.y >= 0.0 && w.z >= 0.0)
-			{
-				w.x /= area;
-				w.y /= area;
-				w.z /= area;
-				rgb = create_t_color((w.x * c.a.x + w.y * c.b.x + w.z * c.c.x),
-									(w.x * c.a.y + w.y * c.b.y + w.z * c.c.y),
-									(w.x * c.a.z + w.y * c.b.z + w.z * c.c.z),
-									1.0);
-				z = 1 / (w.x * tri.a.z + w.y * tri.b.z + w.z * tri.c.z);
-				rgb.r *= z;
-				rgb.g *= z;
-				rgb.b *= z;
-				s = (w.x * st.a.x + w.y * st.b.x + w.z * st.c.x) * z * p_uv->texture->surface->w;
-				t = (w.x * st.a.y + w.y * st.b.y + w.z * st.c.y) * z * p_uv->texture->surface->h;
-				rgb = get_pixel_color(p_uv->texture, s, t);
-				draw_pixel(p_view_port->window, i, j, rgb);
-			}
+			// //triangle du bas
+			// p = create_t_vector3(i - EPSILON, p_view_port->window->size_y - j - EPSILON, 0);
+			// w = create_t_vector3(edge_t_vector3(tri.c, tri.b, p),
+			// 					edge_t_vector3(tri.a, tri.c, p),
+			// 					edge_t_vector3(tri.b, tri.a, p));
+			// if (w.x >= 0.0 && w.y >= 0.0 && w.z >= 0.0)
+			// {
+			// 	w.x /= area;
+			// 	w.y /= area;
+			// 	w.z /= area;
+			// 	rgb = create_t_color((w.x * c.a.x + w.y * c.b.x + w.z * c.c.x),
+			// 						(w.x * c.a.y + w.y * c.b.y + w.z * c.c.y),
+			// 						(w.x * c.a.z + w.y * c.b.z + w.z * c.c.z),
+			// 						1.0);
+			// 	z = 1 / (w.x * tri.a.z + w.y * tri.b.z + w.z * tri.c.z);
+			// 	rgb.r *= z;
+			// 	rgb.g *= z;
+			// 	rgb.b *= z;
+			// 	s = (w.x * st.a.x + w.y * st.b.x + w.z * st.c.x) * z * p_uv->texture->surface->w;
+			// 	t = (w.x * st.a.y + w.y * st.b.y + w.z * st.c.y) * z * p_uv->texture->surface->h;
+			// 	rgb = get_pixel_color(p_uv->texture, s, t);
+			// 	draw_pixel(p_view_port->window, i, j, rgb);
+			// }
 			i++;
 		}
 		j++;
