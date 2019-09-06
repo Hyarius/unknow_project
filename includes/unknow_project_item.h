@@ -6,7 +6,7 @@
 /*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/30 13:29:24 by spuisais          #+#    #+#             */
-/*   Updated: 2019/08/09 15:04:04 by spuisais         ###   ########.fr       */
+/*   Updated: 2019/09/06 16:36:01 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct  	s_item
 	int				type; // 0 = hp | 1 = ammo | 2 = armor
 	char			*name;
 	t_mesh			*mesh;
-	void 			(*pf)(t_player);
+	void 			(*pf)(t_player*);
 }       			t_item;
 
 typedef struct	s_item_list

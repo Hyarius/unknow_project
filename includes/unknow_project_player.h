@@ -66,6 +66,7 @@ typedef struct  s_player
 }               t_player;
 
 t_ammo			create_t_ammo();
+t_player		*initialize_t_player(t_camera *cam);
 t_player		create_t_player(t_camera *cam);
 
 #endif

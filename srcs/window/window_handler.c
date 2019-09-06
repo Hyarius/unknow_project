@@ -142,7 +142,7 @@ void				prepare_screen(t_window *p_win, t_color color)
 
 void				render_screen(t_window *p_win)
 {
-	check_frame();
+	//check_frame();
 
 	draw_buffer_opengl(p_win, p_win->color_data);
 

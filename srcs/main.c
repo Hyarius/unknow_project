@@ -214,6 +214,15 @@ int main(int argc, char **argv)
 
 	t_item health_pack = create_health_pack(create_t_vector3(0.0, 0.0, 0.0), engine);
 	t_item_list_push_back(item_list, health_pack);
+	printf("item list 1 name = %s\n", item_list->item[0].name);
+
+	health_pack = create_health_pack(create_t_vector3(1.0, 0.0, 0.0), engine);
+	t_item_list_push_back(item_list, health_pack);
+	printf("item list 2 name = %s\n", item_list->item[1].name);
+
+	t_item health_pack3 = create_health_pack(create_t_vector3(-1.0, 0.0, 0.0), engine);
+	t_item_list_push_back(item_list, health_pack3);
+	printf("item list 3 name = %s\n", item_list->item[2].name);
 
 	// create_ammo_pack(create_t_vector3(0.5, 0.0, 0.0), engine);
 	// create_armor_pack(create_t_vector3(-0.5, 0.0, 0.0), engine);
@@ -232,11 +241,13 @@ int main(int argc, char **argv)
 
 	t_camera *main_camera = t_camera_list_get(engine->visual_engine->camera_list, 0);
 
-	t_engine_place_camera(engine, 0, create_t_vector3(0.0, 1.0, -1.5));
+	t_engine_place_camera(engine, 0, create_t_vector3(0.0480, 1.7, 0.10));
+	// t_engine_place_camera(engine, 0, create_t_vector3(0, 1.0, 0));
 	t_camera_look_at_point(main_camera, create_t_vector3(0, 0, 0));
 
-	t_player player = create_t_player(main_camera);
-	t_engine_add_mesh(engine, player.hitbox);
+	t_player *player = initialize_t_player(main_camera);
+	t_engine_add_mesh(engine, player->hitbox);
+	printf("Player hp after initialisation = %d\n", player->hp);
 
 	// t_engine_add_camera(engine, create_t_camera(win, create_t_vector3(0.0, 11.0, 0.0), 70, create_t_vector2(NEAR, FAR)));
 	// resize_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 1)->view_port, create_t_vector2_int(400, 340));
@@ -250,25 +261,31 @@ int main(int argc, char **argv)
 	// move_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 2)->view_port, create_t_vector2_int(0, 0));
 	// t_camera_look_at_point(t_camera_list_get(engine->visual_engine->camera_list, 2), create_t_vector3(0, 0, 0));
 
-	t_item *target;
-	t_mesh *test;
-
-	/*
-	*/
+	t_mesh *target;
 	t_color color = create_t_color(1.0, 0.0, 1.0, 1.0);
-	is_collectible(engine, engine->physic_engine->mesh_list, item_list);
-	//target = t_item_list_get(item_list, 0);
 	while (engine->playing == 1)
 	{
 		/*
 		penser a faire un initialize t_item
 		*/
-		// if ((target->mesh = cast_ray(engine, main_camera->pos, create_t_vector3(0.0, -1.0, 0.0))) != NULL)
-		// {
-		// 	// if (target->mesh->collectible == 1)
-		// 	// 	t_mesh_set_visibility(target->mesh, 0);
-		// 	// target->pf(player);
-		// }	
+		if ((target = cast_ray(engine, main_camera->pos, create_t_vector3(0.0, -1.0, 0.0))) != NULL)
+		{
+			if (target->collectible == 1)
+			{
+				int i = 0;
+				while (i < item_list->size)
+				{
+					if (ft_strcmp(target->name, item_list->item[i].name) == 0)
+					{
+						item_list->item[i].pf(player);
+						item_list->item[i].name = NULL;
+					}
+					i++;
+				}
+				t_mesh_set_visibility(target, 0);
+				// delete_t_mesh(target);
+			}
+		}
 		// target->mesh = cast_ray(engine, player.camera.pos ,create_t_vector3(0.0, -1.0, 0.0));
 		// target->name = target->mesh->name;
 		// if (ft_strcmp("Health Pack", target->name))
