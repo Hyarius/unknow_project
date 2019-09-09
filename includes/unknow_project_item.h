@@ -9,7 +9,7 @@ typedef struct  	s_item
 	int				type; // 0 = hp | 1 = ammo | 2 = armor
 	char			*name;
 	t_mesh			*mesh;
-	void 			(*pf)(t_player);
+	void 			(*pf)(t_player*);
 }       			t_item;
 
 typedef struct	s_item_list

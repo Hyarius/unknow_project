@@ -62,11 +62,11 @@ int				can_move_axis(t_mesh *mesh, t_mesh *target, t_vector3 axis)
 	t_triangle	triangle_mesh;
 	t_triangle	triangle_mesh2;
 	t_triangle	triangle_target;
-	t_face	*mesh_face;
-	t_face *target_face;
-	t_vector3 delta_pos;
-	int i;
-	int j;
+	t_face		*mesh_face;
+	t_face		*target_face;
+	t_vector3	delta_pos;
+	int			i;
+	int			j;
 
 	result = 0;
 	tmp = mult_vector3_by_vector3(mesh->force, axis);
