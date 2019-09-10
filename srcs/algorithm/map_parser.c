@@ -1,6 +1,6 @@
 #include "unknow_project.h"
 
-t_mesh_list		read_map_file(char *path)
+t_mesh_list		*read_map_file(char *path)
 {
 	t_mesh		mesh;
 	t_mesh_list	*result;
@@ -60,5 +60,5 @@ t_mesh_list		read_map_file(char *path)
 		}
 	}
 	close(fd);
-	return(*result);
+	return(result);
 }

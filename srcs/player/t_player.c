@@ -40,8 +40,11 @@ t_player	create_t_player(t_camera *cam)
 	t_player	result;
 
 	result.camera = cam;
-	result.hitbox = read_obj_file("pawn.obj", create_t_vector3(1.0, 5.0, 1.0),\
-									create_t_vector3(0.1, 0.11, 0.1), 100.0);
+	result.hitbox = create_primitive_cube(create_t_vector3(1.0, 5.0, 1.0),\
+									create_t_vector3(0.4, 0.2, 0.4), NULL,\
+									100.0, "player");
+	// result.hitbox = read_obj_file("pawn.obj", create_t_vector3(1.0, 5.0, 1.0),\
+	// 								create_t_vector3(0.1, 0.11, 0.1), 100.0);
 	t_mesh_set_color(&result.hitbox, create_t_color(0.5, 0.6, 0.0 ,1.0));
 	result.hp = 50;
 	result.armor = 0;

@@ -198,7 +198,7 @@ void		move_camera(t_camera *camera, t_vector3 mouvement, t_physic_engine *physic
 	t_physic_engine_apply_force(physic_engine);
 	camera->pos = add_vector3_to_vector3(camera->pos, camera->body->force);
 	camera->pos = add_vector3_to_vector3(camera->body->pos,
-					create_t_vector3(0.0, 0.5, 0.0));
+					create_t_vector3(0.2, 0.5, 0.2));
 }
 
 void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard, t_physic_engine *physic_engine) // calcul du mouvement de la cameraera au clavier
