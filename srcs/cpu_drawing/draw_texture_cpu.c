@@ -93,11 +93,11 @@ void	draw_triangle_texture_cpu(t_view_port *p_view_port, t_triangle *p_triangle,
 				s = (w.x * st.a.x + w.y * st.b.x + w.z * st.c.x) * z * p_uv->texture->surface->w;
 				t = (w.x * st.a.y + w.y * st.b.y + w.z * st.c.y) * z * p_uv->texture->surface->h;
 				rgb = get_pixel_color(p_uv->texture, s, t);
-				// if (z <= p_view_port->depth_buffer[i + (j * p_view_port->window->size_x)])
-				// {
+				if (z <= p_view_port->depth_buffer[i + (j * p_view_port->window->size_x)])
+				{
 					p_view_port->depth_buffer[i + (j * p_view_port->window->size_x)] = z;
 					draw_pixel(p_view_port->window, (int)(i + p_view_port->pos.x), (int)(j + p_view_port->pos.y), rgb);
-				// }
+				}
 			}
 			i++;
 		}

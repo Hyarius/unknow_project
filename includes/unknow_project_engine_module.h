@@ -23,7 +23,7 @@ void			t_physic_engine_compute_check_list(t_physic_engine *physic_engine);
 int				calc_max_velocity(t_mesh *mesh, t_mesh *target, t_vector3 axis);
 int				can_move(t_mesh *mesh, t_mesh_list *mesh_list);
 void			handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard, t_physic_engine *physic_engine);
-void			move_camera(t_camera *camera, t_vector3 mouvement, t_physic_engine *physic_engine);
+void			move_camera(t_camera *camera, t_vector3 mouvement, t_physic_engine *physic_engine, float j);
 
 typedef struct	s_user_engine
 {

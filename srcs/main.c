@@ -51,10 +51,10 @@ int main(int argc, char **argv)
 
 
 
-	// mesh = create_primitive_cube(create_t_vector3(5.0, 0.0, 5.0), create_t_vector3(1.0, 1.0, 1.0), texture, 0.0, "cube texture");
-	// t_mesh_rotate(&mesh, create_t_vector3(0.0, 0.0, 0.0));
-	// t_mesh_set_color(&mesh, create_t_color(0.5, 0.6, 0.8 ,1.0));
-	// t_engine_add_mesh(engine, mesh);
+	mesh = create_primitive_cube(create_t_vector3(2.0, 0.0, 2.0), create_t_vector3(1.0, 1.0, 1.0), texture, 0.0, "cube texture");
+	t_mesh_rotate(&mesh, create_t_vector3(0.0, 0.0, 0.0));
+	t_mesh_set_color(&mesh, create_t_color(0.5, 0.6, 0.8 ,1.0));
+	t_engine_add_mesh(engine, mesh);
 
 	mesh = create_primitive_cube(create_t_vector3(-5.0, 0.0, 5.0), create_t_vector3(10.0, 2.0, 0.1), NULL, 0.0, "mur bleu");
 	t_mesh_rotate(&mesh, create_t_vector3(0.0, 0.0, 0.0));
@@ -195,7 +195,7 @@ int main(int argc, char **argv)
 
 			t_engine_draw_mesh(engine);
 
-			// draw_rectangle_color_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(-1, 1), create_t_vector2(2, -2)), initialize_t_color(0.2, 0.2, 0.3, 1.0));
+			draw_rectangle_color_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(-1, 1), create_t_vector2(2, -2)), initialize_t_color(0.2, 0.2, 0.3, 1.0));
 			t_engine_render_camera(engine);
 			drawing_front_hp(main_camera, gui);
 			drawing_front_mun(main_camera, gui, texture2);
