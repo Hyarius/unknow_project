@@ -14,8 +14,9 @@ t_camera	create_t_camera(t_window *window, t_vector3 p_pos, float p_fov, t_vecto
 	result.yaw = 0; // angle a laquel on voit l'objet
 	result.pitch = 0; // angle a laquel on voit l'objet
 	result.speed = 0.1f; // vitesse de deplacement
-	result.running = 3.4f; // action de courir
+	result.running = 1.8f; // action de courir
 	result.slowing = 1.0f; // ralentissement pour le recul
+	result.crounch = 0;
 
 	result.model = create_t_matrix(); // creation de la matrice d'identite permettant de faire les calculs matriciel par la suite
 	t_camera_look_at(&result); //calcul de l'angle de la camera
@@ -191,23 +192,28 @@ void		t_camera_change_view(t_camera *cam, float delta_pitch, float delta_yaw)
 	t_camera_look_at(cam);
 }
 
-void		move_camera(t_camera *camera, t_vector3 mouvement, t_physic_engine *physic_engine)
+void		move_camera(t_camera *camera, t_vector3 mouvement, t_physic_engine *physic_engine, float j)
 {
 	if (can_move(camera->body, physic_engine->mesh_list) == BOOL_TRUE)
 		t_mesh_move(camera->body, camera->body->force);
 	t_physic_engine_apply_force(physic_engine);
 	camera->pos = add_vector3_to_vector3(camera->pos, camera->body->force);
 	camera->pos = add_vector3_to_vector3(camera->body->pos,
-					create_t_vector3(0.2, 0.5, 0.2));
+					create_t_vector3(0.2, 0.45 - j, 0.2));
 }
 
 void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard, t_physic_engine *physic_engine) // calcul du mouvement de la cameraera au clavier
 {
+	t_mesh		*target;
 	t_vector3	tmp;
 	t_vector3	mouvement;
 	t_vector3	save;
 	float		y;
+	float		j;
+	int			i;
 
+	j = 0.0;
+	i = 0;
 	mouvement = create_t_vector3(0, 0, 0);
 	save = create_t_vector3(0, 0, 0);
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_SPACE]) == 1 && camera->body->force.y == 0)
@@ -215,10 +221,10 @@ void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard,
 		camera->body->force.y = 0.05;
 	}
 	y = camera->body->force.y;
-	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_LSHIFT]) == 0)
-		tmp = create_t_vector3(camera->speed, 0.0, camera->speed);
-	else
+	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_LSHIFT]) == 1 && camera->body->force.y == 0)
 		tmp = create_t_vector3(camera->speed * camera->running, 0.0, camera->speed * camera->running);
+	else
+		tmp = create_t_vector3(camera->speed, 0.0, camera->speed);
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_S]) == 1)
 	{
 		tmp = create_t_vector3(camera->speed / camera->slowing, 0.0, camera->speed / camera->slowing);
@@ -250,9 +256,60 @@ void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard,
 			save = create_t_vector3(camera->body->force.x, 0, camera->body->force.z);
 	}
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_LCTRL]) == 1)
-		camera->body->force = add_vector3_to_vector3(create_t_vector3(0.0, -camera->speed, 0.0), mouvement);
+	{
+		j = 0.2;
+		if (camera->crounch == 0)
+		{
+			t_mesh_resize(camera->body, create_t_vector3(0.0, -0.2, 0.0));
+			camera->crounch = 1;
+		}
+	}
+	else if (camera->crounch == 1)
+	{
+		t_mesh_resize(camera->body, create_t_vector3(0.0, 0.2, 0.0));
+		camera->crounch = 0;
+		j = 0.0;
+		// camera->crounch = 0;
+		// t_mesh_resize(camera->body, create_t_vector3(0.0, 0.2, 0.0));
+		// while (i < physic_engine->mesh_list->size)
+		// {
+		// 	target = t_mesh_list_get(physic_engine->mesh_list, i);
+		// 	if (camera->body != target && target->bubble_radius + camera->body->bubble_radius >= calc_dist_vector3_to_vector3(camera->body->center, target->center))
+		// 		if (is_t_mesh_intersecting(camera->body, target) == BOOL_TRUE)
+		// 		{
+		// 			t_mesh_resize(camera->body, create_t_vector3(0.0, -0.2, 0.0));
+		// 			camera->crounch = 1;
+		// 			break ;
+		// 		}
+		// 	i++;
+		// }
+		//
+		// j = 0.5f;
+		// while (i < physic_engine->mesh_list->size)
+		// {
+		// 	target = t_mesh_list_get(physic_engine->mesh_list, i);
+		// 	if (camera->body != target && target->bubble_radius + camera->body->bubble_radius >= calc_dist_vector3_to_vector3(camera->body->center, target->center))
+		// 		test_move_axis(camera->body, &j, create_t_vector3(0, 1, 0), target);
+		// 	if (j != 0.5f)
+		// 	{
+		// 		printf("yo\n");
+		// 		break ;
+		// 	}
+		// 	i++;
+		// }
+		// printf("j = %f\n", j);
+		// if (j == 0.5f)
+		// {
+		// 	t_mesh_resize(camera->body, create_t_vector3(0.0, 0.2, 0.0));
+		// 	camera->crounch = 0;
+		// 	j = 0.0;
+		// }
+		// else
+		// 	j = 0.2;
+	}
+
 	camera->body->force = create_t_vector3(save.x, y, save.z);
-	move_camera(camera, camera->body->force, physic_engine);
+	move_camera(camera, camera->body->force, physic_engine, j);
 	camera->body->force = mult_vector3_by_vector3(camera->body->force, create_t_vector3(0.0, 1.0, 0.0));
 }
 

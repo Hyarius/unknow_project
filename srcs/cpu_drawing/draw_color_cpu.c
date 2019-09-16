@@ -43,7 +43,7 @@ void	draw_triangle_color_cpu(t_view_port *view_port, t_triangle *p_triangle, t_c
 			{
 				float oneOverZ = (triangle.a.z * w0) + (triangle.b.z * w1) + (triangle.c.z * w2);
 				float z = 1 / oneOverZ;
-				if (z <= view_port->depth_buffer[pixel_index])
+				if (z < view_port->depth_buffer[pixel_index])
 				{
 					view_port->depth_buffer[pixel_index] = z;
 					draw_pixel(view_port->window, (int)(pixelSample.x + view_port->pos.x), (int)(pixelSample.y + view_port->pos.y), *p_color);
