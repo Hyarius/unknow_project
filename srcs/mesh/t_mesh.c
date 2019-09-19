@@ -284,3 +284,8 @@ void	t_mesh_resize(t_mesh *mesh, t_vector3 modif)
 		i++;
 	}
 }
+
+void	t_mesh_set_name(t_mesh *mesh, char *name)
+{
+	mesh->name = name;
+}

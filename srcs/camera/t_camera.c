@@ -194,10 +194,8 @@ void		t_camera_change_view(t_camera *cam, float delta_pitch, float delta_yaw)
 
 void		move_camera(t_camera *camera, t_vector3 mouvement, t_physic_engine *physic_engine, float j)
 {
-	// print_t_vector3(camera->body->force, "mouvement");
 	if (can_move(camera->body, physic_engine->mesh_list) == BOOL_TRUE)
 		t_mesh_move(camera->body, camera->body->force);
-	// print_t_vector3(camera->body->force, "mouvement");
 	t_physic_engine_apply_force(physic_engine);
 	camera->pos = add_vector3_to_vector3(camera->pos, camera->body->force);
 	camera->pos = add_vector3_to_vector3(camera->body->pos,
@@ -309,6 +307,25 @@ void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard,
 		// else
 		// 	j = 0.2;
 	}
+	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_F]) == 1)
+	{
+		i = 0;
+		while(i < physic_engine->mesh_list->size)
+		{
+			target = t_mesh_list_get(physic_engine->mesh_list, i);
+			if (camera->body != target && target->bubble_radius + camera->body->bubble_radius >= calc_dist_vector3_to_vector3(camera->body->center, target->center) && ft_strcmp(target->name, "door_close") == 0)
+			{
+				t_mesh_set_name(target, "door_open");
+				t_mesh_rotate_around_point(target, create_t_vector3(0.0, 90.0, 0.0), target->pos);
+			}
+			else if (camera->body != target && target->bubble_radius + camera->body->bubble_radius >= calc_dist_vector3_to_vector3(camera->body->center, target->center) && ft_strcmp(target->name, "door_open") == 0)
+			{
+				t_mesh_set_name(target, "door_close");
+				t_mesh_rotate_around_point(target, create_t_vector3(0.0, -90.0, 0.0), target->pos);
+			}
+			i++;
+		}
+	}
 
 	camera->body->force = create_t_vector3(save.x, y, save.z);
 	move_camera(camera, camera->body->force, physic_engine, j);
@@ -322,6 +339,7 @@ void		handle_t_camera_view_by_mouse(t_camera *cam, t_mouse *p_mouse) // calcul d
 
 	delta_pitch = -(p_mouse->rel_pos.x / 10.0);
 	delta_yaw = p_mouse->rel_pos.y / 10.0;
+	t_mesh_rotate_around_point(cam->body, create_t_vector3(0.0, delta_pitch, 0.0), cam->body->center);
 	t_camera_change_view(cam, delta_yaw, delta_pitch);
 }
 
