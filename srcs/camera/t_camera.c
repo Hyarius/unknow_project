@@ -194,8 +194,10 @@ void		t_camera_change_view(t_camera *cam, float delta_pitch, float delta_yaw)
 
 void		move_camera(t_camera *camera, t_vector3 mouvement, t_physic_engine *physic_engine, float j)
 {
+	// print_t_vector3(camera->body->force, "mouvement");
 	if (can_move(camera->body, physic_engine->mesh_list) == BOOL_TRUE)
 		t_mesh_move(camera->body, camera->body->force);
+	// print_t_vector3(camera->body->force, "mouvement");
 	t_physic_engine_apply_force(physic_engine);
 	camera->pos = add_vector3_to_vector3(camera->pos, camera->body->force);
 	camera->pos = add_vector3_to_vector3(camera->body->pos,

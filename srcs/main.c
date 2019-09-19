@@ -56,6 +56,14 @@ int main(int argc, char **argv)
 		i++;
 	}
 
+	t_mesh	mesh;
+	mesh = create_primitive_cube(create_t_vector3(2.0, 0.0, 2.0), create_t_vector3(0.2, 0.0001, 0.2), NULL, 0.0, "tp1");
+	t_mesh_set_color(&mesh, create_t_color(0.0, 0.0, 1.0, 1.0));
+	t_engine_add_mesh(engine, mesh);
+
+	mesh = create_primitive_cube(create_t_vector3(12.0, 0.0, 12.0), create_t_vector3(0.2, 0.0001, 0.2), NULL, 0.0, "tp2");
+	t_mesh_set_color(&mesh, create_t_color(0.0, 0.0, 1.0, 1.0));
+	t_engine_add_mesh(engine, mesh);
 	// mesh = create_primitive_plane(create_t_vector3(0.0, 0, 0.0), create_t_vector3(10.0, 0.0, 10.0), NULL, 0.0);
 	// // t_mesh_rotate(&mesh, create_t_vector3(45.0, 0.0, 0.0));
 	// t_mesh_set_color(&mesh, create_t_color(0.5, 0.5, 0.5 ,1.0));
