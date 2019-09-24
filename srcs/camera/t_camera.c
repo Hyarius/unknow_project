@@ -17,6 +17,7 @@ t_camera	create_t_camera(t_window *window, t_vector3 p_pos, float p_fov, t_vecto
 	result.running = 1.8f; // action de courir
 	result.slowing = 1.0f; // ralentissement pour le recul
 	result.crounch = 0;
+	result.f_press = 0;
 
 	result.model = create_t_matrix(); // creation de la matrice d'identite permettant de faire les calculs matriciel par la suite
 	t_camera_look_at(&result); //calcul de l'angle de la camera
@@ -211,6 +212,8 @@ void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard,
 	float		y;
 	float		j;
 	int			i;
+	int			k;
+	int			l;
 
 	j = 0.0;
 	i = 0;
@@ -266,66 +269,53 @@ void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard,
 	}
 	else if (camera->crounch == 1)
 	{
-		t_mesh_resize(camera->body, create_t_vector3(0.0, 0.2, 0.0));
-		camera->crounch = 0;
-		j = 0.0;
-		// camera->crounch = 0;
+		k = 0;
+		l = 0;
 		// t_mesh_resize(camera->body, create_t_vector3(0.0, 0.2, 0.0));
-		// while (i < physic_engine->mesh_list->size)
-		// {
-		// 	target = t_mesh_list_get(physic_engine->mesh_list, i);
-		// 	if (camera->body != target && target->bubble_radius + camera->body->bubble_radius >= calc_dist_vector3_to_vector3(camera->body->center, target->center))
-		// 		if (is_t_mesh_intersecting(camera->body, target) == BOOL_TRUE)
-		// 		{
-		// 			t_mesh_resize(camera->body, create_t_vector3(0.0, -0.2, 0.0));
-		// 			camera->crounch = 1;
-		// 			break ;
-		// 		}
-		// 	i++;
-		// }
-		//
-		// j = 0.5f;
-		// while (i < physic_engine->mesh_list->size)
-		// {
-		// 	target = t_mesh_list_get(physic_engine->mesh_list, i);
-		// 	if (camera->body != target && target->bubble_radius + camera->body->bubble_radius >= calc_dist_vector3_to_vector3(camera->body->center, target->center))
-		// 		test_move_axis(camera->body, &j, create_t_vector3(0, 1, 0), target);
-		// 	if (j != 0.5f)
-		// 	{
-		// 		printf("yo\n");
-		// 		break ;
-		// 	}
-		// 	i++;
-		// }
-		// printf("j = %f\n", j);
-		// if (j == 0.5f)
-		// {
-		// 	t_mesh_resize(camera->body, create_t_vector3(0.0, 0.2, 0.0));
-		// 	camera->crounch = 0;
-		// 	j = 0.0;
-		// }
-		// else
-		// 	j = 0.2;
+		while (i < physic_engine->mesh_list->size)
+		{
+			target = t_mesh_list_get(physic_engine->mesh_list, i);
+			if (camera->body != target && target->bubble_radius + camera->body->bubble_radius >= calc_dist_vector3_to_vector3(camera->body->center, target->center))
+			{
+				k++;
+				if (camera->body->pos.y > target->pos.y && camera->body->pos.y - target->pos.y >= 0)
+					l++;
+			}
+			i++;
+		}
+		if (k == l)
+		{
+			t_mesh_resize(camera->body, create_t_vector3(0.0, 0.2, 0.0));
+			camera->crounch = 0;
+			j = 0.0;
+		}
+		else
+			j = 0.2;
 	}
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_F]) == 1)
 	{
 		i = 0;
-		while(i < physic_engine->mesh_list->size)
+		while(i < physic_engine->mesh_list->size && camera->f_press == 0)
 		{
 			target = t_mesh_list_get(physic_engine->mesh_list, i);
 			if (camera->body != target && target->bubble_radius + camera->body->bubble_radius >= calc_dist_vector3_to_vector3(camera->body->center, target->center) && ft_strcmp(target->name, "door_close") == 0)
 			{
 				t_mesh_set_name(target, "door_open");
+				// t_mesh_move(target, create_t_vector3(-1.0, 0.0, 0.0));
 				t_mesh_rotate_around_point(target, create_t_vector3(0.0, 90.0, 0.0), target->pos);
 			}
 			else if (camera->body != target && target->bubble_radius + camera->body->bubble_radius >= calc_dist_vector3_to_vector3(camera->body->center, target->center) && ft_strcmp(target->name, "door_open") == 0)
 			{
 				t_mesh_set_name(target, "door_close");
+				// t_mesh_move(target, create_t_vector3(1.0, 0.0, 0.0));
 				t_mesh_rotate_around_point(target, create_t_vector3(0.0, -90.0, 0.0), target->pos);
 			}
 			i++;
 		}
+		camera->f_press = 1;
 	}
+	else
+		camera->f_press = 0;
 
 	camera->body->force = create_t_vector3(save.x, y, save.z);
 	move_camera(camera, camera->body->force, physic_engine, j);
@@ -339,7 +329,7 @@ void		handle_t_camera_view_by_mouse(t_camera *cam, t_mouse *p_mouse) // calcul d
 
 	delta_pitch = -(p_mouse->rel_pos.x / 10.0);
 	delta_yaw = p_mouse->rel_pos.y / 10.0;
-	t_mesh_rotate_around_point(cam->body, create_t_vector3(0.0, delta_pitch, 0.0), cam->body->center);
+	// t_mesh_rotate_around_point(cam->body, create_t_vector3(0.0, delta_pitch, 0.0), cam->body->center);
 	t_camera_change_view(cam, delta_yaw, delta_pitch);
 }
 

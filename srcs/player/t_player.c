@@ -7,7 +7,7 @@ t_player		create_t_player(t_camera *cam)
 
 //CHANGER POS DE LA HITBOX PAR CAM->POS
 	result.camera = cam;
-	result.hitbox = create_primitive_cube(create_t_vector3(1.0, 1.0, 1.0), create_t_vector3(0.3, 0.5, 0.3), NULL, 0.0, "Player");;
+	result.hitbox = create_primitive_cube(create_t_vector3(20.0, 1.0, 20.0), create_t_vector3(0.3, 0.5, 0.3), NULL, 0.0, "Player");;
 	t_mesh_set_color(&result.hitbox, create_t_color(0.5, 0.6, 0.0 ,1.0));
 	result.hp = 50;
 	printf("Player hp at initialisation = %d\n", result.hp);

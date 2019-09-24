@@ -69,7 +69,12 @@ int main(int argc, char **argv)
 	t_mesh_set_color(&mesh, create_t_color(0.0, 0.0, 1.0, 1.0));
 	t_engine_add_mesh(engine, mesh);
 
-	
+	mesh = create_primitive_cube(create_t_vector3(-5.0, 0.0, 0.5), create_t_vector3(1.0, 2.0, 0.1), NULL, 0.0, "door_close");
+	t_mesh_set_color(&mesh, create_t_color(0.0, 0.0, 1.0, 1.0));
+	t_mesh_rotate_around_point(&mesh, create_t_vector3(0.0, 90.0, 0.0), mesh.pos);
+	t_engine_add_mesh(engine, mesh);
+
+
 	// mesh = create_primitive_plane(create_t_vector3(0.0, 0, 0.0), create_t_vector3(10.0, 0.0, 10.0), NULL, 0.0);
 	// // t_mesh_rotate(&mesh, create_t_vector3(45.0, 0.0, 0.0));
 	// t_mesh_set_color(&mesh, create_t_color(0.5, 0.5, 0.5 ,1.0));
@@ -178,27 +183,27 @@ int main(int argc, char **argv)
 			t_engine_render_camera(engine);
 			drawing_front_pause(main_camera, gui);
 		}
-		if (engine->playing == 2)
+		else if (engine->playing == 2)
 		{
 			draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->menu[0]);
 		}
-		if (engine->playing == 3)
+		else if (engine->playing == 3)
 		{
 			draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->menu[1]);
 		}
-		if (engine->playing == 4)
+		else if (engine->playing == 4)
 		{
 			draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->menu[2]);
 		}
-		if (engine->playing == 5)
+		else if (engine->playing == 5)
 		{
 			draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->menu[4]);
 		}
-		if (engine->playing == 6)
+		else if (engine->playing == 6)
 		{
 			draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->menu[3]);
 		}
-		if (engine->playing == 1)
+		else
 		{
 			t_engine_apply_physic(engine);
 

@@ -73,6 +73,7 @@ void				t_mesh_resize(t_mesh *mesh, t_vector3 modif);
 
 void				t_mesh_set_name(t_mesh *mesh, char *name);
 
+
 typedef struct		s_door
 {
 	t_mesh			mesh;

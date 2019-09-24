@@ -50,6 +50,7 @@ typedef struct	s_camera
 	float		far;
 
 	int			crounch;
+	int			f_press;
 
 }				t_camera;
 
