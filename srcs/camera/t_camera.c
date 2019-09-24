@@ -278,7 +278,7 @@ void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard,
 			if (camera->body != target && target->bubble_radius + camera->body->bubble_radius >= calc_dist_vector3_to_vector3(camera->body->center, target->center))
 			{
 				k++;
-				if (camera->body->pos.y > target->pos.y && camera->body->pos.y - target->pos.y >= 0)
+				if (camera->body->pos.y > target->pos.y || target->pos.y - camera->body->pos.y >= 0.49)
 					l++;
 			}
 			i++;
