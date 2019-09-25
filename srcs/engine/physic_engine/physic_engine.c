@@ -33,14 +33,14 @@ void			free_t_physic_engine(t_physic_engine *dest)
 	free(dest);
 }
 
-void			t_physic_engine_draw_mesh(t_physic_engine *p_physic_engine, t_window *p_win, t_camera *p_cam)
+void			t_physic_engine_draw_mesh(t_physic_engine *p_physic_engine, t_camera *p_cam)
 {
 	int			i;
 
 	i = 0;
 	while (i < p_physic_engine->mesh_list->size)
 	{
-		draw_t_mesh(p_win, p_cam, t_mesh_list_get(p_physic_engine->mesh_list, i));
+		draw_t_mesh(p_cam, t_mesh_list_get(p_physic_engine->mesh_list, i));
 		i++;
 	}
 }
@@ -57,8 +57,50 @@ t_mesh			*t_physic_engine_get_mesh(t_physic_engine *physic_engine, int index)
 
 int				can_move_axis(t_mesh *mesh, t_mesh *target, t_vector3 axis)
 {
+	int			result;
+	t_vector3	tmp;
+	t_triangle	triangle_mesh;
+	t_triangle	triangle_mesh2;
+	t_triangle	triangle_target;
+	t_face		*mesh_face;
+	t_face		*target_face;
+	t_vector3	delta_pos;
+	int			i;
+	int			j;
 
-	return (BOOL_FALSE);
+	result = 0;
+	tmp = mult_vector3_by_vector3(mesh->force, axis);
+	delta_pos = add_vector3_to_vector3(mesh->pos, tmp);
+	clean_t_vector3_list(mesh->vertices_in_world);
+	i = 0;
+	while (i < mesh->vertices->size)
+	{
+		t_vector3_list_push_back(mesh->vertices_in_world, add_vector3_to_vector3(t_vector3_list_at(mesh->vertices, i), delta_pos));
+		i++;
+	}
+	j = 0;
+	while (j < mesh->faces->size)
+	{
+		mesh_face = t_face_list_get(mesh->faces, j);
+		//set_t_face_color(mesh_face, create_t_color(0.0, 1.0, 0.0, 1.0));
+		triangle_mesh = compose_t_triangle_from_t_vertices(mesh->vertices_in_world, mesh_face->index_vertices);
+		i = 0;
+		while (i < target->faces->size)
+		{
+			target_face = t_face_list_get(target->faces, i);
+			triangle_target = compose_t_triangle_from_t_vertices(target->vertices_in_world, target_face->index_vertices);
+			if (is_triangle_in_triangle(triangle_mesh, triangle_target) == BOOL_TRUE)
+			{
+				set_t_face_color(mesh_face, create_t_color(1.0, 0.0, 0.0, 1.0));
+				result++;
+			}
+			i++;
+		}
+		j++;
+	}
+	if (result > 0)
+		return (BOOL_FALSE);
+	return (BOOL_TRUE);
 }
 
 void			test_move_axis(t_mesh *mesh, float *force, t_vector3 axis, t_mesh *target)
@@ -81,24 +123,46 @@ void			test_move_axis(t_mesh *mesh, float *force, t_vector3 axis, t_mesh *target
 		if (i == subdivision)
 			*force = max;
 		t_mesh_compute_next_vertices_in_world(mesh, axis);
+		if (is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
+			*force -= delta;
 	}
 }
 
-int				can_move(t_mesh *mesh, t_mesh_list *mesh_list)
+int				can_move(t_mesh *mesh, t_engine *engine)
 {
 	t_mesh	*target;
 	int		i;
+	int		j;
 
-	//printf("Delta %f - %f - %f\n", delta[0], delta[1], delta[2]);
 	i = 0;
-	while (i < mesh_list->size)
+	while (i < engine->physic_engine->mesh_list->size)
 	{
-		target = t_mesh_list_get(mesh_list, i);
+		target = t_mesh_list_get(engine->physic_engine->mesh_list, i);
 		if (mesh != target && target->bubble_radius + mesh->bubble_radius >= calc_dist_vector3_to_vector3(mesh->center, target->center))
 		{
-			test_move_axis(mesh, &(mesh->force.x), create_t_vector3(1, 0, 0), target);
-			test_move_axis(mesh, &(mesh->force.y), create_t_vector3(0, 1, 0), target);
-			test_move_axis(mesh, &(mesh->force.z), create_t_vector3(0, 0, 1), target);
+			if (target->collectible == 1 && is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
+			{
+				j = 0;
+				while (j < engine->physic_engine->item_list->size)
+				{
+					if (ft_strcmp(target->name, engine->physic_engine->item_list->item[j].name) == 0)
+					{
+						if (engine->physic_engine->item_list->item[j].picked_up == 0)
+						{
+							engine->physic_engine->item_list->item[j].pf(engine->user_engine->player);
+							engine->physic_engine->item_list->item[j].picked_up = 1;
+						}
+					}
+					j++;
+				}
+				t_mesh_set_visibility(target, 0);
+			}
+			else if (target->collectible == 0)
+			{
+				test_move_axis(mesh, &(mesh->force.x), create_t_vector3(1, 0, 0), target);
+				test_move_axis(mesh, &(mesh->force.y), create_t_vector3(0, 1, 0), target);
+				test_move_axis(mesh, &(mesh->force.z), create_t_vector3(0, 0, 1), target);
+			}
 		}
 		i++;
 	}
@@ -116,7 +180,7 @@ void			t_physic_engine_compute_vertices_in_world(t_physic_engine *physic_engine)
 	}
 }
 
-void			t_physic_engine_apply_force(t_physic_engine *physic_engine)
+void			t_physic_engine_apply_force(t_engine *engine)
 {
 	Uint32 	actual_frame;
 	static Uint32 	last_frame = 0;
@@ -126,13 +190,13 @@ void			t_physic_engine_apply_force(t_physic_engine *physic_engine)
 
 	actual_frame = SDL_GetTicks();
 	time_passed = (actual_frame - last_frame) / 1000.0;
-	while (i < physic_engine->mesh_list->size)
+	while (i < engine->physic_engine->mesh_list->size)
 	{
-		mesh = t_mesh_list_get(physic_engine->mesh_list, i);
+		mesh = t_mesh_list_get(engine->physic_engine->mesh_list, i);
 		if (mesh->kinetic > 0)
-			mesh->force = add_vector3_to_vector3(mesh->force, mult_vector3_by_float(physic_engine->gravity_force, mesh->kinetic * time_passed));
+			mesh->force = add_vector3_to_vector3(mesh->force, mult_vector3_by_float(engine->physic_engine->gravity_force, mesh->kinetic * time_passed));
 		if (mesh->force.x != 0 || mesh->force.y != 0 || mesh->force.z != 0)
-			if (can_move(mesh, physic_engine->mesh_list) == BOOL_TRUE)
+			if (can_move(mesh, engine) == BOOL_TRUE)
 				t_mesh_apply_force(mesh);
 		i++;
 
