@@ -1,12 +1,12 @@
 #include "unknow_project.h"
 
-t_player		create_t_player(t_camera *cam)
+t_player		create_t_player(t_camera *cam, t_mesh hitbox)
 {
 	t_player 	result;
 
 //CHANGER POS DE LA HITBOX PAR CAM->POS
 	result.camera = cam;
-	result.hitbox = create_primitive_cube(create_t_vector3(1.0, 1.0, 1.0), create_t_vector3(0.3, 0.5, 0.3), NULL, 0.0, "Player");;
+	result.hitbox = hitbox;
 	t_mesh_set_color(&result.hitbox, create_t_color(0.5, 0.6, 0.0 ,1.0));
 	result.hp = 50;
 	printf("Player hp at initialisation = %d\n", result.hp);
@@ -17,14 +17,14 @@ t_player		create_t_player(t_camera *cam)
 	return (result);
 }
 
-t_player			*initialize_t_player(t_camera *cam)
+t_player			*initialize_t_player(t_camera *cam, t_mesh hitbox)
 {
 	t_player *result;
 
 	if (!(result = (t_player *)malloc(sizeof(t_player))))
 		error_exit(-13, "Can't create a t_player array");
 
-	*result = create_t_player(cam);
+	*result = create_t_player(cam, hitbox);
 
 	return(result);
 }

@@ -269,3 +269,23 @@ void	t_mesh_jump(t_mesh *body, t_vector3 jump)
 	if (body->kinetic < -12.0f)
 		body->kinetic = -12.0f;
 }
+
+void	t_mesh_resize(t_mesh *mesh, t_vector3 modif)
+{
+	t_vector3	tmp;
+	int			i;
+
+	i = 4;
+	while (i <= 7)
+	{
+		tmp = t_vector3_list_at(mesh->vertices, i);
+		tmp = add_vector3_to_vector3(tmp, modif);
+		t_vector3_list_set(mesh->vertices, i, &tmp);
+		i++;
+	}
+}
+
+void	t_mesh_set_name(t_mesh *mesh, char *name)
+{
+	mesh->name = name;
+}

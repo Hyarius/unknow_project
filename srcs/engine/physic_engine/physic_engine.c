@@ -128,20 +128,41 @@ void			test_move_axis(t_mesh *mesh, float *force, t_vector3 axis, t_mesh *target
 	}
 }
 
-int				can_move(t_mesh *mesh, t_mesh_list *mesh_list)
+int				can_move(t_mesh *mesh, t_engine *engine)
 {
 	t_mesh	*target;
 	int		i;
+	int		j;
 
 	i = 0;
-	while (i < mesh_list->size)
+	while (i < engine->physic_engine->mesh_list->size)
 	{
-		target = t_mesh_list_get(mesh_list, i);
+		target = t_mesh_list_get(engine->physic_engine->mesh_list, i);
 		if (mesh != target && target->bubble_radius + mesh->bubble_radius >= calc_dist_vector3_to_vector3(mesh->center, target->center))
 		{
-			test_move_axis(mesh, &(mesh->force.x), create_t_vector3(1, 0, 0), target);
-			test_move_axis(mesh, &(mesh->force.y), create_t_vector3(0, 1, 0), target);
-			test_move_axis(mesh, &(mesh->force.z), create_t_vector3(0, 0, 1), target);
+			if (target->collectible == 1 && is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
+			{
+				j = 0;
+				while (j < engine->physic_engine->item_list->size)
+				{
+					if (ft_strcmp(target->name, engine->physic_engine->item_list->item[j].name) == 0)
+					{
+						if (engine->physic_engine->item_list->item[j].picked_up == 0)
+						{
+							engine->physic_engine->item_list->item[j].pf(engine->user_engine->player);
+							engine->physic_engine->item_list->item[j].picked_up = 1;
+						}
+					}
+					j++;
+				}
+				t_mesh_set_visibility(target, 0);
+			}
+			else if (target->collectible == 0)
+			{
+				test_move_axis(mesh, &(mesh->force.x), create_t_vector3(1, 0, 0), target);
+				test_move_axis(mesh, &(mesh->force.y), create_t_vector3(0, 1, 0), target);
+				test_move_axis(mesh, &(mesh->force.z), create_t_vector3(0, 0, 1), target);
+			}
 		}
 		i++;
 	}
@@ -159,7 +180,7 @@ void			t_physic_engine_compute_vertices_in_world(t_physic_engine *physic_engine)
 	}
 }
 
-void			t_physic_engine_apply_force(t_physic_engine *physic_engine)
+void			t_physic_engine_apply_force(t_engine *engine)
 {
 	Uint32 	actual_frame;
 	static Uint32 	last_frame = 0;
@@ -169,13 +190,13 @@ void			t_physic_engine_apply_force(t_physic_engine *physic_engine)
 
 	actual_frame = SDL_GetTicks();
 	time_passed = (actual_frame - last_frame) / 1000.0;
-	while (i < physic_engine->mesh_list->size)
+	while (i < engine->physic_engine->mesh_list->size)
 	{
-		mesh = t_mesh_list_get(physic_engine->mesh_list, i);
+		mesh = t_mesh_list_get(engine->physic_engine->mesh_list, i);
 		if (mesh->kinetic > 0)
-			mesh->force = add_vector3_to_vector3(mesh->force, mult_vector3_by_float(physic_engine->gravity_force, mesh->kinetic * time_passed));
+			mesh->force = add_vector3_to_vector3(mesh->force, mult_vector3_by_float(engine->physic_engine->gravity_force, mesh->kinetic * time_passed));
 		if (mesh->force.x != 0 || mesh->force.y != 0 || mesh->force.z != 0)
-			if (can_move(mesh, physic_engine->mesh_list) == BOOL_TRUE)
+			if (can_move(mesh, engine) == BOOL_TRUE)
 				t_mesh_apply_force(mesh);
 		i++;
 

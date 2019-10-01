@@ -2,13 +2,11 @@
 
 void		check_frame(void)
 {
-	static int		nb_frame;
-	static int		beginsecond;
+	static int		nb_frame = 0;
+	static int		beginsecond = 0;
 	int				frame_actual;
 	static Uint32	framestart;
 
-	nb_frame = 0;
-	beginsecond = 0;
 	frame_actual = SDL_GetTicks();
 	if (beginsecond == 0)
 		beginsecond = frame_actual;

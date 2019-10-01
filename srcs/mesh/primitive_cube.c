@@ -57,9 +57,9 @@ static void	t_mesh_init_face_primitive_cube_next(t_mesh *result, t_face tmp_face
 static void	t_mesh_init_face_primitive_cube(t_mesh *result, t_face tmp_face1, t_face tmp_face2)
 {
 	set_t_face_vertices(&tmp_face1, 2, 3, 1);
-	set_t_face_uvs(&tmp_face1, 4, 3, 1);
+	set_t_face_uvs(&tmp_face1, 0, 1, 3);
 	set_t_face_vertices(&tmp_face2, 0, 1, 3);
-	set_t_face_uvs(&tmp_face2, 0, 1, 3);
+	set_t_face_uvs(&tmp_face2, 2, 3, 1);
 	t_mesh_add_face(result, tmp_face1);
 	t_mesh_add_face(result, tmp_face2);
 	set_t_face_vertices(&tmp_face1, 6, 5, 7);

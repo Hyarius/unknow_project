@@ -87,13 +87,13 @@ void	print_letter(t_camera *main_camera, t_gui *gui, char *str, t_rectangle rec)
 	draw_buffer_opengl(main_camera->view_port->window, main_camera->view_port->window->color_data);
 }
 
-void	print_info_bar(t_camera *main_camera, t_gui *gui)
+void	print_info_bar(t_camera *main_camera, t_player *player, t_gui *gui)
 {
 	char	*str;
 
-	str = ft_itoa((int)(gui->perso.hp * 100));
+	str = ft_itoa(player->hp);
 	print_letter(main_camera, gui, ft_strcat(str, " / 100"), create_t_rectangle(create_t_vector2(-0.1, -0.92), create_t_vector2(0.02, 0.07)));
-	str = ft_itoa(gui->perso.mun);
+	str = ft_itoa(player->ammo.pistol_ammo);
 	print_letter(main_camera, gui, ft_strcat(str, " / 30"), create_t_rectangle(create_t_vector2(0.78, -0.90), create_t_vector2(0.01, 0.05)));
 	free(str);
 }
