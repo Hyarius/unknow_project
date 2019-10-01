@@ -65,11 +65,11 @@ int main(int argc, char **argv)
 	t_mesh_set_color(&mesh, create_t_color(0.0, 0.0, 1.0, 1.0));
 	t_engine_add_mesh(engine, mesh);
 
-	mesh = create_primitive_cube(create_t_vector3(-0.5, 0.0, 5.0), create_t_vector3(1.0, 2.0, 0.1), NULL, 0.0, "door_close");
+	mesh = create_primitive_cube(create_t_vector3(-0.5, 0.0, 5.0), create_t_vector3(1.0, 2.0, 0.1), NULL, 0.0, "door");
 	t_mesh_set_color(&mesh, create_t_color(0.0, 0.0, 1.0, 1.0));
 	t_engine_add_mesh(engine, mesh);
 
-	mesh = create_primitive_cube(create_t_vector3(-5.0, 0.0, 0.5), create_t_vector3(1.0, 2.0, 0.1), NULL, 0.0, "door_close");
+	mesh = create_primitive_cube(create_t_vector3(-5.0, 0.0, 0.5), create_t_vector3(1.0, 2.0, 0.1), NULL, 0.0, "door");
 	t_mesh_set_color(&mesh, create_t_color(0.0, 0.0, 1.0, 1.0));
 	t_mesh_rotate_around_point(&mesh, create_t_vector3(0.0, 90.0, 0.0), mesh.pos);
 	t_engine_add_mesh(engine, mesh);
@@ -144,36 +144,6 @@ int main(int argc, char **argv)
 	// is_collectible(engine, engine->physic_engine->mesh_list, item_list);
 	while (engine->playing != 0)
 	{
-		//target = NULL;
-		//target = cast_ray(engine, main_camera->pos, main_camera->forward);
-		// if (target != NULL)
-		// {
-		// 	// printf("Object hit : \n");
-		// 	t_mesh_set_color(target, create_t_color(1, 0, 0, 1));
-		// }
-		//draw_minimap(main_camera, engine, win);
-				/*
-		penser a faire un initialize t_item
-		*/
-		// if ((target->mesh = cast_ray(engine, main_camera->pos, create_t_vector3(0.0, -1.0, 0.0))) != NULL)
-		// {
-		// 	// if (target->mesh->collectible == 1)
-		// 	// 	t_mesh_set_visibility(target->mesh, 0);
-		// 	// target->pf(player);
-		// }
-		// target->mesh = cast_ray(engine, player.camera.pos ,create_t_vector3(0.0, -1.0, 0.0));
-		// target->name = target->mesh->name;
-		// if (ft_strcmp("Health Pack", target->name))
-		// 	target->type = 0;
-		// printf("target name = %s\n", target->name);
-		// printf("target type = %d\n", target->type);
-		// if ((target->type == 0 || target->type == 1 || target->type == 2))
-		// {
-		// 	//target->pf(player);
-		// 	//t_mesh_set_visibility(target->mesh, 0);
-		// 	//t_mesh_list_erase(engine->physic_engine->mesh_list, t_mesh_list_get_index(engine->physic_engine->mesh_list, target));
-		// 	//printf("test\n");
-		// }
 		prepare_screen(win, create_t_color(0.2f, 0.2f, 0.2f, 1.0f));
 		t_engine_prepare_camera(engine);
 

@@ -7,6 +7,7 @@ t_camera	create_t_camera(t_window *window, t_vector3 p_pos, float p_fov, t_vecto
 	result.view_port = initialize_t_view_port(window, create_t_vector2_int(0, 0), create_t_vector2_int(window->size_x, window->size_y));
 
 	result.body = NULL;
+	// result.foot = NULL;
 	result.pos = p_pos; //position de la camera
 	result.fov = p_fov; // champ de vision
 	result.near = p_dist.x; //distance la plus proche pour voir un objet
@@ -197,6 +198,7 @@ void		move_camera(t_camera *camera, t_vector3 mouvement, t_physic_engine *physic
 {
 	if (can_move(camera->body, physic_engine->mesh_list) == BOOL_TRUE)
 		t_mesh_move(camera->body, camera->body->force);
+	// print_t_vector3(camera->body->force, "force");
 	t_physic_engine_apply_force(physic_engine);
 	camera->pos = add_vector3_to_vector3(camera->pos, camera->body->force);
 	camera->pos = add_vector3_to_vector3(camera->body->pos,
@@ -206,10 +208,12 @@ void		move_camera(t_camera *camera, t_vector3 mouvement, t_physic_engine *physic
 void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard, t_physic_engine *physic_engine) // calcul du mouvement de la cameraera au clavier
 {
 	t_mesh		*target;
+	static t_mesh	*door = NULL;
 	t_vector3	tmp;
 	t_vector3	mouvement;
 	t_vector3	save;
 	float		y;
+	float		x;
 	float		j;
 	int			i;
 	int			k;
@@ -271,7 +275,6 @@ void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard,
 	{
 		k = 0;
 		l = 0;
-		// t_mesh_resize(camera->body, create_t_vector3(0.0, 0.2, 0.0));
 		while (i < physic_engine->mesh_list->size)
 		{
 			target = t_mesh_list_get(physic_engine->mesh_list, i);
@@ -298,17 +301,10 @@ void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard,
 		while(i < physic_engine->mesh_list->size && camera->f_press == 0)
 		{
 			target = t_mesh_list_get(physic_engine->mesh_list, i);
-			if (camera->body != target && target->bubble_radius + camera->body->bubble_radius >= calc_dist_vector3_to_vector3(camera->body->center, target->center) && ft_strcmp(target->name, "door_close") == 0)
+			if (camera->body != target && target->bubble_radius + camera->body->bubble_radius >= calc_dist_vector3_to_vector3(camera->body->center, target->center) && ft_strcmp(target->name, "door") == 0)
 			{
-				t_mesh_set_name(target, "door_open");
-				// t_mesh_move(target, create_t_vector3(-1.0, 0.0, 0.0));
-				t_mesh_rotate_around_point(target, create_t_vector3(0.0, 90.0, 0.0), target->pos);
-			}
-			else if (camera->body != target && target->bubble_radius + camera->body->bubble_radius >= calc_dist_vector3_to_vector3(camera->body->center, target->center) && ft_strcmp(target->name, "door_open") == 0)
-			{
-				t_mesh_set_name(target, "door_close");
-				// t_mesh_move(target, create_t_vector3(1.0, 0.0, 0.0));
-				t_mesh_rotate_around_point(target, create_t_vector3(0.0, -90.0, 0.0), target->pos);
+				target->door.move = 1;
+				door = target;
 			}
 			i++;
 		}
@@ -317,6 +313,8 @@ void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard,
 	else
 		camera->f_press = 0;
 
+	if (door != NULL)
+		t_mesh_move_door(door);
 	camera->body->force = create_t_vector3(save.x, y, save.z);
 	move_camera(camera, camera->body->force, physic_engine, j);
 	camera->body->force = mult_vector3_by_vector3(camera->body->force, create_t_vector3(0.0, 1.0, 0.0));

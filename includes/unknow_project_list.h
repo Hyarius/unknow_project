@@ -40,11 +40,4 @@ void			clean_t_camera_list(t_camera_list *dest);
 t_camera		t_camera_list_at(t_camera_list *dest, int index);
 t_camera		*t_camera_list_get(t_camera_list *dest, int index);
 
-typedef struct	s_door_list
-{
-	t_door		*door;
-	int			size;
-	int			max_size;
-}				t_door_list;
-
 #endif

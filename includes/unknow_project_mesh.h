@@ -4,6 +4,17 @@
 # include "unknow_project_basic_list.h"
 # include "unknow_project_window.h"
 
+typedef struct		s_door
+{
+	float			tick;
+	int				state;
+	int				move;
+}					t_door;
+
+t_door	create_t_door(void);
+t_door	*initialize_t_door(void);
+
+
 typedef struct		s_mesh
 {
 	struct s_camera	*camera;
@@ -32,6 +43,7 @@ typedef struct		s_mesh
 	t_face_list		*faces;
 
 	char			*name;
+	t_door			door;
 }					t_mesh;
 
 t_mesh				create_t_mesh(t_vector3 pos, char *name);
@@ -73,13 +85,6 @@ void				t_mesh_resize(t_mesh *mesh, t_vector3 modif);
 
 void				t_mesh_set_name(t_mesh *mesh, char *name);
 
-
-typedef struct		s_door
-{
-	t_mesh			mesh;
-	float			tick;
-	int				state;
-	int				press;
-}					t_door;
+void				t_mesh_move_door(t_mesh	*mesh);
 
 #endif

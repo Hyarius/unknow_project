@@ -10,6 +10,7 @@
 typedef struct	s_camera
 {
 	t_mesh		*body;
+	// t_mesh		*foot;
 	t_view_port *view_port;
 
 	t_matrix	model;
