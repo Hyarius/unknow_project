@@ -236,7 +236,7 @@ void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard,
 	{
 		tmp = create_t_vector3(camera->speed / camera->slowing, 0.0, camera->speed / camera->slowing);
 		camera->body->force = add_vector3_to_vector3(mult_vector3_by_vector3(normalize_t_vector3(mult_vector3_by_vector3(camera->forward, create_t_vector3(-1.0, 0.0, -1.0))), tmp), mouvement);
-		save = create_t_vector3(camera->body->force.x, 0, camera->body->force.z);
+		save = create_t_vector3(camera->body->force.x, 0.02, camera->body->force.z);
 	}
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_W]) == 1)
 	{
@@ -244,7 +244,7 @@ void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard,
 		if (save.x != 0 || save.y != 0 || save.z != 0)
 			save = add_vector3_to_vector3(divide_vector3_by_float(camera->body->force, 2), divide_vector3_by_float(save, 2));
 		else
-			save = create_t_vector3(camera->body->force.x, 0, camera->body->force.z);
+			save = create_t_vector3(camera->body->force.x, 0.02, camera->body->force.z);
 	}
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_D]) == 1)
 	{
@@ -252,7 +252,7 @@ void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard,
 		if (save.x != 0 || save.y != 0 || save.z != 0)
 			save = add_vector3_to_vector3(divide_vector3_by_float(camera->body->force, 2), divide_vector3_by_float(save, 2));
 		else
-			save = create_t_vector3(camera->body->force.x, 0, camera->body->force.z);
+			save = create_t_vector3(camera->body->force.x, 0.02, camera->body->force.z);
 }
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_A]) == 1)
 	{
@@ -260,7 +260,7 @@ void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard,
 		if (save.x != 0 || save.y != 0 || save.z != 0)
 			save = add_vector3_to_vector3(divide_vector3_by_float(camera->body->force, 2), divide_vector3_by_float(save, 2));
 		else
-			save = create_t_vector3(camera->body->force.x, 0, camera->body->force.z);
+			save = create_t_vector3(camera->body->force.x, 0.02, camera->body->force.z);
 	}
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_LCTRL]) == 1)
 	{

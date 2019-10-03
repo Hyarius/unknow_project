@@ -44,6 +44,8 @@ int main(int argc, char **argv)
 	// t_mesh mesh = read_obj_file("pawn.obj", create_t_vector3(2.9, 10.0, 2.9), create_t_vector3(0.1, 0.11, 0.1), 100.0);
 	// t_mesh_set_color(&mesh, create_t_color(1.5, 0.8, 1.5, 1.0));
 	// t_engine_add_mesh(engine, mesh);
+
+
 	link_t_camera_to_t_mesh(main_camera, t_engine_get_mesh(engine, 0), 100);
 
 
@@ -57,6 +59,7 @@ int main(int argc, char **argv)
 	}
 
 	t_mesh	mesh;
+
 	mesh = create_primitive_cube(create_t_vector3(2.0, 0.0, 2.0), create_t_vector3(0.2, 0.0001, 0.2), NULL, 0.0, "tp1");
 	t_mesh_set_color(&mesh, create_t_color(0.0, 0.0, 1.0, 1.0));
 	t_engine_add_mesh(engine, mesh);
@@ -74,6 +77,68 @@ int main(int argc, char **argv)
 	t_mesh_rotate_around_point(&mesh, create_t_vector3(0.0, 90.0, 0.0), mesh.pos);
 	t_engine_add_mesh(engine, mesh);
 
+	mesh = create_primitive_cube(create_t_vector3(2.0, 5.0, 2.0), create_t_vector3(0.3, 0.5, 0.3), NULL, 100.0, "s");
+	t_mesh_set_color(&mesh, create_t_color(0.0, 0.0, 1.0, 1.0));
+	t_mesh_rotate_around_point(&mesh, create_t_vector3(0.0, 90.0, 0.0), mesh.pos);
+	t_engine_add_mesh(engine, mesh);
+
+	mesh = create_primitive_cube(create_t_vector3(9.99, 0.0, -10.0), create_t_vector3(1.0, 10.0, 0.01), NULL, 0.0, "ladder");
+	t_mesh_set_color(&mesh, create_t_color(0.0, 0.0, 1.0, 1.0));
+	t_mesh_rotate_around_point(&mesh, create_t_vector3(0.0, 90.0, 0.0), mesh.pos);
+	t_engine_add_mesh(engine, mesh);
+
+	mesh = create_primitive_cube(create_t_vector3(10.0, 0.0, -10.0), create_t_vector3(1.0, 10.0, 1.0), NULL, 0.0, "cube");
+	t_mesh_set_color(&mesh, create_t_color(1.0, 0.0, 1.0, 1.0));
+	t_mesh_rotate_around_point(&mesh, create_t_vector3(0.0, 90.0, 0.0), mesh.pos);
+	t_engine_add_mesh(engine, mesh);
+
+	mesh = create_primitive_cube(create_t_vector3(-10.0, 0.0, 8.0), create_t_vector3(1.0, 0.1, 1.0), NULL, 0.0, "stair");
+	t_mesh_set_color(&mesh, create_t_color(1.0, 1.0, 0.0, 1.0));
+	t_mesh_rotate_around_point(&mesh, create_t_vector3(0.0, 90.0, 0.0), mesh.pos);
+	t_engine_add_mesh(engine, mesh);
+
+
+	mesh = create_primitive_cube(create_t_vector3(-10.0, 0.1, 8.5), create_t_vector3(1.0, 0.1, 1.0), NULL, 0.0, "stair");
+	t_mesh_set_color(&mesh, create_t_color(1.0, 1.0, 0.0, 1.0));
+	t_mesh_rotate_around_point(&mesh, create_t_vector3(0.0, 90.0, 0.0), mesh.pos);
+	t_engine_add_mesh(engine, mesh);
+	mesh = create_primitive_cube(create_t_vector3(-10.0, 0.2, 9.0), create_t_vector3(1.0, 0.1, 1.0), NULL, 0.0, "stair");
+	t_mesh_set_color(&mesh, create_t_color(1.0, 1.0, 0.0, 1.0));
+	t_mesh_rotate_around_point(&mesh, create_t_vector3(0.0, 90.0, 0.0), mesh.pos);
+	t_engine_add_mesh(engine, mesh);
+	mesh = create_primitive_cube(create_t_vector3(-10.0, 0.3, 9.5), create_t_vector3(1.0, 0.1, 1.0), NULL, 0.0, "stair");
+	t_mesh_set_color(&mesh, create_t_color(1.0, 1.0, 0.0, 1.0));
+	t_mesh_rotate_around_point(&mesh, create_t_vector3(0.0, 90.0, 0.0), mesh.pos);
+	t_engine_add_mesh(engine, mesh);
+	mesh = create_primitive_cube(create_t_vector3(-10.0, 0.4, 10.0), create_t_vector3(1.0, 0.1, 1.0), NULL, 0.0, "stair");
+	t_mesh_set_color(&mesh, create_t_color(1.0, 1.0, 0.0, 1.0));
+	t_mesh_rotate_around_point(&mesh, create_t_vector3(0.0, 90.0, 0.0), mesh.pos);
+	t_engine_add_mesh(engine, mesh);
+	mesh = create_primitive_cube(create_t_vector3(-10.0, 0.5, 10.5), create_t_vector3(1.0, 0.1, 1.0), NULL, 0.0, "stair");
+	t_mesh_set_color(&mesh, create_t_color(1.0, 1.0, 0.0, 1.0));
+	t_mesh_rotate_around_point(&mesh, create_t_vector3(0.0, 90.0, 0.0), mesh.pos);
+	t_engine_add_mesh(engine, mesh);
+	mesh = create_primitive_cube(create_t_vector3(-10.0, 0.6, 11.0), create_t_vector3(1.0, 0.1, 1.0), NULL, 0.0, "stair");
+	t_mesh_set_color(&mesh, create_t_color(1.0, 1.0, 0.0, 1.0));
+	t_mesh_rotate_around_point(&mesh, create_t_vector3(0.0, 90.0, 0.0), mesh.pos);
+	t_engine_add_mesh(engine, mesh);
+	mesh = create_primitive_cube(create_t_vector3(-10.0, 0.7, 11.5), create_t_vector3(1.0, 0.1, 1.0), NULL, 0.0, "stair");
+	t_mesh_set_color(&mesh, create_t_color(1.0, 1.0, 0.0, 1.0));
+	t_mesh_rotate_around_point(&mesh, create_t_vector3(0.0, 90.0, 0.0), mesh.pos);
+	t_engine_add_mesh(engine, mesh);
+	mesh = create_primitive_cube(create_t_vector3(-10.0, 0.8, 12.0), create_t_vector3(1.0, 0.1, 1.0), NULL, 0.0, "stair");
+	t_mesh_set_color(&mesh, create_t_color(1.0, 1.0, 0.0, 1.0));
+	t_mesh_rotate_around_point(&mesh, create_t_vector3(0.0, 90.0, 0.0), mesh.pos);
+	t_engine_add_mesh(engine, mesh);
+	mesh = create_primitive_cube(create_t_vector3(-10.0, 0.9, 12.5), create_t_vector3(1.0, 0.1, 1.0), NULL, 0.0, "stair");
+	t_mesh_set_color(&mesh, create_t_color(1.0, 1.0, 0.0, 1.0));
+	t_mesh_rotate_around_point(&mesh, create_t_vector3(0.0, 90.0, 0.0), mesh.pos);
+	t_engine_add_mesh(engine, mesh);
+
+	mesh = create_primitive_cube(create_t_vector3(-10.0, 0.1, 5.0), create_t_vector3(10.0, 0.05, 1.0), NULL, 0.0, "stair");
+	t_mesh_set_color(&mesh, create_t_color(1.0, 0.0, 1.0, 1.0));
+	t_mesh_rotate_around_point(&mesh, create_t_vector3(10.0, 90.0, 0.0), mesh.pos);
+	t_engine_add_mesh(engine, mesh);
 
 	// mesh = create_primitive_plane(create_t_vector3(0.0, 0, 0.0), create_t_vector3(10.0, 0.0, 10.0), NULL, 0.0);
 	// // t_mesh_rotate(&mesh, create_t_vector3(45.0, 0.0, 0.0));
