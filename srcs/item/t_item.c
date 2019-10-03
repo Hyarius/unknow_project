@@ -4,14 +4,12 @@ void		heal(t_player *player)
 {
 	int to_heal;
 
-	printf("HP before = %d\n", player->hp);
 	to_heal = 20;
 	if (player->hp < 100)
 	{
 		while (player->hp < 100 && to_heal-- > 0)
 			player->hp += 1;
 	}
-	printf("HP now = %d\n", player->hp);
 }
 
 void		refill(t_player *player)
@@ -30,14 +28,12 @@ void		protect(t_player *player)
 {
 	int to_protect;
 
-	printf("armor before = %d\n", player->armor);
 	to_protect = 20;
 	if (player->armor < 100)
 	{
 		while (player->armor < 100 && to_protect-- > 0)
 			player->armor += 1;
 	}
-	printf("armor now = %d\n", player->armor);
 }
 
 t_item		create_health_pack(t_vector3 pos, t_engine *engine)
@@ -52,7 +48,6 @@ t_item		create_health_pack(t_vector3 pos, t_engine *engine)
 	str = ft_strcpy(str, "Health Pack ");
 	str = ft_strcat(str, ft_itoa(num++));
 	item.name = str;
-	printf("Item name = %s\n", item.name);
 	result = create_primitive_cube(pos, create_t_vector3(0.2, 0.05, 0.2), NULL, 0.0, item.name);
 	t_mesh_rotate(&result, create_t_vector3(0.0, 0.0, 0.0));
 	t_mesh_set_color(&result, create_t_color(0.8, 0.0, 0.0 ,1.0));

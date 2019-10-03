@@ -4,6 +4,16 @@
 # include "unknow_project_basic_list.h"
 # include "unknow_project_window.h"
 
+typedef struct		s_door
+{
+	float			tick;
+	int				state;
+	int				move;
+}					t_door;
+
+t_door			create_t_door(void);
+t_door			*initialize_t_door(void);
+
 typedef struct		s_mesh
 {
 	struct s_camera	*camera;
@@ -32,6 +42,7 @@ typedef struct		s_mesh
 	t_face_list		*faces;
 
 	char			*name;
+	t_door			door;
 }					t_mesh;
 
 t_mesh			create_t_mesh(t_vector3 pos, char *name);
@@ -68,9 +79,7 @@ void			t_mesh_compute_vertices_in_world(t_mesh *dest);
 void			t_mesh_compute_next_vertices_in_world(t_mesh *dest, t_vector3 axis);
 
 void			t_mesh_jump(t_mesh *body, t_vector3 jump);
-
-void				t_mesh_resize(t_mesh *mesh, t_vector3 modif);
-
-void				t_mesh_set_name(t_mesh *mesh, char *name);
-
+void			t_mesh_resize(t_mesh *mesh, t_vector3 modif);
+void			t_mesh_set_name(t_mesh *mesh, char *name);
+void			t_mesh_move_door(t_mesh	*mesh);
 #endif

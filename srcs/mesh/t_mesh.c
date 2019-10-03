@@ -31,6 +31,8 @@ t_mesh	create_t_mesh(t_vector3 pos, char *name)
 		str = ft_strcat(str, ft_itoa(num++));
 		result.name = str;
 	}
+	if (ft_strcmp(result.name, "door") == 0)
+		result.door = create_t_door();
 	t_mesh_look_at(&result);
 	return (result);
 }
@@ -288,4 +290,30 @@ void	t_mesh_resize(t_mesh *mesh, t_vector3 modif)
 void	t_mesh_set_name(t_mesh *mesh, char *name)
 {
 	mesh->name = name;
+}
+
+void	t_mesh_move_door(t_mesh *mesh)
+{
+	if (mesh->door.tick <= 5 && mesh->door.state == 0 && mesh->door.move == 1)
+	{
+		mesh->pos = add_vector3_to_vector3(mesh->pos, create_t_vector3(0.0, 0.12, 0.0));
+		mesh->center = add_vector3_to_vector3(mesh->center, create_t_vector3(0.0, 0.12, 0.0));
+		mesh->door.tick++;
+		if (mesh->door.tick == 5)
+		{
+			mesh->door.state = 1;
+			mesh->door.move = 0;
+		}
+	}
+	if (mesh->door.tick >= 0 && mesh->door.state == 1 && mesh->door.move == 1)
+	{
+		mesh->pos = add_vector3_to_vector3(mesh->pos, create_t_vector3(0.0, -0.12, 0.0));
+		mesh->center = add_vector3_to_vector3(mesh->center, create_t_vector3(0.0, -0.12, 0.0));
+		mesh->door.tick--;
+		if (mesh->door.tick == 0)
+		{
+			mesh->door.state = 0;
+			mesh->door.move = 0;
+		}
+	}
 }

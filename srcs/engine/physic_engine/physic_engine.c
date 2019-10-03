@@ -124,7 +124,11 @@ void			test_move_axis(t_mesh *mesh, float *force, t_vector3 axis, t_mesh *target
 			*force = max;
 		t_mesh_compute_next_vertices_in_world(mesh, axis);
 		if (is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
+		{
 			*force -= delta;
+			if (ft_strcmp(target->name, "ladder") == 0)
+				mesh->force.y = 0.02;
+		}
 	}
 }
 
@@ -157,10 +161,14 @@ int				can_move(t_mesh *mesh, t_engine *engine)
 				}
 				t_mesh_set_visibility(target, 0);
 			}
+			if (is_t_mesh_intersecting(mesh, target) == BOOL_TRUE && ft_strcmp(target->name, "stair") == 0)
+			{
+				mesh->force.y = 0.015;
+			}
 			else if (target->collectible == 0)
 			{
-				test_move_axis(mesh, &(mesh->force.x), create_t_vector3(1, 0, 0), target);
 				test_move_axis(mesh, &(mesh->force.y), create_t_vector3(0, 1, 0), target);
+				test_move_axis(mesh, &(mesh->force.x), create_t_vector3(1, 0, 0), target);
 				test_move_axis(mesh, &(mesh->force.z), create_t_vector3(0, 0, 1), target);
 			}
 		}

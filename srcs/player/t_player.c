@@ -9,7 +9,6 @@ t_player		create_t_player(t_camera *cam, t_mesh hitbox)
 	result.hitbox = hitbox;
 	t_mesh_set_color(&result.hitbox, create_t_color(0.5, 0.6, 0.0 ,1.0));
 	result.hp = 50;
-	printf("Player hp at initialisation = %d\n", result.hp);
 	result.armor = 0;
 	result.speed = 1.0;
 	result.ammo = create_t_ammo();
