@@ -149,13 +149,15 @@ int				can_move(t_mesh *mesh, t_engine *engine)
 					{
 						if (engine->physic_engine->item_list->item[j].picked_up == 0)
 						{
-							engine->physic_engine->item_list->item[j].pf(engine->user_engine->player);
-							engine->physic_engine->item_list->item[j].picked_up = 1;
+							if (engine->physic_engine->item_list->item[j].pf(engine->user_engine->player) == BOOL_TRUE)
+							{	
+								t_mesh_set_visibility(target, 0);
+								engine->physic_engine->item_list->item[j].picked_up = 1;
+							}
 						}
 					}
 					j++;
 				}
-				t_mesh_set_visibility(target, 0);
 			}
 			else if (target->collectible == 0)
 			{

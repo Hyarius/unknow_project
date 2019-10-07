@@ -1,7 +1,5 @@
 #include "unknow_project.h"
 
-int find;
-
 void	draw_triangle_color_cpu(t_view_port *view_port, t_triangle *p_triangle, t_color *p_color)
 {
 	t_vector3		min;
@@ -91,7 +89,6 @@ void	multithreading_draw_triangle_color_cpu(t_view_port *p_view_port, t_triangle
 	int i;
 	int nb_thread;
 
-	find = 0;
 	start = 0;
 	modulo = p_triangle_list->size % NB_THREAD_MAX;
 	i = 0;

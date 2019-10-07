@@ -2,46 +2,34 @@
 
 void	draw_triangle_texture_cpu(t_view_port *p_view_port, t_triangle *p_triangle, t_uv *p_uv)
 {
-	t_texture		*texture;
-	t_triangle		triangle;
 	t_vector3		min;
 	t_vector3		max;
-	t_vector3		current;
-	t_rasterizer	ab;
-	t_rasterizer	ac;
-	t_rasterizer	bc;
-	float			alpha;
-	float			beta;
-	float			gamma;
+	t_triangle		triangle;
+	t_triangle		st;
+	t_color			rgb;
+	float			s;
+	float			t;
 	int				pixel_index;
-	t_color			color;
-
-	texture = p_uv->texture;
-
-	t_vector3 pixel;
-	t_triangle uv;
 
 	triangle.a = convert_opengl_to_vector3(p_view_port, p_triangle->a);
 	triangle.b = convert_opengl_to_vector3(p_view_port, p_triangle->b);
 	triangle.c = convert_opengl_to_vector3(p_view_port, p_triangle->c);
 
-	p_uv->uv.a.z = triangle.a.z;
-	p_uv->uv.b.z = triangle.b.z;
-	p_uv->uv.c.z = triangle.c.z;
+	st = create_t_triangle(create_t_vector3(p_uv->uv.a.x, p_uv->uv.a.y, p_uv->uv.a.z),
+						create_t_vector3(p_uv->uv.b.x, p_uv->uv.b.y, p_uv->uv.b.z),
+						create_t_vector3(p_uv->uv.c.x, p_uv->uv.c.y, p_uv->uv.c.z));
 
-	if (triangle.a.z != 0)
-		triangle.a.z = 1.0 / triangle.a.z;
-	if (triangle.b.z != 0)
-		triangle.b.z = 1.0 / triangle.b.z;
-	if (triangle.c.z != 0)
-		triangle.c.z = 1.0 / triangle.c.z;
+	st.a.x /= triangle.a.z;
+	st.a.y /= triangle.a.z;
+	st.b.x /= triangle.b.z;
+	st.b.y /= triangle.b.z;
+	st.c.x /= triangle.c.z;
+	st.c.y /= triangle.c.z;
 
+	triangle.a.z = 1.0 / triangle.a.z;
+	triangle.b.z = 1.0 / triangle.b.z;
+	triangle.c.z = 1.0 / triangle.c.z;
 
-	ab = create_t_rasterizer(triangle.a, triangle.b, triangle.c);
-	ac = create_t_rasterizer(triangle.a, triangle.c, triangle.b);
-	bc = create_t_rasterizer(triangle.b, triangle.c, triangle.a);
-
-	t_triangle_get_min_max_value(&triangle, &min, &max);
 	t_triangle_get_min_max_value(&triangle, &min, &max);
 
 	if (min.x < 0)
@@ -53,43 +41,144 @@ void	draw_triangle_texture_cpu(t_view_port *p_view_port, t_triangle *p_triangle,
 	if (max.y >= p_view_port->size.y)
 		max.y = p_view_port->size.y - 1;
 
-	current = min;
-	while (current.y <= max.y)
+	float area = edge_t_vector3(triangle.a, triangle.b, triangle.c);
+	// printf("%f\n", area);
+	for (int y = min.y; y <= max.y; y++)
 	{
-		pixel_index = (int)(current.x) + ((int)(current.y) * p_view_port->size.x);
-
-		while (current.x <= max.x)
+		pixel_index = (int)(min.x) + (y * p_view_port->size.x);
+        for (int x = min.x; x <= max.x; x++)
 		{
-			alpha = calc_rasterizer(&ab, current.x, current.y);
-			beta = calc_rasterizer(&ac, current.x, current.y);
-			gamma = 1.0 - alpha - beta;
-
-			if (alpha >= 0 && beta >= 0 && gamma >= 0)
+			t_vector3 pixelSample = create_t_vector3(x, y, 0);
+			float w0 = edge_t_vector3(triangle.b, triangle.c, pixelSample) / area;
+			float w1 = edge_t_vector3(triangle.c, triangle.a, pixelSample) / area;
+			float w2 = edge_t_vector3(triangle.a, triangle.b, pixelSample) / area;
+			if (w0 >= 0 && w1 >= 0 && w2 >= 0)
 			{
-				float z = 1;
-				if (triangle.a.z != 0 || triangle.b.z != 0 || triangle.c.z != 0)
-					z = 1.0f / ((triangle.a.z * gamma) + (triangle.b.z * beta) + (triangle.c.z * alpha));
-
-				pixel.x = alpha * p_uv->uv.c.x + beta * p_uv->uv.b.x + gamma * p_uv->uv.a.x;
-                pixel.y = 1.0 - (alpha * p_uv->uv.c.y + beta * p_uv->uv.b.y + gamma * p_uv->uv.a.y);
-				pixel.x *= z;
-				pixel.y *= z;
-				pixel.x *= texture->surface->w;
-				pixel.y *= texture->surface->h;
-				if (z <= p_view_port->depth_buffer[pixel_index] || p_view_port->depth_buffer[pixel_index] == -1)
+				float z = 1 / ((triangle.a.z * w0) + (triangle.b.z * w1) + (triangle.c.z * w2));
+				if (z <= p_view_port->depth_buffer[pixel_index])
 				{
-					color = get_pixel_color(texture, (int)(pixel.x - EPSILON), (int)(pixel.y - EPSILON));
-					draw_pixel(p_view_port->window, (int)(current.x), (int)(current.y), color);
+					s = (w0 * st.a.x + w1 * st.b.x + w2 * st.c.x) * z * p_uv->texture->surface->w;
+					t = (w0 * st.a.y + w1 * st.b.y + w2 * st.c.y) * z * p_uv->texture->surface->h;
+					rgb = get_pixel_color(p_uv->texture, s, t);
+					// printf("z = %f\n", z);
 					p_view_port->depth_buffer[pixel_index] = z;
+					draw_pixel(p_view_port->window, (int)(pixelSample.x + p_view_port->pos.x), (int)(pixelSample.y + p_view_port->pos.y), rgb);
 				}
 			}
-			current.x++;
 			pixel_index++;
 		}
-		current.x = min.x;
-		current.y++;
 	}
 }
+
+// void	draw_triangle_texture_cpu(t_view_port *p_view_port, t_triangle *p_triangle, t_uv *p_uv)
+// {
+// 	t_triangle tri;
+// 	// t_triangle c;
+// 	t_triangle st;
+// 	t_rasterizer	ab;
+// 	t_rasterizer	ac;
+// 	t_rasterizer	bc;
+
+// 	// tri = create_t_triangle(create_t_vector3(p_triangle->a.x, p_triangle->a.y, p_triangle->a.z),
+// 	// 						create_t_vector3(p_triangle->b.x, p_triangle->b.y, p_triangle->b.z),
+// 	// 						create_t_vector3(p_triangle->c.x, p_triangle->c.y, p_triangle->c.z));
+
+// 	// c = create_t_triangle(create_t_vector3(1, 0, 0),
+// 	// 						create_t_vector3(0, 1, 0),
+// 	// 						create_t_vector3(0, 0, 1));
+
+// 	st = create_t_triangle(create_t_vector3(p_uv->uv.a.x, p_uv->uv.a.y, p_uv->uv.a.z),
+// 							create_t_vector3(p_uv->uv.b.x, p_uv->uv.b.y, p_uv->uv.b.z),
+// 							create_t_vector3(p_uv->uv.c.x, p_uv->uv.c.y, p_uv->uv.c.z));
+
+// 	// tri.a.x /= tri.a.z;
+// 	// tri.a.y /= tri.a.z;
+// 	// tri.b.x /= tri.b.z;
+// 	// tri.b.y /= tri.b.z;
+// 	// tri.c.x /= tri.c.z;
+// 	// tri.c.y /= tri.c.z;
+
+// 	tri.a = convert_opengl_to_vector3(p_view_port, p_triangle->a);
+// 	tri.b = convert_opengl_to_vector3(p_view_port, p_triangle->b);
+// 	tri.c = convert_opengl_to_vector3(p_view_port, p_triangle->c);
+
+// 	//perspective correcte
+// 	// c.a.x /= tri.a.z;
+// 	// c.a.y /= tri.a.z;
+// 	// c.a.z /= tri.a.z;
+// 	// c.b.x /= tri.b.z;
+// 	// c.b.y /= tri.b.z;
+// 	// c.b.z /= tri.b.z;
+// 	// c.c.x /= tri.c.z;
+// 	// c.c.y /= tri.c.z;
+// 	// c.c.z /= tri.c.z;
+
+// 	st.a.x /= tri.a.z;
+// 	st.a.y /= tri.a.z;
+// 	st.b.x /= tri.b.z;
+// 	st.b.y /= tri.b.z;
+// 	st.c.x /= tri.c.z;
+// 	st.c.y /= tri.c.z;
+
+// 	tri.a.z = 1 / tri.a.z;
+// 	tri.b.z = 1 / tri.b.z;
+// 	tri.c.z = 1 / tri.c.z;
+
+// 	ab = create_t_rasterizer(tri.a, tri.b, tri.c);
+// 	ac = create_t_rasterizer(tri.a, tri.c, tri.b);
+// 	bc = create_t_rasterizer(tri.b, tri.c, tri.a);
+
+// 	t_vector3 min;
+// 	t_vector3 max;
+// 	t_triangle_get_min_max_value(&tri, &min, &max);
+
+// 	if (min.x < 0)
+// 		min.x = 0;
+// 	if (min.y < 0)
+// 		min.y = 0;
+// 	if (max.x >= p_view_port->size.x)
+// 		max.x = p_view_port->size.x - 1;
+// 	if (max.y >= p_view_port->size.y)
+// 		max.y = p_view_port->size.y - 1;
+
+// 	float area = edge_t_vector3(tri.a, tri.b, tri.c);
+// 	int i = min.x;
+// 	int j = min.y;
+// 	t_vector3 p;
+// 	t_vector3 w;
+// 	t_color rgb;
+// 	float z;
+// 	float s;
+// 	float t;
+// 	while (j < max.y)
+// 	{
+// 		i = min.x;
+// 		while (i < max.x)
+// 		{
+// 			p = create_t_vector3(i + EPSILON, j + EPSILON, 0);
+// 			w = create_t_vector3(calc_rasterizer(&bc, i, j) / area,
+// 								calc_rasterizer(&ac, i, j)/ area,
+// 								calc_rasterizer(&ab, i, j)/ area);
+// 			if (w.x >= 0.0 && w.y >= 0.0 && w.z >= 0.0)
+// 			{
+// 				w.x /= area;
+// 				w.y /= area;
+// 				w.z /= area;
+// 				z = 1 / (w.x * tri.a.z + w.y * tri.b.z + w.z * tri.c.z);
+// 				s = (w.x * st.a.x + w.y * st.b.x + w.z * st.c.x) * z * p_uv->texture->surface->w;
+// 				t = (w.x * st.a.y + w.y * st.b.y + w.z * st.c.y) * z * p_uv->texture->surface->h;
+// 				rgb = get_pixel_color(p_uv->texture, s, t);
+// 				if (z <= p_view_port->depth_buffer[i + (j * p_view_port->window->size_x)])
+// 				{
+// 					p_view_port->depth_buffer[i + (j * p_view_port->window->size_x)] = z;
+// 					draw_pixel(p_view_port->window, (int)(i + p_view_port->pos.x), (int)(j + p_view_port->pos.y), rgb);
+// 				}
+// 			}
+// 			i++;
+// 		}
+// 		j++;
+// 	}
+// }
 
 void	*thread_draw_texture_cpu(void *void_list)
 {
@@ -158,13 +247,25 @@ void	multithreading_draw_triangle_texture_cpu(t_view_port *p_view_port, t_triang
 
 void    draw_rectangle_texture_cpu(t_view_port *p_view_port, t_rectangle p_rec, t_texture *p_texture)
 {
-	draw_triangle_texture_cpu(p_view_port, initialize_t_triangle(create_t_vector3(p_rec.pos.x, p_rec.pos.y, 0.0),
-										create_t_vector3(p_rec.pos.x + p_rec.size.x, p_rec.pos.y, 0.0),
-										create_t_vector3(p_rec.pos.x, p_rec.pos.y + p_rec.size.y, 0.0)),
-										initialize_t_uv(create_t_triangle(create_t_vector3(0, 0, 0), create_t_vector3(1, 0, 0), create_t_vector3(0, 1, 0)), p_texture));
+	t_triangle_list	*tri_list;
+	t_triangle		*tri;
+	t_uv_list		*uv_list;
+	t_uv			*uv;
 
-	draw_triangle_texture_cpu(p_view_port, initialize_t_triangle(create_t_vector3(p_rec.pos.x + p_rec.size.x, p_rec.pos.y + p_rec.size.y, 0.0),
-										create_t_vector3(p_rec.pos.x + p_rec.size.x, p_rec.pos.y, 0.0),
-										create_t_vector3(p_rec.pos.x, p_rec.pos.y + p_rec.size.y, 0.0)),
-										initialize_t_uv(create_t_triangle(create_t_vector3(1, 1, 0), create_t_vector3(1, 0, 0), create_t_vector3(0, 1, 0)), p_texture));
+	uv_list = initialize_t_uv_list();
+	tri_list = initialize_t_triangle_list();
+	tri = initialize_t_triangle(create_t_vector3(p_rec.pos.x, p_rec.pos.y, 1.0),
+							create_t_vector3(p_rec.pos.x + p_rec.size.x, p_rec.pos.y, 1.0),
+							create_t_vector3(p_rec.pos.x, p_rec.pos.y + p_rec.size.y, 1.0));
+	t_triangle_list_push_back(tri_list, *tri);
+	uv = initialize_t_uv(create_t_triangle(create_t_vector3(0, 1, 0), create_t_vector3(1, 1, 0), create_t_vector3(0, 0, 0)), p_texture);
+	t_uv_list_push_back(uv_list, *uv);
+
+	tri = initialize_t_triangle(create_t_vector3(p_rec.pos.x + p_rec.size.x, p_rec.pos.y + p_rec.size.y, 1.0),
+							create_t_vector3(p_rec.pos.x + p_rec.size.x, p_rec.pos.y, 1.0),
+							create_t_vector3(p_rec.pos.x, p_rec.pos.y + p_rec.size.y, 1.0));
+	t_triangle_list_push_back(tri_list, *tri);
+	uv = initialize_t_uv(create_t_triangle(create_t_vector3(1, 0, 0), create_t_vector3(1, 1, 0), create_t_vector3(0, 0, 0)), p_texture);
+	t_uv_list_push_back(uv_list, *uv);
+	multithreading_draw_triangle_texture_cpu(p_view_port, tri_list,	uv_list);
 }

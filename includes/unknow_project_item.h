@@ -9,7 +9,7 @@ typedef struct  	s_item
 	char			*name;
 	t_mesh			*mesh;
 	int				picked_up; // 0 no | 1 yes
-	void 			(*pf)(t_player*);
+	int 			(*pf)(t_player*);
 }       			t_item;
 
 typedef struct	s_item_list

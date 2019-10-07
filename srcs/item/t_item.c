@@ -1,43 +1,71 @@
 #include "unknow_project.h"
 
-void		heal(t_player *player)
+int		heal(t_player *player)
 {
 	int to_heal;
 
-	printf("HP before = %d\n", player->hp);
 	to_heal = 20;
 	if (player->hp < 100)
 	{
 		while (player->hp < 100 && to_heal-- > 0)
 			player->hp += 1;
+		return (BOOL_TRUE);
 	}
-	printf("HP now = %d\n", player->hp);
+	return (BOOL_FALSE);
 }
 
-void		refill(t_player *player)
+int		refill_pistol(t_player *player)
 {
-	int to_refill;
-
-	to_refill = 15;
-	if (player->ammo.pistol_ammo < 999)
+	if (player->weapons[0].mags < 6)
 	{
-		while (player->ammo.pistol_ammo < 999 && to_refill-- > 0)
-			player->ammo.pistol_ammo += 1;
+		player->weapons[0].mags += 1;
+		return (BOOL_TRUE);
 	}
+	return (BOOL_FALSE);
 }
 
-void		protect(t_player *player)
+int		refill_ar(t_player *player)
+{
+	if (player->weapons[1].mags < 6)
+	{
+		player->weapons[1].mags += 1;
+		return (BOOL_TRUE);
+	}
+	return (BOOL_FALSE);
+}
+
+int		refill_rifle(t_player *player)
+{
+	if (player->weapons[2].mags < 6)
+	{
+		player->weapons[2].mags += 1;
+		return (BOOL_TRUE);
+	}
+	return (BOOL_FALSE);
+}
+
+int		refill_shotgun(t_player *player)
+{
+	if (player->weapons[3].mags < 6)
+	{
+		player->weapons[3].mags += 1;
+		return (BOOL_TRUE);
+	}
+	return (BOOL_FALSE);
+}
+
+int		protect(t_player *player)
 {
 	int to_protect;
 
-	printf("armor before = %d\n", player->armor);
 	to_protect = 20;
 	if (player->armor < 100)
 	{
 		while (player->armor < 100 && to_protect-- > 0)
 			player->armor += 1;
+		return (BOOL_TRUE);
 	}
-	printf("armor now = %d\n", player->armor);
+	return (BOOL_FALSE);
 }
 
 t_item		create_health_pack(t_vector3 pos, t_engine *engine)
@@ -64,24 +92,38 @@ t_item		create_health_pack(t_vector3 pos, t_engine *engine)
 	return (item);
 }
 
-t_item		create_ammo_pack(t_vector3 pos, t_engine *engine)
+t_item		create_ammo_pack(t_vector3 pos, t_engine *engine, int type)
 {
 	static int	num = 1;
 	t_item		item;
 	t_mesh		result;
 	char 		*str;
 
-	item.type = 0;
+	item.type = type;
 	str = ft_strnew(ft_strlen("Ammo Pack ") + ft_strlen(ft_itoa(num)));
 	str = ft_strcpy(str, "Ammo Pack ");
 	str = ft_strcat(str, ft_itoa(num++));
 	item.name = str;
 	result = create_primitive_cube(pos, create_t_vector3(0.2, 0.05, 0.2), NULL, 0.0, item.name);
 	t_mesh_rotate(&result, create_t_vector3(0.0, 0.0, 0.0));
-	t_mesh_set_color(&result, create_t_color(0.0, 0.8, 0.0 ,1.0));
+	if (type == 1)
+		t_mesh_set_color(&result, create_t_color(0.3, 0.3, 0.3 ,1.0));
+	else if (type == 2)
+		t_mesh_set_color(&result, create_t_color(0.0, 0.8, 0.0 ,1.0));
+	else if (type == 3)
+		t_mesh_set_color(&result, create_t_color(0.8, 0.8, 0.0 ,1.0));
+	else if (type == 4)
+		t_mesh_set_color(&result, create_t_color(0.4, 0.0, 0.0 ,1.0));
 	result.collectible = BOOL_TRUE;
 	item.mesh = &result;
-	item.pf = refill;
+	if (type == 1)
+		item.pf = refill_pistol;
+	else if (type == 2)
+		item.pf = refill_ar;
+	else if (type == 3)
+		item.pf = refill_rifle;
+	else if (type == 4)
+		item.pf = refill_shotgun;
 	item.picked_up = 0;
 	t_engine_add_mesh(engine, result);
 	return (item);

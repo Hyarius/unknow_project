@@ -1,11 +1,11 @@
 #include "unknow_project.h"
 
-void			check_frame()
+void		check_frame(void)
 {
 	static int		nb_frame = 0;
 	static int		beginsecond = 0;
 	int				frame_actual;
-	static Uint32 	framestart;
+	static Uint32	framestart;
 
 	frame_actual = SDL_GetTicks();
 	if (beginsecond == 0)
@@ -18,7 +18,5 @@ void			check_frame()
 	}
 	else
 		nb_frame++;
-	/*if (1000 / FPS > frame_actual - framestart)
-		SDL_Delay(1000 / FPS - (frame_actual - framestart));*/
 	framestart = SDL_GetTicks();
 }

@@ -4,16 +4,17 @@ t_player		create_t_player(t_camera *cam, t_mesh hitbox)
 {
 	t_player 	result;
 
-//CHANGER POS DE LA HITBOX PAR CAM->POS
 	result.camera = cam;
 	result.hitbox = hitbox;
 	t_mesh_set_color(&result.hitbox, create_t_color(0.5, 0.6, 0.0 ,1.0));
-	result.hp = 50;
-	printf("Player hp at initialisation = %d\n", result.hp);
+	result.hp = 100;
 	result.armor = 0;
 	result.speed = 1.0;
-	result.ammo = create_t_ammo();
-	result.weapons = create_t_weapons(result.ammo);
+	result.weapons[0] = create_t_weapons(0);
+	result.weapons[1] = create_t_weapons(1);
+	result.weapons[2] = create_t_weapons(2);
+	result.weapons[3] = create_t_weapons(3);
+	result.current_weapon = result.weapons[0];
 	return (result);
 }
 
@@ -29,37 +30,64 @@ t_player			*initialize_t_player(t_camera *cam, t_mesh hitbox)
 	return(result);
 }
 
-t_weapons		create_t_weapons(t_ammo ammo)
+t_weapon		create_t_weapons(int index)
 {
-	t_weapons	result;
+	t_weapon	result[4];
 
-	result.pistol.mag_size = 15;
-	result.ar.mag_size = 30;
-	result.rifle.mag_size = 10;
-	result.shotgun.mag_size = 8;
-	return (result);
+	result[0].name = "pistol";
+	result[0].ammo = 15;
+	result[0].mags = 0;
+	result[0].mag_size = 15;
+
+	result[1].name = "ar";
+	result[1].ammo = 0;
+	result[1].mags = 0;
+	result[1].mag_size = 30;
+
+	result[2].name = "rifle";
+	result[2].ammo = 0;
+	result[2].mags = 0;
+	result[2].mag_size = 10;
+
+	result[3].name = "shotgun";
+	result[3].ammo = 0;
+	result[3].mags = 0;
+	result[3].mag_size = 8;
+	return (result[index]);
 }
 
-// void			set_t_weapons(t_player player, t_weapons weapons)
-// {
-// 	weapons.pistol.ammo = player.ammo.pistol + (weapons.pistol.mag_size * ammo.pistol.mags);
-// 	weapons.ar.ammo = player.ammo.ar + (weapons.pistol.mag_size * ammo.ar.mags);
-// 	weapons.rifle.ammo = player.ammo.rifle + (weapons.pistol.mag_size * ammo.rifle.mags);
-// 	weapons.shotgun.ammo = player.ammo.shotgun + (weapons.pistol.mag_size * ammo.shotgun.mags);
-// }
 
-t_ammo			create_t_ammo(void)
+void			change_weapon(t_keyboard *p_keyboard, t_player *player)
 {
-	t_ammo		result;
+	static int test = 0;
 
-	result.pistol_mags = 0;
-	result.ar_mags = 0;
-	result.rifle_mags = 0;
-	result.shotgun_mags = 0;
-	return (result);
+	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_1]) == 1)
+		test = 0;
+	else if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_2]) == 1)
+		test = 1;
+	else if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_3]) == 1)
+		test = 2;
+	else if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_4]) == 1)
+		test = 3;
+	player->current_weapon = player->weapons[test];
 }
 
-// void			set_t_ammo(t_ammo ammo)
-// {
-// 	ammo.pistol_ammo =
-// }
+void			reload_weapon(t_keyboard *p_keyboard, t_player *player)
+{
+	// if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_1]) == 1)
+	// {
+	// 	player->current_weapon = player->weapons.pistol.name;
+	// }	
+	// else if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_2]) == 1)
+	// {
+	// 	player->current_weapon = player->weapons.ar.name;
+	// }	
+	// else if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_3]) == 1)
+	// {
+	// 	player->current_weapon = player->weapons.rifle.name;
+	// }	
+	// else if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_4]) == 1)
+	// {
+	// 	player->current_weapon = player->weapons.shotgun.name;
+	// }
+}
