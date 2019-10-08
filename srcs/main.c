@@ -33,9 +33,7 @@ int main(int argc, char **argv)
 
 	t_mesh		mesh;
 	t_camera	*main_camera;
-	t_player	*player;
 
-	printf("dest->size = %d\n", engine->visual_engine->camera_list->size);
 	main_camera = t_camera_list_get(engine->visual_engine->camera_list, 0);
 	t_engine_place_camera(engine, 0, create_t_vector3(5.0, 5.0, 0.0));
 	t_camera_look_at_point(main_camera, create_t_vector3(0, 0, 0));
@@ -60,10 +58,8 @@ int main(int argc, char **argv)
 	t_mesh_set_color(&mesh, create_t_color(0.5, 0.5, 0.5 ,1.0));
 	t_engine_add_mesh(engine, mesh);
 
-	player = initialize_t_player(main_camera, mesh);
-	t_engine_add_mesh(engine, player->hitbox);
-	printf("Player hp after initialisation = %d\n", player->hp);
-	engine->user_engine->player = player;
+	engine->user_engine->player = initialize_t_player(main_camera, mesh);
+	t_engine_add_mesh(engine, engine->user_engine->player->hitbox);
 
 	mesh = create_primitive_cube(create_t_vector3(1.0, 0.0, 2.0), create_t_vector3(1.0, 1.0, 1.0), NULL, 0.0, "cube texture");
 	t_mesh_rotate(&mesh, create_t_vector3(0.0, 0.0, 0.0));
@@ -200,13 +196,14 @@ int main(int argc, char **argv)
 			t_engine_draw_mesh(engine);
 
 			t_engine_render_camera(engine);
+			change_weapon(engine->user_engine->keyboard, engine->user_engine->player);
+			reload_weapon(engine->user_engine->keyboard, engine->user_engine->player);
 			drawing_front_hp(main_camera, engine);
-			drawing_front_mun(main_camera, gui, texture2, player);
+			drawing_front_mun(main_camera, gui, texture2, engine->user_engine->player);
 			draw_minimap(main_camera, engine, win);
 			print_info_bar(main_camera, engine->user_engine->player, gui);
+			
 		}
-		change_weapon(engine->user_engine->keyboard, player);
-		reload_weapon(engine->user_engine->keyboard, player);
 		t_engine_handle_event(main_camera, gui, engine);
 		render_screen(win); // affiche la fenetre
 	}

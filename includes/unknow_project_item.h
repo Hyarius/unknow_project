@@ -5,7 +5,6 @@
 
 typedef struct  	s_item
 {
-	int				type; // 0 = hp | 1 = ammo | 2 = armor
 	char			*name;
 	t_mesh			*mesh;
 	int				picked_up; // 0 no | 1 yes

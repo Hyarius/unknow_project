@@ -14,7 +14,7 @@ t_player		create_t_player(t_camera *cam, t_mesh hitbox)
 	result.weapons[1] = create_t_weapons(1);
 	result.weapons[2] = create_t_weapons(2);
 	result.weapons[3] = create_t_weapons(3);
-	result.current_weapon = result.weapons[0];
+	result.current_weapon = &result.weapons[0];
 	return (result);
 }
 
@@ -36,58 +36,59 @@ t_weapon		create_t_weapons(int index)
 
 	result[0].name = "pistol";
 	result[0].ammo = 15;
-	result[0].mags = 0;
 	result[0].mag_size = 15;
+	result[0].max_ammo = result[0].mag_size * MAX_MAGS;
+	result[0].total_ammo = 0;
 
 	result[1].name = "ar";
 	result[1].ammo = 0;
-	result[1].mags = 0;
 	result[1].mag_size = 30;
+	result[1].max_ammo = result[1].mag_size * MAX_MAGS;
+	result[1].total_ammo = 0;
 
 	result[2].name = "rifle";
 	result[2].ammo = 0;
-	result[2].mags = 0;
 	result[2].mag_size = 10;
+	result[2].max_ammo = result[2].mag_size * MAX_MAGS;
+	result[2].total_ammo = 0;
 
 	result[3].name = "shotgun";
 	result[3].ammo = 0;
-	result[3].mags = 0;
 	result[3].mag_size = 8;
+	result[3].max_ammo = result[3].mag_size * MAX_MAGS;
+	result[3].total_ammo = 0;
+
 	return (result[index]);
 }
 
 
 void			change_weapon(t_keyboard *p_keyboard, t_player *player)
 {
-	static int test = 0;
+	static int index = 0; //changer pour une union
 
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_1]) == 1)
-		test = 0;
+		index = 0;
 	else if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_2]) == 1)
-		test = 1;
+		index = 1;
 	else if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_3]) == 1)
-		test = 2;
+		index = 2;
 	else if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_4]) == 1)
-		test = 3;
-	player->current_weapon = player->weapons[test];
+		index = 3;
+	player->current_weapon = &player->weapons[index];
 }
 
 void			reload_weapon(t_keyboard *p_keyboard, t_player *player)
 {
-	// if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_1]) == 1)
-	// {
-	// 	player->current_weapon = player->weapons.pistol.name;
-	// }	
-	// else if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_2]) == 1)
-	// {
-	// 	player->current_weapon = player->weapons.ar.name;
-	// }	
-	// else if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_3]) == 1)
-	// {
-	// 	player->current_weapon = player->weapons.rifle.name;
-	// }	
-	// else if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_4]) == 1)
-	// {
-	// 	player->current_weapon = player->weapons.shotgun.name;
-	// }
+	int to_fill;
+
+	to_fill = player->current_weapon->mag_size - player->current_weapon->ammo;
+	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_R]) == 1)
+	{
+		while (to_fill > 0 && player->current_weapon->ammo < player->current_weapon->mag_size && player->current_weapon->total_ammo > 0)
+		{
+			player->current_weapon->ammo++;
+			player->current_weapon->total_ammo--;
+			to_fill--;
+		}
+	}
 }

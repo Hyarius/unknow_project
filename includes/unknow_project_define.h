@@ -1,5 +1,6 @@
 #ifndef UNKNOW_PROJECT_DEFINE_H
 # define UNKNOW_PROJECT_DEFINE_H
+# define GL_SILENCE_DEPRECATION
 
 # define WIN_X 1840
 # define WIN_Y 1220
@@ -28,5 +29,6 @@
 # define FOV 70
 # define NEAR 0.1f
 # define FAR 50.0f
+
 
 #endif

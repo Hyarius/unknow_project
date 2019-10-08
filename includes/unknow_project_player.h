@@ -6,10 +6,11 @@
 
 typedef struct  s_weapon
 {
+	char		*name;
 	int			ammo;
 	int			mag_size;
-	int			mags;
-	char		*name;
+	int			total_ammo;
+	int			max_ammo;
 }               t_weapon;
 
 typedef struct  s_player
@@ -20,7 +21,7 @@ typedef struct  s_player
 	int			armor;
 	float		speed;
 	t_weapon	weapons[4];
-	t_weapon	current_weapon;
+	t_weapon	*current_weapon;
 
 }               t_player;
 

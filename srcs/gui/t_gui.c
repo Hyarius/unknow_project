@@ -90,18 +90,16 @@ void	print_letter(t_camera *main_camera, t_gui *gui, char *str, t_rectangle rec)
 void	print_info_bar(t_camera *main_camera, t_player *player, t_gui *gui)
 {
 	char		*str;
-	int			ammo;
 
 	str = ft_itoa(player->armor);
 	print_letter(main_camera, gui, ft_strcat(str, "%"), create_t_rectangle(create_t_vector2(-0.025, -0.87), create_t_vector2(0.02, 0.07)));
 	str = ft_itoa(player->hp);
 	print_letter(main_camera, gui, ft_strcat(str, "%"), create_t_rectangle(create_t_vector2(-0.025, -0.97), create_t_vector2(0.02, 0.07)));
 	
-	str = ft_itoa(player->current_weapon.ammo);
+	str = ft_itoa(player->current_weapon->ammo);
 	str = ft_strcat(str, " / ");
-	ammo = player->current_weapon.mag_size * player->current_weapon.mags;
-	str = ft_strcat(str, ft_itoa(ammo));
-
+	str = ft_strcat(str, ft_itoa(player->current_weapon->total_ammo));
+	
 	print_letter(main_camera, gui, str, create_t_rectangle(create_t_vector2(0.78, -0.90), create_t_vector2(0.01, 0.05)));
 	free(str);
 }
