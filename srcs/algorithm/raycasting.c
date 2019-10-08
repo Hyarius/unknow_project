@@ -34,7 +34,12 @@ t_mesh	*cast_ray(t_engine *engine, t_vector3 pos, t_vector3 direction)
 		while (++j < t_engine_return_mesh_len(engine))
 		{
 			mesh = t_engine_get_mesh(engine, j);
-			mesh = cast_ray_next(engine, pos, direction, mesh);
+			if (ft_strcmp(mesh->name, "Player") != 0)
+			{
+				mesh = cast_ray_next(engine, pos, direction, mesh);
+				if (mesh != NULL)
+					return (mesh);
+			}	
 		}
 		pos = add_vector3_to_vector3(pos, direction);
 	}

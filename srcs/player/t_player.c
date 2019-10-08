@@ -92,3 +92,19 @@ void			reload_weapon(t_keyboard *p_keyboard, t_player *player)
 		}
 	}
 }
+
+void			shoot_weapon(t_engine *engine)
+{
+	t_mesh	*target;
+
+	if (t_mouse_state(engine->user_engine->mouse) == 1)
+	{
+		if (engine->user_engine->player->current_weapon->ammo > 0)
+		{
+			target = cast_ray(engine, t_camera_list_get(engine->visual_engine->camera_list, 0)->pos, t_camera_list_get(engine->visual_engine->camera_list, 0)->forward);
+			if (target != NULL)
+				printf("\rTarget name = %s\n", target->name);
+			engine->user_engine->player->current_weapon->ammo--;
+		}
+	}
+}
