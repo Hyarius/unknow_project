@@ -32,7 +32,6 @@ int main(int argc, char **argv)
 	set_t_gui_texte(gui);
 
 	t_mesh		mesh;
-	t_player	*player;
 	t_camera	*main_camera;
 
 	main_camera = t_camera_list_get(engine->visual_engine->camera_list, 0);
@@ -60,6 +59,12 @@ int main(int argc, char **argv)
 	// t_mesh_rotate(&mesh, create_t_vector3(0.0, 0.0, 0.0));
 	// t_mesh_set_color(&mesh, create_t_color(0.5, 0.6, 0.8 ,1.0));
 	// t_engine_add_mesh(engine, mesh);
+
+	mesh = create_primitive_cube(create_t_vector3(1.0, 0.0, 5.0), create_t_vector3(2.0, 2.0, 2), NULL, 0.0);
+	t_mesh_set_name(&mesh, "Enemy");
+	t_mesh_rotate(&mesh, create_t_vector3(0.0, 30.0, 0.0));
+	t_mesh_set_color(&mesh, create_t_color(0.0, 0.0, 0.0 ,1.0));
+	t_engine_add_mesh(engine, mesh);
 
 	t_mesh_list *meshs = read_map_file("fichier_map.map");
 
@@ -93,11 +98,7 @@ int main(int argc, char **argv)
 	t_item_list_push_back(item_list, armor_pack);
 	engine->physic_engine->item_list = item_list;
 
-	// t_mesh *target;
-	t_color color2 = create_t_color(1.0, 0.0, 1.0, 1.0);
-
 	mesh = create_primitive_skybox(main_camera->pos, create_t_vector3(1.0, 1.0, 1.0), skybox);
-	// t_mesh_set_color(&mesh, create_t_color(0.0, 1.0, 0.0, 0.5));
 	engine->playing = 1;
 	while (engine->playing != 0)
 	{
@@ -146,10 +147,10 @@ int main(int argc, char **argv)
 			t_engine_render_camera(engine);
 			change_weapon(engine->user_engine->keyboard, engine->user_engine->player);
 			reload_weapon(engine->user_engine->keyboard, engine->user_engine->player);
-			// drawing_front_hp(main_camera, engine);
-			// drawing_front_mun(main_camera, gui, texture2, engine->user_engine->player);
+			drawing_front_hp(main_camera, engine);
+			drawing_front_mun(main_camera, gui, texture2, engine->user_engine->player);
 			draw_minimap(main_camera, engine, win);
-			// print_info_bar(main_camera, engine->user_engine->player, gui);
+			print_info_bar(main_camera, engine->user_engine->player, gui);
 		}
 		t_engine_handle_event(main_camera, gui, engine);
 		render_screen(win); // affiche la fenetre
