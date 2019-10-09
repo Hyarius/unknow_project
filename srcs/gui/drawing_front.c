@@ -9,10 +9,20 @@ void    drawing_front_hp(t_camera *main_camera, t_engine *engine)
     draw_buffer_opengl(main_camera->view_port->window, main_camera->view_port->window->color_data);
 }
 
-void    drawing_front_mun(t_camera *main_camera, t_gui *p_gui, t_texture *texture)
+void    drawing_front_mun(t_camera *main_camera, t_gui *p_gui, t_texture **texture, t_player *player)
 {
+    int weapon;
+
+    if (ft_strcmp(player->current_weapon->name, "pistol") == 0)
+        weapon = 0;
+    else if (ft_strcmp(player->current_weapon->name, "ar") == 0)
+        weapon = 1;
+    else if (ft_strcmp(player->current_weapon->name, "rifle") == 0)
+        weapon = 2;
+    else if (ft_strcmp(player->current_weapon->name, "shotgun") == 0)
+        weapon = 3;
     t_view_port_clear_buffers(main_camera->view_port);
-    draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.8, -1), create_t_vector2(0.2, 0.2)), texture);
+    draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.8, -1), create_t_vector2(0.2, 0.2)), texture[weapon]);
     draw_buffer_opengl(main_camera->view_port->window, main_camera->view_port->window->color_data);
 }
 

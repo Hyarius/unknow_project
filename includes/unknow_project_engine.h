@@ -39,7 +39,7 @@ void		t_engine_prepare_camera(t_engine *engine);
 void		t_engine_add_camera(t_engine *p_engine, t_camera new_camera);
 
 t_item			create_health_pack(t_vector3 pos, t_engine *engine);
-t_item			create_ammo_pack(t_vector3 pos, t_engine *engine);
+t_item			create_ammo_pack(t_vector3 pos, t_engine *engine, int type);
 t_item			create_armor_pack(t_vector3 pos, t_engine *engine);
 
 int				can_move(t_mesh *mesh, t_engine *engine);

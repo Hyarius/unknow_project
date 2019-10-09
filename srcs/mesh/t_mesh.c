@@ -43,6 +43,7 @@ t_mesh	*initialize_t_mesh(t_vector3 pos)
 
 	if (!(result = (t_mesh *)malloc(sizeof(t_mesh))))
 		error_exit(-13, "Can't create a t_mesh array");
+	printf("malloc t_mesh\n");
 	*result = create_t_mesh(pos, NULL);
 	return (result);
 }
@@ -52,12 +53,14 @@ void	delete_t_mesh(t_mesh mesh)
 	free_t_vector3_list(mesh.vertices);
 	free_t_vector3_list(mesh.uvs);
 	free_t_face_list(mesh.faces);
+	printf("delete t_mesh\n");
 }
 
 void	free_t_mesh(t_mesh *mesh)
 {
 	delete_t_mesh(*mesh);
 	free(mesh);
+	printf("free t_mesh\n");
 }
 
 void	t_mesh_add_uv(t_mesh *dest, t_vector3 new_uv)
@@ -289,7 +292,10 @@ void	t_mesh_resize(t_mesh *mesh, t_vector3 modif)
 
 void	t_mesh_set_name(t_mesh *mesh, char *name)
 {
+
 	mesh->name = name;
+	if (ft_strcmp(mesh->name, "door") == 0)
+		mesh->door = create_t_door();
 }
 
 void	t_mesh_move_door(t_mesh *mesh)

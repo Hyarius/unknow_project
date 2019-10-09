@@ -40,6 +40,7 @@ t_camera	*initialize_t_camera(t_window *window, t_vector3 p_pos, float p_fov, t_
 
 	if (!(result = (t_camera *)malloc(sizeof(t_camera))))
 		error_exit(-31, "Can't malloc a t_camera");
+	printf("malloc t_camera\n");
 
 	*result = create_t_camera(window, p_pos, p_fov, p_dist);
 
@@ -61,6 +62,7 @@ void		t_camera_change_view_port(t_camera *camera, t_view_port *new_view_port)
 {
 	free(camera->view_port);
 	camera->view_port = new_view_port;
+	printf("free change_t_camera\n");
 }
 
 void		delete_t_cam(t_camera dest)
@@ -71,12 +73,14 @@ void		delete_t_cam(t_camera dest)
 	delete_t_uv_list(dest.uv_list);
 	delete_t_color_list(dest.darkness_list);
 	free(dest.view_port);
+	printf("delete t_camera\n");
 }
 
 void		free_t_cam(t_camera *dest)
 {
 	delete_t_cam(*dest);
 	free(dest);
+	printf("free t_camera\n");
 }
 
 void		t_camera_look_at_point(t_camera *cam, t_vector3 target) // calcul de l'angle de vue de la camera (forward, right, up)

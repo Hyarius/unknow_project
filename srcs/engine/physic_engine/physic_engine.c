@@ -16,7 +16,7 @@ t_physic_engine	*initialize_t_physic_engine()
 
 	if (!(result = (t_physic_engine	*)malloc(sizeof(t_physic_engine))))
 		return (NULL);
-
+	printf("malloc t_physic_engine\n");
 	*result = create_t_physic_engine();
 
 	return (result);
@@ -25,12 +25,14 @@ t_physic_engine	*initialize_t_physic_engine()
 void			delete_t_physic_engine(t_physic_engine dest)
 {
 	free_t_mesh_list(dest.mesh_list);
+	printf("delete t_physic_engine\n");
 }
 
 void			free_t_physic_engine(t_physic_engine *dest)
 {
 	delete_t_physic_engine(*dest);
 	free(dest);
+	printf("free t_physic_engine\n");
 }
 
 void			t_physic_engine_draw_mesh(t_physic_engine *p_physic_engine, t_camera *p_cam)
@@ -153,13 +155,15 @@ int				can_move(t_mesh *mesh, t_engine *engine)
 					{
 						if (engine->physic_engine->item_list->item[j].picked_up == 0)
 						{
-							engine->physic_engine->item_list->item[j].pf(engine->user_engine->player);
-							engine->physic_engine->item_list->item[j].picked_up = 1;
+							if (engine->physic_engine->item_list->item[j].pf(engine->user_engine->player) == BOOL_TRUE)
+							{
+								t_mesh_set_visibility(target, 0);
+								engine->physic_engine->item_list->item[j].picked_up = 1;
+							}
 						}
 					}
 					j++;
 				}
-				t_mesh_set_visibility(target, 0);
 			}
 			if (is_t_mesh_intersecting(mesh, target) == BOOL_TRUE && ft_strcmp(target->name, "stair") == 0)
 			{

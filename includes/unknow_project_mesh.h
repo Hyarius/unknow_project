@@ -6,7 +6,7 @@
 
 typedef struct		s_door
 {
-	float			tick;
+	int				tick;
 	int				state;
 	int				move;
 }					t_door;

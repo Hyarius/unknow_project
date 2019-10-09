@@ -18,6 +18,7 @@ t_engine	*initialize_t_engine(t_window *p_window)
 
 	if (!(result = (t_engine *)malloc(sizeof(t_engine))))
 		return (NULL);
+	printf("malloc t_engine\n");
 
 	*result = create_t_engine(p_window);
 
@@ -29,12 +30,14 @@ void		delete_t_engine(t_engine dest)
 	free_t_physic_engine(dest.physic_engine);
 	free_t_user_engine(dest.user_engine);
 	free_t_visual_engine(dest.visual_engine);
+	printf("delete t_engine\n");
 }
 
 void		free_t_engine(t_engine *dest)
 {
 	delete_t_engine(*dest);
 	free(dest);
+	printf("free t_engine\n");
 }
 
 void		t_engine_handle_camera(t_engine *p_engine)
