@@ -104,7 +104,8 @@ void			shoot_weapon(t_engine *engine)
 			target = cast_ray(engine, t_camera_list_get(engine->visual_engine->camera_list, 0)->pos, t_camera_list_get(engine->visual_engine->camera_list, 0)->forward);
 			if (target != NULL)
 				printf("\rTarget name = %s\n", target->name);
-			engine->user_engine->player->current_weapon->ammo--;
+			if (ft_strcmp(target->name, "Enemy") == 0)
+				engine->user_engine->player->current_weapon->ammo--;
 		}
 	}
 }
