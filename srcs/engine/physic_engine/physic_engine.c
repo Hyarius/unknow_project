@@ -165,10 +165,10 @@ int				can_move(t_mesh *mesh, t_engine *engine)
 					j++;
 				}
 			}
+			if (is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
+				printf("%s\n", target->name);
 			if (is_t_mesh_intersecting(mesh, target) == BOOL_TRUE && ft_strcmp(target->name, "stair") == 0)
-			{
 				mesh->force.y = 0.015;
-			}
 			else if (target->collectible == 0)
 			{
 				test_move_axis(mesh, &(mesh->force.y), create_t_vector3(0, 1, 0), target);

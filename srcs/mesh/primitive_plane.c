@@ -14,7 +14,7 @@ t_mesh		create_primitive_plane(t_vector3 pos, t_vector3 size, t_texture *p_textu
 	t_face	tmp_face1;
 	t_face	tmp_face2;
 
-	result = create_t_mesh(pos, NULL);
+	result = create_t_mesh(pos);
 	t_mesh_activate_gravity(&result, gravity);
 	t_mesh_add_point(&result, create_t_vector3(-size.x / 2.0, 0.0, -size.z / 2.0));
 	t_mesh_add_point(&result, create_t_vector3(size.x / 2.0, 0.0, -size.z / 2.0));

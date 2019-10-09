@@ -76,13 +76,13 @@ static void	t_mesh_init_face_primitive_cube(t_mesh *result, t_face tmp_face1, t_
 	t_mesh_add_face(result, tmp_face2);
 }
 
-t_mesh		create_primitive_cube(t_vector3 pos, t_vector3 size, t_texture *p_texture, float gravity, char *name)
+t_mesh		create_primitive_cube(t_vector3 pos, t_vector3 size, t_texture *p_texture, float gravity)
 {
 	t_mesh	result;
 	t_face	tmp_face1;
 	t_face	tmp_face2;
 
-	result = create_t_mesh(pos, name);
+	result = create_t_mesh(pos);
 	t_mesh_activate_gravity(&result, gravity);
 	t_mesh_init_point_primitive_cube(&result, size);
 	t_mesh_init_uv_point_primitive_cube(&result);

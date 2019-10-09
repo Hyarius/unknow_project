@@ -1,6 +1,6 @@
 #include "unknow_project.h"
 
-t_mesh	create_t_mesh(t_vector3 pos, char *name)
+t_mesh	create_t_mesh(t_vector3 pos)
 {
 	t_mesh		result;
 	static int	num = 1;
@@ -16,23 +16,13 @@ t_mesh	create_t_mesh(t_vector3 pos, char *name)
 	result.kinetic = 0.0;
 	result.angle = create_t_vector3(0.0, 90.0, 0.0);
 	result.texture = NULL;
+	result.name = NULL;
 	result.vertices_in_world = initialize_t_vector3_list();
 	result.next_vertices_in_world = initialize_t_vector3_list();
 	result.vertices = initialize_t_vector3_list();
 	result.uvs = initialize_t_vector3_list();
 	result.faces = initialize_t_face_list();
 	result.normales = initialize_t_vector3_list();
-	if (name != NULL)
-		result.name = name;
-	else
-	{
-		str = ft_strnew(ft_strlen("Mesh ") + ft_strlen(ft_itoa(num)));
-		str = ft_strcpy(str, "Mesh ");
-		str = ft_strcat(str, ft_itoa(num++));
-		result.name = str;
-	}
-	if (ft_strcmp(result.name, "door") == 0)
-		result.door = create_t_door();
 	t_mesh_look_at(&result);
 	return (result);
 }
@@ -44,7 +34,7 @@ t_mesh	*initialize_t_mesh(t_vector3 pos)
 	if (!(result = (t_mesh *)malloc(sizeof(t_mesh))))
 		error_exit(-13, "Can't create a t_mesh array");
 	printf("malloc t_mesh\n");
-	*result = create_t_mesh(pos, NULL);
+	*result = create_t_mesh(pos);
 	return (result);
 }
 

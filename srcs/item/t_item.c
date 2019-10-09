@@ -100,7 +100,8 @@ t_item		create_health_pack(t_vector3 pos, t_engine *engine)
 	str = ft_strcat(str, ft_itoa(num++));
 	item.name = str;
 	free(str);
-	result = create_primitive_cube(pos, create_t_vector3(0.2, 0.05, 0.2), NULL, 0.0, item.name);
+	result = create_primitive_cube(pos, create_t_vector3(0.2, 0.05, 0.2), NULL, 0.0);
+	t_mesh_set_name(&result, item.name);
 	t_mesh_rotate(&result, create_t_vector3(0.0, 0.0, 0.0));
 	t_mesh_set_color(&result, create_t_color(0.8, 0.0, 0.0 ,1.0));
 	result.collectible = BOOL_TRUE;
@@ -123,7 +124,8 @@ t_item		create_ammo_pack(t_vector3 pos, t_engine *engine, int type)
 	str = ft_strcat(str, ft_itoa(num++));
 	item.name = str;
 	free(str);
-	result = create_primitive_cube(pos, create_t_vector3(0.2, 0.05, 0.2), NULL, 0.0, item.name);
+	result = create_primitive_cube(pos, create_t_vector3(0.2, 0.05, 0.2), NULL, 0.0);
+	t_mesh_set_name(&result, item.name);
 	t_mesh_rotate(&result, create_t_vector3(0.0, 0.0, 0.0));
 	if (type == 1)
 		t_mesh_set_color(&result, create_t_color(0.3, 0.3, 0.3 ,1.0));
@@ -160,7 +162,8 @@ t_item		create_armor_pack(t_vector3 pos, t_engine *engine)
 	str = ft_strcat(str, ft_itoa(num++));
 	item.name = str;
 	free(str);
-	result = create_primitive_cube(pos, create_t_vector3(0.2, 0.05, 0.2), NULL, 0.0, item.name);
+	result = create_primitive_cube(pos, create_t_vector3(0.2, 0.05, 0.2), NULL, 0.0);
+	t_mesh_set_name(&result, item.name);
 	t_mesh_rotate(&result, create_t_vector3(0.0, 0.0, 0.0));
 	t_mesh_set_color(&result, create_t_color(0.0, 0.0, 0.8 ,1.0));
 	result.collectible = BOOL_TRUE;

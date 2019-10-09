@@ -45,7 +45,7 @@ typedef struct		s_mesh
 	t_door			door;
 }					t_mesh;
 
-t_mesh			create_t_mesh(t_vector3 pos, char *name);
+t_mesh			create_t_mesh(t_vector3 pos);
 t_mesh			read_obj_file(char *path, t_vector3 pos, t_vector3 size, float gravity);
 t_mesh			*initialize_t_mesh(t_vector3 pos);
 void			delete_t_mesh(t_mesh mesh);
@@ -65,7 +65,7 @@ void			t_mesh_apply_force(t_mesh *dest);
 void			t_mesh_set_force(t_mesh *dest, t_vector3 new_force);
 void			t_mesh_add_force(t_mesh *dest, t_vector3 delta_force);
 
-t_mesh			create_primitive_cube(t_vector3 coord, t_vector3 size, t_texture *texture, float gravity, char *name);
+t_mesh			create_primitive_cube(t_vector3 coord, t_vector3 size, t_texture *texture, float gravity);
 t_mesh			create_primitive_plane(t_vector3 pos, t_vector3 size, t_texture *texture, float gravity);
 t_mesh			create_primitive_vertical_plane(t_vector3 pos, t_vector3 size, t_texture *p_texture, float gravity);
 t_mesh			create_primitive_skybox(t_vector3 pos, t_vector3 size, t_texture *p_texture);

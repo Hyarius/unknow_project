@@ -249,25 +249,30 @@ void	multithreading_draw_triangle_texture_cpu(t_view_port *p_view_port, t_triang
 
 void    draw_rectangle_texture_cpu(t_view_port *p_view_port, t_rectangle p_rec, t_texture *p_texture)
 {
-	t_triangle_list	*tri_list;
-	t_triangle		*tri;
-	t_uv_list		*uv_list;
-	t_uv			*uv;
+	static t_triangle_list	*tri_list = NULL;
+	t_triangle				tri;
+	static t_uv_list		*uv_list = NULL;
+	t_uv					uv;
 
-	uv_list = initialize_t_uv_list();
-	tri_list = initialize_t_triangle_list();
-	tri = initialize_t_triangle(create_t_vector3(p_rec.pos.x, p_rec.pos.y, 1.0),
+	if (tri_list == NULL && uv_list == NULL)
+	{
+		uv_list = initialize_t_uv_list();
+		tri_list = initialize_t_triangle_list();
+	}
+	tri = create_t_triangle(create_t_vector3(p_rec.pos.x, p_rec.pos.y, 1.0),
 							create_t_vector3(p_rec.pos.x + p_rec.size.x, p_rec.pos.y, 1.0),
 							create_t_vector3(p_rec.pos.x, p_rec.pos.y + p_rec.size.y, 1.0));
-	t_triangle_list_push_back(tri_list, *tri);
-	uv = initialize_t_uv(create_t_triangle(create_t_vector3(0, 1, 0), create_t_vector3(1, 1, 0), create_t_vector3(0, 0, 0)), p_texture);
-	t_uv_list_push_back(uv_list, *uv);
+	t_triangle_list_push_back(tri_list, tri);
+	uv = create_t_uv(create_t_triangle(create_t_vector3(0, 1, 0), create_t_vector3(1, 1, 0), create_t_vector3(0, 0, 0)), p_texture);
+	t_uv_list_push_back(uv_list, uv);
 
-	tri = initialize_t_triangle(create_t_vector3(p_rec.pos.x + p_rec.size.x, p_rec.pos.y + p_rec.size.y, 1.0),
+	tri = create_t_triangle(create_t_vector3(p_rec.pos.x + p_rec.size.x, p_rec.pos.y + p_rec.size.y, 1.0),
 							create_t_vector3(p_rec.pos.x + p_rec.size.x, p_rec.pos.y, 1.0),
 							create_t_vector3(p_rec.pos.x, p_rec.pos.y + p_rec.size.y, 1.0));
-	t_triangle_list_push_back(tri_list, *tri);
-	uv = initialize_t_uv(create_t_triangle(create_t_vector3(1, 0, 0), create_t_vector3(1, 1, 0), create_t_vector3(0, 0, 0)), p_texture);
-	t_uv_list_push_back(uv_list, *uv);
-	multithreading_draw_triangle_texture_cpu(p_view_port, tri_list,	uv_list);
+	t_triangle_list_push_back(tri_list, tri);
+	uv = create_t_uv(create_t_triangle(create_t_vector3(1, 0, 0), create_t_vector3(1, 1, 0), create_t_vector3(0, 0, 0)), p_texture);
+	t_uv_list_push_back(uv_list, uv);
+	multithreading_draw_triangle_texture_cpu(p_view_port, tri_list, uv_list);
+	clean_t_triangle_list(tri_list);
+	clean_t_uv_list(uv_list);
 }

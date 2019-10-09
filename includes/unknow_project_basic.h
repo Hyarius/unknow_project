@@ -14,6 +14,7 @@ int				ft_strchr(char *src, char d);
 int				get_next_line(const int fd, char **line);
 char			**ft_strsplit(char const *s, char c);
 int				ft_tablen(char **tab);
+void            ft_freetab(char **tab);
 void 			error_exit(int error, char *message);
 void			ft_bzero(void *src, size_t nb_bytes);
 void			endl();

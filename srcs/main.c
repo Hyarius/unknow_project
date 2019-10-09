@@ -47,14 +47,16 @@ int main(int argc, char **argv)
 
 	//resize_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 0)->view_port, create_t_vector2_int(2, 2));
 
-	mesh = create_primitive_cube(create_t_vector3(2.0, 2.0, 2.0), create_t_vector3(0.3, 0.6, 0.3), NULL, 0.0, "Player");
+	mesh = create_primitive_cube(create_t_vector3(2.0, 2.0, 2.0), create_t_vector3(0.3, 0.5, 0.3), NULL, 0.0);
+	t_mesh_set_name(&mesh, "Player");
 	t_mesh_set_color(&mesh, create_t_color(1.5, 0.4, 1.5, 1.0));
 
 	engine->user_engine->player = initialize_t_player(main_camera, mesh);
 	t_engine_add_mesh(engine, engine->user_engine->player->hitbox);
 	link_t_camera_to_t_mesh(main_camera, t_engine_get_mesh(engine, 0), 100);
 
-	// mesh = create_primitive_cube(create_t_vector3(1.0, 0.0, 2.0), create_t_vector3(1.0, 1.0, 1.0), texture, 0.0, "cube texture");
+	// mesh = create_primitive_cube(create_t_vector3(1.0, 0.0, 2.0), create_t_vector3(1.0, 1.0, 1.0), texture, 0.0);
+	// t_mesh_set_name(&mesh, "cube texture");
 	// t_mesh_rotate(&mesh, create_t_vector3(0.0, 0.0, 0.0));
 	// t_mesh_set_color(&mesh, create_t_color(0.5, 0.6, 0.8 ,1.0));
 	// t_engine_add_mesh(engine, mesh);
@@ -67,48 +69,6 @@ int main(int argc, char **argv)
 		t_engine_add_mesh(engine, t_mesh_list_at(meshs, i));
 		i++;
 	}
-
-
-	// mesh = create_primitive_cube(create_t_vector3(-5.0, 0.0, 5.0), create_t_vector3(10.0, 2.0, 0.1), NULL, 0.0, "mur bleu");
-	// t_mesh_rotate(&mesh, create_t_vector3(0.0, 0.0, 0.0));
-	// t_mesh_set_color(&mesh, create_t_color(0.5, 0.6, 0.8 ,1.0));
-	// t_engine_add_mesh(engine, mesh);
-
-	// mesh = create_primitive_cube(create_t_vector3(-5.0, 0.0, -5.0), create_t_vector3(10.0, 2.0, 0.1), NULL, 0.0, "mur rose");
-	// t_mesh_rotate(&mesh, create_t_vector3(0.0, 0.0, 0.0));
-	// t_mesh_set_color(&mesh, create_t_color(1.0, 0.6, 0.8 ,1.0));
-	// t_engine_add_mesh(engine, mesh);
-
-	// mesh = create_primitive_cube(create_t_vector3(-5.0, 0.0, 5.0), create_t_vector3(10.0, 2.0, 0.1), NULL, 0.0, "mur violet");
-	// t_mesh_rotate(&mesh, create_t_vector3(0.0, 90.0, 0.0));
-	// t_mesh_set_color(&mesh, create_t_color(0.5, 0.0, 0.8 ,1.0));
-	// t_engine_add_mesh(engine, mesh);
-
-	// mesh = create_primitive_cube(create_t_vector3(5.0, 0.0, 5.0), create_t_vector3(10.0, 2.0, 0.1), NULL, 0.0, "mur vert");
-	// t_mesh_rotate(&mesh, create_t_vector3(0.0, 90.0, 0.0));
-	// t_mesh_set_color(&mesh, create_t_color(0.5, 0.6, 0.0 ,1.0));
-	// t_engine_add_mesh(engine, mesh);
-
-	// mesh = create_primitive_cube(create_t_vector3(0.0, 0.0, 0.0), create_t_vector3(5.0, 5.0, 5.0), NULL, 100.0);
-	// t_mesh_rotate(&mesh, create_t_vector3(0.0, 0.0, 0.0));
-	// t_mesh_set_color(&mesh, create_t_color(0.5, 0.6, 0.0 ,1.0));
-	// t_engine_add_mesh(engine, mesh);
-	// mesh = create_primitive_cube(create_t_vector3(2.0, 0.0, 2.0), create_t_vector3(0.2, 0.0001, 0.2), NULL, 0.0, "tp1");
-	// t_mesh_set_color(&mesh, create_t_color(0.0, 0.0, 1.0, 1.0));
-	// t_engine_add_mesh(engine, mesh);
-
-	// mesh = create_primitive_cube(create_t_vector3(12.0, 0.0, 12.0), create_t_vector3(0.2, 0.0001, 0.2), NULL, 0.0, "tp2");
-	// t_mesh_set_color(&mesh, create_t_color(0.0, 0.0, 1.0, 1.0));
-	// t_engine_add_mesh(engine, mesh);
-
-	// mesh = create_primitive_cube(create_t_vector3(-0.5, 0.0, 5.0), create_t_vector3(1.0, 2.0, 0.1), NULL, 0.0, "door_close");
-	// t_mesh_set_color(&mesh, create_t_color(0.0, 0.0, 1.0, 1.0));
-	// t_engine_add_mesh(engine, mesh);
-
-	// mesh = create_primitive_cube(create_t_vector3(-5.0, 0.0, 0.5), create_t_vector3(1.0, 2.0, 0.1), NULL, 0.0, "door_close");
-	// t_mesh_set_color(&mesh, create_t_color(0.0, 0.0, 1.0, 1.0));
-	// t_mesh_rotate_around_point(&mesh, create_t_vector3(0.0, 90.0, 0.0), mesh.pos);
-	// t_engine_add_mesh(engine, mesh);
 
 	t_rectangle rec = create_t_rectangle(create_t_vector2(-1, 1), create_t_vector2(2, -2));
 
@@ -174,8 +134,8 @@ int main(int argc, char **argv)
 		{
 			mesh.pos = main_camera->pos;
 
-			draw_skybox(win, main_camera, &mesh); // skybox
-			t_engine_render_camera(engine);
+			// draw_skybox(win, main_camera, &mesh); // skybox
+			// t_engine_render_camera(engine);
 			t_engine_apply_physic(engine);
 
 			t_engine_handle_camera(engine);
@@ -186,10 +146,10 @@ int main(int argc, char **argv)
 			t_engine_render_camera(engine);
 			change_weapon(engine->user_engine->keyboard, engine->user_engine->player);
 			reload_weapon(engine->user_engine->keyboard, engine->user_engine->player);
-			drawing_front_hp(main_camera, engine);
-			drawing_front_mun(main_camera, gui, texture2, engine->user_engine->player);
+			// drawing_front_hp(main_camera, engine);
+			// drawing_front_mun(main_camera, gui, texture2, engine->user_engine->player);
 			draw_minimap(main_camera, engine, win);
-			print_info_bar(main_camera, engine->user_engine->player, gui);
+			// print_info_bar(main_camera, engine->user_engine->player, gui);
 		}
 		t_engine_handle_event(main_camera, gui, engine);
 		render_screen(win); // affiche la fenetre
