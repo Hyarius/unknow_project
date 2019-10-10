@@ -5,7 +5,7 @@ static int              ft_size(long nb)
         int             size;
 
         size = 0;
-        if (nb < 0)
+        if (nb <= 0)
         {
                 nb *= -1;
                 size++;

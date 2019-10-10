@@ -15,6 +15,7 @@ t_line	*initialize_t_line(t_vector3 p_a, t_vector3 p_b)
 
 	if (!(result = (t_line *)malloc(sizeof(t_line))))
 		error_exit(-31, "Can't malloc a t_line");
+	printf("malloc t_line\n");
 	*result = create_t_line(p_a, p_b);
 	return (result);
 }

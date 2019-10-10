@@ -5,22 +5,14 @@ static void	t_mesh_init_point_primitive_skybox(t_mesh *result, t_vector3 size)
 	size.x -= EPSILON;
 	size.y -= EPSILON;
 	size.z -= EPSILON;
-	t_mesh_add_point(result, create_t_vector3(-size.x / 2.0, -size.y / 2.0,\
-												-size.z / 2.0));
-	t_mesh_add_point(result, create_t_vector3(size.x / 2.0, -size.y / 2.0,\
-												-size.z / 2.0));
-	t_mesh_add_point(result, create_t_vector3(size.x / 2.0, -size.y / 2.0,\
-												size.z / 2.0));
-	t_mesh_add_point(result, create_t_vector3(-size.x / 2.0, -size.y / 2.0,\
-												size.z / 2.0));
-	t_mesh_add_point(result, create_t_vector3(-size.x / 2.0, size.y / 2.0,\
-												-size.z / 2.0));
-	t_mesh_add_point(result, create_t_vector3(size.x / 2.0, size.y / 2.0,\
-												-size.z / 2.0));
-	t_mesh_add_point(result, create_t_vector3(size.x / 2.0, size.y / 2.0,\
-												size.z / 2.0));
-	t_mesh_add_point(result, create_t_vector3(-size.x / 2.0, size.y / 2.0,\
-												size.z / 2.0));
+	t_mesh_add_point(result, create_t_vector3(-size.x / 2.0, -size.y / 2.0, -size.z / 2.0));
+	t_mesh_add_point(result, create_t_vector3(size.x / 2.0, -size.y / 2.0, -size.z / 2.0));
+	t_mesh_add_point(result, create_t_vector3(size.x / 2.0, -size.y / 2.0, size.z / 2.0));
+	t_mesh_add_point(result, create_t_vector3(-size.x / 2.0, -size.y / 2.0, size.z / 2.0));
+	t_mesh_add_point(result, create_t_vector3(-size.x / 2.0, size.y / 2.0, -size.z / 2.0));
+	t_mesh_add_point(result, create_t_vector3(size.x / 2.0, size.y / 2.0, -size.z / 2.0));
+	t_mesh_add_point(result, create_t_vector3(size.x / 2.0, size.y / 2.0, size.z / 2.0));
+	t_mesh_add_point(result, create_t_vector3(-size.x / 2.0, size.y / 2.0, size.z / 2.0));
 }
 
 static void	t_mesh_init_uv_point_primitive_skybox(t_mesh *result)
@@ -90,7 +82,7 @@ t_mesh		create_primitive_skybox(t_vector3 pos, t_vector3 size, t_texture *p_text
 	t_face	tmp_face1;
 	t_face	tmp_face2;
 
-	result = create_t_mesh(pos, NULL);
+	result = create_t_mesh(pos);
 	t_mesh_init_point_primitive_skybox(&result, size);
 	t_mesh_init_uv_point_primitive_skybox(&result);
 	tmp_face1 = create_t_face();

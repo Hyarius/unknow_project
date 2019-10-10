@@ -7,7 +7,6 @@ t_camera	create_t_camera(t_window *window, t_vector3 p_pos, float p_fov, t_vecto
 	result.view_port = initialize_t_view_port(window, create_t_vector2_int(0, 0), create_t_vector2_int(window->size_x, window->size_y));
 
 	result.body = NULL;
-	// result.foot = NULL;
 	result.pos = p_pos; //position de la camera
 	result.fov = p_fov; // champ de vision
 	result.near = p_dist.x; //distance la plus proche pour voir un objet
@@ -41,6 +40,7 @@ t_camera	*initialize_t_camera(t_window *window, t_vector3 p_pos, float p_fov, t_
 
 	if (!(result = (t_camera *)malloc(sizeof(t_camera))))
 		error_exit(-31, "Can't malloc a t_camera");
+	printf("malloc t_camera\n");
 
 	*result = create_t_camera(window, p_pos, p_fov, p_dist);
 
@@ -62,6 +62,7 @@ void		t_camera_change_view_port(t_camera *camera, t_view_port *new_view_port)
 {
 	free(camera->view_port);
 	camera->view_port = new_view_port;
+	printf("free change_t_camera\n");
 }
 
 void		delete_t_cam(t_camera dest)
@@ -72,12 +73,14 @@ void		delete_t_cam(t_camera dest)
 	delete_t_uv_list(dest.uv_list);
 	delete_t_color_list(dest.darkness_list);
 	free(dest.view_port);
+	printf("delete t_camera\n");
 }
 
 void		free_t_cam(t_camera *dest)
 {
 	delete_t_cam(*dest);
 	free(dest);
+	printf("free t_camera\n");
 }
 
 void		t_camera_look_at_point(t_camera *cam, t_vector3 target) // calcul de l'angle de vue de la camera (forward, right, up)
@@ -194,30 +197,28 @@ void		t_camera_change_view(t_camera *cam, float delta_pitch, float delta_yaw)
 	t_camera_look_at(cam);
 }
 
-void		move_camera(t_camera *camera, t_vector3 mouvement, t_physic_engine *physic_engine, float j)
+void		move_camera(t_camera *camera, t_vector3 mouvement, t_engine *engine, float j)
 {
-	if (can_move(camera->body, physic_engine->mesh_list) == BOOL_TRUE)
+	if (can_move(camera->body, engine) == BOOL_TRUE)
 		t_mesh_move(camera->body, camera->body->force);
-	// print_t_vector3(camera->body->force, "force");
-	t_physic_engine_apply_force(physic_engine);
+	t_physic_engine_apply_force(engine);
 	camera->pos = add_vector3_to_vector3(camera->pos, camera->body->force);
 	camera->pos = add_vector3_to_vector3(camera->body->pos,
-					create_t_vector3(0.2, 0.45 - j, 0.2));
+					create_t_vector3(0.15, 0.45 - j, 0.15));
 }
 
-void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard, t_physic_engine *physic_engine) // calcul du mouvement de la cameraera au clavier
+void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard, t_engine *engine) // calcul du mouvement de la cameraera au clavier
 {
-	t_mesh		*target;
 	static t_mesh	*door = NULL;
-	t_vector3	tmp;
-	t_vector3	mouvement;
-	t_vector3	save;
-	float		y;
-	float		x;
-	float		j;
-	int			i;
-	int			k;
-	int			l;
+	t_mesh			*target;
+	t_vector3		tmp;
+	t_vector3		mouvement;
+	t_vector3		save;
+	float			y;
+	float			j;
+	int				i;
+	int				k;
+	int				l;
 
 	j = 0.0;
 	i = 0;
@@ -236,7 +237,7 @@ void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard,
 	{
 		tmp = create_t_vector3(camera->speed / camera->slowing, 0.0, camera->speed / camera->slowing);
 		camera->body->force = add_vector3_to_vector3(mult_vector3_by_vector3(normalize_t_vector3(mult_vector3_by_vector3(camera->forward, create_t_vector3(-1.0, 0.0, -1.0))), tmp), mouvement);
-		save = create_t_vector3(camera->body->force.x, 0.02, camera->body->force.z);
+		save = create_t_vector3(camera->body->force.x, 0, camera->body->force.z);
 	}
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_W]) == 1)
 	{
@@ -244,7 +245,7 @@ void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard,
 		if (save.x != 0 || save.y != 0 || save.z != 0)
 			save = add_vector3_to_vector3(divide_vector3_by_float(camera->body->force, 2), divide_vector3_by_float(save, 2));
 		else
-			save = create_t_vector3(camera->body->force.x, 0.02, camera->body->force.z);
+			save = create_t_vector3(camera->body->force.x, 0, camera->body->force.z);
 	}
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_D]) == 1)
 	{
@@ -252,7 +253,7 @@ void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard,
 		if (save.x != 0 || save.y != 0 || save.z != 0)
 			save = add_vector3_to_vector3(divide_vector3_by_float(camera->body->force, 2), divide_vector3_by_float(save, 2));
 		else
-			save = create_t_vector3(camera->body->force.x, 0.02, camera->body->force.z);
+			save = create_t_vector3(camera->body->force.x, 0, camera->body->force.z);
 }
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_A]) == 1)
 	{
@@ -260,7 +261,7 @@ void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard,
 		if (save.x != 0 || save.y != 0 || save.z != 0)
 			save = add_vector3_to_vector3(divide_vector3_by_float(camera->body->force, 2), divide_vector3_by_float(save, 2));
 		else
-			save = create_t_vector3(camera->body->force.x, 0.02, camera->body->force.z);
+			save = create_t_vector3(camera->body->force.x, 0, camera->body->force.z);
 	}
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_LCTRL]) == 1)
 	{
@@ -275,9 +276,9 @@ void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard,
 	{
 		k = 0;
 		l = 0;
-		while (i < physic_engine->mesh_list->size)
+		while (i < engine->physic_engine->mesh_list->size)
 		{
-			target = t_mesh_list_get(physic_engine->mesh_list, i);
+			target = t_mesh_list_get(engine->physic_engine->mesh_list, i);
 			if (camera->body != target && target->bubble_radius + camera->body->bubble_radius >= calc_dist_vector3_to_vector3(camera->body->center, target->center))
 			{
 				k++;
@@ -298,9 +299,9 @@ void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard,
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_F]) == 1)
 	{
 		i = 0;
-		while(i < physic_engine->mesh_list->size && camera->f_press == 0)
+		while(i < engine->physic_engine->mesh_list->size && camera->f_press == 0)
 		{
-			target = t_mesh_list_get(physic_engine->mesh_list, i);
+			target = t_mesh_list_get(engine->physic_engine->mesh_list, i);
 			if (camera->body != target && target->bubble_radius + camera->body->bubble_radius >= calc_dist_vector3_to_vector3(camera->body->center, target->center) && ft_strcmp(target->name, "door") == 0)
 			{
 				target->door.move = 1;
@@ -316,7 +317,7 @@ void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard,
 	if (door != NULL)
 		t_mesh_move_door(door);
 	camera->body->force = create_t_vector3(save.x, y, save.z);
-	move_camera(camera, camera->body->force, physic_engine, j);
+	move_camera(camera, camera->body->force, engine, j);
 	camera->body->force = mult_vector3_by_vector3(camera->body->force, create_t_vector3(0.0, 1.0, 0.0));
 }
 
@@ -327,7 +328,6 @@ void		handle_t_camera_view_by_mouse(t_camera *cam, t_mouse *p_mouse) // calcul d
 
 	delta_pitch = -(p_mouse->rel_pos.x / 10.0);
 	delta_yaw = p_mouse->rel_pos.y / 10.0;
-	// t_mesh_rotate_around_point(cam->body, create_t_vector3(0.0, delta_pitch, 0.0), cam->body->center);
 	t_camera_change_view(cam, delta_yaw, delta_pitch);
 }
 
@@ -343,22 +343,21 @@ void 		t_camera_calc_depth(t_camera *p_cam)
 		triangle = t_triangle_list_at(&(p_cam->triangle_color_list), i);
 		if (triangle.a.z > p_cam->dist_max)
 			p_cam->dist_max = triangle.a.z;
-		if (triangle.b.z > p_cam->dist_max)
+		else if (triangle.b.z > p_cam->dist_max)
 			p_cam->dist_max = triangle.b.z;
-		if (triangle.c.z > p_cam->dist_max)
+		else if (triangle.c.z > p_cam->dist_max)
 			p_cam->dist_max = triangle.c.z;
 		i++;
 	}
-
 	i = 0;
 	while (i < p_cam->triangle_texture_list.size)
 	{
 		triangle = t_triangle_list_at(&(p_cam->triangle_texture_list), i);
 		if (triangle.a.z > p_cam->dist_max)
 			p_cam->dist_max = triangle.a.z;
-		if (triangle.b.z > p_cam->dist_max)
+		else if (triangle.b.z > p_cam->dist_max)
 			p_cam->dist_max = triangle.b.z;
-		if (triangle.c.z > p_cam->dist_max)
+		else if (triangle.c.z > p_cam->dist_max)
 			p_cam->dist_max = triangle.c.z;
 		i++;
 	}
@@ -372,7 +371,6 @@ void		draw_depth_from_camera_on_screen(t_camera *p_cam)
 	int			i;
 
 	t_camera_calc_depth(p_cam);
-
 	i = 0;
 	while (i < p_cam->triangle_color_list.size)
 	{
@@ -392,24 +390,18 @@ void		draw_depth_from_camera_on_screen(t_camera *p_cam)
 void		draw_triangle_from_camera_on_screen(t_camera *p_cam)
 {
 	if (p_cam->triangle_color_list.size > 0)
-	{
 		multithreading_draw_triangle_color_cpu(p_cam->view_port, &(p_cam->triangle_color_list), &(p_cam->color_list));
-	}
 	if (p_cam->triangle_texture_list.size > 0)
-	{
 		multithreading_draw_triangle_texture_cpu(p_cam->view_port, &(p_cam->triangle_texture_list), &(p_cam->uv_list));
-	}
 }
 
 void		clean_t_camera(t_camera *camera)
 {
 	clean_t_triangle_list(&(camera->triangle_color_list));
 	clean_t_color_list(&(camera->color_list));
-
 	clean_t_triangle_list(&(camera->triangle_texture_list));
 	clean_t_color_list(&(camera->darkness_list));
 	clean_t_uv_list(&(camera->uv_list));
-
 	t_view_port_clear_buffers(camera->view_port);
 }
 

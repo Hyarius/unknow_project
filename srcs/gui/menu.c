@@ -4,13 +4,13 @@ void            t_user_engine_handle_menu(t_camera *main_camera, t_gui *gui, t_u
 {
     if (*play == 2)
         main_menu(main_camera, gui, user_engine, play);
-    if (*play == 3)
+    else if (*play == 3)
         option_menu(main_camera, gui, user_engine, play);
-    if (*play == 4)
+    else if (*play == 4)
         setting_menu(main_camera, gui, user_engine, play);
-    if (*play == 5)
+    else if (*play == 5)
         difficulty_menu(main_camera, gui, user_engine, play);
-    if (*play == 6)
+    else if (*play == 6)
         sens_menu(main_camera, gui, user_engine, play);
 }
 
@@ -21,39 +21,39 @@ void			main_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, 
 	get_t_mouse_info(mouse);
 	if (mouse->pos.x >= 35 && mouse->pos.x <= 270 && mouse->pos.y >= 410 && mouse->pos.y <= 560)
 	{
-		draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.9 - 0.01, -0.25 - 0.06), create_t_vector2(0.05, 0.08)), gui->menu[7]);
-		draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.87 - 0.01, -0.22 - 0.06), create_t_vector2(0.05, 0.08)), gui->menu[7]);
-		draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.84 - 0.01, -0.15 - 0.06), create_t_vector2(0.05, 0.08)), gui->menu[7]);
-		draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.75 - 0.01, -0.25 - 0.06), create_t_vector2(0.05, 0.08)), gui->menu[7]);
+		draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.9, 0.25), create_t_vector2(0.05, 0.08)), gui->menu[7]);
+		draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.87, 0.22), create_t_vector2(0.05, 0.08)), gui->menu[7]);
+		draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.84, 0.15), create_t_vector2(0.05, 0.08)), gui->menu[7]);
+		draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.75, 0.25), create_t_vector2(0.05, 0.08)), gui->menu[7]);
 		if (t_mouse_state(mouse) == 2)
 			*play = 1;
 	}
 	else if (mouse->pos.x >= 1580 && mouse->pos.x <= 1780 && mouse->pos.y >= 410 && mouse->pos.y <= 560)
 	{
-		draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.75 - 0.02, -0.25 - 0.06), create_t_vector2(0.05, 0.08)), gui->menu[7]);
-		draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.84 - 0.02, -0.22 - 0.06), create_t_vector2(0.05, 0.08)), gui->menu[7]);
-		draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.73 - 0.02, -0.15 - 0.06), create_t_vector2(0.05, 0.08)), gui->menu[7]);
-		draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.92 - 0.02, -0.25 - 0.06), create_t_vector2(0.05, 0.08)), gui->menu[7]);
+		draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.75, 0.25), create_t_vector2(0.05, 0.08)), gui->menu[7]);
+		draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.84, 0.22), create_t_vector2(0.05, 0.08)), gui->menu[7]);
+		draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.73, 0.15), create_t_vector2(0.05, 0.08)), gui->menu[7]);
+		draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.92, 0.25), create_t_vector2(0.05, 0.08)), gui->menu[7]);
 		if (t_mouse_state(mouse) == 2)
 			*play = 0;
 	}
 	else if (mouse->pos.x >= 35 && mouse->pos.x <= 345 && mouse->pos.y >= 870 && mouse->pos.y <= 1020)
 	{
-		draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.87 - 0.01, 0.56 - 0.06), create_t_vector2(0.05, 0.08)), gui->menu[7]);
-		draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.69 - 0.01, 0.60 - 0.06), create_t_vector2(0.05, 0.08)), gui->menu[7]);
-		draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.85 - 0.01, 0.46 - 0.06), create_t_vector2(0.05, 0.08)), gui->menu[7]);
-		draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.78 - 0.01, 0.54 - 0.06), create_t_vector2(0.05, 0.08)), gui->menu[7]);
-		draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.95 - 0.01, 0.62 - 0.06), create_t_vector2(0.05, 0.08)), gui->menu[7]);
+		draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.87, -0.56), create_t_vector2(0.05, 0.08)), gui->menu[7]);
+		draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.69, -0.60), create_t_vector2(0.05, 0.08)), gui->menu[7]);
+		draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.85, -0.46), create_t_vector2(0.05, 0.08)), gui->menu[7]);
+		draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.78, -0.54), create_t_vector2(0.05, 0.08)), gui->menu[7]);
+		draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.95, -0.62), create_t_vector2(0.05, 0.08)), gui->menu[7]);
 		if (t_mouse_state(mouse) == 2)
 			*play = 0;
 	}
 	else if (mouse->pos.x >= 1490 && mouse->pos.x <= 1765 && mouse->pos.y >= 870 && mouse->pos.y <= 1020)
 	{
-		draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.76 - 0.02, 0.64 - 0.08), create_t_vector2(0.05, 0.08)), gui->menu[7]);
-		draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.64 - 0.02, 0.52 - 0.08), create_t_vector2(0.05, 0.08)), gui->menu[7]);
-		draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.80 - 0.02, 0.59 - 0.08), create_t_vector2(0.05, 0.08)), gui->menu[7]);
-		draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.73 - 0.02, 0.48 - 0.08), create_t_vector2(0.05, 0.08)), gui->menu[7]);
-		draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.90 - 0.02, 0.58 - 0.08), create_t_vector2(0.05, 0.08)), gui->menu[7]);
+		draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.76, -0.64), create_t_vector2(0.05, 0.08)), gui->menu[7]);
+		draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.64, -0.52), create_t_vector2(0.05, 0.08)), gui->menu[7]);
+		draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.80, -0.59), create_t_vector2(0.05, 0.08)), gui->menu[7]);
+		draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.73, -0.48), create_t_vector2(0.05, 0.08)), gui->menu[7]);
+		draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.90, -0.58), create_t_vector2(0.05, 0.08)), gui->menu[7]);
 		if (t_mouse_state(mouse) == 2)
 			*play = 3;
 	}
@@ -122,6 +122,7 @@ void        setting_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_
 {
     t_mouse *mouse = user_engine->mouse;
     t_keyboard *keyboard = user_engine->keyboard;
+
 	get_t_mouse_info(mouse);
     if (gui->key_press != 2)
     {

@@ -19,6 +19,7 @@ t_mouse	*initialize_t_mouse(void)
 
 	if (!(result = (t_mouse *)malloc(sizeof(t_mouse))))
 		return (NULL);
+	printf("malloc t_mouse\n");
 	*result = create_t_mouse();
 	return (result);
 }
