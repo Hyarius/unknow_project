@@ -94,11 +94,14 @@ t_item		create_health_pack(t_vector3 pos, t_engine *engine)
 	t_item		item;
 	t_mesh		result;
 	char 		*str;
+	char 		*tmp;
 
-	str = ft_strnew(ft_strlen("Health Pack ") + ft_strlen(ft_itoa(num)));
+	tmp = ft_itoa(num++);
+	str = ft_strnew(ft_strlen("Health Pack ") + ft_strlen(tmp));
 	str = ft_strcpy(str, "Health Pack ");
-	str = ft_strcat(str, ft_itoa(num++));
+	str = ft_strcat(str, tmp);
 	item.name = str;
+	free(tmp);
 	result = create_primitive_cube(pos, create_t_vector3(0.2, 0.05, 0.2), NULL, 0.0);
 	t_mesh_set_name(&result, item.name);
 	t_mesh_rotate(&result, create_t_vector3(0.0, 0.0, 0.0));
@@ -117,11 +120,14 @@ t_item		create_ammo_pack(t_vector3 pos, t_engine *engine, int type)
 	t_item		item;
 	t_mesh		result;
 	char 		*str;
+	char 		*tmp;
 
-	str = ft_strnew(ft_strlen("Ammo Pack ") + ft_strlen(ft_itoa(num)));
+	tmp = ft_itoa(num++);
+	str = ft_strnew(ft_strlen("Ammo Pack ") + ft_strlen(tmp));
 	str = ft_strcpy(str, "Ammo Pack ");
-	str = ft_strcat(str, ft_itoa(num++));
+	str = ft_strcat(str, tmp);
 	item.name = str;
+	free(tmp);
 	result = create_primitive_cube(pos, create_t_vector3(0.2, 0.05, 0.2), NULL, 0.0);
 	t_mesh_set_name(&result, item.name);
 	t_mesh_rotate(&result, create_t_vector3(0.0, 0.0, 0.0));
@@ -154,11 +160,14 @@ t_item		create_armor_pack(t_vector3 pos, t_engine *engine)
 	t_item		item;
 	t_mesh		result;
 	char 		*str;
+	char 		*tmp;
 
-	str = ft_strnew(ft_strlen("Armor Pack ") + ft_strlen(ft_itoa(num)));
+	tmp = ft_itoa(num++);
+	str = ft_strnew(ft_strlen("Armor Pack ") + ft_strlen(tmp));
 	str = ft_strcpy(str, "Armor Pack ");
-	str = ft_strcat(str, ft_itoa(num++));
+	str = ft_strcat(str, tmp);
 	item.name = str;
+	free(tmp);
 	result = create_primitive_cube(pos, create_t_vector3(0.2, 0.05, 0.2), NULL, 0.0);
 	t_mesh_set_name(&result, item.name);
 	t_mesh_rotate(&result, create_t_vector3(0.0, 0.0, 0.0));

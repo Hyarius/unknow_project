@@ -62,6 +62,7 @@ t_mesh_list		*read_map_file(char *path)
 		}
 		free(line);
 	}
+	free(line);
 	ft_freetab(line_split);
 	close(fd);
 	return(result);

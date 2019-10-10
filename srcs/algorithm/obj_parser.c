@@ -79,7 +79,9 @@ t_mesh		read_obj_file(char *path, t_vector3 pos, t_vector3 size, float gravity)
 				}
 			}
 		}
+		free(line);
 	}
+	free(line);
 	t_mesh_compute_normals(&result);
 	close(fd);
 	t_mesh_compute_bubble_box(&result);

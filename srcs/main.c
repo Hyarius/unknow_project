@@ -2,9 +2,9 @@
 
 int main(int argc, char **argv)
 {
-	TTF_Font    *police;
-	SDL_Surface *font = NULL;
-	SDL_Color color = {0, 0, 0};
+	TTF_Font	*police;
+	SDL_Surface	*font = NULL;
+	SDL_Color	color = {0, 0, 0};
 
 	if (argc != 1)
 		error_exit(-1, "Bad argument");
@@ -147,8 +147,9 @@ int main(int argc, char **argv)
 			t_engine_render_camera(engine);
 			change_weapon(engine->user_engine->keyboard, engine->user_engine->player);
 			reload_weapon(engine->user_engine->keyboard, engine->user_engine->player);
-			drawing_front_hp(main_camera, engine);
-			drawing_front_mun(main_camera, gui, texture2, engine->user_engine->player);
+			shoot_weapon(engine);
+			// drawing_front_hp(main_camera, engine);
+			// drawing_front_mun(main_camera, gui, texture2, engine->user_engine->player);
 			draw_minimap(main_camera, engine, win);
 			print_info_bar(main_camera, engine->user_engine->player, gui);
 		}
