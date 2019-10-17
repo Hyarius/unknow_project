@@ -40,10 +40,10 @@ void		free_t_engine(t_engine *dest)
 	printf("free t_engine\n");
 }
 
-void		t_engine_handle_camera(t_engine *p_engine)
+void		t_engine_handle_camera(t_engine *p_engine, t_window *p_win)
 {
 	t_user_engine_handle_camera(p_engine,
-								t_visual_engine_get_main_camera(p_engine->visual_engine));
+								t_visual_engine_get_main_camera(p_engine->visual_engine), p_win);
 }
 
 void		t_engine_draw_mesh(t_engine *p_engine)

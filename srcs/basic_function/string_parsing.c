@@ -50,3 +50,45 @@ int			ft_strcmp(char *s1, char *s2)
 		i++;
 	return ((int)((unsigned char)s1[i] - (unsigned char)s2[i]));
 }
+
+int		ft_get_end_line(char *str)
+{
+	size_t		i;
+
+	i = 0;
+	while (str[i] != '\0' && str[i] != '\n')
+		i++;
+	return (i);
+}
+
+char	*ft_strsub(char const *s, unsigned int start, size_t len)
+{
+	char	*section;
+	int		i;
+
+	i = 0;
+	if (s == NULL)
+		return (NULL);
+	if (!(section = (char*)malloc(sizeof(char) * len + 1)))
+		return (NULL);
+	while (len != 0)
+	{
+		section[i] = s[start + i];
+		i++;
+		len--;
+	}
+	section[i] = '\0';
+	return (section);
+}
+
+char	*ft_strjoinf(char *s1, char *s2, int c)
+{
+	char	*str;
+
+	str = ft_strjoin(s1, s2);
+	if (c == 1 || c == 3)
+		free(s1);
+	if (c == 2 || c == 3)
+		free(s2);
+	return (str);
+}

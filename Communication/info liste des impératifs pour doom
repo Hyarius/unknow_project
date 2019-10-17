@@ -15,7 +15,7 @@ Doom Nukem project
 
 - sky box : ok (mise a part texture évidemment)
 
-- Transparency murs : surement
+- Transparency murs : ok
 
 - Élements de décors : non mais pas dur
 
@@ -31,7 +31,7 @@ Doom Nukem project
 
 - Courir sauter tomber : ok
 
-- Nager/Voler : WIP simple
+- Nager/Voler : ok
 
 - Interactions environnement : ok
 
@@ -39,11 +39,11 @@ Doom Nukem project
 
 - Ramassage objets : ok
 
-- Actions suite a interactions (ex jetpack, porte a clef) : WIP
+- Actions suite a interactions (ex jetpack, porte a clef) : ok
 
 - Actions modifies elements du jeu : WIP mais details
 
-- Animations, ouvertures de porte,  passage secret… : Near finish
+- Animations, ouvertures de porte,  passage secret… : ok
 
 - Personnages et objets interactions : WIP
 

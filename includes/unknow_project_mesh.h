@@ -43,6 +43,8 @@ typedef struct		s_mesh
 
 	char			*name;
 	t_door			door;
+
+	int				no_hitbox;
 }					t_mesh;
 
 t_mesh			create_t_mesh(t_vector3 pos);
@@ -82,4 +84,6 @@ void			t_mesh_jump(t_mesh *body, t_vector3 jump);
 void			t_mesh_resize(t_mesh *mesh, t_vector3 modif);
 void			t_mesh_set_name(t_mesh *mesh, char *name);
 void			t_mesh_move_door(t_mesh	*mesh);
+int				t_mesh_on_mesh(t_mesh *body, t_mesh *target);
+
 #endif

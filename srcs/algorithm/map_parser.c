@@ -53,16 +53,19 @@ t_mesh_list		*read_map_file(char *path)
 					t_mesh_set_color(&mesh, color);
 				t_mesh_rotate(&mesh, vector[2]);
 				if (ft_strcmp(line_split[ft_tablen(line_split) - 1], "*") == 0)
-					t_mesh_set_visibility(&mesh, BOOL_FALSE);
+					mesh.no_hitbox = 1;
+				else
+					mesh.no_hitbox = 0;
 				t_mesh_set_name(&mesh, line_split[1 + i]);
 				t_mesh_list_push_back(result, mesh);
 				if (texture != NULL)
 					free(texture);
 			}
+			ft_freetab(line_split);
 		}
 		free(line);
 	}
-	ft_freetab(line_split);
+	free(line);
 	close(fd);
 	return(result);
 }

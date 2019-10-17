@@ -19,8 +19,9 @@ typedef struct  s_player
 	t_mesh		hitbox;
 	int			hp;
 	int			armor;
+	int			fuel;
 	float		speed;
-	t_weapon	weapons[4];
+	t_weapon	weapons[5];
 	t_weapon	*current_weapon;
 
 }               t_player;

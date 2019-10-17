@@ -74,5 +74,5 @@ void		ft_stradd(char **src1, char *src2)
 	if (*src1 == NULL)
 		*src1 = ft_strdup(src2);
 	else if (src2 != NULL)
-		*src1 = ft_strjoin(*src1, src2);
+		*src1 = ft_strjoinf(*src1, src2, 1);
 }

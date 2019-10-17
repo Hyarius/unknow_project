@@ -144,7 +144,7 @@ int				can_move(t_mesh *mesh, t_engine *engine)
 	while (i < engine->physic_engine->mesh_list->size)
 	{
 		target = t_mesh_list_get(engine->physic_engine->mesh_list, i);
-		if (mesh != target && target->bubble_radius + mesh->bubble_radius >= calc_dist_vector3_to_vector3(mesh->center, target->center))
+		if (mesh != target && target->bubble_radius + mesh->bubble_radius >= calc_dist_vector3_to_vector3(mesh->center, target->center) && target->no_hitbox == 0)
 		{
 			if (target->collectible == 1 && is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
 			{
@@ -159,6 +159,7 @@ int				can_move(t_mesh *mesh, t_engine *engine)
 							{
 								t_mesh_set_visibility(target, 0);
 								engine->physic_engine->item_list->item[j].picked_up = 1;
+								target->no_hitbox = 1;
 							}
 						}
 					}
@@ -167,6 +168,8 @@ int				can_move(t_mesh *mesh, t_engine *engine)
 			}
 			if (is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
 				printf("%s\n", target->name);
+			if (t_mesh_on_mesh(mesh, target) == 1 && ft_strcmp(target->name, "end") == 0)
+				engine->playing = 2;
 			if (is_t_mesh_intersecting(mesh, target) == BOOL_TRUE && ft_strcmp(target->name, "stair") == 0)
 				mesh->force.y = 0.015;
 			else if (target->collectible == 0)
@@ -194,24 +197,19 @@ void			t_physic_engine_compute_vertices_in_world(t_physic_engine *physic_engine)
 
 void			t_physic_engine_apply_force(t_engine *engine)
 {
-	Uint32 	actual_frame;
-	static Uint32 	last_frame = 0;
-	int i = 0;
-	float time_passed;
+	int i;
 	t_mesh *mesh;
 
-	actual_frame = SDL_GetTicks();
-	time_passed = (actual_frame - last_frame) / 1000.0;
+	i = 0;
 	while (i < engine->physic_engine->mesh_list->size)
 	{
 		mesh = t_mesh_list_get(engine->physic_engine->mesh_list, i);
 		if (mesh->kinetic > 0)
-			mesh->force = add_vector3_to_vector3(mesh->force, mult_vector3_by_float(engine->physic_engine->gravity_force, mesh->kinetic * time_passed));
+			mesh->force = add_vector3_to_vector3(mesh->force, create_t_vector3(0.0, -0.01, 0.0));
 		if (mesh->force.x != 0 || mesh->force.y != 0 || mesh->force.z != 0)
 			if (can_move(mesh, engine) == BOOL_TRUE)
 				t_mesh_apply_force(mesh);
 		i++;
 
 	}
-	last_frame = actual_frame;
 }

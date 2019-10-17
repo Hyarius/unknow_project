@@ -5,17 +5,21 @@ void    drawing_front_hp(t_camera *main_camera, t_engine *engine)
     static t_color    *color_back = NULL;
     static t_color    *color_hp = NULL;
     static t_color    *color_armor = NULL;
+    static t_color    *color_jetpack = NULL;
 
     if (color_back == NULL && color_hp == NULL && color_armor == NULL)
     {
         color_back = initialize_t_color(0.7, 0.7, 0.7, 1.0);
         color_hp = initialize_t_color(1.0, 0.3, 0.3, 1.0);
         color_armor = initialize_t_color(0.3, 0.3, 1.0, 1.0);
+        color_jetpack = initialize_t_color(1.0, 1.0, 0.3, 1.0);
     }
     t_view_port_clear_buffers(main_camera->view_port);
     draw_rectangle_color_cpu_front(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.22, -1), create_t_vector2(0.44, 0.22)), color_back);
     draw_rectangle_color_cpu_front(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.2, -0.98), create_t_vector2(0.4 * (float)(engine->user_engine->player->hp) / 100, 0.08)), color_hp);
     draw_rectangle_color_cpu_front(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.2, -0.88), create_t_vector2(0.4 * (float)(engine->user_engine->player->armor) / 100, 0.08)), color_armor);
+    draw_rectangle_color_cpu_front(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.88, -0.88), create_t_vector2(0.2 * (float)(engine->user_engine->player->fuel) / 100, 0.08)), color_jetpack);
+    draw_rectangle_color_cpu_front(main_camera->view_port, create_t_rectangle(create_t_vector2(0.0, 0.0), create_t_vector2(0.005, 0.01)), color_armor);
     draw_buffer_opengl(main_camera->view_port->window, main_camera->view_port->window->color_data);
 }
 
