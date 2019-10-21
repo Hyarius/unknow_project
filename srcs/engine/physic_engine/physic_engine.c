@@ -6,6 +6,7 @@ t_physic_engine	create_t_physic_engine()
 
 	result.gravity_force = create_t_vector3(0, -GRAVITY * 3, 0);
 	result.mesh_list = initialize_t_mesh_list();
+	result.item_list = initialize_t_item_list();
 
 	return (result);
 }
@@ -16,7 +17,7 @@ t_physic_engine	*initialize_t_physic_engine()
 
 	if (!(result = (t_physic_engine	*)malloc(sizeof(t_physic_engine))))
 		return (NULL);
-	printf("malloc t_physic_engine\n");
+	// printf("malloc t_physic_engine\n");
 	*result = create_t_physic_engine();
 
 	return (result);
@@ -25,14 +26,14 @@ t_physic_engine	*initialize_t_physic_engine()
 void			delete_t_physic_engine(t_physic_engine dest)
 {
 	free_t_mesh_list(dest.mesh_list);
-	printf("delete t_physic_engine\n");
+	// printf("delete t_physic_engine\n");
 }
 
 void			free_t_physic_engine(t_physic_engine *dest)
 {
 	delete_t_physic_engine(*dest);
 	free(dest);
-	printf("free t_physic_engine\n");
+	// printf("free t_physic_engine\n");
 }
 
 void			t_physic_engine_draw_mesh(t_physic_engine *p_physic_engine, t_camera *p_cam)
@@ -50,6 +51,11 @@ void			t_physic_engine_draw_mesh(t_physic_engine *p_physic_engine, t_camera *p_c
 void			t_physic_engine_add_mesh(t_physic_engine *physic_engine, t_mesh p_mesh)
 {
 	t_mesh_list_push_back(physic_engine->mesh_list, p_mesh);
+}
+
+void			t_physic_engine_add_item(t_physic_engine *physic_engine, t_item p_item)
+{
+	t_item_list_push_back(physic_engine->item_list, p_item);
 }
 
 t_mesh			*t_physic_engine_get_mesh(t_physic_engine *physic_engine, int index)
@@ -148,19 +154,19 @@ int				can_move(t_mesh *mesh, t_engine *engine)
 		{
 			if (target->collectible == 1 && is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
 			{
+				printf("here1\n");
 				j = 0;
 				while (j < engine->physic_engine->item_list->size)
 				{
-					if (ft_strcmp(target->name, engine->physic_engine->item_list->item[j].name) == 0)
+					printf("%s\n", t_item_list_get(engine->physic_engine->item_list, j)->name);
+					if (ft_strcmp(target->name, t_item_list_get(engine->physic_engine->item_list, j)->name) == 0)
 					{
-						if (engine->physic_engine->item_list->item[j].picked_up == 0)
+						printf("here3\n");
+						if (engine->physic_engine->item_list->item[j].pf(engine->user_engine->player) == BOOL_TRUE)
 						{
-							if (engine->physic_engine->item_list->item[j].pf(engine->user_engine->player) == BOOL_TRUE)
-							{
-								t_mesh_set_visibility(target, 0);
-								engine->physic_engine->item_list->item[j].picked_up = 1;
-								target->no_hitbox = 1;
-							}
+							printf("here4\n");
+							t_mesh_set_visibility(target, BOOL_FALSE);
+							target->no_hitbox = 1;
 						}
 					}
 					j++;

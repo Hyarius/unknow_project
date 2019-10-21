@@ -11,29 +11,29 @@ t_gui create_t_gui(float x, int y)
 	idx = 0;
 	if (!(result.letter = (t_texture **)malloc(sizeof(t_texture*) * 95)))
 		error_exit(-29, "Can't malloc a t_surface");
-	printf("malloc t_gui.letter\n");
+	// printf("malloc t_gui.letter\n");
 	while (idx <= 94)
 	{
 		if (!(result.letter[idx] = (t_texture *)malloc(sizeof(t_texture))))
 			error_exit(-29, "Can't malloc a t_surface");
-		printf("malloc t_gui.letter[idx]\n");
+		// printf("malloc t_gui.letter[idx]\n");
 		if (!(result.letter[idx]->surface = (t_surface *)malloc(sizeof(t_surface))))
 			error_exit(-29, "Can't malloc a t_surface");
-		printf("malloc t_gui.letter[idx]->surface\n");
+		// printf("malloc t_gui.letter[idx]->surface\n");
 		idx++;
 	}
 	idx = 0;
 	if (!(result.menu = (t_texture **)malloc(sizeof(t_texture*) * 15)))
 		error_exit(-29, "Can't malloc a t_surface");
-	printf("malloc t_gui.menu\n");
+	// printf("malloc t_gui.menu\n");
 	while (idx <= 14)
 	{
 		if (!(result.menu[idx] = (t_texture *)malloc(sizeof(t_texture))))
 			error_exit(-29, "Can't malloc a t_surface");
-		printf("malloc t_gui.menu[idx]\n");
+		// printf("malloc t_gui.menu[idx]\n");
 		if (!(result.menu[idx]->surface = (t_surface *)malloc(sizeof(t_surface))))
 			error_exit(-29, "Can't malloc a t_surface");
-		printf("malloc t_gui.menu[idx]->surface\n");
+		// printf("malloc t_gui.menu[idx]->surface\n");
 		idx++;
 	}
 	result.idx = 8;
@@ -51,7 +51,7 @@ t_gui *initialize_t_gui(float x, int y)
 	if (!(result = (t_gui *)malloc(sizeof(t_gui))))
 		error_exit(-13, "Can't create a t_gui");
 
-	printf("malloc t_gui\n");
+	// printf("malloc t_gui\n");
 	*result = create_t_gui(x, y);
 
 	return (result);
@@ -109,8 +109,8 @@ void	print_info_bar(t_camera *main_camera, t_player *player, t_gui *gui)
 	free(str);
 
 	str = ft_itoa(player->current_weapon->ammo);
-	str = ft_strcat(str, " / ");
-	str = ft_strcat(str, ft_itoa(player->current_weapon->total_ammo));
+	str = ft_strjoinf(str, " / ", 1);
+	str = ft_strjoinf(str, ft_itoa(player->current_weapon->total_ammo), 3);
 
 	print_letter(main_camera, gui, str, create_t_rectangle(create_t_vector2(0.78, -0.90), create_t_vector2(0.01, 0.05)));
 	free(str);

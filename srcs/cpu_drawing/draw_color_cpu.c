@@ -129,7 +129,6 @@ void    draw_rectangle_color_cpu(t_view_port *p_view_port, t_rectangle p_rec, t_
 		tri_list = initialize_t_triangle_list();
 		i++;
 	}
-	printf("i = %d\n", i);
 	tri = create_t_triangle(create_t_vector3(p_rec.pos.x, p_rec.pos.y, 1.0),
 							create_t_vector3(p_rec.pos.x + p_rec.size.x, p_rec.pos.y, 1.0),
 							create_t_vector3(p_rec.pos.x, p_rec.pos.y + p_rec.size.y, 1.0));

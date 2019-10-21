@@ -18,11 +18,13 @@ typedef struct		s_mesh
 {
 	struct s_camera	*camera;
 	t_vector3		pos;
+	t_vector3		size;
 	t_vector3		center;
 	int				is_visible;
 	float			bubble_radius;
 	int				collectible; // 0 false 1 true
 
+	t_vector3		rotation;
 	t_vector3		angle;
 	t_vector3		forward;
 	t_vector3		right;
@@ -45,6 +47,8 @@ typedef struct		s_mesh
 	t_door			door;
 
 	int				no_hitbox;
+	int				primitive;
+	int				hp;
 }					t_mesh;
 
 t_mesh			create_t_mesh(t_vector3 pos);
@@ -67,9 +71,9 @@ void			t_mesh_apply_force(t_mesh *dest);
 void			t_mesh_set_force(t_mesh *dest, t_vector3 new_force);
 void			t_mesh_add_force(t_mesh *dest, t_vector3 delta_force);
 
-t_mesh			create_primitive_cube(t_vector3 coord, t_vector3 size, t_texture *texture, float gravity);
-t_mesh			create_primitive_plane(t_vector3 pos, t_vector3 size, t_texture *texture, float gravity);
-t_mesh			create_primitive_vertical_plane(t_vector3 pos, t_vector3 size, t_texture *p_texture, float gravity);
+t_mesh			create_primitive_cube(t_vector3 coord, t_vector3 size, char *texture_path, float gravity);
+t_mesh			create_primitive_plane(t_vector3 pos, t_vector3 size, char *texture_path, float gravity);
+t_mesh			create_primitive_vertical_plane(t_vector3 pos, t_vector3 size, char *texture_path, float gravity);
 t_mesh			create_primitive_skybox(t_vector3 pos, t_vector3 size, t_texture *p_texture);
 
 void			t_mesh_rotate(t_mesh *mesh, t_vector3 delta_angle);

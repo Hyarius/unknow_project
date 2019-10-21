@@ -67,16 +67,26 @@ int main(int argc, char **argv)
 	t_mesh_set_color(&mesh, create_t_color(0.0, 0.0, 0.0 ,1.0));
 	t_engine_add_mesh(engine, mesh);
 
+	// t_mesh_list *meshs = read_map_file("ressources/map/save1.map");
 	t_mesh_list *meshs = read_map_file("fichier_map.map");
+	t_item_list *item_list = load_items(meshs);
 
 	int i = 0;
+	int	j = 0;
 	while (i < meshs->size)
 	{
+		if (t_mesh_list_at(meshs, i).collectible == 1)
+		{
+			printf("%d\n", item_list->size);
+			t_engine_add_item(engine, t_item_list_at(item_list, j));
+			j++;
+		}
 		if (ft_strcmp(t_mesh_list_at(meshs, i).name, "start") == 0)
 			start = t_mesh_list_at(meshs, i);
 		t_engine_add_mesh(engine, t_mesh_list_at(meshs, i));
 		i++;
 	}
+	printf("here\n");
 	mesh = create_primitive_cube(create_t_vector3(start.pos.x, start.pos.y + 1.0, start.pos.z), create_t_vector3(0.3, 0.5, 0.3), NULL, 0.0);
 	t_mesh_set_name(&mesh, "Player");
 	t_mesh_set_color(&mesh, create_t_color(1.5, 0.4, 1.5, 1.0));
@@ -87,55 +97,62 @@ int main(int argc, char **argv)
 
 	t_rectangle rec = create_t_rectangle(create_t_vector2(-1, 1), create_t_vector2(2, -2));
 
-	t_item_list	*item_list = initialize_t_item_list();
-
-	t_item health_pack = create_health_pack(create_t_vector3(0.0, 0.0, 0.0), engine);
-	t_item_list_push_back(item_list, health_pack);
-
-	t_item ammo_pack = create_ammo_pack(create_t_vector3(1.0, 0.0, 0.0), engine, 1);
-	t_item_list_push_back(item_list, ammo_pack);
-	ammo_pack = create_ammo_pack(create_t_vector3(2.0, 0.0, 0.0), engine, 2);
-	t_item_list_push_back(item_list, ammo_pack);
-	ammo_pack = create_ammo_pack(create_t_vector3(3.0, 0.0, 0.0), engine, 3);
-	t_item_list_push_back(item_list, ammo_pack);
-	ammo_pack = create_ammo_pack(create_t_vector3(4.0, 0.0, 0.0), engine, 4);
-	t_item_list_push_back(item_list, ammo_pack);
-	ammo_pack = create_ammo_pack(create_t_vector3(-2.0, 0.0, 0.0), engine, 5);
-	t_item_list_push_back(item_list, ammo_pack);
-
-	t_item armor_pack = create_armor_pack(create_t_vector3(-1.0, 0.0, 0.0), engine);
-	t_item_list_push_back(item_list, armor_pack);
+	// t_item_list	*item_list = initialize_t_item_list();
 	//
-	// armor_pack = create_armor_pack(create_t_vector3(-2.0, 0.0, 0.0), engine);
+	// t_item health_pack = create_health_pack(create_t_vector3(0.0, 0.0, 0.0), engine);
+	// t_item_list_push_back(item_list, health_pack);
+	//
+	// t_item ammo_pack = create_ammo_pack(create_t_vector3(1.0, 0.0, 0.0), engine, 1);
+	// t_item_list_push_back(item_list, ammo_pack);
+	// ammo_pack = create_ammo_pack(create_t_vector3(2.0, 0.0, 0.0), engine, 2);
+	// t_item_list_push_back(item_list, ammo_pack);
+	// ammo_pack = create_ammo_pack(create_t_vector3(3.0, 0.0, 0.0), engine, 3);
+	// t_item_list_push_back(item_list, ammo_pack);
+	// ammo_pack = create_ammo_pack(create_t_vector3(4.0, 0.0, 0.0), engine, 4);
+	// t_item_list_push_back(item_list, ammo_pack);
+	// ammo_pack = create_ammo_pack(create_t_vector3(-2.0, 0.0, 0.0), engine, 5);
+	// t_item_list_push_back(item_list, ammo_pack);
+	//
+	// t_item armor_pack = create_armor_pack(create_t_vector3(-1.0, 0.0, 0.0), engine);
 	// t_item_list_push_back(item_list, armor_pack);
+	// //
+	// // armor_pack = create_armor_pack(create_t_vector3(-2.0, 0.0, 0.0), engine);
+	// // t_item_list_push_back(item_list, armor_pack);
+	//
+	// t_item jet_pack = create_jet_pack(create_t_vector3(-3.0, 0.0, 0.0), engine);
+	// t_item_list_push_back(item_list, jet_pack);
+	//
+	// jet_pack = create_jet_pack(create_t_vector3(-3.0, 0.0, 1.0), engine);
+	// t_item_list_push_back(item_list, jet_pack);
+	//
+	//
+	// jet_pack = create_jet_pack(create_t_vector3(-3.0, 0.0, 2.0), engine);
+	// t_item_list_push_back(item_list, jet_pack);
+	//
+	//
+	// jet_pack = create_jet_pack(create_t_vector3(-3.0, 0.0, 3.0), engine);
+	// t_item_list_push_back(item_list, jet_pack);
+	//
+	//
+	// jet_pack = create_jet_pack(create_t_vector3(-3.0, 0.0, -1.0), engine);
+	// t_item_list_push_back(item_list, jet_pack);
+	//
+	//
+	// jet_pack = create_jet_pack(create_t_vector3(-3.0, 0.0, -2.0), engine);
+	// t_item_list_push_back(item_list, jet_pack);
+	//
+	//
+	// jet_pack = create_jet_pack(create_t_vector3(-3.0, 0.0, -3.0), engine);
+	// t_item_list_push_back(item_list, jet_pack);
+	//
+	// t_item color_card = create_color_card(create_t_vector3(-6.0, 0.0, -1.0), engine, 1);
+	// t_item_list_push_back(item_list, color_card);
+	// color_card = create_color_card(create_t_vector3(-6.0, 0.0, 0.0), engine, 2);
+	// t_item_list_push_back(item_list, color_card);
+	// color_card = create_color_card(create_t_vector3(-6.0, 0.0, 1.0), engine, 3);
+	// t_item_list_push_back(item_list, color_card);
 
-	t_item jet_pack = create_jet_pack(create_t_vector3(-3.0, 0.0, 0.0), engine);
-	t_item_list_push_back(item_list, jet_pack);
-
-	jet_pack = create_jet_pack(create_t_vector3(-3.0, 0.0, 1.0), engine);
-	t_item_list_push_back(item_list, jet_pack);
-
-
-	jet_pack = create_jet_pack(create_t_vector3(-3.0, 0.0, 2.0), engine);
-	t_item_list_push_back(item_list, jet_pack);
-
-
-	jet_pack = create_jet_pack(create_t_vector3(-3.0, 0.0, 3.0), engine);
-	t_item_list_push_back(item_list, jet_pack);
-
-
-	jet_pack = create_jet_pack(create_t_vector3(-3.0, 0.0, -1.0), engine);
-	t_item_list_push_back(item_list, jet_pack);
-
-
-	jet_pack = create_jet_pack(create_t_vector3(-3.0, 0.0, -2.0), engine);
-	t_item_list_push_back(item_list, jet_pack);
-
-
-	jet_pack = create_jet_pack(create_t_vector3(-3.0, 0.0, -3.0), engine);
-	t_item_list_push_back(item_list, jet_pack);
-
-	engine->physic_engine->item_list = item_list;
+	// engine->physic_engine->item_list = item_list;
 
 	mesh = create_primitive_skybox(main_camera->pos, create_t_vector3(1.0, 1.0, 1.0), skybox);
 	engine->playing = 1;

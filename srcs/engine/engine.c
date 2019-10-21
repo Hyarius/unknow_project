@@ -18,7 +18,7 @@ t_engine	*initialize_t_engine(t_window *p_window)
 
 	if (!(result = (t_engine *)malloc(sizeof(t_engine))))
 		return (NULL);
-	printf("malloc t_engine\n");
+	// printf("malloc t_engine\n");
 
 	*result = create_t_engine(p_window);
 
@@ -30,14 +30,14 @@ void		delete_t_engine(t_engine dest)
 	free_t_physic_engine(dest.physic_engine);
 	free_t_user_engine(dest.user_engine);
 	free_t_visual_engine(dest.visual_engine);
-	printf("delete t_engine\n");
+	// printf("delete t_engine\n");
 }
 
 void		free_t_engine(t_engine *dest)
 {
 	delete_t_engine(*dest);
 	free(dest);
-	printf("free t_engine\n");
+	// printf("free t_engine\n");
 }
 
 void		t_engine_handle_camera(t_engine *p_engine, t_window *p_win)
@@ -62,6 +62,12 @@ void		t_engine_draw_mesh(t_engine *p_engine)
 void		t_engine_add_mesh(t_engine *engine, t_mesh p_mesh)
 {
 	t_physic_engine_add_mesh(engine->physic_engine, p_mesh);
+}
+
+void		t_engine_add_item(t_engine *engine, t_item p_item)
+{
+	printf("here\n");
+	t_physic_engine_add_item(engine->physic_engine, p_item);
 }
 
 void		t_engine_handle_event(t_camera *main_camera, t_gui *gui, t_engine *engine)

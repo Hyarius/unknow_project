@@ -23,6 +23,9 @@ typedef struct  s_player
 	float		speed;
 	t_weapon	weapons[5];
 	t_weapon	*current_weapon;
+	int			red_card;
+	int			blue_card;
+	int			green_card;
 
 }               t_player;
 

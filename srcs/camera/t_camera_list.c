@@ -6,7 +6,7 @@ t_camera_list	create_t_camera_list()
 
 	if (!(list.camera = (t_camera *)malloc(sizeof(t_camera) * PUSH_SIZE)))
 		error_exit(-18, "Can't malloc a t_camera array");
-	printf("malloc t_camera_list.camera\n");
+	// printf("malloc t_camera_list.camera\n");
 	list.size = 0;
 	list.max_size = PUSH_SIZE;
 	return (list);
@@ -18,7 +18,7 @@ t_camera_list	*initialize_t_camera_list()
 
 	if (!(list = (t_camera_list *)malloc(sizeof(t_camera_list))))
 		error_exit(-19, "Can't create a t_camera_list array");
-	printf("malloc t_camera_list\n");
+	// printf("malloc t_camera_list\n");
 
 	*list = create_t_camera_list();
 
@@ -35,7 +35,7 @@ void			t_camera_list_push_back(t_camera_list *dest, t_camera to_add)
 		tmp = dest->camera;
 		if (!(dest->camera = (t_camera *)malloc(sizeof(t_camera) * (dest->size + 1 + PUSH_SIZE))))
 			error_exit(-20, "Can't realloc a t_camera array");
-		printf("malloc t_camera_list_push_back\n");
+		// printf("malloc t_camera_list_push_back\n");
 		i = 0;
 		while (i < dest->size)
 		{
@@ -76,14 +76,14 @@ void			t_camera_list_add_back(t_camera_list *dest, t_camera *to_add)
 void			delete_t_camera_list(t_camera_list dest)
 {
 	free(dest.camera);
-	printf("delete t_camera_list\n");
+	// printf("delete t_camera_list\n");
 }
 
 void			free_t_camera_list(t_camera_list *dest)
 {
 	delete_t_camera_list(*dest);
 	free(dest);
-	printf("free t_camera_list\n");
+	// printf("free t_camera_list\n");
 }
 
 void			clean_t_camera_list(t_camera_list *dest)

@@ -8,6 +8,7 @@ t_player		create_t_player(t_camera *cam, t_mesh hitbox)
 	result.hitbox = hitbox;
 	t_mesh_set_color(&result.hitbox, create_t_color(0.5, 0.6, 0.0 ,1.0));
 	result.hp = 100;
+	result.hitbox.hp = result.hp;
 	result.armor = 0;
 	result.fuel = 0;
 	result.speed = 1.0;
@@ -16,6 +17,9 @@ t_player		create_t_player(t_camera *cam, t_mesh hitbox)
 	result.weapons[2] = create_t_weapons(2);
 	result.weapons[3] = create_t_weapons(3);
 	result.weapons[4] = create_t_weapons(4);
+	result.red_card = 0;
+	result.blue_card = 0;
+	result.green_card = 0;
 	result.current_weapon = &result.weapons[0];
 	return (result);
 }
@@ -26,7 +30,7 @@ t_player			*initialize_t_player(t_camera *cam, t_mesh hitbox)
 
 	if (!(result = (t_player *)malloc(sizeof(t_player))))
 		error_exit(-13, "Can't create a t_player array");
-	printf("malloc t_player\n");
+	// printf("malloc t_player\n");
 
 	*result = create_t_player(cam, hitbox);
 
@@ -155,10 +159,16 @@ void			player_action(t_camera *camera, t_keyboard *p_keyboard, t_engine *engine)
 		while(i < engine->physic_engine->mesh_list->size && camera->f_press == 0)
 		{
 			target = t_mesh_list_get(engine->physic_engine->mesh_list, i);
-			if (camera->body != target && target->bubble_radius + camera->body->bubble_radius >= calc_dist_vector3_to_vector3(camera->body->center, target->center) && ft_strcmp(target->name, "door") == 0)
+			if (camera->body != target && target->bubble_radius + camera->body->bubble_radius >= calc_dist_vector3_to_vector3(camera->body->center, target->center) && (ft_strcmp(target->name, "door") == 0 || ft_strcmp(target->name, "door") == '_'))
 			{
-				target->door.move = 1;
-				door = target;
+				if (ft_strcmp(target->name, "door") == 0 || (ft_strcmp(target->name, "door_red") == 0
+				&& engine->user_engine->player->red_card == 1) || (ft_strcmp(target->name, "door_blue") == 0
+				&& engine->user_engine->player->blue_card == 1) || (ft_strcmp(target->name, "door_green") == 0
+				&& engine->user_engine->player->green_card == 1))
+				{
+					target->door.move = 1;
+					door = target;
+				}
 			}
 			if (camera->body != target && target->bubble_radius + camera->body->bubble_radius >= calc_dist_vector3_to_vector3(camera->body->center, target->center) && ft_strcmp(target->name, "elevator") == 0)
 			{
@@ -171,6 +181,8 @@ void			player_action(t_camera *camera, t_keyboard *p_keyboard, t_engine *engine)
 	}
 	else
 		camera->f_press = 0;
+	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_B]) == 1)
+		save_map(engine->physic_engine->mesh_list, 1);
 
 	if (door != NULL)
 		t_mesh_move_door(door);

@@ -7,6 +7,7 @@ t_mesh	create_t_mesh(t_vector3 pos)
 	char		*str;
 
 	result.camera = NULL;
+	result.primitive = 10;
 	result.pos = pos;
 	result.is_visible = BOOL_TRUE;
 	result.center = pos;
@@ -18,12 +19,14 @@ t_mesh	create_t_mesh(t_vector3 pos)
 	result.texture = NULL;
 	result.name = NULL;
 	result.no_hitbox = 0;
+	result.hp = 0;
 	result.vertices_in_world = initialize_t_vector3_list();
 	result.next_vertices_in_world = initialize_t_vector3_list();
 	result.vertices = initialize_t_vector3_list();
 	result.uvs = initialize_t_vector3_list();
 	result.faces = initialize_t_face_list();
 	result.normales = initialize_t_vector3_list();
+	result.rotation = create_t_vector3(0.0, 0.0, 0.0);
 	t_mesh_look_at(&result);
 	return (result);
 }
@@ -34,7 +37,7 @@ t_mesh	*initialize_t_mesh(t_vector3 pos)
 
 	if (!(result = (t_mesh *)malloc(sizeof(t_mesh))))
 		error_exit(-13, "Can't create a t_mesh array");
-	printf("malloc t_mesh\n");
+	// printf("malloc t_mesh\n");
 	*result = create_t_mesh(pos);
 	return (result);
 }
@@ -44,14 +47,14 @@ void	delete_t_mesh(t_mesh mesh)
 	free_t_vector3_list(mesh.vertices);
 	free_t_vector3_list(mesh.uvs);
 	free_t_face_list(mesh.faces);
-	printf("delete t_mesh\n");
+	// printf("delete t_mesh\n");
 }
 
 void	free_t_mesh(t_mesh *mesh)
 {
 	delete_t_mesh(*mesh);
 	free(mesh);
-	printf("free t_mesh\n");
+	// printf("free t_mesh\n");
 }
 
 void	t_mesh_add_uv(t_mesh *dest, t_vector3 new_uv)
@@ -285,7 +288,9 @@ void	t_mesh_set_name(t_mesh *mesh, char *name)
 {
 
 	mesh->name = ft_strdup(name);
-	if (ft_strcmp(mesh->name, "door") == 0 || ft_strcmp(mesh->name, "elevator") == 0)
+	if (ft_strcmp(mesh->name, "door") == 0 || ft_strcmp(mesh->name, "elevator") == 0
+		|| ft_strcmp(mesh->name, "door_red") == 0 || ft_strcmp(mesh->name, "door_blue") == 0
+		|| ft_strcmp(mesh->name, "door_green") == 0)
 		mesh->door = create_t_door();
 }
 

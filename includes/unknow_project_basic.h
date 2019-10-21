@@ -24,6 +24,7 @@ int				ft_strcmp(char *s1, char *s2);
 int				ft_atoi(const char *str);
 int				ft_floor(float source);
 float			ft_abs_float(float src);
+char		    *ft_ftoa(float num);
 
 int				min(int a, int b);
 int				max(int a, int b);

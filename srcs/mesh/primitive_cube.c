@@ -76,13 +76,15 @@ static void	t_mesh_init_face_primitive_cube(t_mesh *result, t_face tmp_face1, t_
 	t_mesh_add_face(result, tmp_face2);
 }
 
-t_mesh		create_primitive_cube(t_vector3 pos, t_vector3 size, t_texture *p_texture, float gravity)
+t_mesh		create_primitive_cube(t_vector3 pos, t_vector3 size, char *texture_path, float gravity)
 {
 	t_mesh	result;
 	t_face	tmp_face1;
 	t_face	tmp_face2;
 
 	result = create_t_mesh(pos);
+	result.primitive = 1;
+	result.size = create_t_vector3(size.x, size.y, size.z);
 	t_mesh_activate_gravity(&result, gravity);
 	t_mesh_init_point_primitive_cube(&result, size);
 	t_mesh_init_uv_point_primitive_cube(&result);
@@ -92,6 +94,7 @@ t_mesh		create_primitive_cube(t_vector3 pos, t_vector3 size, t_texture *p_textur
 	t_mesh_init_face_primitive_cube_next(&result, tmp_face1, tmp_face2);
 	t_mesh_compute_normals(&result);
 	t_mesh_compute_bubble_box(&result);
-	t_mesh_set_texture(&result, p_texture);
+	if (texture_path != NULL)
+		result.texture = png_load(texture_path);
 	return (result);
 }
