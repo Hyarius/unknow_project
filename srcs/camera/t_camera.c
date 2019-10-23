@@ -205,6 +205,7 @@ void		move_camera(t_camera *camera, t_vector3 mouvement, t_engine *engine, float
 	camera->pos = add_vector3_to_vector3(camera->pos, camera->body->force);
 	camera->pos = add_vector3_to_vector3(camera->body->pos,
 					create_t_vector3(0.15, 0.45 - j, 0.15));
+	engine->user_engine->player->hitbox.pos = camera->pos;
 }
 
 void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard, t_engine *engine) // calcul du mouvement de la cameraera au clavier

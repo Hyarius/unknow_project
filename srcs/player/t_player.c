@@ -47,6 +47,7 @@ t_weapon		create_t_weapons(int index)
 	result[0].max_ammo = result[0].mag_size * MAX_MAGS;
 	result[0].total_ammo = 0;
 	result[0].dmg = 10;
+	result[0].tick = 5;
 
 	result[1].name = "ar";
 	result[1].ammo = 0;
@@ -54,6 +55,7 @@ t_weapon		create_t_weapons(int index)
 	result[1].max_ammo = result[1].mag_size * MAX_MAGS;
 	result[1].total_ammo = 0;
 	result[1].dmg = 12;
+	result[1].tick = 0;
 
 	result[2].name = "rifle";
 	result[2].ammo = 0;
@@ -61,13 +63,15 @@ t_weapon		create_t_weapons(int index)
 	result[2].max_ammo = result[2].mag_size * MAX_MAGS;
 	result[2].total_ammo = 0;
 	result[2].dmg = 50;
+	result[2].tick = 10;
 
 	result[3].name = "shotgun";
 	result[3].ammo = 0;
 	result[3].mag_size = 8;
 	result[3].max_ammo = result[3].mag_size * MAX_MAGS;
 	result[3].total_ammo = 0;
-	result[3].dmg = 40;
+	result[3].dmg = 120;
+	result[3].tick = 10;
 
 	result[4].name = "rpg";
 	result[4].ammo = 0;
@@ -75,6 +79,7 @@ t_weapon		create_t_weapons(int index)
 	result[4].max_ammo = result[4].mag_size * MAX_MAGS;
 	result[4].total_ammo = 0;
 	result[4].dmg = 200000;
+	result[4].tick = 1;
 
 	return (result[index]);
 }
@@ -112,21 +117,14 @@ void			reload_weapon(t_camera *camera, t_player *player, int tick)
 		}
 		camera->r_press = 0;
 	}
-	// if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_R]) == 1)
-	// {
-		// while (to_fill > 0 && player->current_weapon->ammo < player->current_weapon->mag_size && player->current_weapon->total_ammo > 0)
-		// {
-			// player->current_weapon->ammo++;
-			// player->current_weapon->total_ammo--;
-		// 	to_fill--;
-		// }
-	// }
 }
 
-void			shoot_weapon(t_engine *engine)
+void			shoot_weapon(t_engine *engine, int *tick)
 {
 	t_mesh	*target;
+	float	dist;
 
+	dist = 0.0;
 	if (t_mouse_state(engine->user_engine->mouse) == 1)
 	{
 		if (engine->user_engine->player->current_weapon->ammo > 0)
@@ -134,7 +132,10 @@ void			shoot_weapon(t_engine *engine)
 			target = cast_ray(engine, t_camera_list_get(engine->visual_engine->camera_list, 0)->pos, t_camera_list_get(engine->visual_engine->camera_list, 0)->forward);
 			if (target != NULL && target->hp > 0)
 			{
-				target->hp -= engine->user_engine->player->current_weapon->dmg;
+				if (ft_strcmp(engine->user_engine->player->current_weapon->name, "shotgun") == 0)
+					dist = calc_dist_vector3_to_vector3(engine->user_engine->player->hitbox.pos, target->pos);
+				if (engine->user_engine->player->current_weapon->dmg - dist * 4 >= 0)
+					target->hp -= engine->user_engine->player->current_weapon->dmg - dist * 4;
 				printf("\rTarget hp = %d\n", target->hp);
 				if (target->hp <= 0)
 				{
@@ -144,6 +145,7 @@ void			shoot_weapon(t_engine *engine)
 			}
 			engine->user_engine->player->current_weapon->ammo--;
 		}
+		*tick = 0;
 	}
 }
 
@@ -153,13 +155,15 @@ void			player_action(t_camera *camera, t_keyboard *p_keyboard, t_engine *engine)
 	static t_mesh	*elevator = NULL;
 	t_mesh			*target;
 	int				i;
-	static int		tick = 8;
+	static int		tick_reload = 8;
+	static int		tick_shoot = 0;
 
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_R]) == 1 && camera->r_press == 0
-		&& engine->user_engine->player->current_weapon->mag_size - engine->user_engine->player->current_weapon->ammo != 0)
+		&& engine->user_engine->player->current_weapon->mag_size - engine->user_engine->player->current_weapon->ammo != 0
+		&& engine->user_engine->player->current_weapon->total_ammo != 0)
 	{
 		camera->r_press = 1;
-		tick = 0;
+		tick_reload = 0;
 	}
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_F]) == 1)
 	{
@@ -196,10 +200,13 @@ void			player_action(t_camera *camera, t_keyboard *p_keyboard, t_engine *engine)
 		t_mesh_move_door(door);
 	if (elevator != NULL)
 		t_mesh_move_elevator(elevator, camera);
-	if (tick != 8)
+	if (tick_reload != 8)
 	{
-		tick++;
-		reload_weapon(camera, engine->user_engine->player, tick);
+		tick_reload++;
+		reload_weapon(camera, engine->user_engine->player, tick_reload);
 	}
-	shoot_weapon(engine);
+	if (tick_shoot >= engine->user_engine->player->current_weapon->tick && camera->r_press == 0)
+		shoot_weapon(engine, &tick_shoot);
+	else if (camera->r_press == 0)
+		tick_shoot++;
 }

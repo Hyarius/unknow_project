@@ -154,17 +154,13 @@ int				can_move(t_mesh *mesh, t_engine *engine)
 		{
 			if (target->collectible == 1 && is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
 			{
-				printf("here1\n");
 				j = 0;
 				while (j < engine->physic_engine->item_list->size)
 				{
-					printf("%s\n", t_item_list_get(engine->physic_engine->item_list, j)->name);
 					if (ft_strcmp(target->name, t_item_list_get(engine->physic_engine->item_list, j)->name) == 0)
 					{
-						printf("here3\n");
 						if (engine->physic_engine->item_list->item[j].pf(engine->user_engine->player) == BOOL_TRUE)
 						{
-							printf("here4\n");
 							t_mesh_set_visibility(target, BOOL_FALSE);
 							target->no_hitbox = 1;
 						}
@@ -210,7 +206,7 @@ void			t_physic_engine_apply_force(t_engine *engine)
 	while (i < engine->physic_engine->mesh_list->size)
 	{
 		mesh = t_mesh_list_get(engine->physic_engine->mesh_list, i);
-		if (mesh->kinetic > 0)
+		if (mesh->kinetic > 0 && mesh->force.y > -0.1)
 			mesh->force = add_vector3_to_vector3(mesh->force, create_t_vector3(0.0, -0.01, 0.0));
 		if (mesh->force.x != 0 || mesh->force.y != 0 || mesh->force.z != 0)
 			if (can_move(mesh, engine) == BOOL_TRUE)

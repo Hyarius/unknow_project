@@ -41,7 +41,7 @@ Doom Nukem project
 
 - Actions suite a interactions (ex jetpack, porte a clef) : ok
 
-- Actions modifies elements du jeu : WIP mais details
+- Actions modifies elements du jeu : ok
 
 - Animations, ouvertures de porte,  passage secret… : ok
 
@@ -51,11 +51,11 @@ Doom Nukem project
 
 - Histoire : non
 
-- Début - fin de level : non
+- Début - fin de level : oui
 
-- Bruitages : non
+- Bruitages : oui mais a tester
 
-- Musique : non
+- Musique : oui
 
 - Editeur de niveau : non
 

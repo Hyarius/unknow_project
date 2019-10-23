@@ -12,6 +12,7 @@ typedef struct  s_weapon
 	int			total_ammo;
 	int			max_ammo;
 	int			dmg;
+	int			tick;
 }               t_weapon;
 
 typedef struct  s_player

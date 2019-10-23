@@ -8,6 +8,9 @@ int main(int argc, char **argv)
 
 	if (argc != 1)
 		error_exit(-1, "Bad argument");
+
+	Mix_Init(MIX_INIT_OGG);
+	printf("%s\n", Mix_GetError());
 	start_sdl(); //initialisation de la SDL
 
 	t_window *win;
@@ -30,11 +33,15 @@ int main(int argc, char **argv)
 	load_menu(gui);
 	TTF_Init();
 	set_t_gui_texte(gui);
+	if (Mix_OpenAudio(44100, AUDIO_S16SYS, 1, 1024) == -1)
+		printf("%s\n", Mix_GetError());
 
 	t_mesh		mesh;
 	t_mesh		start;
 	t_camera	*main_camera;
+	Mix_Music	*musique;
 
+	musique = Mix_LoadMUS("ressources/assets/sound/mega_man_test.ogg");
 	main_camera = t_camera_list_get(engine->visual_engine->camera_list, 0);
 	t_engine_place_camera(engine, 0, create_t_vector3(5.0, 5.0, 0.0));
 	t_camera_look_at_point(main_camera, create_t_vector3(0, 0, 0));
@@ -156,6 +163,8 @@ int main(int argc, char **argv)
 
 	mesh = create_primitive_skybox(main_camera->pos, create_t_vector3(1.0, 1.0, 1.0), skybox);
 	engine->playing = 1;
+	Mix_VolumeMusic(MIX_MAX_VOLUME);
+	Mix_PlayMusic(musique, -1);
 	while (engine->playing != 0)
 	{
 		prepare_screen(win, create_t_color(0.2f, 0.2f, 0.2f, 1.0f));
@@ -215,6 +224,8 @@ int main(int argc, char **argv)
 		t_engine_handle_event(main_camera, gui, engine);
 		render_screen(win); // affiche la fenetre
 	}
+	Mix_FreeMusic(musique);
+	Mix_CloseAudio();
 	TTF_Quit();
 	return (0);
 }
