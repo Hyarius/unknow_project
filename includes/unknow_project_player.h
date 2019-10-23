@@ -11,6 +11,7 @@ typedef struct  s_weapon
 	int			mag_size;
 	int			total_ammo;
 	int			max_ammo;
+	int			dmg;
 }               t_weapon;
 
 typedef struct  s_player

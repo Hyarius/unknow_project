@@ -46,30 +46,35 @@ t_weapon		create_t_weapons(int index)
 	result[0].mag_size = 15;
 	result[0].max_ammo = result[0].mag_size * MAX_MAGS;
 	result[0].total_ammo = 0;
+	result[0].dmg = 10;
 
 	result[1].name = "ar";
 	result[1].ammo = 0;
 	result[1].mag_size = 30;
 	result[1].max_ammo = result[1].mag_size * MAX_MAGS;
 	result[1].total_ammo = 0;
+	result[1].dmg = 12;
 
 	result[2].name = "rifle";
 	result[2].ammo = 0;
 	result[2].mag_size = 10;
 	result[2].max_ammo = result[2].mag_size * MAX_MAGS;
 	result[2].total_ammo = 0;
+	result[2].dmg = 50;
 
 	result[3].name = "shotgun";
 	result[3].ammo = 0;
 	result[3].mag_size = 8;
 	result[3].max_ammo = result[3].mag_size * MAX_MAGS;
 	result[3].total_ammo = 0;
+	result[3].dmg = 40;
 
 	result[4].name = "rpg";
 	result[4].ammo = 0;
 	result[4].mag_size = 1;
 	result[4].max_ammo = result[4].mag_size * MAX_MAGS;
 	result[4].total_ammo = 0;
+	result[4].dmg = 200000;
 
 	return (result[index]);
 }
@@ -127,12 +132,15 @@ void			shoot_weapon(t_engine *engine)
 		if (engine->user_engine->player->current_weapon->ammo > 0)
 		{
 			target = cast_ray(engine, t_camera_list_get(engine->visual_engine->camera_list, 0)->pos, t_camera_list_get(engine->visual_engine->camera_list, 0)->forward);
-			if (target != NULL)
-				printf("\rTarget name = %s\n", target->name);
-			if (ft_strcmp(engine->user_engine->player->current_weapon->name, "rpg") == 0 && ft_strcmp(target->name, "plane") != 0 && target->no_hitbox == 0 && target->is_visible == BOOL_TRUE)
+			if (target != NULL && target->hp > 0)
 			{
-				t_mesh_set_visibility(target, BOOL_FALSE);
-				target->no_hitbox = 1;
+				target->hp -= engine->user_engine->player->current_weapon->dmg;
+				printf("\rTarget hp = %d\n", target->hp);
+				if (target->hp <= 0)
+				{
+					t_mesh_set_visibility(target, BOOL_FALSE);
+					target->no_hitbox = 1;
+				}
 			}
 			engine->user_engine->player->current_weapon->ammo--;
 		}
