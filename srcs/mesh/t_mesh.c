@@ -180,6 +180,8 @@ void	t_mesh_rotate(t_mesh *mesh, t_vector3 delta_angle)
 	t_vector3	*target;
 	int			i;
 
+	mesh->rotation = add_vector3_to_vector3(mesh->rotation,
+			create_t_vector3(delta_angle.x, delta_angle.y, delta_angle.z));
 	rotation = create_rotation_matrix(delta_angle.x, delta_angle.y,\
 										delta_angle.z);
 	mesh->angle = add_vector3_to_vector3(mesh->angle, delta_angle);
@@ -292,6 +294,8 @@ void	t_mesh_set_name(t_mesh *mesh, char *name)
 		|| ft_strcmp(mesh->name, "door_red") == 0 || ft_strcmp(mesh->name, "door_blue") == 0
 		|| ft_strcmp(mesh->name, "door_green") == 0)
 		mesh->door = create_t_door();
+	else if (ft_strcmp(mesh->name, "Enemy") == 0)
+		mesh->tick = 0;
 }
 
 void	t_mesh_move_door(t_mesh *mesh)

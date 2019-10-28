@@ -49,6 +49,7 @@ typedef struct		s_mesh
 	int				no_hitbox;
 	int				primitive;
 	int				hp;
+	int				tick;
 }					t_mesh;
 
 t_mesh			create_t_mesh(t_vector3 pos);

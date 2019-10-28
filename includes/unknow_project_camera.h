@@ -80,5 +80,4 @@ void		clean_t_camera(t_camera *camera);
 void		link_t_camera_to_t_mesh(t_camera *camera, t_mesh *mesh, float new_kinetic);
 void		t_mesh_move_elevator(t_mesh *mesh, t_camera *camera);
 
-
 #endif

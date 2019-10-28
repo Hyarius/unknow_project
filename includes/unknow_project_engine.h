@@ -49,4 +49,10 @@ void			t_user_engine_handle_camera(t_engine *engine, t_camera *cam, t_window *p_
 void			t_physic_engine_apply_force(t_engine *engine);
 void			player_action(t_camera *camera, t_keyboard *p_keyboard, t_engine *engine);
 
+void			enemy_shoot(t_engine *engine);
+
+
+void    		save_map(t_engine *engine, int wich);
+void			save_player(t_engine *engine, t_mesh current, int fd);
+
 #endif

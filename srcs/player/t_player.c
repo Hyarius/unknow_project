@@ -1,30 +1,31 @@
 #include "unknow_project.h"
 
-t_player		create_t_player(t_camera *cam, t_mesh hitbox)
+t_player		create_t_player(t_camera *cam)
 {
 	t_player 	result;
 
 	result.camera = cam;
-	result.hitbox = hitbox;
-	t_mesh_set_color(&result.hitbox, create_t_color(0.5, 0.6, 0.0 ,1.0));
-	result.hp = 100;
-	result.hitbox.hp = result.hp;
-	result.armor = 0;
-	result.fuel = 0;
+	// result.hitbox = hitbox;
+	// // result.hitbox.no_hitbox = 1;
+	// t_mesh_set_color(&result.hitbox, create_t_color(0.5, 0.6, 0.0 ,1.0));
+	// result.hp = 100;
+	// result.hitbox.hp = result.hp;
+	// result.armor = 0;
+	// result.fuel = 0;
 	result.speed = 1.0;
-	result.weapons[0] = create_t_weapons(0);
-	result.weapons[1] = create_t_weapons(1);
-	result.weapons[2] = create_t_weapons(2);
-	result.weapons[3] = create_t_weapons(3);
-	result.weapons[4] = create_t_weapons(4);
-	result.red_card = 0;
-	result.blue_card = 0;
-	result.green_card = 0;
-	result.current_weapon = &result.weapons[0];
+	// // result.weapons[0] = create_t_weapons(0);
+	// // result.weapons[1] = create_t_weapons(1);
+	// // result.weapons[2] = create_t_weapons(2);
+	// // result.weapons[3] = create_t_weapons(3);
+	// // result.weapons[4] = create_t_weapons(4);
+	// result.red_card = 0;
+	// result.blue_card = 0;
+	// result.green_card = 0;
+	// result.current_weapon = &result.weapons[0];
 	return (result);
 }
 
-t_player			*initialize_t_player(t_camera *cam, t_mesh hitbox)
+t_player			*initialize_t_player(t_camera *cam)
 {
 	t_player *result;
 
@@ -32,58 +33,57 @@ t_player			*initialize_t_player(t_camera *cam, t_mesh hitbox)
 		error_exit(-13, "Can't create a t_player array");
 	// printf("malloc t_player\n");
 
-	*result = create_t_player(cam, hitbox);
+	*result = create_t_player(cam);
 
 	return(result);
 }
 
-t_weapon		create_t_weapons(int index)
+t_weapon		create_t_weapons(int index, int ammo, int total_ammo)
 {
 	t_weapon	result[5];
 
 	result[0].name = "pistol";
-	result[0].ammo = 15;
+	result[0].ammo = ammo;
 	result[0].mag_size = 15;
 	result[0].max_ammo = result[0].mag_size * MAX_MAGS;
-	result[0].total_ammo = 0;
+	result[0].total_ammo = total_ammo;
 	result[0].dmg = 10;
 	result[0].tick = 5;
 
 	result[1].name = "ar";
-	result[1].ammo = 0;
+	result[1].ammo = ammo;
 	result[1].mag_size = 30;
 	result[1].max_ammo = result[1].mag_size * MAX_MAGS;
-	result[1].total_ammo = 0;
+	result[1].total_ammo = total_ammo;
 	result[1].dmg = 12;
 	result[1].tick = 0;
 
 	result[2].name = "rifle";
-	result[2].ammo = 0;
+	result[2].ammo = ammo;
 	result[2].mag_size = 10;
 	result[2].max_ammo = result[2].mag_size * MAX_MAGS;
-	result[2].total_ammo = 0;
+	result[2].total_ammo = total_ammo;
 	result[2].dmg = 50;
 	result[2].tick = 10;
 
 	result[3].name = "shotgun";
-	result[3].ammo = 0;
+	result[3].ammo = ammo;
 	result[3].mag_size = 8;
 	result[3].max_ammo = result[3].mag_size * MAX_MAGS;
-	result[3].total_ammo = 0;
+	result[3].total_ammo = total_ammo;
 	result[3].dmg = 120;
 	result[3].tick = 10;
 
 	result[4].name = "rpg";
-	result[4].ammo = 0;
+	result[4].ammo = ammo;
 	result[4].mag_size = 1;
 	result[4].max_ammo = result[4].mag_size * MAX_MAGS;
-	result[4].total_ammo = 0;
+	result[4].total_ammo = total_ammo;
 	result[4].dmg = 200000;
 	result[4].tick = 1;
 
 	return (result[index]);
 }
-
 
 void			change_weapon(t_keyboard *p_keyboard, t_player *player)
 {
@@ -194,7 +194,7 @@ void			player_action(t_camera *camera, t_keyboard *p_keyboard, t_engine *engine)
 	else
 		camera->f_press = 0;
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_B]) == 1)
-		save_map(engine->physic_engine->mesh_list, 1);
+		save_map(engine, 1);
 
 	if (door != NULL)
 		t_mesh_move_door(door);

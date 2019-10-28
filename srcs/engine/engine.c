@@ -66,7 +66,6 @@ void		t_engine_add_mesh(t_engine *engine, t_mesh p_mesh)
 
 void		t_engine_add_item(t_engine *engine, t_item p_item)
 {
-	printf("here\n");
 	t_physic_engine_add_item(engine->physic_engine, p_item);
 }
 
@@ -77,8 +76,8 @@ void		t_engine_handle_event(t_camera *main_camera, t_gui *gui, t_engine *engine)
 	int		i;
 
 	if (engine->playing == 1 && get_key_state(engine->user_engine->keyboard, SDL_SCANCODE_P) == 1)
-		engine->playing = -1;
-	else if (engine->playing <= -1 && get_key_state(engine->user_engine->keyboard, SDL_SCANCODE_P) == 1)
+		engine->playing = -2;
+	else if (engine->playing <= -2 && get_key_state(engine->user_engine->keyboard, SDL_SCANCODE_P) == 1)
 		engine->playing = 1;
 	t_user_engine_handle_pause(main_camera, gui, engine->user_engine, &(engine->playing));
 	t_user_engine_handle_menu(main_camera, gui, engine->user_engine, &(engine->playing));

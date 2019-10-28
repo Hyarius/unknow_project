@@ -37,6 +37,72 @@ t_item_list		*load_items(t_mesh_list *meshs)
 	return (result);
 }
 
+t_player		*read_player(char *path, t_camera *main_camera)
+{
+	t_player	*player;
+	t_mesh		mesh;
+	char		*line;
+	char		**line_split;
+	t_vector3	vector[3];
+	int			fd;
+
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+		error_exit(-7000, "imposible fd");
+	player = initialize_t_player(main_camera);
+	while (get_next_line(fd, &line) > 0)
+	{
+		if (ft_strlen(line) != 0)
+		{
+			line_split = ft_strsplit(line, ' ');
+			if (ft_strcmp(line_split[0], "player:") == 0)
+			{
+				vector[0] = create_t_vector3(ft_atof(line_split[2]),
+											ft_atof(line_split[3]) + 0.2,
+											ft_atof(line_split[4]));
+				vector[1] = create_t_vector3(ft_atof(line_split[5]),
+											ft_atof(line_split[6]),
+											ft_atof(line_split[7]));
+				vector[2] = create_t_vector3(ft_atof(line_split[10]),
+											ft_atof(line_split[11]),
+											ft_atof(line_split[12]));
+				// if (ft_strcmp(line_split[8 + i], "NULL") != 0)
+				// 	texture_path = line_split[8 + i];
+				// else
+				// 	color = create_t_color(ft_atof(line_split[13 + i]), ft_atof(line_split[14 + i]), ft_atof(line_split[15 + i]), ft_atof(line_split[16 + i]));
+				mesh = create_primitive_cube(vector[0], vector[1], NULL, ft_atof(line_split[9]));
+				t_mesh_rotate(&mesh, vector[2]);
+				mesh.hp = ft_atoi(line_split[17]);
+				mesh.no_hitbox = 0;
+				mesh.primitive = -1;
+				t_mesh_set_name(&mesh, line_split[1]);
+				player->hitbox = mesh;
+				t_mesh_set_color(&player->hitbox, create_t_color(0.5, 0.6, 0.0 ,1.0));
+				player->hp = ft_atoi(line_split[17]);
+				player->armor = ft_atoi(line_split[18]);
+				player->fuel = ft_atoi(line_split[19]);
+				player->weapons[0] = create_t_weapons(0, ft_atoi(line_split[20]), ft_atoi(line_split[21]));
+				player->weapons[1] = create_t_weapons(1, ft_atoi(line_split[22]), ft_atoi(line_split[23]));
+				player->weapons[2] = create_t_weapons(2, ft_atoi(line_split[24]), ft_atoi(line_split[25]));
+				player->weapons[3] = create_t_weapons(3, ft_atoi(line_split[26]), ft_atoi(line_split[27]));
+				player->weapons[4] = create_t_weapons(4, ft_atoi(line_split[28]), ft_atoi(line_split[29]));
+				printf("here\n");
+				player->red_card = ft_atoi(line_split[30]);
+				printf("here\n");
+				player->blue_card = ft_atoi(line_split[31]);
+				printf("here\n");
+				player->green_card = ft_atoi(line_split[32]);
+				player->current_weapon = &player->weapons[0];
+			}
+			ft_freetab(line_split);
+		}
+		free(line);
+	}
+	free(line);
+	close(fd);
+	return (player);
+}
+
 t_mesh_list		*read_map_file(char *path)
 {
 	t_mesh		mesh;
@@ -79,7 +145,6 @@ t_mesh_list		*read_map_file(char *path)
 					texture_path = line_split[8 + i];
 				else
 					color = create_t_color(ft_atof(line_split[13 + i]), ft_atof(line_split[14 + i]), ft_atof(line_split[15 + i]), ft_atof(line_split[16 + i]));
-				print_t_color(color, "color");
 				if (ft_strcmp(line_split[0], "plane:") == 0)
 					mesh = create_primitive_plane(vector[0], vector[1], texture_path, ft_atof(line_split[9 + i]));
 				else if (ft_strcmp(line_split[0], "cube:") == 0)
@@ -103,7 +168,6 @@ t_mesh_list		*read_map_file(char *path)
 					mesh.no_hitbox = 0;
 				t_mesh_set_name(&mesh, line_split[1 + i]);
 				t_mesh_list_push_back(result, mesh);
-				printf("here\n");
 			}
 			ft_freetab(line_split);
 		}

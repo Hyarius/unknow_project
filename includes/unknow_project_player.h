@@ -31,8 +31,9 @@ typedef struct  s_player
 
 }               t_player;
 
-t_player		create_t_player(t_camera *cam, t_mesh hitbox);
-t_player		*initialize_t_player(t_camera *cam, t_mesh hitbox);
-t_weapon		create_t_weapons(int index);
+t_player		create_t_player(t_camera *cam);
+t_player		*initialize_t_player(t_camera *cam);
+t_player		*read_player(char *path, t_camera *main_camera);
+t_weapon		create_t_weapons(int index, int ammo, int total_ammo);
 
 #endif

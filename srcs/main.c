@@ -1,5 +1,12 @@
 #include "unknow_project.h"
 
+// int main()
+// {
+// 	float i = 0.5;
+//
+// 	printf("%s\n", ft_ftoa(i));
+// }
+
 int main(int argc, char **argv)
 {
 	TTF_Font    *police;
@@ -37,7 +44,6 @@ int main(int argc, char **argv)
 		printf("%s\n", Mix_GetError());
 
 	t_mesh		mesh;
-	t_mesh		start;
 	t_camera	*main_camera;
 	Mix_Music	*musique;
 
@@ -73,9 +79,11 @@ int main(int argc, char **argv)
 	// t_mesh_rotate(&mesh, create_t_vector3(0.0, 90.0, 0.0));
 	// t_mesh_set_color(&mesh, create_t_color(0.0, 0.0, 0.0 ,1.0));
 	// t_engine_add_mesh(engine, mesh);
-
-	// t_mesh_list *meshs = read_map_file("ressources/map/save1.map");
-	t_mesh_list *meshs = read_map_file("fichier_map.map");
+	t_player *player;
+	player = read_player("ressources/map/save1.map", main_camera);
+	t_mesh_list *meshs = read_map_file("ressources/map/save1.map");
+	// player = read_player("ressources/map/fichier_map.map", main_camera);
+	// t_mesh_list *meshs = read_map_file("ressources/map/fichier_map.map");
 	t_item_list *item_list = load_items(meshs);
 
 	int i = 0;
@@ -84,21 +92,19 @@ int main(int argc, char **argv)
 	{
 		if (t_mesh_list_at(meshs, i).collectible == 1)
 		{
-			printf("%d\n", item_list->size);
+			// printf("item %d\n", item_list->size);
 			t_engine_add_item(engine, t_item_list_at(item_list, j));
 			j++;
 		}
-		if (ft_strcmp(t_mesh_list_at(meshs, i).name, "start") == 0)
-			start = t_mesh_list_at(meshs, i);
-		t_engine_add_mesh(engine, t_mesh_list_at(meshs, i));
+		// if (ft_strcmp(t_mesh_list_at(meshs, i).name, "Player") == 0)
+		// 	player = t_mesh_list_at(meshs, i);
+		// else
+			t_engine_add_mesh(engine, t_mesh_list_at(meshs, i));
 		i++;
 	}
-	printf("here\n");
-	mesh = create_primitive_cube(create_t_vector3(start.pos.x, start.pos.y + 1.0, start.pos.z), create_t_vector3(0.3, 0.5, 0.3), NULL, 0.0);
-	t_mesh_set_name(&mesh, "Player");
-	t_mesh_set_color(&mesh, create_t_color(1.5, 0.4, 1.5, 1.0));
-
-	engine->user_engine->player = initialize_t_player(main_camera, mesh);
+	// player.pos = add_vector3_to_vector3(player.pos, create_t_vector3(0.0, 1.0, 0.0));
+	// engine->user_engine->player = initialize_t_player(main_camera, player);
+	engine->user_engine->player = player;
 	t_engine_add_mesh(engine, engine->user_engine->player->hitbox);
 	link_t_camera_to_t_mesh(main_camera, t_engine_get_mesh(engine, i), 100);
 
@@ -173,7 +179,7 @@ int main(int argc, char **argv)
 		{
 			SDL_ShowCursor(SDL_ENABLE);
 		}
-		if (engine->playing <= -1)
+		if (engine->playing <= -2)
 		{
 			t_engine_draw_mesh(engine);
 			t_engine_render_camera(engine);
@@ -216,6 +222,7 @@ int main(int argc, char **argv)
 			t_engine_render_camera(engine);
 			change_weapon(engine->user_engine->keyboard, engine->user_engine->player);
 			player_action(main_camera, engine->user_engine->keyboard, engine);
+			// enemy_shoot(engine);
 			drawing_front_hp(main_camera, engine);
 			// drawing_front_mun(main_camera, gui, texture2, engine->user_engine->player);
 			draw_minimap(main_camera, engine, win);
