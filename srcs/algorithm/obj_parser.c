@@ -60,8 +60,9 @@ t_mesh		read_obj_file(char *path, t_vector3 pos, t_vector3 size, float gravity)
 					set_t_face_vertices(&tmp_face, index[0], index[2], index[3]);
 					set_t_face_uvs(&tmp_face, index_uv[0], index_uv[2], index_uv[3]);
 					t_mesh_add_face(&result, tmp_face);
+					ft_freetab(tab);
 				}
-				if (ft_tablen(line_split) == 4)
+				else if (ft_tablen(line_split) == 4)
 				{
 					// Format : 2 - 1 - 3 - 4
 					i = 0;
@@ -76,6 +77,7 @@ t_mesh		read_obj_file(char *path, t_vector3 pos, t_vector3 size, float gravity)
 					set_t_face_vertices(&tmp_face, index[0], index[1], index[2]);
 					set_t_face_uvs(&tmp_face, index_uv[0], index_uv[1], index_uv[2]);
 					t_mesh_add_face(&result, tmp_face);
+					ft_freetab(tab);
 				}
 			}
 			ft_freetab(line_split);
