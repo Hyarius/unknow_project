@@ -6,7 +6,7 @@
 /*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 15:50:12 by adjouber          #+#    #+#             */
-/*   Updated: 2019/10/31 15:50:14 by adjouber         ###   ########.fr       */
+/*   Updated: 2019/10/31 16:38:00 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,11 @@ float			float_max(float a, float b)
 	if (a >= b)
 		return (a);
 	return (b);
+}
+
+float			ft_abs_float(float src)
+{
+	if (src < 0)
+		return (-src);
+	return (src);
 }
