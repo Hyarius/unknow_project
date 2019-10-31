@@ -39,9 +39,6 @@ void			t_engine_prepare_camera(t_engine *engine);
 
 void			t_engine_add_camera(t_engine *p_engine, t_camera new_camera);
 
-t_mesh_list		*read_map_file(char *path);
-
-
 int				can_move(t_mesh *mesh, t_engine *engine);
 void			handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard, t_engine *engine);
 void			move_camera(t_camera *camera, t_vector3 mouvement, t_engine *engine, float j);

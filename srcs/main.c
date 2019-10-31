@@ -80,11 +80,22 @@ int main(int argc, char **argv)
 	// t_mesh_set_color(&mesh, create_t_color(0.0, 0.0, 0.0 ,1.0));
 	// t_engine_add_mesh(engine, mesh);
 	t_player *player;
-	player = read_player("ressources/map/save1.map", main_camera);
-	t_mesh_list *meshs = read_map_file("ressources/map/save1.map");
-	// player = read_player("ressources/map/fichier_map.map", main_camera);
-	// t_mesh_list *meshs = read_map_file("ressources/map/fichier_map.map");
+	int		fd;
+
+	fd = open("ressources/map/fichier_map.map", O_RDONLY);
+	if (fd < 0)
+		error_exit(-7000, "imposible fd");
+	// player = read_player("ressources/map/save1.map", main_camera);
+	// t_mesh_list *meshs = read_map_file("ressources/map/save1.map");
+	player = read_player(fd, main_camera);
+	close(fd);
+	fd = open("ressources/map/fichier_map.map", O_RDONLY);
+	if (fd < 0)
+		error_exit(-7000, "imposible fd");
+	t_mesh_list *meshs = read_map_file(fd);
 	t_item_list *item_list = load_items(meshs);
+	close(fd);
+
 
 	int i = 0;
 	int	j = 0;

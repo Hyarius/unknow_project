@@ -327,7 +327,7 @@ float			calc_distance_to_plane(t_vector3 p_normal, t_vector3 p_center, t_vector3
 	return (result);
 }
 
-int				is_middle(float min, float max, float value)
+int				is_mid(float min, float max, float value)
 {
 	if (value >= min && value <= max)
 		return (BOOL_TRUE);
