@@ -419,8 +419,11 @@ void		clean_t_camera(t_camera *camera)
 	t_view_port_clear_buffers(camera->view_port);
 }
 
-void		link_t_camera_to_t_mesh(t_camera *camera, t_mesh *mesh, float new_kinetic)
+void		link_t_camera_to_t_mesh(t_engine *engine, int index, t_mesh *mesh, float new_kinetic)
 {
+	t_camera	*camera;
+
+	camera = t_camera_list_get(engine->visual_engine->camera_list, index);
 	if (camera->body != NULL)
 		camera->body->camera = NULL;
 	camera->body = mesh;

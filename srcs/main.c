@@ -111,13 +111,15 @@ int main(int argc, char **argv)
 		// 	player = t_mesh_list_at(meshs, i);
 		// else
 			t_engine_add_mesh(engine, t_mesh_list_at(meshs, i));
+			if (ft_strcmp(t_mesh_list_at(meshs, i).name, "Enemy") == 0)
+				link_t_camera_to_t_mesh(engine, 2, t_engine_get_mesh(engine, i), 0);
 		i++;
 	}
 	// player.pos = add_vector3_to_vector3(player.pos, create_t_vector3(0.0, 1.0, 0.0));
 	// engine->user_engine->player = initialize_t_player(main_camera, player);
 	engine->user_engine->player = player;
 	t_engine_add_mesh(engine, engine->user_engine->player->hitbox);
-	link_t_camera_to_t_mesh(main_camera, t_engine_get_mesh(engine, i), 100);
+	link_t_camera_to_t_mesh(engine, 0, t_engine_get_mesh(engine, i), 100);
 
 	t_rectangle rec = create_t_rectangle(create_t_vector2(-1, 1), create_t_vector2(2, -2));
 
@@ -233,6 +235,7 @@ int main(int argc, char **argv)
 			t_engine_render_camera(engine);
 			change_weapon(engine->user_engine->keyboard, engine->user_engine->player);
 			player_action(main_camera, engine->user_engine->keyboard, engine);
+			enemy_look(engine);
 			// enemy_shoot(engine);
 			drawing_front_hp(main_camera, engine);
 			// drawing_front_mun(main_camera, gui, texture2, engine->user_engine->player);
