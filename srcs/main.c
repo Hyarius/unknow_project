@@ -82,14 +82,14 @@ int main(int argc, char **argv)
 	t_player *player;
 	int		fd;
 
-	fd = open("ressources/map/save1.map", O_RDONLY);
+	fd = open("ressources/map/fichier_map.map", O_RDONLY);
 	if (fd < 0)
 		error_exit(-7000, "imposible fd");
 	// player = read_player("ressources/map/save1.map", main_camera);
 	// t_mesh_list *meshs = read_map_file("ressources/map/save1.map");
 	player = read_player(fd, main_camera);
 	close(fd);
-	fd = open("ressources/map/save1.map", O_RDONLY);
+	fd = open("ressources/map/fichier_map.map", O_RDONLY);
 	if (fd < 0)
 		error_exit(-7000, "imposible fd");
 	t_mesh_list *meshs = read_map_file(fd);

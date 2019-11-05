@@ -210,22 +210,27 @@ void		move_camera(t_camera *camera, t_vector3 mouvement, t_engine *engine, float
 
 void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard, t_engine *engine) // calcul du mouvement de la cameraera au clavier
 {
-	// static t_mesh	*door = NULL;
-	// static t_mesh	*elevator = NULL;
 	t_mesh			*target;
 	t_vector3		tmp;
 	t_vector3		mouvement;
 	t_vector3		save;
 	float			y;
 	float			j;
+	float			z;
 	int				i;
 	int				k;
 	int				l;
 
 	j = 0.0;
 	i = 0;
+	z = 0.0;
 	mouvement = create_t_vector3(0, 0, 0);
 	save = create_t_vector3(0, 0, 0);
+	if (engine->user_engine->player->camera->body->kinetic == 0.0f)
+	{
+		camera->body->force = create_t_vector3(0.0, 0.0, 0.0);
+		z = 0.1;
+	}
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_SPACE]) == 1 && engine->user_engine->player->fuel > 0)
 	{
 		camera->body->force.y = 0.1;
@@ -237,22 +242,22 @@ void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard,
 	}
 	y = camera->body->force.y;
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_LSHIFT]) == 1 && camera->body->force.y == 0)
-		tmp = create_t_vector3(camera->speed * camera->running, 0.0, camera->speed * camera->running);
+		tmp = create_t_vector3(camera->speed * camera->running, z, camera->speed * camera->running);
 	else
-		tmp = create_t_vector3(camera->speed, 0.0, camera->speed);
+		tmp = create_t_vector3(camera->speed, z, camera->speed);
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_S]) == 1)
 	{
-		tmp = create_t_vector3(camera->speed / camera->slowing, 0.0, camera->speed / camera->slowing);
-		camera->body->force = add_vector3_to_vector3(mult_vector3_by_vector3(normalize_t_vector3(mult_vector3_by_vector3(camera->forward, create_t_vector3(-1.0, 0.0, -1.0))), tmp), mouvement);
-		save = create_t_vector3(camera->body->force.x, 0, camera->body->force.z);
+		tmp = create_t_vector3(camera->speed / camera->slowing, z, camera->speed / camera->slowing);
+		camera->body->force = add_vector3_to_vector3(mult_vector3_by_vector3(normalize_t_vector3(mult_vector3_by_vector3(camera->forward, create_t_vector3(-1.0, -1.0, -1.0))), tmp), mouvement);
+		save = create_t_vector3(camera->body->force.x, camera->body->force.y, camera->body->force.z);
 	}
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_W]) == 1)
 	{
-		camera->body->force = add_vector3_to_vector3(mult_vector3_by_vector3(normalize_t_vector3(mult_vector3_by_vector3(camera->forward, create_t_vector3(1.0, 0.0, 1.0))), tmp), mouvement);
+		camera->body->force = add_vector3_to_vector3(mult_vector3_by_vector3(normalize_t_vector3(mult_vector3_by_vector3(camera->forward, create_t_vector3(1.0, 1.0, 1.0))), tmp), mouvement);
 		if (save.x != 0 || save.y != 0 || save.z != 0)
 			save = add_vector3_to_vector3(divide_vector3_by_float(camera->body->force, 2), divide_vector3_by_float(save, 2));
 		else
-			save = create_t_vector3(camera->body->force.x, 0, camera->body->force.z);
+			save = create_t_vector3(camera->body->force.x, camera->body->force.y, camera->body->force.z);
 	}
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_D]) == 1)
 	{
@@ -260,7 +265,7 @@ void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard,
 		if (save.x != 0 || save.y != 0 || save.z != 0)
 			save = add_vector3_to_vector3(divide_vector3_by_float(camera->body->force, 2), divide_vector3_by_float(save, 2));
 		else
-			save = create_t_vector3(camera->body->force.x, 0, camera->body->force.z);
+			save = create_t_vector3(camera->body->force.x, camera->body->force.y, camera->body->force.z);
 }
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_A]) == 1)
 	{
@@ -268,7 +273,7 @@ void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard,
 		if (save.x != 0 || save.y != 0 || save.z != 0)
 			save = add_vector3_to_vector3(divide_vector3_by_float(camera->body->force, 2), divide_vector3_by_float(save, 2));
 		else
-			save = create_t_vector3(camera->body->force.x, 0, camera->body->force.z);
+			save = create_t_vector3(camera->body->force.x, camera->body->force.y, camera->body->force.z);
 	}
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_LCTRL]) == 1)
 	{
@@ -303,34 +308,10 @@ void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard,
 		else
 			j = 0.2;
 	}
-	// if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_F]) == 1)
-	// {
-	// 	i = 0;
-	// 	while(i < engine->physic_engine->mesh_list->size && camera->f_press == 0)
-	// 	{
-	// 		target = t_mesh_list_get(engine->physic_engine->mesh_list, i);
-	// 		if (camera->body != target && target->bubble_radius + camera->body->bubble_radius >= calc_dist_vector3_to_vector3(camera->body->center, target->center) && ft_strcmp(target->name, "door") == 0)
-	// 		{
-	// 			target->door.move = 1;
-	// 			door = target;
-	// 		}
-	// 		if (camera->body != target && target->bubble_radius + camera->body->bubble_radius >= calc_dist_vector3_to_vector3(camera->body->center, target->center) && ft_strcmp(target->name, "elevator") == 0)
-	// 		{
-	// 			target->door.move = 1;
-	// 			elevator = target;
-	// 		}
-	// 		i++;
-	// 	}
-	// 	camera->f_press = 1;
-	// }
-	// else
-	// 	camera->f_press = 0;
-
-	// if (door != NULL)
-	// 	t_mesh_move_door(door);
-	// if (elevator != NULL)
-	// 	t_mesh_move_elevator(elevator, camera);
-	camera->body->force = create_t_vector3(save.x, y, save.z);
+	if (y != 0.0f)
+		camera->body->force = create_t_vector3(save.x, y, save.z);
+	else
+		camera->body->force = save;
 	move_camera(camera, camera->body->force, engine, j);
 	camera->body->force = mult_vector3_by_vector3(camera->body->force, create_t_vector3(0.0, 1.0, 0.0));
 }

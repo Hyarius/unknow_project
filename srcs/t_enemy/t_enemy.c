@@ -33,7 +33,9 @@ void        enemy_look(t_engine *engine)
 void        enemy_shoot(t_engine *engine)
 {
     int     i;
+	int		diff;
     t_mesh  *target;
+	t_mesh	*mesh;
 
     i = 0;
     while (i < engine->physic_engine->mesh_list->size)
@@ -41,16 +43,26 @@ void        enemy_shoot(t_engine *engine)
         target = t_mesh_list_get(engine->physic_engine->mesh_list, i);
         if (ft_strcmp(target->name, "Enemy") == 0)
         {
-          if (target->tick >= 4 && cast_ray(engine, target->camera->pos,
-              target->camera->forward, "Enemy")/*&& ft_strcmp(cast_ray(engine, target->camera->pos,
-              target->camera->forward, "Enemy")->name, "Player") == 0*/)
-          {
-            printf("on rentre 2\n");
-            engine->user_engine->player->hp -= 1;
-            target->tick = 0;
-          }
-          else if (target->tick != 4)
-              target->tick++;
+			mesh = cast_ray(engine, target->camera->pos, target->camera->forward, "Enemy");
+        	if (mesh != NULL && target->tick >= 15 && ft_strcmp(mesh->name, "Player") == 0)
+    		{
+				if (engine->user_engine->player->armor != 0)
+				{
+					if (engine->user_engine->player->armor >= 5)
+						engine->user_engine->player->armor -= 5;
+					else
+					{
+						diff = 5 - engine->user_engine->player->armor;
+						engine->user_engine->player->armor = 0;
+						engine->user_engine->player->hp -= diff;
+					}
+				}
+				else
+            		engine->user_engine->player->hp -= 5;
+            	target->tick = 0;
+    		}
+    		else if (target->tick != 15)
+    			target->tick++;
         }
         i++;
     }

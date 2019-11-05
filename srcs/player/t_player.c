@@ -139,6 +139,8 @@ void			shoot_weapon(t_engine *engine, int *tick)
 				printf("\rTarget hp = %d\n", target->hp);
 				if (target->hp <= 0)
 				{
+					if (ft_strcmp(target->name, "Enemy") == 0)
+						t_mesh_set_name(target, "Dead_enemy");
 					t_mesh_set_visibility(target, BOOL_FALSE);
 					target->no_hitbox = 1;
 				}
@@ -158,6 +160,14 @@ void			player_action(t_camera *camera, t_keyboard *p_keyboard, t_engine *engine)
 	static int		tick_reload = 8;
 	static int		tick_shoot = 0;
 
+	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_L]) == 1)
+	{
+		if (engine->user_engine->player->camera->body->kinetic != 0.0f)
+			t_mesh_activate_gravity(engine->user_engine->player->camera->body, 0.0f);
+		else
+			t_mesh_activate_gravity(engine->user_engine->player->camera->body, 100.0f);
+		printf("%f\n", engine->user_engine->player->camera->body->kinetic);
+	}
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_R]) == 1 && camera->r_press == 0
 		&& engine->user_engine->player->current_weapon->mag_size - engine->user_engine->player->current_weapon->ammo != 0
 		&& engine->user_engine->player->current_weapon->total_ammo != 0)

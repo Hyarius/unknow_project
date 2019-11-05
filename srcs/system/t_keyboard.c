@@ -21,6 +21,7 @@ t_keyboard	create_t_keyboard(void)
 	result.key[SDL_SCANCODE_4] = SDL_SCANCODE_4;
 	result.key[SDL_SCANCODE_5] = SDL_SCANCODE_5;
 	result.key[SDL_SCANCODE_B] = SDL_SCANCODE_B;
+	result.key[SDL_SCANCODE_Z] = SDL_SCANCODE_Z;
 	result.state = SDL_GetKeyboardState(NULL);
 	return (result);
 }

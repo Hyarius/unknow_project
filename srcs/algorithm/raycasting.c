@@ -28,7 +28,7 @@ t_mesh	*cast_ray(t_engine *engine, t_vector3 pos, t_vector3 direction, char *sho
 	i = -1;
 	direction = normalize_t_vector3(direction);
 	direction = divide_vector3_by_float(direction, 3);
-	while (++i < FAR * 3)
+	while (++i < FAR)
 	{
 		j = -1;
 		while (++j < t_engine_return_mesh_len(engine))
@@ -38,10 +38,7 @@ t_mesh	*cast_ray(t_engine *engine, t_vector3 pos, t_vector3 direction, char *sho
 			{
 				mesh = cast_ray_next(engine, pos, direction, mesh);
 				if (mesh != NULL)
-				{
-					printf("return cast_ray = %s\n", mesh->name);
 					return (mesh);
-				}
 			}
 		}
 		pos = add_vector3_to_vector3(pos, direction);
