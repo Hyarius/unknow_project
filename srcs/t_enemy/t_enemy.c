@@ -22,7 +22,7 @@ void        enemy_look(t_engine *engine)
     {
       if (ft_strcmp(cam->body->name, "Enemy") == 0)
       {
-        cam->pos = cam->body->pos;
+        cam->pos = add_vector3_to_vector3(cam->body->pos, create_t_vector3(0.15, 0.45, -0.15));
         t_camera_look_at_point(cam, target.pos);
       }
     }
@@ -41,14 +41,16 @@ void        enemy_shoot(t_engine *engine)
         target = t_mesh_list_get(engine->physic_engine->mesh_list, i);
         if (ft_strcmp(target->name, "Enemy") == 0)
         {
-                if (target->tick >= 4 && ft_strcmp(cast_ray(engine, target->pos,
-                    target->forward)->name, "Player") == 0)
-                {
-                    engine->user_engine->player->hp -= 20;
-                    target->tick = 0;
-                }
-                else if (target->tick != 4)
-                    target->tick++;
+          if (target->tick >= 4 && cast_ray(engine, target->camera->pos,
+              target->camera->forward, "Enemy")/*&& ft_strcmp(cast_ray(engine, target->camera->pos,
+              target->camera->forward, "Enemy")->name, "Player") == 0*/)
+          {
+            printf("on rentre 2\n");
+            engine->user_engine->player->hp -= 1;
+            target->tick = 0;
+          }
+          else if (target->tick != 4)
+              target->tick++;
         }
         i++;
     }

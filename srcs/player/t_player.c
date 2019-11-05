@@ -129,7 +129,7 @@ void			shoot_weapon(t_engine *engine, int *tick)
 	{
 		if (engine->user_engine->player->current_weapon->ammo > 0)
 		{
-			target = cast_ray(engine, t_camera_list_get(engine->visual_engine->camera_list, 0)->pos, t_camera_list_get(engine->visual_engine->camera_list, 0)->forward);
+			target = cast_ray(engine, t_camera_list_get(engine->visual_engine->camera_list, 0)->pos, t_camera_list_get(engine->visual_engine->camera_list, 0)->forward, "Player");
 			if (target != NULL && target->hp > 0)
 			{
 				if (ft_strcmp(engine->user_engine->player->current_weapon->name, "shotgun") == 0)

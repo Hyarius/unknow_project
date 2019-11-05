@@ -19,7 +19,7 @@ t_mesh	*cast_ray_next(t_engine *engine, t_vector3 pos, t_vector3 direction, t_me
 	return (NULL);
 }
 
-t_mesh	*cast_ray(t_engine *engine, t_vector3 pos, t_vector3 direction)
+t_mesh	*cast_ray(t_engine *engine, t_vector3 pos, t_vector3 direction, char *shooter)
 {
 	int 		i;
 	int 		j;
@@ -34,11 +34,14 @@ t_mesh	*cast_ray(t_engine *engine, t_vector3 pos, t_vector3 direction)
 		while (++j < t_engine_return_mesh_len(engine))
 		{
 			mesh = t_engine_get_mesh(engine, j);
-			if (ft_strcmp(mesh->name, "Player") != 0)
+			if (ft_strcmp(mesh->name, shooter) != 0)
 			{
 				mesh = cast_ray_next(engine, pos, direction, mesh);
 				if (mesh != NULL)
+				{
+					printf("return cast_ray = %s\n", mesh->name);
 					return (mesh);
+				}
 			}
 		}
 		pos = add_vector3_to_vector3(pos, direction);
