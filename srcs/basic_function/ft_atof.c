@@ -19,13 +19,30 @@ int		is_digit(char c)
 	return (0);
 }
 
+float	ft_atof_bis(float a, int e)
+{
+	float	ret;
+
+	while (e > 0)
+	{
+		a *= 10.0;
+		e--;
+	}
+	while (e < 0)
+	{
+		a *= 0.1;
+		e++;
+	}
+	ret = a;
+	return (ret);
+}
+
 float	ft_atof(char *s)
 {
 	float	a;
 	int		neg;
 	int		e;
 	int		c;
-	int		sign;
 	int		i;
 
 	a = 0.0;
@@ -44,34 +61,6 @@ float	ft_atof(char *s)
 			a = a * 10.0 + (c - '0');
 			e = e - 1;
 		}
-	// if (c == 'e' || c == 'E')
-	// {
-	// 	sign = 1;
-	// 	i = 0;
-	// 	c = *s++;
-	// 	if (c == '+')
-	// 		c = *s++;
-	// 	else if (c == '-')
-	// 	{
-	// 		c = *s++;
-	// 		sign = -1;
-	// 	}
-	// 	while (is_digit(c))
-	// 	{
-	// 		i = i * 10 + (c - '0');
-	// 		c = *s++;
-	// 	}
-	// 	e += i * sign;
-	// }
-	while (e > 0)
-	{
-		a *= 10.0;
-		e--;
-	}
-	while (e < 0)
-	{
-		a *= 0.1;
-		e++;
-	}
+	a = ft_atof_bis(a, e);
 	return (a * neg);
 }
