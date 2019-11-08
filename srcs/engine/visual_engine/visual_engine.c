@@ -53,6 +53,13 @@ void			t_visual_engine_render_camera(t_visual_engine *engine)
 	}
 }
 
+void			t_visual_engine_render_first_camera(t_visual_engine *engine)
+{
+	t_camera *cam = t_camera_list_get(engine->camera_list, 0);
+	compute_t_camera(cam);
+	draw_triangle_from_camera_on_screen(cam);
+}
+
 void			t_visual_engine_prepare_camera(t_visual_engine *engine)
 {
 	int			i;

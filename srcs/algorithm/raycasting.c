@@ -1,6 +1,6 @@
 # include "unknow_project.h"
 
-t_mesh	*cast_ray_next(t_engine *engine, t_vector3 pos, t_vector3 direction, t_mesh *mesh)
+t_mesh	*cast_ray_next(t_vector3 pos, t_vector3 direction, t_mesh *mesh)
 {
 	int 		k;
 	t_line		line;
@@ -26,9 +26,8 @@ t_mesh	*cast_ray(t_engine *engine, t_vector3 pos, t_vector3 direction, char *sho
 	t_mesh 		*mesh;
 
 	i = -1;
-	direction = normalize_t_vector3(direction);
-	direction = divide_vector3_by_float(direction, 3);
-	while (++i < FAR)
+	direction = divide_vector3_by_float(direction, 10);
+	while (++i < 100)
 	{
 		j = -1;
 		while (++j < t_engine_return_mesh_len(engine))
@@ -36,9 +35,12 @@ t_mesh	*cast_ray(t_engine *engine, t_vector3 pos, t_vector3 direction, char *sho
 			mesh = t_engine_get_mesh(engine, j);
 			if (ft_strcmp(mesh->name, shooter) != 0)
 			{
-				mesh = cast_ray_next(engine, pos, direction, mesh);
+				mesh = cast_ray_next(pos, direction, mesh);
 				if (mesh != NULL)
+				{
+					printf("%s\n", mesh->name);
 					return (mesh);
+				}
 			}
 		}
 		pos = add_vector3_to_vector3(pos, direction);

@@ -84,36 +84,7 @@ void		t_engine_handle_event(t_camera *main_camera, t_gui *gui, t_engine *engine)
 	if (t_user_engine_poll_event(engine->user_engine) > 0)
 	{
 		t_user_engine_handle_quit(engine->user_engine, &(engine->playing));
-		if (engine->user_engine->event.type == SDL_KEYDOWN && engine->user_engine->event.key.keysym.sym == SDLK_u)
-		{
-			i = 0;
-			while (i < engine->physic_engine->mesh_list->size)
-			{
-				mesh = t_mesh_list_get(engine->physic_engine->mesh_list, i);
-				if (mesh->kinetic > 0)
-					mesh->kinetic = 0;
-				else
-					mesh->kinetic = 100;
-				i++;
-			}
-		}
 	}
-	// if (get_key_state(engine->user_engine->keyboard, SDL_SCANCODE_R) == 1)
-	// {
-	// 	printf("Size increased !\n");
-	//
-	// 	reset_key_state(engine->user_engine->keyboard, SDL_SCANCODE_R);
-	// 	size += 0.2;
-	// }
-	// if (get_key_state(engine->user_engine->keyboard, SDL_SCANCODE_T) == 1)
-	// {
-	// 	size -= 0.2;
-	// 	if (size <= 0.2)
-	// 		size = 0.2;
-	// 	printf("Size decreased !\n");
-	//
-	// 	reset_key_state(engine->user_engine->keyboard, SDL_SCANCODE_T);
-	// }
 }
 
 t_mesh		*t_engine_get_mesh(t_engine *p_engine, int index)
@@ -140,7 +111,10 @@ void		t_engine_camera_look_at(t_engine *engine, int index, t_vector3 target)
 
 void		t_engine_render_camera(t_engine *engine)
 {
-	t_visual_engine_render_camera(engine->visual_engine);
+	if (engine->playing == 10)
+		t_visual_engine_render_first_camera(engine->visual_engine);
+	else
+		t_visual_engine_render_camera(engine->visual_engine);
 }
 
 void		t_engine_prepare_camera(t_engine *engine)

@@ -119,7 +119,7 @@ void			test_move_axis(t_mesh *mesh, float *force, t_vector3 axis, t_mesh *target
 	float	delta;
 
 	i = 0;
-	subdivision = 10;
+	subdivision = 15;
 	delta = *force / subdivision;
 	max = *force;
 	*force = 0;

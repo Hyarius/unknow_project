@@ -2,7 +2,7 @@
 
 void            t_user_engine_handle_pause(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int *play)
 {
-    if (*play == -2)
+    if (*play == -3)
         main_pause(main_camera, gui, user_engine, play);
 }
 

@@ -44,7 +44,7 @@ void        enemy_shoot(t_engine *engine)
         if (ft_strcmp(target->name, "Enemy") == 0)
         {
 			mesh = cast_ray(engine, target->camera->pos, target->camera->forward, "Enemy");
-        	if (mesh != NULL && target->tick >= 15 && ft_strcmp(mesh->name, "Player") == 0)
+        	if (mesh != NULL && target->tick >= 20 && ft_strcmp(mesh->name, "Player") == 0)
     		{
 				if (engine->user_engine->player->armor != 0)
 				{
@@ -61,8 +61,11 @@ void        enemy_shoot(t_engine *engine)
             		engine->user_engine->player->hp -= 5;
             	target->tick = 0;
     		}
-    		else if (target->tick != 15)
+    		else if (mesh != NULL && target->tick != 20 && ft_strcmp(mesh->name, "Player") == 0)
+			{
+				printf("here\n");
     			target->tick++;
+			}
         }
         i++;
     }

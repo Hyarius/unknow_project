@@ -387,3 +387,10 @@ int		t_mesh_on_mesh(t_mesh *body, t_mesh *target)
 		return (1);
 	return (0);
 }
+
+void	t_mesh_free_move(t_mesh *mesh)
+{
+	t_mesh_activate_gravity(mesh, 0.0f);
+	t_mesh_set_visibility(mesh, BOOL_FALSE);
+	mesh->no_hitbox = 1;
+}

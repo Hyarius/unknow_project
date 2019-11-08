@@ -1,12 +1,5 @@
 #include "unknow_project.h"
 
-// int main()
-// {
-// 	float i = 0.5;
-//
-// 	printf("%s\n", ft_ftoa(i));
-// }
-
 int main(int argc, char **argv)
 {
 	TTF_Font    *police;
@@ -83,6 +76,8 @@ int main(int argc, char **argv)
 	int		fd;
 
 	fd = open("ressources/map/fichier_map.map", O_RDONLY);
+	// fd = open("ressources/map/save1.map", O_RDONLY);
+	// fd = open("ressources/map/editing_map1.map", O_RDONLY);
 	if (fd < 0)
 		error_exit(-7000, "imposible fd");
 	// player = read_player("ressources/map/save1.map", main_camera);
@@ -90,6 +85,8 @@ int main(int argc, char **argv)
 	player = read_player(fd, main_camera);
 	close(fd);
 	fd = open("ressources/map/fichier_map.map", O_RDONLY);
+	// fd = open("ressources/map/save1.map", O_RDONLY);
+	// fd = open("ressources/map/editing_map1.map", O_RDONLY);
 	if (fd < 0)
 		error_exit(-7000, "imposible fd");
 	t_mesh_list *meshs = read_map_file(fd);
@@ -99,6 +96,7 @@ int main(int argc, char **argv)
 
 	int i = 0;
 	int	j = 0;
+	int k = 0;
 	while (i < meshs->size)
 	{
 		if (t_mesh_list_at(meshs, i).collectible == 1)
@@ -112,7 +110,16 @@ int main(int argc, char **argv)
 		// else
 			t_engine_add_mesh(engine, t_mesh_list_at(meshs, i));
 			if (ft_strcmp(t_mesh_list_at(meshs, i).name, "Enemy") == 0)
-				link_t_camera_to_t_mesh(engine, 2, t_engine_get_mesh(engine, i), 0);
+			{
+				if (k != 0)
+				{
+					t_engine_add_camera(engine, create_t_camera(win, create_t_vector3(0.0, 0.0, 0.0), 70, create_t_vector2(NEAR, FAR)));
+					resize_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 2 + k)->view_port, create_t_vector2_int(1, 1));
+					move_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 2 + k)->view_port, create_t_vector2_int(0, 0));
+				}
+				link_t_camera_to_t_mesh(engine, 2 + k, t_engine_get_mesh(engine, i), 0);
+				k++;
+			}
 		i++;
 	}
 	// player.pos = add_vector3_to_vector3(player.pos, create_t_vector3(0.0, 1.0, 0.0));
@@ -181,44 +188,46 @@ int main(int argc, char **argv)
 	// engine->physic_engine->item_list = item_list;
 
 	mesh = create_primitive_skybox(main_camera->pos, create_t_vector3(1.0, 1.0, 1.0), skybox);
-	engine->playing = 1;
+	engine->playing = 10;
 	Mix_VolumeMusic(MIX_MAX_VOLUME);
 	Mix_PlayMusic(musique, -1);
 	while (engine->playing != 0)
 	{
 		prepare_screen(win, create_t_color(0.2f, 0.2f, 0.2f, 1.0f));
 		t_engine_prepare_camera(engine);
-		if (engine->playing != 1)
+		if (engine->playing != 1 || engine->playing != 10)
 		{
 			SDL_ShowCursor(SDL_ENABLE);
 		}
-		if (engine->playing <= -2)
+		if (engine->playing == -2)
+			game_over(main_camera, gui, engine);
+		else if (engine->playing <= -3)
 		{
 			t_engine_draw_mesh(engine);
 			t_engine_render_camera(engine);
 			drawing_front_pause(main_camera, gui);
 		}
-		if (engine->playing == 2)
+		else if (engine->playing == 2)
 		{
 			draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->menu[0]);
 		}
-		if (engine->playing == 3)
+		else if (engine->playing == 3)
 		{
 			draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->menu[1]);
 		}
-		if (engine->playing == 4)
+		else if (engine->playing == 4)
 		{
 			draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->menu[2]);
 		}
-		if (engine->playing == 5)
+		else if (engine->playing == 5)
 		{
 			draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->menu[4]);
 		}
-		if (engine->playing == 6)
+		else if (engine->playing == 6)
 		{
 			draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->menu[3]);
 		}
-		if (engine->playing == 1)
+		else if (engine->playing == 1)
 		{
 			mesh.pos = main_camera->pos;
 
@@ -233,14 +242,25 @@ int main(int argc, char **argv)
 			t_engine_draw_mesh(engine);
 
 			t_engine_render_camera(engine);
-			change_weapon(engine->user_engine->keyboard, engine->user_engine->player);
 			player_action(main_camera, engine->user_engine->keyboard, engine);
 			enemy_look(engine);
 			enemy_shoot(engine);
 			drawing_front_hp(main_camera, engine);
-			// drawing_front_mun(main_camera, gui, texture2, engine->user_engine->player);
+			drawing_front_mun(main_camera, gui, texture2, engine->user_engine->player);
 			draw_minimap(main_camera, engine, win);
 			print_info_bar(main_camera, engine->user_engine->player, gui);
+		}
+		else if (engine->playing == 10)
+		{
+			mesh.pos = main_camera->pos;
+			SDL_ShowCursor(SDL_DISABLE);
+			t_engine_apply_physic(engine);
+			t_engine_handle_camera(engine, win);
+			t_engine_prepare_camera(engine);
+			t_engine_draw_mesh(engine);
+			t_engine_render_camera(engine);
+			t_mesh_free_move(engine->user_engine->player->camera->body);
+			map_editor(main_camera, gui, engine);
 		}
 		t_engine_handle_event(main_camera, gui, engine);
 		render_screen(win); // affiche la fenetre
