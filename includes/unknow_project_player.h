@@ -22,10 +22,18 @@ typedef struct  s_player
 	float		speed;
 	t_weapon	weapons[4];
 	t_weapon	*current_weapon;
-
 }               t_player;
 
+typedef struct  s_enemy
+{
+	t_mesh		hitbox;
+	int			hp;
+	float		speed;
+	t_weapon	weapon;
+}               t_enemy;
+
 t_player		create_t_player(t_camera *cam, t_mesh hitbox);
+t_enemy			create_t_enemy(t_mesh hitbox);
 t_player		*initialize_t_player(t_camera *cam, t_mesh hitbox);
 t_weapon		create_t_weapons(int index);
 

@@ -30,6 +30,19 @@ t_player			*initialize_t_player(t_camera *cam, t_mesh hitbox)
 	return(result);
 }
 
+t_enemy		create_t_enemy(t_mesh hitbox)
+{
+	t_enemy 	result;
+
+	result.hitbox = &hitbox;
+	t_mesh_set_color(result.hitbox, create_t_color(0.1, 0.1, 0.1 ,1.0));
+	result.hp = 3;
+	result.speed = 1.0;
+	result.weapon = create_t_weapons(0);
+	result.weapon.ammo = 1000;
+	return (result);
+}
+
 t_weapon		create_t_weapons(int index)
 {
 	t_weapon	result[4];
@@ -95,7 +108,7 @@ void			reload_weapon(t_keyboard *p_keyboard, t_player *player)
 
 void			shoot_weapon(t_engine *engine)
 {
-	t_mesh	*target;
+	t_enemy	*target;
 
 	if (t_mouse_state(engine->user_engine->mouse) == 1)
 	{
@@ -103,7 +116,10 @@ void			shoot_weapon(t_engine *engine)
 		{
 			target = cast_ray(engine, t_camera_list_get(engine->visual_engine->camera_list, 0)->pos, t_camera_list_get(engine->visual_engine->camera_list, 0)->forward);
 			if (target != NULL)
-				printf("\rTarget name = %s\n", target->name);
+			{
+				printf("\rTarget name = %s\n", target->hitbox->name);
+				// if (ft_strcmp)
+			}	
 			engine->user_engine->player->current_weapon->ammo--;
 		}
 	}
