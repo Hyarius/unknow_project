@@ -18,6 +18,7 @@ t_camera	create_t_camera(t_window *window, t_vector3 p_pos, float p_fov, t_vecto
 	result.slowing = 1.0f; // ralentissement pour le recul
 	result.crounch = 0;
 	result.f_press = 0;
+	result.r_press = 0;
 
 	result.model = create_t_matrix(); // creation de la matrice d'identite permettant de faire les calculs matriciel par la suite
 	t_camera_look_at(&result); //calcul de l'angle de la camera
@@ -235,12 +236,12 @@ void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard,
 	}
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_SPACE]) == 1 && engine->user_engine->player->fuel > 0)
 	{
-		camera->body->force.y = 0.1;
+		camera->body->force.y = 0.04;
 		engine->user_engine->player->fuel--;
 	}
 	else if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_SPACE]) == 1 && camera->body->force.y == 0)
 	{
-		camera->body->force.y = 0.1;
+		camera->body->force.y = 0.04;
 	}
 	y = camera->body->force.y;
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_LSHIFT]) == 1 && camera->body->force.y == 0)

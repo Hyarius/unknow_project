@@ -8,7 +8,7 @@
 typedef struct	s_engine
 {
 	int			playing;
-
+	int			tick;
 	t_visual_engine
 				*visual_engine;
 	t_physic_engine

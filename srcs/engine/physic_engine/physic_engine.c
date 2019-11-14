@@ -119,7 +119,7 @@ void			test_move_axis(t_mesh *mesh, float *force, t_vector3 axis, t_mesh *target
 	float	delta;
 
 	i = 0;
-	subdivision = 15;
+	subdivision = 20;
 	delta = *force / subdivision;
 	max = *force;
 	*force = 0;
@@ -197,21 +197,45 @@ void			t_physic_engine_compute_vertices_in_world(t_physic_engine *physic_engine)
 	}
 }
 
+// void			t_physic_engine_apply_force(t_engine *engine)
+// {
+// 	int i;
+// 	t_mesh *mesh;
+//
+// 	i = 0;
+// 	while (i < engine->physic_engine->mesh_list->size)
+// 	{
+// 		mesh = t_mesh_list_get(engine->physic_engine->mesh_list, i);
+// 		if (mesh->kinetic > 0 && mesh->force.y > -0.1)
+// 			mesh->force = add_vector3_to_vector3(mesh->force, create_t_vector3(0.0, -0.01, 0.0));
+// 		if (mesh->force.x != 0 || mesh->force.y != 0 || mesh->force.z != 0)
+// 			if (can_move(mesh, engine) == BOOL_TRUE)
+// 				t_mesh_apply_force(mesh);
+// 		i++;
+//
+// 	}
+// }
+
 void			t_physic_engine_apply_force(t_engine *engine)
 {
-	int i;
+	Uint32 	actual_frame;
+	static Uint32 	last_frame = 0;
+	int i = 0;
+	float time_passed;
 	t_mesh *mesh;
 
-	i = 0;
+	actual_frame = SDL_GetTicks();
+	time_passed = (actual_frame - last_frame) / 1000.0;
 	while (i < engine->physic_engine->mesh_list->size)
 	{
 		mesh = t_mesh_list_get(engine->physic_engine->mesh_list, i);
-		if (mesh->kinetic > 0 && mesh->force.y > -0.1)
-			mesh->force = add_vector3_to_vector3(mesh->force, create_t_vector3(0.0, -0.01, 0.0));
+		if (mesh->kinetic > 0)
+			mesh->force = add_vector3_to_vector3(mesh->force, mult_vector3_by_float(engine->physic_engine->gravity_force, mesh->kinetic * time_passed));
 		if (mesh->force.x != 0 || mesh->force.y != 0 || mesh->force.z != 0)
 			if (can_move(mesh, engine) == BOOL_TRUE)
 				t_mesh_apply_force(mesh);
 		i++;
 
 	}
+	last_frame = actual_frame;
 }

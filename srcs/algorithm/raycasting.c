@@ -38,7 +38,7 @@ t_mesh	*cast_ray(t_engine *engine, t_vector3 pos, t_vector3 direction, char *sho
 				mesh = cast_ray_next(pos, direction, mesh);
 				if (mesh != NULL)
 				{
-					printf("%s\n", mesh->name);
+					// printf("%s\n", mesh->name);
 					return (mesh);
 				}
 			}

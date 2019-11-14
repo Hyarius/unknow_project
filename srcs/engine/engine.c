@@ -5,6 +5,7 @@ t_engine	create_t_engine(t_window *p_window)
 	t_engine	result;
 
 	result.playing = 2;
+	result.tick = 0;
 	result.visual_engine = initialize_t_visual_engine(p_window);
 	result.physic_engine = initialize_t_physic_engine();
 	result.user_engine = initialize_t_user_engine();

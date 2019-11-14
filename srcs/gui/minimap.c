@@ -9,12 +9,10 @@ void    draw_minimap(t_camera *main_camera, t_engine *engine, t_window *win)
     cam = t_camera_list_get(engine->visual_engine->camera_list, 1);
     compute_t_camera(cam);
     draw_triangle_from_camera_on_screen(cam);
-    draw_buffer_opengl(main_camera->view_port->window, main_camera->view_port->window->color_data);
 
     t_engine_place_camera(engine, 2, t_camera_list_get(engine->visual_engine->camera_list, 2)->pos);
 	t_camera_look_at_point(t_camera_list_get(engine->visual_engine->camera_list, 2), t_camera_list_get(engine->visual_engine->camera_list, 0)->pos);
     cam = t_camera_list_get(engine->visual_engine->camera_list, 2);
     compute_t_camera(cam);
     draw_triangle_from_camera_on_screen(cam);
-    draw_buffer_opengl(main_camera->view_port->window, main_camera->view_port->window->color_data);
 }

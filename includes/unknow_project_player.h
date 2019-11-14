@@ -29,6 +29,8 @@ typedef struct  s_player
 	int			red_card;
 	int			blue_card;
 	int			green_card;
+	int			shoot_time;
+	int			reload_time;
 
 }               t_player;
 

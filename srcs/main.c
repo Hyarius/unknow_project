@@ -76,6 +76,7 @@ int main(int argc, char **argv)
 	int		fd;
 
 	fd = open("ressources/map/fichier_map.map", O_RDONLY);
+	// fd = open("ressources/map/test_gravity.map", O_RDONLY);
 	// fd = open("ressources/map/save1.map", O_RDONLY);
 	// fd = open("ressources/map/editing_map1.map", O_RDONLY);
 	if (fd < 0)
@@ -85,6 +86,7 @@ int main(int argc, char **argv)
 	player = read_player(fd, main_camera);
 	close(fd);
 	fd = open("ressources/map/fichier_map.map", O_RDONLY);
+	// fd = open("ressources/map/test_gravity.map", O_RDONLY);
 	// fd = open("ressources/map/save1.map", O_RDONLY);
 	// fd = open("ressources/map/editing_map1.map", O_RDONLY);
 	if (fd < 0)
@@ -187,8 +189,10 @@ int main(int argc, char **argv)
 
 	// engine->physic_engine->item_list = item_list;
 
+	t_mesh	mesh_editing;
+	mesh_editing = create_mesh_editing(0);
 	mesh = create_primitive_skybox(main_camera->pos, create_t_vector3(1.0, 1.0, 1.0), skybox);
-	engine->playing = 10;
+	engine->playing = 1;
 	Mix_VolumeMusic(MIX_MAX_VOLUME);
 	Mix_PlayMusic(musique, -1);
 	while (engine->playing != 0)
@@ -260,10 +264,11 @@ int main(int argc, char **argv)
 			t_engine_draw_mesh(engine);
 			t_engine_render_camera(engine);
 			t_mesh_free_move(engine->user_engine->player->camera->body);
-			map_editor(main_camera, gui, engine);
+			// select_mesh();
+			map_editor(main_camera, gui, engine, mesh_editing);
 		}
 		t_engine_handle_event(main_camera, gui, engine);
-		render_screen(win); // affiche la fenetre
+		render_screen(win, engine); // affiche la fenetre
 	}
 	Mix_FreeMusic(musique);
 	Mix_CloseAudio();

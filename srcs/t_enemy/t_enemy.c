@@ -32,10 +32,11 @@ void        enemy_look(t_engine *engine)
 
 void        enemy_shoot(t_engine *engine)
 {
-    int     i;
-	int		diff;
-    t_mesh  *target;
-	t_mesh	*mesh;
+    int			i;
+	int			diff;
+	static int	j = -5;
+    t_mesh  	*target;
+	t_mesh		*mesh;
 
     i = 0;
     while (i < engine->physic_engine->mesh_list->size)
@@ -43,9 +44,11 @@ void        enemy_shoot(t_engine *engine)
         target = t_mesh_list_get(engine->physic_engine->mesh_list, i);
         if (ft_strcmp(target->name, "Enemy") == 0)
         {
+			printf("%d\n", j);
 			mesh = cast_ray(engine, target->camera->pos, target->camera->forward, "Enemy");
-        	if (mesh != NULL && target->tick >= 20 && ft_strcmp(mesh->name, "Player") == 0)
+        	if (mesh != NULL && engine->tick - j == 3 && ft_strcmp(mesh->name, "Player") == 0)
     		{
+				printf("here shoot\n");
 				if (engine->user_engine->player->armor != 0)
 				{
 					if (engine->user_engine->player->armor >= 5)
@@ -59,13 +62,15 @@ void        enemy_shoot(t_engine *engine)
 				}
 				else
             		engine->user_engine->player->hp -= 5;
-            	target->tick = 0;
+				j = -5;
     		}
-    		else if (mesh != NULL && target->tick != 20 && ft_strcmp(mesh->name, "Player") == 0)
+    		else if (mesh != NULL && engine->tick - j > 3 && ft_strcmp(mesh->name, "Player") == 0)
 			{
-				printf("here\n");
-    			target->tick++;
+				printf("here load\n");
+    			j = engine->tick;
 			}
+			else if (mesh == NULL || ft_strcmp(mesh->name, "Player") != 0)
+				j = -5;
         }
         i++;
     }

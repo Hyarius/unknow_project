@@ -34,7 +34,7 @@ typedef struct		s_window
 }					t_window;
 
 //			fps_handler
-void		check_frame();
+// void		check_frame(t_engine *engine);
 
 //			window_handler
 void		start_sdl();

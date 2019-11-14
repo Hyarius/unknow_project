@@ -35,7 +35,8 @@ float			radius_to_degree(float radian);
 t_uv 			convert_t_uv_to_texture(t_uv *source);
 
 void			prepare_screen(t_window *win, t_color color);
-void			render_screen(t_window *win);
+void			check_frame(t_engine *engine);
+void			render_screen(t_window *win, t_engine *engine);
 void 			clear_buffers(t_window *win);
 void			draw_pixel(t_window *p_win, int x, int y, t_color color);
 
