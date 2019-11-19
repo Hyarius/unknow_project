@@ -28,7 +28,6 @@ t_keyboard	*initialize_t_keyboard(void)
 
 	if (!(result = (t_keyboard *)malloc(sizeof(t_keyboard))))
 		return (NULL);
-	printf("malloc t_keyboard\n");
 	*result = create_t_keyboard();
 	return (result);
 }

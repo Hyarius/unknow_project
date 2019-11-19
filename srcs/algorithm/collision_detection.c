@@ -1,6 +1,6 @@
 #include "unknow_project.h"
 
-void		sat_test(t_vector3 normale, t_vector3_list *vector_list, float *min, float *max)
+void		sat_test(t_vector4 normale, t_vector4_list *vector_list, float *min, float *max)
 {
 	int		i;
 	float	dot_result;
@@ -10,7 +10,7 @@ void		sat_test(t_vector3 normale, t_vector3_list *vector_list, float *min, float
 	i = 0;
 	while (i < vector_list->size)
 	{
-		dot_result = dot_t_vector3(normale, t_vector3_list_at(vector_list, i));
+		dot_result = dot_t_vector4(normale, t_vector4_list_at(vector_list, i));
 		if (dot_result < *min)
 			*min = dot_result;
 		if (dot_result > *max)

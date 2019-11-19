@@ -16,7 +16,6 @@ t_vector3_int	*initialize_t_vector3_int(int p_x, int p_y, int p_z)
 
 	if (!(result = (t_vector3_int *)malloc(sizeof(t_vector3_int))))
 		return (NULL);
-	printf("malloc t_vector3_int\n");
 	*result = create_t_vector3_int(p_x, p_y, p_z);
 	return (result);
 }

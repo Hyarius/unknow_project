@@ -16,7 +16,6 @@ t_user_engine	*initialize_t_user_engine()
 
 	if (!(result = (t_user_engine *)malloc(sizeof(t_user_engine))))
 		return (NULL);
-	printf("malloc t_user_engine\n");
 
 	*result = create_t_user_engine();
 
@@ -27,14 +26,12 @@ void			delete_t_user_engine(t_user_engine dest)
 {
 	free(dest.mouse);
 	free(dest.keyboard);
-	printf("delete t_user_engine\n");
 }
 
 void			free_t_user_engine(t_user_engine *dest)
 {
 	delete_t_user_engine(*dest);
 	free(dest);
-	printf("free t_user_engine\n");
 }
 
 void			t_user_engine_handle_camera(t_engine *engine, t_camera *cam)

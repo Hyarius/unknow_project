@@ -15,7 +15,6 @@ t_uv	*initialize_t_uv(t_triangle p_triangle, t_texture *p_texture)
 
 	if (!(result = (t_uv *)malloc(sizeof(t_uv))))
 		return (NULL);
-	printf("malloc t_uv\n");
 	*result = create_t_uv(p_triangle, p_texture);
 	return (result);
 }
@@ -26,10 +25,10 @@ void	print_t_uv(t_uv uv, char *texture_name) // A SUPPRIMER
 	printf("Texture size : %d / %d\n", uv.texture->surface->w, uv.texture->surface->h);
 	printf("Texture Internal Format : %d\n", uv.texture->surface->internalFormat);
 	printf("UV coordinate :\n");
-	print_t_vector3(uv.uv.a, "A : ");
+	print_t_vector4(uv.uv.a, "A : ");
 	endl();
-	print_t_vector3(uv.uv.b, "B : ");
+	print_t_vector4(uv.uv.b, "B : ");
 	endl();
-	print_t_vector3(uv.uv.c, "C : ");
+	print_t_vector4(uv.uv.c, "C : ");
 	endl();
 }

@@ -11,29 +11,23 @@ t_gui create_t_gui(float x, int y)
 	idx = 0;
 	if (!(result.letter = (t_texture **)malloc(sizeof(t_texture*) * 95)))
 		error_exit(-29, "Can't malloc a t_surface");
-	printf("malloc t_gui.letter\n");
 	while (idx <= 94)
 	{
 		if (!(result.letter[idx] = (t_texture *)malloc(sizeof(t_texture))))
 			error_exit(-29, "Can't malloc a t_surface");
-		printf("malloc t_gui.letter[idx]\n");
 		if (!(result.letter[idx]->surface = (t_surface *)malloc(sizeof(t_surface))))
 			error_exit(-29, "Can't malloc a t_surface");
-		printf("malloc t_gui.letter[idx]->surface\n");
 		idx++;
 	}
 	idx = 0;
 	if (!(result.menu = (t_texture **)malloc(sizeof(t_texture*) * 15)))
 		error_exit(-29, "Can't malloc a t_surface");
-	printf("malloc t_gui.menu\n");
 	while (idx <= 14)
 	{
 		if (!(result.menu[idx] = (t_texture *)malloc(sizeof(t_texture))))
 			error_exit(-29, "Can't malloc a t_surface");
-		printf("malloc t_gui.menu[idx]\n");
 		if (!(result.menu[idx]->surface = (t_surface *)malloc(sizeof(t_surface))))
 			error_exit(-29, "Can't malloc a t_surface");
-		printf("malloc t_gui.menu[idx]->surface\n");
 		idx++;
 	}
 	result.idx = 8;
@@ -51,7 +45,6 @@ t_gui *initialize_t_gui(float x, int y)
 	if (!(result = (t_gui *)malloc(sizeof(t_gui))))
 		error_exit(-13, "Can't create a t_gui");
 
-	printf("malloc t_gui\n");
 	*result = create_t_gui(x, y);
 
 	return (result);
@@ -94,7 +87,6 @@ void	print_letter(t_camera *main_camera, t_gui *gui, char *str, t_rectangle rec)
 		}
 		i++;
 	}
-	draw_buffer_opengl(main_camera->view_port->window, main_camera->view_port->window->color_data);
 }
 
 void	print_info_bar(t_camera *main_camera, t_player *player, t_gui *gui)

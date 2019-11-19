@@ -7,7 +7,7 @@ t_visual_engine	create_t_visual_engine(t_window *p_window)
 
 	result.camera_list = initialize_t_camera_list();
 	result.main_camera = 0;
-	tmp = create_t_camera(p_window, create_t_vector3(0, 0, 0), FOV, create_t_vector2(NEAR, FAR));
+	tmp = create_t_camera(p_window, create_t_vector4(0, 0, 0), FOV, create_t_vector2(NEAR, FAR));
 	t_camera_list_push_back(result.camera_list, tmp);
 
 	return (result);
@@ -19,7 +19,6 @@ t_visual_engine	*initialize_t_visual_engine(t_window *p_window)
 
 	if (!(result = (t_visual_engine *)malloc(sizeof(t_visual_engine))))
 		return (NULL);
-	printf("malloc t_visual_engine\n");
 
 	*result = create_t_visual_engine(p_window);
 
@@ -29,14 +28,12 @@ t_visual_engine	*initialize_t_visual_engine(t_window *p_window)
 void			delete_t_visual_engine(t_visual_engine dest)
 {
 	free_t_camera_list(dest.camera_list);
-	printf("delete t_visual_engine\n");
 }
 
 void			free_t_visual_engine(t_visual_engine *dest)
 {
 	delete_t_visual_engine(*dest);
 	free(dest);
-	printf("free t_visual_engine\n");
 }
 
 void			t_visual_engine_render_camera(t_visual_engine *engine)

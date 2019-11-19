@@ -24,7 +24,6 @@ t_player			*initialize_t_player(t_camera *cam, t_mesh hitbox)
 
 	if (!(result = (t_player *)malloc(sizeof(t_player))))
 		error_exit(-13, "Can't create a t_player array");
-	printf("malloc t_player\n");
 
 	*result = create_t_player(cam, hitbox);
 

@@ -8,7 +8,7 @@ t_mesh_list		*read_map_file(char *path)
 	char		**line_split;
 	int			fd;
 	t_texture	*texture;
-	t_vector3	vector[3];
+	t_vector4	vector[3];
 	char		*obj_path[256];
 	int			i;
 	t_color 	color;
@@ -28,13 +28,13 @@ t_mesh_list		*read_map_file(char *path)
 				i++;
 			if (ft_strcmp(line_split[0], "plane:") == 0 || ft_strcmp(line_split[0], "cube:") == 0 || i > 0)
 			{
-				vector[0] = create_t_vector3(ft_atof(line_split[2 + i]),
+				vector[0] = create_t_vector4(ft_atof(line_split[2 + i]),
 											ft_atof(line_split[3 + i]),
 											ft_atof(line_split[4 + i]));
-				vector[1] = create_t_vector3(ft_atof(line_split[5 + i]),
+				vector[1] = create_t_vector4(ft_atof(line_split[5 + i]),
 											ft_atof(line_split[6 + i]),
 											ft_atof(line_split[7 + i]));
-				vector[2] = create_t_vector3(ft_atof(line_split[10 + i]),
+				vector[2] = create_t_vector4(ft_atof(line_split[10 + i]),
 											ft_atof(line_split[11 + i]),
 											ft_atof(line_split[12 + i]));
 

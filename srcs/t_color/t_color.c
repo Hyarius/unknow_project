@@ -17,7 +17,6 @@ t_color	*initialize_t_color(float p_r, float p_g, float p_b, float p_a)
 
 	if (!(color = (t_color *)malloc(sizeof(t_color))))
 		return (NULL);
-	printf("malloc t_color\n");
 	*color = create_t_color(p_r, p_g, p_b, p_a);
 	return (color);
 }
@@ -37,7 +36,6 @@ t_color	*initialize_t_color_from_int(int p_r, int p_g, int p_b, int p_a)
 
 	if (!(color = (t_color *)malloc(sizeof(t_color))))
 		return (NULL);
-	printf("malloc t_color_from_int\n");
 	*color = create_t_color_from_int(p_r, p_g, p_b, p_a);
 	return (color);
 }

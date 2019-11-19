@@ -1,6 +1,6 @@
 #include "unknow_project.h"
 
-t_mesh	create_t_mesh(t_vector3 pos)
+t_mesh	create_t_mesh(t_vector4 pos)
 {
 	t_mesh		result;
 	static int	num = 1;
@@ -12,55 +12,52 @@ t_mesh	create_t_mesh(t_vector3 pos)
 	result.center = pos;
 	result.bubble_radius = 0.0;
 	result.collectible = 0;
-	result.force = create_t_vector3(0.0, 0.0, 0.0);
+	result.force = create_t_vector4(0.0, 0.0, 0.0);
 	result.kinetic = 0.0;
-	result.angle = create_t_vector3(0.0, 90.0, 0.0);
+	result.angle = create_t_vector4(0.0, 90.0, 0.0);
 	result.texture = NULL;
 	result.name = NULL;
-	result.vertices_in_world = initialize_t_vector3_list();
-	result.next_vertices_in_world = initialize_t_vector3_list();
-	result.vertices = initialize_t_vector3_list();
-	result.uvs = initialize_t_vector3_list();
+	result.vertices_in_world = initialize_t_vector4_list();
+	result.next_vertices_in_world = initialize_t_vector4_list();
+	result.vertices = initialize_t_vector4_list();
+	result.uvs = initialize_t_vector4_list();
 	result.faces = initialize_t_face_list();
-	result.normales = initialize_t_vector3_list();
+	result.normales = initialize_t_vector4_list();
 	t_mesh_look_at(&result);
 	return (result);
 }
 
-t_mesh	*initialize_t_mesh(t_vector3 pos)
+t_mesh	*initialize_t_mesh(t_vector4 pos)
 {
 	t_mesh	*result;
 
 	if (!(result = (t_mesh *)malloc(sizeof(t_mesh))))
 		error_exit(-13, "Can't create a t_mesh array");
-	printf("malloc t_mesh\n");
 	*result = create_t_mesh(pos);
 	return (result);
 }
 
 void	delete_t_mesh(t_mesh mesh)
 {
-	free_t_vector3_list(mesh.vertices);
-	free_t_vector3_list(mesh.uvs);
+	free_t_vector4_list(mesh.vertices);
+	free_t_vector4_list(mesh.uvs);
 	free_t_face_list(mesh.faces);
-	printf("delete t_mesh\n");
 }
 
 void	free_t_mesh(t_mesh *mesh)
 {
 	delete_t_mesh(*mesh);
 	free(mesh);
-	printf("free t_mesh\n");
 }
 
-void	t_mesh_add_uv(t_mesh *dest, t_vector3 new_uv)
+void	t_mesh_add_uv(t_mesh *dest, t_vector4 new_uv)
 {
-	t_vector3_list_push_back(dest->uvs, new_uv);
+	t_vector4_list_push_back(dest->uvs, new_uv);
 }
 
-void	t_mesh_add_point(t_mesh *dest, t_vector3 new_point)
+void	t_mesh_add_point(t_mesh *dest, t_vector4 new_point)
 {
-	t_vector3_list_push_back(dest->vertices, new_point);
+	t_vector4_list_push_back(dest->vertices, new_point);
 }
 
 void	t_mesh_add_face(t_mesh *dest, t_face new_face)
@@ -76,24 +73,24 @@ void	t_mesh_set_texture(t_mesh *dest, t_texture *p_texture)
 void	t_mesh_compute_normals(t_mesh *mesh)
 {
 	t_face		*face;
-	t_vector3	a;
-	t_vector3	b;
-	t_vector3	c;
+	t_vector4	a;
+	t_vector4	b;
+	t_vector4	c;
 	int			i;
 
-	clean_t_vector3_list(mesh->normales);
+	clean_t_vector4_list(mesh->normales);
 	i = -1;
 	while (++i < mesh->faces->size)
 	{
 		face = t_face_list_get(mesh->faces, i);
-		a = t_vector3_list_at(mesh->vertices, face->index_vertices[0]);
-		b = substract_vector3_to_vector3(t_vector3_list_at(mesh->vertices,\
+		a = t_vector4_list_at(mesh->vertices, face->index_vertices[0]);
+		b = substract_vector4_to_vector4(t_vector4_list_at(mesh->vertices,\
 											face->index_vertices[1]), a);
-		c = substract_vector3_to_vector3(t_vector3_list_at(mesh->vertices,\
+		c = substract_vector4_to_vector4(t_vector4_list_at(mesh->vertices,\
 											face->index_vertices[2]), a);
-		face->normale = normalize_t_vector3(cross_t_vector3(b, c));
-		t_vector3_list_push_back(mesh->normales, create_t_vector3(0, 0, 0));
-		t_vector3_list_push_back(mesh->normales, face->normale);
+		face->normale = normalize_t_vector4(cross_t_vector4(b, c));
+		t_vector4_list_push_back(mesh->normales, create_t_vector4(0, 0, 0));
+		t_vector4_list_push_back(mesh->normales, face->normale);
 	}
 }
 
@@ -101,21 +98,21 @@ void	t_mesh_compute_bubble_box(t_mesh *mesh)
 {
 	int			i;
 	float		tmp;
-	t_vector3	total;
+	t_vector4	total;
 
-	total = create_t_vector3(0.0, 0.0, 0.0);
+	total = create_t_vector4(0.0, 0.0, 0.0);
 	i = -1;
 	while (++i < mesh->vertices->size)
-		total = add_vector3_to_vector3(total,\
-					t_vector3_list_at(mesh->vertices, i));
+		total = add_vector4_to_vector4(total,\
+					t_vector4_list_at(mesh->vertices, i));
 	if (i > 0)
-		total = divide_vector3_by_float(total, (float)(i));
-	mesh->center = add_vector3_to_vector3(total, mesh->pos);
+		total = divide_vector4_by_float(total, (float)(i));
+	mesh->center = add_vector4_to_vector4(total, mesh->pos);
 	i = -1;
 	while (++i < mesh->vertices->size)
 	{
-		tmp = calc_dist_vector3_to_vector3(total,\
-					t_vector3_list_at(mesh->vertices, i));
+		tmp = calc_dist_vector4_to_vector4(total,\
+					t_vector4_list_at(mesh->vertices, i));
 		if (mesh->bubble_radius < tmp)
 			mesh->bubble_radius = tmp;
 	}
@@ -123,68 +120,68 @@ void	t_mesh_compute_bubble_box(t_mesh *mesh)
 
 void	t_mesh_look_at(t_mesh *mesh)
 {
-	t_vector3	zaxis;
-	t_vector3	xaxis;
-	t_vector3	yaxis;
+	t_vector4	zaxis;
+	t_vector4	xaxis;
+	t_vector4	yaxis;
 
-	zaxis = normalize_t_vector3(create_t_vector3(\
+	zaxis = normalize_t_vector4(create_t_vector4(\
 		cos(degree_to_radius(mesh->angle.z)) \
 			* sin(degree_to_radius(mesh->angle.y)),
 		sin(degree_to_radius(mesh->angle.z)),
 		cos(degree_to_radius(mesh->angle.z)) \
 			* cos(degree_to_radius(mesh->angle.y))));
-	xaxis = normalize_t_vector3(create_t_vector3(\
+	xaxis = normalize_t_vector4(create_t_vector4(\
 					sin(degree_to_radius(mesh->angle.y) - 3.14f / 2.0f),
 					0, cos(degree_to_radius(mesh->angle.y) - 3.14f / 2.0f)));
-	yaxis = normalize_t_vector3(cross_t_vector3(xaxis, zaxis));
+	yaxis = normalize_t_vector4(cross_t_vector4(xaxis, zaxis));
 	mesh->forward = zaxis;
 	mesh->right = xaxis;
-	mesh->up = inv_t_vector3(yaxis);
+	mesh->up = inv_t_vector4(yaxis);
 }
 
-void	t_mesh_rotate_around_point(t_mesh *mesh, t_vector3 delta_angle, t_vector3 center)
+void	t_mesh_rotate_around_point(t_mesh *mesh, t_vector4 delta_angle, t_vector4 center)
 {
 	t_matrix	translate;
 	t_matrix	rotation;
 	t_matrix	inv_translate;
-	t_vector3	*target;
+	t_vector4	*target;
 	int			i;
 
-	translate = create_translation_matrix(substract_vector3_to_vector3(center, \
+	translate = create_translation_matrix(substract_vector4_to_vector4(center, \
 																	mesh->pos));
-	inv_translate = create_translation_matrix(inv_t_vector3(\
-							substract_vector3_to_vector3(center, mesh->pos)));
+	inv_translate = create_translation_matrix(inv_t_vector4(\
+							substract_vector4_to_vector4(center, mesh->pos)));
 	rotation = create_rotation_matrix(delta_angle.x, delta_angle.y,\
 													delta_angle.z);
-	mesh->angle = add_vector3_to_vector3(mesh->angle, delta_angle);
+	mesh->angle = add_vector4_to_vector4(mesh->angle, delta_angle);
 	t_mesh_look_at(mesh);
 	i = -1;
 	while (++i < mesh->vertices->size)
 	{
-		target = t_vector3_list_get(mesh->vertices, i);
-		*target = mult_vector3_by_matrix(*target, inv_translate);
-		*target = mult_vector3_by_matrix(*target, rotation);
-		*target = mult_vector3_by_matrix(*target, translate);
+		target = t_vector4_list_get(mesh->vertices, i);
+		*target = mult_vector4_by_matrix(*target, inv_translate);
+		*target = mult_vector4_by_matrix(*target, rotation);
+		*target = mult_vector4_by_matrix(*target, translate);
 	}
 	t_mesh_compute_normals(mesh);
 	t_mesh_compute_bubble_box(mesh);
 }
 
-void	t_mesh_rotate(t_mesh *mesh, t_vector3 delta_angle)
+void	t_mesh_rotate(t_mesh *mesh, t_vector4 delta_angle)
 {
 	t_matrix	rotation;
-	t_vector3	*target;
+	t_vector4	*target;
 	int			i;
 
 	rotation = create_rotation_matrix(delta_angle.x, delta_angle.y,\
 										delta_angle.z);
-	mesh->angle = add_vector3_to_vector3(mesh->angle, delta_angle);
+	mesh->angle = add_vector4_to_vector4(mesh->angle, delta_angle);
 	t_mesh_look_at(mesh);
 	i = -1;
 	while (++i < mesh->vertices->size)
 	{
-		target = t_vector3_list_get(mesh->vertices, i);
-		*target = mult_vector3_by_matrix(*target, rotation);
+		target = t_vector4_list_get(mesh->vertices, i);
+		*target = mult_vector4_by_matrix(*target, rotation);
 	}
 	t_mesh_compute_normals(mesh);
 	t_mesh_compute_bubble_box(mesh);
@@ -199,26 +196,26 @@ void	t_mesh_set_color(t_mesh *dest, t_color p_color)
 		set_t_face_color(t_face_list_get(dest->faces, i), p_color);
 }
 
-void	t_mesh_move(t_mesh *dest, t_vector3 delta)
+void	t_mesh_move(t_mesh *dest, t_vector4 delta)
 {
-	dest->pos = add_vector3_to_vector3(dest->pos, delta);
-	dest->center = add_vector3_to_vector3(dest->center, delta);
+	dest->pos = add_vector4_to_vector4(dest->pos, delta);
+	dest->center = add_vector4_to_vector4(dest->center, delta);
 }
 
 void	t_mesh_apply_force(t_mesh *dest)
 {
-	dest->pos = add_vector3_to_vector3(dest->pos, dest->force);
-	dest->center = add_vector3_to_vector3(dest->center, dest->force);
+	dest->pos = add_vector4_to_vector4(dest->pos, dest->force);
+	dest->center = add_vector4_to_vector4(dest->center, dest->force);
 }
 
-void	t_mesh_set_force(t_mesh *dest, t_vector3 new_force)
+void	t_mesh_set_force(t_mesh *dest, t_vector4 new_force)
 {
 	dest->force = new_force;
 }
 
-void	t_mesh_add_force(t_mesh *dest, t_vector3 delta_force)
+void	t_mesh_add_force(t_mesh *dest, t_vector4 delta_force)
 {
-	dest->force = add_vector3_to_vector3(dest->force, delta_force);
+	dest->force = add_vector4_to_vector4(dest->force, delta_force);
 }
 
 void	t_mesh_activate_gravity(t_mesh *dest, float gravity)
@@ -237,45 +234,45 @@ void	t_mesh_compute_vertices_in_world(t_mesh *dest)
 	int		i;
 
 	i = -1;
-	clean_t_vector3_list(dest->vertices_in_world);
+	clean_t_vector4_list(dest->vertices_in_world);
 	while (++i < dest->vertices->size)
-		t_vector3_list_push_back(dest->vertices_in_world,\
-		add_vector3_to_vector3(t_vector3_list_at(dest->vertices, i),\
+		t_vector4_list_push_back(dest->vertices_in_world,\
+		add_vector4_to_vector4(t_vector4_list_at(dest->vertices, i),\
 												dest->pos));
 }
 
-void	t_mesh_compute_next_vertices_in_world(t_mesh *dest, t_vector3 axis)
+void	t_mesh_compute_next_vertices_in_world(t_mesh *dest, t_vector4 axis)
 {
-	t_vector3	next_pos;
+	t_vector4	next_pos;
 	t_face		*dest_face;
 	int			i;
 
 	i = -1;
-	clean_t_vector3_list(dest->next_vertices_in_world);
-	next_pos = add_vector3_to_vector3(dest->pos,\
-				mult_vector3_by_vector3(dest->force, axis));
+	clean_t_vector4_list(dest->next_vertices_in_world);
+	next_pos = add_vector4_to_vector4(dest->pos,\
+				mult_vector4_by_vector4(dest->force, axis));
 	while (++i < dest->vertices->size)
-		t_vector3_list_push_back(dest->next_vertices_in_world,\
-		add_vector3_to_vector3(t_vector3_list_at(dest->vertices, i), next_pos));
+		t_vector4_list_push_back(dest->next_vertices_in_world,\
+		add_vector4_to_vector4(t_vector4_list_at(dest->vertices, i), next_pos));
 }
 
-void	t_mesh_jump(t_mesh *body, t_vector3 jump)
+void	t_mesh_jump(t_mesh *body, t_vector4 jump)
 {
 	if (body->kinetic < -12.0f)
 		body->kinetic = -12.0f;
 }
 
-void	t_mesh_resize(t_mesh *mesh, t_vector3 modif)
+void	t_mesh_resize(t_mesh *mesh, t_vector4 modif)
 {
-	t_vector3	tmp;
+	t_vector4	tmp;
 	int			i;
 
 	i = 4;
 	while (i <= 7)
 	{
-		tmp = t_vector3_list_at(mesh->vertices, i);
-		tmp = add_vector3_to_vector3(tmp, modif);
-		t_vector3_list_set(mesh->vertices, i, &tmp);
+		tmp = t_vector4_list_at(mesh->vertices, i);
+		tmp = add_vector4_to_vector4(tmp, modif);
+		t_vector4_list_set(mesh->vertices, i, &tmp);
 		i++;
 	}
 }
@@ -292,8 +289,8 @@ void	t_mesh_move_door(t_mesh *mesh)
 {
 	if (mesh->door.tick <= 5 && mesh->door.state == 0 && mesh->door.move == 1)
 	{
-		mesh->pos = add_vector3_to_vector3(mesh->pos, create_t_vector3(0.0, 0.12, 0.0));
-		mesh->center = add_vector3_to_vector3(mesh->center, create_t_vector3(0.0, 0.12, 0.0));
+		mesh->pos = add_vector4_to_vector4(mesh->pos, create_t_vector4(0.0, 0.12, 0.0));
+		mesh->center = add_vector4_to_vector4(mesh->center, create_t_vector4(0.0, 0.12, 0.0));
 		mesh->door.tick++;
 		if (mesh->door.tick == 5)
 		{
@@ -303,8 +300,8 @@ void	t_mesh_move_door(t_mesh *mesh)
 	}
 	if (mesh->door.tick >= 0 && mesh->door.state == 1 && mesh->door.move == 1)
 	{
-		mesh->pos = add_vector3_to_vector3(mesh->pos, create_t_vector3(0.0, -0.12, 0.0));
-		mesh->center = add_vector3_to_vector3(mesh->center, create_t_vector3(0.0, -0.12, 0.0));
+		mesh->pos = add_vector4_to_vector4(mesh->pos, create_t_vector4(0.0, -0.12, 0.0));
+		mesh->center = add_vector4_to_vector4(mesh->center, create_t_vector4(0.0, -0.12, 0.0));
 		mesh->door.tick--;
 		if (mesh->door.tick == 0)
 		{
