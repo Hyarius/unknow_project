@@ -41,6 +41,7 @@ t_gui create_t_gui(float x, int y)
 	result.key_press = 0;
     result.perso.hp = x;
 	result.perso.mun = y;
+	result.info_print = 0;
 	return (result);
 }
 

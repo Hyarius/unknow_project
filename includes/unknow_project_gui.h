@@ -31,6 +31,7 @@ typedef struct  s_gui
     int         key_press;
     int         key_change;
     int         sens;
+	int			info_print;
 }               t_gui;
 
 t_gui           create_t_gui(float x, int y);
@@ -56,7 +57,7 @@ void            set_controls(t_camera *main_camera, t_gui *gui, t_user_engine *e
 void            main_pause(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int *play);
 
 void			map_editor(t_camera *main_camera, t_gui *gui, t_engine *engine, t_mesh mesh);
-t_mesh			create_mesh_editing(int index);
+
 
 
 #endif

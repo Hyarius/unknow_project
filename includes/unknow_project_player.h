@@ -39,4 +39,5 @@ t_player		*initialize_t_player(t_camera *cam);
 t_player		*read_player(int fd, t_camera *main_camera);
 t_weapon		create_t_weapons(int index, int ammo, int total_ammo);
 
+
 #endif

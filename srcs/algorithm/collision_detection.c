@@ -6,7 +6,7 @@
 /*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 12:09:40 by adjouber          #+#    #+#             */
-/*   Updated: 2019/10/31 13:23:20 by adjouber         ###   ########.fr       */
+/*   Updated: 2019/11/20 14:02:08 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int		is_t_mesh_intersecting(t_mesh *mesh_compared, t_mesh *mesh_target)
 	int		i;
 	float	val[4];
 
+	if (mesh_compared->faces == NULL)
+		error_exit(0,"test");
 	i = -1;
 	while (++i < mesh_compared->faces->size)
 	{

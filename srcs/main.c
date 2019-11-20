@@ -75,20 +75,20 @@ int main(int argc, char **argv)
 	t_player *player;
 	int		fd;
 
-	fd = open("ressources/map/fichier_map.map", O_RDONLY);
+	// fd = open("ressources/map/fichier_map.map", O_RDONLY);
 	// fd = open("ressources/map/test_gravity.map", O_RDONLY);
 	// fd = open("ressources/map/save1.map", O_RDONLY);
-	// fd = open("ressources/map/editing_map1.map", O_RDONLY);
+	fd = open("ressources/map/editing_map1.map", O_RDONLY);
 	if (fd < 0)
 		error_exit(-7000, "imposible fd");
 	// player = read_player("ressources/map/save1.map", main_camera);
 	// t_mesh_list *meshs = read_map_file("ressources/map/save1.map");
 	player = read_player(fd, main_camera);
 	close(fd);
-	fd = open("ressources/map/fichier_map.map", O_RDONLY);
+	// fd = open("ressources/map/fichier_map.map", O_RDONLY);
 	// fd = open("ressources/map/test_gravity.map", O_RDONLY);
 	// fd = open("ressources/map/save1.map", O_RDONLY);
-	// fd = open("ressources/map/editing_map1.map", O_RDONLY);
+	fd = open("ressources/map/editing_map1.map", O_RDONLY);
 	if (fd < 0)
 		error_exit(-7000, "imposible fd");
 	t_mesh_list *meshs = read_map_file(fd);
@@ -190,9 +190,9 @@ int main(int argc, char **argv)
 	// engine->physic_engine->item_list = item_list;
 
 	t_mesh	mesh_editing;
-	mesh_editing = create_mesh_editing(0);
+	mesh_editing = create_mesh_editing(0, engine->user_engine->player->camera->body->pos);
 	mesh = create_primitive_skybox(main_camera->pos, create_t_vector3(1.0, 1.0, 1.0), skybox);
-	engine->playing = 1;
+	engine->playing = 10;
 	Mix_VolumeMusic(MIX_MAX_VOLUME);
 	Mix_PlayMusic(musique, -1);
 	while (engine->playing != 0)
@@ -259,12 +259,13 @@ int main(int argc, char **argv)
 			mesh.pos = main_camera->pos;
 			SDL_ShowCursor(SDL_DISABLE);
 			t_engine_apply_physic(engine);
+			// t_physic_engine_apply_force(engine);
 			t_engine_handle_camera(engine, win);
 			t_engine_prepare_camera(engine);
 			t_engine_draw_mesh(engine);
 			t_engine_render_camera(engine);
 			t_mesh_free_move(engine->user_engine->player->camera->body);
-			// select_mesh();
+			mesh_editing = select_mesh(mesh_editing, engine->user_engine->keyboard, engine->user_engine->player->camera->body->pos);
 			map_editor(main_camera, gui, engine, mesh_editing);
 		}
 		t_engine_handle_event(main_camera, gui, engine);

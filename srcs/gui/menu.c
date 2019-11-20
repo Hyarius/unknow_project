@@ -58,7 +58,7 @@ void			main_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, 
 			*play = 3;
 	}
     else
-        user_engine->mouse->clicked = BOOL_FALSE;
+        user_engine->mouse->clicked_left = BOOL_FALSE;
 }
 
 void			option_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int *play)
@@ -115,7 +115,7 @@ void			option_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine
 			*play = 2;
 	}
     else
-        user_engine->mouse->clicked = BOOL_FALSE;
+        user_engine->mouse->clicked_left = BOOL_FALSE;
 }
 
 void        setting_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int *play)
@@ -244,7 +244,7 @@ void        setting_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_
     			*play = 3;
     	}
         else
-            user_engine->mouse->clicked = BOOL_FALSE;
+            user_engine->mouse->clicked_left = BOOL_FALSE;
     }
     if (gui->key_press == 2)
     {
@@ -294,7 +294,7 @@ void        difficulty_menu(t_camera *main_camera, t_gui *gui, t_user_engine *us
     else
     {
         draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.1, -0.54), create_t_vector2(0.6, 0.94)), gui->menu[gui->idx]);
-        user_engine->mouse->clicked = BOOL_FALSE;
+        user_engine->mouse->clicked_left = BOOL_FALSE;
     }
 }
 
@@ -352,7 +352,7 @@ void        sens_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_eng
     else
     {
         sens_bis(main_camera, gui, gui->sens);
-        user_engine->mouse->clicked = BOOL_FALSE;
+        user_engine->mouse->clicked_left = BOOL_FALSE;
     }
 }
 

@@ -96,6 +96,7 @@ t_mesh		*t_engine_get_mesh(t_engine *p_engine, int index)
 void		t_engine_apply_physic(t_engine *engine)
 {
 	t_physic_engine_compute_vertices_in_world(engine->physic_engine);
+	// printf("here4\n");
 	t_physic_engine_apply_force(engine);
 }
 

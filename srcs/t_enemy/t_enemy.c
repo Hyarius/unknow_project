@@ -46,7 +46,7 @@ void        enemy_shoot(t_engine *engine)
         {
 			printf("%d\n", j);
 			mesh = cast_ray(engine, target->camera->pos, target->camera->forward, "Enemy");
-        	if (mesh != NULL && engine->tick - j == 3 && ft_strcmp(mesh->name, "Player") == 0)
+        	if (mesh != NULL && engine->tick - j == 2 && ft_strcmp(mesh->name, "Player") == 0)
     		{
 				printf("here shoot\n");
 				if (engine->user_engine->player->armor != 0)
