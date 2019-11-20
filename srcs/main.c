@@ -36,17 +36,17 @@ int main(int argc, char **argv)
 
 	main_camera = t_camera_list_get(engine->visual_engine->camera_list, 0);
 	t_engine_place_camera(engine, 0, create_t_vector4(5.0, 5.0, 0.0));
-	t_camera_look_at_point(main_camera, create_t_vector4(0, 0, 0));
+	t_camera_look_at_point(main_camera, create_t_vector4(1.0, 1.0, 1.0));
 	t_engine_add_camera(engine, create_t_camera(win, create_t_vector4(0.0, 0.0, 0.0), 70, create_t_vector2(NEAR, FAR)));
 	resize_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 1)->view_port, create_t_vector2_int(300, 240));
 	move_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 1)->view_port, create_t_vector2_int(WIN_X - 300, 0));
-	t_engine_add_camera(engine, create_t_camera(win, create_t_vector4(0.0, 0.0, 0.0), 70, create_t_vector2(NEAR, FAR)));
-	resize_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 2)->view_port, create_t_vector2_int(300, 240));
-	move_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 2)->view_port, create_t_vector2_int(300, 0));
+	// t_engine_add_camera(engine, create_t_camera(win, create_t_vector4(0.0, 0.0, 0.0), 70, create_t_vector2(NEAR, FAR)));
+	// resize_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 2)->view_port, create_t_vector2_int(300, 240));
+	// move_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 2)->view_port, create_t_vector2_int(300, 0));
 
-	//resize_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 0)->view_port, create_t_vector2_int(2, 2));
+	// resize_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 0)->view_port, create_t_vector2_int(2, 2));
 
-	mesh = create_primitive_cube(create_t_vector4(2.0, 2.0, 2.0), create_t_vector4(0.3, 0.5, 0.3), NULL, 0.0);
+	mesh = create_primitive_cube(create_t_vector4(3.0, 1.0, 3.0), create_t_vector4(0.3, 0.5, 0.3), NULL, 0.0);
 	t_mesh_set_name(&mesh, "Player");
 	t_mesh_set_color(&mesh, create_t_color(1.5, 0.4, 1.5, 1.0));
 
@@ -54,19 +54,31 @@ int main(int argc, char **argv)
 	t_engine_add_mesh(engine, engine->user_engine->player->hitbox);
 	link_t_camera_to_t_mesh(main_camera, t_engine_get_mesh(engine, 0), 100);
 
-	mesh = create_primitive_cube(create_t_vector4(1.0, 0.0, 2.0), create_t_vector4(1.0, 1.0, 1.0), texture, 0.0);
+	mesh = create_primitive_cube(create_t_vector4(0.0, 0.0, 0.0), create_t_vector4(1.0, 1.0, 1.0), texture, 0.0);
 	t_mesh_set_name(&mesh, "cube texture");
-	t_mesh_rotate(&mesh, create_t_vector4(0.0, 0.0, 0.0));
-	t_mesh_set_color(&mesh, create_t_color(0.5, 0.6, 0.8 ,1.0));
+	// t_mesh_rotate(&mesh, create_t_vector4(0.0, 0.0, 0.0));
+	// t_mesh_set_color(&mesh, create_t_color(0.5, 0.6, 0.8 ,1.0));
 	t_engine_add_mesh(engine, mesh);
 
-	mesh = create_primitive_cube(create_t_vector4(1.0, 0.0, 5.0), create_t_vector4(2.0, 2.0, 2), NULL, 0.0);
-	t_mesh_set_name(&mesh, "Enemy");
-	t_mesh_rotate(&mesh, create_t_vector4(0.0, 90.0, 0.0));
-	t_mesh_set_color(&mesh, create_t_color(0.0, 0.0, 0.0 ,1.0));
+	mesh = create_primitive_cube(create_t_vector4(1.0, 0.0, 1.0), create_t_vector4(1.0, 1.0, 1.0), texture, 0.0);
+	t_mesh_set_name(&mesh, "cube texture");
+	// t_mesh_rotate(&mesh, create_t_vector4(0.0, 0.0, 0.0));
+	// t_mesh_set_color(&mesh, create_t_color(0.5, 0.6, 0.8 ,1.0));
 	t_engine_add_mesh(engine, mesh);
 
-	t_mesh_list *meshs = read_map_file("fichier_map.map");
+
+	// mesh = read_obj_file("pawn.obj", create_t_vector4(1.0, 0.0, 1.0), create_t_vector4(0.1, 0.1, 0.1), 0.0);
+	// t_mesh_set_name(&mesh, "pawn.obj");
+	// t_mesh_set_color(&mesh, create_t_color(0.5, 0.6, 0.8 ,1.0));
+	// t_engine_add_mesh(engine, mesh);
+
+	// mesh = create_primitive_cube(create_t_vector4(1.0, 0.0, 5.0), create_t_vector4(2.0, 2.0, 2), NULL, 0.0);
+	// t_mesh_set_name(&mesh, "Enemy");
+	// t_mesh_rotate(&mesh, create_t_vector4(0.0, 90.0, 0.0));
+	// t_mesh_set_color(&mesh, create_t_color(0.0, 0.0, 0.0 ,1.0));
+	// t_engine_add_mesh(engine, mesh);
+
+	t_mesh_list *meshs = read_map_file("ressources/map/fichier_map.map");
 
 	int i = 0;
 	while (i < meshs->size)
@@ -77,26 +89,26 @@ int main(int argc, char **argv)
 
 	t_rectangle rec = create_t_rectangle(create_t_vector2(-1, 1), create_t_vector2(2, -2));
 
-	t_item_list	*item_list = initialize_t_item_list();
+	// t_item_list	*item_list = initialize_t_item_list();
 
-	t_item health_pack = create_health_pack(create_t_vector4(0.0, 0.0, 0.0), engine);
-	t_item_list_push_back(item_list, health_pack);
+	// t_item health_pack = create_health_pack(create_t_vector4(0.0, 0.0, 0.0), engine);
+	// t_item_list_push_back(item_list, health_pack);
 
-	t_item ammo_pack = create_ammo_pack(create_t_vector4(1.0, 0.0, 0.0), engine, 1);
-	t_item_list_push_back(item_list, ammo_pack);
-	ammo_pack = create_ammo_pack(create_t_vector4(2.0, 0.0, 0.0), engine, 2);
-	t_item_list_push_back(item_list, ammo_pack);
-	ammo_pack = create_ammo_pack(create_t_vector4(3.0, 0.0, 0.0), engine, 3);
-	t_item_list_push_back(item_list, ammo_pack);
-	ammo_pack = create_ammo_pack(create_t_vector4(4.0, 0.0, 0.0), engine, 4);
-	t_item_list_push_back(item_list, ammo_pack);
+	// t_item ammo_pack = create_ammo_pack(create_t_vector4(1.0, 0.0, 0.0), engine, 1);
+	// t_item_list_push_back(item_list, ammo_pack);
+	// ammo_pack = create_ammo_pack(create_t_vector4(2.0, 0.0, 0.0), engine, 2);
+	// t_item_list_push_back(item_list, ammo_pack);
+	// ammo_pack = create_ammo_pack(create_t_vector4(3.0, 0.0, 0.0), engine, 3);
+	// t_item_list_push_back(item_list, ammo_pack);
+	// ammo_pack = create_ammo_pack(create_t_vector4(4.0, 0.0, 0.0), engine, 4);
+	// t_item_list_push_back(item_list, ammo_pack);
 
-	t_item armor_pack = create_armor_pack(create_t_vector4(-1.0, 0.0, 0.0), engine);
-	t_item_list_push_back(item_list, armor_pack);
+	// t_item armor_pack = create_armor_pack(create_t_vector4(-1.0, 0.0, 0.0), engine);
+	// t_item_list_push_back(item_list, armor_pack);
 
-	armor_pack = create_armor_pack(create_t_vector4(-2.0, 0.0, 0.0), engine);
-	t_item_list_push_back(item_list, armor_pack);
-	engine->physic_engine->item_list = item_list;
+	// armor_pack = create_armor_pack(create_t_vector4(-2.0, 0.0, 0.0), engine);
+	// t_item_list_push_back(item_list, armor_pack);
+	// engine->physic_engine->item_list = item_list;
 
 	mesh = create_primitive_skybox(main_camera->pos, create_t_vector4(1.0, 1.0, 1.0), skybox);
 	engine->playing = 1;
@@ -134,7 +146,11 @@ int main(int argc, char **argv)
 		if (engine->playing == 1)
 		{
 			mesh.pos = main_camera->pos;
-
+			if (engine->user_engine->event.type == SDL_KEYDOWN && engine->user_engine->event.key.keysym.sym == SDLK_r)
+				t_mesh_rotate(t_mesh_list_get(engine->physic_engine->mesh_list, 1), create_t_vector4(0.0, 1.0, 0.0));
+			if (engine->user_engine->event.type == SDL_KEYDOWN && engine->user_engine->event.key.keysym.sym == SDLK_e)
+				t_mesh_rotate(t_mesh_list_get(engine->physic_engine->mesh_list, 1), create_t_vector4(0.0, -1.0, 0.0));
+			// t_mesh_rotate_around_point(t_mesh_list_get(engine->physic_engine->mesh_list, 2), create_t_vector4(0.0, 300000000000000000000000000000000000000.0, 0.0), create_t_vector4(0.0, 0.0, 0.0));
 			// draw_skybox(win, main_camera, &mesh); // skybox
 			// t_engine_render_camera(engine);
 			t_engine_apply_physic(engine);
@@ -157,5 +173,7 @@ int main(int argc, char **argv)
 		render_screen(win); // affiche la fenetre
 	}
 	TTF_Quit();
+	SDL_DestroyWindow(win);
+	SDL_Quit();
 	return (0);
 }

@@ -117,12 +117,12 @@ t_matrix	t_camera_compute_view(t_camera *cam) //calcul de la matrice de vue
 	result.value[0][0] = cam->right.x;
 	result.value[1][0] = cam->right.y;
 	result.value[2][0] = cam->right.z;
-	result.value[3][0] = - (dot_t_vector4(cam->right, cam->pos));
+	result.value[3][0] = -(dot_t_vector4(cam->right, cam->pos));
 
 	result.value[0][1] = cam->up.x;
 	result.value[1][1] = cam->up.y;
 	result.value[2][1] = cam->up.z;
-	result.value[3][1] = - (dot_t_vector4(cam->up, cam->pos));
+	result.value[3][1] = -(dot_t_vector4(cam->up, cam->pos));
 
 	result.value[0][2] = cam->forward.x;
 	result.value[1][2] = cam->forward.y;
@@ -157,7 +157,7 @@ t_matrix	compute_projection_matrix(t_camera *p_cam) //calcul de la matrice de pr
 	result.value[1][1] = r;
 	result.value[2][2] = f / (f - n);
 	result.value[2][3] = 1.0;
-	result.value[3][2] = -(f * n) / (f - n);
+	result.value[3][2] = -(2 * f * n) / (f - n);
 	return (result);
 }
 

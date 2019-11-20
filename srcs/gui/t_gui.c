@@ -8,27 +8,25 @@ t_gui create_t_gui(float x, int y)
 	t_gui	result;
 	int		idx;
 
-	idx = 0;
+	idx = -1;
 	if (!(result.letter = (t_texture **)malloc(sizeof(t_texture*) * 95)))
-		error_exit(-29, "Can't malloc a t_surface");
-	while (idx <= 94)
+		error_exit(-29, "Can't malloc a t_texture");
+	while (++idx <= 94)
 	{
 		if (!(result.letter[idx] = (t_texture *)malloc(sizeof(t_texture))))
-			error_exit(-29, "Can't malloc a t_surface");
+			error_exit(-29, "Can't malloc a t_texture");
 		if (!(result.letter[idx]->surface = (t_surface *)malloc(sizeof(t_surface))))
 			error_exit(-29, "Can't malloc a t_surface");
-		idx++;
 	}
-	idx = 0;
+	idx = -1;
 	if (!(result.menu = (t_texture **)malloc(sizeof(t_texture*) * 15)))
-		error_exit(-29, "Can't malloc a t_surface");
-	while (idx <= 14)
+		error_exit(-29, "Can't malloc a t_texture");
+	while (++idx <= 14)
 	{
 		if (!(result.menu[idx] = (t_texture *)malloc(sizeof(t_texture))))
-			error_exit(-29, "Can't malloc a t_surface");
+			error_exit(-29, "Can't malloc a t_texture");
 		if (!(result.menu[idx]->surface = (t_surface *)malloc(sizeof(t_surface))))
 			error_exit(-29, "Can't malloc a t_surface");
-		idx++;
 	}
 	result.idx = 8;
 	result.sens = 2;
@@ -96,6 +94,7 @@ void	print_info_bar(t_camera *main_camera, t_player *player, t_gui *gui)
 	str = ft_itoa(player->armor);
 	print_letter(main_camera, gui, ft_strcat(str, "%"), create_t_rectangle(create_t_vector2(-0.025, -0.87), create_t_vector2(0.02, 0.07)));
 	free(str);
+
 	str = ft_itoa(player->hp);
 	print_letter(main_camera, gui, ft_strcat(str, "%"), create_t_rectangle(create_t_vector2(-0.025, -0.97), create_t_vector2(0.02, 0.07)));
 	free(str);
@@ -103,7 +102,6 @@ void	print_info_bar(t_camera *main_camera, t_player *player, t_gui *gui)
 	str = ft_itoa(player->current_weapon->ammo);
 	str = ft_strcat(str, " / ");
 	str = ft_strcat(str, ft_itoa(player->current_weapon->total_ammo));
-
 	print_letter(main_camera, gui, str, create_t_rectangle(create_t_vector2(0.78, -0.90), create_t_vector2(0.01, 0.05)));
 	free(str);
 }

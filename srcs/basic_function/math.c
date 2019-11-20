@@ -95,7 +95,9 @@ t_vector4		intersect_plane_by_line(t_vector4 p_normal, t_vector4 p_center, t_vec
 	t = (normal_delta - dist_start) / (dist_end - dist_start);
 	basic_line = substract_vector4_to_vector4(end, start);
 	intersection = mult_vector4_by_float(basic_line, t);
-	return (add_vector4_to_vector4(start, intersection));
+	intersection = add_vector4_to_vector4(start, intersection);
+	intersection.w = t;
+	return (intersection);
 }
 
 int				is_point_on_line(t_vector4 a, t_vector4 b, t_vector4 c)
@@ -148,7 +150,7 @@ int				same_side(t_vector4 p1, t_vector4 p2, t_vector4 a, t_vector4 b)
 	b_a = substract_vector4_to_vector4(b, a);
 	cp1 = cross_t_vector4(b_a, substract_vector4_to_vector4(p1, a));
 	cp2 = cross_t_vector4(b_a, substract_vector4_to_vector4(p2, a));
-	if (dot_t_vector4(cp1, cp2) >= 0)
+	if (dot_t_vector4(cp1, cp2) < 0)
 		return (BOOL_TRUE);
 	else
 		return (BOOL_FALSE);
@@ -359,7 +361,7 @@ t_vector4		interpolate_vector4_over_line(float ratio_x, float ratio_y, t_vector4
 	result.x = ((ub.x - ua.x) * ratio_x) + ua.x;
 	result.y = ((ub.y - ua.y) * ratio_y) + ua.y;
 	result.z = 0;
-	result.w = 0;
+	result.w = 1.0;
 	return (result);
 }
 

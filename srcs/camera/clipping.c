@@ -62,7 +62,6 @@ int			clip_triangle_to_plane(t_camera *p_camera, t_vector4 *p_points, t_vector4 
 												interpolate_ratio(inside_points[0].y, outside_points[1].y, clipping_list[2].y),
 												inside_points_uv[0], outside_points_uv[1]);
 		}
-
 		return (3);
 	}
 	else if (inside_nb == 2) // si 2 points a l'interieur, creation de 2 nouveaux point pour creer 2 triangles
@@ -81,7 +80,6 @@ int			clip_triangle_to_plane(t_camera *p_camera, t_vector4 *p_points, t_vector4 
 											inside_points_uv[0], outside_points_uv[0]);
 		}
 
-
 		clipping_list[3] = inside_points[1];
 		clipping_list[4] = intersect_plane_by_line(forward, plane_center, inside_points[0], outside_points[0]);
 		clipping_list[5] = intersect_plane_by_line(forward, plane_center, inside_points[1], outside_points[0]);
@@ -98,7 +96,6 @@ int			clip_triangle_to_plane(t_camera *p_camera, t_vector4 *p_points, t_vector4 
 											interpolate_ratio(inside_points[1].y, outside_points[0].y, clipping_list[5].y),
 											inside_points_uv[1], outside_points_uv[0]);
 		}
-
 		return (6);
 	}
 	if (inside_nb == 3) // si 3 point a l'interieur, rien a faire
@@ -113,9 +110,7 @@ int			clip_triangle_to_plane(t_camera *p_camera, t_vector4 *p_points, t_vector4 
 			clipping_list_uv[1] = inside_points_uv[1];
 			clipping_list_uv[2] = inside_points_uv[2];
 		}
-
 		return (3);
 	}
-
 	return (0);
 }

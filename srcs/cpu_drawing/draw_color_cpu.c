@@ -11,9 +11,9 @@ void	draw_triangle_color_cpu(t_view_port *view_port, t_triangle *p_triangle, t_c
 	triangle.b = convert_opengl_to_vector4(view_port, p_triangle->b);
 	triangle.c = convert_opengl_to_vector4(view_port, p_triangle->c);
 
-	triangle.a.z = 1.0 / triangle.a.z;
-	triangle.b.z = 1.0 / triangle.b.z;
-	triangle.c.z = 1.0 / triangle.c.z;
+	triangle.a.w = 1.0 / triangle.a.w;
+	triangle.b.w = 1.0 / triangle.b.w;
+	triangle.c.w = 1.0 / triangle.c.w;
 
 	t_triangle_get_min_max_value(&triangle, &min, &max);
 
@@ -39,7 +39,7 @@ void	draw_triangle_color_cpu(t_view_port *view_port, t_triangle *p_triangle, t_c
 			float w2 = edge_t_vector4(triangle.a, triangle.b, pixelSample) / area;
 			if (w0 >= 0 && w1 >= 0 && w2 >= 0)
 			{
-				float oneOverZ = (triangle.a.z * w0) + (triangle.b.z * w1) + (triangle.c.z * w2);
+				float oneOverZ = (triangle.a.w * w0) + (triangle.b.w * w1) + (triangle.c.w * w2);
 				float z = 1 / oneOverZ;
 				if (z <= view_port->depth_buffer[pixel_index])
 				{

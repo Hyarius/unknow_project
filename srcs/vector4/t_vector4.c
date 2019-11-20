@@ -84,7 +84,10 @@ t_vector4	divide_vector4_by_float(t_vector4 a, float b)
 {
 	t_vector4	result;
 
-	result = create_t_vector4(a.x / b, a.y / b, a.z / b);
+	result.x = a.x / b;
+	result.y = a.y / b;
+	result.z = a.z / b;
+	result.w = a.w;
 	return (result);
 }
 

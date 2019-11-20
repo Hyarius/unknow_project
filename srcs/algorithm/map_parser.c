@@ -15,7 +15,7 @@ t_mesh_list		*read_map_file(char *path)
 
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
-	 	error_exit(-7000, "impossible fd");
+	 	error_exit(-7000, ft_strjoin(path, " doesn't exist"));
 	result = initialize_t_mesh_list();
 	while (get_next_line(fd, &line) > 0)
 	{

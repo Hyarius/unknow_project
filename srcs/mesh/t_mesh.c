@@ -256,11 +256,11 @@ void	t_mesh_compute_next_vertices_in_world(t_mesh *dest, t_vector4 axis)
 		add_vector4_to_vector4(t_vector4_list_at(dest->vertices, i), next_pos));
 }
 
-void	t_mesh_jump(t_mesh *body, t_vector4 jump)
-{
-	if (body->kinetic < -12.0f)
-		body->kinetic = -12.0f;
-}
+// void	t_mesh_jump(t_mesh *body, t_vector4 jump)
+// {
+// 	if (body->kinetic < -12.0f)
+// 		body->kinetic = -12.0f;
+// }
 
 void	t_mesh_resize(t_mesh *mesh, t_vector4 modif)
 {
