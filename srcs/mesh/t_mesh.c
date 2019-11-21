@@ -260,12 +260,6 @@ void	t_mesh_compute_next_vertices_in_world(t_mesh *dest, t_vector4 axis)
 		add_vector4_to_vector4(t_vector4_list_at(dest->vertices, i), next_pos));
 }
 
-// void	t_mesh_jump(t_mesh *body, t_vector4 jump)
-// {
-// 	if (body->kinetic < -12.0f)
-// 		body->kinetic = -12.0f;
-// }
-
 void	t_mesh_resize(t_mesh *mesh, t_vector4 modif)
 {
 	t_vector4	tmp;
@@ -283,34 +277,108 @@ void	t_mesh_resize(t_mesh *mesh, t_vector4 modif)
 
 void	t_mesh_set_name(t_mesh *mesh, char *name)
 {
-
-	mesh->name = name;
-	if (ft_strcmp(mesh->name, "door") == 0)
+	mesh->name = ft_strdup(name);
+	if (ft_strcmp(mesh->name, "door") == 0 || ft_strcmp(mesh->name, "elevator") == 0
+		|| ft_strcmp(mesh->name, "door_red") == 0 || ft_strcmp(mesh->name, "door_blue") == 0
+		|| ft_strcmp(mesh->name, "door_green") == 0)
 		mesh->door = create_t_door();
+	else if (ft_strcmp(mesh->name, "Enemy") == 0)
+		mesh->tick = 0;
 }
 
 void	t_mesh_move_door(t_mesh *mesh)
 {
-	if (mesh->door.tick <= 5 && mesh->door.state == 0 && mesh->door.move == 1)
+	float	tmp;
+
+	if (mesh->door.tick <= 5 && mesh->door.move == 1)
 	{
-		mesh->pos = add_vector4_to_vector4(mesh->pos, create_t_vector4(0.0, 0.12, 0.0));
-		mesh->center = add_vector4_to_vector4(mesh->center, create_t_vector4(0.0, 0.12, 0.0));
+		if (mesh->door.state == 0)
+			tmp = 0.12f;
+		else
+			tmp = -0.12f;
+		mesh->pos = add_vector3_to_vector3(mesh->pos, create_t_vector3(0.0, tmp, 0.0));
+		mesh->center = add_vector3_to_vector3(mesh->center, create_t_vector3(0.0, tmp, 0.0));
 		mesh->door.tick++;
 		if (mesh->door.tick == 5)
 		{
-			mesh->door.state = 1;
+			if (tmp == 0.12f)
+				mesh->door.state = 1;
+			else
+				mesh->door.state = 0;
 			mesh->door.move = 0;
+			mesh->door.tick = 0;
 		}
 	}
-	if (mesh->door.tick >= 0 && mesh->door.state == 1 && mesh->door.move == 1)
+}
+
+void	t_mesh_move_elevator(t_mesh *mesh, t_camera *camera)
+{
+	float	tmp;
+
+	if (mesh->door.tick <= 10 && mesh->door.move == 1)
 	{
-		mesh->pos = add_vector4_to_vector4(mesh->pos, create_t_vector4(0.0, -0.12, 0.0));
-		mesh->center = add_vector4_to_vector4(mesh->center, create_t_vector4(0.0, -0.12, 0.0));
-		mesh->door.tick--;
-		if (mesh->door.tick == 0)
+		if (mesh->door.state == 0)
+			tmp = 0.5f;
+		else
+			tmp = -0.5f;
+		// if ()
+		// {
+		if (t_mesh_on_mesh(camera->body, mesh) == 1)
 		{
-			mesh->door.state = 0;
+			camera->body->pos = add_vector3_to_vector3(camera->body->pos, create_t_vector3(0.0, tmp, 0.0));
+			camera->body->center = add_vector3_to_vector3(camera->body->center, create_t_vector3(0.0, tmp, 0.0));
+		}
+		mesh->pos = add_vector3_to_vector3(mesh->pos, create_t_vector3(0.0, tmp, 0.0));
+		mesh->center = add_vector3_to_vector3(mesh->center, create_t_vector3(0.0, tmp, 0.0));
+		mesh->door.tick++;
+		if (mesh->door.tick == 10)
+		{
+			if (tmp == 0.5f)
+				mesh->door.state = 1;
+			else
+				mesh->door.state = 0;
 			mesh->door.move = 0;
+			mesh->door.tick = 0;
+			if (t_mesh_on_mesh(camera->body, mesh) == 1)
+			{
+				camera->body->pos = add_vector3_to_vector3(camera->body->pos, create_t_vector3(0.0, 0.05, 0.0));
+				camera->body->center = add_vector3_to_vector3(camera->body->center, create_t_vector3(0.0, 0.05, 0.0));
+			}
 		}
 	}
+}
+
+int		t_mesh_on_mesh(t_mesh *body, t_mesh *target)
+{
+	float	x_max;
+	float	z_max;
+	float	x_min;
+	float	z_min;
+
+	x_min = target->pos.x + ((target->center.x - target->pos.x) * 2);
+	z_min = target->pos.z + ((target->center.z - target->pos.z) * 2);
+	if (target->pos.x > x_min)
+		x_max = target->pos.x;
+	else
+	{
+		x_max = x_min;
+		x_min = target->pos.x;
+	}
+	if (target->pos.z > z_min)
+		z_max = target->pos.z;
+	else
+	{
+		z_max = z_min;
+		z_min = target->pos.z;
+	}
+	if ((body->pos.x + 0.3 >= x_min && body->pos.x <= x_max) && (body->pos.z + 0.3 >= z_min && body->pos.z <= z_max))
+		return (1);
+	return (0);
+}
+
+void	t_mesh_free_move(t_mesh *mesh)
+{
+	t_mesh_activate_gravity(mesh, 0.0f);
+	t_mesh_set_visibility(mesh, BOOL_FALSE);
+	mesh->no_hitbox = 1;
 }
