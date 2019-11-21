@@ -20,6 +20,7 @@ void			free_t_physic_engine(t_physic_engine *dest);
 
 void			t_physic_engine_draw_mesh(t_physic_engine *p_physic_engine, t_camera *p_cam);
 void			t_physic_engine_add_mesh(t_physic_engine *physic_engine, t_mesh p_mesh);
+void			t_physic_engine_add_item(t_physic_engine *physic_engine, t_item p_item);
 t_mesh			*t_physic_engine_get_mesh(t_physic_engine *physic_engine, int index);
 void			t_physic_engine_compute_check_list(t_physic_engine *physic_engine);
 int				calc_max_velocity(t_mesh *mesh, t_mesh *target, t_vector4 axis);

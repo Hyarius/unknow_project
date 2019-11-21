@@ -34,6 +34,7 @@ typedef struct	s_texture
 {
 	t_surface	*surface;
 	GLuint		id;
+	char		*path;
 	char		letter;
 }				t_texture;
 

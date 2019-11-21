@@ -16,14 +16,9 @@
 # include "unknow_project_player.h"
 # include "unknow_project_item.h"
 
-//			PNG reader
 t_texture 		*png_load(char *path);
-
-//			Shader - handler
 GLuint			load_shaders(const char * p_vertex_file_path,
 						const char * p_fragment_file_path);
-
-//			convert
 t_vector4		convert_screen_to_opengl(t_view_port *p_view_port, t_vector4 source);
 t_vector2		convert_vector2_to_opengl(t_view_port *p_view_port, t_vector2 source);
 t_vector4		convert_opengl_to_vector4(t_view_port *p_view_port, t_vector4 source);
@@ -33,12 +28,10 @@ t_vector4		convert_vector2_to_vector4(t_vector2 base);
 float			degree_to_radius(float angle);
 float			radius_to_degree(float radian);
 t_uv 			convert_t_uv_to_texture(t_uv *source);
-
 void			prepare_screen(t_window *win, t_color color);
 void			render_screen(t_window *win);
 void 			clear_buffers(t_window *win);
 void			draw_pixel(t_window *p_win, int x, int y, t_color color);
-
 t_triangle		compose_t_triangle_from_t_mesh(t_mesh *src, int *index);
 t_triangle		compose_t_triangle_from_t_vertices(t_vector4_list *src, int *index);
 
