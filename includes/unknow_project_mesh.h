@@ -17,19 +17,15 @@ t_door			*initialize_t_door(void);
 typedef struct		s_mesh
 {
 	struct s_camera	*camera;
-
 	t_vector4		pos;
 	t_vector4		size;
 	t_vector4		center;
-
 	int				is_visible;
+	float			bubble_radius;
 	int				collectible; // 0 false 1 true
 
-	float			bubble_radius;
-
-	t_vector4		angle;
 	t_vector4		rotation;
-
+	t_vector4		angle;
 	t_vector4		forward;
 	t_vector4		right;
 	t_vector4		up;
@@ -76,9 +72,9 @@ void			t_mesh_apply_force(t_mesh *dest);
 void			t_mesh_set_force(t_mesh *dest, t_vector4 new_force);
 void			t_mesh_add_force(t_mesh *dest, t_vector4 delta_force);
 
-t_mesh			create_primitive_cube(t_vector4 coord, t_vector4 size, t_texture *texture, float gravity);
-t_mesh			create_primitive_plane(t_vector4 pos, t_vector4 size, t_texture *texture, float gravity);
-t_mesh			create_primitive_vertical_plane(t_vector4 pos, t_vector4 size, t_texture *p_texture, float gravity);
+t_mesh			create_primitive_cube(t_vector4 coord, t_vector4 size, char *texture_path, float gravity);
+t_mesh			create_primitive_plane(t_vector4 pos, t_vector4 size, char *texture_path, float gravity);
+t_mesh			create_primitive_vertical_plane(t_vector4 pos, t_vector4 size, char *texture_path, float gravity);
 t_mesh			create_primitive_skybox(t_vector4 pos, t_vector4 size, t_texture *p_texture);
 
 void			t_mesh_rotate(t_mesh *mesh, t_vector4 delta_angle);
@@ -93,4 +89,6 @@ void			t_mesh_jump(t_mesh *body, t_vector4 jump);
 void			t_mesh_resize(t_mesh *mesh, t_vector4 modif);
 void			t_mesh_set_name(t_mesh *mesh, char *name);
 void			t_mesh_move_door(t_mesh	*mesh);
+int				t_mesh_on_mesh(t_mesh *body, t_mesh *target);
+
 #endif
