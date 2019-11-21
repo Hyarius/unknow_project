@@ -126,33 +126,6 @@ void		draw_t_mesh(t_camera *p_cam, t_mesh *mesh)
 		face = t_face_list_at(mesh->faces, i);
 		how_many_points_clipped(mesh, face, p_cam);
 	}
-	i = -1;
-	j = 0;
-	// while (++i < p_cam->triangle_texture_list.size || j < p_cam->triangle_color_list.size)
-	// {
-	// 	if (i < p_cam->triangle_texture_list.size)
-	// 	{
-	// 		triangle = t_triangle_list_get(&p_cam->triangle_texture_list, i);
-	// 		uv = t_uv_list_get(&p_cam->uv_list, i);
-	// 		triangle->a = divide_vector4_by_float(triangle->a, triangle->a.w);
-	// 		triangle->b = divide_vector4_by_float(triangle->b, triangle->b.w);
-	// 		triangle->c = divide_vector4_by_float(triangle->c, triangle->c.w);
-	// 		uv->uv.a = divide_vector4_by_float(uv->uv.a, triangle->a.w);
-	// 		uv->uv.a.w = 1.0f / triangle->a.w;
-	// 		uv->uv.b = divide_vector4_by_float(uv->uv.b, triangle->a.w);
-	// 		uv->uv.b.w = 1.0f / triangle->b.w;
-	// 		uv->uv.c = divide_vector4_by_float(uv->uv.c, triangle->a.w);
-	// 		uv->uv.c.w = 1.0f / triangle->c.w;
-	// 	}
-	// 	if (j < p_cam->triangle_color_list.size)
-	// 	{
-	// 		triangle = t_triangle_list_get(&p_cam->triangle_color_list, j);
-	// 		triangle->a = divide_vector4_by_float(triangle->a, triangle->a.w);
-	// 		triangle->b = divide_vector4_by_float(triangle->b, triangle->b.w);
-	// 		triangle->c = divide_vector4_by_float(triangle->c, triangle->c.w);
-	// 	}
-	// 	j++;
-	// }
 	// time_exe("test2");
 	// print_time();
 }

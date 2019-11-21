@@ -2,9 +2,9 @@
 
 void    load_letter(t_gui *gui, char *str, int idx)
 {
-    TTF_Font    *police;
-    SDL_Surface *font = NULL;
-    SDL_Color color = {0, 0, 0};
+    TTF_Font	*police;
+    SDL_Surface	*font = NULL;
+    SDL_Color	color = {0, 0, 0};
 
     str[1] = '\0';
     police = TTF_OpenFont("ressources/assets/ttf/Tinos-Regular.ttf", 60);
@@ -13,7 +13,7 @@ void    load_letter(t_gui *gui, char *str, int idx)
     gui->letter[idx]->surface->h = font->h;
     gui->letter[idx]->surface->internalFormat = 4;
     gui->letter[idx]->surface->pixels = (GLubyte *)malloc (sizeof (GLubyte) * gui->letter[idx]->surface->w * gui->letter[idx]->surface->h * gui->letter[idx]->surface->internalFormat);
-	gui->letter[idx]->surface->pixels = font->pixels;
+    gui->letter[idx]->surface->pixels = font->pixels;
     gui->letter[idx]->letter = str[0];
     TTF_CloseFont(police);
 }

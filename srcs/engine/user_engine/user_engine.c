@@ -6,7 +6,6 @@ t_user_engine	create_t_user_engine()
 
 	result.mouse = initialize_t_mouse();
 	result.keyboard = initialize_t_keyboard();
-
 	return (result);
 }
 
@@ -16,9 +15,7 @@ t_user_engine	*initialize_t_user_engine()
 
 	if (!(result = (t_user_engine *)malloc(sizeof(t_user_engine))))
 		return (NULL);
-
 	*result = create_t_user_engine();
-
 	return (result);
 }
 
@@ -36,14 +33,15 @@ void			free_t_user_engine(t_user_engine *dest)
 
 void			t_user_engine_handle_camera(t_engine *engine, t_camera *cam)
 {
-	t_mouse *mouse = engine->user_engine->mouse;
-	t_keyboard *keyboard = engine->user_engine->keyboard;
+	t_mouse		*mouse;
+	t_keyboard	*keyboard;
+
+	keyboard = engine->user_engine->keyboard;
+	mouse = engine->user_engine->mouse;
 	get_t_mouse_info(mouse); // recuperation des informations mouse (position, et boutton utiliser)
-	if (mouse->button[MOUSE_LEFT] == BOOL_TRUE)
-		handle_t_camera_view_by_mouse(cam, mouse); // calcul du mouvement de l'angle de la camera a la souris
-
+	handle_t_camera_view_by_mouse(cam, mouse); // calcul du mouvement de l'angle de la camera a la souris
+	SDL_WarpMouseInWindow(p_win->window, WIN_X / 2, WIN_Y / 2);
 	handle_t_camera_mouvement_by_key(cam, keyboard, engine); // deplacement cameras
-
 	compute_t_camera(cam);
 }
 

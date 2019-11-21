@@ -18,14 +18,13 @@ t_item_list 	*initialize_t_item_list()
 	if (!(list = (t_item_list *)malloc(sizeof(t_item_list))))
 		error_exit(-19, "Can't create a t_item_list array");
 	*list = create_t_item_list();
-
 	return (list);
 }
 
 void			t_item_list_push_back(t_item_list *dest, t_item to_add)
 {
-	t_item *tmp;
-	int i;
+	t_item	*tmp;
+	int		i;
 
 	if ((dest->size + 1) >= dest->max_size)
 	{

@@ -7,6 +7,7 @@ t_mesh	create_t_mesh(t_vector4 pos)
 	char		*str;
 
 	result.camera = NULL;
+	result.primitive = 10;
 	result.pos = pos;
 	result.is_visible = BOOL_TRUE;
 	result.center = pos;
@@ -17,12 +18,15 @@ t_mesh	create_t_mesh(t_vector4 pos)
 	result.angle = create_t_vector4(0.0, 90.0, 0.0);
 	result.texture = NULL;
 	result.name = NULL;
+	result.no_hitbox = 0;
+	result.hp = 0;
 	result.vertices_in_world = initialize_t_vector4_list();
 	result.next_vertices_in_world = initialize_t_vector4_list();
 	result.vertices = initialize_t_vector4_list();
 	result.uvs = initialize_t_vector4_list();
 	result.faces = initialize_t_face_list();
 	result.normales = initialize_t_vector4_list();
+	result.rotation = create_t_vector4(0.0, 0.0, 0.0);
 	t_mesh_look_at(&result);
 	return (result);
 }

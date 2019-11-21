@@ -12,12 +12,9 @@ char		*ft_strcut(char **src, char delim)
 	while (tmp[i] != '\0' && tmp[i] != delim)
 		i++;
 	ret = ft_strnew(i);
-	j = 0;
-	while (j < i)
-	{
+	j = -1;
+	while (++j < i)
 		ret[j] = tmp[j];
-		j++;
-	}
 	ret[j] = '\0';
 	if (ft_strlen(*src) > j)
 		*src = ft_strdup(&(tmp[j + 1]));
