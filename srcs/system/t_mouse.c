@@ -10,6 +10,8 @@ t_mouse	create_t_mouse(void)
 	result.button[MOUSE_LEFT] = BOOL_FALSE;
 	result.button[MOUSE_RIGHT] = BOOL_FALSE;
 	result.button[MOUSE_MIDDLE] = BOOL_FALSE;
+	result.clicked_left = BOOL_FALSE;
+	result.clicked_right = BOOL_FALSE;
 	return (result);
 }
 
