@@ -18,9 +18,9 @@ t_gui create_t_gui(float x, int y)
 		if (!(result.letter[idx]->surface = (t_surface *)malloc(sizeof(t_surface))))
 			error_exit(-29, "Can't malloc a t_surface");
 	}
-	idx = -1;
 	if (!(result.menu = (t_texture **)malloc(sizeof(t_texture*) * 15)))
 		error_exit(-29, "Can't malloc a t_texture");
+	idx = -1;
 	while (++idx <= 14)
 	{
 		if (!(result.menu[idx] = (t_texture *)malloc(sizeof(t_texture))))
@@ -33,6 +33,7 @@ t_gui create_t_gui(float x, int y)
 	result.key_press = 0;
     result.perso.hp = x;
 	result.perso.mun = y;
+	result.info_print = 0;
 	return (result);
 }
 
@@ -42,9 +43,7 @@ t_gui *initialize_t_gui(float x, int y)
 
 	if (!(result = (t_gui *)malloc(sizeof(t_gui))))
 		error_exit(-13, "Can't create a t_gui");
-
 	*result = create_t_gui(x, y);
-
 	return (result);
 }
 
@@ -94,14 +93,14 @@ void	print_info_bar(t_camera *main_camera, t_player *player, t_gui *gui)
 	str = ft_itoa(player->armor);
 	print_letter(main_camera, gui, ft_strcat(str, "%"), create_t_rectangle(create_t_vector2(-0.025, -0.87), create_t_vector2(0.02, 0.07)));
 	free(str);
-
 	str = ft_itoa(player->hp);
 	print_letter(main_camera, gui, ft_strcat(str, "%"), create_t_rectangle(create_t_vector2(-0.025, -0.97), create_t_vector2(0.02, 0.07)));
 	free(str);
 
 	str = ft_itoa(player->current_weapon->ammo);
-	str = ft_strcat(str, " / ");
-	str = ft_strcat(str, ft_itoa(player->current_weapon->total_ammo));
+	str = ft_strjoinf(str, " / ", 1);
+	str = ft_strjoinf(str, ft_itoa(player->current_weapon->total_ammo), 3);
+
 	print_letter(main_camera, gui, str, create_t_rectangle(create_t_vector2(0.78, -0.90), create_t_vector2(0.01, 0.05)));
 	free(str);
 }

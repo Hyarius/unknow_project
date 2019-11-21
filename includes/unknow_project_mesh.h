@@ -17,13 +17,19 @@ t_door			*initialize_t_door(void);
 typedef struct		s_mesh
 {
 	struct s_camera	*camera;
+
 	t_vector4		pos;
+	t_vector4		size;
 	t_vector4		center;
+
 	int				is_visible;
-	float			bubble_radius;
 	int				collectible; // 0 false 1 true
 
+	float			bubble_radius;
+
 	t_vector4		angle;
+	t_vector4		rotation;
+
 	t_vector4		forward;
 	t_vector4		right;
 	t_vector4		up;
@@ -43,6 +49,11 @@ typedef struct		s_mesh
 
 	char			*name;
 	t_door			door;
+
+	int				no_hitbox;
+	int				primitive;
+	int				hp;
+	int				tick;
 }					t_mesh;
 
 t_mesh			create_t_mesh(t_vector4 pos);

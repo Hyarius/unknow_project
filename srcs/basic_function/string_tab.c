@@ -22,3 +22,15 @@ void	ft_freetab(char **tab)
 	}
 	free(tab);
 }
+
+char	*ft_strjoinf(char *s1, char *s2, int c)
+{
+	char	*str;
+
+	str = ft_strjoin(s1, s2);
+	if (c == 1 || c == 3)
+		free(s1);
+	if (c == 2 || c == 3)
+		free(s2);
+	return (str);
+}

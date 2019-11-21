@@ -8,9 +8,7 @@ int		generate_nbr(int min, int max)
 	if (min < 0)
 		max += -min;
 	value = rand();
-
 	value = value % max;
 	value += min;
-
 	return (value);
 }
