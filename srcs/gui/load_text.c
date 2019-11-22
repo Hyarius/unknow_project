@@ -29,7 +29,7 @@ void    load_menu(t_gui *gui)
     gui->menu[8] = png_load("ressources/assets/imgs/trainee.png");
     gui->menu[9] = png_load("ressources/assets/imgs/recruit.png");
     gui->menu[10] = png_load("ressources/assets/imgs/pirate.png");
-    gui->menu[12] = png_load("ressources/assets/texture/balle.png");
-    gui->menu[13] = png_load("ressources/assets/texture/tdm2.png");
-    gui->menu[14] = png_load("ressources/assets/texture/press_key.png");
+    gui->menu[12] = png_load("ressources/assets/textures/balle.png");
+    gui->menu[13] = png_load("ressources/assets/textures/tdm2.png");
+    gui->menu[14] = png_load("ressources/assets/textures/press_key.png");
 }

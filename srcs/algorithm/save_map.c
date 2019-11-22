@@ -111,8 +111,6 @@ void    save_map(t_engine *engine, int wich)
     system(command);
 
     int fd = open(command + 6, O_WRONLY);
-    // printf("%s\n", command + 6);
-    // printf("%d\n", fd);
     free(command);
     if (fd < 0)
         error_exit(-7001, "impossible fd");

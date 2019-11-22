@@ -17,12 +17,12 @@ int main(int argc, char **argv)
 	win = initialize_t_window(argv[0], WIN_X, WIN_Y);	//creation et initialisation de la window
 
 	t_texture *texture2[4];
-	texture2[0] = png_load("ressources/assets/texture/pistol_ammo.png");
-	texture2[1] = png_load("ressources/assets/texture/ar_ammo.png");
-	texture2[2] = png_load("ressources/assets/texture/rifle_ammo.png");
-	texture2[3] = png_load("ressources/assets/texture/shotgun_ammo.png");
-	t_texture *texture = png_load("ressources/assets/texture/cube_test.png");
-	t_texture *skybox = png_load("ressources/assets/texture/skybox.png");
+	texture2[0] = png_load("ressources/assets/textures/pistol_ammo.png");
+	texture2[1] = png_load("ressources/assets/textures/ar_ammo.png");
+	texture2[2] = png_load("ressources/assets/textures/rifle_ammo.png");
+	texture2[3] = png_load("ressources/assets/textures/shotgun_ammo.png");
+	t_texture *texture = png_load("ressources/assets/textures/cube_test.png");
+	t_texture *skybox = png_load("ressources/assets/textures/skybox.png");
 
 	t_engine	*engine;
 	t_gui		*gui;
@@ -75,6 +75,7 @@ int main(int argc, char **argv)
 	t_player *player;
 	int		fd;
 
+	// fd = open("ressources/map/jules_test.map", O_RDONLY);
 	fd = open("ressources/map/fichier_map.map", O_RDONLY);
 	// fd = open("ressources/map/test_gravity.map", O_RDONLY);
 	// fd = open("ressources/map/save1.map", O_RDONLY);
@@ -85,6 +86,7 @@ int main(int argc, char **argv)
 	// t_mesh_list *meshs = read_map_file("ressources/map/save1.map");
 	player = read_player(fd, main_camera);
 	close(fd);
+	// fd = open("ressources/map/jules_test.map", O_RDONLY);
 	fd = open("ressources/map/fichier_map.map", O_RDONLY);
 	// fd = open("ressources/map/test_gravity.map", O_RDONLY);
 	// fd = open("ressources/map/save1.map", O_RDONLY);

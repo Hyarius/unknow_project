@@ -46,7 +46,6 @@ void	draw_triangle_texture_cpu(t_view_port *p_view_port, t_triangle *p_triangle,
 	t_vector4 pixelSample;
 	float z;
 	float area = edge_t_vector4(triangle.a, triangle.b, triangle.c);
-	// printf("%f\n", area);
 	for (int y = min.y; y <= max.y; y++)
 	{
 		pixel_index = (int)(min.x) + (y * p_view_port->size.x);
@@ -64,9 +63,11 @@ void	draw_triangle_texture_cpu(t_view_port *p_view_port, t_triangle *p_triangle,
 					s = (w.x * st.a.x + w.y * st.b.x + w.z * st.c.x) * z * p_uv->texture->surface->w;
 					t = (w.x * st.a.y + w.y * st.b.y + w.z * st.c.y) * z * p_uv->texture->surface->h;
 					rgb = get_pixel_color(p_uv->texture, s, t);
-					// printf("z = %f\n", z);
-					p_view_port->depth_buffer[pixel_index] = z;
-					draw_pixel(p_view_port->window, (int)(pixelSample.x + p_view_port->pos.x), (int)(pixelSample.y + p_view_port->pos.y), rgb);
+					if (rgb.a == 1.0)
+					{
+						p_view_port->depth_buffer[pixel_index] = z;
+						draw_pixel(p_view_port->window, (int)(pixelSample.x + p_view_port->pos.x), (int)(pixelSample.y + p_view_port->pos.y), rgb);
+					}
 				}
 			}
 			pixel_index++;
