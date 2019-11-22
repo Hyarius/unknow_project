@@ -53,44 +53,124 @@ int main(int argc, char **argv)
 	link_t_camera_to_t_mesh(main_camera, t_engine_get_mesh(engine, 0), 100);
 
 
-	mesh = create_primitive_plane(create_t_vector3(0.0, 0, 0.0), create_t_vector3(10.0, 0.0, 10.0), NULL, 0.0);
-	// t_mesh_rotate(&mesh, create_t_vector3(45.0, 0.0, 0.0));
+	mesh = create_primitive_plane(create_t_vector3(-0.66, 0, 0.0), create_t_vector3(8.66, 0.0, 11.0), NULL, 0.0);
+	t_mesh_set_color(&mesh, create_t_color(0.5, 0.5, 0.5 ,1.0));
+	t_engine_add_mesh(engine, mesh);
+
+	mesh = create_primitive_plane(create_t_vector3(-5.4, 0, 0.0), create_t_vector3(2, 0.0, 1), NULL, 0.0);
+	t_mesh_set_color(&mesh, create_t_color(0.5, 0.5, 0.5 ,1.0));
+	t_engine_add_mesh(engine, mesh);
+
+	mesh = create_primitive_plane(create_t_vector3(-6.9, 0, 4.0), create_t_vector3(1, 0.0, 9), NULL, 0.0);
+	t_mesh_set_color(&mesh, create_t_color(0.5, 0.5, 0.5 ,1.0));
+	t_engine_add_mesh(engine, mesh);
+
+	mesh = create_primitive_plane(create_t_vector3(-8.4, 0, 8.0), create_t_vector3(2, 0.0, 1), NULL, 0.0);
+	t_mesh_set_color(&mesh, create_t_color(0.5, 0.5, 0.5 ,1.0));
+	t_engine_add_mesh(engine, mesh);
+
+	mesh = create_primitive_plane(create_t_vector3(-9.9, 0, 2.5), create_t_vector3(1, 0.0, 12), NULL, 0.0);
+	t_mesh_set_color(&mesh, create_t_color(0.5, 0.5, 0.5 ,1.0));
+	t_engine_add_mesh(engine, mesh);
+
+	mesh = create_primitive_plane(create_t_vector3(-8.4, 0, -3.0), create_t_vector3(2, 0.0, 1), NULL, 0.0);
+	t_mesh_set_color(&mesh, create_t_color(0.5, 0.5, 0.5 ,1.0));
+	t_engine_add_mesh(engine, mesh);
+
+	mesh = create_primitive_plane(create_t_vector3(-10.4, 0, -1.0), create_t_vector3(2, 0.0, 1), NULL, 0.0);
+	t_mesh_set_color(&mesh, create_t_color(0.5, 0.5, 0.5 ,1.0));
+	t_engine_add_mesh(engine, mesh);
+
+	mesh = create_primitive_cube(create_t_vector3(-13.4, -0.1, -2), create_t_vector3(2, 0.1, 12), NULL, 0.0, NULL);
+	t_mesh_set_color(&mesh, create_t_color(0.5, 0.5, 0.5 ,1.0));
+	t_engine_add_mesh(engine, mesh);
+
+	mesh = create_primitive_cube(create_t_vector3(-20.4, -0.1, -2), create_t_vector3(2, 0.1, 12), NULL, 0.0, NULL);
+	t_mesh_set_color(&mesh, create_t_color(0.5, 0.5, 0.5 ,1.0));
+	t_engine_add_mesh(engine, mesh);
+
+	mesh = create_primitive_plane(create_t_vector3(-14.7, -3.0, 2.5), create_t_vector3(7, 0.0, 12), NULL, 0.0);
+	t_mesh_set_color(&mesh, create_t_color(0.5, 0.5, 0.5 ,1.0));
+	t_engine_add_mesh(engine, mesh);
+
+
+	mesh = read_obj_file("Level-1.1.obj", create_t_vector3(3.0, 0.0, -1.0), create_t_vector3(0.7, 0.7, 0.7), 0.0);
+	t_mesh_rotate(&mesh, create_t_vector3(0, -90, 0));
+	t_mesh_set_color(&mesh, create_t_color(0.2, 0.2, 0.2 ,1.0));
+	t_engine_add_mesh(engine, mesh);
+
+	
+
+	// mesh = create_primitive_plane(create_t_vector3(-5.4, 0, 0.0), create_t_vector3(2, 0.0, 1), NULL, 0.0);
+	// t_mesh_set_color(&mesh, create_t_color(0.5, 0.5, 0.5 ,1.0));
+	// t_engine_add_mesh(engine, mesh);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	/////////////////
+	mesh = create_primitive_plane(create_t_vector3(-0.66, 3, 0.0), create_t_vector3(8.66, 0.0, 11.0), NULL, 0.0);
+	t_mesh_rotate(&mesh, create_t_vector3(180.0, 0.0, 0.0));
+	t_mesh_set_color(&mesh, create_t_color(0.5, 0.5, 0.5 ,1.0));
+	t_engine_add_mesh(engine, mesh);
+
+	mesh = create_primitive_plane(create_t_vector3(-0.66, 1.5, 3.0), create_t_vector3(10.0, 0.0, 3.0), NULL, 0.0);
+	t_mesh_rotate(&mesh, create_t_vector3(-90.0, 0.0, -30.0));
+	t_mesh_set_color(&mesh, create_t_color(0.5, 0.5, 0.5 ,1.0));
+	t_engine_add_mesh(engine, mesh);
+
+	mesh = create_primitive_plane(create_t_vector3(-0.66, 1.5, -3.0), create_t_vector3(10.0, 0.0, 3.0), NULL, 0.0);
+	t_mesh_rotate(&mesh, create_t_vector3(90.0, 0.0, -30.0));
+	t_mesh_set_color(&mesh, create_t_color(0.5, 0.5, 0.5 ,1.0));
+	t_engine_add_mesh(engine, mesh);
+	
+	mesh = create_primitive_plane(create_t_vector3(-5.0, 2.5, 0.0), create_t_vector3(1.1, 0.0, 1.0), NULL, 0.0);
+	t_mesh_rotate(&mesh, create_t_vector3(90.0, 0.0, -90.0));
 	t_mesh_set_color(&mesh, create_t_color(0.5, 0.5, 0.5 ,1.0));
 	t_engine_add_mesh(engine, mesh);
 
 	engine->user_engine->player = initialize_t_player(main_camera, mesh);
 	t_engine_add_mesh(engine, engine->user_engine->player->hitbox);
 
-	mesh = create_primitive_cube(create_t_vector3(1.0, 0.0, 2.0), create_t_vector3(1.0, 1.0, 1.0), NULL, 0.0, "cube texture");
-	t_mesh_rotate(&mesh, create_t_vector3(0.0, 0.0, 0.0));
-	t_mesh_set_color(&mesh, create_t_color(0.5, 0.6, 0.8 ,1.0));
-	t_engine_add_mesh(engine, mesh);
+	// mesh = create_primitive_cube(create_t_vector3(1.0, 0.0, 2.0), create_t_vector3(1.0, 1.0, 1.0), NULL, 0.0, "cube texture");
+	// t_mesh_rotate(&mesh, create_t_vector3(0.0, 0.0, 0.0));
+	// t_mesh_set_color(&mesh, create_t_color(0.5, 0.6, 0.8 ,1.0));
+	// t_engine_add_mesh(engine, mesh);
 
-	mesh = create_primitive_cube(create_t_vector3(-5.0, 0.0, 5.0), create_t_vector3(10.0, 2.0, 0.1), NULL, 0.0, "mur bleu");
-	t_mesh_rotate(&mesh, create_t_vector3(0.0, 0.0, 0.0));
-	t_mesh_set_color(&mesh, create_t_color(0.5, 0.6, 0.8 ,1.0));
-	t_engine_add_mesh(engine, mesh);
+	// mesh = create_primitive_cube(create_t_vector3(-5.0, 0.0, 5.0), create_t_vector3(10.0, 2.0, 0.1), NULL, 0.0, "mur bleu");
+	// t_mesh_rotate(&mesh, create_t_vector3(0.0, 0.0, 0.0));
+	// t_mesh_set_color(&mesh, create_t_color(0.5, 0.6, 0.8 ,1.0));
+	// t_engine_add_mesh(engine, mesh);
 
-	mesh = create_primitive_cube(create_t_vector3(-5.0, 0.0, -5.0), create_t_vector3(10.0, 2.0, 0.1), NULL, 0.0, "mur rose");
-	t_mesh_rotate(&mesh, create_t_vector3(0.0, 0.0, 0.0));
-	t_mesh_set_color(&mesh, create_t_color(1.0, 0.6, 0.8 ,1.0));
-	t_engine_add_mesh(engine, mesh);
+	// mesh = create_primitive_cube(create_t_vector3(-5.0, 0.0, -5.0), create_t_vector3(10.0, 2.0, 0.1), NULL, 0.0, "mur rose");
+	// t_mesh_rotate(&mesh, create_t_vector3(0.0, 0.0, 0.0));
+	// t_mesh_set_color(&mesh, create_t_color(1.0, 0.6, 0.8 ,1.0));
+	// t_engine_add_mesh(engine, mesh);
 
-	mesh = create_primitive_cube(create_t_vector3(-5.0, 0.0, 5.0), create_t_vector3(10.0, 2.0, 0.1), NULL, 0.0, "mur violet");
-	t_mesh_rotate(&mesh, create_t_vector3(0.0, 90.0, 0.0));
-	t_mesh_set_color(&mesh, create_t_color(0.5, 0.0, 0.8 ,1.0));
-	t_engine_add_mesh(engine, mesh);
+	// mesh = create_primitive_cube(create_t_vector3(-5.0, 0.0, 5.0), create_t_vector3(10.0, 2.0, 0.1), NULL, 0.0, "mur violet");
+	// t_mesh_rotate(&mesh, create_t_vector3(0.0, 90.0, 0.0));
+	// t_mesh_set_color(&mesh, create_t_color(0.5, 0.0, 0.8 ,1.0));
+	// t_engine_add_mesh(engine, mesh);
 
-	mesh = create_primitive_cube(create_t_vector3(5.0, 0.0, 5.0), create_t_vector3(10.0, 2.0, 0.1), NULL, 0.0, "mur vert");
-	t_mesh_rotate(&mesh, create_t_vector3(0.0, 90.0, 0.0));
-	t_mesh_set_color(&mesh, create_t_color(0.5, 0.6, 0.0 ,1.0));
-	t_engine_add_mesh(engine, mesh);
+	// mesh = create_primitive_cube(create_t_vector3(5.0, 0.0, 5.0), create_t_vector3(10.0, 2.0, 0.1), NULL, 0.0, "mur vert");
+	// t_mesh_rotate(&mesh, create_t_vector3(0.0, 90.0, 0.0));
+	// t_mesh_set_color(&mesh, create_t_color(0.5, 0.6, 0.0 ,1.0));
+	// t_engine_add_mesh(engine, mesh);
 
-	mesh = create_primitive_cube(create_t_vector3(1.0, 0.0, 5.0), create_t_vector3(0.5, 0.5, 0.5), NULL, 0.0, "Enemy");
-	t_mesh_set_color(&mesh, create_t_color(0.0, 0.0, 0.0 ,1.0));
-	t_engine_add_mesh(engine, mesh);
-	t_enemy enemy = create_t_enemy(mesh);
-	t_engine_add_mesh(engine, *enemy.hitbox);
+	// mesh = create_primitive_cube(create_t_vector3(1.0, 0.0, 5.0), create_t_vector3(0.5, 0.5, 0.5), NULL, 0.0, "Enemy");
+	// t_mesh_set_color(&mesh, create_t_color(0.0, 0.0, 0.0 ,1.0));
+	// t_engine_add_mesh(engine, mesh);
 
 	// mesh = create_primitive_cube(create_t_vector3(0.0, 0.0, 0.0), create_t_vector3(5.0, 5.0, 5.0), NULL, 100.0);
 	// t_mesh_rotate(&mesh, create_t_vector3(0.0, 0.0, 0.0));
@@ -104,9 +184,9 @@ int main(int argc, char **argv)
 	// t_mesh_set_color(&mesh, create_t_color(0.0, 0.0, 1.0, 1.0));
 	// t_engine_add_mesh(engine, mesh);
 
-	mesh = create_primitive_cube(create_t_vector3(-0.5, 0.0, 5.0), create_t_vector3(1.0, 2.0, 0.1), NULL, 0.0, "door_close");
-	t_mesh_set_color(&mesh, create_t_color(0.0, 0.0, 1.0, 1.0));
-	t_engine_add_mesh(engine, mesh);
+	// mesh = create_primitive_cube(create_t_vector3(-0.5, 0.0, 5.0), create_t_vector3(1.0, 2.0, 0.1), NULL, 0.0, "door_close");
+	// t_mesh_set_color(&mesh, create_t_color(0.0, 0.0, 1.0, 1.0));
+	// t_engine_add_mesh(engine, mesh);
 
 	mesh = create_primitive_cube(create_t_vector3(-5.0, 0.0, 0.5), create_t_vector3(1.0, 2.0, 0.1), NULL, 0.0, "door_close");
 	t_mesh_set_color(&mesh, create_t_color(0.0, 0.0, 1.0, 1.0));
@@ -166,7 +246,15 @@ int main(int argc, char **argv)
 		{
 			t_engine_draw_mesh(engine);
 			t_engine_render_camera(engine);
-			drawing_front_pause(main_camera, gui);
+   			t_view_port_clear_buffers(main_camera->view_port);
+    		draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->menu[4]);
+		}
+		if (engine->playing <= -2)
+		{
+			t_engine_draw_mesh(engine);
+			t_engine_render_camera(engine);
+   			t_view_port_clear_buffers(main_camera->view_port);
+    		draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->menu[5]);
 		}
 		if (engine->playing == 2)
 		{
@@ -181,10 +269,6 @@ int main(int argc, char **argv)
 			draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->menu[2]);
 		}
 		if (engine->playing == 5)
-		{
-			draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->menu[4]);
-		}
-		if (engine->playing == 6)
 		{
 			draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->menu[3]);
 		}
@@ -204,7 +288,7 @@ int main(int argc, char **argv)
 			t_engine_render_camera(engine);
 			change_weapon(engine->user_engine->keyboard, engine->user_engine->player);
 			reload_weapon(engine->user_engine->keyboard, engine->user_engine->player);
-			shoot_weapon(engine);
+			// shoot_weapon(engine);
 			drawing_front_hp(main_camera, engine);
 			drawing_front_mun(main_camera, gui, texture2, engine->user_engine->player);
 			draw_minimap(main_camera, engine, win);

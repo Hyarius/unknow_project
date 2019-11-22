@@ -2,8 +2,8 @@
 # define UNKNOW_PROJECT_DEFINE_H
 # define GL_SILENCE_DEPRECATION
 
-# define WIN_X 1840
-# define WIN_Y 1220
+# define WIN_X 1280
+# define WIN_Y 720
 
 # define NB_THREAD_MAX 100
 # define NB_TRIANGLE_MAX 15
