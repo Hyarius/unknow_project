@@ -203,34 +203,37 @@ int main(int argc, char **argv)
 		{
 			SDL_ShowCursor(SDL_ENABLE);
 		}
-		if (engine->playing == -2)
-			game_over(main_camera, gui, engine);
-		else if (engine->playing <= -3)
+		if (engine->playing <= -1)
 		{
 			t_engine_draw_mesh(engine);
 			t_engine_render_camera(engine);
-			drawing_front_pause(main_camera, gui);
+   			t_view_port_clear_buffers(main_camera->view_port);
+    		draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->menu[4]);
 		}
-		else if (engine->playing == 2)
+		if (engine->playing <= -2)
+		{
+			t_engine_draw_mesh(engine);
+			t_engine_render_camera(engine);
+   			t_view_port_clear_buffers(main_camera->view_port);
+    		draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->menu[5]);
+		}
+		if (engine->playing == 2)
 		{
 			draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->menu[0]);
 		}
-		else if (engine->playing == 3)
+		if (engine->playing == 3)
 		{
 			draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->menu[1]);
 		}
-		else if (engine->playing == 4)
+		if (engine->playing == 4)
 		{
 			draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->menu[2]);
 		}
-		else if (engine->playing == 5)
-		{
-			draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->menu[4]);
-		}
-		else if (engine->playing == 6)
+		if (engine->playing == 5)
 		{
 			draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->menu[3]);
 		}
+
 		else if (engine->playing == 1)
 		{
 			mesh.pos = main_camera->pos;

@@ -19,7 +19,6 @@ t_engine	*initialize_t_engine(t_window *p_window)
 
 	if (!(result = (t_engine *)malloc(sizeof(t_engine))))
 		return (NULL);
-	// printf("malloc t_engine\n");
 
 	*result = create_t_engine(p_window);
 
@@ -31,14 +30,12 @@ void		delete_t_engine(t_engine dest)
 	free_t_physic_engine(dest.physic_engine);
 	free_t_user_engine(dest.user_engine);
 	free_t_visual_engine(dest.visual_engine);
-	// printf("delete t_engine\n");
 }
 
 void		free_t_engine(t_engine *dest)
 {
 	delete_t_engine(*dest);
 	free(dest);
-	// printf("free t_engine\n");
 }
 
 void		t_engine_handle_camera(t_engine *p_engine, t_window *p_win)
@@ -96,7 +93,6 @@ t_mesh		*t_engine_get_mesh(t_engine *p_engine, int index)
 void		t_engine_apply_physic(t_engine *engine)
 {
 	t_physic_engine_compute_vertices_in_world(engine->physic_engine);
-	// printf("here4\n");
 	t_physic_engine_apply_force(engine);
 }
 

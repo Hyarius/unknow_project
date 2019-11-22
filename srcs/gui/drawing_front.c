@@ -37,13 +37,3 @@ void    drawing_front_mun(t_camera *main_camera, t_gui *p_gui, t_texture **textu
     t_view_port_clear_buffers(main_camera->view_port);
     draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.8, -1), create_t_vector2(0.2, 0.2)), texture[weapon]);
 }
-
-void    drawing_front_pause(t_camera *main_camera, t_gui *p_gui)
-{
-    t_color  color;
-
-    color = create_t_color(0.2, 0.2, 0.2, 1.0);
-    t_view_port_clear_buffers(main_camera->view_port);
-    draw_rectangle_color_cpu_front(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.3, -0.6), create_t_vector2(0.6, 1.2)), &color);
-    print_letter(main_camera, p_gui, "PAUSE", create_t_rectangle(create_t_vector2(-0.15, 0.40), create_t_vector2(0.06, 0.16)));
-}
