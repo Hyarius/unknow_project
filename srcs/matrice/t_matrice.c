@@ -49,6 +49,7 @@ t_matrix	*initialize_t_matrix(void)
 
 	if (!(result = (t_matrix *)malloc(sizeof(t_matrix))))
 		error_exit(-13, "Can't create a t_matrix array");
+	// printf("malloc t_matrix\n");
 	*result = create_t_matrix();
 	return (result);
 }

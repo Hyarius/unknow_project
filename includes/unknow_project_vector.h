@@ -9,7 +9,7 @@ typedef struct	s_vector4
     float		w;
 }				t_vector4;
 
-t_vector4	create_t_vector4(float p_x, float p_y, float p_z);
+t_vector4 create_t_vector4(float p_x, float p_y, float p_z);
 t_vector4	*initialize_t_vector4(float p_x, float p_y, float p_z);
 t_vector4	add_vector4_to_vector4(t_vector4 a, t_vector4 b);
 t_vector4	substract_vector4_to_vector4(t_vector4 a, t_vector4 b);
@@ -23,7 +23,7 @@ t_vector4	inv_t_vector4(t_vector4 src);
 void		swap_t_vector4(t_vector4 *a, t_vector4 *b);
 int			t_vector4_equal(t_vector4 a, t_vector4 b);
 float		t_vector4_length(t_vector4 a);
-void		print_t_vector4(t_vector4 vector, char *str);
+void		print_t_vector4(t_vector4 vector, char *str);;
 
 typedef struct	s_vector3
 {

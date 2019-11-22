@@ -111,21 +111,17 @@ void		how_many_points_clipped(t_mesh *mesh, t_face face, t_camera *p_cam)
 
 void		draw_t_mesh(t_camera *p_cam, t_mesh *mesh)
 {
-	int			i;
-	int			j;
-	t_face		face;
-	t_triangle	*triangle;
-	t_uv		*uv;
+	int		i;
+	t_face	face;
 
-	i = 0;
+	i = -1;
 	// time_exe("test1");
 	if (mesh->is_visible == BOOL_FALSE)
 		return ;
-	while (i < mesh->faces->size)
+	while (++i < mesh->faces->size)
 	{
 		face = t_face_list_at(mesh->faces, i);
 		how_many_points_clipped(mesh, face, p_cam);
-		i++;
 	}
 	// time_exe("test2");
 	// print_time();

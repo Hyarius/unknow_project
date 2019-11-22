@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_parser.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/31 15:31:13 by adjouber          #+#    #+#             */
+/*   Updated: 2019/11/22 10:18:55 by gboutin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "unknow_project.h"
 
-static t_mesh			init_primitive(char **line_split, char *texture_path)
+t_mesh			init_primitive(char **line_split, char *texture_path)
 {
 	t_mesh		mesh;
 	t_vector4	vec[2];
@@ -29,7 +41,7 @@ static t_mesh			init_primitive(char **line_split, char *texture_path)
 	return (mesh);
 }
 
-static t_mesh			init_texture(char **line_split)
+t_mesh			init_texture(char **line_split)
 {
 	t_mesh		mesh;
 	char		*texture_path;
@@ -49,7 +61,7 @@ static t_mesh			init_texture(char **line_split)
 	return (mesh);
 }
 
-static void			set_mesh(t_mesh *mesh, char **line_split)
+void			set_mesh(t_mesh *mesh, char **line_split)
 {
 	t_mesh_rotate(mesh, create_t_vector4(ft_atof(line_split[10]),
 		ft_atof(line_split[11]), ft_atof(line_split[12])));

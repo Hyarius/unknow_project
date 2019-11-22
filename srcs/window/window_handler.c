@@ -5,8 +5,7 @@ void		start_sdl(void)
 	unsigned int seed;
 
 	seed = 1493368;
-	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
-		error_exit(ft_atoi(SDL_GetError()), "Erreur SDL_Init");
+	SDL_Init(SDL_INIT_EVERYTHING);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
 	SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
@@ -27,9 +26,9 @@ t_window	*initialize_t_window(char *p_name, int p_size_x, int p_size_y)
 
 	if (!(win = (t_window *)malloc(sizeof(t_window))))
 		error_exit(-6, "Can't malloc a t_window");
-	if ((win->window = SDL_CreateWindow(p_name, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, p_size_x, p_size_y,
-								SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL)) == NULL)
-		error_exit(ft_atoi(SDL_GetError()), "Erreur SDL_CreateWindow");
+	// printf("malloc t_window\n");
+	win->window = SDL_CreateWindow(p_name, 0, 0, p_size_x, p_size_y,
+								SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
 	SDL_GetWindowSize(win->window, &win->size_x, &win->size_y);
 	win->context = SDL_GL_CreateContext(win->window);
 	glGenVertexArrays(1, &win->vertex_array);

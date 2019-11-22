@@ -77,6 +77,7 @@ void		draw_triangle_from_camera_on_screen(t_camera *p_cam);
 void 		t_camera_calc_depth(t_camera *p_cam);
 void		draw_depth_from_camera_on_screen(t_camera *p_cam);
 void		clean_t_camera(t_camera *camera);
+// void		link_t_camera_to_t_mesh(t_camera *camera, t_mesh *mesh, float new_kinetic);
 void		t_mesh_move_elevator(t_mesh *mesh, t_camera *camera);
 
 #endif

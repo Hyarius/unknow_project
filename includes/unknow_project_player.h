@@ -1,6 +1,5 @@
 #ifndef UNKNOW_PROJECT_PLAYER_H
 # define UNKNOW_PROJECT_PLAYER_H
-
 # define MAX_MAGS 5
 
 #include "unknow_project_camera.h"
@@ -39,5 +38,6 @@ t_player		create_t_player(t_camera *cam);
 t_player		*initialize_t_player(t_camera *cam);
 t_player		*read_player(int fd, t_camera *main_camera);
 t_weapon		create_t_weapons(int index, int ammo, int total_ammo);
+
 
 #endif

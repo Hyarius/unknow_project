@@ -12,16 +12,16 @@ t_keyboard	create_t_keyboard(void)
 	result.key[SDL_SCANCODE_I] = SDL_SCANCODE_I;
 	result.key[SDL_SCANCODE_R] = SDL_SCANCODE_R;
 	result.key[SDL_SCANCODE_L] = SDL_SCANCODE_L;
-	result.key[SDL_SCANCODE_B] = SDL_SCANCODE_B;
-	result.key[SDL_SCANCODE_Z] = SDL_SCANCODE_Z;
+	result.key[SDL_SCANCODE_LCTRL] = SDL_SCANCODE_LCTRL;
+	result.key[SDL_SCANCODE_LSHIFT] = SDL_SCANCODE_LSHIFT;
+	result.key[SDL_SCANCODE_SPACE] = SDL_SCANCODE_SPACE;
 	result.key[SDL_SCANCODE_1] = SDL_SCANCODE_1;
 	result.key[SDL_SCANCODE_2] = SDL_SCANCODE_2;
 	result.key[SDL_SCANCODE_3] = SDL_SCANCODE_3;
 	result.key[SDL_SCANCODE_4] = SDL_SCANCODE_4;
 	result.key[SDL_SCANCODE_5] = SDL_SCANCODE_5;
-	result.key[SDL_SCANCODE_LCTRL] = SDL_SCANCODE_LCTRL;
-	result.key[SDL_SCANCODE_LSHIFT] = SDL_SCANCODE_LSHIFT;
-	result.key[SDL_SCANCODE_SPACE] = SDL_SCANCODE_SPACE;
+	result.key[SDL_SCANCODE_B] = SDL_SCANCODE_B;
+	result.key[SDL_SCANCODE_Z] = SDL_SCANCODE_Z;
 	result.key[SDL_SCANCODE_PERIOD] = SDL_SCANCODE_PERIOD;
 	result.key[SDL_SCANCODE_COMMA] = SDL_SCANCODE_COMMA;
 	result.key[SDL_SCANCODE_LEFT] = SDL_SCANCODE_LEFT;
@@ -30,8 +30,8 @@ t_keyboard	create_t_keyboard(void)
 	result.key[SDL_SCANCODE_DOWN] = SDL_SCANCODE_DOWN;
 	result.key[SDL_SCANCODE_EQUALS] = SDL_SCANCODE_EQUALS;
 	result.key[SDL_SCANCODE_MINUS] = SDL_SCANCODE_MINUS;
-	result.i = 0;
 	result.state = SDL_GetKeyboardState(NULL);
+	result.i = 0;
 	return (result);
 }
 
@@ -41,6 +41,7 @@ t_keyboard	*initialize_t_keyboard(void)
 
 	if (!(result = (t_keyboard *)malloc(sizeof(t_keyboard))))
 		return (NULL);
+	// printf("malloc t_keyboard\n");
 	*result = create_t_keyboard();
 	return (result);
 }

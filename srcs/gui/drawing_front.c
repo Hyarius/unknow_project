@@ -7,7 +7,7 @@ void    drawing_front_hp(t_camera *main_camera, t_engine *engine)
     static t_color    *color_armor = NULL;
     static t_color    *color_jetpack = NULL;
 
-    if (color_back == NULL && color_hp == NULL && color_armor == NULL && color_jetpack == NULL)
+    if (color_back == NULL && color_hp == NULL && color_armor == NULL)
     {
         color_back = initialize_t_color(0.7, 0.7, 0.7, 1.0);
         color_hp = initialize_t_color(1.0, 0.3, 0.3, 1.0);

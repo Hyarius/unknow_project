@@ -17,7 +17,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos)
 		mesh.texture->path = NULL;
 		mesh.kinetic = 0.0;
 	}
-	else if (index == 1)
+	if (index == 1)
 	{
 		mesh.name = "wall";
 		mesh.size = create_t_vector4(3.0, 2.0, 0.2);
@@ -29,7 +29,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos)
 		mesh.texture->path = NULL;
 		mesh.kinetic = 0.0;
 	}
-	else if (index == 2)
+	if (index == 2)
 	{
 		mesh.name = "door";
 		mesh.size = create_t_vector4(1.0, 2.0, 0.2);
@@ -41,7 +41,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos)
 		mesh.texture->path = NULL;
 		mesh.kinetic = 0.0;
 	}
-	else if (index == 3)
+	if (index == 3)
 	{
 		mesh.name = "door_red";
 		mesh.size = create_t_vector4(1.0, 2.0, 0.2);
@@ -53,7 +53,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos)
 		mesh.texture->path = NULL;
 		mesh.kinetic = 0.0;
 	}
-	else if (index == 4)
+	if (index == 4)
 	{
 		mesh.name = "door_blue";
 		mesh.size = create_t_vector4(1.0, 2.0, 0.2);
@@ -65,7 +65,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos)
 		mesh.texture->path = NULL;
 		mesh.kinetic = 0.0;
 	}
-	else if (index == 5)
+	if (index == 5)
 	{
 		mesh.name = "door_green";
 		mesh.size = create_t_vector4(1.0, 2.0, 0.2);
@@ -77,7 +77,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos)
 		mesh.texture->path = NULL;
 		mesh.kinetic = 0.0;
 	}
-	else if (index == 6)
+	if (index == 6)
 	{
 		mesh.name = "Card_red";
 		mesh.size = create_t_vector4(0.2, 0.05, 0.2);
@@ -89,7 +89,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos)
 		mesh.texture->path = NULL;
 		mesh.kinetic = 0.0;
 	}
-	else if (index == 7)
+	if (index == 7)
 	{
 		mesh.name = "Card_blue";
 		mesh.size = create_t_vector4(0.2, 0.05, 0.2);
@@ -101,7 +101,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos)
 		mesh.texture->path = NULL;
 		mesh.kinetic = 0.0;
 	}
-	else if (index == 8)
+	if (index == 8)
 	{
 		mesh.name = "Card_green";
 		mesh.size = create_t_vector4(0.2, 0.05, 0.2);
@@ -113,7 +113,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos)
 		mesh.texture->path = NULL;
 		mesh.kinetic = 0.0;
 	}
-	else if (index == 9)
+	if (index == 9)
 	{
 		mesh.name = "elevator";
 		mesh.size = create_t_vector4(2.0, 5.0, 2.0);
@@ -125,7 +125,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos)
 		mesh.texture->path = NULL;
 		mesh.kinetic = 0.0;
 	}
-	else if (index == 10)
+	if (index == 10)
 	{
 		mesh.name = "stair";
 		mesh.size = create_t_vector4(1.0, 0.2, 5.0);
@@ -137,7 +137,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos)
 		mesh.texture->path = NULL;
 		mesh.kinetic = 0.0;
 	}
-	else if (index == 11)
+	if (index == 11)
 	{
 		mesh.name = "stair";
 		mesh.size = create_t_vector4(1.0, 0.2, 5.0);
@@ -149,7 +149,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos)
 		mesh.texture->path = NULL;
 		mesh.kinetic = 0.0;
 	}
-	else if (index == 12)
+	if (index == 12)
 	{
 		mesh.name = "Healt_Pack";
 		mesh.size = create_t_vector4(0.2, 0.05, 0.2);
@@ -161,7 +161,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos)
 		mesh.texture->path = NULL;
 		mesh.kinetic = 0.0;
 	}
-	else if (index == 13)
+	if (index == 13)
 	{
 		mesh.name = "Armor_Pack";
 		mesh.size = create_t_vector4(0.2, 0.05, 0.2);
@@ -173,7 +173,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos)
 		mesh.texture->path = NULL;
 		mesh.kinetic = 0.0;
 	}
-	else if (index == 14)
+	if (index == 14)
 	{
 		mesh.name = "Jet_Pack";
 		mesh.size = create_t_vector4(0.2, 0.05, 0.2);
@@ -185,7 +185,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos)
 		mesh.texture->path = NULL;
 		mesh.kinetic = 0.0;
 	}
-	else if (index == 15)
+	if (index == 15)
 	{
 		mesh.name = "Ammo_Pack";
 		mesh.size = create_t_vector4(0.2, 0.05, 0.2);
@@ -197,7 +197,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos)
 		mesh.texture->path = NULL;
 		mesh.kinetic = 0.0;
 	}
-	else if (index == 16)
+	if (index == 16)
 	{
 		mesh.name = "Ammo_Pack";
 		mesh.size = create_t_vector4(0.2, 0.05, 0.2);
@@ -209,7 +209,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos)
 		mesh.texture->path = NULL;
 		mesh.kinetic = 0.0;
 	}
-	else if (index == 17)
+	if (index == 17)
 	{
 		mesh.name = "Ammo_Pack";
 		mesh.size = create_t_vector4(0.2, 0.05, 0.2);
@@ -221,7 +221,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos)
 		mesh.texture->path = NULL;
 		mesh.kinetic = 0.0;
 	}
-	else if (index == 18)
+	if (index == 18)
 	{
 		mesh.name = "Ammo_Pack";
 		mesh.size = create_t_vector4(0.2, 0.05, 0.2);
@@ -233,7 +233,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos)
 		mesh.texture->path = NULL;
 		mesh.kinetic = 0.0;
 	}
-	else if (index == 19)
+	if (index == 19)
 	{
 		mesh.name = "ladder";
 		mesh.size = create_t_vector4(1.0, 2.0, -0.01);
@@ -245,7 +245,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos)
 		mesh.texture->path = NULL;
 		mesh.kinetic = 0.0;
 	}
-	else if (index == 20)
+	if (index == 20)
 	{
 		mesh.name = "platform";
 		mesh.size = create_t_vector4(1.0, 0.2, 1.0);
@@ -257,7 +257,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos)
 		mesh.texture->path = NULL;
 		mesh.kinetic = 0.0;
 	}
-	else if (index == 21)
+	if (index == 21)
 	{
 		mesh.name = "plane";
 		mesh.size = create_t_vector4(1.0, 0.0, 1.0);
@@ -269,7 +269,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos)
 		mesh.texture->path = NULL;
 		mesh.kinetic = 0.0;
 	}
-	else if (index == 22)
+	if (index == 22)
 	{
 		mesh.name = "Enemy";
 		mesh.size = create_t_vector4(0.3, 0.5, 0.3);
@@ -281,7 +281,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos)
 		mesh.texture->path = NULL;
 		mesh.kinetic = 0.0;
 	}
-	else if (index == 23)
+	if (index == 23)
 	{
 		mesh.name = "window";
 		mesh.size = create_t_vector4(1.0, 2.0, 0.3);
@@ -293,7 +293,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos)
 		mesh.texture->path = NULL;
 		mesh.kinetic = 0.0;
 	}
-	else if (index == 24)
+	if (index == 24)
 	{
 		mesh.name = "end";
 		mesh.size = create_t_vector4(0.3, 0.0, 0.3);
@@ -305,9 +305,9 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos)
 		mesh.texture->path = NULL;
 		mesh.kinetic = 0.0;
 	}
-	else if (index == 25)
+	if (index == 25)
 	{
-		mesh.name = "start";
+		mesh.name = "star";
 		mesh.size = create_t_vector4(0.3, 0.0, 0.3);
 		mesh.primitive = 0;
 		mesh.collectible = 0;

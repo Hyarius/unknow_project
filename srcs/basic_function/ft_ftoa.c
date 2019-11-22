@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ftoa.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/31 15:50:26 by adjouber          #+#    #+#             */
+/*   Updated: 2019/10/31 15:50:27 by adjouber         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "unknow_project.h"
 
-static void		create_string(float nb, char *rest, int i)
+void	create_string(float nb, char *rest, int i)
 {
-	int			afterdots;
-	int			dot;
+	int		afterdots;
+	int		dot;
 
 	dot = 0;
 	afterdots = 0;
@@ -25,7 +37,7 @@ static void		create_string(float nb, char *rest, int i)
 	rest[i] = '\0';
 }
 
-char			*ft_ftoa(float n)
+char	*ft_ftoa(float n)
 {
 	char		*flt;
 	char		*first;

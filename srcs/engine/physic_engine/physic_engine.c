@@ -7,6 +7,7 @@ t_physic_engine	create_t_physic_engine()
 	result.gravity_force = create_t_vector4(0, -GRAVITY * 3, 0);
 	result.mesh_list = initialize_t_mesh_list();
 	result.item_list = initialize_t_item_list();
+
 	return (result);
 }
 
@@ -16,19 +17,23 @@ t_physic_engine	*initialize_t_physic_engine()
 
 	if (!(result = (t_physic_engine	*)malloc(sizeof(t_physic_engine))))
 		return (NULL);
+	// printf("malloc t_physic_engine\n");
 	*result = create_t_physic_engine();
+
 	return (result);
 }
 
 void			delete_t_physic_engine(t_physic_engine dest)
 {
 	free_t_mesh_list(dest.mesh_list);
+	// printf("delete t_physic_engine\n");
 }
 
 void			free_t_physic_engine(t_physic_engine *dest)
 {
 	delete_t_physic_engine(*dest);
 	free(dest);
+	// printf("free t_physic_engine\n");
 }
 
 void			t_physic_engine_draw_mesh(t_physic_engine *p_physic_engine, t_camera *p_cam)
@@ -85,6 +90,7 @@ int				can_move_axis(t_mesh *mesh, t_mesh *target, t_vector4 axis)
 	while (j < mesh->faces->size)
 	{
 		mesh_face = t_face_list_get(mesh->faces, j);
+		//set_t_face_color(mesh_face, create_t_color(0.0, 1.0, 0.0, 1.0));
 		triangle_mesh = compose_t_triangle_from_t_vertices(mesh->vertices_in_world, mesh_face->index_vertices);
 		i = 0;
 		while (i < target->faces->size)
@@ -92,7 +98,10 @@ int				can_move_axis(t_mesh *mesh, t_mesh *target, t_vector4 axis)
 			target_face = t_face_list_get(target->faces, i);
 			triangle_target = compose_t_triangle_from_t_vertices(target->vertices_in_world, target_face->index_vertices);
 			if (is_triangle_in_triangle(triangle_mesh, triangle_target) == BOOL_TRUE)
+			{
+				set_t_face_color(mesh_face, create_t_color(1.0, 0.0, 0.0, 1.0));
 				result++;
+			}
 			i++;
 		}
 		j++;
@@ -104,16 +113,17 @@ int				can_move_axis(t_mesh *mesh, t_mesh *target, t_vector4 axis)
 
 void			test_move_axis(t_mesh *mesh, float *force, t_vector4 axis, t_mesh *target)
 {
-	float		max;
-	int			subdivision;
-	int			i;
-	float		delta;
+	float	max;
+	int		subdivision;
+	int		i;
+	float	delta;
 
 	i = 0;
-	subdivision = 10;
+	subdivision = 20;
 	delta = *force / subdivision;
 	max = *force;
 	*force = 0;
+
 	while (i < subdivision && is_t_mesh_intersecting(mesh, target) == BOOL_FALSE)
 	{
 		i++;
@@ -178,9 +188,8 @@ int				can_move(t_mesh *mesh, t_engine *engine)
 
 void			t_physic_engine_compute_vertices_in_world(t_physic_engine *physic_engine)
 {
-	int i;
+	int i = 0;
 
-	i = 0;
 	while (i < physic_engine->mesh_list->size)
 	{
 		t_mesh_compute_vertices_in_world(t_mesh_list_get(physic_engine->mesh_list, i));
@@ -188,15 +197,33 @@ void			t_physic_engine_compute_vertices_in_world(t_physic_engine *physic_engine)
 	}
 }
 
+// void			t_physic_engine_apply_force(t_engine *engine)
+// {
+// 	int i;
+// 	t_mesh *mesh;
+//
+// 	i = 0;
+// 	while (i < engine->physic_engine->mesh_list->size)
+// 	{
+// 		mesh = t_mesh_list_get(engine->physic_engine->mesh_list, i);
+// 		if (mesh->kinetic > 0 && mesh->force.y > -0.1)
+// 			mesh->force = add_vector4_to_vector4(mesh->force, create_t_vector4(0.0, -0.01, 0.0));
+// 		if (mesh->force.x != 0 || mesh->force.y != 0 || mesh->force.z != 0)
+// 			if (can_move(mesh, engine) == BOOL_TRUE)
+// 				t_mesh_apply_force(mesh);
+// 		i++;
+//
+// 	}
+// }
+
 void			t_physic_engine_apply_force(t_engine *engine)
 {
-	Uint32			actual_frame;
-	static Uint32	last_frame = 0;
-	int				i;
-	float			time_passed;
-	t_mesh			*mesh;
+	Uint32 	actual_frame;
+	static Uint32 	last_frame = 0;
+	int i = 0;
+	float time_passed;
+	t_mesh *mesh;
 
-	i = 0;
 	actual_frame = SDL_GetTicks();
 	time_passed = (actual_frame - last_frame) / 1000.0;
 	while (i < engine->physic_engine->mesh_list->size)
@@ -208,6 +235,7 @@ void			t_physic_engine_apply_force(t_engine *engine)
 			if (can_move(mesh, engine) == BOOL_TRUE)
 				t_mesh_apply_force(mesh);
 		i++;
+
 	}
 	last_frame = actual_frame;
 }

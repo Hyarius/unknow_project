@@ -15,6 +15,7 @@ t_uv	*initialize_t_uv(t_triangle p_triangle, t_texture *p_texture)
 
 	if (!(result = (t_uv *)malloc(sizeof(t_uv))))
 		return (NULL);
+	// printf("malloc t_uv\n");
 	*result = create_t_uv(p_triangle, p_texture);
 	return (result);
 }

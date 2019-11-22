@@ -19,6 +19,8 @@ void	draw_triangle_texture_cpu(t_view_port *p_view_port, t_triangle *p_triangle,
 						create_t_vector4(p_uv->uv.b.x, p_uv->uv.b.y, p_uv->uv.b.z),
 						create_t_vector4(p_uv->uv.c.x, p_uv->uv.c.y, p_uv->uv.c.z));
 
+	// printf("z = %f --- w = %f\n", p_triangle->a.z, p_uv->uv.a.w);
+
 	st.a.x /= p_triangle->a.w;
 	st.a.y /= p_triangle->a.w;
 	st.b.x /= p_triangle->b.w;
@@ -44,6 +46,7 @@ void	draw_triangle_texture_cpu(t_view_port *p_view_port, t_triangle *p_triangle,
 	t_vector4 pixelSample;
 	float z;
 	float area = edge_t_vector4(triangle.a, triangle.b, triangle.c);
+	// printf("%f\n", area);
 	for (int y = min.y; y <= max.y; y++)
 	{
 		pixel_index = (int)(min.x) + (y * p_view_port->size.x);
@@ -61,6 +64,7 @@ void	draw_triangle_texture_cpu(t_view_port *p_view_port, t_triangle *p_triangle,
 					s = (w.x * st.a.x + w.y * st.b.x + w.z * st.c.x) * z * p_uv->texture->surface->w;
 					t = (w.x * st.a.y + w.y * st.b.y + w.z * st.c.y) * z * p_uv->texture->surface->h;
 					rgb = get_pixel_color(p_uv->texture, s, t);
+					// printf("z = %f\n", z);
 					p_view_port->depth_buffer[pixel_index] = z;
 					draw_pixel(p_view_port->window, (int)(pixelSample.x + p_view_port->pos.x), (int)(pixelSample.y + p_view_port->pos.y), rgb);
 				}
@@ -127,9 +131,12 @@ void	multithreading_draw_triangle_texture_cpu(t_view_port *p_view_port, t_triang
 		i++;
 		start += len;
 	}
-	i = -1;
-	while (++i < nb_thread)
+	i = 0;
+	while (i < nb_thread)
+	{
 		pthread_join(p_view_port->window->threads[i], NULL); // join et free des threads
+		i++;
+	}
 }
 
 void    draw_rectangle_texture_cpu(t_view_port *p_view_port, t_rectangle p_rec, t_texture *p_texture)

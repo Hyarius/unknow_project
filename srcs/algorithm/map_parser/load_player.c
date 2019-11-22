@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   load_player.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/31 13:30:45 by adjouber          #+#    #+#             */
+/*   Updated: 2019/11/22 10:18:51 by gboutin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "unknow_project.h"
 
-static t_mesh			init_mesh(char **line_split)
+t_mesh			init_mesh(char **line_split)
 {
 	t_mesh		mesh;
 	t_vector4	vector[3];
@@ -24,7 +36,7 @@ static t_mesh			init_mesh(char **line_split)
 	return (mesh);
 }
 
-static void			init_player(t_player *player, char **line_split)
+void			init_player(t_player *player, char **line_split)
 {
 	player->hp = ft_atoi(line_split[17]);
 	player->armor = ft_atoi(line_split[18]);

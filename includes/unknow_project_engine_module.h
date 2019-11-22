@@ -53,7 +53,6 @@ t_visual_engine	*initialize_t_visual_engine(t_window *p_window);
 void			delete_t_visual_engine(t_visual_engine dest);
 void			free_t_visual_engine(t_visual_engine *dest);
 void			t_visual_engine_render_camera(t_visual_engine *engine);
-void			t_visual_engine_render_first_camera(t_visual_engine *engine);
 void			t_visual_engine_prepare_camera(t_visual_engine *engine);
 void			t_visual_engine_add_camera(t_visual_engine *engine, t_camera new_camera);
 t_camera		*t_visual_engine_get_main_camera(t_visual_engine *engine);

@@ -13,11 +13,13 @@ void			test_move_axis_bis(t_mesh *mesh, float *force, t_vector4 axis, t_mesh *ta
 		error_exit(1, "mesh = NULL");
 	if (target == NULL)
 		error_exit(1, "target = NULL");
+
 	i = 0;
 	subdivision = 20;
 	delta = *force / subdivision;
 	max = *force;
 	*force = 0;
+
 	while (i < subdivision && is_t_mesh_intersecting(mesh, target) == BOOL_FALSE)
 	{
 		i++;

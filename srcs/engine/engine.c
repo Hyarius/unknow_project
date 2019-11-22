@@ -9,6 +9,7 @@ t_engine	create_t_engine(t_window *p_window)
 	result.visual_engine = initialize_t_visual_engine(p_window);
 	result.physic_engine = initialize_t_physic_engine();
 	result.user_engine = initialize_t_user_engine();
+
 	return (result);
 }
 
@@ -18,7 +19,10 @@ t_engine	*initialize_t_engine(t_window *p_window)
 
 	if (!(result = (t_engine *)malloc(sizeof(t_engine))))
 		return (NULL);
+	// printf("malloc t_engine\n");
+
 	*result = create_t_engine(p_window);
+
 	return (result);
 }
 
@@ -27,18 +31,20 @@ void		delete_t_engine(t_engine dest)
 	free_t_physic_engine(dest.physic_engine);
 	free_t_user_engine(dest.user_engine);
 	free_t_visual_engine(dest.visual_engine);
+	// printf("delete t_engine\n");
 }
 
 void		free_t_engine(t_engine *dest)
 {
 	delete_t_engine(*dest);
 	free(dest);
+	// printf("free t_engine\n");
 }
 
-void		t_engine_handle_camera(t_engine *p_engine, t_window *win)
+void		t_engine_handle_camera(t_engine *p_engine, t_window *p_win)
 {
 	t_user_engine_handle_camera(p_engine,
-					t_visual_engine_get_main_camera(p_engine->visual_engine), win);
+								t_visual_engine_get_main_camera(p_engine->visual_engine), p_win);
 }
 
 void		t_engine_draw_mesh(t_engine *p_engine)
@@ -66,9 +72,9 @@ void		t_engine_add_item(t_engine *engine, t_item p_item)
 
 void		t_engine_handle_event(t_camera *main_camera, t_gui *gui, t_engine *engine)
 {
-	static float	size = 0.45;
-	t_mesh			*mesh;
-	int				i;
+	static float size = 0.45;
+	t_mesh	*mesh;
+	int		i;
 
 	if (engine->playing == 1 && get_key_state(engine->user_engine->keyboard, SDL_SCANCODE_P) == 1)
 		engine->playing = -2;
@@ -77,7 +83,9 @@ void		t_engine_handle_event(t_camera *main_camera, t_gui *gui, t_engine *engine)
 	t_user_engine_handle_pause(main_camera, gui, engine->user_engine, &(engine->playing));
 	t_user_engine_handle_menu(main_camera, gui, engine->user_engine, &(engine->playing));
 	if (t_user_engine_poll_event(engine->user_engine) > 0)
+	{
 		t_user_engine_handle_quit(engine->user_engine, &(engine->playing));
+	}
 }
 
 t_mesh		*t_engine_get_mesh(t_engine *p_engine, int index)
@@ -88,6 +96,7 @@ t_mesh		*t_engine_get_mesh(t_engine *p_engine, int index)
 void		t_engine_apply_physic(t_engine *engine)
 {
 	t_physic_engine_compute_vertices_in_world(engine->physic_engine);
+	// printf("here4\n");
 	t_physic_engine_apply_force(engine);
 }
 

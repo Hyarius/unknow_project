@@ -37,6 +37,7 @@ t_mesh	*initialize_t_mesh(t_vector4 pos)
 
 	if (!(result = (t_mesh *)malloc(sizeof(t_mesh))))
 		error_exit(-13, "Can't create a t_mesh array");
+	// printf("malloc t_mesh\n");
 	*result = create_t_mesh(pos);
 	return (result);
 }
@@ -46,12 +47,14 @@ void	delete_t_mesh(t_mesh mesh)
 	free_t_vector4_list(mesh.vertices);
 	free_t_vector4_list(mesh.uvs);
 	free_t_face_list(mesh.faces);
+	// printf("delete t_mesh\n");
 }
 
 void	free_t_mesh(t_mesh *mesh)
 {
 	delete_t_mesh(*mesh);
 	free(mesh);
+	// printf("free t_mesh\n");
 }
 
 void	t_mesh_add_uv(t_mesh *dest, t_vector4 new_uv)
@@ -83,8 +86,8 @@ void	t_mesh_compute_normals(t_mesh *mesh)
 	int			i;
 
 	clean_t_vector4_list(mesh->normales);
-	i = 0;
-	while (i < mesh->faces->size)
+	i = -1;
+	while (++i < mesh->faces->size)
 	{
 		face = t_face_list_get(mesh->faces, i);
 		a = t_vector4_list_at(mesh->vertices, face->index_vertices[0]);
@@ -95,7 +98,6 @@ void	t_mesh_compute_normals(t_mesh *mesh)
 		face->normale = normalize_t_vector4(cross_t_vector4(b, c));
 		t_vector4_list_push_back(mesh->normales, create_t_vector4(0, 0, 0));
 		t_vector4_list_push_back(mesh->normales, face->normale);
-		i++;
 	}
 }
 
@@ -106,24 +108,20 @@ void	t_mesh_compute_bubble_box(t_mesh *mesh)
 	t_vector4	total;
 
 	total = create_t_vector4(0.0, 0.0, 0.0);
-	i = 0;
-	while (i < mesh->vertices->size)
-	{
+	i = -1;
+	while (++i < mesh->vertices->size)
 		total = add_vector4_to_vector4(total,\
 					t_vector4_list_at(mesh->vertices, i));
-		i++;
-	}
 	if (i > 0)
 		total = divide_vector4_by_float(total, (float)(i));
 	mesh->center = add_vector4_to_vector4(total, mesh->pos);
-	i = 0;
-	while (i < mesh->vertices->size)
+	i = -1;
+	while (++i < mesh->vertices->size)
 	{
 		tmp = calc_dist_vector4_to_vector4(total,\
 					t_vector4_list_at(mesh->vertices, i));
 		if (mesh->bubble_radius < tmp)
 			mesh->bubble_radius = tmp;
-		i++;
 	}
 }
 
@@ -182,6 +180,8 @@ void	t_mesh_rotate(t_mesh *mesh, t_vector4 delta_angle)
 	t_vector4	*target;
 	int			i;
 
+	mesh->rotation = add_vector4_to_vector4(mesh->rotation,
+			create_t_vector4(delta_angle.x, delta_angle.y, delta_angle.z));
 	rotation = create_rotation_matrix(delta_angle.x, delta_angle.y,\
 										delta_angle.z);
 	mesh->angle = add_vector4_to_vector4(mesh->angle, delta_angle);
@@ -265,6 +265,12 @@ void	t_mesh_compute_next_vertices_in_world(t_mesh *dest, t_vector4 axis)
 		add_vector4_to_vector4(t_vector4_list_at(dest->vertices, i), next_pos));
 }
 
+void	t_mesh_jump(t_mesh *body, t_vector4 jump)
+{
+	if (body->kinetic < -12.0f)
+		body->kinetic = -12.0f;
+}
+
 void	t_mesh_resize(t_mesh *mesh, t_vector4 modif)
 {
 	t_vector4	tmp;
@@ -282,6 +288,7 @@ void	t_mesh_resize(t_mesh *mesh, t_vector4 modif)
 
 void	t_mesh_set_name(t_mesh *mesh, char *name)
 {
+
 	mesh->name = ft_strdup(name);
 	if (ft_strcmp(mesh->name, "door") == 0 || ft_strcmp(mesh->name, "elevator") == 0
 		|| ft_strcmp(mesh->name, "door_red") == 0 || ft_strcmp(mesh->name, "door_blue") == 0

@@ -1,13 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atof.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/31 17:09:04 by adjouber          #+#    #+#             */
+/*   Updated: 2019/11/05 16:46:35 by adjouber         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "unknow_project.h"
 
-int			is_digit(char c)
+int		is_digit(char c)
 {
 	if (c >= '0' && c <= '9')
 		return (1);
 	return (0);
 }
 
-float		ft_atof_bis(float a, int e)
+float	ft_atof_bis(float a, int e)
 {
 	float	ret;
 
@@ -25,7 +37,7 @@ float		ft_atof_bis(float a, int e)
 	return (ret);
 }
 
-float		ft_atof(char *s)
+float	ft_atof(char *s)
 {
 	float	a;
 	int		neg;
