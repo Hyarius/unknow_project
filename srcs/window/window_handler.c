@@ -107,7 +107,7 @@ void		render_screen(t_window *p_win, t_engine *engine)
 	SDL_GL_SwapWindow(p_win->window);
 }
 
-int			is_point_in_screen(t_window *p_win, t_vector3 p_point)
+int			is_point_in_screen(t_window *p_win, t_vector4 p_point)
 {
 	if (p_point.x < 0 || p_point.x >= p_win->size_x ||
 		p_point.y < 0 || p_point.y >= p_win->size_y)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 15:31:13 by adjouber          #+#    #+#             */
-/*   Updated: 2019/10/31 15:31:15 by adjouber         ###   ########.fr       */
+/*   Updated: 2019/11/22 10:18:55 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 t_mesh			init_primitive(char **line_split, char *texture_path)
 {
 	t_mesh		mesh;
-	t_vector3	vec[2];
+	t_vector4	vec[2];
 
-	vec[0] = create_t_vector3(ft_atof(line_split[2]),
+	vec[0] = create_t_vector4(ft_atof(line_split[2]),
 								ft_atof(line_split[3]),
 								ft_atof(line_split[4]));
-	vec[1] = create_t_vector3(ft_atof(line_split[5]),
+	vec[1] = create_t_vector4(ft_atof(line_split[5]),
 								ft_atof(line_split[6]),
 								ft_atof(line_split[7]));
 	if (ft_strcmp(line_split[0], "plane:") == 0)
@@ -63,7 +63,7 @@ t_mesh			init_texture(char **line_split)
 
 void			set_mesh(t_mesh *mesh, char **line_split)
 {
-	t_mesh_rotate(mesh, create_t_vector3(ft_atof(line_split[10]),
+	t_mesh_rotate(mesh, create_t_vector4(ft_atof(line_split[10]),
 		ft_atof(line_split[11]), ft_atof(line_split[12])));
 	mesh->hp = ft_atoi(line_split[17]);
 	if (ft_strcmp(line_split[ft_tablen(line_split) - 1], "*") == 0)

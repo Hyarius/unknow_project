@@ -1,6 +1,6 @@
 #include "unknow_project.h"
 
-t_mesh		create_mesh_editing(int index, t_vector3 pos)
+t_mesh		create_mesh_editing(int index, t_vector4 pos)
 {
 	t_mesh	mesh;
 
@@ -8,10 +8,10 @@ t_mesh		create_mesh_editing(int index, t_vector3 pos)
 	if (index == 0)
 	{
 		mesh.name = "cube";
-		mesh.size = create_t_vector3(1.0, 1.0, 1.0);
+		mesh.size = create_t_vector4(1.0, 1.0, 1.0);
 		mesh.primitive = 1;
 		mesh.collectible = 0;
-		mesh.rotation = create_t_vector3(0.0, 0.0, 0.0);
+		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
 		mesh.hp = -1;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
 		mesh.texture->path = NULL;
@@ -20,10 +20,10 @@ t_mesh		create_mesh_editing(int index, t_vector3 pos)
 	if (index == 1)
 	{
 		mesh.name = "wall";
-		mesh.size = create_t_vector3(3.0, 2.0, 0.2);
+		mesh.size = create_t_vector4(3.0, 2.0, 0.2);
 		mesh.primitive = 1;
 		mesh.collectible = 0;
-		mesh.rotation = create_t_vector3(0.0, 0.0, 0.0);
+		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
 		mesh.hp = -1;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
 		mesh.texture->path = NULL;
@@ -32,10 +32,10 @@ t_mesh		create_mesh_editing(int index, t_vector3 pos)
 	if (index == 2)
 	{
 		mesh.name = "door";
-		mesh.size = create_t_vector3(1.0, 2.0, 0.2);
+		mesh.size = create_t_vector4(1.0, 2.0, 0.2);
 		mesh.primitive = 1;
 		mesh.collectible = 0;
-		mesh.rotation = create_t_vector3(0.0, 0.0, 0.0);
+		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
 		mesh.hp = -1;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
 		mesh.texture->path = NULL;
@@ -44,10 +44,10 @@ t_mesh		create_mesh_editing(int index, t_vector3 pos)
 	if (index == 3)
 	{
 		mesh.name = "door_red";
-		mesh.size = create_t_vector3(1.0, 2.0, 0.2);
+		mesh.size = create_t_vector4(1.0, 2.0, 0.2);
 		mesh.primitive = 1;
 		mesh.collectible = 0;
-		mesh.rotation = create_t_vector3(0.0, 0.0, 0.0);
+		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
 		mesh.hp = -1;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
 		mesh.texture->path = NULL;
@@ -56,10 +56,10 @@ t_mesh		create_mesh_editing(int index, t_vector3 pos)
 	if (index == 4)
 	{
 		mesh.name = "door_blue";
-		mesh.size = create_t_vector3(1.0, 2.0, 0.2);
+		mesh.size = create_t_vector4(1.0, 2.0, 0.2);
 		mesh.primitive = 1;
 		mesh.collectible = 0;
-		mesh.rotation = create_t_vector3(0.0, 0.0, 0.0);
+		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
 		mesh.hp = -1;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
 		mesh.texture->path = NULL;
@@ -68,10 +68,10 @@ t_mesh		create_mesh_editing(int index, t_vector3 pos)
 	if (index == 5)
 	{
 		mesh.name = "door_green";
-		mesh.size = create_t_vector3(1.0, 2.0, 0.2);
+		mesh.size = create_t_vector4(1.0, 2.0, 0.2);
 		mesh.primitive = 1;
 		mesh.collectible = 0;
-		mesh.rotation = create_t_vector3(0.0, 0.0, 0.0);
+		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
 		mesh.hp = -1;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
 		mesh.texture->path = NULL;
@@ -80,10 +80,10 @@ t_mesh		create_mesh_editing(int index, t_vector3 pos)
 	if (index == 6)
 	{
 		mesh.name = "Card_red";
-		mesh.size = create_t_vector3(0.2, 0.05, 0.2);
+		mesh.size = create_t_vector4(0.2, 0.05, 0.2);
 		mesh.primitive = 1;
 		mesh.collectible = 1;
-		mesh.rotation = create_t_vector3(0.0, 0.0, 0.0);
+		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
 		mesh.hp = -1;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
 		mesh.texture->path = NULL;
@@ -92,10 +92,10 @@ t_mesh		create_mesh_editing(int index, t_vector3 pos)
 	if (index == 7)
 	{
 		mesh.name = "Card_blue";
-		mesh.size = create_t_vector3(0.2, 0.05, 0.2);
+		mesh.size = create_t_vector4(0.2, 0.05, 0.2);
 		mesh.primitive = 1;
 		mesh.collectible = 1;
-		mesh.rotation = create_t_vector3(0.0, 0.0, 0.0);
+		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
 		mesh.hp = -1;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
 		mesh.texture->path = NULL;
@@ -104,10 +104,10 @@ t_mesh		create_mesh_editing(int index, t_vector3 pos)
 	if (index == 8)
 	{
 		mesh.name = "Card_green";
-		mesh.size = create_t_vector3(0.2, 0.05, 0.2);
+		mesh.size = create_t_vector4(0.2, 0.05, 0.2);
 		mesh.primitive = 1;
 		mesh.collectible = 1;
-		mesh.rotation = create_t_vector3(0.0, 0.0, 0.0);
+		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
 		mesh.hp = -1;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
 		mesh.texture->path = NULL;
@@ -116,10 +116,10 @@ t_mesh		create_mesh_editing(int index, t_vector3 pos)
 	if (index == 9)
 	{
 		mesh.name = "elevator";
-		mesh.size = create_t_vector3(2.0, 5.0, 2.0);
+		mesh.size = create_t_vector4(2.0, 5.0, 2.0);
 		mesh.primitive = 1;
 		mesh.collectible = 0;
-		mesh.rotation = create_t_vector3(0.0, 0.0, 0.0);
+		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
 		mesh.hp = -1;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
 		mesh.texture->path = NULL;
@@ -128,10 +128,10 @@ t_mesh		create_mesh_editing(int index, t_vector3 pos)
 	if (index == 10)
 	{
 		mesh.name = "stair";
-		mesh.size = create_t_vector3(1.0, 0.2, 5.0);
+		mesh.size = create_t_vector4(1.0, 0.2, 5.0);
 		mesh.primitive = 1;
 		mesh.collectible = 0;
-		mesh.rotation = create_t_vector3(10.0, 0.0, 0.0);
+		mesh.rotation = create_t_vector4(10.0, 0.0, 0.0);
 		mesh.hp = -1;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
 		mesh.texture->path = NULL;
@@ -140,10 +140,10 @@ t_mesh		create_mesh_editing(int index, t_vector3 pos)
 	if (index == 11)
 	{
 		mesh.name = "stair";
-		mesh.size = create_t_vector3(1.0, 0.2, 5.0);
+		mesh.size = create_t_vector4(1.0, 0.2, 5.0);
 		mesh.primitive = 1;
 		mesh.collectible = 0;
-		mesh.rotation = create_t_vector3(10.0, 0.0, 0.0);
+		mesh.rotation = create_t_vector4(10.0, 0.0, 0.0);
 		mesh.hp = -1;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
 		mesh.texture->path = NULL;
@@ -152,10 +152,10 @@ t_mesh		create_mesh_editing(int index, t_vector3 pos)
 	if (index == 12)
 	{
 		mesh.name = "Healt_Pack";
-		mesh.size = create_t_vector3(0.2, 0.05, 0.2);
+		mesh.size = create_t_vector4(0.2, 0.05, 0.2);
 		mesh.primitive = 1;
 		mesh.collectible = 1;
-		mesh.rotation = create_t_vector3(0.0, 0.0, 0.0);
+		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
 		mesh.hp = -1;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
 		mesh.texture->path = NULL;
@@ -164,10 +164,10 @@ t_mesh		create_mesh_editing(int index, t_vector3 pos)
 	if (index == 13)
 	{
 		mesh.name = "Armor_Pack";
-		mesh.size = create_t_vector3(0.2, 0.05, 0.2);
+		mesh.size = create_t_vector4(0.2, 0.05, 0.2);
 		mesh.primitive = 1;
 		mesh.collectible = 1;
-		mesh.rotation = create_t_vector3(0.0, 0.0, 0.0);
+		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
 		mesh.hp = -1;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
 		mesh.texture->path = NULL;
@@ -176,10 +176,10 @@ t_mesh		create_mesh_editing(int index, t_vector3 pos)
 	if (index == 14)
 	{
 		mesh.name = "Jet_Pack";
-		mesh.size = create_t_vector3(0.2, 0.05, 0.2);
+		mesh.size = create_t_vector4(0.2, 0.05, 0.2);
 		mesh.primitive = 1;
 		mesh.collectible = 1;
-		mesh.rotation = create_t_vector3(0.0, 0.0, 0.0);
+		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
 		mesh.hp = -1;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
 		mesh.texture->path = NULL;
@@ -188,10 +188,10 @@ t_mesh		create_mesh_editing(int index, t_vector3 pos)
 	if (index == 15)
 	{
 		mesh.name = "Ammo_Pack";
-		mesh.size = create_t_vector3(0.2, 0.05, 0.2);
+		mesh.size = create_t_vector4(0.2, 0.05, 0.2);
 		mesh.primitive = 1;
 		mesh.collectible = 1;
-		mesh.rotation = create_t_vector3(0.0, 0.0, 0.0);
+		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
 		mesh.hp = -2;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
 		mesh.texture->path = NULL;
@@ -200,10 +200,10 @@ t_mesh		create_mesh_editing(int index, t_vector3 pos)
 	if (index == 16)
 	{
 		mesh.name = "Ammo_Pack";
-		mesh.size = create_t_vector3(0.2, 0.05, 0.2);
+		mesh.size = create_t_vector4(0.2, 0.05, 0.2);
 		mesh.primitive = 1;
 		mesh.collectible = 1;
-		mesh.rotation = create_t_vector3(0.0, 0.0, 0.0);
+		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
 		mesh.hp = -3;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
 		mesh.texture->path = NULL;
@@ -212,10 +212,10 @@ t_mesh		create_mesh_editing(int index, t_vector3 pos)
 	if (index == 17)
 	{
 		mesh.name = "Ammo_Pack";
-		mesh.size = create_t_vector3(0.2, 0.05, 0.2);
+		mesh.size = create_t_vector4(0.2, 0.05, 0.2);
 		mesh.primitive = 1;
 		mesh.collectible = 1;
-		mesh.rotation = create_t_vector3(0.0, 0.0, 0.0);
+		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
 		mesh.hp = -4;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
 		mesh.texture->path = NULL;
@@ -224,10 +224,10 @@ t_mesh		create_mesh_editing(int index, t_vector3 pos)
 	if (index == 18)
 	{
 		mesh.name = "Ammo_Pack";
-		mesh.size = create_t_vector3(0.2, 0.05, 0.2);
+		mesh.size = create_t_vector4(0.2, 0.05, 0.2);
 		mesh.primitive = 1;
 		mesh.collectible = 1;
-		mesh.rotation = create_t_vector3(0.0, 0.0, 0.0);
+		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
 		mesh.hp = -5;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
 		mesh.texture->path = NULL;
@@ -236,10 +236,10 @@ t_mesh		create_mesh_editing(int index, t_vector3 pos)
 	if (index == 19)
 	{
 		mesh.name = "ladder";
-		mesh.size = create_t_vector3(1.0, 2.0, -0.01);
+		mesh.size = create_t_vector4(1.0, 2.0, -0.01);
 		mesh.primitive = 1;
 		mesh.collectible = 0;
-		mesh.rotation = create_t_vector3(0.0, 0.0, 0.0);
+		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
 		mesh.hp = -1;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
 		mesh.texture->path = NULL;
@@ -248,10 +248,10 @@ t_mesh		create_mesh_editing(int index, t_vector3 pos)
 	if (index == 20)
 	{
 		mesh.name = "platform";
-		mesh.size = create_t_vector3(1.0, 0.2, 1.0);
+		mesh.size = create_t_vector4(1.0, 0.2, 1.0);
 		mesh.primitive = 1;
 		mesh.collectible = 0;
-		mesh.rotation = create_t_vector3(0.0, 0.0, 0.0);
+		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
 		mesh.hp = -1;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
 		mesh.texture->path = NULL;
@@ -260,10 +260,10 @@ t_mesh		create_mesh_editing(int index, t_vector3 pos)
 	if (index == 21)
 	{
 		mesh.name = "plane";
-		mesh.size = create_t_vector3(1.0, 0.0, 1.0);
+		mesh.size = create_t_vector4(1.0, 0.0, 1.0);
 		mesh.primitive = 0;
 		mesh.collectible = 0;
-		mesh.rotation = create_t_vector3(0.0, 0.0, 0.0);
+		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
 		mesh.hp = -1;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
 		mesh.texture->path = NULL;
@@ -272,10 +272,10 @@ t_mesh		create_mesh_editing(int index, t_vector3 pos)
 	if (index == 22)
 	{
 		mesh.name = "Enemy";
-		mesh.size = create_t_vector3(0.3, 0.5, 0.3);
+		mesh.size = create_t_vector4(0.3, 0.5, 0.3);
 		mesh.primitive = 1;
 		mesh.collectible = 0;
-		mesh.rotation = create_t_vector3(0.0, 0.0, 0.0);
+		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
 		mesh.hp = -1;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
 		mesh.texture->path = NULL;
@@ -284,10 +284,10 @@ t_mesh		create_mesh_editing(int index, t_vector3 pos)
 	if (index == 23)
 	{
 		mesh.name = "window";
-		mesh.size = create_t_vector3(1.0, 2.0, 0.3);
+		mesh.size = create_t_vector4(1.0, 2.0, 0.3);
 		mesh.primitive = 1;
 		mesh.collectible = 0;
-		mesh.rotation = create_t_vector3(0.0, 0.0, 0.0);
+		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
 		mesh.hp = -1;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
 		mesh.texture->path = NULL;
@@ -296,10 +296,10 @@ t_mesh		create_mesh_editing(int index, t_vector3 pos)
 	if (index == 24)
 	{
 		mesh.name = "end";
-		mesh.size = create_t_vector3(0.3, 0.0, 0.3);
+		mesh.size = create_t_vector4(0.3, 0.0, 0.3);
 		mesh.primitive = 0;
 		mesh.collectible = 0;
-		mesh.rotation = create_t_vector3(0.0, 0.0, 0.0);
+		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
 		mesh.hp = -1;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
 		mesh.texture->path = NULL;
@@ -308,10 +308,10 @@ t_mesh		create_mesh_editing(int index, t_vector3 pos)
 	if (index == 25)
 	{
 		mesh.name = "star";
-		mesh.size = create_t_vector3(0.3, 0.0, 0.3);
+		mesh.size = create_t_vector4(0.3, 0.0, 0.3);
 		mesh.primitive = 0;
 		mesh.collectible = 0;
-		mesh.rotation = create_t_vector3(0.0, 0.0, 0.0);
+		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
 		mesh.hp = -1;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
 		mesh.texture->path = NULL;
@@ -320,7 +320,7 @@ t_mesh		create_mesh_editing(int index, t_vector3 pos)
 	return (mesh);
 }
 
-t_mesh		select_mesh(t_mesh mesh_editing, t_keyboard *key, t_vector3 pos)
+t_mesh		select_mesh(t_mesh mesh_editing, t_keyboard *key, t_vector4 pos)
 {
 	t_mesh	mesh;
 	static int	press = 0;
@@ -402,7 +402,7 @@ void		map_editor(t_camera *main_camera, t_gui *gui, t_engine *engine, t_mesh mes
 {
 	t_mesh			*target;
 	t_mesh			mesh;
-	t_vector3		normal;
+	t_vector4		normal;
 	static t_color	*color_armor = NULL;
 	static int		l_press = 0;
 	static int		i_press = 0;
@@ -478,13 +478,13 @@ void		map_editor(t_camera *main_camera, t_gui *gui, t_engine *engine, t_mesh mes
 	{
 		target = cast_ray(engine, t_camera_list_get(engine->visual_engine->camera_list, 0)->pos, t_camera_list_get(engine->visual_engine->camera_list, 0)->forward, "Player");
 		if (target != NULL)
-			t_mesh_rotate(target, create_t_vector3(0.0, 10.0, 0.0));
+			t_mesh_rotate(target, create_t_vector4(0.0, 10.0, 0.0));
 	}
 	else if (get_key_state(engine->user_engine->keyboard, engine->user_engine->keyboard->key[SDL_SCANCODE_COMMA]) == 1)
 	{
 		target = cast_ray(engine, t_camera_list_get(engine->visual_engine->camera_list, 0)->pos, t_camera_list_get(engine->visual_engine->camera_list, 0)->forward, "Player");
 		if (target != NULL)
-			t_mesh_rotate(target, create_t_vector3(0.0, -10.0, 0.0));
+			t_mesh_rotate(target, create_t_vector4(0.0, -10.0, 0.0));
 	}
 	if (get_key_state(engine->user_engine->keyboard, engine->user_engine->keyboard->key[SDL_SCANCODE_LEFT]) == 1 && left_press == 0)
 	{
@@ -492,7 +492,7 @@ void		map_editor(t_camera *main_camera, t_gui *gui, t_engine *engine, t_mesh mes
 		if (target != NULL)
 		{
 			left_press = 1;
-			t_mesh_move(target, create_t_vector3(0.0, 0.0, 0.1));
+			t_mesh_move(target, create_t_vector4(0.0, 0.0, 0.1));
 		}
 	}
 	else if (get_key_state(engine->user_engine->keyboard, engine->user_engine->keyboard->key[SDL_SCANCODE_LEFT]) == 0)
@@ -503,7 +503,7 @@ void		map_editor(t_camera *main_camera, t_gui *gui, t_engine *engine, t_mesh mes
 		if (target != NULL)
 		{
 			right_press = 1;
-			t_mesh_move(target, create_t_vector3(0.0, 0.0, -0.1));
+			t_mesh_move(target, create_t_vector4(0.0, 0.0, -0.1));
 		}
 	}
 	else if (get_key_state(engine->user_engine->keyboard, engine->user_engine->keyboard->key[SDL_SCANCODE_RIGHT]) == 0)
@@ -514,7 +514,7 @@ void		map_editor(t_camera *main_camera, t_gui *gui, t_engine *engine, t_mesh mes
 		if (target != NULL)
 		{
 			up_press = 1;
-			t_mesh_move(target, create_t_vector3(0.1, 0.0, 0.0));
+			t_mesh_move(target, create_t_vector4(0.1, 0.0, 0.0));
 		}
 	}
 	else if (get_key_state(engine->user_engine->keyboard, engine->user_engine->keyboard->key[SDL_SCANCODE_UP]) == 0)
@@ -525,7 +525,7 @@ void		map_editor(t_camera *main_camera, t_gui *gui, t_engine *engine, t_mesh mes
 		if (target != NULL)
 		{
 			down_press = 1;
-			t_mesh_move(target, create_t_vector3(-0.1, 0.0, 0.0));
+			t_mesh_move(target, create_t_vector4(-0.1, 0.0, 0.0));
 		}
 	}
 	else if (get_key_state(engine->user_engine->keyboard, engine->user_engine->keyboard->key[SDL_SCANCODE_DOWN]) == 0)
@@ -536,7 +536,7 @@ void		map_editor(t_camera *main_camera, t_gui *gui, t_engine *engine, t_mesh mes
 		if (target != NULL)
 		{
 			equals_press = 1;
-			t_mesh_move(target, create_t_vector3(0.0, 0.1, 0.0));
+			t_mesh_move(target, create_t_vector4(0.0, 0.1, 0.0));
 		}
 	}
 	else if (get_key_state(engine->user_engine->keyboard, engine->user_engine->keyboard->key[SDL_SCANCODE_EQUALS]) == 0)
@@ -547,7 +547,7 @@ void		map_editor(t_camera *main_camera, t_gui *gui, t_engine *engine, t_mesh mes
 		if (target != NULL)
 		{
 			minus_press = 1;
-			t_mesh_move(target, create_t_vector3(0.0, -0.1, 0.0));
+			t_mesh_move(target, create_t_vector4(0.0, -0.1, 0.0));
 		}
 	}
 	else if (get_key_state(engine->user_engine->keyboard, engine->user_engine->keyboard->key[SDL_SCANCODE_MINUS]) == 0)

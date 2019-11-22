@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setting_float.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 13:44:15 by adjouber          #+#    #+#             */
-/*   Updated: 2019/11/08 14:41:11 by adjouber         ###   ########.fr       */
+/*   Updated: 2019/11/22 10:19:00 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ float		round_float(float x, unsigned int round)
 	return (ret);
 }
 
-t_vector3	round_t_vector3(t_vector3 a, unsigned int round)
+t_vector4	round_t_vector4(t_vector4 a, unsigned int round)
 {
 	a.x = round_float(a.x, round);
 	a.y = round_float(a.y, round);

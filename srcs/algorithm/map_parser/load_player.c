@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 13:30:45 by adjouber          #+#    #+#             */
-/*   Updated: 2019/10/31 14:01:00 by adjouber         ###   ########.fr       */
+/*   Updated: 2019/11/22 10:18:51 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 t_mesh			init_mesh(char **line_split)
 {
 	t_mesh		mesh;
-	t_vector3	vector[3];
+	t_vector4	vector[3];
 
-	vector[0] = create_t_vector3(ft_atof(line_split[2]),
+	vector[0] = create_t_vector4(ft_atof(line_split[2]),
 								ft_atof(line_split[3]) + 0.2,
 								ft_atof(line_split[4]));
-	vector[1] = create_t_vector3(ft_atof(line_split[5]),
+	vector[1] = create_t_vector4(ft_atof(line_split[5]),
 								ft_atof(line_split[6]),
 								ft_atof(line_split[7]));
-	vector[2] = create_t_vector3(ft_atof(line_split[10]),
+	vector[2] = create_t_vector4(ft_atof(line_split[10]),
 								ft_atof(line_split[11]),
 								ft_atof(line_split[12]));
 	mesh = create_primitive_cube(vector[0], vector[1], NULL,
@@ -62,7 +62,7 @@ t_player		*read_player(int fd, t_camera *main_camera)
 	t_player	*player;
 	char		*line;
 	char		**line_split;
-	t_vector3	vector[3];
+	t_vector4	vector[3];
 
 	player = initialize_t_player(main_camera);
 	while (get_next_line(fd, &line) > 0)

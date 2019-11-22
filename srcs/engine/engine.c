@@ -100,12 +100,12 @@ void		t_engine_apply_physic(t_engine *engine)
 	t_physic_engine_apply_force(engine);
 }
 
-void		t_engine_place_camera(t_engine *engine, int index, t_vector3 p_new_pos)
+void		t_engine_place_camera(t_engine *engine, int index, t_vector4 p_new_pos)
 {
 	t_camera_list_get(engine->visual_engine->camera_list, index)->pos = p_new_pos;
 }
 
-void		t_engine_camera_look_at(t_engine *engine, int index, t_vector3 target)
+void		t_engine_camera_look_at(t_engine *engine, int index, t_vector4 target)
 {
 	t_camera_look_at_point(t_camera_list_get(engine->visual_engine->camera_list, index), target);
 	compute_t_camera(t_camera_list_get(engine->visual_engine->camera_list, index));

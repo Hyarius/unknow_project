@@ -154,7 +154,7 @@ void			shoot_weapon(t_engine *engine)
 			if (target != NULL && target->hp > 0)
 			{
 				if (ft_strcmp(engine->user_engine->player->current_weapon->name, "shotgun") == 0)
-					dist = calc_dist_vector3_to_vector3(engine->user_engine->player->hitbox.pos, target->pos);
+					dist = calc_dist_vector4_to_vector4(engine->user_engine->player->hitbox.pos, target->pos);
 				if (engine->user_engine->player->current_weapon->dmg - dist * 4 >= 0)
 					target->hp -= engine->user_engine->player->current_weapon->dmg - dist * 4;
 				printf("\rTarget hp = %d\n", target->hp);
@@ -203,7 +203,7 @@ void			player_action(t_camera *camera, t_keyboard *p_keyboard, t_engine *engine)
 		while(i < engine->physic_engine->mesh_list->size && camera->f_press == 0)
 		{
 			target = t_mesh_list_get(engine->physic_engine->mesh_list, i);
-			if (camera->body != target && target->bubble_radius + camera->body->bubble_radius >= calc_dist_vector3_to_vector3(camera->body->center, target->center) && (ft_strcmp(target->name, "door") == 0 || ft_strcmp(target->name, "door") == '_'))
+			if (camera->body != target && target->bubble_radius + camera->body->bubble_radius >= calc_dist_vector4_to_vector4(camera->body->center, target->center) && (ft_strcmp(target->name, "door") == 0 || ft_strcmp(target->name, "door") == '_'))
 			{
 				if (ft_strcmp(target->name, "door") == 0 || (ft_strcmp(target->name, "door_red") == 0
 				&& engine->user_engine->player->red_card == 1) || (ft_strcmp(target->name, "door_blue") == 0
@@ -214,7 +214,7 @@ void			player_action(t_camera *camera, t_keyboard *p_keyboard, t_engine *engine)
 					door = target;
 				}
 			}
-			if (camera->body != target && target->bubble_radius + camera->body->bubble_radius >= calc_dist_vector3_to_vector3(camera->body->center, target->center) && ft_strcmp(target->name, "elevator") == 0)
+			if (camera->body != target && target->bubble_radius + camera->body->bubble_radius >= calc_dist_vector4_to_vector4(camera->body->center, target->center) && ft_strcmp(target->name, "elevator") == 0)
 			{
 				target->door.move = 1;
 				elevator = target;

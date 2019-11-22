@@ -1,6 +1,6 @@
 #include "unknow_project.h"
 
-t_mesh		read_obj_file(char *path, t_vector3 pos, t_vector3 size, float gravity)
+t_mesh		read_obj_file(char *path, t_vector4 pos, t_vector4 size, float gravity)
 {
 	t_mesh	result;
 	char	*line;
@@ -33,11 +33,11 @@ t_mesh		read_obj_file(char *path, t_vector3 pos, t_vector3 size, float gravity)
 			line_split = ft_strsplit(line, ' ');
 			if (ft_strcmp(line_split[0], "v") == 0)
 			{
-				t_mesh_add_point(&result, create_t_vector3(atof(line_split[1]) * size.x, atof(line_split[2]) * size.y, atof(line_split[3]) * size.z));
+				t_mesh_add_point(&result, create_t_vector4(atof(line_split[1]) * size.x, atof(line_split[2]) * size.y, atof(line_split[3]) * size.z));
 			}
 			else if (ft_strcmp(line_split[0], "vt") == 0)
 			{
-				t_mesh_add_uv(&result, create_t_vector3(atof(line_split[1]), atof(line_split[2]), 0.0));
+				t_mesh_add_uv(&result, create_t_vector4(atof(line_split[1]), atof(line_split[2]), 0.0));
 			}
 			else if (ft_strcmp(line_split[0], "f") == 0)
 			{

@@ -1,6 +1,6 @@
 #include "unknow_project.h"
 
-t_mesh		create_primitive_vertical_plane(t_vector3 pos, t_vector3 size, char *texture_path, float gravity)
+t_mesh		create_primitive_vertical_plane(t_vector4 pos, t_vector4 size, char *texture_path, float gravity)
 {
 	t_mesh	result;
 	t_face	tmp_face1;
@@ -8,12 +8,12 @@ t_mesh		create_primitive_vertical_plane(t_vector3 pos, t_vector3 size, char *tex
 
 	result = create_t_mesh(pos);
 	result.primitive = 2;
-	result.size = create_t_vector3(size.x, size.y, size.z);
+	result.size = create_t_vector4(size.x, size.y, size.z);
 	t_mesh_activate_gravity(&result, gravity);
-	t_mesh_add_point(&result, create_t_vector3(-size.x, -size.z, 0.0));
-	t_mesh_add_point(&result, create_t_vector3(size.x, -size.z, 0.0));
-	t_mesh_add_point(&result, create_t_vector3(size.x, size.z, 0.0));
-	t_mesh_add_point(&result, create_t_vector3(-size.x, size.z, 0.0));
+	t_mesh_add_point(&result, create_t_vector4(-size.x, -size.z, 0.0));
+	t_mesh_add_point(&result, create_t_vector4(size.x, -size.z, 0.0));
+	t_mesh_add_point(&result, create_t_vector4(size.x, size.z, 0.0));
+	t_mesh_add_point(&result, create_t_vector4(-size.x, size.z, 0.0));
 	t_mesh_init_uv_point_primitive_vertical_plane(&result);
 	tmp_face1 = create_t_face();
 	tmp_face2 = create_t_face();

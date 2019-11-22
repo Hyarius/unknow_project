@@ -1,13 +1,13 @@
 # include "unknow_project.h"
 
-t_mesh	*cast_ray_next(t_vector3 pos, t_vector3 direction, t_mesh *mesh)
+t_mesh	*cast_ray_next(t_vector4 pos, t_vector4 direction, t_mesh *mesh)
 {
 	int 		k;
 	t_line		line;
-	t_vector3	intersection;
+	t_vector4	intersection;
 
 	k = -1;
-	line = create_t_line(pos, add_vector3_to_vector3(pos, direction));
+	line = create_t_line(pos, add_vector4_to_vector4(pos, direction));
 	while (++k < mesh->faces->size)
 	{
 		if ((mesh->no_hitbox == 0 || mesh->is_visible == 1) && intersect_triangle_by_segment(compose_t_triangle_from_t_mesh
@@ -19,14 +19,14 @@ t_mesh	*cast_ray_next(t_vector3 pos, t_vector3 direction, t_mesh *mesh)
 	return (NULL);
 }
 
-t_mesh	*cast_ray(t_engine *engine, t_vector3 pos, t_vector3 direction, char *shooter)
+t_mesh	*cast_ray(t_engine *engine, t_vector4 pos, t_vector4 direction, char *shooter)
 {
 	int 		i;
 	int 		j;
 	t_mesh 		*mesh;
 
 	i = -1;
-	direction = divide_vector3_by_float(direction, 10);
+	direction = divide_vector4_by_float(direction, 10);
 	while (++i < 100)
 	{
 		j = -1;
@@ -43,23 +43,23 @@ t_mesh	*cast_ray(t_engine *engine, t_vector3 pos, t_vector3 direction, char *sho
 				}
 			}
 		}
-		pos = add_vector3_to_vector3(pos, direction);
+		pos = add_vector4_to_vector4(pos, direction);
 	}
 	return (NULL);
 }
 
-// t_mesh	*cast_ray(t_engine *engine, t_vector3 pos, t_vector3 direction)
+// t_mesh	*cast_ray(t_engine *engine, t_vector4 pos, t_vector4 direction)
 // {
 // 	int 		i;
 // 	int 		j;
 // 	int 		k;
 // 	t_line		line;
-// 	t_vector3	intersection;
+// 	t_vector4	intersection;
 // 	t_mesh 		*mesh;
 
 // 	i = 0;
-// 	direction = normalize_t_vector3(direction);
-// 	direction = divide_vector3_by_float(direction, 3);
+// 	direction = normalize_t_vector4(direction);
+// 	direction = divide_vector4_by_float(direction, 3);
 // 	while (i < FAR * 3)
 // 	{
 // 		j = 0;
@@ -67,7 +67,7 @@ t_mesh	*cast_ray(t_engine *engine, t_vector3 pos, t_vector3 direction, char *sho
 // 		{
 // 			k = 0;
 // 			mesh = t_engine_get_mesh(engine, j);
-// 			line = create_t_line(pos, add_vector3_to_vector3(pos, direction));
+// 			line = create_t_line(pos, add_vector4_to_vector4(pos, direction));
 // 			while (k < mesh->faces->size)
 // 			{
 // 				if (intersect_triangle_by_segment(compose_t_triangle_from_t_mesh
@@ -79,7 +79,7 @@ t_mesh	*cast_ray(t_engine *engine, t_vector3 pos, t_vector3 direction, char *sho
 // 			}
 // 			j++;
 // 		}
-// 		pos = add_vector3_to_vector3(pos, direction);
+// 		pos = add_vector4_to_vector4(pos, direction);
 // 		i++;
 // 	}
 // 	return (NULL);

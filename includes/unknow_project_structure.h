@@ -55,7 +55,7 @@ typedef struct	s_face
 	t_color		color;
 	int			index_vertices[3];
 	int			index_uvs[3];
-	t_vector3	normale;
+	t_vector4	normale;
 }				t_face;
 
 t_face 			create_t_face();

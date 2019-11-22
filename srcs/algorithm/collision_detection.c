@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   collision_detection.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 12:09:40 by adjouber          #+#    #+#             */
-/*   Updated: 2019/11/20 14:02:08 by adjouber         ###   ########.fr       */
+/*   Updated: 2019/11/22 10:31:51 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-void	sat_test(t_vector3 normale, t_vector3_list *vector_list,
+void	sat_test(t_vector4 normale, t_vector4_list *vector_list,
 				float *min, float *max)
 {
 	int		i;
@@ -23,7 +23,7 @@ void	sat_test(t_vector3 normale, t_vector3_list *vector_list,
 	i = 0;
 	while (i < vector_list->size)
 	{
-		dot_result = dot_t_vector3(normale, t_vector3_list_at(vector_list, i));
+		dot_result = dot_t_vector4(normale, t_vector4_list_at(vector_list, i));
 		if (dot_result < *min)
 			*min = dot_result;
 		if (dot_result > *max)
