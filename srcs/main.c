@@ -17,12 +17,12 @@ int main(int argc, char **argv)
 	win = initialize_t_window(argv[0], WIN_X, WIN_Y);	//creation et initialisation de la window
 
 	t_texture *texture2[4];
-	texture2[0] = png_load("ressources/assets/texture/pistol_ammo.png");
-	texture2[1] = png_load("ressources/assets/texture/ar_ammo.png");
-	texture2[2] = png_load("ressources/assets/texture/rifle_ammo.png");
-	texture2[3] = png_load("ressources/assets/texture/shotgun_ammo.png");
-	t_texture *texture = png_load("ressources/assets/texture/cube_test.png");
-	t_texture *skybox = png_load("ressources/assets/texture/skybox.png");
+	texture2[0] = png_load("ressources/assets/textures/pistol_ammo.png");
+	texture2[1] = png_load("ressources/assets/textures/ar_ammo.png");
+	texture2[2] = png_load("ressources/assets/textures/rifle_ammo.png");
+	texture2[3] = png_load("ressources/assets/textures/shotgun_ammo.png");
+	t_texture *texture = png_load("ressources/assets/textures/cube_test.png");
+	t_texture *skybox = png_load("ressources/assets/textures/skybox.png");
 
 	t_engine	*engine;
 	t_gui		*gui;
