@@ -1,6 +1,6 @@
 #include "unknow_project.h"
 
-void			test_move_axis_bis(t_mesh *mesh, float *force, t_vector3 axis, t_mesh *target)
+void			test_move_axis_bis(t_mesh *mesh, float *force, t_vector4 axis, t_mesh *target)
 {
 	float	max;
 	int		subdivision;
@@ -44,11 +44,11 @@ int				can_move_bis(t_mesh *mesh, t_engine *engine, char *name)
 	while (i < engine->physic_engine->mesh_list->size)
 	{
 		target = t_mesh_list_get(engine->physic_engine->mesh_list, i);
-		if (mesh != target && target->bubble_radius + mesh->bubble_radius >= calc_dist_vector3_to_vector3(mesh->center, target->center) && target->no_hitbox == 0 && ft_strcmp(target->name, name) != 0)
+		if (mesh != target && target->bubble_radius + mesh->bubble_radius >= calc_dist_vector4_to_vector4(mesh->center, target->center) && target->no_hitbox == 0 && ft_strcmp(target->name, name) != 0)
 		{
-			test_move_axis_bis(mesh, &(mesh->force.y), create_t_vector3(0, 1, 0), target);
-			test_move_axis_bis(mesh, &(mesh->force.x), create_t_vector3(1, 0, 0), target);
-			test_move_axis_bis(mesh, &(mesh->force.z), create_t_vector3(0, 0, 1), target);
+			test_move_axis_bis(mesh, &(mesh->force.y), create_t_vector4(0, 1, 0), target);
+			test_move_axis_bis(mesh, &(mesh->force.x), create_t_vector4(1, 0, 0), target);
+			test_move_axis_bis(mesh, &(mesh->force.z), create_t_vector4(0, 0, 1), target);
 		}
 		i++;
 	}
@@ -66,9 +66,9 @@ void	cast_mesh(t_engine *engine, t_mesh *mesh_editing, char *name)
 		if ((mesh_editing->pos.x - cam->pos.x > 10 || mesh_editing->pos.x - cam->pos.x < -10)
 			|| (mesh_editing->pos.y - cam->pos.y > 10 || mesh_editing->pos.y - cam->pos.y < -10)
 			||	(mesh_editing->pos.z - cam->pos.z > 10 || mesh_editing->pos.z - cam->pos.z < -10))
-			mesh_editing->force = create_t_vector3(0.0, 0.0, 0.0);
+			mesh_editing->force = create_t_vector4(0.0, 0.0, 0.0);
 		if (can_move_bis(mesh_editing, engine, name) == BOOL_TRUE)
 			t_mesh_move(mesh_editing, mesh_editing->force);
 	}
-	mesh_editing->force = create_t_vector3(0.0, 0.0, 0.0);
+	mesh_editing->force = create_t_vector4(0.0, 0.0, 0.0);
 }

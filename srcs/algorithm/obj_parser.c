@@ -12,16 +12,17 @@ t_mesh		read_obj_file(char *path, t_vector4 pos, t_vector4 size, float gravity)
 	int		i;
 	t_face	tmp_face;
 
-	if ((fd = open(path, O_RDONLY)) < 0);
+	if ((fd = open(path, O_RDONLY)) < 0)
 	 	error_exit(-8000, ft_strjoin(path, " doesn't exist"));
 	result = create_t_mesh(pos);
 	t_mesh_activate_gravity(&result, gravity);
 	tmp_face = create_t_face();
-	i = -1;
-	while (++i < 4)
+	i = 0;
+	while (i < 4)
 	{
 		index[i] = 0;
 		index_uv[i] = 0;
+		i++;
 	}
 	while (get_next_line(fd, &line))
 	{
@@ -36,13 +37,14 @@ t_mesh		read_obj_file(char *path, t_vector4 pos, t_vector4 size, float gravity)
 			{
 				if (ft_tablen(line_split) == 5)
 				{
-					i = -1;
-					while (++i < 4)
+					i = 0;
+					while (i < 4)
 					{
 						tab = ft_strsplit(line_split[i + 1], '/');
 						index[i] = ft_atoi(tab[0]) - 1;
 						if (ft_tablen(tab) >= 2 && ft_strlen(tab[1]) != 0)
 							index_uv[i] = ft_atoi(tab[1]) - 1;
+						i++;
 					}
 					set_t_face_vertices(&tmp_face, index[0], index[1], index[2]);
 					set_t_face_uvs(&tmp_face, index_uv[0], index_uv[1], index_uv[2]);
@@ -53,13 +55,14 @@ t_mesh		read_obj_file(char *path, t_vector4 pos, t_vector4 size, float gravity)
 				}
 				if (ft_tablen(line_split) == 4)
 				{
-					i = -1;
-					while (++i < 3)
+					i = 0;
+					while (i < 3)
 					{
 						tab = ft_strsplit(line_split[i + 1], '/');
 						index[i] = ft_atoi(tab[0]) - 1;
 						if (ft_tablen(tab) >= 2 && ft_strlen(tab[1]) != 0)
 							index_uv[i] = ft_atoi(tab[1]) - 1;
+						i++;
 					}
 					set_t_face_vertices(&tmp_face, index[0], index[1], index[2]);
 					set_t_face_uvs(&tmp_face, index_uv[0], index_uv[1], index_uv[2]);

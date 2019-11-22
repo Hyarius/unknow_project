@@ -1,12 +1,14 @@
 #include "unknow_project.h"
 
-t_mesh		create_primitive_vertical_plane(t_vector4 pos, t_vector4 size, t_texture *p_texture, float gravity)
+t_mesh		create_primitive_vertical_plane(t_vector4 pos, t_vector4 size, char *texture_path, float gravity)
 {
 	t_mesh	result;
 	t_face	tmp_face1;
 	t_face	tmp_face2;
 
 	result = create_t_mesh(pos);
+	result.primitive = 2;
+	result.size = create_t_vector4(size.x, size.y, size.z);
 	t_mesh_activate_gravity(&result, gravity);
 	t_mesh_add_point(&result, create_t_vector4(-size.x, -size.z, 0.0));
 	t_mesh_add_point(&result, create_t_vector4(size.x, -size.z, 0.0));
@@ -23,6 +25,7 @@ t_mesh		create_primitive_vertical_plane(t_vector4 pos, t_vector4 size, t_texture
 	t_mesh_add_face(&result, tmp_face2);
 	t_mesh_compute_normals(&result);
 	t_mesh_compute_bubble_box(&result);
-	t_mesh_set_texture(&result, p_texture);
+	if (texture_path != NULL)
+		result.texture = png_load(texture_path);
 	return (result);
 }

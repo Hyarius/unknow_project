@@ -1,6 +1,6 @@
 #include "unknow_project.h"
 
-t_player		create_t_player(t_camera *cam, t_mesh hitbox)
+t_player		create_t_player(t_camera *cam)
 {
 	t_player 	result;
 
@@ -10,19 +10,19 @@ t_player		create_t_player(t_camera *cam, t_mesh hitbox)
 	return (result);
 }
 
-t_player			*initialize_t_player(t_camera *cam, t_mesh hitbox)
+t_player			*initialize_t_player(t_camera *cam)
 {
 	t_player *result;
 
 	if (!(result = (t_player *)malloc(sizeof(t_player))))
 		error_exit(-13, "Can't create a t_player array");
 
-	*result = create_t_player(cam, hitbox);
+	*result = create_t_player(cam);
 
 	return(result);
 }
 
-t_weapon		create_t_weapons(int index)
+t_weapon		create_t_weapons(int index, int ammo, int total_ammo)
 {
 	t_weapon	result[5];
 
@@ -91,7 +91,7 @@ void			change_weapon(t_keyboard *p_keyboard, t_player *player)
 	player->current_weapon = &player->weapons[index];
 }
 
-void			reload_weapon(t_keyboard *p_keyboard, t_player *player)
+void			reload_weapon(t_camera *camera, t_engine *engine)
 {
 	int to_fill;
 
@@ -126,7 +126,7 @@ void			shoot_weapon(t_engine *engine)
 			if (target != NULL && target->hp > 0)
 			{
 				if (ft_strcmp(engine->user_engine->player->current_weapon->name, "shotgun") == 0)
-					dist = calc_dist_vector3_to_vector3(engine->user_engine->player->hitbox.pos, target->pos);
+					dist = calc_dist_vector4_to_vector4(engine->user_engine->player->hitbox.pos, target->pos);
 				if (engine->user_engine->player->current_weapon->dmg - dist * 4 >= 0)
 					target->hp -= engine->user_engine->player->current_weapon->dmg - dist * 4;
 				if (target->hp <= 0)
@@ -174,7 +174,7 @@ void			player_action(t_camera *camera, t_keyboard *p_keyboard, t_engine *engine)
 		while(i < engine->physic_engine->mesh_list->size && camera->f_press == 0)
 		{
 			target = t_mesh_list_get(engine->physic_engine->mesh_list, i);
-			if (camera->body != target && target->bubble_radius + camera->body->bubble_radius >= calc_dist_vector3_to_vector3(camera->body->center, target->center) && (ft_strcmp(target->name, "door") == 0 || ft_strcmp(target->name, "door") == '_'))
+			if (camera->body != target && target->bubble_radius + camera->body->bubble_radius >= calc_dist_vector4_to_vector4(camera->body->center, target->center) && (ft_strcmp(target->name, "door") == 0 || ft_strcmp(target->name, "door") == '_'))
 			{
 				if (ft_strcmp(target->name, "door") == 0 || (ft_strcmp(target->name, "door_red") == 0
 				&& engine->user_engine->player->red_card == 1) || (ft_strcmp(target->name, "door_blue") == 0
@@ -185,7 +185,7 @@ void			player_action(t_camera *camera, t_keyboard *p_keyboard, t_engine *engine)
 					door = target;
 				}
 			}
-			if (camera->body != target && target->bubble_radius + camera->body->bubble_radius >= calc_dist_vector3_to_vector3(camera->body->center, target->center) && ft_strcmp(target->name, "elevator") == 0)
+			if (camera->body != target && target->bubble_radius + camera->body->bubble_radius >= calc_dist_vector4_to_vector4(camera->body->center, target->center) && ft_strcmp(target->name, "elevator") == 0)
 			{
 				target->door.move = 1;
 				elevator = target;

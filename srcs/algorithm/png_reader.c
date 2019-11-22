@@ -1,6 +1,6 @@
 #include "unknow_project.h"
 
-t_surface		*read_png_file(const char *filename)
+t_surface		*read_png_file(char *filename)
 {
 	FILE		*fp;
 	png_structp	png_ptr;

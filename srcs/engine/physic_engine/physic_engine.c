@@ -35,9 +35,12 @@ void			t_physic_engine_draw_mesh(t_physic_engine *p_physic_engine, t_camera *p_c
 {
 	int			i;
 
-	i = -1;
-	while (++i < p_physic_engine->mesh_list->size)
+	i = 0;
+	while (i < p_physic_engine->mesh_list->size)
+	{
 		draw_t_mesh(p_cam, t_mesh_list_get(p_physic_engine->mesh_list, i));
+		i++;
+	}
 }
 
 void			t_physic_engine_add_mesh(t_physic_engine *physic_engine, t_mesh p_mesh)
@@ -72,22 +75,27 @@ int				can_move_axis(t_mesh *mesh, t_mesh *target, t_vector4 axis)
 	tmp = mult_vector4_by_vector4(mesh->force, axis);
 	delta_pos = add_vector4_to_vector4(mesh->pos, tmp);
 	clean_t_vector4_list(mesh->vertices_in_world);
-	i = -1;
-	while (++i < mesh->vertices->size)
+	i = 0;
+	while (i < mesh->vertices->size)
+	{
 		t_vector4_list_push_back(mesh->vertices_in_world, add_vector4_to_vector4(t_vector4_list_at(mesh->vertices, i), delta_pos));
-	j = -1;
-	while (++j < mesh->faces->size)
+		i++;
+	}
+	j = 0;
+	while (j < mesh->faces->size)
 	{
 		mesh_face = t_face_list_get(mesh->faces, j);
 		triangle_mesh = compose_t_triangle_from_t_vertices(mesh->vertices_in_world, mesh_face->index_vertices);
-		i = -1;
-		while (++i < target->faces->size)
+		i = 0;
+		while (i < target->faces->size)
 		{
 			target_face = t_face_list_get(target->faces, i);
 			triangle_target = compose_t_triangle_from_t_vertices(target->vertices_in_world, target_face->index_vertices);
 			if (is_triangle_in_triangle(triangle_mesh, triangle_target) == BOOL_TRUE)
 				result++;
+			i++;
 		}
+		j++;
 	}
 	if (result > 0)
 		return (BOOL_FALSE);
@@ -170,10 +178,14 @@ int				can_move(t_mesh *mesh, t_engine *engine)
 
 void			t_physic_engine_compute_vertices_in_world(t_physic_engine *physic_engine)
 {
-	int i = -1;
+	int i;
 
-	while (++i < physic_engine->mesh_list->size)
+	i = 0;
+	while (i < physic_engine->mesh_list->size)
+	{
 		t_mesh_compute_vertices_in_world(t_mesh_list_get(physic_engine->mesh_list, i));
+		i++;
+	}
 }
 
 void			t_physic_engine_apply_force(t_engine *engine)

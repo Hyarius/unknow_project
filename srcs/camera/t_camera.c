@@ -321,8 +321,8 @@ void 		t_camera_calc_depth(t_camera *p_cam)
 	int			i;
 
 	p_cam->dist_max = 0.0f;
-	i = -1;
-	while (++i < p_cam->triangle_color_list.size)
+	i = 0;
+	while (i < p_cam->triangle_color_list.size)
 	{
 		triangle = t_triangle_list_at(&(p_cam->triangle_color_list), i);
 		if (triangle.a.z > p_cam->dist_max)
@@ -331,9 +331,10 @@ void 		t_camera_calc_depth(t_camera *p_cam)
 			p_cam->dist_max = triangle.b.z;
 		else if (triangle.c.z > p_cam->dist_max)
 			p_cam->dist_max = triangle.c.z;
+		i++;
 	}
-	i = -1;
-	while (++i < p_cam->triangle_texture_list.size)
+	i = 0;
+	while (i < p_cam->triangle_texture_list.size)
 	{
 		triangle = t_triangle_list_at(&(p_cam->triangle_texture_list), i);
 		if (triangle.a.z > p_cam->dist_max)
@@ -342,6 +343,7 @@ void 		t_camera_calc_depth(t_camera *p_cam)
 			p_cam->dist_max = triangle.b.z;
 		else if (triangle.c.z > p_cam->dist_max)
 			p_cam->dist_max = triangle.c.z;
+		i++;
 	}
 }
 
@@ -353,17 +355,19 @@ void		draw_depth_from_camera_on_screen(t_camera *p_cam)
 	int			i;
 
 	t_camera_calc_depth(p_cam);
-	i = -1;
-	while (++i < p_cam->triangle_color_list.size)
+	i = 0;
+	while (i < p_cam->triangle_color_list.size)
 	{
 		triangle = t_triangle_list_at(&(p_cam->triangle_color_list), i);
 		draw_triangle_depth_cpu(p_cam->view_port, &triangle, p_cam->dist_max);
+		i++;
 	}
-	i = -1;
-	while (++i < p_cam->triangle_texture_list.size)
+	i = 0;
+	while (i < p_cam->triangle_texture_list.size)
 	{
 		triangle = t_triangle_list_at(&(p_cam->triangle_texture_list), i);
 		draw_triangle_depth_cpu(p_cam->view_port, &triangle, p_cam->dist_max);
+		i++;
 	}
 }
 

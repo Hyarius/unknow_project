@@ -101,9 +101,9 @@ void		prepare_screen(t_window *p_win, t_color color)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-void		render_screen(t_window *p_win)
+void		render_screen(t_window *p_win, t_engine *engine)
 {
-	check_frame();
+	check_frame(engine);
 	draw_buffer_opengl(p_win, p_win->color_data);
 	SDL_GL_SwapWindow(p_win->window);
 }

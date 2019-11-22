@@ -83,8 +83,8 @@ void	t_mesh_compute_normals(t_mesh *mesh)
 	int			i;
 
 	clean_t_vector4_list(mesh->normales);
-	i = -1;
-	while (++i < mesh->faces->size)
+	i = 0;
+	while (i < mesh->faces->size)
 	{
 		face = t_face_list_get(mesh->faces, i);
 		a = t_vector4_list_at(mesh->vertices, face->index_vertices[0]);
@@ -95,6 +95,7 @@ void	t_mesh_compute_normals(t_mesh *mesh)
 		face->normale = normalize_t_vector4(cross_t_vector4(b, c));
 		t_vector4_list_push_back(mesh->normales, create_t_vector4(0, 0, 0));
 		t_vector4_list_push_back(mesh->normales, face->normale);
+		i++;
 	}
 }
 
@@ -105,20 +106,24 @@ void	t_mesh_compute_bubble_box(t_mesh *mesh)
 	t_vector4	total;
 
 	total = create_t_vector4(0.0, 0.0, 0.0);
-	i = -1;
-	while (++i < mesh->vertices->size)
+	i = 0;
+	while (i < mesh->vertices->size)
+	{
 		total = add_vector4_to_vector4(total,\
 					t_vector4_list_at(mesh->vertices, i));
+		i++;
+	}
 	if (i > 0)
 		total = divide_vector4_by_float(total, (float)(i));
 	mesh->center = add_vector4_to_vector4(total, mesh->pos);
-	i = -1;
-	while (++i < mesh->vertices->size)
+	i = 0;
+	while (i < mesh->vertices->size)
 	{
 		tmp = calc_dist_vector4_to_vector4(total,\
 					t_vector4_list_at(mesh->vertices, i));
 		if (mesh->bubble_radius < tmp)
 			mesh->bubble_radius = tmp;
+		i++;
 	}
 }
 
@@ -296,8 +301,8 @@ void	t_mesh_move_door(t_mesh *mesh)
 			tmp = 0.12f;
 		else
 			tmp = -0.12f;
-		mesh->pos = add_vector3_to_vector3(mesh->pos, create_t_vector3(0.0, tmp, 0.0));
-		mesh->center = add_vector3_to_vector3(mesh->center, create_t_vector3(0.0, tmp, 0.0));
+		mesh->pos = add_vector4_to_vector4(mesh->pos, create_t_vector4(0.0, tmp, 0.0));
+		mesh->center = add_vector4_to_vector4(mesh->center, create_t_vector4(0.0, tmp, 0.0));
 		mesh->door.tick++;
 		if (mesh->door.tick == 5)
 		{
@@ -325,11 +330,11 @@ void	t_mesh_move_elevator(t_mesh *mesh, t_camera *camera)
 		// {
 		if (t_mesh_on_mesh(camera->body, mesh) == 1)
 		{
-			camera->body->pos = add_vector3_to_vector3(camera->body->pos, create_t_vector3(0.0, tmp, 0.0));
-			camera->body->center = add_vector3_to_vector3(camera->body->center, create_t_vector3(0.0, tmp, 0.0));
+			camera->body->pos = add_vector4_to_vector4(camera->body->pos, create_t_vector4(0.0, tmp, 0.0));
+			camera->body->center = add_vector4_to_vector4(camera->body->center, create_t_vector4(0.0, tmp, 0.0));
 		}
-		mesh->pos = add_vector3_to_vector3(mesh->pos, create_t_vector3(0.0, tmp, 0.0));
-		mesh->center = add_vector3_to_vector3(mesh->center, create_t_vector3(0.0, tmp, 0.0));
+		mesh->pos = add_vector4_to_vector4(mesh->pos, create_t_vector4(0.0, tmp, 0.0));
+		mesh->center = add_vector4_to_vector4(mesh->center, create_t_vector4(0.0, tmp, 0.0));
 		mesh->door.tick++;
 		if (mesh->door.tick == 10)
 		{
@@ -341,8 +346,8 @@ void	t_mesh_move_elevator(t_mesh *mesh, t_camera *camera)
 			mesh->door.tick = 0;
 			if (t_mesh_on_mesh(camera->body, mesh) == 1)
 			{
-				camera->body->pos = add_vector3_to_vector3(camera->body->pos, create_t_vector3(0.0, 0.05, 0.0));
-				camera->body->center = add_vector3_to_vector3(camera->body->center, create_t_vector3(0.0, 0.05, 0.0));
+				camera->body->pos = add_vector4_to_vector4(camera->body->pos, create_t_vector4(0.0, 0.05, 0.0));
+				camera->body->center = add_vector4_to_vector4(camera->body->center, create_t_vector4(0.0, 0.05, 0.0));
 			}
 		}
 	}

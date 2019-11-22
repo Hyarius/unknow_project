@@ -31,7 +31,7 @@ void			free_t_user_engine(t_user_engine *dest)
 	free(dest);
 }
 
-void			t_user_engine_handle_camera(t_engine *engine, t_camera *cam)
+void			t_user_engine_handle_camera(t_engine *engine, t_camera *cam, t_window *p_win)
 {
 	t_mouse		*mouse;
 	t_keyboard	*keyboard;

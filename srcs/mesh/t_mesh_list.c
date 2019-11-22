@@ -32,9 +32,12 @@ void		t_mesh_list_push_back(t_mesh_list *dest, t_mesh to_add)
 		if (!(dest->mesh = (t_mesh *)malloc(sizeof(t_mesh) \
 											* (dest->size + 1 + PUSH_SIZE))))
 			error_exit(-20, "Can't realloc a t_mesh array");
-		i = -1;
-		while (++i < dest->size)
+		i = 0;
+		while (i < dest->size)
+		{
 			dest->mesh[i] = tmp[i];
+			i++;
+		}
 		free(tmp);
 		dest->max_size += PUSH_SIZE;
 	}
@@ -86,11 +89,12 @@ int			t_mesh_list_get_index(t_mesh_list *dest, t_mesh *mesh)
 {
 	int		i;
 
-	i = -1;
-	while (++i < dest->size)
+	i = 0;
+	while (i < dest->size)
 	{
 		if (dest[i].mesh == mesh)
 			return (i);
+		i++;
 	}
 	return (-1);
 }

@@ -8,9 +8,11 @@ char		*ft_strnew(int size)
 	ret = NULL;
 	if (!(ret = (char *)malloc(sizeof(char) * (size + 1))))
 		return (NULL);
-	i = -1;
-	while (++i <= size)
+	i = 0;
+	while (i <= size)
+	{
 		ret[i] = '\0';
+		i++;
 	}
 	return (ret);
 }

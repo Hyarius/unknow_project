@@ -90,7 +90,7 @@ char			**ft_strsplit(char const *s, char c)
 		s += ft_let(s, c);
 		while (ft_is_sep(*s, c))
 			++s;
-		++i;
+		i++;
 	}
 	array[i] = NULL;
 	return (array);

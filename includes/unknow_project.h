@@ -24,12 +24,12 @@ GLuint			load_shaders(const char * p_vertex_file_path,
 						const char * p_fragment_file_path);
 
 //			convert
-t_vector3		convert_screen_to_opengl(t_view_port *p_view_port, t_vector3 source);
+t_vector4		convert_screen_to_opengl(t_view_port *p_view_port, t_vector4 source);
 t_vector2		convert_vector2_to_opengl(t_view_port *p_view_port, t_vector2 source);
-t_vector3		convert_opengl_to_vector3(t_view_port *p_view_port, t_vector3 source);
+t_vector4		convert_opengl_to_vector4(t_view_port *p_view_port, t_vector4 source);
 t_vector2_int	convert_vector2_to_vector2_int(t_vector2 base);
-t_vector3_int	convert_vector3_to_vector3_int(t_vector3 base);
-t_vector3		convert_vector2_to_vector3(t_vector2 base);
+t_vector4_int	convert_vector4_to_vector4_int(t_vector4 base);
+t_vector4		convert_vector2_to_vector4(t_vector2 base);
 float			degree_to_radius(float angle);
 float			radius_to_degree(float radian);
 t_uv 			convert_t_uv_to_texture(t_uv *source);

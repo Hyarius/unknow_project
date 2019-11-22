@@ -117,14 +117,15 @@ void		draw_t_mesh(t_camera *p_cam, t_mesh *mesh)
 	t_triangle	*triangle;
 	t_uv		*uv;
 
-	i = -1;
+	i = 0;
 	// time_exe("test1");
 	if (mesh->is_visible == BOOL_FALSE)
 		return ;
-	while (++i < mesh->faces->size)
+	while (i < mesh->faces->size)
 	{
 		face = t_face_list_at(mesh->faces, i);
 		how_many_points_clipped(mesh, face, p_cam);
+		i++;
 	}
 	// time_exe("test2");
 	// print_time();

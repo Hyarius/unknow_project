@@ -135,7 +135,7 @@ int		green_card(t_player *player)
 	return (BOOL_TRUE);
 }
 
-t_item		create_health_pack(t_vector4 pos, t_engine *engine)
+t_item		create_health_pack(void)
 {
 	static int	num = 1;
 	t_item		item;
@@ -146,7 +146,7 @@ t_item		create_health_pack(t_vector4 pos, t_engine *engine)
 	return (item);
 }
 
-t_item		create_ammo_pack(t_vector4 pos, t_engine *engine, int type)
+t_item		create_ammo_pack(int type)
 {
 	static int	num = 1;
 	t_item		item;
@@ -166,7 +166,7 @@ t_item		create_ammo_pack(t_vector4 pos, t_engine *engine, int type)
 	return (item);
 }
 
-t_item		create_armor_pack(t_vector4 pos, t_engine *engine)
+t_item		create_armor_pack(void)
 {
 	static int	num = 1;
 	t_item		item;

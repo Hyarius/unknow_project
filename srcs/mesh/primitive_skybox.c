@@ -77,13 +77,15 @@ static void	t_mesh_init_face_primitive_skybox(t_mesh *result, t_face tmp_face1, 
 	t_mesh_add_face(result, tmp_face2);
 }
 
-t_mesh		create_primitive_skybox(t_vector4 pos, t_vector4 size, t_texture *p_texture)
+t_mesh		create_primitive_skybox(t_vector4 pos, t_vector4 size, char *texture_path)
 {
 	t_mesh	result;
 	t_face	tmp_face1;
 	t_face	tmp_face2;
 
 	result = create_t_mesh(pos);
+	result.primitive = 50;
+	result.size = create_t_vector4(size.x, size.y, size.z);
 	t_mesh_init_point_primitive_skybox(&result, size);
 	t_mesh_init_uv_point_primitive_skybox(&result);
 	tmp_face1 = create_t_face();
@@ -91,6 +93,8 @@ t_mesh		create_primitive_skybox(t_vector4 pos, t_vector4 size, t_texture *p_text
 	t_mesh_init_face_primitive_skybox(&result, tmp_face1, tmp_face2);
 	t_mesh_init_face_primitive_skybox_next(&result, tmp_face1, tmp_face2);
 	t_mesh_compute_normals(&result);
-	t_mesh_set_texture(&result, p_texture);
+	t_mesh_compute_bubble_box(&result);
+	if (texture_path != NULL)
+		result.texture = png_load(texture_path);
 	return (result);
 }
