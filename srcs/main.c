@@ -76,7 +76,7 @@ int main(int argc, char **argv)
 	int		fd;
 
 	fd = open("ressources/map/fichier_map.map", O_RDONLY);
-	// fd = open("ressources/map/test_gravity.map", O_RDONLY);
+	// fd = open("ressources/map/test.map", O_RDONLY);
 	// fd = open("ressources/map/save1.map", O_RDONLY);
 	// fd = open("ressources/map/editing_map1.map", O_RDONLY);
 	if (fd < 0)
@@ -86,7 +86,7 @@ int main(int argc, char **argv)
 	player = read_player(fd, main_camera);
 	close(fd);
 	fd = open("ressources/map/fichier_map.map", O_RDONLY);
-	// fd = open("ressources/map/test_gravity.map", O_RDONLY);
+	// fd = open("ressources/map/test.map", O_RDONLY);
 	// fd = open("ressources/map/save1.map", O_RDONLY);
 	// fd = open("ressources/map/editing_map1.map", O_RDONLY);
 	if (fd < 0)
