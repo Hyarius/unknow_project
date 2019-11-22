@@ -86,9 +86,13 @@ cube: door_blue -10.0 0.0 0.5 1.0 2.0 0.1 ressources/assets/textures/cube_test.p
 cube: door_red -8.0 0.0 0.5 1.0 2.0 0.1 ressources/assets/textures/cube_test.png 0.0 0.0 90.0 0.0 1.0 0.2 0.2 1.0    -1
 cube: door_green -12.0 0.0 0.5 1.0 2.0 0.1 ressources/assets/textures/cube_test.png 0.0 0.0 90.0 0.0 0.2 1.0 0.2 1.0    -1
 
+<<<<<<< HEAD
 cube: ladder 9.95 0.0 -10.0 1.0 10.0 0.05 ressources/assets/textures/echelle.png 0.0 0.0 90.0 0.0 0.0 0.0 1.0 1.0   -1
 
 
+=======
+cube: ladder 9.99 0.0 -10.0 1.0 10.0 0.01 ressources/assets/textures/cube_test.png 0.0 0.0 90.0 0.0 0.0 0.0 1.0 1.0   -1
+>>>>>>> 616a4419b44f6ccba17887658d951dbe3f8b4a6b
 cube: cube 10.0 0.0 -10.0 1.0 10.0 1.0 ressources/assets/textures/cube_test.png 0.0 0.0 90.0 0.0 1.0 0.0 1.0 1.0   200000
 
 cube: cube -9.0 2.0 7.0 0.2 6.0 2.0 ressources/assets/textures/cube_test.png 0.0 90.0 0.0 0.0 0.5 0.0 1.0 1.0   -1
@@ -114,6 +118,7 @@ cube: Enemy 1.0 0.0 4.0 0.3 0.5 0.3 ressources/assets/textures/cube_test.png 0.0
 /cube: Enemy 1.0 0.0 14.0 0.3 0.5 0.3 ressources/assets/textures/cube_test.png 0.0 0.0 90.0 0.0 0.0 0.0 0.0 1.0    50
 /cube: Enemy 28.0 0.0 -8.0 0.3 0.5 0.3 ressources/assets/textures/cube_test.png 0.0 0.0 90.0 0.0 0.0 0.0 0.0 1.0    50
 
+<<<<<<< HEAD
 cube: elevator -10.0 -5.0 -10.0 5.0 5.0 5.0 ressources/assets/textures/cube_test_blue.png 0.0 0.0 90.0 0.0 0.0 1.0 1.0 1.0   -1
 
 cube: destructible_wall   10.0 0.0 0.0    2.0 5.0 0.1 ressources/assets/textures/cube_test.png 0.0    0.0 0.0 0.0    1.0 0.5 0.5 1.0   200000
@@ -130,4 +135,22 @@ item: Armor_Pack_1 -11.0 0.0 -6.0   0.2 0.05 0.2   ressources/assets/textures/cu
 item: Armor_Pack_2 -12.0 0.0 -6.0   0.2 0.05 0.2   ressources/assets/textures/cube_number.png   0.0   0.0 0.0 0.0   0.0 0.0 0.8 1.0   -1
 item: Health_Pack_1 -9.0 0.0 -6.0   0.2 0.05 0.2   ressources/assets/textures/cube_number.png   0.0   0.0 0.0 0.0   0.8 0.0 0.0 1.0   -1
 item: Health_Pack_2 -10.0 0.0 -6.0   0.2 0.05 0.2   ressources/assets/textures/cube_number.png   0.0   0.0 0.0 0.0   0.8 0.0 0.0 1.0   -1
+=======
+cube: elevator -10.0 -5.0 -10.0 5.0 5.0 5.0 ressources/assets/textures/cube_test.png 0.0 0.0 90.0 0.0 0.0 1.0 1.0 1.0   -1
+
+cube: destructible_wall   10.0 0.0 0.0    2.0 5.0 0.1 ressources/assets/textures/cube_test.png 0.0    0.0 0.0 0.0    1.0 0.5 0.5 1.0   200000
+item: Ammo_Pack_1 -7.0 0.0 0.0   0.2 0.05 0.2   ressources/assets/textures/cube_test.png   0.0   0.0 0.0 0.0   0.3 0.3 0.3 1.0   -1
+item: Ammo_Pack_2 -7.0 0.0 1.0   0.2 0.05 0.2   ressources/assets/textures/cube_test.png   0.0   0.0 0.0 0.0   0.0 0.8 0.0 1.0   -2
+item: Ammo_Pack_3 -7.0 0.0 2.0   0.2 0.05 0.2   ressources/assets/textures/cube_test.png   0.0   0.0 0.0 0.0   0.8 0.8 0.0 1.0   -3
+item: Ammo_Pack_4 -7.0 0.0 -1.0   0.2 0.05 0.2   ressources/assets/textures/cube_test.png   0.0   0.0 0.0 0.0   0.4 0.0 0.0 1.0   -4
+item: Ammo_Pack_5 -7.0 0.0 -2.0   0.2 0.05 0.2   ressources/assets/textures/cube_test.png   0.0   0.0 0.0 0.0   0.4 0.0 0.4 1.0   -5
+item: Jet_Pack_1 -8.0 0.0 -6.0   0.2 0.05 0.2   ressources/assets/textures/cube_test.png   0.0   0.0 0.0 0.0   0.8 0.8 0.5 1.0   -1
+item: Jet_Pack_2 -7.0 0.0 -6.0   0.2 0.05 0.2   ressources/assets/textures/cube_test.png   0.0   0.0 0.0 0.0   0.8 0.8 0.5 1.0   -1
+item: Jet_Pack_3 -6.0 0.0 -6.0   0.2 0.05 0.2   ressources/assets/textures/cube_test.png   0.0   0.0 0.0 0.0   0.8 0.8 0.5 1.0   -1
+item: Jet_Pack_4 -5.0 0.0 -6.0   0.2 0.05 0.2   ressources/assets/textures/cube_test.png   0.0   0.0 0.0 0.0   0.8 0.8 0.5 1.0   -1
+item: Armor_Pack_1 -11.0 0.0 -6.0   0.2 0.05 0.2   ressources/assets/textures/cube_test.png   0.0   0.0 0.0 0.0   0.0 0.0 0.8 1.0   -1
+item: Armor_Pack_2 -12.0 0.0 -6.0   0.2 0.05 0.2   ressources/assets/textures/cube_test.png   0.0   0.0 0.0 0.0   0.0 0.0 0.8 1.0   -1
+item: Health_Pack_1 -9.0 0.0 -6.0   0.2 0.05 0.2   ressources/assets/textures/cube_test.png   0.0   0.0 0.0 0.0   0.8 0.0 0.0 1.0   -1
+item: Health_Pack_2 -10.0 0.0 -6.0   0.2 0.05 0.2   ressources/assets/textures/cube_test.png   0.0   0.0 0.0 0.0   0.8 0.0 0.0 1.0   -1
+>>>>>>> 616a4419b44f6ccba17887658d951dbe3f8b4a6b
 */
