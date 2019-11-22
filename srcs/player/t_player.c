@@ -6,23 +6,7 @@ t_player		create_t_player(t_camera *cam)
 
 	result.camera = cam;
 	result.shoot_time = 10;
-	// result.hitbox = hitbox;
-	// // result.hitbox.no_hitbox = 1;
-	// t_mesh_set_color(&result.hitbox, create_t_color(0.5, 0.6, 0.0 ,1.0));
-	// result.hp = 100;
-	// result.hitbox.hp = result.hp;
-	// result.armor = 0;
-	// result.fuel = 0;
 	result.speed = 1.0;
-	// // result.weapons[0] = create_t_weapons(0);
-	// // result.weapons[1] = create_t_weapons(1);
-	// // result.weapons[2] = create_t_weapons(2);
-	// // result.weapons[3] = create_t_weapons(3);
-	// // result.weapons[4] = create_t_weapons(4);
-	// result.red_card = 0;
-	// result.blue_card = 0;
-	// result.green_card = 0;
-	// result.current_weapon = &result.weapons[0];
 	return (result);
 }
 
@@ -32,10 +16,7 @@ t_player			*initialize_t_player(t_camera *cam)
 
 	if (!(result = (t_player *)malloc(sizeof(t_player))))
 		error_exit(-13, "Can't create a t_player array");
-	// printf("malloc t_player\n");
-
 	*result = create_t_player(cam);
-
 	return(result);
 }
 
@@ -95,25 +76,15 @@ void			change_weapon(t_keyboard *p_keyboard, t_player *player)
 {
 	static int index = 0; //changer pour une union
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_1]) == 1)
-	{
 		index = 0;
-	}
 	else if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_2]) == 1)
-	{
 		index = 1;
-	}
 	else if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_3]) == 1)
-	{
 		index = 2;
-	}
 	else if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_4]) == 1)
-	{
 		index = 3;
-	}
 	else if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_5]) == 1)
-	{
 		index = 4;
-	}
 	player->current_weapon = &player->weapons[index];
 }
 
@@ -121,7 +92,6 @@ void			reload_weapon(t_camera *camera, t_engine *engine)
 {
 	int to_fill;
 
-	// printf("%d\n", engine->tick - engine->user_engine->player->reload_time);
 	to_fill = engine->user_engine->player->current_weapon->mag_size - engine->user_engine->player->current_weapon->ammo;
 	if (engine->tick - engine->user_engine->player->reload_time == engine->user_engine->player->current_weapon->tick_reload)
 	{
@@ -147,7 +117,6 @@ void			shoot_weapon(t_engine *engine)
 	dist = 0.0;
 	if (t_mouse_state(engine->user_engine->mouse) == 1 && engine->tick % engine->user_engine->player->current_weapon->tick_shoot == 0)
 	{
-		// printf("%d\n", engine->tick);
 		if (engine->user_engine->player->current_weapon->ammo > 0)
 		{
 			target = cast_ray(engine, t_camera_list_get(engine->visual_engine->camera_list, 0)->pos, t_camera_list_get(engine->visual_engine->camera_list, 0)->forward, "Player");
@@ -157,7 +126,6 @@ void			shoot_weapon(t_engine *engine)
 					dist = calc_dist_vector4_to_vector4(engine->user_engine->player->hitbox.pos, target->pos);
 				if (engine->user_engine->player->current_weapon->dmg - dist * 4 >= 0)
 					target->hp -= engine->user_engine->player->current_weapon->dmg - dist * 4;
-				printf("\rTarget hp = %d\n", target->hp);
 				if (target->hp <= 0)
 				{
 					if (ft_strcmp(target->name, "wall_script") == 0)
@@ -227,7 +195,6 @@ void			player_action(t_camera *camera, t_keyboard *p_keyboard, t_engine *engine)
 		camera->f_press = 0;
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_B]) == 1)
 		save_map(engine, 1);
-	// printf("%d\n", camera->r_press);
 	change_weapon(engine->user_engine->keyboard, engine->user_engine->player);
 	if (door != NULL)
 		t_mesh_move_door(door);

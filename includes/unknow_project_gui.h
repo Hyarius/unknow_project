@@ -48,16 +48,14 @@ void            t_user_engine_handle_menu(t_camera *main_camera, t_gui *gui, t_u
 
 void            main_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int *play);
 void            option_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int *play);
-void            setting_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int *play);
-void            difficulty_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int *play);
-void            sens_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int *play);
+void            settings_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int *play);
+void            controls_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int *play);
+void            pause_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int *play);
+void            settings_pause_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int *play);
+void            credits_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int *play);
 void            sens_bis(t_camera *main_camera, t_gui *gui, int sens);
 void            set_controls(t_camera *main_camera, t_gui *gui, t_user_engine *engine, int key);
 
 void            main_pause(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int *play);
-
-void			map_editor(t_camera *main_camera, t_gui *gui, t_engine *engine, t_mesh mesh);
-
-
 
 #endif

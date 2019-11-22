@@ -370,31 +370,7 @@ void		print_info_editing(t_camera *main_camera, t_keyboard *key, t_gui *gui)
 	if (gui->info_print == 1)
 	{
 		t_view_port_clear_buffers(main_camera->view_port);
-		draw_rectangle_color_cpu_front(main_camera->view_port, create_t_rectangle(create_t_vector2(-1.0, 1.0), create_t_vector2(0.5, -2.0)), color);
-		print_letter(main_camera, gui, "cube", create_t_rectangle(create_t_vector2(-0.9, 0.83), create_t_vector2(0.02, 0.06)));
-		print_letter(main_camera, gui, "wall", create_t_rectangle(create_t_vector2(-0.9, 0.76), create_t_vector2(0.02, 0.06)));
-		print_letter(main_camera, gui, "door", create_t_rectangle(create_t_vector2(-0.9, 0.69), create_t_vector2(0.02, 0.06)));
-		print_letter(main_camera, gui, "door_red", create_t_rectangle(create_t_vector2(-0.9, 0.62), create_t_vector2(0.02, 0.06)));
-		print_letter(main_camera, gui, "door_blue", create_t_rectangle(create_t_vector2(-0.9, 0.55), create_t_vector2(0.02, 0.06)));
-		print_letter(main_camera, gui, "door_green", create_t_rectangle(create_t_vector2(-0.9, 0.48), create_t_vector2(0.02, 0.06)));
-		print_letter(main_camera, gui, "card_red", create_t_rectangle(create_t_vector2(-0.9, 0.41), create_t_vector2(0.02, 0.06)));
-		print_letter(main_camera, gui, "card_blue", create_t_rectangle(create_t_vector2(-0.9, 0.34), create_t_vector2(0.02, 0.06)));
-		print_letter(main_camera, gui, "card_green", create_t_rectangle(create_t_vector2(-0.9, 0.27), create_t_vector2(0.02, 0.06)));
-		print_letter(main_camera, gui, "elevator", create_t_rectangle(create_t_vector2(-0.9, 0.2), create_t_vector2(0.02, 0.06)));
-		print_letter(main_camera, gui, "slope", create_t_rectangle(create_t_vector2(-0.9, 0.13), create_t_vector2(0.02, 0.06)));
-		print_letter(main_camera, gui, "stair", create_t_rectangle(create_t_vector2(-0.9, 0.06), create_t_vector2(0.02, 0.06)));
-		print_letter(main_camera, gui, "health pack", create_t_rectangle(create_t_vector2(-0.9, -0.01), create_t_vector2(0.02, 0.06)));
-		print_letter(main_camera, gui, "armor pack", create_t_rectangle(create_t_vector2(-0.9, -0.08), create_t_vector2(0.02, 0.06)));
-		print_letter(main_camera, gui, "jet pack", create_t_rectangle(create_t_vector2(-0.9, -0.15), create_t_vector2(0.02, 0.06)));
-		print_letter(main_camera, gui, "ammo pack ar", create_t_rectangle(create_t_vector2(-0.9, -0.22), create_t_vector2(0.02, 0.06)));
-		print_letter(main_camera, gui, "ammo pack rifle", create_t_rectangle(create_t_vector2(-0.9, -0.29), create_t_vector2(0.02, 0.06)));
-		print_letter(main_camera, gui, "ammo pack shotgun", create_t_rectangle(create_t_vector2(-0.9, -0.36), create_t_vector2(0.02, 0.06)));
-		print_letter(main_camera, gui, "ammo pack rpg", create_t_rectangle(create_t_vector2(-0.9, -0.43), create_t_vector2(0.02, 0.06)));
-		print_letter(main_camera, gui, "ladder", create_t_rectangle(create_t_vector2(-0.9, -0.5), create_t_vector2(0.02, 0.06)));
-		print_letter(main_camera, gui, "platform", create_t_rectangle(create_t_vector2(-0.9, -0.57), create_t_vector2(0.02, 0.06)));
-		print_letter(main_camera, gui, "plane", create_t_rectangle(create_t_vector2(-0.9, -0.64), create_t_vector2(0.02, 0.06)));
-		print_letter(main_camera, gui, "enemy", create_t_rectangle(create_t_vector2(-0.9, -0.71), create_t_vector2(0.02, 0.06)));
-		print_letter(main_camera, gui, "window", create_t_rectangle(create_t_vector2(-0.9, -0.78), create_t_vector2(0.02, 0.06)));
+		draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(-1.0, 1.0), create_t_vector2(2.0, -2.0)), gui->menu[12]);
 	}
 }
 
