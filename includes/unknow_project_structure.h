@@ -34,6 +34,8 @@ typedef struct	s_texture
 {
 	t_surface	*surface;
 	GLuint		id;
+	char		*path;
+	char		letter;
 }				t_texture;
 
 t_color			get_pixel_color(t_texture *texture, int x, int y);
@@ -53,7 +55,7 @@ typedef struct	s_face
 	t_color		color;
 	int			index_vertices[3];
 	int			index_uvs[3];
-	t_vector3	normale;
+	t_vector4	normale;
 }				t_face;
 
 t_face 			create_t_face();

@@ -9,9 +9,21 @@ typedef struct	s_vector4
     float		w;
 }				t_vector4;
 
-t_vector4	create_t_vector4(float p_x, float p_y, float p_z, float p_w);
-t_vector4	*initialize_t_vector4(float p_x, float p_y, float p_z, float p_w);
-void 		print_t_vector4(t_vector4 vector, char *str);
+t_vector4 create_t_vector4(float p_x, float p_y, float p_z);
+t_vector4	*initialize_t_vector4(float p_x, float p_y, float p_z);
+t_vector4	add_vector4_to_vector4(t_vector4 a, t_vector4 b);
+t_vector4	substract_vector4_to_vector4(t_vector4 a, t_vector4 b);
+t_vector4	substract_float_to_vector4(t_vector4 b, float a);
+t_vector4	add_float_to_vector4(t_vector4 b, float a);
+t_vector4	mult_vector4_by_vector4(t_vector4 a, t_vector4 b);
+t_vector4	mult_vector4_by_float(t_vector4 a, float b);
+t_vector4	divide_vector4_by_vector4(t_vector4 a, t_vector4 b);
+t_vector4	divide_vector4_by_float(t_vector4 a, float b);
+t_vector4	inv_t_vector4(t_vector4 src);
+void		swap_t_vector4(t_vector4 *a, t_vector4 *b);
+int			t_vector4_equal(t_vector4 a, t_vector4 b);
+float		t_vector4_length(t_vector4 a);
+void		print_t_vector4(t_vector4 vector, char *str);;
 
 typedef struct	s_vector3
 {
@@ -45,6 +57,7 @@ typedef struct	s_vector2
 t_vector2	create_t_vector2(float p_x, float p_y);
 t_vector2	*initialize_t_vector2(float p_x, float p_y);
 void 		print_t_vector2(t_vector2 vector, char *str);
+t_vector2	add_vector2_to_vector2(t_vector2 v1, t_vector2 v2);
 
 typedef struct	s_vector4_int
 {
@@ -55,9 +68,9 @@ typedef struct	s_vector4_int
 }				t_vector4_int;
 
 t_vector4_int
-			create_t_vector4_int(int p_x, int p_y, int p_z, int p_w);
+			create_t_vector4_int(int p_x, int p_y, int p_z);
 t_vector4_int
-			*initialize_t_vector4_int(int p_x, int p_y, int p_z, int p_w);
+			*initialize_t_vector4_int(int p_x, int p_y, int p_z);
 void 		print_t_vector4_int(t_vector4_int vector, char *str);
 
 typedef struct	s_vector3_int
