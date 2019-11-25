@@ -33,11 +33,15 @@ t_mesh	*cast_ray(t_engine *engine, t_vector4 pos, t_vector4 direction, char *sho
 		while (++j < t_engine_return_mesh_len(engine))
 		{
 			mesh = t_engine_get_mesh(engine, j);
+			// t_mesh_set_color(mesh, create_t_color(0.0, 1.0, 0.0, 1.0));
 			if (ft_strcmp(mesh->name, shooter) != 0)
 			{
 				mesh = cast_ray_next(pos, direction, mesh);
 				if (mesh != NULL)
+				// {
+				// 	t_mesh_set_color(mesh, create_t_color(1.0, 0.0, 0.0, 1.0));
 					return (mesh);
+				// }
 			}
 		}
 		pos = add_vector4_to_vector4(pos, direction);

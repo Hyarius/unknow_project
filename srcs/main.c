@@ -40,7 +40,7 @@ int main(int argc, char **argv)
 	t_camera	*main_camera;
 	Mix_Music	*musique;
 
-	musique = Mix_LoadMUS("ressources/assets/sound/mega_man_test.ogg");
+	musique = Mix_LoadMUS("ressources/assets/sounds/mega_man_test.ogg");
 	main_camera = t_camera_list_get(engine->visual_engine->camera_list, 0);
 	t_engine_place_camera(engine, 0, create_t_vector4(5.0, 5.0, 0.0));
 	t_camera_look_at_point(main_camera, create_t_vector4(0, 0, 0));
@@ -51,27 +51,6 @@ int main(int argc, char **argv)
 	resize_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 2)->view_port, create_t_vector2_int(300, 240));
 	move_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 2)->view_port, create_t_vector2_int(300, 0));
 
-	//resize_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 0)->view_port, create_t_vector2_int(2, 2));
-	//
-	// mesh = create_primitive_cube(create_t_vector4(2.0, 2.0, 2.0), create_t_vector4(0.3, 0.5, 0.3), NULL, 0.0);
-	// t_mesh_set_name(&mesh, "Player");
-	// t_mesh_set_color(&mesh, create_t_color(1.5, 0.4, 1.5, 1.0));
-	//
-	// engine->user_engine->player = initialize_t_player(main_camera, mesh);
-	// t_engine_add_mesh(engine, engine->user_engine->player->hitbox);
-	// link_t_camera_to_t_mesh(main_camera, t_engine_get_mesh(engine, 0), 100);
-
-	// mesh = create_primitive_cube(create_t_vector4(1.0, 0.0, 2.0), create_t_vector4(1.0, 1.0, 1.0), texture, 0.0);
-	// t_mesh_set_name(&mesh, "cube texture");
-	// t_mesh_rotate(&mesh, create_t_vector4(0.0, 0.0, 0.0));
-	// t_mesh_set_color(&mesh, create_t_color(0.5, 0.6, 0.8 ,1.0));
-	// t_engine_add_mesh(engine, mesh);
-
-	// mesh = create_primitive_cube(create_t_vector4(1.0, 0.0, 5.0), create_t_vector4(2.0, 2.0, 2), NULL, 0.0);
-	// t_mesh_set_name(&mesh, "Enemy");
-	// t_mesh_rotate(&mesh, create_t_vector4(0.0, 90.0, 0.0));
-	// t_mesh_set_color(&mesh, create_t_color(0.0, 0.0, 0.0 ,1.0));
-	// t_engine_add_mesh(engine, mesh);
 	t_player *player;
 	int		fd;
 
@@ -109,94 +88,32 @@ int main(int argc, char **argv)
 			t_engine_add_item(engine, t_item_list_at(item_list, j));
 			j++;
 		}
-		// if (ft_strcmp(t_mesh_list_at(meshs, i).name, "Player") == 0)
-		// 	player = t_mesh_list_at(meshs, i);
-		// else
-			t_engine_add_mesh(engine, t_mesh_list_at(meshs, i));
-			if (ft_strcmp(t_mesh_list_at(meshs, i).name, "Enemy") == 0)
+		t_engine_add_mesh(engine, t_mesh_list_at(meshs, i));
+		if (ft_strcmp(t_mesh_list_at(meshs, i).name, "Enemy") == 0)
+		{
+			if (k != 0)
 			{
-				if (k != 0)
-				{
-					t_engine_add_camera(engine, create_t_camera(win, create_t_vector4(0.0, 0.0, 0.0), 70, create_t_vector2(NEAR, FAR)));
-					resize_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 2 + k)->view_port, create_t_vector2_int(1, 1));
-					move_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 2 + k)->view_port, create_t_vector2_int(0, 0));
-				}
-				link_t_camera_to_t_mesh(engine, 2 + k, t_engine_get_mesh(engine, i), 0);
-				k++;
+				t_engine_add_camera(engine, create_t_camera(win, create_t_vector4(0.0, 0.0, 0.0), 70, create_t_vector2(NEAR, FAR)));
+				resize_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 2 + k)->view_port, create_t_vector2_int(1, 1));
+				move_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 2 + k)->view_port, create_t_vector2_int(0, 0));
 			}
+			link_t_camera_to_t_mesh(engine, 2 + k, t_engine_get_mesh(engine, i), 0);
+			k++;
+		}
 		i++;
 	}
-	// player.pos = add_vector4_to_vector4(player.pos, create_t_vector4(0.0, 1.0, 0.0));
-	// engine->user_engine->player = initialize_t_player(main_camera, player);
 	engine->user_engine->player = player;
 	t_engine_add_mesh(engine, engine->user_engine->player->hitbox);
 	link_t_camera_to_t_mesh(engine, 0, t_engine_get_mesh(engine, i), 100);
 
 	t_rectangle rec = create_t_rectangle(create_t_vector2(-1, 1), create_t_vector2(2, -2));
 
-	// t_item_list	*item_list = initialize_t_item_list();
-	//
-	// t_item health_pack = create_health_pack(create_t_vector4(0.0, 0.0, 0.0), engine);
-	// t_item_list_push_back(item_list, health_pack);
-	//
-	// t_item ammo_pack = create_ammo_pack(create_t_vector4(1.0, 0.0, 0.0), engine, 1);
-	// t_item_list_push_back(item_list, ammo_pack);
-	// ammo_pack = create_ammo_pack(create_t_vector4(2.0, 0.0, 0.0), engine, 2);
-	// t_item_list_push_back(item_list, ammo_pack);
-	// ammo_pack = create_ammo_pack(create_t_vector4(3.0, 0.0, 0.0), engine, 3);
-	// t_item_list_push_back(item_list, ammo_pack);
-	// ammo_pack = create_ammo_pack(create_t_vector4(4.0, 0.0, 0.0), engine, 4);
-	// t_item_list_push_back(item_list, ammo_pack);
-	// ammo_pack = create_ammo_pack(create_t_vector4(-2.0, 0.0, 0.0), engine, 5);
-	// t_item_list_push_back(item_list, ammo_pack);
-	//
-	// t_item armor_pack = create_armor_pack(create_t_vector4(-1.0, 0.0, 0.0), engine);
-	// t_item_list_push_back(item_list, armor_pack);
-	// //
-	// // armor_pack = create_armor_pack(create_t_vector4(-2.0, 0.0, 0.0), engine);
-	// // t_item_list_push_back(item_list, armor_pack);
-	//
-	// t_item jet_pack = create_jet_pack(create_t_vector4(-3.0, 0.0, 0.0), engine);
-	// t_item_list_push_back(item_list, jet_pack);
-	//
-	// jet_pack = create_jet_pack(create_t_vector4(-3.0, 0.0, 1.0), engine);
-	// t_item_list_push_back(item_list, jet_pack);
-	//
-	//
-	// jet_pack = create_jet_pack(create_t_vector4(-3.0, 0.0, 2.0), engine);
-	// t_item_list_push_back(item_list, jet_pack);
-	//
-	//
-	// jet_pack = create_jet_pack(create_t_vector4(-3.0, 0.0, 3.0), engine);
-	// t_item_list_push_back(item_list, jet_pack);
-	//
-	//
-	// jet_pack = create_jet_pack(create_t_vector4(-3.0, 0.0, -1.0), engine);
-	// t_item_list_push_back(item_list, jet_pack);
-	//
-	//
-	// jet_pack = create_jet_pack(create_t_vector4(-3.0, 0.0, -2.0), engine);
-	// t_item_list_push_back(item_list, jet_pack);
-	//
-	//
-	// jet_pack = create_jet_pack(create_t_vector4(-3.0, 0.0, -3.0), engine);
-	// t_item_list_push_back(item_list, jet_pack);
-	//
-	// t_item color_card = create_color_card(create_t_vector4(-6.0, 0.0, -1.0), engine, 1);
-	// t_item_list_push_back(item_list, color_card);
-	// color_card = create_color_card(create_t_vector4(-6.0, 0.0, 0.0), engine, 2);
-	// t_item_list_push_back(item_list, color_card);
-	// color_card = create_color_card(create_t_vector4(-6.0, 0.0, 1.0), engine, 3);
-	// t_item_list_push_back(item_list, color_card);
-
-	// engine->physic_engine->item_list = item_list;
-
 	t_mesh	mesh_editing;
 	mesh_editing = create_mesh_editing(0, engine->user_engine->player->camera->body->pos);
 	mesh = create_primitive_skybox(main_camera->pos, create_t_vector4(1.0, 1.0, 1.0), skybox);
 	engine->playing = 1;
-	Mix_VolumeMusic(MIX_MAX_VOLUME);
-	Mix_PlayMusic(musique, -1);
+	Mix_VolumeMusic(MIX_MAX_VOLUME / 100);
+	Mix_PlayMusic(musique, 1);
 	while (engine->playing != 0)
 	{
 		prepare_screen(win, create_t_color(0.2f, 0.2f, 0.2f, 1.0f));
@@ -253,7 +170,8 @@ int main(int argc, char **argv)
 			t_engine_render_camera(engine);
 			player_action(main_camera, engine->user_engine->keyboard, engine);
 			enemy_look(engine);
-			enemy_shoot(engine);
+			// enemy_shoot(engine);
+			enemy_move(engine);
 			drawing_front_hp(main_camera, engine);
 			drawing_front_mun(main_camera, gui, texture2, engine->user_engine->player);
 			draw_minimap(main_camera, engine, win);

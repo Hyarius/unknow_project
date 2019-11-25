@@ -22,9 +22,9 @@ void	draw_triangle_depth_cpu(t_view_port *view_port, t_triangle *p_triangle, flo
 	triangle.b = convert_opengl_to_vector4(view_port, p_triangle->b);
 	triangle.c = convert_opengl_to_vector4(view_port, p_triangle->c);
 
-	triangle.a.z = 1.0 / triangle.a.z;
-	triangle.b.z = 1.0 / triangle.b.z;
-	triangle.c.z = 1.0 / triangle.c.z;
+	triangle.a.w = 1.0 / triangle.a.w;
+	triangle.b.w = 1.0 / triangle.b.w;
+	triangle.c.w = 1.0 / triangle.c.w;
 
 	ab = create_t_rasterizer(triangle.a, triangle.b, triangle.c);
 	ac = create_t_rasterizer(triangle.a, triangle.c, triangle.b);
@@ -55,7 +55,7 @@ void	draw_triangle_depth_cpu(t_view_port *view_port, t_triangle *p_triangle, flo
 			gamma = (1.0 - alpha - beta);
 			if (alpha >= 0 && beta >= 0 && gamma >= 0)
 			{
-				z = 1 / ((triangle.a.z * gamma) + (triangle.b.z * beta) + (triangle.c.z * alpha));
+				z = 1 / ((triangle.a.w * gamma) + (triangle.b.w * beta) + (triangle.c.w * alpha));
 
 				color.r = 1.0 - (z / dist_max);
 				color.g = 1.0 - (z / dist_max);
