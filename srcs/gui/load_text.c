@@ -32,4 +32,5 @@ void    load_menu(t_gui *gui)
     gui->menu[11] = png_load("ressources/assets/textures/press_key.png");
 	gui->menu[12] = png_load("ressources/assets/imgs/Level_editor_menu.png");
 	gui->menu[13] = png_load("ressources/assets/imgs/yellow_line.png");
+	gui->menu[14] = png_load("ressources/assets/imgs/set_player.png");
 }

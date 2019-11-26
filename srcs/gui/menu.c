@@ -1,19 +1,21 @@
 # include "unknow_project.h"
 
-void            t_user_engine_handle_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int *play)
+void            t_user_engine_handle_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, int *play)
 {
     if (*play == 2)
-        main_menu(main_camera, gui, user_engine, play);
-    if (*play == 3)
-        settings_menu(main_camera, gui, user_engine, play);
-    if (*play == 4)
-        controls_menu(main_camera, gui, user_engine, play);
-    if (*play == 5)
-        credits_menu(main_camera, gui, user_engine, play);
-    if (*play == -1)
-        pause_menu(main_camera, gui, user_engine, play);
-    if (*play == -2)
-        settings_pause_menu(main_camera, gui, user_engine, play);
+        main_menu(main_camera, gui, engine->user_engine, play);
+    else if (*play == 3)
+        settings_menu(main_camera, gui, engine->user_engine, play);
+    else if (*play == 4)
+        controls_menu(main_camera, gui, engine->user_engine, play);
+    else if (*play == 5)
+        credits_menu(main_camera, gui, engine->user_engine, play);
+	else if (*play == 11)
+		set_player_editing(main_camera, gui, engine, play);
+    else if (*play == -1)
+        pause_menu(main_camera, gui, engine->user_engine, play);
+    else if (*play == -2)
+        settings_pause_menu(main_camera, gui, engine->user_engine, play);
 }
 
 void			main_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int *play)
@@ -367,4 +369,33 @@ void			credits_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engin
     }
     else
         user_engine->mouse->clicked_left = BOOL_FALSE;
+}
+
+void		set_player_editing(t_camera *main_camera, t_gui *gui, t_engine *engine, int *play)
+{
+	t_mouse			*mouse = engine->user_engine->mouse;
+	t_keyboard		*keyboard = engine->user_engine->keyboard;
+	t_mesh			*mesh;
+    t_vector2_int	pos;
+	int				i;
+
+	i = 0;
+	mesh = t_mesh_list_get(engine->physic_engine->mesh_list, i);
+	while (++i < engine->physic_engine->mesh_list->size && ft_strcmp(mesh->name, "Player") != 0)
+		mesh = t_mesh_list_get(engine->physic_engine->mesh_list, i);
+	get_t_mouse_info(mouse);
+    pos = create_t_vector2_int(mouse->pos.x * 100 / WIN_X, mouse->pos.y * 100 / WIN_Y);
+	if (ft_strcmp(mesh->name, "Player") == 0)
+	{
+		if (pos.y > 12 && pos.y < 21)
+		{
+			if (pos.x > 27 && pos.x < 46)
+				if (t_mouse_state(mouse) == 2)
+					mesh->kinetic = 10.0;
+			if (pos.x > 54 && pos.x < 72)
+				if (t_mouse_state(mouse) == 2)
+					mesh->kinetic = 100.0;
+				// printf("here\n");
+		}
+	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 13:30:45 by adjouber          #+#    #+#             */
-/*   Updated: 2019/11/22 10:18:51 by gboutin          ###   ########.fr       */
+/*   Updated: 2019/11/26 16:01:28 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ t_mesh			init_mesh(char **line_split)
 	mesh.hp = ft_atoi(line_split[17]);
 	mesh.no_hitbox = 0;
 	mesh.primitive = -1;
+	mesh.kinetic = ft_atof(line_split[9]);
 	t_mesh_set_name(&mesh, line_split[1]);
 	return (mesh);
 }

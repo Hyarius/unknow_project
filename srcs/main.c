@@ -119,7 +119,7 @@ int main(int argc, char **argv)
 					resize_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 2 + k)->view_port, create_t_vector2_int(1, 1));
 					move_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 2 + k)->view_port, create_t_vector2_int(0, 0));
 				}
-				link_t_camera_to_t_mesh(engine, 2 + k, t_engine_get_mesh(engine, i), 0);
+				link_t_camera_to_t_mesh(engine, 2 + k, t_engine_get_mesh(engine, i));
 				k++;
 			}
 		i++;
@@ -128,7 +128,7 @@ int main(int argc, char **argv)
 	// engine->user_engine->player = initialize_t_player(main_camera, player);
 	engine->user_engine->player = player;
 	t_engine_add_mesh(engine, engine->user_engine->player->hitbox);
-	link_t_camera_to_t_mesh(engine, 0, t_engine_get_mesh(engine, i), 100);
+	link_t_camera_to_t_mesh(engine, 0, t_engine_get_mesh(engine, i));
 
 	t_rectangle rec = create_t_rectangle(create_t_vector2(-1, 1), create_t_vector2(2, -2));
 
@@ -269,6 +269,14 @@ int main(int argc, char **argv)
 			t_mesh_free_move(engine->user_engine->player->camera->body);
 			mesh_editing = select_mesh(mesh_editing, engine->user_engine->keyboard, engine->user_engine->player->camera->body->pos);
 			map_editor(main_camera, gui, engine, mesh_editing);
+		}
+		else if (engine->playing == 11)
+		{
+			t_engine_draw_mesh(engine);
+			t_engine_render_camera(engine);
+   			t_view_port_clear_buffers(main_camera->view_port);
+    		draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->menu[14]);
+			print_set_player(main_camera, gui, engine);
 		}
 		t_engine_handle_event(main_camera, gui, engine);
 		render_screen(win, engine); // affiche la fenetre

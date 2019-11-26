@@ -401,7 +401,7 @@ void		clean_t_camera(t_camera *camera)
 	t_view_port_clear_buffers(camera->view_port);
 }
 
-void		link_t_camera_to_t_mesh(t_engine *engine, int index, t_mesh *mesh, float new_kinetic)
+void		link_t_camera_to_t_mesh(t_engine *engine, int index, t_mesh *mesh)
 {
 	t_camera	*camera;
 
@@ -411,7 +411,6 @@ void		link_t_camera_to_t_mesh(t_engine *engine, int index, t_mesh *mesh, float n
 	camera->body = mesh;
 	if (mesh != NULL)
 	{
-		camera->body->kinetic = new_kinetic;
 		mesh->camera = camera;
 	}
 }

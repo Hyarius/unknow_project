@@ -44,7 +44,7 @@ void            set_t_gui_texte(t_gui *gui);
 void            print_info_bar(t_camera *main_camera, t_player *player, t_gui *gui);
 void            load_menu(t_gui *gui);
 void            t_engine_handle_event(t_camera *main_camera, t_gui *gui, t_engine *engine);
-void            t_user_engine_handle_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int *play);
+void            t_user_engine_handle_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, int *play);
 
 void            main_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int *play);
 void            option_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int *play);
@@ -55,7 +55,12 @@ void            settings_pause_menu(t_camera *main_camera, t_gui *gui, t_user_en
 void            credits_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int *play);
 void            sens_bis(t_camera *main_camera, t_gui *gui, int sens);
 void            set_controls(t_camera *main_camera, t_gui *gui, t_user_engine *engine, int key);
+void			set_player_editing(t_camera *main_camera, t_gui *gui, t_engine *engine, int *play);
 
 void            main_pause(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int *play);
+
+void			print_set_player(t_camera *main_camera, t_gui *gui, t_engine *engine);
+void			map_editor(t_camera *main_camera, t_gui *gui, t_engine *engine, t_mesh mesh_editing);
+
 
 #endif

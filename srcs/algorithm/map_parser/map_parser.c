@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 15:31:13 by adjouber          #+#    #+#             */
-/*   Updated: 2019/11/22 10:18:55 by gboutin          ###   ########.fr       */
+/*   Updated: 2019/11/26 16:44:38 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void			set_mesh(t_mesh *mesh, char **line_split)
 		mesh->no_hitbox = 1;
 	else
 		mesh->no_hitbox = 0;
+	mesh.kinetic = ft_atof(line_split[9]);	
 	t_mesh_set_name(mesh, line_split[1]);
 }
 
