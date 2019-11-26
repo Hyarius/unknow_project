@@ -86,15 +86,14 @@ void		free_t_cam(t_camera *dest)
 
 void		t_camera_look_at_point(t_camera *cam, t_vector4 target) // calcul de l'angle de vue de la camera (forward, right, up)
 {
+	t_vector4	result;
+
 	if (target.x == cam->pos.x && target.y == cam->pos.y && target.z == cam->pos.z)
 		return ;
-
-	t_vector4 result = normalize_t_vector4(substract_vector4_to_vector4(cam->pos, target));
-
+	result = normalize_t_vector4(substract_vector4_to_vector4(cam->pos, target));
 	cam->yaw = radius_to_degree(atan2(result.z, -result.x)) - 90;
 	cam->pitch = radius_to_degree(atan2(result.y, sqrt(result.x * result.x + result.z * result.z)));
 	cam->pitch = clamp_float_value(-89, cam->pitch, 89);
-
 	t_camera_look_at(cam);
 }
 

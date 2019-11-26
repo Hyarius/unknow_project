@@ -16,6 +16,7 @@ void    drawing_front_hp(t_camera *main_camera, t_engine *engine)
     }
     t_view_port_clear_buffers(main_camera->view_port);
     draw_rectangle_color_cpu_front(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.22, -1), create_t_vector2(0.44, 0.22)), color_back);
+    t_view_port_clear_buffers(main_camera->view_port);
     draw_rectangle_color_cpu_front(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.2, -0.98), create_t_vector2(0.4 * (float)(engine->user_engine->player->hp) / 100, 0.08)), color_hp);
     draw_rectangle_color_cpu_front(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.2, -0.88), create_t_vector2(0.4 * (float)(engine->user_engine->player->armor) / 100, 0.08)), color_armor);
     draw_rectangle_color_cpu_front(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.88, -0.88), create_t_vector2(0.2 * (float)(engine->user_engine->player->fuel) / 100, 0.08)), color_jetpack);
@@ -25,7 +26,10 @@ void    drawing_front_hp(t_camera *main_camera, t_engine *engine)
 void    drawing_front_mun(t_camera *main_camera, t_gui *p_gui, t_texture **texture, t_player *player)
 {
     int weapon;
+    static t_color    *color = NULL;
 
+    if (color == NULL)
+        color = initialize_t_color(0.7, 0.7, 0.7, 1.0);
     if (ft_strcmp(player->current_weapon->name, "pistol") == 0)
         weapon = 0;
     else if (ft_strcmp(player->current_weapon->name, "ar") == 0)
@@ -34,6 +38,8 @@ void    drawing_front_mun(t_camera *main_camera, t_gui *p_gui, t_texture **textu
         weapon = 2;
     else if (ft_strcmp(player->current_weapon->name, "shotgun") == 0)
         weapon = 3;
+
+	draw_rectangle_color_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.75, -1.0), create_t_vector2(0.25, 0.20)), color);
     t_view_port_clear_buffers(main_camera->view_port);
-    draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.8, -1), create_t_vector2(0.2, 0.2)), texture[weapon]);
+    draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(1.0, -0.8), create_t_vector2(-0.2, -0.2)), texture[weapon]);
 }

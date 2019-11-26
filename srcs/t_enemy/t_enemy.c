@@ -4,13 +4,13 @@ void		enemy_look(t_engine *engine)
 {
 	int			i;
 	t_camera	*cam;
-	t_mesh		target;
+	t_mesh		*target;
 
 	i = 0;
 	while (i < engine->physic_engine->mesh_list->size)
 	{
-		target = t_mesh_list_at(engine->physic_engine->mesh_list, i);
-		if (ft_strcmp(target.name, "Player") == 0)
+		target = t_mesh_list_get(engine->physic_engine->mesh_list, i);
+		if (ft_strcmp(target->name, "Player") == 0)
 			break ;
 		i++;
 	}
@@ -23,7 +23,8 @@ void		enemy_look(t_engine *engine)
 			if (ft_strcmp(cam->body->name, "Enemy") == 0)
 			{
 				cam->pos = add_vector4_to_vector4(cam->body->pos, create_t_vector4(0.15, 0.45, -0.15));
-				t_camera_look_at_point(cam, target.pos);
+				t_camera_look_at_point(cam, target->pos);
+				// t_mesh_rotate_to(cam->body, target);
 			}
 		}
 		i++;
@@ -79,34 +80,25 @@ void		enemy_shoot(t_engine *engine)
 void		enemy_move(t_engine *engine)
 {
 	int			i;
-	int			diff;
-	static int	j = -1;
-	t_mesh		*target;
 	t_mesh		*mesh;
+	t_mesh		*target;
 
 	i = 0;
 	while (i < engine->physic_engine->mesh_list->size)
 	{
-		target = t_mesh_list_get(engine->physic_engine->mesh_list, i);
-		if (ft_strcmp(target->name, "Enemy") == 0)
+		mesh = t_mesh_list_get(engine->physic_engine->mesh_list, i);
+		if (ft_strcmp(mesh->name, "Enemy") == 0)
 		{
-			mesh = cast_ray(engine, target->camera->pos, target->camera->forward, "Enemy");
-			if (mesh != NULL &&/* engine->tick - j == 2 && */ft_strcmp(mesh->name, "Player") == 0)
+			target = cast_ray(engine, mesh->camera->pos, mesh->camera->forward, "Enemy");
+			if (target != NULL && ft_strcmp(target->name, "Player") == 0)
 			{
-				if (target->pos.x > mesh->pos.x)
-					target->pos.x -= 0.08;
-				else if (target->pos.x < mesh->pos.x)
-					target->pos.x += 0.08;
-				if (target->pos.z > mesh->pos.z)
-					target->pos.z -= 0.08;
-				else if (target->pos.z < mesh->pos.z)
-					target->pos.z += 0.08;
-				j = -1;
+				mesh->force = divide_vector4_by_float(mesh->camera->forward, 10);
+				mesh->force.y = 0;
+				if (can_move(mesh, engine) == BOOL_TRUE)
+					t_mesh_move(mesh, mesh->force);
 			}
-			else if (mesh != NULL && engine->tick - j > 3 && ft_strcmp(mesh->name, "Player") == 0)
-				j = engine->tick;
-			else if (mesh == NULL || ft_strcmp(mesh->name, "Player") != 0)
-				j = -1;
+			else
+				mesh->force = create_t_vector4(0.0, 0.0, 0.0);
 		}
 		i++;
 	}

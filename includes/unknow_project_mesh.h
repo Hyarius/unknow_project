@@ -78,6 +78,7 @@ t_mesh			create_primitive_vertical_plane(t_vector4 pos, t_vector4 size, char *te
 t_mesh			create_primitive_skybox(t_vector4 pos, t_vector4 size, t_texture *p_texture);
 
 void			t_mesh_rotate(t_mesh *mesh, t_vector4 delta_angle);
+void			t_mesh_rotate_to(t_mesh *src, t_mesh *dest);
 void			t_mesh_rotate_around_point(t_mesh *mesh, t_vector4 delta_angle, t_vector4 center);
 void			t_mesh_look_at(t_mesh *mesh);
 

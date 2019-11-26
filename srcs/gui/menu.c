@@ -109,7 +109,8 @@ void        settings_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user
 
 	get_t_mouse_info(mouse);
     pos = create_t_vector2_int(mouse->pos.x * 100 / WIN_X, mouse->pos.y * 100 / WIN_Y);
-    printf("x = %d | y = %d\n", pos.x, pos.y);
+    t_view_port_clear_buffers(main_camera->view_port);
+    draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.7, 0.4), create_t_vector2(-0.6, -0.94)), gui->menu[gui->idx]);
     if (pos.x > 16 && pos.x < 29)
     {
         if (pos.y > 23 && pos.y < 26)
@@ -121,21 +122,22 @@ void        settings_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user
         if (pos.y > 32 && pos.y < 35)
         	if (t_mouse_state(mouse) == 2)
 		        printf("Mute sounds\n");
+        t_view_port_clear_buffers(main_camera->view_port);
         if (pos.y > 44 && pos.y < 47)
         {
-            draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.1, -0.54), create_t_vector2(0.6, 0.94)), gui->menu[8]);
+            draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.7, 0.4), create_t_vector2(-0.6, -0.94)), gui->menu[8]);
             if (t_mouse_state(mouse) == 2)
                 gui->idx = 8;
         }
         if (pos.y > 48 && pos.y < 52)
         {
-            draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.1, -0.54), create_t_vector2(0.6, 0.94)), gui->menu[9]);
+            draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.7, 0.4), create_t_vector2(-0.6, -0.94)), gui->menu[9]);
             if (t_mouse_state(mouse) == 2)
                 gui->idx = 9;
         }
         if (pos.y > 53 && pos.y < 56)
         {
-            draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.1, -0.54), create_t_vector2(0.6, 0.94)), gui->menu[10]);
+            draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.7, 0.4), create_t_vector2(-0.6, -0.94)), gui->menu[10]);
             if (t_mouse_state(mouse) == 2)
                 gui->idx = 10;
         }

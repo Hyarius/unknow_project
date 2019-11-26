@@ -56,6 +56,7 @@ int main(int argc, char **argv)
 
 	// fd = open("ressources/map/jules_test.map", O_RDONLY);
 	fd = open("ressources/map/fichier_map.map", O_RDONLY);
+	// fd = open("ressources/map/map2.map", O_RDONLY);
 	// fd = open("ressources/map/test_gravity.map", O_RDONLY);
 	// fd = open("ressources/map/save1.map", O_RDONLY);
 	// fd = open("ressources/map/editing_map1.map", O_RDONLY);
@@ -67,6 +68,7 @@ int main(int argc, char **argv)
 	close(fd);
 	// fd = open("ressources/map/jules_test.map", O_RDONLY);
 	fd = open("ressources/map/fichier_map.map", O_RDONLY);
+	// fd = open("ressources/map/map2.map", O_RDONLY);
 	// fd = open("ressources/map/test_gravity.map", O_RDONLY);
 	// fd = open("ressources/map/save1.map", O_RDONLY);
 	// fd = open("ressources/map/editing_map1.map", O_RDONLY);
@@ -111,7 +113,7 @@ int main(int argc, char **argv)
 	t_mesh	mesh_editing;
 	mesh_editing = create_mesh_editing(0, engine->user_engine->player->camera->body->pos);
 	mesh = create_primitive_skybox(main_camera->pos, create_t_vector4(1.0, 1.0, 1.0), skybox);
-	engine->playing = 1;
+	engine->playing = 2;
 	Mix_VolumeMusic(MIX_MAX_VOLUME / 100);
 	Mix_PlayMusic(musique, 1);
 	while (engine->playing != 0)
@@ -124,6 +126,8 @@ int main(int argc, char **argv)
 		}
 		if (engine->playing <= -1)
 		{
+			draw_skybox(win, main_camera, &mesh); // skybox
+			t_engine_render_camera(engine);
 			t_engine_draw_mesh(engine);
 			t_engine_render_camera(engine);
    			t_view_port_clear_buffers(main_camera->view_port);

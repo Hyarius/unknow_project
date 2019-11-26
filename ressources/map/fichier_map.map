@@ -5,13 +5,11 @@
 
 player: Player -12.0 0.0 2.0 0.3 0.5 0.3 NULL 0.0 0.0 0.0 0.0 1.0 0.4 1.0 1.0 100 100 100 15 15 30 120 0 10 0 20 0 5 0 0 0
 
+cube: Enemy -16.0 3.0 4.0 0.3 0.5 0.3 ressources/assets/textures/cube_test.png 0.0 0.0 90.0 0.0 0.0 0.0 0.0 1.0    50
 plane: end 10.0 0.0 10.0 0.3 0.0 0.3 NULL 0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0   -1
 
 //plane: plane 0.0 0.0 0.0 100.0 0.0 100.0 ressources/assets/textures/sol_metallic.png 0.0 0.0 0.0 0.0 1.0 0.0 0.0 1.0    -1
 //plane: plane 0.0 -0.01 0.0 100.0 0.0 100.0 NULL 0.0 0.0 0.0 0.0 1.0 0.0 0.0 1.0    -1 *
-
-plane: plane 0.0 -0.01 0.0 100.0 0.0 100.0 ressources/assets/textures/sol_metallic.png 0.0 0.0 0.0 0.0 1.0 0.0 0.0 1.0    -1
-plane: plane 0.0 -0.02 0.0 100.0 0.0 100.0 ressources/assets/textures/sol_metallic.png 0.0 0.0 0.0 0.0 1.0 0.0 0.0 1.0    -1
 
 plane: plane -40.0 0.0 -40.0 20.0 0.0 20.0 ressources/assets/textures/metal_floor.png 0.0 0.0 0.0 0.0 1.0 0.0 0.0 1.0    -1
 plane: plane -20.0 0.0 -40.0 20.0 0.0 20.0 ressources/assets/textures/sol_metallic.png 0.0 0.0 0.0 0.0 1.0 0.0 0.0 1.0    -1
@@ -87,7 +85,7 @@ cube: door_red -8.0 0.0 0.5 1.0 2.0 0.1 ressources/assets/textures/cube_test.png
 cube: door_green -12.0 0.0 0.5 1.0 2.0 0.1 ressources/assets/textures/cube_test.png 0.0 0.0 90.0 0.0 0.2 1.0 0.2 1.0    -1
 
 
-cube: ladder 9.95 0.0 -10.4 0.2 10.0 0.05 ressources/assets/textures/echelle.png 0.0 0.0 90.0 0.0 0.0 0.0 1.0 1.0   -1
+cube: ladder 9.95 0.0 -10.4 0.2 4.0 0.05 ressources/assets/textures/echelle.png 0.0 0.0 90.0 0.0 0.0 0.0 1.0 1.0   -1
 
 cube: cube 10.0 0.0 -10.0 1.0 10.0 1.0 ressources/assets/textures/cube_test.png 0.0 0.0 90.0 0.0 1.0 0.0 1.0 1.0   200000
 
@@ -108,7 +106,7 @@ cube: stair -10.0 0.0 13.0 1.0 1.1 1.0 ressources/assets/textures/cube_test.png 
 cube: wall -1.0 0.0 -5.0 2.0 2.0 0.1 ressources/assets/textures/cube_test.png 0.0 0.0 0.0 0.0 0.8 0.8 0.0 1.0    -1   #
 cube: stair -10.0 0.0 25.0 10.0 0.05 1.0 ressources/assets/textures/cube_test.png 0.0 10.0 90.0 0.0 1.0 0.0 1.0 1.0    -1
 
-cube: Enemy 1.0 0.0 4.0 0.3 0.5 0.3 ressources/assets/textures/cube_test.png 0.0 0.0 90.0 0.0 0.0 0.0 0.0 1.0    50
+//cube: Enemy 1.0 0.0 4.0 0.3 0.5 0.3 ressources/assets/textures/cube_test.png 0.0 0.0 90.0 0.0 0.0 0.0 0.0 1.0    50
 /cube: Enemy 12.0 0.0 4.0 0.3 0.5 0.3 ressources/assets/textures/cube_test.png 0.0 0.0 90.0 0.0 0.0 0.0 0.0 1.0    50
 /cube: Enemy -15.0 0.0 -4.0 0.3 0.5 0.3 ressources/assets/textures/cube_test.png 0.0 0.0 90.0 0.0 0.0 0.0 0.0 1.0    50
 /cube: Enemy 1.0 0.0 14.0 0.3 0.5 0.3 ressources/assets/textures/cube_test.png 0.0 0.0 90.0 0.0 0.0 0.0 0.0 1.0    50

@@ -196,6 +196,25 @@ void	t_mesh_rotate(t_mesh *mesh, t_vector4 delta_angle)
 	t_mesh_compute_bubble_box(mesh);
 }
 
+void	t_mesh_rotate_to(t_mesh *src, t_mesh *dest)
+{
+	t_vector4	tmp_src;
+	t_vector4	tmp_dest;
+	t_vector4	result;
+
+	tmp_src = src->forward;
+	tmp_dest = substract_vector4_to_vector4(dest->pos, src->pos);
+	tmp_src = normalize_t_vector4(tmp_src);
+	tmp_dest = normalize_t_vector4(tmp_dest);
+	result = create_t_vector4(0, 0, 0);
+	result.y = dot_t_vector4(tmp_dest, tmp_src);
+	result.y = radius_to_degree(acosf(result.y));
+	printf("result.y = %f\n", result.y);
+	if (result.y > 30)
+		result.y -= 30;
+	t_mesh_rotate_around_point(src, result, src->center);
+}
+
 void	t_mesh_set_color(t_mesh *dest, t_color p_color)
 {
 	int i;
@@ -209,6 +228,8 @@ void	t_mesh_move(t_mesh *dest, t_vector4 delta)
 {
 	dest->pos = add_vector4_to_vector4(dest->pos, delta);
 	dest->center = add_vector4_to_vector4(dest->center, delta);
+	t_mesh_compute_normals(dest);
+	t_mesh_compute_bubble_box(dest);
 }
 
 void	t_mesh_apply_force(t_mesh *dest)

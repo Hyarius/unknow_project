@@ -26,7 +26,7 @@ t_mesh	*cast_ray(t_engine *engine, t_vector4 pos, t_vector4 direction, char *sho
 	t_mesh 		*mesh;
 
 	i = -1;
-	direction = divide_vector4_by_float(direction, 10);
+	direction = divide_vector4_by_float(direction, 8);
 	while (++i < 100)
 	{
 		j = -1;
