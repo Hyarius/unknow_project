@@ -53,8 +53,10 @@ void			t_user_engine_handle_camera(t_engine *engine, t_camera *cam, t_window *p_
 	// }
 	// else if (mouse->pos.x != WIN_X / 2 && mouse->pos.y != WIN_Y / 2)
 		// handle_t_camera_view_by_mouse(cam, mouse);
-
-	handle_t_camera_mouvement_by_key(cam, keyboard, engine); // deplacement cameras
+	if (engine->playing == 1)
+		handle_t_camera_mouvement_by_key(cam, keyboard, engine); // deplacement cameras
+	if (engine->playing == 10)
+		move_cam(cam, keyboard, engine);
 
 	compute_t_camera(cam);
 }

@@ -6,7 +6,7 @@
 /*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 13:30:45 by adjouber          #+#    #+#             */
-/*   Updated: 2019/11/26 16:01:28 by adjouber         ###   ########.fr       */
+/*   Updated: 2019/11/27 14:23:00 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,30 +58,13 @@ void			init_player(t_player *player, char **line_split)
 	player->current_weapon = &player->weapons[0];
 }
 
-t_player		*read_player(int fd, t_camera *main_camera)
+void			read_player(char **line_split, t_player *player)
 {
-	t_player	*player;
-	char		*line;
-	char		**line_split;
-	t_vector4	vector[3];
-
-	player = initialize_t_player(main_camera);
-	while (get_next_line(fd, &line) > 0)
+	if (ft_strcmp(line_split[0], "player:") == 0)
 	{
-		if (ft_strlen(line) != 0)
-		{
-			line_split = ft_strsplit(line, ' ');
-			if (ft_strcmp(line_split[0], "player:") == 0)
-			{
-				player->hitbox = init_mesh(line_split);
-				t_mesh_set_color(&player->hitbox,
-						create_t_color(0.5, 0.6, 0.0, 1.0));
-				init_player(player, line_split);
-			}
-			ft_freetab(line_split);
-		}
-		free(line);
+		player->hitbox = init_mesh(line_split);
+		t_mesh_set_color(&player->hitbox,
+		create_t_color(0.5, 0.6, 0.0, 1.0));
+		init_player(player, line_split);
 	}
-	free(line);
-	return (player);
 }

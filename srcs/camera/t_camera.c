@@ -196,6 +196,22 @@ void		t_camera_change_view(t_camera *cam, float delta_pitch, float delta_yaw)
 	t_camera_look_at(cam);
 }
 
+void		move_cam(t_camera *camera, t_keyboard *key, t_engine *engine)
+{
+	if (get_key_state(key, key->key[SDL_SCANCODE_W]) == 1)
+		camera->pos = add_vector4_to_vector4(camera->pos, camera->forward);
+	if (get_key_state(key, key->key[SDL_SCANCODE_S]) == 1)
+		camera->pos = add_vector4_to_vector4(camera->pos, inv_t_vector4(camera->forward));
+	if (get_key_state(key, key->key[SDL_SCANCODE_D]) == 1)
+		camera->pos = add_vector4_to_vector4(camera->pos, camera->right);
+	if (get_key_state(key, key->key[SDL_SCANCODE_A]) == 1)
+		camera->pos = add_vector4_to_vector4(camera->pos, inv_t_vector4(camera->right));
+	if (get_key_state(key, key->key[SDL_SCANCODE_SPACE]) == 1)
+		camera->pos.y += 0.5;
+	if (get_key_state(key, key->key[SDL_SCANCODE_LCTRL]) == 1)
+		camera->pos.y -= 0.5;
+}
+
 void		move_camera(t_camera *camera, t_vector4 mouvement, t_engine *engine, float j)
 {
 	if (camera->body->no_hitbox == 1 && camera->body->is_visible == 0)

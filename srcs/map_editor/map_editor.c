@@ -383,22 +383,44 @@ void		player_editing(t_camera *main_camera, t_engine *engine, t_gui *gui)
 void		print_set_player(t_camera *main_camera, t_gui *gui, t_engine *engine)
 {
 	int		i;
-	t_mesh	*mesh;
+	t_mesh	mesh;
 
 	i = 0;
-	mesh = t_mesh_list_get(engine->physic_engine->mesh_list, i);
-	while (++i < engine->physic_engine->mesh_list->size && ft_strcmp(mesh->name, "Player") != 0)
-		mesh = t_mesh_list_get(engine->physic_engine->mesh_list, i);
-	if (ft_strcmp(mesh->name, "Player") == 0)
+	if (engine->user_engine->player->hitbox.name == NULL)
+		return ;
+	mesh = engine->user_engine->player->hitbox;
+	if (ft_strcmp(mesh.name, "Player") == 0)
 	{
 		t_view_port_clear_buffers(main_camera->view_port);
-		if (mesh->kinetic == 100.0f)
+		if (mesh.kinetic == 100.0f)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.08, 0.55), create_t_vector2(0.7, 0.1)), gui->menu[13]);
-		if (mesh->kinetic == 10.0f)
+		else if (mesh.kinetic == 20.0f)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.61, 0.55), create_t_vector2(0.7, 0.1)), gui->menu[13]);
+		if (mesh.hp == 100)
+			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.0, 0.11), create_t_vector2(0.4, 0.1)), gui->menu[13]);
+		else if (mesh.hp == 50)
+			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.38, 0.11), create_t_vector2(0.4, 0.1)), gui->menu[13]);
 	}
 }
 
+void		check_mesh_player(t_engine *engine, t_mesh mesh, t_camera *main_camera)
+{
+	int			i;
+	t_mesh		*target;
+
+	i = 0;
+	while (i < engine->physic_engine->mesh_list->size)
+	{
+		target = t_mesh_list_get(engine->physic_engine->mesh_list, i);
+		if (ft_strcmp(target->name, "Player") == 0)
+		{
+			target->is_visible = 0;
+			target->no_hitbox = 1;
+		}
+		i++;
+	}
+	engine->user_engine->player->hitbox = mesh;
+}
 
 void		map_editor(t_camera *main_camera, t_gui *gui, t_engine *engine, t_mesh mesh_editing)
 {
@@ -433,10 +455,12 @@ void		map_editor(t_camera *main_camera, t_gui *gui, t_engine *engine, t_mesh mes
 		t_mesh_set_name(&mesh, mesh_editing.name);
 		mesh.hp = mesh_editing.hp;
 		t_mesh_rotate(&mesh, mesh_editing.rotation);
-		cast_mesh(engine, &mesh, "Player");
+		cast_mesh(engine, &mesh);
 		mesh.pos.x = round_float(mesh.pos.x, 2);
 		mesh.pos.y = round_float(mesh.pos.y, 2);
 		mesh.pos.z = round_float(mesh.pos.z, 2);
+		if (ft_strcmp(mesh.name, "Player") == 0)
+			check_mesh_player(engine, mesh, main_camera);
 		t_engine_add_mesh(engine, mesh);
 	}
 	else if (get_mouse_state(engine->user_engine->mouse, MOUSE_RIGHT) == BOOL_TRUE)

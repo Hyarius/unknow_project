@@ -3,7 +3,7 @@
 void            t_user_engine_handle_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, int *play)
 {
     if (*play == 2)
-        main_menu(main_camera, gui, engine->user_engine, play);
+        main_menu(main_camera, gui, engine, play);
     else if (*play == 3)
         settings_menu(main_camera, gui, engine->user_engine, play);
     else if (*play == 4)
@@ -18,10 +18,10 @@ void            t_user_engine_handle_menu(t_camera *main_camera, t_gui *gui, t_e
         settings_pause_menu(main_camera, gui, engine->user_engine, play);
 }
 
-void			main_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int *play)
+void			main_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, int *play)
 {
-	t_mouse *mouse = user_engine->mouse;
-	t_keyboard *keyboard = user_engine->keyboard;
+	t_mouse *mouse = engine->user_engine->mouse;
+	t_keyboard *keyboard = engine->user_engine->keyboard;
     t_vector2_int pos;
 
 	get_t_mouse_info(mouse);
@@ -30,7 +30,10 @@ void			main_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, 
     {
         if (pos.y > 56 && pos.y < 61)
             if (t_mouse_state(mouse) == 2)
+			{
+				link_t_camera_to_t_mesh(engine, 0, t_engine_get_mesh(engine, 0));
 		        *play = 1;
+			}
         if (pos.y > 63 && pos.y < 68)
         	if (t_mouse_state(mouse) == 2)
 		        *play = 3;
@@ -42,7 +45,7 @@ void			main_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, 
 		        *play = 0;
     }
     else
-        user_engine->mouse->clicked_left = BOOL_FALSE;
+        engine->user_engine->mouse->clicked_left = BOOL_FALSE;
 }
 
 void			pause_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int *play)
@@ -375,27 +378,45 @@ void		set_player_editing(t_camera *main_camera, t_gui *gui, t_engine *engine, in
 {
 	t_mouse			*mouse = engine->user_engine->mouse;
 	t_keyboard		*keyboard = engine->user_engine->keyboard;
-	t_mesh			*mesh;
+	t_player		*player;
     t_vector2_int	pos;
 	int				i;
 
-	i = 0;
-	mesh = t_mesh_list_get(engine->physic_engine->mesh_list, i);
-	while (++i < engine->physic_engine->mesh_list->size && ft_strcmp(mesh->name, "Player") != 0)
-		mesh = t_mesh_list_get(engine->physic_engine->mesh_list, i);
+	player = engine->user_engine->player;
 	get_t_mouse_info(mouse);
     pos = create_t_vector2_int(mouse->pos.x * 100 / WIN_X, mouse->pos.y * 100 / WIN_Y);
-	if (ft_strcmp(mesh->name, "Player") == 0)
+	printf("pos.y = %d || pos.x = %d\n", pos.y, pos.x);
+	if (ft_strcmp(player->hitbox.name, "Player") == 0)
 	{
 		if (pos.y > 12 && pos.y < 21)
 		{
 			if (pos.x > 27 && pos.x < 46)
 				if (t_mouse_state(mouse) == 2)
-					mesh->kinetic = 10.0;
+					player->hitbox.kinetic = 20.0;
 			if (pos.x > 54 && pos.x < 72)
 				if (t_mouse_state(mouse) == 2)
-					mesh->kinetic = 100.0;
-				// printf("here\n");
+					player->hitbox.kinetic = 100.0;
+		}
+		if (pos.y > 34 && pos.y < 43)
+		{
+			if (pos.x > 54 && pos.x < 65)
+				if (t_mouse_state(mouse) == 2)
+					player->hp = 100;
+			if (pos.x > 37 && pos.x < 45)
+				if (t_mouse_state(mouse) == 2)
+					player->hp = 50;
+		}
+		if (pos.y > 56 && pos.y < 65)
+		{
+			if (pos.x > 61 && pos.x < 71)
+				if (t_mouse_state(mouse) == 2)
+					player->armor = 100;
+			if (pos.x > 46 && pos.x < 53)
+				if (t_mouse_state(mouse) == 2)
+					player->armor = 50;
+			if (pos.x > 32 && pos.x < 37)
+				if (t_mouse_state(mouse) == 2)
+					player->armor = 0;
 		}
 	}
 }

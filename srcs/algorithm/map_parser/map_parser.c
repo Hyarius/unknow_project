@@ -6,7 +6,7 @@
 /*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 15:31:13 by adjouber          #+#    #+#             */
-/*   Updated: 2019/11/26 16:44:38 by adjouber         ###   ########.fr       */
+/*   Updated: 2019/11/27 14:23:45 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,32 +72,32 @@ void			set_mesh(t_mesh *mesh, char **line_split)
 		mesh->no_hitbox = 1;
 	else
 		mesh->no_hitbox = 0;
-	mesh.kinetic = ft_atof(line_split[9]);	
+	mesh->kinetic = ft_atof(line_split[9]);
 	t_mesh_set_name(mesh, line_split[1]);
 }
 
-t_mesh_list		*read_map_file(int fd)
+t_mesh_list		*read_map_file(int fd, t_player *player)
 {
 	t_mesh		mesh;
 	t_mesh_list	*result;
 	char		*line;
-	char		**split;
+	char		**s;
 
 	result = initialize_t_mesh_list();
 	while (get_next_line(fd, &line) > 0)
 	{
 		if (ft_strlen(line) != 0)
 		{
-			split = ft_strsplit(line, ' ');
-			if (ft_strcmp(split[0], "plane:") == 0
-				|| ft_strcmp(split[0], "cube:") == 0
-				|| ft_strcmp(split[0], "item:") == 0 || split[0][0] == '#')
+			s = ft_strsplit(line, ' ');
+			read_player(s, player);
+			if (ft_strcmp(s[0], "plane:") == 0 || ft_strcmp(s[0], "cube:") == 0
+				|| ft_strcmp(s[0], "item:") == 0 || s[0][0] == '#')
 			{
-				mesh = init_texture(split);
-				set_mesh(&mesh, split);
+				mesh = init_texture(s);
+				set_mesh(&mesh, s);
 				t_mesh_list_push_back(result, mesh);
 			}
-			ft_freetab(split);
+			ft_freetab(s);
 		}
 		free(line);
 	}

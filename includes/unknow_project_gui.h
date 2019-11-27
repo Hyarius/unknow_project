@@ -46,7 +46,7 @@ void            load_menu(t_gui *gui);
 void            t_engine_handle_event(t_camera *main_camera, t_gui *gui, t_engine *engine);
 void            t_user_engine_handle_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, int *play);
 
-void            main_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int *play);
+void            main_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, int *play);
 void            option_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int *play);
 void            settings_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int *play);
 void            controls_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int *play);

@@ -109,10 +109,10 @@ void		t_engine_camera_look_at(t_engine *engine, int index, t_vector4 target)
 
 void		t_engine_render_camera(t_engine *engine)
 {
-	if (engine->playing == 10)
-		t_visual_engine_render_first_camera(engine->visual_engine);
-	else
+	if (engine->playing == 1)
 		t_visual_engine_render_camera(engine->visual_engine);
+	else
+		t_visual_engine_render_first_camera(engine->visual_engine);
 }
 
 void		t_engine_prepare_camera(t_engine *engine)
