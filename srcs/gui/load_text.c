@@ -33,4 +33,6 @@ void    load_menu(t_gui *gui)
 	gui->menu[12] = png_load("ressources/assets/imgs/Level_editor_menu.png");
 	gui->menu[13] = png_load("ressources/assets/imgs/yellow_line.png");
 	gui->menu[14] = png_load("ressources/assets/imgs/set_player.png");
+	gui->menu[15] = png_load("ressources/assets/imgs/set_weapon.png");
+	gui->menu[16] = png_load("ressources/assets/imgs/save_editor.png");
 }

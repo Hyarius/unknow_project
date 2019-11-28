@@ -12,6 +12,10 @@ void            t_user_engine_handle_menu(t_camera *main_camera, t_gui *gui, t_e
         credits_menu(main_camera, gui, engine->user_engine, play);
 	else if (*play == 11)
 		set_player_editing(main_camera, gui, engine, play);
+	else if (*play == 12)
+		set_weapon_editing(main_camera, gui, engine, play);
+	else if (*play == 13)
+		save_pause(main_camera, gui, engine, play);
     else if (*play == -1)
         pause_menu(main_camera, gui, engine->user_engine, play);
     else if (*play == -2)
@@ -380,12 +384,10 @@ void		set_player_editing(t_camera *main_camera, t_gui *gui, t_engine *engine, in
 	t_keyboard		*keyboard = engine->user_engine->keyboard;
 	t_player		*player;
     t_vector2_int	pos;
-	int				i;
 
 	player = engine->user_engine->player;
 	get_t_mouse_info(mouse);
     pos = create_t_vector2_int(mouse->pos.x * 100 / WIN_X, mouse->pos.y * 100 / WIN_Y);
-	printf("pos.y = %d || pos.x = %d\n", pos.y, pos.x);
 	if (ft_strcmp(player->hitbox.name, "Player") == 0)
 	{
 		if (pos.y > 12 && pos.y < 21)
@@ -418,5 +420,232 @@ void		set_player_editing(t_camera *main_camera, t_gui *gui, t_engine *engine, in
 				if (t_mouse_state(mouse) == 2)
 					player->armor = 0;
 		}
+		if (pos.y > 67 && pos.y < 76 && pos.x > 30 && pos.x < 70)
+			if (t_mouse_state(mouse) == 2)
+				engine->playing = 12;
+		if (pos.y > 78 && pos.y < 87 && pos.x > 37 && pos.x < 62)
+			if (t_mouse_state(mouse) == 2)
+				engine->playing = 13;
+		if (pos.y > 90 && pos.y < 99 && pos.x > 39 && pos.x < 60)
+			if (t_mouse_state(mouse) == 2)
+				engine->playing = 10;
+	}
+}
+
+void		set_weapon_editing(t_camera *main_camera, t_gui *gui, t_engine *engine, int *play)
+{
+	t_mouse			*mouse = engine->user_engine->mouse;
+	t_keyboard		*keyboard = engine->user_engine->keyboard;
+	t_player		*player;
+    t_vector2_int	pos;
+
+	player = engine->user_engine->player;
+	get_t_mouse_info(mouse);
+	pos = create_t_vector2_int(mouse->pos.x * 100 / WIN_X, mouse->pos.y * 100 / WIN_Y);
+	if (t_mouse_state(mouse) == 2)
+	{
+		if (pos.y > 11 && pos.y < 15)
+		{
+			if (pos.x > 44 && pos.x < 48)
+				player->weapons[1].total_ammo = 0;
+			if (pos.x > 50 && pos.x < 55)
+				player->weapons[1].total_ammo = -1;
+		}
+		if (pos.y > 18 && pos.y < 22)
+		{
+			if (pos.x >= 52 && pos.x <= 54)
+			{
+				player->weapons[1].ammo = 0;
+				player->weapons[1].total_ammo = 0;
+			}
+			if (pos.x >= 55 && pos.x <= 57)
+			{
+				player->weapons[1].ammo = 30;
+				player->weapons[1].total_ammo = 0;
+			}
+			if (pos.x >= 58 && pos.x <= 60)
+			{
+				player->weapons[1].ammo = 30;
+				player->weapons[1].total_ammo = 30;
+			}
+			if (pos.x >= 61 && pos.x <= 63)
+			{
+				player->weapons[1].ammo = 30;
+				player->weapons[1].total_ammo = 60;
+			}
+			if (pos.x >= 64 && pos.x <= 66)
+			{
+				player->weapons[1].ammo = 30;
+				player->weapons[1].total_ammo = 90;
+			}
+			if (pos.x >= 67 && pos.x <= 69)
+			{
+				player->weapons[1].ammo = 30;
+				player->weapons[1].total_ammo = 120;
+			}
+		}
+		if (pos.y > 32 && pos.y < 36)
+		{
+			if (pos.x > 44 && pos.x < 48)
+				player->weapons[3].total_ammo = 0;
+			if (pos.x > 50 && pos.x < 55)
+				player->weapons[3].total_ammo = -1;
+		}
+		if (pos.y > 39 && pos.y < 43)
+		{
+			if (pos.x >= 52 && pos.x <= 54)
+			{
+				player->weapons[3].ammo = 0;
+				player->weapons[3].total_ammo = 0;
+			}
+			if (pos.x >= 55 && pos.x <= 57)
+			{
+				player->weapons[3].ammo = 8;
+				player->weapons[3].total_ammo = 0;
+			}
+			if (pos.x >= 58 && pos.x <= 60)
+			{
+				player->weapons[3].ammo = 8;
+				player->weapons[3].total_ammo = 8;
+			}
+			if (pos.x >= 61 && pos.x <= 63)
+			{
+				player->weapons[3].ammo = 8;
+				player->weapons[3].total_ammo = 16;
+			}
+			if (pos.x >= 64 && pos.x <= 66)
+			{
+				player->weapons[3].ammo = 8;
+				player->weapons[3].total_ammo = 24;
+			}
+			if (pos.x >= 67 && pos.x <= 69)
+			{
+				player->weapons[3].ammo = 8;
+				player->weapons[3].total_ammo = 32;
+			}
+		}
+		if (pos.y > 53 && pos.y < 57)
+		{
+			if (pos.x > 44 && pos.x < 48)
+				player->weapons[2].total_ammo = 0;
+			if (pos.x > 50 && pos.x < 55)
+				player->weapons[2].total_ammo = -1;
+		}
+		if (pos.y > 60 && pos.y < 64)
+		{
+			if (pos.x >= 52 && pos.x <= 54)
+			{
+				player->weapons[2].ammo = 0;
+				player->weapons[2].total_ammo = 0;
+			}
+			if (pos.x >= 55 && pos.x <= 57)
+			{
+				player->weapons[2].ammo = 10;
+				player->weapons[2].total_ammo = 0;
+			}
+			if (pos.x >= 58 && pos.x <= 60)
+			{
+				player->weapons[2].ammo = 10;
+				player->weapons[2].total_ammo = 10;
+			}
+			if (pos.x >= 61 && pos.x <= 63)
+			{
+				player->weapons[2].ammo = 10;
+				player->weapons[2].total_ammo = 20;
+			}
+			if (pos.x >= 64 && pos.x <= 66)
+			{
+				player->weapons[2].ammo = 10;
+				player->weapons[2].total_ammo = 30;
+			}
+			if (pos.x >= 67 && pos.x <= 69)
+			{
+				player->weapons[2].ammo = 10;
+				player->weapons[2].total_ammo = 40;
+			}
+		}
+		if (pos.y > 74 && pos.y < 78)
+		{
+			if (pos.x > 44 && pos.x < 48)
+				player->weapons[4].total_ammo = 0;
+			if (pos.x > 50 && pos.x < 55)
+				player->weapons[4].total_ammo = -1;
+		}
+		if (pos.y > 81 && pos.y < 85)
+		{
+			if (pos.x >= 52 && pos.x <= 54)
+			{
+				player->weapons[4].ammo = 0;
+				player->weapons[4].total_ammo = 0;
+			}
+			if (pos.x >= 55 && pos.x <= 57)
+			{
+				player->weapons[4].ammo = 1;
+				player->weapons[4].total_ammo = 0;
+			}
+			if (pos.x >= 58 && pos.x <= 60)
+			{
+				player->weapons[4].ammo = 1;
+				player->weapons[4].total_ammo = 1;
+			}
+			if (pos.x >= 61 && pos.x <= 63)
+			{
+				player->weapons[4].ammo = 1;
+				player->weapons[4].total_ammo = 2;
+			}
+			if (pos.x >= 64 && pos.x <= 66)
+			{
+				player->weapons[4].ammo = 1;
+				player->weapons[4].total_ammo = 3;
+			}
+			if (pos.x >= 67 && pos.x <= 69)
+			{
+				player->weapons[4].ammo = 1;
+				player->weapons[4].total_ammo = 4;
+			}
+		}
+		if (pos.y > 91 && pos.y < 98 && pos.x > 40 && pos.x < 61)
+			engine->playing = 11;
+	}
+}
+
+void		save_pause(t_camera *main_camera, t_gui *gui, t_engine *engine, int *play)
+{
+	t_mouse			*mouse = engine->user_engine->mouse;
+	t_keyboard		*keyboard = engine->user_engine->keyboard;
+	t_vector2_int	pos;
+
+	get_t_mouse_info(mouse);
+	pos = create_t_vector2_int(mouse->pos.x * 100 / WIN_X, mouse->pos.y * 100 / WIN_Y);
+	printf("pos.y = %d || pos.x = %d\n", pos.y, pos.x);
+	if (t_mouse_state(mouse) == 2)
+	{
+		if (pos.y > 10 && pos.y < 18 && pos.x > 40 && pos.x < 59)
+		{
+			save_map(engine, 1);
+			engine->playing = 2;
+		}
+		if (pos.y > 26 && pos.y < 34 && pos.x > 40 && pos.x < 59)
+		{
+			save_map(engine, 2);
+			engine->playing = 2;
+		}
+		if (pos.y > 41 && pos.y < 49 && pos.x > 40 && pos.x < 59)
+		{
+			save_map(engine, 3);
+			engine->playing = 2;
+		}
+		if (pos.y > 57 && pos.y < 65 && pos.x > 40 && pos.x < 59)
+		{
+			save_map(engine, 4);
+			engine->playing = 2;
+		}
+		if (pos.y > 72 && pos.y < 80 && pos.x > 40 && pos.x < 59)
+		{
+			save_map(engine, 5);
+			engine->playing = 2;
+		}
+		if (pos.y > 91 && pos.y < 98 && pos.x > 40 && pos.x < 61)
+			engine->playing = 11;
 	}
 }

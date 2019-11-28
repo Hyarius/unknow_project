@@ -23,10 +23,10 @@ t_gui create_t_gui(float x, int y)
 		idx++;
 	}
 	idx = 0;
-	if (!(result.menu = (t_texture **)malloc(sizeof(t_texture*) * 15)))
+	if (!(result.menu = (t_texture **)malloc(sizeof(t_texture*) * 17)))
 		error_exit(-29, "Can't malloc a t_surface");
 	// printf("malloc t_gui.menu\n");
-	while (idx <= 14)
+	while (idx <= 16)
 	{
 		if (!(result.menu[idx] = (t_texture *)malloc(sizeof(t_texture))))
 			error_exit(-29, "Can't malloc a t_surface");

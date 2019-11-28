@@ -56,10 +56,13 @@ void            credits_menu(t_camera *main_camera, t_gui *gui, t_user_engine *u
 void            sens_bis(t_camera *main_camera, t_gui *gui, int sens);
 void            set_controls(t_camera *main_camera, t_gui *gui, t_user_engine *engine, int key);
 void			set_player_editing(t_camera *main_camera, t_gui *gui, t_engine *engine, int *play);
+void			set_weapon_editing(t_camera *main_camera, t_gui *gui, t_engine *engine, int *play);
+void			save_pause(t_camera *main_camera, t_gui *gui, t_engine *engine, int *play);
 
 void            main_pause(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int *play);
 
 void			print_set_player(t_camera *main_camera, t_gui *gui, t_engine *engine);
+void			print_set_weapon(t_camera *main_camera, t_gui *gui, t_engine *engine);
 void			map_editor(t_camera *main_camera, t_gui *gui, t_engine *engine, t_mesh mesh_editing);
 
 
