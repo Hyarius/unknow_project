@@ -38,7 +38,7 @@ int		is_t_mesh_intersecting(t_mesh *mesh_compared, t_mesh *mesh_target)
 	float	val[4];
 
 	if (mesh_compared->faces == NULL)
-		error_exit(0,"test");
+		error_exit(0,"is_t_mesh_intersecting");
 	i = -1;
 	while (++i < mesh_compared->faces->size)
 	{

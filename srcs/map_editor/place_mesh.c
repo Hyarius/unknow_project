@@ -34,6 +34,7 @@ void			test_move_axis_bis(t_mesh *mesh, float *force, t_vector4 axis, t_mesh *ta
 				mesh->force.y = 0.02;
 		}
 	}
+	t_mesh_compute_next_vertices_in_world(mesh, axis);
 }
 
 int				can_move_bis(t_mesh *mesh, t_engine *engine, char *name)

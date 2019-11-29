@@ -96,6 +96,7 @@ int main(int argc, char **argv)
 	close(fd);
 
 
+
 	int i = 0;
 	int	j = 0;
 	int k = 0;
@@ -131,6 +132,10 @@ int main(int argc, char **argv)
 	link_t_camera_to_t_mesh(engine, 0, t_engine_get_mesh(engine, i), 100);
 
 	t_rectangle rec = create_t_rectangle(create_t_vector2(-1, 1), create_t_vector2(2, -2));
+
+	mesh = read_obj_file("ressources/objets/Level-1.1.obj", create_t_vector4(0.0, 10.0, 0.0), create_t_vector4(1.0, 1.0, 1.0), 0.0);
+	t_mesh_set_name(&mesh, "map");
+	t_engine_add_mesh(engine, mesh);
 
 	// t_item_list	*item_list = initialize_t_item_list();
 	//
@@ -239,7 +244,8 @@ int main(int argc, char **argv)
 			mesh.pos = main_camera->pos;
 
 			draw_skybox(win, main_camera, &mesh); // skybox
-			t_engine_render_camera(engine);
+			// t_engine_render_camera(engine);
+			t_view_port_clear_buffers(main_camera->view_port);
 			SDL_ShowCursor(SDL_DISABLE);
 			t_engine_apply_physic(engine);
 
