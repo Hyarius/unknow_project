@@ -3,10 +3,10 @@
 /* pour le player:
 /* primitive / name / coord 3 / size 3 / texture 1 / gravity 1 / rotation 3 / color 4 / hp 1 / armor 1 / fuel 1 / ammo gun 2 / ammo ar 2 / ammo rifle 2 / ammo shotgun 2 / ammo rpg 2 /card (red/blue/green) 3
 
-player: Player -12.0 0.0 2.0 0.3 0.5 0.3 NULL 0.0 0.0 0.0 0.0 1.0 0.4 1.0 1.0 100 100 100 15 15 30 120 0 10 0 20 0 5 0 0 0
+player: Player -12.0 0.0 2.0 0.3 0.5 0.3 NULL 0.0 0.0 0.0 0.0 1.0 0.4 1.0 1.0 100 100 1000 15 15 30 120 0 10 0 20 0 5 0 0 0
 
-cube: Enemy -16.0 3.0 4.0 0.3 0.5 0.3 ressources/assets/textures/cube_test.png 0.0 0.0 90.0 0.0 0.0 0.0 0.0 1.0    50
 plane: end 10.0 0.0 10.0 0.3 0.0 0.3 NULL 0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0   -1
+cube: Enemy -16.0 0.0 2.0 0.3 0.5 0.3 ressources/assets/textures/cube_test.png 0.0 0.0 90.0 0.0 0.0 0.0 0.0 1.0    50
 
 //plane: plane 0.0 0.0 0.0 100.0 0.0 100.0 ressources/assets/textures/sol_metallic.png 0.0 0.0 0.0 0.0 1.0 0.0 0.0 1.0    -1
 //plane: plane 0.0 -0.01 0.0 100.0 0.0 100.0 NULL 0.0 0.0 0.0 0.0 1.0 0.0 0.0 1.0    -1 *
@@ -115,18 +115,18 @@ cube: stair -10.0 0.0 25.0 10.0 0.05 1.0 ressources/assets/textures/cube_test.pn
 cube: elevator -10.0 -5.0 -10.0 5.0 5.0 5.0 ressources/assets/textures/cube_test_blue.png 0.0 0.0 90.0 0.0 0.0 1.0 1.0 1.0   -1
 
 cube: destructible_wall   10.0 0.0 0.0    2.0 5.0 0.1 ressources/assets/textures/cube_test.png 0.0    0.0 0.0 0.0    1.0 0.5 0.5 1.0   200000
-item: Ammo_Pack_1 -7.0 0.0 0.0   0.2 0.05 0.2   ressources/assets/textures/cube_number.png   0.0   0.0 0.0 0.0   0.3 0.3 0.3 1.0   -1
-item: Ammo_Pack_2 -7.0 0.0 1.0   0.2 0.05 0.2   ressources/assets/textures/cube_number.png   0.0   0.0 0.0 0.0   0.0 0.8 0.0 1.0   -2
-item: Ammo_Pack_3 -7.0 0.0 2.0   0.2 0.05 0.2   ressources/assets/textures/cube_number.png   0.0   0.0 0.0 0.0   0.8 0.8 0.0 1.0   -3
+item: Ammo_Pack_1 -7.0 0.0 0.0   0.2 0.05 0.2   ressources/assets/textures/rifle.png   0.0   0.0 0.0 0.0   0.3 0.3 0.3 1.0   -1
+item: Ammo_Pack_2 -7.0 0.0 1.0   0.2 0.05 0.2   ressources/assets/textures/shotgun.png   0.0   0.0 0.0 0.0   0.0 0.8 0.0 1.0   -2
+item: Ammo_Pack_3 -7.0 0.0 2.0   0.2 0.05 0.2   ressources/assets/textures/ar.png   0.0   0.0 0.0 0.0   0.8 0.8 0.0 1.0   -3
 item: Ammo_Pack_4 -7.0 0.0 -1.0   0.2 0.05 0.2   ressources/assets/textures/cube_number.png   0.0   0.0 0.0 0.0   0.4 0.0 0.0 1.0   -4
 item: Ammo_Pack_5 -7.0 0.0 -2.0   0.2 0.05 0.2   ressources/assets/textures/cube_number.png   0.0   0.0 0.0 0.0   0.4 0.0 0.4 1.0   -5
 item: Jet_Pack_1 -8.0 0.0 -6.0   0.2 0.05 0.2   ressources/assets/textures/cube_test_blue.png   0.0   0.0 0.0 0.0   0.8 0.8 0.5 1.0   -1
 item: Jet_Pack_2 -7.0 0.0 -6.0   0.2 0.05 0.2   ressources/assets/textures/cube_test_blue.png   0.0   0.0 0.0 0.0   0.8 0.8 0.5 1.0   -1
 item: Jet_Pack_3 -6.0 0.0 -6.0   0.2 0.05 0.2   ressources/assets/textures/cube_test_blue.png   0.0   0.0 0.0 0.0   0.8 0.8 0.5 1.0   -1
 item: Jet_Pack_4 -5.0 0.0 -6.0   0.2 0.05 0.2   ressources/assets/textures/cube_test_blue.png   0.0   0.0 0.0 0.0   0.8 0.8 0.5 1.0   -1
-item: Armor_Pack_1 -11.0 0.0 -6.0   0.2 0.05 0.2   ressources/assets/textures/cube_number.png   0.0   0.0 0.0 0.0   0.0 0.0 0.8 1.0   -1
-item: Armor_Pack_2 -12.0 0.0 -6.0   0.2 0.05 0.2   ressources/assets/textures/cube_number.png   0.0   0.0 0.0 0.0   0.0 0.0 0.8 1.0   -1
-item: Health_Pack_1 -9.0 0.0 -6.0   0.2 0.05 0.2   ressources/assets/textures/cube_number.png   0.0   0.0 0.0 0.0   0.8 0.0 0.0 1.0   -1
-item: Health_Pack_2 -10.0 0.0 -6.0   0.2 0.05 0.2   ressources/assets/textures/cube_number.png   0.0   0.0 0.0 0.0   0.8 0.0 0.0 1.0   -1
+item: Armor_Pack_1 -11.0 0.0 -6.0   0.2 0.05 0.2   ressources/assets/textures/armor.png   0.0   0.0 0.0 0.0   0.0 0.0 0.8 1.0   -1
+item: Armor_Pack_2 -12.0 0.0 -6.0   0.2 0.05 0.2   ressources/assets/textures/armor.png   0.0   0.0 0.0 0.0   0.0 0.0 0.8 1.0   -1
+item: Health_Pack_1 -9.0 0.0 -6.0   0.2 0.05 0.2   ressources/assets/textures/health.png   0.0   0.0 0.0 0.0   0.8 0.0 0.0 1.0   -1
+item: Health_Pack_2 -10.0 0.0 -6.0   0.2 0.05 0.2   ressources/assets/textures/health.png   0.0   0.0 0.0 0.0   0.8 0.0 0.0 1.0   -1
 
 */

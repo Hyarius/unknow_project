@@ -7,7 +7,7 @@ void    load_letter(t_gui *gui, char *str, int idx)
     SDL_Color color = {0, 0, 0};
 
     str[1] = '\0';
-    police = TTF_OpenFont("ressources/assets/ttf/Tinos-Regular.ttf", 60);
+    police = TTF_OpenFont("ressources/assets/ttf/Tinos-Regular.ttf", 240);
     font = TTF_RenderText_Blended(police, str, color);
     gui->letter[idx]->surface->w = (GLuint)(font->w);
     gui->letter[idx]->surface->h = font->h;

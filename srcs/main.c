@@ -55,8 +55,8 @@ int main(int argc, char **argv)
 	int		fd;
 
 	// fd = open("ressources/map/jules_test.map", O_RDONLY);
-	fd = open("ressources/map/fichier_map.map", O_RDONLY);
-	// fd = open("ressources/map/map2.map", O_RDONLY);
+	// fd = open("ressources/map/fichier_map.map", O_RDONLY);
+	fd = open("ressources/map/map2.map", O_RDONLY);
 	// fd = open("ressources/map/test_gravity.map", O_RDONLY);
 	// fd = open("ressources/map/save1.map", O_RDONLY);
 	// fd = open("ressources/map/editing_map1.map", O_RDONLY);
@@ -67,8 +67,8 @@ int main(int argc, char **argv)
 	player = read_player(fd, main_camera);
 	close(fd);
 	// fd = open("ressources/map/jules_test.map", O_RDONLY);
-	fd = open("ressources/map/fichier_map.map", O_RDONLY);
-	// fd = open("ressources/map/map2.map", O_RDONLY);
+	// fd = open("ressources/map/fichier_map.map", O_RDONLY);
+	fd = open("ressources/map/map2.map", O_RDONLY);
 	// fd = open("ressources/map/test_gravity.map", O_RDONLY);
 	// fd = open("ressources/map/save1.map", O_RDONLY);
 	// fd = open("ressources/map/editing_map1.map", O_RDONLY);
@@ -113,9 +113,9 @@ int main(int argc, char **argv)
 	t_mesh	mesh_editing;
 	mesh_editing = create_mesh_editing(0, engine->user_engine->player->camera->body->pos);
 	mesh = create_primitive_skybox(main_camera->pos, create_t_vector4(1.0, 1.0, 1.0), skybox);
-	engine->playing = 2;
+	engine->playing = 1;
 	Mix_VolumeMusic(MIX_MAX_VOLUME / 100);
-	Mix_PlayMusic(musique, 1);
+	// Mix_PlayMusic(musique, 1);
 	while (engine->playing != 0)
 	{
 		prepare_screen(win, create_t_color(0.2f, 0.2f, 0.2f, 1.0f));
@@ -174,8 +174,8 @@ int main(int argc, char **argv)
 			t_engine_render_camera(engine);
 			player_action(main_camera, engine->user_engine->keyboard, engine);
 			enemy_look(engine);
-			// enemy_shoot(engine);
-			enemy_move(engine);
+			enemy_shoot(engine);
+			// enemy_move(engine);
 			drawing_front_hp(main_camera, engine);
 			drawing_front_mun(main_camera, gui, texture2, engine->user_engine->player);
 			draw_minimap(main_camera, engine, win);
@@ -201,5 +201,7 @@ int main(int argc, char **argv)
 	Mix_FreeMusic(musique);
 	Mix_CloseAudio();
 	TTF_Quit();
+	SDL_DestroyWindow(win->window);
+	SDL_Quit();
 	return (0);
 }

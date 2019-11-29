@@ -84,32 +84,34 @@ void		free_t_cam(t_camera *dest)
 	// printf("free t_camera\n");
 }
 
-void		t_camera_look_at_point(t_camera *cam, t_vector4 target) // calcul de l'angle de vue de la camera (forward, right, up)
+float		t_camera_look_at_point(t_camera *cam, t_vector4 target) // calcul de l'angle de vue de la camera (forward, right, up)
 {
-	t_vector4	result;
+	t_vector4		result;
 
 	if (target.x == cam->pos.x && target.y == cam->pos.y && target.z == cam->pos.z)
-		return ;
+		return (0.0);
 	result = normalize_t_vector4(substract_vector4_to_vector4(cam->pos, target));
 	cam->yaw = radius_to_degree(atan2(result.z, -result.x)) - 90;
 	cam->pitch = radius_to_degree(atan2(result.y, sqrt(result.x * result.x + result.z * result.z)));
 	cam->pitch = clamp_float_value(-89, cam->pitch, 89);
 	t_camera_look_at(cam);
+	return (cam->yaw);
 }
 
 void		t_camera_look_at(t_camera *cam) // calcul de l'angle de vue de la camera (forward, right, up)
 {
-	t_vector4 zaxis = normalize_t_vector4(create_t_vector4(cos(degree_to_radius(cam->pitch)) * sin(degree_to_radius(cam->yaw)),
-						sin(degree_to_radius(cam->pitch)),
-						cos(degree_to_radius(cam->pitch)) * cos(degree_to_radius(cam->yaw))));
-	t_vector4 xaxis = normalize_t_vector4(create_t_vector4(sin(degree_to_radius(cam->yaw) - 3.14f / 2.0f),
-						0,
-						cos(degree_to_radius(cam->yaw) - 3.14f / 2.0f)));
-	t_vector4 yaxis = normalize_t_vector4(cross_t_vector4(xaxis, zaxis));
+	t_vector4 zaxis;
+	t_vector4 xaxis;
 
+	zaxis = normalize_t_vector4(create_t_vector4(cos(
+		degree_to_radius(cam->pitch)) * sin(degree_to_radius(cam->yaw)),
+		sin(degree_to_radius(cam->pitch)),
+		cos(degree_to_radius(cam->pitch)) * cos(degree_to_radius(cam->yaw))));
+	xaxis = normalize_t_vector4(create_t_vector4(sin(degree_to_radius(cam->yaw)
+		- 3.14f / 2.0f), 0, cos(degree_to_radius(cam->yaw) - 3.14f / 2.0f)));
 	cam->forward = inv_t_vector4(zaxis);
 	cam->right = inv_t_vector4(xaxis);
-	cam->up = yaxis;
+	cam->up = normalize_t_vector4(cross_t_vector4(xaxis, zaxis));
 }
 
 t_matrix	t_camera_compute_view(t_camera *cam) //calcul de la matrice de vue

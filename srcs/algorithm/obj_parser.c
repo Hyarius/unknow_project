@@ -16,16 +16,13 @@ t_mesh		read_obj_file(char *path, t_vector4 pos, t_vector4 size, float gravity)
 	t_mesh_activate_gravity(&result, gravity);
 	tmp_face = create_t_face();
 
-	fd = open(path, O_RDONLY);
-
+	if ((fd = open(path, O_RDONLY)) < 0)
+	 	error_exit(-8000, "impossible fd");
 	for (i = 0; i < 4; i++)
 	{
 		index[i] = 0;
 		index_uv[i] = 0;
 	}
-
-	if (fd < 0)
-	 	error_exit(-8000, "impossible fd");
 	while (get_next_line(fd, &line))
 	{
 		if (ft_strlen(line) != 0)

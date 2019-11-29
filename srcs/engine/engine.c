@@ -72,11 +72,21 @@ void		t_engine_handle_event(t_camera *main_camera, t_gui *gui, t_engine *engine)
 	static float size = 0.45;
 	t_mesh	*mesh;
 	int		i;
+	static int variable = 0;
 
-	if (engine->playing == 1 && get_key_state(engine->user_engine->keyboard, SDL_SCANCODE_P) == 1)
+	if (engine->playing == 1 && get_key_state(engine->user_engine->keyboard, SDL_SCANCODE_P) == 1 && variable == 0)
+	{
+		variable = 1;
 		engine->playing = -2;
-	else if (engine->playing <= -2 && get_key_state(engine->user_engine->keyboard, SDL_SCANCODE_P) == 1)
+	}
+	else if (engine->playing <= -2 && get_key_state(engine->user_engine->keyboard, SDL_SCANCODE_P) == 1 && variable == 0)
+	{
+		variable = 1;
 		engine->playing = 1;
+	}
+	else if (get_key_state(engine->user_engine->keyboard, SDL_SCANCODE_P) == 0)
+		variable = 0;
+
 	t_user_engine_handle_pause(main_camera, gui, engine->user_engine, &(engine->playing));
 	t_user_engine_handle_menu(main_camera, gui, engine->user_engine, &(engine->playing));
 	if (t_user_engine_poll_event(engine->user_engine) > 0)
