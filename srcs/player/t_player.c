@@ -20,7 +20,7 @@ t_player			*initialize_t_player(t_camera *cam)
 	return(result);
 }
 
-t_weapon		create_t_weapons(int index, int ammo, int total_ammo)
+t_weapon		create_t_weapons(int index, int ammo, int total)
 {
 	t_weapon	result[5];
 
@@ -28,7 +28,7 @@ t_weapon		create_t_weapons(int index, int ammo, int total_ammo)
 	result[0].ammo = ammo;
 	result[0].mag_size = 15;
 	result[0].max_ammo = result[0].mag_size * MAX_MAGS;
-	result[0].total_ammo = total_ammo;
+	result[0].total = total;
 	result[0].dmg = 10;
 	result[0].tick_shoot = 1;
 	result[0].tick_reload = 2;
@@ -37,7 +37,7 @@ t_weapon		create_t_weapons(int index, int ammo, int total_ammo)
 	result[1].ammo = ammo;
 	result[1].mag_size = 30;
 	result[1].max_ammo = result[1].mag_size * MAX_MAGS;
-	result[1].total_ammo = total_ammo;
+	result[1].total = total;
 	result[1].dmg = 25;
 	result[1].tick_shoot = 1;
 	result[1].tick_reload = 2;
@@ -46,7 +46,7 @@ t_weapon		create_t_weapons(int index, int ammo, int total_ammo)
 	result[2].ammo = ammo;
 	result[2].mag_size = 10;
 	result[2].max_ammo = result[2].mag_size * MAX_MAGS;
-	result[2].total_ammo = total_ammo;
+	result[2].total = total;
 	result[2].dmg = 50;
 	result[2].tick_shoot = 2;
 	result[2].tick_reload = 3;
@@ -55,7 +55,7 @@ t_weapon		create_t_weapons(int index, int ammo, int total_ammo)
 	result[3].ammo = ammo;
 	result[3].mag_size = 8;
 	result[3].max_ammo = result[3].mag_size * MAX_MAGS;
-	result[3].total_ammo = total_ammo;
+	result[3].total = total;
 	result[3].dmg = 120;
 	result[3].tick_shoot = 2;
 	result[3].tick_reload = 3;
@@ -64,7 +64,7 @@ t_weapon		create_t_weapons(int index, int ammo, int total_ammo)
 	result[4].ammo = ammo;
 	result[4].mag_size = 1;
 	result[4].max_ammo = result[4].mag_size * MAX_MAGS;
-	result[4].total_ammo = total_ammo;
+	result[4].total = total;
 	result[4].dmg = 200000;
 	result[4].tick_shoot = 1;
 	result[4].tick_reload = 4;
@@ -95,13 +95,13 @@ void			reload_weapon(t_camera *camera, t_engine *engine)
 	to_fill = engine->user_engine->player->current_weapon->mag_size - engine->user_engine->player->current_weapon->ammo;
 	if (engine->tick - engine->user_engine->player->reload_time == engine->user_engine->player->current_weapon->tick_reload)
 	{
-		while (to_fill > 0 && engine->user_engine->player->current_weapon->ammo < engine->user_engine->player->current_weapon->mag_size && engine->user_engine->player->current_weapon->total_ammo > 0)
+		while (to_fill > 0 && engine->user_engine->player->current_weapon->ammo < engine->user_engine->player->current_weapon->mag_size && engine->user_engine->player->current_weapon->total > 0)
 		{
 			engine->user_engine->player->current_weapon->ammo++;
-			engine->user_engine->player->current_weapon->total_ammo--;
+			engine->user_engine->player->current_weapon->total--;
 			to_fill--;
 			if (ft_strcmp(engine->user_engine->player->current_weapon->name, "pistol") == 0 && engine->user_engine->player->current_weapon->ammo == engine->user_engine->player->current_weapon->mag_size)
-				engine->user_engine->player->current_weapon->total_ammo = 15;
+				engine->user_engine->player->current_weapon->total = 15;
 
 		}
 		camera->r_press = 0;
@@ -160,7 +160,7 @@ void			player_action(t_camera *camera, t_keyboard *p_keyboard, t_engine *engine)
 	}
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_R]) == 1 && camera->r_press == 0
 		&& engine->user_engine->player->current_weapon->mag_size - engine->user_engine->player->current_weapon->ammo != 0
-		&& engine->user_engine->player->current_weapon->total_ammo != 0)
+		&& engine->user_engine->player->current_weapon->total != 0)
 	{
 		camera->r_press = 1;
 		engine->user_engine->player->reload_time = engine->tick;

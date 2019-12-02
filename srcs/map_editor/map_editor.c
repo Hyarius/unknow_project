@@ -1,6 +1,6 @@
 #include "unknow_project.h"
 
-t_mesh		create_mesh_editing(int index, t_vector4 pos)
+t_mesh		create_mesh_editing(int index, t_vector4 pos, char *path)
 {
 	t_mesh	mesh;
 
@@ -14,7 +14,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos)
 		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
 		mesh.hp = -1;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = NULL;
+		mesh.texture->path = path;
 		mesh.kinetic = 0.0;
 	}
 	else if (index == 1)
@@ -26,7 +26,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos)
 		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
 		mesh.hp = -1;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = NULL;
+		mesh.texture->path = path;
 		mesh.kinetic = 0.0;
 	}
 	else if (index == 2)
@@ -38,7 +38,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos)
 		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
 		mesh.hp = -1;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = NULL;
+		mesh.texture->path = path;
 		mesh.kinetic = 0.0;
 	}
 	else if (index == 3)
@@ -50,7 +50,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos)
 		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
 		mesh.hp = -1;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = NULL;
+		mesh.texture->path = path;
 		mesh.kinetic = 0.0;
 	}
 	else if (index == 4)
@@ -62,7 +62,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos)
 		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
 		mesh.hp = -1;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = NULL;
+		mesh.texture->path = path;
 		mesh.kinetic = 0.0;
 	}
 	else if (index == 5)
@@ -74,7 +74,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos)
 		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
 		mesh.hp = -1;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = NULL;
+		mesh.texture->path = path;
 		mesh.kinetic = 0.0;
 	}
 	else if (index == 6)
@@ -86,7 +86,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos)
 		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
 		mesh.hp = -1;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = NULL;
+		mesh.texture->path = path;
 		mesh.kinetic = 0.0;
 	}
 	else if (index == 7)
@@ -98,7 +98,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos)
 		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
 		mesh.hp = -1;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = NULL;
+		mesh.texture->path = path;
 		mesh.kinetic = 0.0;
 	}
 	else if (index == 8)
@@ -110,7 +110,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos)
 		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
 		mesh.hp = -1;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = NULL;
+		mesh.texture->path = path;
 		mesh.kinetic = 0.0;
 	}
 	else if (index == 9)
@@ -122,7 +122,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos)
 		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
 		mesh.hp = -1;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = NULL;
+		mesh.texture->path = path;
 		mesh.kinetic = 0.0;
 	}
 	else if (index == 10)
@@ -134,7 +134,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos)
 		mesh.rotation = create_t_vector4(10.0, 0.0, 0.0);
 		mesh.hp = -1;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = NULL;
+		mesh.texture->path = path;
 		mesh.kinetic = 0.0;
 	}
 	else if (index == 11)
@@ -146,7 +146,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos)
 		mesh.rotation = create_t_vector4(10.0, 0.0, 0.0);
 		mesh.hp = -1;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = NULL;
+		mesh.texture->path = path;
 		mesh.kinetic = 0.0;
 	}
 	else if (index == 12)
@@ -158,7 +158,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos)
 		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
 		mesh.hp = -1;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = NULL;
+		mesh.texture->path = path;
 		mesh.kinetic = 0.0;
 	}
 	else if (index == 13)
@@ -170,7 +170,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos)
 		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
 		mesh.hp = -1;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = NULL;
+		mesh.texture->path = path;
 		mesh.kinetic = 0.0;
 	}
 	else if (index == 14)
@@ -182,7 +182,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos)
 		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
 		mesh.hp = -1;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = NULL;
+		mesh.texture->path = path;
 		mesh.kinetic = 0.0;
 	}
 	else if (index == 15)
@@ -194,7 +194,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos)
 		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
 		mesh.hp = -2;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = NULL;
+		mesh.texture->path = path;
 		mesh.kinetic = 0.0;
 	}
 	else if (index == 16)
@@ -206,7 +206,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos)
 		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
 		mesh.hp = -3;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = NULL;
+		mesh.texture->path = path;
 		mesh.kinetic = 0.0;
 	}
 	else if (index == 17)
@@ -218,7 +218,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos)
 		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
 		mesh.hp = -4;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = NULL;
+		mesh.texture->path = path;
 		mesh.kinetic = 0.0;
 	}
 	else if (index == 18)
@@ -230,7 +230,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos)
 		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
 		mesh.hp = -1;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = NULL;
+		mesh.texture->path = path;
 		mesh.kinetic = 0.0;
 	}
 	else if (index == 19)
@@ -242,7 +242,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos)
 		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
 		mesh.hp = -1;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = NULL;
+		mesh.texture->path = path;
 		mesh.kinetic = 0.0;
 	}
 	else if (index == 20)
@@ -254,7 +254,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos)
 		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
 		mesh.hp = -1;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = NULL;
+		mesh.texture->path = path;
 		mesh.kinetic = 0.0;
 	}
 	else if (index == 21)
@@ -266,19 +266,19 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos)
 		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
 		mesh.hp = -1;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = NULL;
+		mesh.texture->path = path;
 		mesh.kinetic = 0.0;
 	}
 	else if (index == 22)
 	{
 		mesh.name = "window";
-		mesh.size = create_t_vector4(1.0, 2.0, 0.3);
+		mesh.size = create_t_vector4(2.0, 2.0, 0.3);
 		mesh.primitive = 1;
 		mesh.collectible = 0;
 		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
 		mesh.hp = -1;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = NULL;
+		mesh.texture->path = path;
 		mesh.kinetic = 0.0;
 	}
 	else if (index == 24)
@@ -290,7 +290,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos)
 		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
 		mesh.hp = -1;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = NULL;
+		mesh.texture->path = path;
 		mesh.kinetic = 0.0;
 	}
 	else if (index == 23)
@@ -302,13 +302,13 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos)
 		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
 		mesh.hp = 100;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = NULL;
+		mesh.texture->path = path;
 		mesh.kinetic = 100.0;
 	}
 	return (mesh);
 }
 
-t_mesh		select_mesh(t_mesh mesh_editing, t_keyboard *key, t_vector4 pos)
+t_mesh		select_mesh(t_mesh mesh_editing, t_keyboard *key, t_vector4 pos, char **path)
 {
 	t_mesh	mesh;
 	static int	press = 0;
@@ -320,7 +320,6 @@ t_mesh		select_mesh(t_mesh mesh_editing, t_keyboard *key, t_vector4 pos)
 		key->i--;
 		if (key->i < 0)
 			key->i = 24;
-		mesh = create_mesh_editing(key->i, pos);
 		press = 1;
 	}
 	else if (get_key_state(key, key->key[SDL_SCANCODE_2]) == 1 && press == 0)
@@ -328,11 +327,11 @@ t_mesh		select_mesh(t_mesh mesh_editing, t_keyboard *key, t_vector4 pos)
 		key->i++;
 		if (key->i > 24)
 			key->i = 0;
-		mesh = create_mesh_editing(key->i, pos);
 		press = 1;
 	}
 	else if (get_key_state(key, key->key[SDL_SCANCODE_1]) == 0 && get_key_state(key, key->key[SDL_SCANCODE_2]) == 0)
 		press = 0;
+	mesh = create_mesh_editing(key->i, pos, path[key->i]);
 	return (mesh);
 }
 
@@ -417,69 +416,69 @@ void		print_set_weapon(t_camera *main_camera, t_gui *gui, t_engine *engine)
 	if (ft_strcmp(player->hitbox.name, "Player") == 0)
 	{
 		t_view_port_clear_buffers(main_camera->view_port);
-		if (player->weapons[1].total_ammo == -1)
+		if (player->weapons[1].total == -1)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.023, 0.65), create_t_vector2(0.18, 0.1)), gui->menu[13]);
 		else
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.151, 0.65), create_t_vector2(0.15, 0.1)), gui->menu[13]);
-		if (player->weapons[2].total_ammo == -1)
+		if (player->weapons[2].total == -1)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.023, -0.19), create_t_vector2(0.18, 0.1)), gui->menu[13]);
 		else
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.151, -0.19), create_t_vector2(0.15, 0.1)), gui->menu[13]);
-		if (player->weapons[3].total_ammo == -1)
+		if (player->weapons[3].total == -1)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.023, 0.23), create_t_vector2(0.18, 0.1)), gui->menu[13]);
 		else
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.151, 0.23), create_t_vector2(0.15, 0.1)), gui->menu[13]);
-		if (player->weapons[4].total_ammo == -1)
+		if (player->weapons[4].total == -1)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.023, -0.61), create_t_vector2(0.18, 0.1)), gui->menu[13]);
 		else
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.151, -0.61), create_t_vector2(0.15, 0.1)), gui->menu[13]);
-		if (player->weapons[1].total_ammo == 0 && player->weapons[1].ammo == 0)
+		if (player->weapons[1].total == 0 && player->weapons[1].ammo == 0)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.04, 0.52), create_t_vector2(0.08, 0.1)), gui->menu[13]);
-		if (player->weapons[1].total_ammo == 0 && player->weapons[1].ammo == 30)
+		if (player->weapons[1].total == 0 && player->weapons[1].ammo == 30)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.1, 0.52), create_t_vector2(0.08, 0.1)), gui->menu[13]);
-		if (player->weapons[1].total_ammo == 30 && player->weapons[1].ammo == 30)
+		if (player->weapons[1].total == 30 && player->weapons[1].ammo == 30)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.16, 0.52), create_t_vector2(0.08, 0.1)), gui->menu[13]);
-		if (player->weapons[1].total_ammo == 60 && player->weapons[1].ammo == 30)
+		if (player->weapons[1].total == 60 && player->weapons[1].ammo == 30)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.22, 0.52), create_t_vector2(0.08, 0.1)), gui->menu[13]);
-		if (player->weapons[1].total_ammo == 90 && player->weapons[1].ammo == 30)
+		if (player->weapons[1].total == 90 && player->weapons[1].ammo == 30)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.285, 0.52), create_t_vector2(0.08, 0.1)), gui->menu[13]);
-		if (player->weapons[1].total_ammo == 120 && player->weapons[1].ammo == 30)
+		if (player->weapons[1].total == 120 && player->weapons[1].ammo == 30)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.348, 0.52), create_t_vector2(0.08, 0.1)), gui->menu[13]);
-		if (player->weapons[3].total_ammo == 0 && player->weapons[3].ammo == 0)
+		if (player->weapons[3].total == 0 && player->weapons[3].ammo == 0)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.035, 0.095), create_t_vector2(0.08, 0.1)), gui->menu[13]);
-		if (player->weapons[3].total_ammo == 0 && player->weapons[3].ammo == 8)
+		if (player->weapons[3].total == 0 && player->weapons[3].ammo == 8)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.095, 0.095), create_t_vector2(0.08, 0.1)), gui->menu[13]);
-		if (player->weapons[3].total_ammo == 8 && player->weapons[3].ammo == 8)
+		if (player->weapons[3].total == 8 && player->weapons[3].ammo == 8)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.155, 0.095), create_t_vector2(0.08, 0.1)), gui->menu[13]);
-		if (player->weapons[3].total_ammo == 16 && player->weapons[3].ammo == 8)
+		if (player->weapons[3].total == 16 && player->weapons[3].ammo == 8)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.215, 0.095), create_t_vector2(0.08, 0.1)), gui->menu[13]);
-		if (player->weapons[3].total_ammo == 24 && player->weapons[3].ammo == 8)
+		if (player->weapons[3].total == 24 && player->weapons[3].ammo == 8)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.28, 0.095), create_t_vector2(0.08, 0.1)), gui->menu[13]);
-		if (player->weapons[3].total_ammo == 32 && player->weapons[3].ammo == 8)
+		if (player->weapons[3].total == 32 && player->weapons[3].ammo == 8)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.343, 0.095), create_t_vector2(0.08, 0.1)), gui->menu[13]);
-		if (player->weapons[2].total_ammo == 0 && player->weapons[2].ammo == 0)
+		if (player->weapons[2].total == 0 && player->weapons[2].ammo == 0)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.042, -0.33), create_t_vector2(0.08, 0.1)), gui->menu[13]);
-		if (player->weapons[2].total_ammo == 0 && player->weapons[2].ammo == 10)
+		if (player->weapons[2].total == 0 && player->weapons[2].ammo == 10)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.105, -0.33), create_t_vector2(0.08, 0.1)), gui->menu[13]);
-		if (player->weapons[2].total_ammo == 10 && player->weapons[2].ammo == 10)
+		if (player->weapons[2].total == 10 && player->weapons[2].ammo == 10)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.162, -0.33), create_t_vector2(0.08, 0.1)), gui->menu[13]);
-		if (player->weapons[2].total_ammo == 20 && player->weapons[2].ammo == 10)
+		if (player->weapons[2].total == 20 && player->weapons[2].ammo == 10)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.222, -0.33), create_t_vector2(0.08, 0.1)), gui->menu[13]);
-		if (player->weapons[2].total_ammo == 30 && player->weapons[2].ammo == 10)
+		if (player->weapons[2].total == 30 && player->weapons[2].ammo == 10)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.287, -0.33), create_t_vector2(0.08, 0.1)), gui->menu[13]);
-		if (player->weapons[2].total_ammo == 40 && player->weapons[2].ammo == 10)
+		if (player->weapons[2].total == 40 && player->weapons[2].ammo == 10)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.35, -0.33), create_t_vector2(0.08, 0.1)), gui->menu[13]);
-		if (player->weapons[4].total_ammo == 0 && player->weapons[4].ammo == 0)
+		if (player->weapons[4].total == 0 && player->weapons[4].ammo == 0)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.042, -0.755), create_t_vector2(0.08, 0.1)), gui->menu[13]);
-		if (player->weapons[4].total_ammo == 0 && player->weapons[4].ammo == 1)
+		if (player->weapons[4].total == 0 && player->weapons[4].ammo == 1)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.105, -0.755), create_t_vector2(0.08, 0.1)), gui->menu[13]);
-		if (player->weapons[4].total_ammo == 1 && player->weapons[4].ammo == 1)
+		if (player->weapons[4].total == 1 && player->weapons[4].ammo == 1)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.162, -0.755), create_t_vector2(0.08, 0.1)), gui->menu[13]);
-		if (player->weapons[4].total_ammo == 2 && player->weapons[4].ammo == 1)
+		if (player->weapons[4].total == 2 && player->weapons[4].ammo == 1)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.222, -0.755), create_t_vector2(0.08, 0.1)), gui->menu[13]);
-		if (player->weapons[4].total_ammo == 3 && player->weapons[4].ammo == 1)
+		if (player->weapons[4].total == 3 && player->weapons[4].ammo == 1)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.287, -0.755), create_t_vector2(0.08, 0.1)), gui->menu[13]);
-		if (player->weapons[4].total_ammo == 4 && player->weapons[4].ammo == 1)
+		if (player->weapons[4].total == 4 && player->weapons[4].ammo == 1)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.35, -0.755), create_t_vector2(0.08, 0.1)), gui->menu[13]);
 	}
 }
@@ -547,7 +546,7 @@ void		map_editor(t_camera *main_camera, t_gui *gui, t_engine *engine, t_mesh mes
 	else if (get_mouse_state(engine->user_engine->mouse, MOUSE_RIGHT) == BOOL_TRUE)
 	{
 		target = cast_ray(engine, t_camera_list_get(engine->visual_engine->camera_list, 0)->pos, t_camera_list_get(engine->visual_engine->camera_list, 0)->forward, "Player");
-		if (target != NULL)
+		if (target != NULL && ft_strcmp(target->name, "Player") != 0)
 		{
 			t_mesh_set_visibility(target, BOOL_FALSE);
 			target->no_hitbox = 1;
@@ -556,7 +555,7 @@ void		map_editor(t_camera *main_camera, t_gui *gui, t_engine *engine, t_mesh mes
 	if (get_key_state(engine->user_engine->keyboard, engine->user_engine->keyboard->key[SDL_SCANCODE_L]) == 1 && l_press == 0)
 	{
 		target = cast_ray(engine, t_camera_list_get(engine->visual_engine->camera_list, 0)->pos, t_camera_list_get(engine->visual_engine->camera_list, 0)->forward, "Player");
-		if (target != NULL)
+		if (target != NULL && ft_strcmp(target->name, "Player") != 0)
 		{
 			printf("here\n");
 			if (target->no_hitbox == 0)
@@ -571,7 +570,7 @@ void		map_editor(t_camera *main_camera, t_gui *gui, t_engine *engine, t_mesh mes
 	if (get_key_state(engine->user_engine->keyboard, engine->user_engine->keyboard->key[SDL_SCANCODE_I]) == 1 && i_press == 0)
 	{
 		target = cast_ray(engine, t_camera_list_get(engine->visual_engine->camera_list, 0)->pos, t_camera_list_get(engine->visual_engine->camera_list, 0)->forward, "Player");
-		if (target != NULL)
+		if (target != NULL && ft_strcmp(target->name, "Player") != 0)
 		{
 			printf("here\n");
 			if (target->is_visible == 0)

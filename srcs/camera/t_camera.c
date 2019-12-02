@@ -199,13 +199,13 @@ void		t_camera_change_view(t_camera *cam, float delta_pitch, float delta_yaw)
 void		move_cam(t_camera *camera, t_keyboard *key, t_engine *engine)
 {
 	if (get_key_state(key, key->key[SDL_SCANCODE_W]) == 1)
-		camera->pos = add_vector4_to_vector4(camera->pos, camera->forward);
+		camera->pos = add_vector4_to_vector4(camera->pos, divide_vector4_by_float(camera->forward, 2.0));
 	if (get_key_state(key, key->key[SDL_SCANCODE_S]) == 1)
-		camera->pos = add_vector4_to_vector4(camera->pos, inv_t_vector4(camera->forward));
+		camera->pos = add_vector4_to_vector4(camera->pos, inv_t_vector4(divide_vector4_by_float(camera->forward, 2.0)));
 	if (get_key_state(key, key->key[SDL_SCANCODE_D]) == 1)
-		camera->pos = add_vector4_to_vector4(camera->pos, camera->right);
+		camera->pos = add_vector4_to_vector4(camera->pos, divide_vector4_by_float(camera->right, 2.0));
 	if (get_key_state(key, key->key[SDL_SCANCODE_A]) == 1)
-		camera->pos = add_vector4_to_vector4(camera->pos, inv_t_vector4(camera->right));
+		camera->pos = add_vector4_to_vector4(camera->pos, inv_t_vector4(divide_vector4_by_float(camera->right, 2.0)));
 	if (get_key_state(key, key->key[SDL_SCANCODE_SPACE]) == 1)
 		camera->pos.y += 0.5;
 	if (get_key_state(key, key->key[SDL_SCANCODE_LCTRL]) == 1)
@@ -243,7 +243,7 @@ void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard,
 	z = 0.0;
 	mouvement = create_t_vector4(0, 0, 0);
 	save = create_t_vector4(0, 0, 0);
-	if (engine->user_engine->player->camera->body->kinetic == 0.0f)
+	if (engine->user_engine->player->hitbox.kinetic == 0.0f)
 	{
 		camera->body->force = create_t_vector4(0.0, 0.0, 0.0);
 		z = 0.1;
@@ -283,7 +283,7 @@ void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard,
 			save = add_vector4_to_vector4(divide_vector4_by_float(camera->body->force, 2), divide_vector4_by_float(save, 2));
 		else
 			save = create_t_vector4(camera->body->force.x, camera->body->force.y, camera->body->force.z);
-}
+	}
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_A]) == 1)
 	{
 		camera->body->force = add_vector4_to_vector4(mult_vector4_by_vector4(inv_t_vector4(camera->right), tmp), mouvement);

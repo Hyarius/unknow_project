@@ -111,7 +111,7 @@ void	print_info_bar(t_camera *main_camera, t_player *player, t_gui *gui)
 
 	str = ft_itoa(player->current_weapon->ammo);
 	str = ft_strjoinf(str, " / ", 1);
-	str = ft_strjoinf(str, ft_itoa(player->current_weapon->total_ammo), 3);
+	str = ft_strjoinf(str, ft_itoa(player->current_weapon->total), 3);
 
 	print_letter(main_camera, gui, str, create_t_rectangle(create_t_vector2(0.78, -0.90), create_t_vector2(0.01, 0.05)));
 	free(str);

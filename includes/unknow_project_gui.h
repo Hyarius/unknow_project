@@ -64,6 +64,7 @@ void            main_pause(t_camera *main_camera, t_gui *gui, t_user_engine *use
 void			print_set_player(t_camera *main_camera, t_gui *gui, t_engine *engine);
 void			print_set_weapon(t_camera *main_camera, t_gui *gui, t_engine *engine);
 void			map_editor(t_camera *main_camera, t_gui *gui, t_engine *engine, t_mesh mesh_editing);
+char			**load_path_texture(void);
 
 
 #endif

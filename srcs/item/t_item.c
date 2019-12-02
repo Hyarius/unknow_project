@@ -19,10 +19,10 @@ int		refill_pistol(t_player *player)
 	int	to_fill;
 
 	to_fill = player->weapons[0].mag_size;
-	if (player->weapons[0].total_ammo < player->weapons[0].max_ammo)
+	if (player->weapons[0].total < player->weapons[0].max_ammo)
 	{
-		while (to_fill-- > 0 && player->weapons[0].total_ammo < player->weapons[0].max_ammo)
-			player->weapons[0].total_ammo++;
+		while (to_fill-- > 0 && player->weapons[0].total < player->weapons[0].max_ammo)
+			player->weapons[0].total++;
 		return (BOOL_TRUE);
 	}
 	else
@@ -34,10 +34,10 @@ int		refill_ar(t_player *player)
 	int	to_fill;
 
 	to_fill = player->weapons[1].mag_size;
-	if (player->weapons[1].total_ammo < player->weapons[1].max_ammo)
+	if (player->weapons[1].total < player->weapons[1].max_ammo)
 	{
-		while (to_fill-- > 0 && player->weapons[1].total_ammo < player->weapons[1].max_ammo)
-			player->weapons[1].total_ammo++;
+		while (to_fill-- > 0 && player->weapons[1].total < player->weapons[1].max_ammo)
+			player->weapons[1].total++;
 		return (BOOL_TRUE);
 	}
 	else
@@ -49,10 +49,10 @@ int		refill_rifle(t_player *player)
 	int	to_fill;
 
 	to_fill = player->weapons[2].mag_size;
-	if (player->weapons[2].total_ammo < player->weapons[2].max_ammo)
+	if (player->weapons[2].total < player->weapons[2].max_ammo)
 	{
-		while (to_fill-- > 0 && player->weapons[2].total_ammo < player->weapons[2].max_ammo)
-			player->weapons[2].total_ammo++;
+		while (to_fill-- > 0 && player->weapons[2].total < player->weapons[2].max_ammo)
+			player->weapons[2].total++;
 		return (BOOL_TRUE);
 	}
 	else
@@ -64,10 +64,10 @@ int		refill_shotgun(t_player *player)
 	int	to_fill;
 
 	to_fill = player->weapons[3].mag_size;
-	if (player->weapons[3].total_ammo < player->weapons[3].max_ammo)
+	if (player->weapons[3].total < player->weapons[3].max_ammo)
 	{
-		while (to_fill-- > 0 && player->weapons[3].total_ammo < player->weapons[3].max_ammo)
-			player->weapons[3].total_ammo++;
+		while (to_fill-- > 0 && player->weapons[3].total < player->weapons[3].max_ammo)
+			player->weapons[3].total++;
 		return (BOOL_TRUE);
 	}
 	else
@@ -79,10 +79,10 @@ int		refill_rpg(t_player *player)
 	int	to_fill;
 
 	to_fill = player->weapons[4].mag_size;
-	if (player->weapons[4].total_ammo < player->weapons[4].max_ammo)
+	if (player->weapons[4].total < player->weapons[4].max_ammo)
 	{
-		while (to_fill-- > 0 && player->weapons[4].total_ammo < player->weapons[4].max_ammo)
-			player->weapons[4].total_ammo++;
+		while (to_fill-- > 0 && player->weapons[4].total < player->weapons[4].max_ammo)
+			player->weapons[4].total++;
 		return (BOOL_TRUE);
 	}
 	else

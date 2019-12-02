@@ -9,7 +9,7 @@ typedef struct  s_weapon
 	char		*name;
 	int			ammo;
 	int			mag_size;
-	int			total_ammo;
+	int			total;
 	int			max_ammo;
 	int			dmg;
 	int			tick_shoot;
@@ -38,7 +38,7 @@ t_player		create_t_player(t_camera *cam);
 t_player		*initialize_t_player(t_camera *cam);
 t_mesh_list 	*read_map_file(int fd, t_player *player);
 void			read_player(char **split, t_player *player);
-t_weapon		create_t_weapons(int index, int ammo, int total_ammo);
+t_weapon		create_t_weapons(int index, int ammo, int total);
 
 
 #endif

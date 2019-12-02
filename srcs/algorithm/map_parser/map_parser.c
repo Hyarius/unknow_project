@@ -6,7 +6,7 @@
 /*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 15:31:13 by adjouber          #+#    #+#             */
-/*   Updated: 2019/11/27 14:23:45 by adjouber         ###   ########.fr       */
+/*   Updated: 2019/12/02 13:08:57 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_mesh			init_texture(char **line_split)
 
 	texture_path = NULL;
 	if (ft_strcmp(line_split[8], "NULL") != 0)
-		texture_path = line_split[8];
+		texture_path = ft_strdup(line_split[8]);
 	else
 		color = create_t_color(ft_atof(line_split[13]),
 			ft_atof(line_split[14]),
