@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collision_detection.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 12:09:40 by adjouber          #+#    #+#             */
-/*   Updated: 2019/11/22 10:31:51 by gboutin          ###   ########.fr       */
+/*   Updated: 2019/12/02 15:34:16 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ int		is_t_mesh_intersecting(t_mesh *mesh_compared, t_mesh *mesh_target)
 	int		i;
 	float	val[4];
 
-	if (mesh_compared->faces == NULL)
-		error_exit(0,"test");
 	i = -1;
 	while (++i < mesh_compared->faces->size)
 	{
