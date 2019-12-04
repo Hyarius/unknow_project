@@ -24,6 +24,7 @@ void			free_t_engine(t_engine *dest);
 void			t_engine_add_mesh(t_engine *engine, t_mesh p_mesh);
 void			t_engine_add_item(t_engine *engine, t_item p_item);
 t_mesh			*t_engine_get_mesh(t_engine *p_engine, int index);
+t_mesh			*t_engine_get_player(t_engine *engine);
 
 void			t_engine_handle_camera(t_engine *p_engine, t_window *p_win);
 void			t_engine_draw_mesh(t_engine *p_engine);
@@ -54,7 +55,7 @@ void			enemy_look(t_engine *engine);
 
 
 void    		save_map(t_engine *engine, int wich);
-void			save_player(t_engine *engine, t_mesh current, int fd);
+void			save_player(t_engine *engine, int fd);
 
 void			link_t_camera_to_t_mesh(t_engine *engine, int index, t_mesh *mesh);
 
@@ -62,6 +63,10 @@ void			link_t_camera_to_t_mesh(t_engine *engine, int index, t_mesh *mesh);
 t_mesh			create_mesh_editing(int index, t_vector4 pos, char *path);
 t_mesh			select_mesh(t_mesh mesh_editing, t_keyboard *p_keyboard, t_vector4 pos, char **path);
 void			cast_mesh(t_engine *engine, t_mesh *mesh_editing);
+
+
+void			load_map(t_camera *main_camera, t_engine *engine, char *path);
+
 
 
 

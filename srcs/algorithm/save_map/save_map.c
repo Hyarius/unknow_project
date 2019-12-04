@@ -6,7 +6,7 @@
 /*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 13:29:42 by adjouber          #+#    #+#             */
-/*   Updated: 2019/12/02 13:55:47 by adjouber         ###   ########.fr       */
+/*   Updated: 2019/12/04 13:29:21 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,13 +115,12 @@ void	save_map(t_engine *engine, int wich)
 	free(command);
 	if (fd < 0)
 		error_exit(-7001, "impossible fd");
+	save_player(engine, fd);
 	i = 0;
 	while (i < engine->physic_engine->mesh_list->size)
 	{
 		current = t_mesh_list_at(engine->physic_engine->mesh_list, i);
-		if (current.primitive == -1)
-			save_player(engine, current, fd);
-		else if (current.primitive >= 0 && (current.is_visible
+		if (current.primitive >= 0 && (current.is_visible
 							|| !current.no_hitbox))
 			save_name(current, fd);
 		i++;

@@ -59,7 +59,8 @@ void    load_menu(t_gui *gui)
     gui->menu[2] = png_load("ressources/assets/imgs/controls_screen.png");
     gui->menu[3] = png_load("ressources/assets/imgs/credits_screen.png");
     gui->menu[4] = png_load("ressources/assets/imgs/pause_menu.png");
-    gui->menu[5] = png_load("ressources/assets/imgs/settings_pause_menu.png");
+	gui->menu[5] = png_load("ressources/assets/imgs/settings_pause_menu.png");
+    gui->menu[6] = png_load("ressources/assets/imgs/Play_menu.png");
     gui->menu[8] = png_load("ressources/assets/imgs/trainee.png");
     gui->menu[9] = png_load("ressources/assets/imgs/recruit.png");
     gui->menu[10] = png_load("ressources/assets/imgs/pirate.png");

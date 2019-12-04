@@ -20,6 +20,22 @@ t_player			*initialize_t_player(t_camera *cam)
 	return(result);
 }
 
+void	delete_t_player(t_player player)
+{
+	free_t_cam(player.camera);
+	// free_t_vector4_list(player.vertices);
+	// free_t_vector4_list(player.uvs);
+	// free_t_face_list(player.faces);
+	// printf("delete t_player\n");
+}
+
+void	free_t_player(t_player *player)
+{
+	delete_t_player(*player);
+	free(player);
+	// printf("free t_mesh\n");
+}
+
 t_weapon		create_t_weapons(int index, int ammo, int total)
 {
 	t_weapon	result[5];

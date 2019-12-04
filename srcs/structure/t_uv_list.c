@@ -79,3 +79,9 @@ void		clean_t_uv_list(t_uv_list *dest)
 {
 	dest->size = 0;
 }
+
+void			delete_t_uv_list(t_uv_list dest)
+{
+	free(dest.uvs);
+	// printf("delete t_triangle_list\n");
+}

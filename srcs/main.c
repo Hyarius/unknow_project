@@ -75,52 +75,52 @@ int main(int argc, char **argv)
 	t_engine_add_camera(engine, create_t_camera(win, create_t_vector4(0.0, 0.0, 0.0), 70, create_t_vector2(NEAR, FAR)));
 	resize_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 2)->view_port, create_t_vector2_int(300, 240));
 	move_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 2)->view_port, create_t_vector2_int(300, 0));
-	t_player *player;
-	int		fd;
-
-	player = initialize_t_player(main_camera);
-	fd = open("ressources/map/fichier_map.map", O_RDONLY);
-	// fd = open("ressources/map/test_gravity.map", O_RDONLY);
-	// fd = open("ressources/map/save1.map", O_RDONLY);
+	// t_player *player;
+	// int		fd;
+	//
+	// player = initialize_t_player(main_camera);
+	// // fd = open("ressources/map/fichier_map.map", O_RDONLY);
+	// // fd = open("ressources/map/test_gravity.map", O_RDONLY);
+	// // fd = open("ressources/map/save1.map", O_RDONLY);
 	// fd = open("ressources/map/editing_map1.map", O_RDONLY);
-	if (fd < 0)
-		error_exit(-7000, "imposible fd");
-	t_mesh_list *meshs = read_map_file(fd, player);
-	t_item_list *item_list = load_items(meshs);
-	close(fd);
-	engine->user_engine->player = player;
-	if (player->hitbox.name != NULL)
-	{
-		t_engine_add_mesh(engine, engine->user_engine->player->hitbox);
-	}
-
-
-	int i = 0;
-	int	j = 0;
-	int k = 0;
-	while (i < meshs->size)
-	{
-		if (t_mesh_list_at(meshs, i).collectible == 1)
-		{
-			t_engine_add_item(engine, t_item_list_at(item_list, j));
-			j++;
-		}
-		if (t_mesh_list_at(meshs, i).texture != NULL)
-			printf("%s\n", t_mesh_list_at(meshs, i).texture->path);
-		t_engine_add_mesh(engine, t_mesh_list_at(meshs, i));
-		if (ft_strcmp(t_mesh_list_at(meshs, i).name, "Enemy") == 0)
-		{
-			if (k != 0)
-			{
-				t_engine_add_camera(engine, create_t_camera(win, create_t_vector4(0.0, 0.0, 0.0), 70, create_t_vector2(NEAR, FAR)));
-				resize_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 2 + k)->view_port, create_t_vector2_int(1, 1));
-				move_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 2 + k)->view_port, create_t_vector2_int(0, 0));
-			}
-			link_t_camera_to_t_mesh(engine, 2 + k, t_engine_get_mesh(engine, i));
-			k++;
-		}
-		i++;
-	}
+	// if (fd < 0)
+	// 	error_exit(-7000, "imposible fd");
+	// t_mesh_list *meshs = read_map_file(fd, player);
+	// t_item_list *item_list = load_items(meshs);
+	// close(fd);
+	// engine->user_engine->player = player;
+	// if (player->hitbox.name != NULL)
+	// {
+	// 	t_engine_add_mesh(engine, engine->user_engine->player->hitbox);
+	// }
+	//
+	//
+	// int i = 0;
+	// int	j = 0;
+	// int k = 0;
+	// while (i < meshs->size)
+	// {
+	// 	if (t_mesh_list_at(meshs, i).collectible == 1)
+	// 	{
+	// 		t_engine_add_item(engine, t_item_list_at(item_list, j));
+	// 		j++;
+	// 	}
+	// 	if (t_mesh_list_at(meshs, i).texture != NULL)
+	// 		printf("%s\n", t_mesh_list_at(meshs, i).texture->path);
+	// 	t_engine_add_mesh(engine, t_mesh_list_at(meshs, i));
+	// 	if (ft_strcmp(t_mesh_list_at(meshs, i).name, "Enemy") == 0)
+	// 	{
+	// 		if (k != 0)
+	// 		{
+	// 			t_engine_add_camera(engine, create_t_camera(win, create_t_vector4(0.0, 0.0, 0.0), 70, create_t_vector2(NEAR, FAR)));
+	// 			resize_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 2 + k)->view_port, create_t_vector2_int(1, 1));
+	// 			move_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 2 + k)->view_port, create_t_vector2_int(0, 0));
+	// 		}
+	// 		link_t_camera_to_t_mesh(engine, 2 + k, t_engine_get_mesh(engine, i));
+	// 		k++;
+	// 	}
+	// 	i++;
+	// }
 	engine->playing = 2;
 
 	t_rectangle rec = create_t_rectangle(create_t_vector2(-1, 1), create_t_vector2(2, -2));
@@ -169,6 +169,10 @@ int main(int argc, char **argv)
 		if (engine->playing == 5)
 		{
 			draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->menu[3]);
+		}
+		if (engine->playing == 6)
+		{
+			draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->menu[6]);
 		}
 
 		else if (engine->playing == 1)

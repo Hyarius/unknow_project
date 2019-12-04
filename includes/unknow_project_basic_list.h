@@ -259,6 +259,7 @@ void			t_uv_list_push_back(t_uv_list *dest, t_uv to_add);
 void			t_uv_list_add_back(t_uv_list *dest, t_uv *to_add);
 t_uv			*t_uv_list_get(t_uv_list *dest, int index);
 void			clean_t_uv_list(t_uv_list *dest);
+void			delete_t_uv_list(t_uv_list dest);
 
 typedef struct	s_face_list
 {

@@ -47,10 +47,11 @@ void            t_engine_handle_event(t_camera *main_camera, t_gui *gui, t_engin
 void            t_user_engine_handle_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, int *play);
 
 void            main_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, int *play);
+void			play_menu(t_camera *main_camera, t_engine *engine, int *play);
 void            option_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int *play);
 void            settings_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int *play);
 void            controls_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int *play);
-void            pause_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int *play);
+void            pause_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, int *play);
 void            settings_pause_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int *play);
 void            credits_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int *play);
 void            sens_bis(t_camera *main_camera, t_gui *gui, int sens);

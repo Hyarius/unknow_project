@@ -297,7 +297,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos, char *path)
 	{
 		mesh.name = "Player";
 		mesh.size = create_t_vector4(0.3, 0.5, 0.3);
-		mesh.primitive = 1;
+		mesh.primitive = -1;
 		mesh.collectible = 0;
 		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
 		mesh.hp = 100;
@@ -527,8 +527,16 @@ void		map_editor(t_camera *main_camera, t_gui *gui, t_engine *engine, t_mesh mes
 	player_editing(main_camera, engine, gui);
 	if (t_mouse_state(engine->user_engine->mouse) == 2)
 	{
-		if (mesh_editing.primitive == 1)
-			mesh = create_primitive_cube(mesh_editing.pos, mesh_editing.size, mesh_editing.texture->path, mesh_editing.kinetic);
+		if (mesh_editing.primitive == 1 || mesh_editing.primitive == -1)
+		{
+			if (mesh_editing.primitive == -1)
+			{
+				mesh = create_primitive_cube(mesh_editing.pos, mesh_editing.size, mesh_editing.texture->path, mesh_editing.kinetic);
+				mesh.primitive = -1;
+			}
+			else
+				mesh = create_primitive_cube(mesh_editing.pos, mesh_editing.size, mesh_editing.texture->path, mesh_editing.kinetic);
+		}
 		else if (mesh_editing.primitive == 0)
 			mesh = create_primitive_plane(mesh_editing.pos, mesh_editing.size, mesh_editing.texture->path, mesh_editing.kinetic);
 		t_mesh_set_color(&mesh, create_t_color(1.0, 1.0, 1.0, 1.0));

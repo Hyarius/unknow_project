@@ -6,7 +6,7 @@
 /*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 14:06:57 by adjouber          #+#    #+#             */
-/*   Updated: 2019/12/02 14:08:24 by adjouber         ###   ########.fr       */
+/*   Updated: 2019/12/04 13:30:18 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	save_status(t_engine *engine, t_mesh cu, int fd, char *test)
 	save_ammo(engine, fd, test);
 }
 
-void	save_player(t_engine *engine, t_mesh current, int fd)
+void	save_player_pos(t_engine *engine, t_mesh current, int fd)
 {
 	char	*test;
 
@@ -93,4 +93,21 @@ void	save_player(t_engine *engine, t_mesh current, int fd)
 	test = ft_strjoinf(test, " ", 1);
 	test = ft_strjoinf(test, "NULL ", 1);
 	save_status(engine, current, fd, test);
+}
+
+void	save_player(t_engine *engine, int fd)
+{
+	t_mesh	current;
+	int		i;
+
+	i = 0;
+	while (i < engine->physic_engine->mesh_list->size)
+	{
+		current = t_mesh_list_at(engine->physic_engine->mesh_list, i);
+		if (current.primitive == -1 && (current.is_visible
+							|| !current.no_hitbox))
+			save_player_pos(engine, current, fd);
+		i++;
+	}
+
 }
