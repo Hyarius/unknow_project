@@ -20,6 +20,13 @@ int main(int argc, char **argv)
 	texture2[1] = png_load("ressources/assets/textures/ar_ammo.png");
 	texture2[2] = png_load("ressources/assets/textures/rifle_ammo.png");
 	texture2[3] = png_load("ressources/assets/textures/shotgun_ammo.png");
+	t_texture *texture_weapons[6];
+	texture_weapons[0] = png_load("ressources/assets/imgs/pistol.png");
+	texture_weapons[1] = png_load("ressources/assets/imgs/AR.png");
+	texture_weapons[2] = png_load("ressources/assets/imgs/rifle.png");
+	texture_weapons[3] = png_load("ressources/assets/imgs/shotgun.png");
+	// texture_weapons[4] = png_load("ressources/assets/imgs/wall_destroyer.png");
+	texture_weapons[4] = png_load("ressources/assets/imgs/Hands_baby_copy.png");
 	t_texture *skybox = png_load("ressources/assets/textures/skybox.png");
 
 	t_engine	*engine;
@@ -179,6 +186,7 @@ int main(int argc, char **argv)
 			enemy_move(engine);
 			drawing_front_hp(main_camera, engine);
 			drawing_front_mun(main_camera, texture2, engine->user_engine->player);
+			drawing_front_weapons(main_camera, texture_weapons, engine->user_engine->player);
 			draw_minimap(main_camera, engine, win);
 			print_info_bar(main_camera, engine->user_engine->player, gui);
 		}
@@ -204,6 +212,5 @@ int main(int argc, char **argv)
 	TTF_Quit();
 	SDL_DestroyWindow(win->window);
 	SDL_Quit();
-
 	return (0);
 }

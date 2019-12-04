@@ -37,6 +37,7 @@ t_gui           create_t_gui(void);
 t_gui           *initialize_t_gui(void);
 void            drawing_front_hp(t_camera *main_camera, t_engine *engine);
 void            drawing_front_mun(t_camera *main_camera,  t_texture **texture, t_player *player);
+void            drawing_front_weapons(t_camera *main_camera,  t_texture **texture, t_player *player);
 void            draw_minimap(t_camera *main_camera, t_engine *engine, t_window *win);
 void            load_letter(t_gui *gui, char *str, int idx);
 void            set_t_gui_texte(t_gui *gui);
