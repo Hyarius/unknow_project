@@ -82,8 +82,8 @@ t_mesh		read_obj_file(char *path, t_vector4 pos, t_vector4 size, float gravity)
 		free(line);
 	}
 	free(line);
-	t_mesh_compute_normals(&result);
 	close(fd);
+	t_mesh_compute_normals(&result);
 	t_mesh_compute_bubble_box(&result);
 	t_mesh_set_texture(&result, NULL);
 	return(result);

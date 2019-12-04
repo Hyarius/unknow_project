@@ -132,6 +132,7 @@
 // 	glDrawArrays(GL_LINES, 0, 2);
 // }
 //
+
 void	draw_triangle_color_opengl(t_window *p_win, t_triangle *p_triangle, t_color *p_color)
 {
 	GLfloat vertex_buffer_data[9] = {
@@ -161,6 +162,7 @@ void	draw_triangle_color_opengl(t_window *p_win, t_triangle *p_triangle, t_color
 	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, NULL);
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 }
+
 //
 // void			draw_triangle_texture_opengl(t_window *p_win, t_triangle *p_triangle_screen, t_uv *uv)
 // {

@@ -25,16 +25,12 @@ void		enemy_look(t_engine *engine)
 			if (ft_strcmp(cam->body->name, "Enemy") == 0)
 			{
 				cam->pos = add_vector4_to_vector4(cam->body->pos, create_t_vector4(0.15, 0.45, -0.15));
-				// printf("%f\n", t_camera_look_at_point(cam, target->pos));x
-				t_camera_look_at_point(cam, target->pos);
-				if (cam->yaw != yaw_stat)
+				t_camera_look_at_point(cam, target->center);
+				tmp = (cam->yaw - cam->body->angle.x);
+				if (tmp > cam->body->angle.x + 1.0f || tmp < cam->body->angle.x - 1.0f)
 				{
-					printf("cam->yaw = %f\n", cam->yaw);
-					cam->body->angle.y = cam->yaw;
-					yaw_stat = cam->yaw;
-					if (cam->yaw < 0)
-						cam->body->angle.y *= -1;
-					t_mesh_rotate_around_point(cam->body, cam->body->angle, cam->body->center);
+					t_mesh_rotate_around_point(cam->body, create_t_vector4(0.0, tmp, 0.0), cam->body->center);
+					cam->body->angle.x = cam->yaw;
 				}
 			}
 		}
@@ -56,11 +52,9 @@ void		enemy_shoot(t_engine *engine)
 		target = t_mesh_list_get(engine->physic_engine->mesh_list, i);
 		if (ft_strcmp(target->name, "Enemy") == 0)
 		{
-			// printf("%d\n", j);
 			mesh = cast_ray(engine, target->camera->pos, target->camera->forward, "Enemy");
 			if (mesh != NULL && engine->tick - j == 2 && ft_strcmp(mesh->name, "Player") == 0)
 			{
-				// printf("here shoot\n");
 				if (engine->user_engine->player->armor != 0)
 				{
 					if (engine->user_engine->player->armor >= 5)
@@ -77,15 +71,9 @@ void		enemy_shoot(t_engine *engine)
 				j = -5;
 			}
 			else if (mesh != NULL && engine->tick - j > 3 && ft_strcmp(mesh->name, "Player") == 0)
-			{
-				// printf("here load\n");
 				j = engine->tick;
-			}
 			else if (mesh == NULL || ft_strcmp(mesh->name, "Player") != 0)
-			{
-				// printf("here here\n");
 				j = -5;
-			}
 		}
 		i++;
 	}
@@ -104,11 +92,9 @@ void		enemy_move(t_engine *engine)
 		if (ft_strcmp(mesh->name, "Enemy") == 0)
 		{
 			target = cast_ray(engine, mesh->camera->pos, mesh->camera->forward, "Enemy");
-			// if (target != NULL)
-			// 	printf("target.name = %s\n", target->name);
 			if (target != NULL && ft_strcmp(target->name, "Player") == 0)
 			{
-				mesh->force = divide_vector4_by_float(mesh->camera->forward, 10);
+				mesh->force = divide_vector4_by_float(mesh->camera->forward, 25);
 				mesh->force.y = 0;
 				if (can_move(mesh, engine) == BOOL_TRUE)
 					t_mesh_move(mesh, mesh->force);

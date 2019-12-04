@@ -205,62 +205,18 @@ void	t_mesh_rotate(t_mesh *mesh, t_vector4 delta_angle)
 	t_mesh_compute_bubble_box(mesh);
 }
 
-float	t_mesh_rotate_to(t_mesh *src, t_mesh *dest)
+void	t_mesh_rotate_to(t_mesh *src, t_mesh *dest)
 {
-	t_vector4	tmp_forward;
-	t_vector4	tmp_pos;
-	t_vector4	c;
 	t_vector4	result;
-	// t_vector4	tmp;
-	float		dot;
+	float		tmp_yaw;
+	float		tmp_pitch;
 
-	t_vector4 tmp;
-
-	tmp = substract_vector4_to_vector4(dest->pos, src->pos);
-	// print_t_vector4(tmp, "tmp");
-	print_t_vector4(src->forward, "src->forward");
-	tmp_forward = normalize_t_vector4(src->forward);
-	tmp_pos = normalize_t_vector4(src->pos);
-	result = create_t_vector4(0.0, 0.0, 0.0);
-	result.y = (((tmp_forward.x - tmp_pos.x) * (tmp.x - tmp_pos.x)) + ((tmp_forward.y - tmp_pos.y) * (tmp.y - tmp_pos.y)) + ((tmp_forward.z - tmp_pos.z) * (tmp.z - tmp_pos.z)))
-	/ sqrt(((tmp_forward.x - tmp_pos.x) * (tmp_forward.x - tmp_pos.x)) + ((tmp_forward.y - tmp_pos.y) * (tmp_forward.y - tmp_pos.y)) + ((tmp_forward.z - tmp_pos.z) * (tmp_forward.z - tmp_pos.z)))
-	* sqrt(((tmp.x - tmp_pos.x) * (tmp.x - tmp_pos.x)) + ((tmp.y - tmp_pos.y) * (tmp.y - tmp_pos.y)) + ((tmp.z - tmp_pos.z) * (tmp.z - tmp_pos.z)));
-	printf("result.y = %f\n", result.y);
-	dot = dot_t_vector4(tmp, tmp_pos);
-	if (dot < 0)
-		result.y = -result.y;
-	printf("result.y = %f\n", result.y);
-	return (dot);
-	// t_mesh_rotate_around_point(src, result, src->center);
-	// t_mesh_rotate(src, result);
-	// a = src->pos;
-	// print_t_vector4(a, "src->pos");
-	// b = src->forward;
-	// print_t_vector4(b, "src->forward");
-	// c = substract_vector4_to_vector4(dest->pos, a);
-	// print_t_vector4(c, "c");
-	// tmp = cross_t_vector4(b, c);
-	// result.y = (((b.x - a.x) * (c.x - a.x)) + ((b.y - a.y) * (c.y - a.y)) + ((b.z - a.z) * (c.z - a.z)))
-	// / sqrt(((b.x - a.x) * (b.x - a.x)) + ((b.y - a.y) * (b.y - a.y)) + ((b.z - a.z) * (b.z - a.z)))
-	// * sqrt(((c.x - a.x) * (c.x - a.x)) + ((c.y - a.y) * (c.y - a.y)) + ((c.z - a.z) * (c.z - a.z)));
-	// dot = dot_t_vector4(tmp, normalize_t_vector4(c));
-	// printf("dot = %20f\n", dot);
-	// if (dot > 0)
-	// {
-	// 	// printf("pos -------- ");
-	// 	result.y = result.y;
-	// 	t_mesh_rotate_around_point(src, result, src->center);
-
-	// }
-	// else if (dot < 0)
-	// {
-	// 	// printf("neg -------- ");
-	// 	result.y = -result.y;
-	// 	t_mesh_rotate_around_point(src, result, src->center);
-	// }
-	// if (dot == 0)
-		// printf("coco --------- ");
-	// printf("result.y = %f\n", result.y);
+	result = normalize_t_vector4(substract_vector4_to_vector4(src->pos, dest->pos));
+	src->angle.y = radius_to_degree(atan2(result.z, -result.x)) - 90;
+	// tmp_pitch = radius_to_degree(atan2(result.y, sqrt(result.x * result.x + result.z * result.z)));
+	// tmp_pitch = clamp_float_value(-89, tmp_pitch, 89);
+	printf("src->angle.y = %f\n", src->angle.y);
+	t_mesh_rotate_around_point(src, src->angle, src->center);
 
 }
 

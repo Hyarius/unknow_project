@@ -91,7 +91,11 @@ float		t_camera_look_at_point(t_camera *cam, t_vector4 target) // calcul de l'an
 	if (target.x == cam->pos.x && target.y == cam->pos.y && target.z == cam->pos.z)
 		return (0.0);
 	result = normalize_t_vector4(substract_vector4_to_vector4(cam->pos, target));
+	// if (cam->body != NULL)
+	// 	printf("------------------\ncam->yaw avant : %f\n", cam->yaw);
 	cam->yaw = radius_to_degree(atan2(result.z, -result.x)) - 90;
+	// if (cam->body != NULL)
+	// 	printf("cam->yaw apres : %f\n", cam->yaw);
 	cam->pitch = radius_to_degree(atan2(result.y, sqrt(result.x * result.x + result.z * result.z)));
 	cam->pitch = clamp_float_value(-89, cam->pitch, 89);
 	t_camera_look_at(cam);

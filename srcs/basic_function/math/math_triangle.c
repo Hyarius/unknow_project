@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 16:57:24 by adjouber          #+#    #+#             */
-/*   Updated: 2019/11/27 12:04:13 by gboutin          ###   ########.fr       */
+/*   Updated: 2019/12/04 11:18:42 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int		intersect_triangle_by_segment(t_triangle p_triangle, t_vector4 p_normal,
 	}
 	if (is_point_on_triangle(p_triangle, *intersection) == BOOL_FALSE)
 	{
-	// 	printf("point on triangle\n");
+		// printf("point on triangle\n");
 		return (BOOL_FALSE);
 	}
 	return (BOOL_TRUE);

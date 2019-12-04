@@ -8,9 +8,11 @@ static char	*read_shader(const char *p_path)
 
 	content = NULL;
 	line = NULL;
-	fd = open(p_path, O_RDONLY);
+	if ((fd = open(p_path, O_RDONLY)) < 0)
+		error_exit(-555, "can't read the shader");
 	while (get_next_line(fd, &line) > 0)
 	{
+
 		if (ft_strlen(content) != 0)
 			ft_stradd(&content, "\n");
 		ft_stradd(&content, line);
@@ -57,6 +59,7 @@ GLuint		load_shaders(const char *p_vertex_file_path, const char *p_fragment_file
 	GLuint	vertex_shader_id;
 	GLuint	fragment_shader_id;
 	GLuint	program_id;
+
 
 	program_id = glCreateProgram();
 	fragment_shader_id = glCreateShader(GL_FRAGMENT_SHADER);

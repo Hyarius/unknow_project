@@ -3,20 +3,20 @@
 void            t_user_engine_handle_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int *play)
 {
     if (*play == 2)
-        main_menu(main_camera, gui, user_engine, play);
+        main_menu(main_camera, user_engine, play);
     if (*play == 3)
         settings_menu(main_camera, gui, user_engine, play);
     if (*play == 4)
         controls_menu(main_camera, gui, user_engine, play);
     if (*play == 5)
-        credits_menu(main_camera, gui, user_engine, play);
+        credits_menu(main_camera, user_engine, play);
     if (*play == -1)
-        pause_menu(main_camera, gui, user_engine, play);
+        pause_menu(main_camera, user_engine, play);
     if (*play == -2)
-        settings_pause_menu(main_camera, gui, user_engine, play);
+        settings_pause_menu(main_camera, user_engine, play);
 }
 
-void			main_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int *play)
+void			main_menu(t_camera *main_camera, t_user_engine *user_engine, int *play)
 {
 	t_mouse *mouse = user_engine->mouse;
 	t_keyboard *keyboard = user_engine->keyboard;
@@ -43,7 +43,7 @@ void			main_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, 
         user_engine->mouse->clicked_left = BOOL_FALSE;
 }
 
-void			pause_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int *play)
+void			pause_menu(t_camera *main_camera, t_user_engine *user_engine, int *play)
 {
 	t_mouse *mouse = user_engine->mouse;
 	t_keyboard *keyboard = user_engine->keyboard;
@@ -73,7 +73,7 @@ void			pause_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine,
         user_engine->mouse->clicked_left = BOOL_FALSE;
 }
 
-void			settings_pause_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int *play)
+void			settings_pause_menu(t_camera *main_camera, t_user_engine *user_engine, int *play)
 {
 	t_mouse *mouse = user_engine->mouse;
 	t_keyboard *keyboard = user_engine->keyboard;
@@ -354,7 +354,7 @@ void    set_controls(t_camera *main_camera, t_gui *gui, t_user_engine *engine, i
     }
 }
 
-void			credits_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int *play)
+void			credits_menu(t_camera *main_camera, t_user_engine *user_engine, int *play)
 {
 	t_mouse *mouse = user_engine->mouse;
 	t_keyboard *keyboard = user_engine->keyboard;

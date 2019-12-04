@@ -37,6 +37,7 @@ void			t_camera_list_push_back(t_camera_list *dest, t_camera to_add)
 			dest->camera[i] = tmp[i];
 			// i++;
 		}
+
 		free(tmp);
 		dest->max_size += PUSH_SIZE;
 	}

@@ -78,7 +78,7 @@ void			t_triangle_list_add_back(t_triangle_list *dest, t_triangle *add)
 void			delete_t_triangle_list(t_triangle_list dest)
 {
 	free(dest.triangle);
-	// printf("delete t_triangle_list\n");
+	printf("delete t_triangle_list\n");
 }
 
 void			free_t_triangle_list(t_triangle_list *dest)

@@ -14,7 +14,10 @@ t_mesh	*cast_ray_next(t_vector4 pos, t_vector4 direction, t_mesh *mesh)
 				(mesh, t_face_list_get(mesh->faces, k)->index_vertices),
 				t_face_list_get(mesh->faces, k)->normale, line,
 				&intersection) == BOOL_TRUE)
-			return (mesh);
+				{
+					return (mesh);
+				}
+			// print_t_vector4(intersection, "intersection");
 	}
 	return (NULL);
 }

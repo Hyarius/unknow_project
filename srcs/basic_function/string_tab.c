@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   string_tab.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 16:18:14 by adjouber          #+#    #+#             */
-/*   Updated: 2019/10/31 17:07:37 by adjouber         ###   ########.fr       */
+/*   Updated: 2019/12/02 10:58:39 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_freetab(char **tab)
 	int	i;
 
 	i = 0;
-	while (i < ft_tablen(tab))
+	while (tab[i])
 	{
 		free(tab[i]);
 		i++;

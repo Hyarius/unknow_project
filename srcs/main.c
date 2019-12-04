@@ -5,7 +5,6 @@ int main(int argc, char **argv)
 	TTF_Font    *police;
 	SDL_Surface *font = NULL;
 	SDL_Color color = {0, 0, 0};
-
 	if (argc != 1)
 		error_exit(-1, "Bad argument");
 
@@ -21,14 +20,13 @@ int main(int argc, char **argv)
 	texture2[1] = png_load("ressources/assets/textures/ar_ammo.png");
 	texture2[2] = png_load("ressources/assets/textures/rifle_ammo.png");
 	texture2[3] = png_load("ressources/assets/textures/shotgun_ammo.png");
-	t_texture *texture = png_load("ressources/assets/textures/cube_test.png");
 	t_texture *skybox = png_load("ressources/assets/textures/skybox.png");
 
 	t_engine	*engine;
 	t_gui		*gui;
 
 	engine = initialize_t_engine(win);
-	gui = initialize_t_gui(0.10, 30);
+	gui = initialize_t_gui();
 
 	load_menu(gui);
 	TTF_Init();
@@ -38,9 +36,7 @@ int main(int argc, char **argv)
 
 	t_mesh		mesh;
 	t_camera	*main_camera;
-	Mix_Music	*musique;
 
-	musique = Mix_LoadMUS("ressources/assets/sounds/mega_man_test.ogg");
 	main_camera = t_camera_list_get(engine->visual_engine->camera_list, 0);
 	t_engine_place_camera(engine, 0, create_t_vector4(5.0, 5.0, 0.0));
 	t_camera_look_at_point(main_camera, create_t_vector4(0, 0, 0));
@@ -55,8 +51,8 @@ int main(int argc, char **argv)
 	int		fd;
 
 	// fd = open("ressources/map/jules_test.map", O_RDONLY);
-	// fd = open("ressources/map/fichier_map.map", O_RDONLY);
-	fd = open("ressources/map/map2.map", O_RDONLY);
+	fd = open("ressources/map/fichier_map.map", O_RDONLY);
+	// fd = open("ressources/map/map2.map", O_RDONLY);
 	// fd = open("ressources/map/test_gravity.map", O_RDONLY);
 	// fd = open("ressources/map/save1.map", O_RDONLY);
 	// fd = open("ressources/map/editing_map1.map", O_RDONLY);
@@ -67,8 +63,8 @@ int main(int argc, char **argv)
 	player = read_player(fd, main_camera);
 	close(fd);
 	// fd = open("ressources/map/jules_test.map", O_RDONLY);
-	// fd = open("ressources/map/fichier_map.map", O_RDONLY);
-	fd = open("ressources/map/map2.map", O_RDONLY);
+	fd = open("ressources/map/fichier_map.map", O_RDONLY);
+	// fd = open("ressources/map/map2.map", O_RDONLY);
 	// fd = open("ressources/map/test_gravity.map", O_RDONLY);
 	// fd = open("ressources/map/save1.map", O_RDONLY);
 	// fd = open("ressources/map/editing_map1.map", O_RDONLY);
@@ -114,8 +110,13 @@ int main(int argc, char **argv)
 	mesh_editing = create_mesh_editing(0, engine->user_engine->player->camera->body->pos);
 	mesh = create_primitive_skybox(main_camera->pos, create_t_vector4(1.0, 1.0, 1.0), skybox);
 	engine->playing = 1;
-	Mix_VolumeMusic(MIX_MAX_VOLUME / 100);
+
+	Mix_Music	*musique;
+
+	musique = Mix_LoadMUS("ressources/assets/sounds/mega_man_test.ogg");
+	Mix_VolumeMusic(MIX_MAX_VOLUME);
 	// Mix_PlayMusic(musique, 1);
+
 	while (engine->playing != 0)
 	{
 		prepare_screen(win, create_t_color(0.2f, 0.2f, 0.2f, 1.0f));
@@ -174,10 +175,10 @@ int main(int argc, char **argv)
 			t_engine_render_camera(engine);
 			player_action(main_camera, engine->user_engine->keyboard, engine);
 			enemy_look(engine);
-			enemy_shoot(engine);
-			// enemy_move(engine);
+			// enemy_shoot(engine);
+			enemy_move(engine);
 			drawing_front_hp(main_camera, engine);
-			drawing_front_mun(main_camera, gui, texture2, engine->user_engine->player);
+			drawing_front_mun(main_camera, texture2, engine->user_engine->player);
 			draw_minimap(main_camera, engine, win);
 			print_info_bar(main_camera, engine->user_engine->player, gui);
 		}
@@ -203,5 +204,6 @@ int main(int argc, char **argv)
 	TTF_Quit();
 	SDL_DestroyWindow(win->window);
 	SDL_Quit();
+
 	return (0);
 }

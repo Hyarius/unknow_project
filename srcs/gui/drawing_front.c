@@ -23,7 +23,7 @@ void    drawing_front_hp(t_camera *main_camera, t_engine *engine)
     draw_rectangle_color_cpu_front(main_camera->view_port, create_t_rectangle(create_t_vector2(0.0, 0.0), create_t_vector2(0.005, 0.01)), color_armor);
 }
 
-void    drawing_front_mun(t_camera *main_camera, t_gui *p_gui, t_texture **texture, t_player *player)
+void    drawing_front_mun(t_camera *main_camera, t_texture **texture, t_player *player)
 {
     int weapon;
     static t_color    *color = NULL;
