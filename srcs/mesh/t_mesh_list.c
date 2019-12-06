@@ -57,15 +57,13 @@ void		t_mesh_list_erase(t_mesh_list *dest, int index)
 
 void		delete_t_mesh_list(t_mesh_list dest)
 {
-	free(dest.mesh);
-	// printf("delete t_mesh_list\n");
+	free_t_mesh(dest.mesh);
 }
 
 void		free_t_mesh_list(t_mesh_list *dest)
 {
 	delete_t_mesh_list(*dest);
 	free(dest);
-	// printf("free t_mesh_list\n");
 }
 
 void		clean_t_mesh_list(t_mesh_list *dest)

@@ -191,7 +191,7 @@ int main(int argc, char **argv)
 
 			t_engine_render_camera(engine);
 			player_action(main_camera, engine->user_engine->keyboard, engine);
-			enemy_look(engine);
+			// enemy_look(engine);
 			// enemy_shoot(engine);
 			drawing_front_hp(main_camera, engine);
 			drawing_front_mun(main_camera, gui, texture2, engine->user_engine->player);
