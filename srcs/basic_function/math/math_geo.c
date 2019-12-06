@@ -83,3 +83,15 @@ t_vector4		interpolate_vector4_over_line(float ratio_x, float ratio_y,
 	result.z = 0;
 	return (result);
 }
+
+float			signed_volume(t_vector4 a, t_vector4 b, t_vector4 c, t_vector4 d)
+{
+	t_vector4	sub_res1;
+	t_vector4	sub_res2;
+	t_vector4	sub_res3;
+
+	sub_res1 = substract_vector4_to_vector4(b, a);
+	sub_res2 = substract_vector4_to_vector4(c, a);
+	sub_res3 = substract_vector4_to_vector4(d, a);
+	return ((1.0 / 6.0) * dot_t_vector4(cross_t_vector4(sub_res1, sub_res2), sub_res3));
+}

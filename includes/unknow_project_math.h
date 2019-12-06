@@ -68,5 +68,6 @@ int 			is_triangle_in_triangle(t_triangle p_a, t_triangle p_b);
 int				old_intersect(t_triangle p_triangle, t_vector4 p_normal, t_line line, t_vector4 *intersection);
 int				is_same_sign(float a, float b);
 int				is_mid(float min, float max, float value);
+float			signed_volume(t_vector4 a, t_vector4 b, t_vector4 c, t_vector4 d);
 
 #endif

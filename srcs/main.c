@@ -75,6 +75,14 @@ int main(int argc, char **argv)
 	t_player *player;
 	int		fd;
 
+	// t_triangle	tri1;
+	// t_triangle	tri2;
+
+	// tri1 = create_t_triangle(create_t_vector4(5.0, 2.0, 5.0), create_t_vector4(-3.0, 3.0, 5.0), creatte_t_vector4(4.0, -4.0, 4.0));
+	// tri2 = create_t_triangle(create_t_triangle(0.9, 1.9, 4.9), create_t_triangle(2.0, 3.0, 5.0), create_t_vector4(1.0, 2.0, 3.0));
+
+	// printf("return triangle intersection : %d\n", intersect)
+
 	fd = open("ressources/map/fichier_map.map", O_RDONLY);
 	// fd = open("ressources/map/test_gravity.map", O_RDONLY);
 	// fd = open("ressources/map/save1.map", O_RDONLY);
@@ -133,9 +141,13 @@ int main(int argc, char **argv)
 
 	t_rectangle rec = create_t_rectangle(create_t_vector2(-1, 1), create_t_vector2(2, -2));
 
-	mesh = read_obj_file("ressources/objets/Level-1.1.obj", create_t_vector4(0.0, 10.0, 0.0), create_t_vector4(1.0, 1.0, 1.0), 0.0);
-	t_mesh_set_name(&mesh, "map");
+	mesh = create_primitive_cave(create_t_vector4(25.0, 0.1, 25.0), create_t_vector4(2.0, 2.0, 2.0), NULL, 0.0);
+	t_mesh_set_name(&mesh, "cave");
 	t_engine_add_mesh(engine, mesh);
+
+	// mesh = read_obj_file("ressources/objets/LevelUp.obj", create_t_vector4(0.0, 5.0, 0.0), create_t_vector4(1.0, 1.0, 1.0), 0.0);
+	// t_mesh_set_name(&mesh, "map");
+	// t_engine_add_mesh(engine, mesh);
 
 	// t_item_list	*item_list = initialize_t_item_list();
 	//

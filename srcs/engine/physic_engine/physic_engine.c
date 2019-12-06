@@ -131,28 +131,36 @@ void			test_move_axis(t_mesh *mesh, float *force, t_vector4 axis, t_mesh *target
 		*force += delta;
 		if (i == subdivision)
 			*force = max;
+		printf("here\n");
 		t_mesh_compute_next_vertices_in_world(mesh, axis);
 		if (is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
 		{
-			if (axis.y == 0.0)
-			{
-				tmp = mesh->force.y;
-				mesh->force.y = 0.015;
-				axis.y = 1.0;
-				t_mesh_compute_next_vertices_in_world(mesh, axis);
-				if (is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
-				{
-					printf("here\n");
-					mesh->force.y = tmp;
-					*force -= delta;
-				}
-				i = subdivision;
-				axis.y = 0.0;
-			}
-			else
+			// if (axis.y == 0.0)
+			// {
+			// 	tmp = mesh->force.y;
+			// 	mesh->force.y = 0.001;
+			// 	axis.y = 1.0;
+			// 	while (mesh->force.y < 0.015)
+			// 	{
+			// 		t_mesh_compute_next_vertices_in_world(mesh, axis);
+			// 		if (is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
+			// 			break;
+			// 		mesh->force.y += 0.001;
+			// 	}
+				
+			// 	if (is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
+			// 	{
+			// 		printf("here\n");
+			// 		mesh->force.y = tmp;
+			// 		*force -= delta;
+			// 	}
+			// 	i = subdivision;
+			// 	axis.y = 0.0;
+			// }
+			// else
 				*force -= delta;
-			if (ft_strcmp(target->name, "ladder") == 0 && axis.y == 0.0)
-				mesh->force.y = 0.02;
+			// if (ft_strcmp(target->name, "ladder") == 0 && axis.y == 0.0)
+			// 	mesh->force.y = 0.02;
 		}
 	}
 	t_mesh_compute_next_vertices_in_world(mesh, axis);
@@ -186,8 +194,8 @@ int				can_move(t_mesh *mesh, t_engine *engine)
 					j++;
 				}
 			}
-			if (is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
-				printf("%s\n", target->name);
+			// if (is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
+			// 	printf("%s\n", target->name);
 			if (t_mesh_on_mesh(mesh, target) == 1 && ft_strcmp(target->name, "end") == 0)
 				engine->playing = -1;
 			// if (is_t_mesh_intersecting(mesh, target) == BOOL_TRUE && ft_strcmp(target->name, "stair") == 0)

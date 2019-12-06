@@ -216,3 +216,49 @@ int			t_triangle_similarity_segment(t_triangle p_a, t_vector4 p_b, t_vector4 p_c
 	}
 	return (result);
 }
+
+int		triangles_intersection(t_triangle tri1, t_face *face1, t_triangle tri2, t_face *face2)
+{
+	t_line		seg;
+	t_vector4	intersection;
+	int			ret;
+	
+
+	seg = create_t_line(tri2.a, tri2.b);
+	if ((ret = intersect_triangle_by_segment(tri1, face1->normale, seg, &intersection)) > 0)
+	{
+		// printf("%d\n", ret);
+		return (BOOL_TRUE);
+	}
+	seg = create_t_line(tri2.b, tri2.c);
+	if ((ret = intersect_triangle_by_segment(tri1, face1->normale, seg, &intersection)) > 0)
+	{
+		// printf("%d\n", ret);
+		return (BOOL_TRUE);
+	}
+	seg = create_t_line(tri2.c, tri2.a);
+	if ((ret = intersect_triangle_by_segment(tri1, face1->normale, seg, &intersection)) > 0)
+	{
+		// printf("%d\n", ret);
+		return (BOOL_TRUE);
+	}
+	seg = create_t_line(tri1.a, tri1.b);
+	if ((ret = intersect_triangle_by_segment(tri2, face1->normale, seg, &intersection)) > 0)
+	{
+		// printf("%d\n", ret);
+		return (BOOL_TRUE);
+	}
+	seg = create_t_line(tri1.b, tri1.c);
+	if ((ret = intersect_triangle_by_segment(tri2, face1->normale, seg, &intersection)) > 0)
+	{
+		// printf("%d\n", ret);
+		return (BOOL_TRUE);
+	}
+	seg = create_t_line(tri1.c, tri1.a);
+	if ((ret = intersect_triangle_by_segment(tri2, face1->normale, seg, &intersection)) > 0)
+	{
+		// printf("%d\n", ret);
+		return (BOOL_TRUE);
+	}
+	return (BOOL_FALSE);
+}
