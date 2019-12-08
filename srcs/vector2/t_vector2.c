@@ -51,8 +51,3 @@ t_vector2	add_vector2_to_vector2(t_vector2 v1, t_vector2 v2)
 	result = create_t_vector2(v1.x + v2.x, v1.y + v2.y);
 	return (result);
 }
-
-void		print_t_vector2(t_vector2 vector, char *str) // A SUPPRIMER
-{
-	printf("%s%0.20f / %0.20f\n", str, vector.x, vector.y);
-}

@@ -217,47 +217,71 @@ int			t_triangle_similarity_segment(t_triangle p_a, t_vector4 p_b, t_vector4 p_c
 	return (result);
 }
 
-int		triangles_intersection(t_triangle tri1, t_face *face1, t_triangle tri2, t_face *face2)
+float	maximum_dist_triangles(t_triangle tri1, t_triangle tri2)
+{
+	float	ret;
+	int		i;
+	float	dists[9];
+
+	dists[0] = size_line(create_t_line(tri1.a, tri2.a));
+	dists[0] = size_line(create_t_line(tri1.a, tri2.b));
+	dists[0] = size_line(create_t_line(tri1.a, tri2.c));
+	dists[0] = size_line(create_t_line(tri1.b, tri2.a));
+	dists[0] = size_line(create_t_line(tri1.b, tri2.b));
+	dists[0] = size_line(create_t_line(tri1.b, tri2.c));
+	dists[0] = size_line(create_t_line(tri1.c, tri2.a));
+	dists[0] = size_line(create_t_line(tri1.c, tri2.b));
+	dists[0] = size_line(create_t_line(tri1.c, tri2.c));
+	i = 0;
+	ret = 600;
+	while (i < 9)
+	{
+		if (ret > dists[i])
+			ret = dists[i];
+		i++;
+	}
+	return (ret);
+}
+
+int		triangles_intersection(t_triangle tri1, t_triangle tri2)
 {
 	t_line		seg;
 	t_vector4	intersection;
+	float		dista;
+	float		distb;
+	float		distc;
+	float		max_dist;
 	int			ret;
 	
-
-	seg = create_t_line(tri2.a, tri2.b);
-	if ((ret = intersect_triangle_by_segment(tri1, face1->normale, seg, &intersection)) > 0)
-	{
-		printf("%f/%f/%f -- %f/%f/%f -- %f/%f/%f --------------- %f/%f/%f -- %f/%f/%f\n", tri1.a.x, tri1.a.y, tri1.a.z, tri1.b.x, tri1.b.y, tri1.b.z, tri1.c.x, tri1.c.y, tri1.c.z, seg.a.x, tri1.c.y, tri1.c.z, seg.b.x, seg.b.y, seg.b.z);
-		return (BOOL_TRUE);
-	}
-	seg = create_t_line(tri2.b, tri2.c);
-	if ((ret = intersect_triangle_by_segment(tri1, face1->normale, seg, &intersection)) > 0)
-	{
-		printf("%f/%f/%f -- %f/%f/%f -- %f/%f/%f --------------- %f/%f/%f -- %f/%f/%f\n", tri1.a.x, tri1.a.y, tri1.a.z, tri1.b.x, tri1.b.y, tri1.b.z, tri1.c.x, tri1.c.y, tri1.c.z, seg.a.x, tri1.c.y, tri1.c.z, seg.b.x, seg.b.y, seg.b.z);
-		return (BOOL_TRUE);
-	}
-	seg = create_t_line(tri2.c, tri2.a);
-	if ((ret = intersect_triangle_by_segment(tri1, face1->normale, seg, &intersection)) > 0)
-	{
-		printf("%f/%f/%f -- %f/%f/%f -- %f/%f/%f --------------- %f/%f/%f -- %f/%f/%f\n", tri1.a.x, tri1.a.y, tri1.a.z, tri1.b.x, tri1.b.y, tri1.b.z, tri1.c.x, tri1.c.y, tri1.c.z, seg.a.x, tri1.c.y, tri1.c.z, seg.b.x, seg.b.y, seg.b.z);
-		return (BOOL_TRUE);
-	}
+	// seg = create_t_line(tri1.a, tri1.b);
+	// dista = size_line(seg);
+	// seg = create_t_line(tri1.b, tri1.c);
+	// distb = size_line(seg);
+	// seg = create_t_line(tri1.a, tri1.c);
+	// distc = size_line(seg);
+	max_dist = maximum_dist_triangles(tri1, tri2);
+	if (max_dist > 25.0 && max_dist > 25.0 && max_dist > 25.0)
+		return (BOOL_FALSE);
+	// printf("%f\n", max_dist);
 	seg = create_t_line(tri1.a, tri1.b);
-	if ((ret = intersect_triangle_by_segment(tri2, face1->normale, seg, &intersection)) > 0)
+	if ((ret = intersect_triangle_by_segment(tri2, seg, &intersection)) > 0)
 	{
-		printf("%f/%f/%f -- %f/%f/%f -- %f/%f/%f --------------- %f/%f/%f -- %f/%f/%f\n", tri2.a.x, tri2.a.y, tri2.a.z, tri2.b.x, tri2.b.y, tri2.b.z, tri2.c.x, tri2.c.y, tri2.c.z, seg.a.x, seg.a.y, seg.a.z, seg.b.x, seg.b.y, seg.b.z);
+		print_t_triangle(tri2, "collision en : ");
+		print_t_line(seg, "avec : ");
 		return (BOOL_TRUE);
 	}
 	seg = create_t_line(tri1.b, tri1.c);
-	if ((ret = intersect_triangle_by_segment(tri2, face1->normale, seg, &intersection)) > 0)
+	if ((ret = intersect_triangle_by_segment(tri2, seg, &intersection)) > 0)
 	{
-		printf("%f/%f/%f -- %f/%f/%f -- %f/%f/%f --------------- %f/%f/%f -- %f/%f/%f\n", tri2.a.x, tri2.a.y, tri2.a.z, tri2.b.x, tri2.b.y, tri2.b.z, tri2.c.x, tri2.c.y, tri2.c.z, seg.a.x, seg.a.y, seg.a.z, seg.b.x, seg.b.y, seg.b.z);
+		print_t_triangle(tri2, "collision en : ");
+		print_t_line(seg, "avec : ");
 		return (BOOL_TRUE);
 	}
-	seg = create_t_line(tri1.c, tri1.a);
-	if ((ret = intersect_triangle_by_segment(tri2, face1->normale, seg, &intersection)) > 0)
+	seg = create_t_line(tri1.a, tri1.c);
+	if ((ret = intersect_triangle_by_segment(tri2, seg, &intersection)) > 0)
 	{
-		printf("%f/%f/%f -- %f/%f/%f -- %f/%f/%f --------------- %f/%f/%f -- %f/%f/%f\n", tri2.a.x, tri2.a.y, tri2.a.z, tri2.b.x, tri2.b.y, tri2.b.z, tri2.c.x, tri2.c.y, tri2.c.z, seg.a.x, seg.a.y, seg.a.z, seg.b.x, seg.b.y, seg.b.z);
+		print_t_triangle(tri2, "collision en : ");
+		print_t_line(seg, "avec : ");
 		return (BOOL_TRUE);
 	}
 	return (BOOL_FALSE);

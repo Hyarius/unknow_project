@@ -32,7 +32,7 @@
 // 	}
 // }
 
-int		sat_test(t_face *face, t_mesh *target, t_mesh *compared)
+int		sat_test(t_face *face, t_mesh *target, t_mesh *mesh_qui_bouge)
 {
 	t_triangle	tri_comp;
 	t_triangle	tri_tar;
@@ -43,32 +43,29 @@ int		sat_test(t_face *face, t_mesh *target, t_mesh *compared)
 	tri_tar.b = t_vector4_list_at(target->vertices_in_world, face->index_vertices[1]);
 	tri_tar.c = t_vector4_list_at(target->vertices_in_world, face->index_vertices[2]);
 	i = 0;
-	while (i < compared->faces->size)
+	while (i < mesh_qui_bouge->faces->size)
 	{
-		if (compared->next_vertices_in_world->size == 0)
+		if (mesh_qui_bouge->next_vertices_in_world->size == 0)
 			break;
-		current = t_face_list_get(compared->faces, i);
-		tri_comp.a = t_vector4_list_at(compared->next_vertices_in_world, current->index_vertices[0]);
-		tri_comp.b = t_vector4_list_at(compared->next_vertices_in_world, current->index_vertices[1]);
-		tri_comp.c = t_vector4_list_at(compared->next_vertices_in_world, current->index_vertices[2]);
-		if (triangles_intersection(tri_comp, current, tri_tar, face))
-		{
-			error_exit(0 , "STOP");
+		current = t_face_list_get(mesh_qui_bouge->faces, i);
+		tri_comp.a = t_vector4_list_at(mesh_qui_bouge->next_vertices_in_world, current->index_vertices[0]);
+		tri_comp.b = t_vector4_list_at(mesh_qui_bouge->next_vertices_in_world, current->index_vertices[1]);
+		tri_comp.c = t_vector4_list_at(mesh_qui_bouge->next_vertices_in_world, current->index_vertices[2]);
+		if (triangles_intersection(tri_comp, tri_tar))
 			return (BOOL_TRUE);
-		}
 		i++;
 	}
 	return (BOOL_FALSE);
 }
 
-int		is_t_mesh_intersecting(t_mesh *mesh_compared, t_mesh *mesh_target)
+int		is_t_mesh_intersecting(t_mesh *mesh_qui_bouge, t_mesh *mesh_target)
 {
 	int		i;
 
 	i = 0;
 	while (i < mesh_target->faces->size)
 	{
-		if (sat_test(t_face_list_get(mesh_target->faces, i), mesh_target, mesh_compared))
+		if (sat_test(t_face_list_get(mesh_target->faces, i), mesh_target, mesh_qui_bouge))
 			return (BOOL_TRUE);
 		i++;
 	}

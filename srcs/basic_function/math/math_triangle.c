@@ -28,67 +28,45 @@ int		is_triangle_parallele(t_triangle p_a, t_triangle p_b)
 	return (BOOL_FALSE);
 }
 
-int		intersect_triangle_by_segment(t_triangle p_triangle, t_vector4 p_normal,
-										t_line line, t_vector4 *intersection)
+int		intersect_triangle_by_segment(t_triangle p_triangle, t_line line, t_vector4 *intersection)
 {
-	t_vector4	u;
-	t_vector4	v;
-	t_vector4	n;
-	t_vector4	dir;
-	t_vector4	w0;
-	t_vector4	w;
-	float		r;
-	float		a;
-	float		b;
-	float		uu;
-	float		uv;
-	float		vv;
-	float		wu;
-	float		wv;
-	float		d;
-	float		s;
-	float		t;
+	t_vector4	t_v[6];
+	float		f[11];
 
-
-	u = substract_vector4_to_vector4(p_triangle.b, p_triangle.a);
-	v = substract_vector4_to_vector4(p_triangle.c, p_triangle.a);
-	n = cross_t_vector4(u, v);
-	if (n.x == 0.0 && n.y == 0.0 && n.z == 0.0)
+	t_v[0] = substract_vector4_to_vector4(p_triangle.b, p_triangle.a);
+	t_v[1] = substract_vector4_to_vector4(p_triangle.c, p_triangle.a);
+	t_v[2] = cross_t_vector4(t_v[0], t_v[1]);
+	if (t_v[2].x == 0.0 && t_v[2].y == 0.0 && t_v[2].z == 0.0)
 		return (-1);
-
-	dir = substract_vector4_to_vector4(line.b, line.a);
-	w0 = substract_vector4_to_vector4(line.a, p_triangle.a);
-	a = -dot_t_vector4(n, w0);
-	b = dot_t_vector4(n, dir);
-	if (fabs(b) < 0.00000001)
+	t_v[3] = substract_vector4_to_vector4(line.b, line.a);
+	t_v[4] = substract_vector4_to_vector4(line.a, p_triangle.a);
+	f[1] = -dot_t_vector4(t_v[2], t_v[4]);
+	f[2] = dot_t_vector4(t_v[2], t_v[3]);
+	if (fabs(f[2]) < 0.00000001f)
 	{
-		if (a == 0)
+		if (f[1] == 0)
 			return (2);
 		else
 			return (0);
 	}
-
-	r = a / b;
-	if (r < 0.0)
+	f[0] = (f[1] / f[2]);
+	if (f[0] < 0.0f || f[0] > 1.0f)
 		return (0);
-	*intersection = add_vector4_to_vector4(mult_vector4_by_float(dir, r), line.a);
-	uu = dot_t_vector4(u, u);
-	uv = dot_t_vector4(u, v);
-	vv = dot_t_vector4(v, v);
-	w = substract_vector4_to_vector4(*intersection, p_triangle.a);
-	wu = dot_t_vector4(w, u);
-	wv = dot_t_vector4(w, v);
-	d = uv * uv - uu * vv;
-
-	s = (uv * wv - vv * wu) /d;
-	if (s < 0.0 || s > 1.0)
+	*intersection = add_vector4_to_vector4(mult_vector4_by_float(t_v[3], f[0]), line.a);
+	f[3] = dot_t_vector4(t_v[0], t_v[0]);
+	f[4] = dot_t_vector4(t_v[0], t_v[1]);
+	f[5] = dot_t_vector4(t_v[1], t_v[1]);
+	t_v[5] = substract_vector4_to_vector4(*intersection, p_triangle.a);
+	f[6] = dot_t_vector4(t_v[5], t_v[0]);
+	f[7] = dot_t_vector4(t_v[5], t_v[1]);
+	f[8] = f[4] * f[4] - f[3] * f[5];
+	f[9] = (f[4] * f[7] - f[5] * f[6]) / f[8];
+	if (f[9] < 0.0f || f[9] > 1.0f)
 		return (0);
-	t = (uv * wu - uu * wv) / d;
-	printf("%f -- %f\n", s, t);
-	if (t < 0.0 || (s + t) > 1.0)
+	f[10] = (f[4] * f[6] - f[3] * f[7]) / f[8];
+	if (f[10] < 0.0f || (f[9] + f[10]) > 1.0f)
 		return (0);
 	return 1;
-
 }
 
 int		is_point_on_triangle(t_triangle a, t_vector4 point)

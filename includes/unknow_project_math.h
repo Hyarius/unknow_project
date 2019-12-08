@@ -46,7 +46,7 @@ float			dot_t_vector4(t_vector4 a, t_vector4 b);
 float			edge_t_vector4(t_vector4 a, t_vector4 b, t_vector4 c);
 int				intersect_segment_by_segment(t_vector4 a, t_vector4 b, t_vector4 c, t_vector4 d);
 t_vector4		intersect_plane_by_line(t_vector4 p_normal, t_vector4 p_center, t_vector4 start, t_vector4 end);
-int				intersect_triangle_by_segment(t_triangle p_triangle, t_vector4 p_normal, t_line line, t_vector4 *intersection);
+int				intersect_triangle_by_segment(t_triangle p_triangle, t_line line, t_vector4 *intersection);
 int				is_point_on_line(t_vector4 a, t_vector4 b, t_vector4 c);
 float			calc_distance_to_triangle(t_triangle p_triangle, t_vector4 point);
 float			calc_distance_to_plane(t_vector4 p_normal, t_vector4 p_center, t_vector4 p_point);

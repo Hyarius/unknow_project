@@ -26,3 +26,8 @@ void	print_t_line(t_line line, char *str)
 	print_t_vector4(line.a, "Point A");
 	print_t_vector4(line.b, "Point B");
 }
+
+float	size_line(t_line line)
+{
+	return (fabs(sqrt(powf(line.a.x - line.b.x, 2.0) + powf(line.a.y - line.b.y, 2.0) + powf(line.a.z - line.b.z, 2.0))));
+}

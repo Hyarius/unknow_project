@@ -23,6 +23,8 @@ int				t_triangle_is_bigger(t_triangle a, t_triangle b);
 int				t_triangle_similarity(t_triangle a, t_triangle b);
 int				t_triangle_similarity_segment(t_triangle p_a, t_vector4 p_b, t_vector4 p_c);
 int 			is_triangle_contact(t_triangle a, t_triangle b);
+int				triangles_intersection(t_triangle tri1, t_triangle tri2);
+float			maximum_dist_triangles(t_triangle tri1, t_triangle tri2);
 
 typedef struct	s_line
 {
@@ -33,6 +35,7 @@ typedef struct	s_line
 t_line			create_t_line(t_vector4 p_a, t_vector4 p_b);
 t_line			*initialize_t_line(t_vector4 p_a, t_vector4 p_b);
 void			print_t_line(t_line line, char *str);
+float			size_line(t_line line);
 
 typedef struct	s_rectangle
 {

@@ -127,3 +127,21 @@ void		print_t_vector4(t_vector4 vector, char *str) // A SUPPRIMER
 {
 	printf("%s : %0.4f / %0.4f / %0.4f / %0.4f\n", str, vector.x, vector.y, vector.z, vector.w);
 }
+
+char		*vector4_str(t_vector4 vector)
+{
+	char *x;
+	char *y;
+	char *z;
+	char *result;
+
+	x = ft_ftoa_p(vector.x, 5);
+	y = ft_ftoa_p(vector.y, 5);
+	z = ft_ftoa_p(vector.z, 5);
+	result = x;
+	result = ft_strjoinf(result, " / ", 1);
+	result = ft_strjoinf(result, y, 3);
+	result = ft_strjoinf(result, " / ", 1);
+	result = ft_strjoinf(result, z, 3);
+	return (result);
+}

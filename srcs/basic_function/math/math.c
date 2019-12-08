@@ -14,6 +14,14 @@
 
 int		is_mid(float min, float max, float value)
 {
+	float tmp;
+
+	if (min > max)
+	{
+		tmp = min;
+		min = max;
+		max = tmp;
+	}
 	if (value >= min && value <= max)
 		return (BOOL_TRUE);
 	return (BOOL_FALSE);

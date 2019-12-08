@@ -64,6 +64,5 @@ t_face 			*initialize_t_face();
 void 			set_t_face_vertices(t_face *face, int a, int b, int c);
 void 			set_t_face_uvs(t_face *face, int a, int b, int c);
 void			set_t_face_color(t_face *face, t_color color);
-int				triangles_intersection(t_triangle tri1, t_face *face1, t_triangle tri2, t_face *face);
 
 #endif

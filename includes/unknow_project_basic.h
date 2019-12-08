@@ -25,6 +25,7 @@ int				ft_atoi(const char *str);
 int				ft_floor(float source);
 float			ft_abs_float(float src);
 char		    *ft_ftoa(float num);
+char	        *ft_ftoa_p(float n, size_t precision);
 
 int				min(int a, int b);
 int				max(int a, int b);
