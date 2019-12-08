@@ -53,14 +53,14 @@ int		intersect_triangle_by_segment(t_triangle p_triangle, t_vector4 p_normal,
 	u = substract_vector4_to_vector4(p_triangle.b, p_triangle.a);
 	v = substract_vector4_to_vector4(p_triangle.c, p_triangle.a);
 	n = cross_t_vector4(u, v);
-	if (n.x == 0.0 && n.y == 0.0 && n.x == 0.0)
+	if (n.x == 0.0 && n.y == 0.0 && n.z == 0.0)
 		return (-1);
 
 	dir = substract_vector4_to_vector4(line.b, line.a);
 	w0 = substract_vector4_to_vector4(line.a, p_triangle.a);
 	a = -dot_t_vector4(n, w0);
 	b = dot_t_vector4(n, dir);
-	if (fabs(b) < 0.0000001)
+	if (fabs(b) < 0.00000001)
 	{
 		if (a == 0)
 			return (2);
@@ -71,8 +71,7 @@ int		intersect_triangle_by_segment(t_triangle p_triangle, t_vector4 p_normal,
 	r = a / b;
 	if (r < 0.0)
 		return (0);
-	
-	*intersection = mult_vector4_by_vector4(add_float_to_vector4(line.a, r), dir);
+	*intersection = add_vector4_to_vector4(mult_vector4_by_float(dir, r), line.a);
 	uu = dot_t_vector4(u, u);
 	uv = dot_t_vector4(u, v);
 	vv = dot_t_vector4(v, v);
@@ -85,6 +84,7 @@ int		intersect_triangle_by_segment(t_triangle p_triangle, t_vector4 p_normal,
 	if (s < 0.0 || s > 1.0)
 		return (0);
 	t = (uv * wu - uu * wv) / d;
+	printf("%f -- %f\n", s, t);
 	if (t < 0.0 || (s + t) > 1.0)
 		return (0);
 	return 1;

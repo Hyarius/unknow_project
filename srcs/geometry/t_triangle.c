@@ -227,37 +227,37 @@ int		triangles_intersection(t_triangle tri1, t_face *face1, t_triangle tri2, t_f
 	seg = create_t_line(tri2.a, tri2.b);
 	if ((ret = intersect_triangle_by_segment(tri1, face1->normale, seg, &intersection)) > 0)
 	{
-		// printf("%d\n", ret);
+		printf("%f/%f/%f -- %f/%f/%f -- %f/%f/%f --------------- %f/%f/%f -- %f/%f/%f\n", tri1.a.x, tri1.a.y, tri1.a.z, tri1.b.x, tri1.b.y, tri1.b.z, tri1.c.x, tri1.c.y, tri1.c.z, seg.a.x, tri1.c.y, tri1.c.z, seg.b.x, seg.b.y, seg.b.z);
 		return (BOOL_TRUE);
 	}
 	seg = create_t_line(tri2.b, tri2.c);
 	if ((ret = intersect_triangle_by_segment(tri1, face1->normale, seg, &intersection)) > 0)
 	{
-		// printf("%d\n", ret);
+		printf("%f/%f/%f -- %f/%f/%f -- %f/%f/%f --------------- %f/%f/%f -- %f/%f/%f\n", tri1.a.x, tri1.a.y, tri1.a.z, tri1.b.x, tri1.b.y, tri1.b.z, tri1.c.x, tri1.c.y, tri1.c.z, seg.a.x, tri1.c.y, tri1.c.z, seg.b.x, seg.b.y, seg.b.z);
 		return (BOOL_TRUE);
 	}
 	seg = create_t_line(tri2.c, tri2.a);
 	if ((ret = intersect_triangle_by_segment(tri1, face1->normale, seg, &intersection)) > 0)
 	{
-		// printf("%d\n", ret);
+		printf("%f/%f/%f -- %f/%f/%f -- %f/%f/%f --------------- %f/%f/%f -- %f/%f/%f\n", tri1.a.x, tri1.a.y, tri1.a.z, tri1.b.x, tri1.b.y, tri1.b.z, tri1.c.x, tri1.c.y, tri1.c.z, seg.a.x, tri1.c.y, tri1.c.z, seg.b.x, seg.b.y, seg.b.z);
 		return (BOOL_TRUE);
 	}
 	seg = create_t_line(tri1.a, tri1.b);
 	if ((ret = intersect_triangle_by_segment(tri2, face1->normale, seg, &intersection)) > 0)
 	{
-		// printf("%d\n", ret);
+		printf("%f/%f/%f -- %f/%f/%f -- %f/%f/%f --------------- %f/%f/%f -- %f/%f/%f\n", tri2.a.x, tri2.a.y, tri2.a.z, tri2.b.x, tri2.b.y, tri2.b.z, tri2.c.x, tri2.c.y, tri2.c.z, seg.a.x, seg.a.y, seg.a.z, seg.b.x, seg.b.y, seg.b.z);
 		return (BOOL_TRUE);
 	}
 	seg = create_t_line(tri1.b, tri1.c);
 	if ((ret = intersect_triangle_by_segment(tri2, face1->normale, seg, &intersection)) > 0)
 	{
-		// printf("%d\n", ret);
+		printf("%f/%f/%f -- %f/%f/%f -- %f/%f/%f --------------- %f/%f/%f -- %f/%f/%f\n", tri2.a.x, tri2.a.y, tri2.a.z, tri2.b.x, tri2.b.y, tri2.b.z, tri2.c.x, tri2.c.y, tri2.c.z, seg.a.x, seg.a.y, seg.a.z, seg.b.x, seg.b.y, seg.b.z);
 		return (BOOL_TRUE);
 	}
 	seg = create_t_line(tri1.c, tri1.a);
 	if ((ret = intersect_triangle_by_segment(tri2, face1->normale, seg, &intersection)) > 0)
 	{
-		// printf("%d\n", ret);
+		printf("%f/%f/%f -- %f/%f/%f -- %f/%f/%f --------------- %f/%f/%f -- %f/%f/%f\n", tri2.a.x, tri2.a.y, tri2.a.z, tri2.b.x, tri2.b.y, tri2.b.z, tri2.c.x, tri2.c.y, tri2.c.z, seg.a.x, seg.a.y, seg.a.z, seg.b.x, seg.b.y, seg.b.z);
 		return (BOOL_TRUE);
 	}
 	return (BOOL_FALSE);

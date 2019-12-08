@@ -131,7 +131,7 @@ void			test_move_axis(t_mesh *mesh, float *force, t_vector4 axis, t_mesh *target
 		*force += delta;
 		if (i == subdivision)
 			*force = max;
-		printf("here\n");
+		// printf("here\n");
 		t_mesh_compute_next_vertices_in_world(mesh, axis);
 		if (is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
 		{

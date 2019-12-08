@@ -52,7 +52,10 @@ int		sat_test(t_face *face, t_mesh *target, t_mesh *compared)
 		tri_comp.b = t_vector4_list_at(compared->next_vertices_in_world, current->index_vertices[1]);
 		tri_comp.c = t_vector4_list_at(compared->next_vertices_in_world, current->index_vertices[2]);
 		if (triangles_intersection(tri_comp, current, tri_tar, face))
+		{
+			error_exit(0 , "STOP");
 			return (BOOL_TRUE);
+		}
 		i++;
 	}
 	return (BOOL_FALSE);

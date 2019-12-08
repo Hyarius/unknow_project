@@ -6,6 +6,13 @@ int main(int argc, char **argv)
 	SDL_Surface *font = NULL;
 	SDL_Color color = {0, 0, 0};
 
+	t_triangle tri = create_t_triangle(create_t_vector4(10.0, 0.0, 10.0), create_t_vector4(10.0, 0.0, -10.0), create_t_vector4(-10.0, 0.0, 10.0));
+	t_line seg = create_t_line(create_t_vector4(0.299500, 14.592211, 0.0), create_t_vector4(0.299500, 14.092710, 0.0));
+	t_vector4 inter;
+
+	printf("%d\n", intersect_triangle_by_segment(tri, inter, seg, &inter));
+	error_exit(0, "stop");
+
 	if (argc != 1)
 		error_exit(-1, "Bad argument");
 
