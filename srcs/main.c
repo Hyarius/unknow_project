@@ -25,8 +25,8 @@ int main(int argc, char **argv)
 	texture_weapons[1] = png_load("ressources/assets/imgs/AR.png");
 	texture_weapons[2] = png_load("ressources/assets/imgs/rifle.png");
 	texture_weapons[3] = png_load("ressources/assets/imgs/shotgun.png");
-	// texture_weapons[4] = png_load("ressources/assets/imgs/wall_destroyer.png");
-	texture_weapons[4] = png_load("ressources/assets/imgs/Hands_baby_copy.png");
+	texture_weapons[4] = png_load("ressources/assets/imgs/wall_destroyer.png");
+	//texture_weapons[4] = png_load("ressources/assets/imgs/Hands_baby.png");
 	t_texture *skybox = png_load("ressources/assets/textures/skybox.png");
 
 	t_engine	*engine;
@@ -122,7 +122,7 @@ int main(int argc, char **argv)
 
 	musique = Mix_LoadMUS("ressources/assets/sounds/mega_man_test.ogg");
 	Mix_VolumeMusic(MIX_MAX_VOLUME);
-	// Mix_PlayMusic(musique, 1);
+	//Mix_PlayMusic(musique, 1);
 
 	while (engine->playing != 0)
 	{
