@@ -76,6 +76,7 @@ t_mesh			create_primitive_cube(t_vector4 coord, t_vector4 size, char *texture_pa
 t_mesh			create_primitive_plane(t_vector4 pos, t_vector4 size, char *texture_path, float gravity);
 t_mesh			create_primitive_vertical_plane(t_vector4 pos, t_vector4 size, char *texture_path, float gravity);
 t_mesh			create_primitive_skybox(t_vector4 pos, t_vector4 size, t_texture *p_texture);
+t_mesh			create_primitive_cave(t_vector4 pos, t_vector4 size, char *texture_path, float gravity);
 
 void			t_mesh_rotate(t_mesh *mesh, t_vector4 delta_angle);
 void			t_mesh_rotate_to(t_mesh *src, t_mesh *dest);

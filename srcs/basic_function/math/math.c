@@ -6,7 +6,7 @@
 /*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 17:00:32 by adjouber          #+#    #+#             */
-/*   Updated: 2019/10/31 17:08:51 by adjouber         ###   ########.fr       */
+/*   Updated: 2019/12/09 11:09:41 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 
 int		is_mid(float min, float max, float value)
 {
+	float tmp;
+
+	if (min > max)
+	{
+		tmp = min;
+		min = max;
+		max = tmp;
+	}
 	if (value >= min && value <= max)
 		return (BOOL_TRUE);
 	return (BOOL_FALSE);

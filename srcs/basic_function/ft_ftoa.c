@@ -1,18 +1,6 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ftoa.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/31 15:50:26 by adjouber          #+#    #+#             */
-/*   Updated: 2019/10/31 15:50:27 by adjouber         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "unknow_project.h"
 
-void	create_string(float nb, char *rest, int i)
+void	create_string(float nb, char *rest, int i, size_t precision)
 {
 	int		afterdots;
 	int		dot;
@@ -23,7 +11,7 @@ void	create_string(float nb, char *rest, int i)
 	{
 		rest[i++] = '.';
 		dot = i;
-		while (afterdots < 2)
+		while (afterdots < precision)
 		{
 			nb *= 10;
 			if (((int)(nb + 0.01)) != 10)
@@ -35,6 +23,33 @@ void	create_string(float nb, char *rest, int i)
 	while (i - dot < 2)
 		rest[i++] = '0';
 	rest[i] = '\0';
+}
+
+char	*ft_ftoa_p(float n, size_t precision)
+{
+	char		*flt;
+	char		*first;
+	long int	nb;
+	int			i;
+	int			j;
+
+	i = -1;
+	j = -1;
+	nb = (long int)n;
+	first = ft_itoa(nb);
+	flt = (char *)malloc(100);
+	n -= (float)nb;
+	if (n < 0)
+	{
+		n *= -1;
+		if (nb == 0)
+			flt[++j] = '-';
+	}
+	while (first[++i])
+		flt[++j] = first[i];
+	create_string(n, flt, i, precision);
+	free(first);
+	return (flt);
 }
 
 char	*ft_ftoa(float n)
@@ -59,7 +74,7 @@ char	*ft_ftoa(float n)
 	}
 	while (first[++i])
 		flt[++j] = first[i];
-	create_string(n, flt, i);
+	create_string(n, flt, i, 2);
 	free(first);
 	return (flt);
 }

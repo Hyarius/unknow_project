@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   math_geo.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 17:05:09 by adjouber          #+#    #+#             */
-/*   Updated: 2019/11/22 10:18:58 by gboutin          ###   ########.fr       */
+/*   Updated: 2019/12/09 11:11:24 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,16 @@ t_vector4		interpolate_vector4_over_line(float ratio_x, float ratio_y,
 	result.y = ((ub.y - ua.y) * ratio_y) + ua.y;
 	result.z = 0;
 	return (result);
+}
+
+float			signed_volume(t_vector4 a, t_vector4 b, t_vector4 c, t_vector4 d)
+{
+	t_vector4	sub_res1;
+	t_vector4	sub_res2;
+	t_vector4	sub_res3;
+
+	sub_res1 = substract_vector4_to_vector4(b, a);
+	sub_res2 = substract_vector4_to_vector4(c, a);
+	sub_res3 = substract_vector4_to_vector4(d, a);
+	return ((1.0 / 6.0) * dot_t_vector4(cross_t_vector4(sub_res1, sub_res2), sub_res3));
 }

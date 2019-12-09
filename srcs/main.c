@@ -113,6 +113,10 @@ int main(int argc, char **argv)
 
 	t_rectangle rec = create_t_rectangle(create_t_vector2(-1, 1), create_t_vector2(2, -2));
 
+	mesh = create_primitive_cave(create_t_vector4(25.0, 0.1, 25.0), create_t_vector4(2.0, 2.0, 2.0), NULL, 0.0);
+	t_mesh_set_name(&mesh, "cave");
+	t_engine_add_mesh(engine, mesh);
+
 	t_mesh	mesh_editing;
 	mesh_editing = create_mesh_editing(0, engine->user_engine->player->camera->body->pos);
 	mesh = create_primitive_skybox(main_camera->pos, create_t_vector4(1.0, 1.0, 1.0), skybox);
@@ -182,7 +186,7 @@ int main(int argc, char **argv)
 			t_engine_render_camera(engine);
 			player_action(main_camera, engine->user_engine->keyboard, engine);
 			enemy_look(engine);
-			// enemy_shoot(engine);
+			enemy_shoot(engine);
 			enemy_move(engine);
 			drawing_front_hp(main_camera, engine);
 			drawing_front_mun(main_camera, texture2, engine->user_engine->player);
