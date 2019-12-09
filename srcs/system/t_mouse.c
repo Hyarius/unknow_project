@@ -21,7 +21,6 @@ t_mouse	*initialize_t_mouse(void)
 
 	if (!(result = (t_mouse *)malloc(sizeof(t_mouse))))
 		return (NULL);
-	// printf("malloc t_mouse\n");
 	*result = create_t_mouse();
 	return (result);
 }
@@ -35,14 +34,6 @@ void	get_t_mouse_info(t_mouse *mouse)
 	if (mouse->old_pos.x != -1)
 		mouse->rel_pos = create_t_vector2_int((mouse->pos.x - WIN_X / 2),
 											(mouse->pos.y - WIN_Y / 2));
-	// else
-		// print_t_vector2_int(mouse->rel_pos, "rel pos ");
-
-	// else if (mouse->pos.x == WIN_X / 2 && mouse->pos.y == WIN_Y / 2)
-	// {
-	// 	mouse->old_pos.x = WIN_X / 2;
-	// 	mouse->old_pos.y = WIN_Y / 2;
-	// }
 	if (mousestate & SDL_BUTTON(SDL_BUTTON_LEFT))
 		mouse->button[MOUSE_LEFT] = BOOL_TRUE;
 	else
@@ -62,31 +53,4 @@ int		get_mouse_state(t_mouse *mouse, int type)
 	if (type < 0 || type > 3)
 		return (-1);
 	return (mouse->button[type]);
-}
-
-void	print_t_mouse(t_mouse *mouse) // affiche les infos de la souris --- a SUPPRIMER
-{
-	int		i;
-	int		find;
-	char	*button_text[] = {
-		"Mouse right",
-		"Mouse left",
-		"Mouse middle",
-	};
-
-	i = 0;
-	find = 0;
-	printf("[ %d][ %d ] - [ %d ][ %d ]", mouse->pos.x, mouse->pos.y, mouse->rel_pos.x, mouse->rel_pos.y);
-	while (i < MOUSE_BUTTON)
-	{
-		if (mouse->button[i] == BOOL_TRUE)
-		{
-			printf("[%s]", button_text[i]);
-			find++;
-		}
-		i++;
-	}
-	if (find == 0)
-		printf("[NULL]");
-	printf("\n");
 }

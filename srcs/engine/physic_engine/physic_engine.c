@@ -31,7 +31,8 @@ void			free_t_physic_engine(t_physic_engine *dest)
 	free(dest);
 }
 
-void			t_physic_engine_draw_mesh(t_physic_engine *p_physic_engine, t_camera *p_cam)
+void			t_physic_engine_draw_mesh(t_physic_engine *p_physic_engine,
+											t_camera *p_cam)
 {
 	int			i;
 
@@ -43,17 +44,20 @@ void			t_physic_engine_draw_mesh(t_physic_engine *p_physic_engine, t_camera *p_c
 	}
 }
 
-void			t_physic_engine_add_mesh(t_physic_engine *physic_engine, t_mesh p_mesh)
+void			t_physic_engine_add_mesh(t_physic_engine *physic_engine,
+											t_mesh p_mesh)
 {
 	t_mesh_list_push_back(physic_engine->mesh_list, p_mesh);
 }
 
-void			t_physic_engine_add_item(t_physic_engine *physic_engine, t_item p_item)
+void			t_physic_engine_add_item(t_physic_engine *physic_engine,
+											t_item p_item)
 {
 	t_item_list_push_back(physic_engine->item_list, p_item);
 }
 
-t_mesh			*t_physic_engine_get_mesh(t_physic_engine *physic_engine, int index)
+t_mesh			*t_physic_engine_get_mesh(t_physic_engine *physic_engine,
+											int index)
 {
 	return (t_mesh_list_get(physic_engine->mesh_list, index));
 }
@@ -150,7 +154,6 @@ void			test_move_axis(t_mesh *mesh, float *force, t_vector4 axis, t_mesh *target
 	delta = *force / subdivision;
 	max = *force;
 	*force = 0;
-
 	while (i < subdivision && is_t_mesh_intersecting(mesh, target) == BOOL_FALSE)
 	{
 		i++;

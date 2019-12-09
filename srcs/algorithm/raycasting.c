@@ -10,9 +10,9 @@ t_mesh	*cast_ray_next(t_vector4 pos, t_vector4 direction, t_mesh *mesh)
 	line = create_t_line(pos, add_vector4_to_vector4(pos, direction));
 	while (++k < mesh->faces->size)
 	{
-		if ((mesh->no_hitbox == 0 || mesh->is_visible == 1) && intersect_triangle_by_segment(compose_t_triangle_from_t_mesh
-				(mesh, t_face_list_get(mesh->faces, k)->index_vertices),
-				/*t_face_list_get(mesh->faces, k)->normale,*/ line,
+		if ((mesh->no_hitbox == 0 || mesh->is_visible == 1)
+		&& intersect_triangle_by_segment(compose_t_triangle_from_t_mesh(mesh,
+			t_face_list_get(mesh->faces, k)->index_vertices), line,
 				&intersection) == BOOL_TRUE)
 			return (mesh);
 	}
