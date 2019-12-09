@@ -1,6 +1,6 @@
 #include "unknow_project.h"
 
-t_surface *read_png_file(const char *filename)
+t_surface *read_png_file(char *filename)
 {
 	FILE		*fp;
 	png_structp	png_ptr;
@@ -16,8 +16,8 @@ t_surface *read_png_file(const char *filename)
 
 	if ((fp = fopen (filename, "rb")) == NULL)
 	{
-		return_erreur = ft_strjoinf(filename, " doesn't exist", 1);
-		error_exit(-500, return_erreur);		//ouverture du fichier .png. "rb" = read byte donc lecture uniquement et en byte.
+		//return_erreur = ft_strjoinf(filename, " doesn't exist", 1);
+		error_exit(-500, ft_strjoin(filename, " doesn't exist"));		//ouverture du fichier .png. "rb" = read byte donc lecture uniquement et en byte.
 
 	}
 
