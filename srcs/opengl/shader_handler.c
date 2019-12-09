@@ -7,8 +7,9 @@ static char	*read_shader(const char *p_path)
 	int		fd;
 
 	content = NULL;
-	line = NULL;
-	fd = open(p_path, O_RDONLY);
+	line = NULL;	
+	if ((fd = open(p_path, O_RDONLY)) < 0)
+		error_exit(-555, "can't read the shader");
 	while (get_next_line(fd, &line) > 0)
 	{
 		if (ft_strlen(content) != 0)

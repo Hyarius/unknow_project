@@ -37,7 +37,6 @@ t_mesh	*initialize_t_mesh(t_vector4 pos)
 
 	if (!(result = (t_mesh *)malloc(sizeof(t_mesh))))
 		error_exit(-13, "Can't create a t_mesh array");
-	// printf("malloc t_mesh\n");
 	*result = create_t_mesh(pos);
 	return (result);
 }
@@ -47,14 +46,12 @@ void	delete_t_mesh(t_mesh mesh)
 	free_t_vector4_list(mesh.vertices);
 	free_t_vector4_list(mesh.uvs);
 	free_t_face_list(mesh.faces);
-	// printf("delete t_mesh\n");
 }
 
 void	free_t_mesh(t_mesh *mesh)
 {
 	delete_t_mesh(*mesh);
 	free(mesh);
-	// printf("free t_mesh\n");
 }
 
 void	t_mesh_add_uv(t_mesh *dest, t_vector4 new_uv)
@@ -333,8 +330,6 @@ void	t_mesh_move_elevator(t_mesh *mesh, t_camera *camera)
 			tmp = 0.5f;
 		else
 			tmp = -0.5f;
-		// if ()
-		// {
 		if (t_mesh_on_mesh(camera->body, mesh) == 1)
 		{
 			camera->body->pos = add_vector4_to_vector4(camera->body->pos, create_t_vector4(0.0, tmp, 0.0));

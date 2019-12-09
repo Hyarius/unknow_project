@@ -90,7 +90,6 @@ int				can_move_axis(t_mesh *mesh, t_mesh *target, t_vector4 axis)
 	while (j < mesh->faces->size)
 	{
 		mesh_face = t_face_list_get(mesh->faces, j);
-		//set_t_face_color(mesh_face, create_t_color(0.0, 1.0, 0.0, 1.0));
 		triangle_mesh = compose_t_triangle_from_t_vertices(mesh->vertices_in_world, mesh_face->index_vertices);
 		i = 0;
 		while (i < target->faces->size)
@@ -138,6 +137,7 @@ void			test_move_axis(t_mesh *mesh, float *force, t_vector4 axis, t_mesh *target
 				mesh->force.y = 0.02;
 		}
 	}
+	t_mesh_compute_next_vertices_in_world(mesh, axis);
 }
 
 int				can_move(t_mesh *mesh, t_engine *engine)
@@ -197,45 +197,28 @@ void			t_physic_engine_compute_vertices_in_world(t_physic_engine *physic_engine)
 	}
 }
 
-// void			t_physic_engine_apply_force(t_engine *engine)
-// {
-// 	int i;
-// 	t_mesh *mesh;
-//
-// 	i = 0;
-// 	while (i < engine->physic_engine->mesh_list->size)
-// 	{
-// 		mesh = t_mesh_list_get(engine->physic_engine->mesh_list, i);
-// 		if (mesh->kinetic > 0 && mesh->force.y > -0.1)
-// 			mesh->force = add_vector4_to_vector4(mesh->force, create_t_vector4(0.0, -0.01, 0.0));
-// 		if (mesh->force.x != 0 || mesh->force.y != 0 || mesh->force.z != 0)
-// 			if (can_move(mesh, engine) == BOOL_TRUE)
-// 				t_mesh_apply_force(mesh);
-// 		i++;
-//
-// 	}
-// }
-
 void			t_physic_engine_apply_force(t_engine *engine)
 {
-	Uint32 	actual_frame;
-	static Uint32 	last_frame = 0;
-	int i = 0;
-	float time_passed;
-	t_mesh *mesh;
+	Uint32			actual_frame;
+	static Uint32	last_frame = 0;
+	int				i;
+	float			time_passed;
+	t_mesh			*mesh;
 
 	actual_frame = SDL_GetTicks();
 	time_passed = (actual_frame - last_frame) / 1000.0;
+	i = 0;
 	while (i < engine->physic_engine->mesh_list->size)
 	{
 		mesh = t_mesh_list_get(engine->physic_engine->mesh_list, i);
 		if (mesh->kinetic > 0)
-			mesh->force = add_vector4_to_vector4(mesh->force, mult_vector4_by_float(engine->physic_engine->gravity_force, mesh->kinetic * time_passed));
+			mesh->force = add_vector4_to_vector4(mesh->force,
+					mult_vector4_by_float(engine->physic_engine->gravity_force,
+											mesh->kinetic * time_passed));
 		if (mesh->force.x != 0 || mesh->force.y != 0 || mesh->force.z != 0)
 			if (can_move(mesh, engine) == BOOL_TRUE)
 				t_mesh_apply_force(mesh);
 		i++;
-
 	}
 	last_frame = actual_frame;
 }

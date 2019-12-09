@@ -43,4 +43,6 @@ void			draw_pixel(t_window *p_win, int x, int y, t_color color);
 t_triangle		compose_t_triangle_from_t_mesh(t_mesh *src, int *index);
 t_triangle		compose_t_triangle_from_t_vertices(t_vector4_list *src, int *index);
 
+void			ft_get_leaks(char *prog_name, char *msg);
+
 #endif

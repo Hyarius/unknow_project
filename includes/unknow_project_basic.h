@@ -42,6 +42,7 @@ void			ft_lstadd(t_list_fd **alst, t_list_fd *new);
 void			ft_lstdel(t_list_fd **alst, void (*del)(void *, size_t));
 void			ft_del_cont(void *content, size_t size);
 void			ft_memdel(void **ap);
+void			*ft_memcpy(void *dst, const void *src, size_t n);
 void			ft_lstdelone(t_list_fd **alst, void (*del)(void*, size_t));
 float			round_float(float x, unsigned int round);
 t_vector4		round_t_vector4(t_vector4 a, unsigned int round);
