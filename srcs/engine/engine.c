@@ -79,7 +79,7 @@ void		t_engine_handle_event(t_camera *main_camera, t_gui *gui, t_engine *engine)
 	t_user_engine_handle_pause(main_camera, gui,
 								engine->user_engine, &(engine->playing));
 	t_user_engine_handle_menu(main_camera, gui,
-								engine->user_engine, &(engine->playing));
+								engine, &(engine->playing));
 	if (t_user_engine_poll_event(engine->user_engine) > 0)
 		t_user_engine_handle_quit(engine->user_engine, &(engine->playing));
 }

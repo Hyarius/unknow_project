@@ -54,7 +54,7 @@ void			play_menu(t_camera *main_camera, t_engine *engine, int *play)
 		if (pos.y > 39 && pos.y < 47)
 		{
 			*play = 1;
-			path = ft_strdup("ressources/map/fichier_map.map");
+			path = ft_strdup("ressources/map/fichier_map2.map");
 		}
 	}
 	if (pos.x > 82 && pos.x < 95 && t_mouse_state(mouse) == 2)
@@ -91,7 +91,6 @@ void			play_menu(t_camera *main_camera, t_engine *engine, int *play)
 		if (*play == 1)
 			link_t_camera_to_t_mesh(engine, 0, t_engine_get_mesh(engine, 0));
 		free(path);
-		printf("%p\n", path);
 	}
 }
 
