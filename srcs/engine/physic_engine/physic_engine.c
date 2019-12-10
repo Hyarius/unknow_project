@@ -137,7 +137,7 @@ void			test_move_axis(t_mesh *mesh, float *force, t_vector4 axis, t_mesh *target
 			if (axis.y == 0.0)
 			{
 				tmp = mesh->force.y;
-				mesh->force.y = 0.001;
+				mesh->force.y = 0.015;
 				axis.y = 1.0;
 				while (mesh->force.y < 0.015)
 				{

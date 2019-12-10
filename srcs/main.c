@@ -152,9 +152,9 @@ int main(int argc, char **argv)
 
 	t_rectangle rec = create_t_rectangle(create_t_vector2(-1, 1), create_t_vector2(2, -2));
 
-	mesh = create_primitive_cave(create_t_vector4(25.0, 0.1, 25.0), create_t_vector4(2.0, 2.0, 2.0), NULL, 0.0);
-	t_mesh_set_name(&mesh, "cave");
-	t_engine_add_mesh(engine, mesh);
+	// mesh = create_primitive_cave(create_t_vector4(25.0, 0.1, 25.0), create_t_vector4(2.0, 2.0, 2.0), NULL, 0.0);
+	// t_mesh_set_name(&mesh, "cave");
+	// t_engine_add_mesh(engine, mesh);
 
 	// mesh = read_obj_file("ressources/objets/LevelUp.obj", create_t_vector4(0.0, 5.0, 0.0), create_t_vector4(1.0, 1.0, 1.0), 0.0);
 	// t_mesh_set_name(&mesh, "map");
@@ -266,7 +266,7 @@ int main(int argc, char **argv)
 		{
 			mesh.pos = main_camera->pos;
 
-			draw_skybox(win, main_camera, &mesh); // skybox
+			//draw_skybox(win, main_camera, &mesh); // skybox
 			// t_engine_render_camera(engine);
 			t_view_port_clear_buffers(main_camera->view_port);
 			SDL_ShowCursor(SDL_DISABLE);
