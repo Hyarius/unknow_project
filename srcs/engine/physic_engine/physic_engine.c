@@ -137,12 +137,12 @@ void			test_move_axis(t_mesh *mesh, float *force, t_vector4 axis, t_mesh *target
 			if (axis.y == 0.0)
 			{
 				tmp = mesh->force.y;
-				mesh->force.y = 0.015;
+				mesh->force.y = 0.001;
 				axis.y = 1.0;
 				while (mesh->force.y < 0.015)
 				{
 					t_mesh_compute_next_vertices_in_world(mesh, axis);
-					if (is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
+					if (is_t_mesh_intersecting(mesh, target) == BOOL_FALSE)
 						break;
 					mesh->force.y += 0.001;
 				}
