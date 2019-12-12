@@ -56,6 +56,7 @@ t_triangle	t_triangle_add_vector4(t_triangle triangle, t_vector4 to_add)
 
 void		print_t_triangle(t_triangle p_triangle, char *triangle_name) // A SUPPRIMER
 {
+	printf("%s\n", triangle_name);
 	print_t_vector4(p_triangle.a, "A : ");
 	print_t_vector4(p_triangle.b, "B : ");
 	print_t_vector4(p_triangle.c, "C : ");
@@ -245,48 +246,15 @@ int		triangles_intersection(t_triangle tri1, t_triangle tri2)
 {
 	t_line		seg;
 	t_vector4	intersection;
-	float		dista;
-	float		distb;
-	float		distc;
-	float		max_dist;
-	int			ret;
 
-	// seg = create_t_line(tri1.a, tri1.b);
-	// dista = size_line(seg);
-	// seg = create_t_line(tri1.b, tri1.c);
-	// distb = size_line(seg);
-	// seg = create_t_line(tri1.a, tri1.c);
-	// distc = size_line(seg);
-	max_dist = maximum_dist_triangles(tri1, tri2);
-	if (max_dist > 25.0 && max_dist > 25.0 && max_dist > 25.0)
-		return (BOOL_FALSE);
-	// printf("%f\n", max_dist);
 	seg = create_t_line(tri1.a, tri1.b);
-	if ((ret = intersect_triangle_by_segment(tri2, seg, &intersection)) > 0)
-	{
-/*
-** 		print_t_triangle(tri2, "collision en : ");
-** 		print_t_line(seg, "avec : ");
-*/
+	if (intersect_triangle_by_segment(tri2, seg, &intersection) > 0)
 		return (BOOL_TRUE);
-	}
 	seg = create_t_line(tri1.b, tri1.c);
-	if ((ret = intersect_triangle_by_segment(tri2, seg, &intersection)) > 0)
-	{
-/*
-** 		print_t_triangle(tri2, "collision en : ");
-** 		print_t_line(seg, "avec : ");
-*/
+	if (intersect_triangle_by_segment(tri2, seg, &intersection) > 0)
 		return (BOOL_TRUE);
-	}
 	seg = create_t_line(tri1.a, tri1.c);
-	if ((ret = intersect_triangle_by_segment(tri2, seg, &intersection)) > 0)
-	{
-/*
-** 		print_t_triangle(tri2, "collision en : ");
-** 		print_t_line(seg, "avec : ");
-*/
+	if (intersect_triangle_by_segment(tri2, seg, &intersection) > 0)
 		return (BOOL_TRUE);
-	}
 	return (BOOL_FALSE);
 }

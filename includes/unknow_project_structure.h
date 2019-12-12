@@ -3,23 +3,6 @@
 
 # include "unknow_project_geometry.h"
 
-typedef struct	s_fuck_norme
-{
-	t_triangle	triangle;
-	t_vector4	min;
-	t_vector4	max;
-	t_vector4	pixel_sample;
-	int			pixel_index;
-	int			x;
-	int			y;
-	float		area;
-	float		w0;
-	float		w1;
-	float		w2;
-	float		z;
-	float		one_over_z;
-}				t_fuck_norme;
-
 typedef struct	s_color
 {
 	float		r;
@@ -35,6 +18,24 @@ t_color 	*initialize_t_color_from_int(int p_r, int p_g, int p_b, int p_a);
 t_color		fuze_t_color(t_color src1, t_color src2);
 t_color		merge_t_color(t_color src1, t_color delta);
 void 		print_t_color(t_color p_color, char *str);
+
+typedef struct	s_fuck_norme
+{
+	t_triangle	triangle;
+	t_vector4	min;
+	t_vector4	max;
+	t_triangle	st;
+	t_color		rgb;
+	float		s;
+	float		t;
+	int			pixel_index;
+	int			x;
+	int			y;
+	t_vector4	w;
+	t_vector4	pixel_sample;
+	float		z;
+	float		area;
+}				t_fuck_norme;
 
 typedef struct	s_surface
 {

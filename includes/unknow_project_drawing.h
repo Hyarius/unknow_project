@@ -27,6 +27,9 @@ void		draw_buffer_opengl(t_window *p_win, t_color *color_data);
 //
 // ----------------- CPU_DRAWING -----------------
 //
+
+t_vector4	calc_w(t_fuck_norme data);
+void		get_min_max_draw_triangle(t_view_port *view_port, t_vector4 *min, t_vector4 *max);
 //			draw color cpu
 void 		draw_triangle_color_cpu(t_view_port *p_view_port, t_triangle *p_triangle, t_color *p_color);
 void		multithreading_draw_triangle_color_cpu(t_view_port *p_view_port, t_triangle_list *p_triangle_list, t_color_list *p_color_list);

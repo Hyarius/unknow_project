@@ -55,7 +55,6 @@ int main(int argc, char **argv)
 	texture_weapons[4] = png_load("ressources_backup/assets/imgs/wall_destroyer.png");
 	//texture_weapons[4] = png_load("ressources_backup/assets/imgs/Hands_baby.png");
 
-	t_texture *texture = png_load("ressources/assets/textures/cube_test.png");
 	t_texture *skybox = png_load("ressources/assets/textures/skybox.png");
 
 	t_engine	*engine;
@@ -92,6 +91,7 @@ int main(int argc, char **argv)
 	Mix_VolumeMusic(MIX_MAX_VOLUME);
 	Mix_PlayMusic(musique, -1);
 	engine->playing = 2;
+
 	while (engine->playing != 0)
 	{
 		prepare_screen(win, create_t_color(0.2f, 0.2f, 0.2f, 1.0f));
@@ -107,40 +107,40 @@ int main(int argc, char **argv)
    			t_view_port_clear_buffers(main_camera->view_port);
     		draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->menu[4]);
 		}
-		if (engine->playing <= -2)
+		else if (engine->playing <= -2)
 		{
 			t_engine_draw_mesh(engine);
 			t_engine_render_camera(engine);
    			t_view_port_clear_buffers(main_camera->view_port);
     		draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->menu[5]);
 		}
-		if (engine->playing == 2)
+		else if (engine->playing == 2)
 		{
 			draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->menu[0]);
 		}
-		if (engine->playing == 3)
+		else if (engine->playing == 3)
 		{
 			draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->menu[1]);
 		}
-		if (engine->playing == 4)
+		else if (engine->playing == 4)
 		{
 			draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->menu[2]);
 		}
-		if (engine->playing == 5)
+		else if (engine->playing == 5)
 		{
 			draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->menu[3]);
 		}
-		if (engine->playing == 6)
+		else if (engine->playing == 6)
 		{
 			draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->menu[6]);
 		}
-
 		else if (engine->playing == 1)
 		{
 			mesh.pos = main_camera->pos;
 
-			draw_skybox(win, main_camera, &mesh); // skybox
+			draw_skybox(win, main_camera, &mesh);
 			t_engine_render_camera(engine);
+
 			SDL_ShowCursor(SDL_DISABLE);
 			t_engine_apply_physic(engine);
 
@@ -163,6 +163,9 @@ int main(int argc, char **argv)
 		else if (engine->playing == 10)
 		{
 			mesh.pos = main_camera->pos;
+			draw_skybox(win, main_camera, &mesh);
+			t_engine_render_camera(engine);
+
 			SDL_ShowCursor(SDL_DISABLE);
 			t_engine_apply_physic(engine);
 			t_engine_handle_camera(engine, win);

@@ -30,17 +30,11 @@ void		draw_triangle_color_cpu_next(t_view_port *view_port,
 											t_color *p_color, t_fuck_norme data)
 {
 	data.pixel_sample = create_t_vector4(data.x, data.y, 0);
-	data.w0 = edge_t_vector4(data.triangle.b, data.triangle.c,
-												data.pixel_sample) / data.area;
-	data.w1 = edge_t_vector4(data.triangle.c, data.triangle.a,
-												data.pixel_sample) / data.area;
-	data.w2 = edge_t_vector4(data.triangle.a, data.triangle.b,
-												data.pixel_sample) / data.area;
-	if (data.w0 >= 0 && data.w1 >= 0 && data.w2 >= 0)
+	data.w = calc_w(data);
+	if (data.w.x >= 0 && data.w.y >= 0 && data.w.z >= 0)
 	{
-		data.one_over_z = (data.triangle.a.w * data.w0) +
-				(data.triangle.b.w * data.w1) + (data.triangle.c.w * data.w2);
-		data.z = 1 / data.one_over_z;
+		data.z = 1 / ((data.triangle.a.w * data.w.x) +
+			(data.triangle.b.w * data.w.y) + (data.triangle.c.w * data.w.z));
 		if (data.z <= view_port->depth_buffer[data.pixel_index])
 		{
 			view_port->depth_buffer[data.pixel_index] = data.z;

@@ -21,6 +21,7 @@ t_line	*initialize_t_line(t_vector4 p_a, t_vector4 p_b)
 
 void	print_t_line(t_line line, char *str)
 {
+	printf("%s\n", str);
 	print_t_vector4(line.a, "Point A");
 	print_t_vector4(line.b, "Point B");
 }
