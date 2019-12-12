@@ -163,6 +163,7 @@ void			test_move_axis(t_mesh *mesh, float *force, t_vector4 axis, t_mesh *target
 		t_mesh_compute_next_vertices_in_world(mesh, axis);
 		if (is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
 		{
+			// printf("mesh intersect with %s\n", target->name);
 			if (axis.y == 0.0)
 			{
 				tmp = mesh->force.y;
@@ -172,23 +173,24 @@ void			test_move_axis(t_mesh *mesh, float *force, t_vector4 axis, t_mesh *target
 				{
 					t_mesh_compute_next_vertices_in_world(mesh, axis);
 					if (is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
+					{
+						// printf("here\n");
 						break;
+					}
 					mesh->force.y += 0.001;
 				}
 
 				if (is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
 				{
-/*
-** 					printf("here\n");
-*/
+ 					// printf("here2\n");
 					mesh->force.y = tmp;
-					*force -= delta;
+					*force -= delta * 2;
 				}
 				i = subdivision;
 				axis.y = 0.0;
 			}
 			else
-				*force -= delta;
+				*force -= delta * 2;
 			if (ft_strcmp(target->name, "ladder") == 0 && axis.y == 0.0)
 				mesh->force.y = 0.02;
 		}

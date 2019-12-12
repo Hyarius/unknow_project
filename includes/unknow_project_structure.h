@@ -3,6 +3,23 @@
 
 # include "unknow_project_geometry.h"
 
+typedef struct	s_fuck_norme
+{
+	t_triangle	triangle;
+	t_vector4	min;
+	t_vector4	max;
+	t_vector4	pixel_sample;
+	int			pixel_index;
+	int			x;
+	int			y;
+	float		area;
+	float		w0;
+	float		w1;
+	float		w2;
+	float		z;
+	float		one_over_z;
+}				t_fuck_norme;
+
 typedef struct	s_color
 {
 	float		r;
