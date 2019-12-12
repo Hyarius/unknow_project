@@ -19,10 +19,10 @@ void	set_map_in_engine(t_engine *engine, t_mesh_list *meshs,
 	int	j;
 	int k;
 
-	i = -1;
+	i = 0;
 	j = 0;
 	k = 0;
-	while (++i < meshs->size)
+	while (i < meshs->size)
 	{
 		if (t_mesh_list_at(meshs, i).collectible == 1)
 		{
@@ -30,13 +30,14 @@ void	set_map_in_engine(t_engine *engine, t_mesh_list *meshs,
 			j++;
 		}
 		t_engine_add_mesh(engine, t_mesh_list_at(meshs, i));
-		if (ft_strcmp(t_mesh_list_at(meshs, i).name, "Enemy") == 0)
+		if (ft_strcmp(t_engine_get_mesh(engine, i)->name, "Enemy") == 0)
 		{
-			if (k != 0)
+			if (k >= 0)
 				link_enemy_to_camera(engine, k);
 			link_t_camera_to_t_mesh(engine, 2 + k, t_engine_get_mesh(engine, i));
 			k++;
 		}
+		i++;
 	}
 }
 
