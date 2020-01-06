@@ -25,25 +25,25 @@ int				ft_atoi(const char *str);
 int				ft_floor(float source);
 float			ft_abs_float(float src);
 char		    *ft_ftoa(float num);
-
 int				min(int a, int b);
 int				max(int a, int b);
 float			float_min(float a, float b);
 float			float_max(float a, float b);
-
 int				get_next_line(const int fd, char **line);
 char			*ft_strcpy(char *dest, const char *str);
 char			*ft_strcat(char *dest, const char *src);
 int	        	ft_get_end_line(char *str);
 char        	*ft_strsub(char const *s, unsigned int start, size_t len);
 char        	*ft_strjoinf(char *s1, char *s2, int c);
-
 void			ft_lstadd(t_list_fd **alst, t_list_fd *new);
 void			ft_lstdel(t_list_fd **alst, void (*del)(void *, size_t));
 void			ft_del_cont(void *content, size_t size);
 void			ft_memdel(void **ap);
+void			*ft_memcpy(void *dst, const void *src, size_t n);
 void			ft_lstdelone(t_list_fd **alst, void (*del)(void*, size_t));
 float			round_float(float x, unsigned int round);
 t_vector4		round_t_vector4(t_vector4 a, unsigned int round);
+char			*ft_ftoa_p(float n, size_t precision);
+
 
 #endif

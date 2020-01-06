@@ -22,9 +22,9 @@ Doom Nukem project
 
 - ambiance globale du jeu : oui
 
-- editeur de niveau : oui
+- editeur de niveau : textures, gravite, types darmes a choisir, niveau de vie, bonus choix musique
 
-- packaging : oui
+- packaging : non
 
 
 bonus:
@@ -35,4 +35,4 @@ bonus:
 
 - reseau : dans t reves
 
-- soyez fou : on a un moteur 3d
+- soyez fou : on a un moteur 3d 

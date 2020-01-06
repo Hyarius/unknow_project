@@ -24,6 +24,7 @@ void		swap_t_vector4(t_vector4 *a, t_vector4 *b);
 int			t_vector4_equal(t_vector4 a, t_vector4 b);
 float		t_vector4_length(t_vector4 a);
 void		print_t_vector4(t_vector4 vector, char *str);;
+char		*vector4_str(t_vector4 vector);
 
 typedef struct	s_vector3
 {

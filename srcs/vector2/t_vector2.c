@@ -15,7 +15,6 @@ t_vector2	*initialize_t_vector2(float p_x, float p_y)
 
 	if (!(result = (t_vector2 *)malloc(sizeof(t_vector2))))
 		return (NULL);
-	// printf("malloc t_vector2\n");
 	*result = create_t_vector2(p_x, p_y);
 	return (result);
 }

@@ -16,29 +16,24 @@ t_mesh		read_obj_file(char *path, t_vector4 pos, t_vector4 size, float gravity)
 	t_mesh_activate_gravity(&result, gravity);
 	tmp_face = create_t_face();
 
-	fd = open(path, O_RDONLY);
-
-	for (i = 0; i < 4; i++)
+	if ((fd = open(path, O_RDONLY)) < 0)
+		error_exit(-8000, "impossible fd");
+	i = 0;
+	while (i < 4)
 	{
 		index[i] = 0;
 		index_uv[i] = 0;
+		i++;
 	}
-
-	if (fd < 0)
-	 	error_exit(-8000, "impossible fd");
 	while (get_next_line(fd, &line))
 	{
 		if (ft_strlen(line) != 0)
 		{
 			line_split = ft_strsplit(line, ' ');
 			if (ft_strcmp(line_split[0], "v") == 0)
-			{
 				t_mesh_add_point(&result, create_t_vector4(atof(line_split[1]) * size.x, atof(line_split[2]) * size.y, atof(line_split[3]) * size.z));
-			}
 			else if (ft_strcmp(line_split[0], "vt") == 0)
-			{
 				t_mesh_add_uv(&result, create_t_vector4(atof(line_split[1]), atof(line_split[2]), 0.0));
-			}
 			else if (ft_strcmp(line_split[0], "f") == 0)
 			{
 				if (ft_tablen(line_split) == 5)
@@ -85,8 +80,8 @@ t_mesh		read_obj_file(char *path, t_vector4 pos, t_vector4 size, float gravity)
 		free(line);
 	}
 	free(line);
-	t_mesh_compute_normals(&result);
 	close(fd);
+	t_mesh_compute_normals(&result);
 	t_mesh_compute_bubble_box(&result);
 	t_mesh_set_texture(&result, NULL);
 	return(result);

@@ -8,7 +8,6 @@ t_vector4 create_t_vector4(float p_x, float p_y, float p_z)
 	result.y = p_y;
 	result.z = p_z;
 	result.w = 1.0;
-
 	return (result);
 }
 
@@ -18,9 +17,7 @@ t_vector4	*initialize_t_vector4(float p_x, float p_y, float p_z)
 
 	if (!(result = (t_vector4 *)malloc(sizeof(t_vector4))))
 		return (NULL);
-
 	*result = create_t_vector4(p_x, p_y, p_z);
-
 	return (result);
 }
 
@@ -126,4 +123,22 @@ float		t_vector4_length(t_vector4 a)
 void		print_t_vector4(t_vector4 vector, char *str) // A SUPPRIMER
 {
 	printf("%s : %0.4f / %0.4f / %0.4f / %0.4f\n", str, vector.x, vector.y, vector.z, vector.w);
+}
+
+char		*vector4_str(t_vector4 vector)
+{
+	char *x;
+	char *y;
+	char *z;
+	char *result;
+
+	x = ft_ftoa_p(vector.x, 5);
+	y = ft_ftoa_p(vector.y, 5);
+	z = ft_ftoa_p(vector.z, 5);
+	result = x;
+	result = ft_strjoinf(result, " / ", 1);
+	result = ft_strjoinf(result, y, 3);
+	result = ft_strjoinf(result, " / ", 1);
+	result = ft_strjoinf(result, z, 3);
+	return (result);
 }

@@ -144,7 +144,6 @@ void	draw_triangle_color_opengl(t_window *p_win, t_triangle *p_triangle, t_color
 		p_color->r, p_color->g, p_color->b, p_color->a,
 		p_color->r, p_color->g, p_color->b, p_color->a,
 	};
-
 	glBindVertexArray(p_win->vertex_array);
 	glBindBuffer(GL_ARRAY_BUFFER, p_win->vertex_buffer);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertex_buffer_data),\

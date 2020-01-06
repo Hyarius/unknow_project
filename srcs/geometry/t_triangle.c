@@ -16,7 +16,6 @@ t_triangle	*initialize_t_triangle(t_vector4 p_a, t_vector4 p_b, t_vector4 p_c)
 
 	if (!(result = (t_triangle *)malloc(sizeof(t_triangle))))
 		error_exit(-31, "Can't malloc a t_triangle");
-	// printf("malloc t_triangle\n");
 	*result = create_t_triangle(p_a, p_b, p_c);
 	return (result);
 }
@@ -57,7 +56,6 @@ t_triangle	t_triangle_add_vector4(t_triangle triangle, t_vector4 to_add)
 
 void		print_t_triangle(t_triangle p_triangle, char *triangle_name) // A SUPPRIMER
 {
-	// printf("Triangle Name : %s\n", triangle_name);
 	print_t_vector4(p_triangle.a, "A : ");
 	print_t_vector4(p_triangle.b, "B : ");
 	print_t_vector4(p_triangle.c, "C : ");
@@ -215,4 +213,80 @@ int			t_triangle_similarity_segment(t_triangle p_a, t_vector4 p_b, t_vector4 p_c
 		i++;
 	}
 	return (result);
+}
+
+float	maximum_dist_triangles(t_triangle tri1, t_triangle tri2)
+{
+	float	ret;
+	int		i;
+	float	dists[9];
+
+	dists[0] = size_line(create_t_line(tri1.a, tri2.a));
+	dists[0] = size_line(create_t_line(tri1.a, tri2.b));
+	dists[0] = size_line(create_t_line(tri1.a, tri2.c));
+	dists[0] = size_line(create_t_line(tri1.b, tri2.a));
+	dists[0] = size_line(create_t_line(tri1.b, tri2.b));
+	dists[0] = size_line(create_t_line(tri1.b, tri2.c));
+	dists[0] = size_line(create_t_line(tri1.c, tri2.a));
+	dists[0] = size_line(create_t_line(tri1.c, tri2.b));
+	dists[0] = size_line(create_t_line(tri1.c, tri2.c));
+	i = 0;
+	ret = 600;
+	while (i < 9)
+	{
+		if (ret > dists[i])
+			ret = dists[i];
+		i++;
+	}
+	return (ret);
+}
+
+int		triangles_intersection(t_triangle tri1, t_triangle tri2)
+{
+	t_line		seg;
+	t_vector4	intersection;
+	float		dista;
+	float		distb;
+	float		distc;
+	float		max_dist;
+	int			ret;
+
+	// seg = create_t_line(tri1.a, tri1.b);
+	// dista = size_line(seg);
+	// seg = create_t_line(tri1.b, tri1.c);
+	// distb = size_line(seg);
+	// seg = create_t_line(tri1.a, tri1.c);
+	// distc = size_line(seg);
+	max_dist = maximum_dist_triangles(tri1, tri2);
+	if (max_dist > 25.0 && max_dist > 25.0 && max_dist > 25.0)
+		return (BOOL_FALSE);
+	// printf("%f\n", max_dist);
+	seg = create_t_line(tri1.a, tri1.b);
+	if ((ret = intersect_triangle_by_segment(tri2, seg, &intersection)) > 0)
+	{
+/*
+** 		print_t_triangle(tri2, "collision en : ");
+** 		print_t_line(seg, "avec : ");
+*/
+		return (BOOL_TRUE);
+	}
+	seg = create_t_line(tri1.b, tri1.c);
+	if ((ret = intersect_triangle_by_segment(tri2, seg, &intersection)) > 0)
+	{
+/*
+** 		print_t_triangle(tri2, "collision en : ");
+** 		print_t_line(seg, "avec : ");
+*/
+		return (BOOL_TRUE);
+	}
+	seg = create_t_line(tri1.a, tri1.c);
+	if ((ret = intersect_triangle_by_segment(tri2, seg, &intersection)) > 0)
+	{
+/*
+** 		print_t_triangle(tri2, "collision en : ");
+** 		print_t_line(seg, "avec : ");
+*/
+		return (BOOL_TRUE);
+	}
+	return (BOOL_FALSE);
 }

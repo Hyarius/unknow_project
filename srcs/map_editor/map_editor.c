@@ -29,9 +29,16 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos, char *path)
 		mesh.texture->path = path;
 		mesh.kinetic = 0.0;
 	}
-	else if (index == 2)
+	else if (index == 2 || index == 3 || index == 4 || index == 5)
 	{
-		mesh.name = "door";
+		if (index == 2)
+			mesh.name = "door";
+		else if (index == 3)
+			mesh.name = "door_red";
+		else if (index == 4)
+			mesh.name = "door_blue";
+		else if (index == 5)
+			mesh.name = "door_green";
 		mesh.size = create_t_vector4(1.0, 2.0, 0.2);
 		mesh.primitive = 1;
 		mesh.collectible = 0;
@@ -41,69 +48,14 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos, char *path)
 		mesh.texture->path = path;
 		mesh.kinetic = 0.0;
 	}
-	else if (index == 3)
+	else if (index == 6 || index == 7 || index == 8)
 	{
-		mesh.name = "door_red";
-		mesh.size = create_t_vector4(1.0, 2.0, 0.2);
-		mesh.primitive = 1;
-		mesh.collectible = 0;
-		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
-		mesh.hp = -1;
-		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = path;
-		mesh.kinetic = 0.0;
-	}
-	else if (index == 4)
-	{
-		mesh.name = "door_blue";
-		mesh.size = create_t_vector4(1.0, 2.0, 0.2);
-		mesh.primitive = 1;
-		mesh.collectible = 0;
-		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
-		mesh.hp = -1;
-		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = path;
-		mesh.kinetic = 0.0;
-	}
-	else if (index == 5)
-	{
-		mesh.name = "door_green";
-		mesh.size = create_t_vector4(1.0, 2.0, 0.2);
-		mesh.primitive = 1;
-		mesh.collectible = 0;
-		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
-		mesh.hp = -1;
-		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = path;
-		mesh.kinetic = 0.0;
-	}
-	else if (index == 6)
-	{
-		mesh.name = "Card_red";
-		mesh.size = create_t_vector4(0.2, 0.05, 0.2);
-		mesh.primitive = 1;
-		mesh.collectible = 1;
-		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
-		mesh.hp = -1;
-		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = path;
-		mesh.kinetic = 0.0;
-	}
-	else if (index == 7)
-	{
-		mesh.name = "Card_blue";
-		mesh.size = create_t_vector4(0.2, 0.05, 0.2);
-		mesh.primitive = 1;
-		mesh.collectible = 1;
-		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
-		mesh.hp = -1;
-		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = path;
-		mesh.kinetic = 0.0;
-	}
-	else if (index == 8)
-	{
-		mesh.name = "Card_green";
+		if (index == 6)
+			mesh.name = "Card_red";
+		else if (index == 7)
+			mesh.name = "Card_blue";
+		else if (index == 8)
+			mesh.name = "Card_green";
 		mesh.size = create_t_vector4(0.2, 0.05, 0.2);
 		mesh.primitive = 1;
 		mesh.collectible = 1;
@@ -149,33 +101,14 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos, char *path)
 		mesh.texture->path = path;
 		mesh.kinetic = 0.0;
 	}
-	else if (index == 12)
+	else if (index == 12 || index == 13 || index == 14)
 	{
-		mesh.name = "Healt_Pack";
-		mesh.size = create_t_vector4(0.2, 0.05, 0.2);
-		mesh.primitive = 1;
-		mesh.collectible = 1;
-		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
-		mesh.hp = -1;
-		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = path;
-		mesh.kinetic = 0.0;
-	}
-	else if (index == 13)
-	{
-		mesh.name = "Armor_Pack";
-		mesh.size = create_t_vector4(0.2, 0.05, 0.2);
-		mesh.primitive = 1;
-		mesh.collectible = 1;
-		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
-		mesh.hp = -1;
-		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = path;
-		mesh.kinetic = 0.0;
-	}
-	else if (index == 14)
-	{
-		mesh.name = "Jet_Pack";
+		if (index == 12)
+			mesh.name = "Healt_Pack";
+		else if (index == 13)
+			mesh.name = "Armor_Pack";
+		else if (index == 14)
+			mesh.name = "Jet_Pack";
 		mesh.size = create_t_vector4(0.2, 0.05, 0.2);
 		mesh.primitive = 1;
 		mesh.collectible = 1;
@@ -416,69 +349,69 @@ void		print_set_weapon(t_camera *main_camera, t_gui *gui, t_engine *engine)
 	if (ft_strcmp(player->hitbox.name, "Player") == 0)
 	{
 		t_view_port_clear_buffers(main_camera->view_port);
-		if (player->weapons[1].total == -1)
+		if (player->weapons[1].total_ammo == -1)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.023, 0.65), create_t_vector2(0.18, 0.1)), gui->menu[13]);
 		else
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.151, 0.65), create_t_vector2(0.15, 0.1)), gui->menu[13]);
-		if (player->weapons[2].total == -1)
+		if (player->weapons[2].total_ammo == -1)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.023, -0.19), create_t_vector2(0.18, 0.1)), gui->menu[13]);
 		else
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.151, -0.19), create_t_vector2(0.15, 0.1)), gui->menu[13]);
-		if (player->weapons[3].total == -1)
+		if (player->weapons[3].total_ammo == -1)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.023, 0.23), create_t_vector2(0.18, 0.1)), gui->menu[13]);
 		else
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.151, 0.23), create_t_vector2(0.15, 0.1)), gui->menu[13]);
-		if (player->weapons[4].total == -1)
+		if (player->weapons[4].total_ammo == -1)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.023, -0.61), create_t_vector2(0.18, 0.1)), gui->menu[13]);
 		else
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.151, -0.61), create_t_vector2(0.15, 0.1)), gui->menu[13]);
-		if (player->weapons[1].total == 0 && player->weapons[1].ammo == 0)
+		if (player->weapons[1].total_ammo == 0 && player->weapons[1].ammo == 0)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.04, 0.52), create_t_vector2(0.08, 0.1)), gui->menu[13]);
-		if (player->weapons[1].total == 0 && player->weapons[1].ammo == 30)
+		if (player->weapons[1].total_ammo == 0 && player->weapons[1].ammo == 30)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.1, 0.52), create_t_vector2(0.08, 0.1)), gui->menu[13]);
-		if (player->weapons[1].total == 30 && player->weapons[1].ammo == 30)
+		if (player->weapons[1].total_ammo == 30 && player->weapons[1].ammo == 30)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.16, 0.52), create_t_vector2(0.08, 0.1)), gui->menu[13]);
-		if (player->weapons[1].total == 60 && player->weapons[1].ammo == 30)
+		if (player->weapons[1].total_ammo == 60 && player->weapons[1].ammo == 30)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.22, 0.52), create_t_vector2(0.08, 0.1)), gui->menu[13]);
-		if (player->weapons[1].total == 90 && player->weapons[1].ammo == 30)
+		if (player->weapons[1].total_ammo == 90 && player->weapons[1].ammo == 30)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.285, 0.52), create_t_vector2(0.08, 0.1)), gui->menu[13]);
-		if (player->weapons[1].total == 120 && player->weapons[1].ammo == 30)
+		if (player->weapons[1].total_ammo == 120 && player->weapons[1].ammo == 30)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.348, 0.52), create_t_vector2(0.08, 0.1)), gui->menu[13]);
-		if (player->weapons[3].total == 0 && player->weapons[3].ammo == 0)
+		if (player->weapons[3].total_ammo == 0 && player->weapons[3].ammo == 0)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.035, 0.095), create_t_vector2(0.08, 0.1)), gui->menu[13]);
-		if (player->weapons[3].total == 0 && player->weapons[3].ammo == 8)
+		if (player->weapons[3].total_ammo == 0 && player->weapons[3].ammo == 8)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.095, 0.095), create_t_vector2(0.08, 0.1)), gui->menu[13]);
-		if (player->weapons[3].total == 8 && player->weapons[3].ammo == 8)
+		if (player->weapons[3].total_ammo == 8 && player->weapons[3].ammo == 8)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.155, 0.095), create_t_vector2(0.08, 0.1)), gui->menu[13]);
-		if (player->weapons[3].total == 16 && player->weapons[3].ammo == 8)
+		if (player->weapons[3].total_ammo == 16 && player->weapons[3].ammo == 8)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.215, 0.095), create_t_vector2(0.08, 0.1)), gui->menu[13]);
-		if (player->weapons[3].total == 24 && player->weapons[3].ammo == 8)
+		if (player->weapons[3].total_ammo == 24 && player->weapons[3].ammo == 8)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.28, 0.095), create_t_vector2(0.08, 0.1)), gui->menu[13]);
-		if (player->weapons[3].total == 32 && player->weapons[3].ammo == 8)
+		if (player->weapons[3].total_ammo == 32 && player->weapons[3].ammo == 8)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.343, 0.095), create_t_vector2(0.08, 0.1)), gui->menu[13]);
-		if (player->weapons[2].total == 0 && player->weapons[2].ammo == 0)
+		if (player->weapons[2].total_ammo == 0 && player->weapons[2].ammo == 0)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.042, -0.33), create_t_vector2(0.08, 0.1)), gui->menu[13]);
-		if (player->weapons[2].total == 0 && player->weapons[2].ammo == 10)
+		if (player->weapons[2].total_ammo == 0 && player->weapons[2].ammo == 10)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.105, -0.33), create_t_vector2(0.08, 0.1)), gui->menu[13]);
-		if (player->weapons[2].total == 10 && player->weapons[2].ammo == 10)
+		if (player->weapons[2].total_ammo == 10 && player->weapons[2].ammo == 10)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.162, -0.33), create_t_vector2(0.08, 0.1)), gui->menu[13]);
-		if (player->weapons[2].total == 20 && player->weapons[2].ammo == 10)
+		if (player->weapons[2].total_ammo == 20 && player->weapons[2].ammo == 10)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.222, -0.33), create_t_vector2(0.08, 0.1)), gui->menu[13]);
-		if (player->weapons[2].total == 30 && player->weapons[2].ammo == 10)
+		if (player->weapons[2].total_ammo == 30 && player->weapons[2].ammo == 10)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.287, -0.33), create_t_vector2(0.08, 0.1)), gui->menu[13]);
-		if (player->weapons[2].total == 40 && player->weapons[2].ammo == 10)
+		if (player->weapons[2].total_ammo == 40 && player->weapons[2].ammo == 10)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.35, -0.33), create_t_vector2(0.08, 0.1)), gui->menu[13]);
-		if (player->weapons[4].total == 0 && player->weapons[4].ammo == 0)
+		if (player->weapons[4].total_ammo == 0 && player->weapons[4].ammo == 0)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.042, -0.755), create_t_vector2(0.08, 0.1)), gui->menu[13]);
-		if (player->weapons[4].total == 0 && player->weapons[4].ammo == 1)
+		if (player->weapons[4].total_ammo == 0 && player->weapons[4].ammo == 1)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.105, -0.755), create_t_vector2(0.08, 0.1)), gui->menu[13]);
-		if (player->weapons[4].total == 1 && player->weapons[4].ammo == 1)
+		if (player->weapons[4].total_ammo == 1 && player->weapons[4].ammo == 1)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.162, -0.755), create_t_vector2(0.08, 0.1)), gui->menu[13]);
-		if (player->weapons[4].total == 2 && player->weapons[4].ammo == 1)
+		if (player->weapons[4].total_ammo == 2 && player->weapons[4].ammo == 1)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.222, -0.755), create_t_vector2(0.08, 0.1)), gui->menu[13]);
-		if (player->weapons[4].total == 3 && player->weapons[4].ammo == 1)
+		if (player->weapons[4].total_ammo == 3 && player->weapons[4].ammo == 1)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.287, -0.755), create_t_vector2(0.08, 0.1)), gui->menu[13]);
-		if (player->weapons[4].total == 4 && player->weapons[4].ammo == 1)
+		if (player->weapons[4].total_ammo == 4 && player->weapons[4].ammo == 1)
 			draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.35, -0.755), create_t_vector2(0.08, 0.1)), gui->menu[13]);
 	}
 }

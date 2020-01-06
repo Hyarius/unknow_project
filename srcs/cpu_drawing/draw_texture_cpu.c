@@ -10,6 +10,12 @@ void	draw_triangle_texture_cpu(t_view_port *p_view_port, t_triangle *p_triangle,
 	float			s;
 	float			t;
 	int				pixel_index;
+	int				x;
+	int				y;
+	t_vector4		w;
+	t_vector4		pixelSample;
+	float			z;
+	float			area;
 
 	triangle.a = convert_opengl_to_vector4(p_view_port, p_triangle->a);
 	triangle.b = convert_opengl_to_vector4(p_view_port, p_triangle->b);
@@ -19,14 +25,12 @@ void	draw_triangle_texture_cpu(t_view_port *p_view_port, t_triangle *p_triangle,
 						create_t_vector4(p_uv->uv.b.x, p_uv->uv.b.y, p_uv->uv.b.z),
 						create_t_vector4(p_uv->uv.c.x, p_uv->uv.c.y, p_uv->uv.c.z));
 
-	// printf("z = %f --- w = %f\n", p_triangle->a.z, p_uv->uv.a.w);
-
-	st.a.x /= p_triangle->a.w;
-	st.a.y /= p_triangle->a.w;
-	st.b.x /= p_triangle->b.w;
-	st.b.y /= p_triangle->b.w;
-	st.c.x /= p_triangle->c.w;
-	st.c.y /= p_triangle->c.w;
+	st.a.x /= triangle.a.w;
+	st.a.y /= triangle.a.w;
+	st.b.x /= triangle.b.w;
+	st.b.y /= triangle.b.w;
+	st.c.x /= triangle.c.w;
+	st.c.y /= triangle.c.w;
 
 	triangle.a.w = 1.0 / triangle.a.w;
 	triangle.b.w = 1.0 / triangle.b.w;
@@ -42,20 +46,18 @@ void	draw_triangle_texture_cpu(t_view_port *p_view_port, t_triangle *p_triangle,
 		max.x = p_view_port->size.x - 1;
 	if (max.y >= p_view_port->size.y)
 		max.y = p_view_port->size.y - 1;
-	t_vector4 w;
-	t_vector4 pixelSample;
-	float z;
-	float area = edge_t_vector4(triangle.a, triangle.b, triangle.c);
-	// printf("%f\n", area);
-	for (int y = min.y; y <= max.y; y++)
+	area = edge_t_vector4(triangle.a, triangle.b, triangle.c);
+	y = min.y;
+	while (y <= max.y)
 	{
 		pixel_index = (int)(min.x) + (y * p_view_port->size.x);
-        for (int x = min.x; x <= max.x; x++)
+        x = min.x;
+		while (x <= max.x)
 		{
 			pixelSample = create_t_vector4(x, y, 0);
 			w = create_t_vector4(edge_t_vector4(triangle.b, triangle.c, pixelSample) / area,
-											edge_t_vector4(triangle.c, triangle.a, pixelSample) / area,
-											edge_t_vector4(triangle.a, triangle.b, pixelSample) / area);
+								edge_t_vector4(triangle.c, triangle.a, pixelSample) / area,
+								edge_t_vector4(triangle.a, triangle.b, pixelSample) / area);
 			if (w.x >= 0 && w.y >= 0 && w.z >= 0)
 			{
 				z = 1 / ((triangle.a.w * w.x) + (triangle.b.w * w.y) + (triangle.c.w * w.z));
@@ -64,13 +66,17 @@ void	draw_triangle_texture_cpu(t_view_port *p_view_port, t_triangle *p_triangle,
 					s = (w.x * st.a.x + w.y * st.b.x + w.z * st.c.x) * z * p_uv->texture->surface->w;
 					t = (w.x * st.a.y + w.y * st.b.y + w.z * st.c.y) * z * p_uv->texture->surface->h;
 					rgb = get_pixel_color(p_uv->texture, s, t);
-					// printf("z = %f\n", z);
-					p_view_port->depth_buffer[pixel_index] = z;
-					draw_pixel(p_view_port->window, (int)(pixelSample.x + p_view_port->pos.x), (int)(pixelSample.y + p_view_port->pos.y), rgb);
+					if (rgb.a == 1.0)
+					{
+						p_view_port->depth_buffer[pixel_index] = z;
+						draw_pixel(p_view_port->window, (int)(pixelSample.x + p_view_port->pos.x), (int)(pixelSample.y + p_view_port->pos.y), rgb);
+					}
 				}
 			}
 			pixel_index++;
+			x++;
 		}
+		y++;
 	}
 }
 

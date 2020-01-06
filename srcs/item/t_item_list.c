@@ -61,14 +61,12 @@ void			t_item_list_erase(t_item_list *dest, int index)
 void			delete_t_item_list(t_item_list dest)
 {
 	free(dest.item);
-	// printf("delete t_item_list\n");
 }
 
 void			free_t_item_list(t_item_list *dest)
 {
 	delete_t_item_list(*dest);
 	free(dest);
-	// printf("free t_item_list\n");
 }
 
 void			clean_t_item_list(t_item_list *dest)

@@ -9,6 +9,7 @@ t_visual_engine	create_t_visual_engine(t_window *p_window)
 	result.main_camera = 0;
 	tmp = create_t_camera(p_window, create_t_vector4(0, 0, 0), FOV, create_t_vector2(NEAR, FAR));
 	t_camera_list_push_back(result.camera_list, tmp);
+	ft_get_leaks("UNKNOW_PROJECT", "push back");
 
 	return (result);
 }
