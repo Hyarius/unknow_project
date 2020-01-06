@@ -38,7 +38,10 @@ void    drawing_front_mun(t_camera *main_camera, t_texture **texture, t_player *
         weapon = 2;
     else if (ft_strcmp(player->current_weapon->name, "shotgun") == 0)
         weapon = 3;
-
+    else if (ft_strcmp(player->current_weapon->name, "rpg") == 0)
+        weapon = 4;
+    else if (ft_strcmp(player->current_weapon->name, "bb") == 0)
+        weapon = 5;
 	draw_rectangle_color_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.75, -1.0), create_t_vector2(0.25, 0.20)), color);
     t_view_port_clear_buffers(main_camera->view_port);
     draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(1.0, -0.8), create_t_vector2(-0.2, -0.2)), texture[weapon]);
@@ -58,6 +61,8 @@ void    drawing_front_weapons(t_camera *main_camera, t_texture **texture, t_play
         weapon = 3;
     else if (ft_strcmp(player->current_weapon->name, "rpg") == 0)
         weapon = 4;
+    else if (ft_strcmp(player->current_weapon->name, "bb") == 0)
+        weapon = 5;
 
     t_view_port_clear_buffers(main_camera->view_port);
     draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.65, -0.1), create_t_vector2(1.3, -0.9)), texture[weapon]);

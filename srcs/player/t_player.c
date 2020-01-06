@@ -33,7 +33,7 @@ void	free_t_player(t_player *player)
 
 t_weapon		create_t_weapons(int index, int ammo, int total_ammo)
 {
-	t_weapon	result[5];
+	t_weapon	result[6];
 
 	result[0].name = "pistol";
 	result[0].ammo = ammo;
@@ -43,6 +43,7 @@ t_weapon		create_t_weapons(int index, int ammo, int total_ammo)
 	result[0].dmg = 10;
 	result[0].tick_shoot = 1;
 	result[0].tick_reload = 2;
+
 	result[1].name = "ar";
 	result[1].ammo = ammo;
 	result[1].mag_size = 30;
@@ -51,6 +52,7 @@ t_weapon		create_t_weapons(int index, int ammo, int total_ammo)
 	result[1].dmg = 25;
 	result[1].tick_shoot = 1;
 	result[1].tick_reload = 2;
+
 	result[2].name = "rifle";
 	result[2].ammo = ammo;
 	result[2].mag_size = 10;
@@ -59,6 +61,7 @@ t_weapon		create_t_weapons(int index, int ammo, int total_ammo)
 	result[2].dmg = 50;
 	result[2].tick_shoot = 2;
 	result[2].tick_reload = 3;
+
 	result[3].name = "shotgun";
 	result[3].ammo = ammo;
 	result[3].mag_size = 8;
@@ -67,6 +70,7 @@ t_weapon		create_t_weapons(int index, int ammo, int total_ammo)
 	result[3].dmg = 120;
 	result[3].tick_shoot = 2;
 	result[3].tick_reload = 3;
+
 	result[4].name = "rpg";
 	result[4].ammo = ammo;
 	result[4].mag_size = 1;
@@ -75,12 +79,28 @@ t_weapon		create_t_weapons(int index, int ammo, int total_ammo)
 	result[4].dmg = 200000;
 	result[4].tick_shoot = 1;
 	result[4].tick_reload = 4;
+
+	result[5].name = "bb";
+	result[5].ammo = 2;
+	// result[5].mag_size = 1;
+	// result[5].max_ammo = result[5].mag_size * MAX_MAGS;
+	result[5].total_ammo = 1;
+	result[5].dmg = 0;
+	// result[5].tick_shoot = 1;
+	// result[5].tick_reload = 4;
+
 	return (result[index]);
 }
 
 void			change_weapon(t_keyboard *p_keyboard, t_player *player)
 {
 	static int index = 0; //changer pour une union
+
+	if (ft_strcmp(player->current_weapon->name, "bb") == 0)
+	{
+		index = 5;
+		return ;
+	}
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_1]) == 1)
 		index = 0;
 	else if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_2]) == 1)
@@ -137,7 +157,10 @@ void			shoot_weapon(t_engine *engine)
 				if (target->hp <= 0)
 				{
 					if (ft_strcmp(target->name, "wall_script") == 0)
-						t_mesh_activate_gravity(engine->user_engine->player->camera->body, 0.0f);
+					{
+						t_mesh_activate_gravity(&engine->user_engine->player->hitbox, 0.0f);
+						engine->user_engine->player->current_weapon = &engine->user_engine->player->weapons[5];
+					}
 					if (ft_strcmp(target->name, "Enemy") == 0)
 						t_mesh_set_name(target, "Dead_enemy");
 					t_mesh_set_visibility(target, BOOL_FALSE);

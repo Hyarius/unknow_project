@@ -41,11 +41,14 @@ int main(int argc, char **argv)
 	t_window *win;
 	win = initialize_t_window(argv[0], WIN_X, WIN_Y);	//creation et initialisation de la window
 
-	t_texture *texture2[4];
+	t_texture *texture2[6];
 	texture2[0] = png_load("ressources/assets/textures/pistol_ammo.png");
 	texture2[1] = png_load("ressources/assets/textures/ar_ammo.png");
 	texture2[2] = png_load("ressources/assets/textures/rifle_ammo.png");
 	texture2[3] = png_load("ressources/assets/textures/shotgun_ammo.png");
+	texture2[4] = png_load("ressources/assets/textures/wall_destroyer_ammo.png");
+	texture2[5] = png_load("ressources_backup/assets/imgs/Hands_baby.png");
+
 
 	t_texture *texture_weapons[6];
 	texture_weapons[0] = png_load("ressources_backup/assets/imgs/pistol.png");
@@ -53,7 +56,7 @@ int main(int argc, char **argv)
 	texture_weapons[2] = png_load("ressources_backup/assets/imgs/rifle.png");
 	texture_weapons[3] = png_load("ressources_backup/assets/imgs/shotgun.png");
 	texture_weapons[4] = png_load("ressources_backup/assets/imgs/wall_destroyer.png");
-	//texture_weapons[4] = png_load("ressources_backup/assets/imgs/Hands_baby.png");
+	texture_weapons[5] = png_load("ressources_backup/assets/imgs/Hands_baby.png");
 
 	t_texture *skybox = png_load("ressources/assets/textures/skybox.png");
 

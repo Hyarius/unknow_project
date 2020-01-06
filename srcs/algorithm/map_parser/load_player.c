@@ -40,6 +40,7 @@ void			init_player(t_player *player, char **line_split)
 			ft_atoi(line_split[26]), ft_atoi(line_split[27]));
 	player->weapons[4] = create_t_weapons(4,
 			ft_atoi(line_split[28]), ft_atoi(line_split[29]));
+	player->weapons[5] = create_t_weapons(5, 0, 0);
 	player->red_card = ft_atoi(line_split[30]);
 	player->blue_card = ft_atoi(line_split[31]);
 	player->green_card = ft_atoi(line_split[32]);

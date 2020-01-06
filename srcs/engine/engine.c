@@ -67,9 +67,6 @@ void		t_engine_add_item(t_engine *engine, t_item p_item)
 
 void		t_engine_handle_event(t_camera *main_camera, t_gui *gui, t_engine *engine)
 {
-	static float	size = 0.45;
-	t_mesh			*mesh;
-
 	if (engine->playing == 1
 		&& get_key_state(engine->user_engine->keyboard, SDL_SCANCODE_P) == 1)
 		engine->playing = -2;

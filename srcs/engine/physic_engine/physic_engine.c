@@ -64,14 +64,13 @@ t_mesh			*t_physic_engine_get_mesh(t_physic_engine *physic_engine,
 
 int				can_move_axis(t_mesh *mesh, t_mesh *target, t_vector4 axis)
 {
-	int			result;
 	t_vector4	tmp;
+	t_vector4	delta_pos;
 	t_triangle	triangle_mesh;
-	t_triangle	triangle_mesh2;
 	t_triangle	triangle_target;
 	t_face		*mesh_face;
 	t_face		*target_face;
-	t_vector4	delta_pos;
+	int			result;
 	int			i;
 	int			j;
 
@@ -149,21 +148,19 @@ void			test_move_axis(t_mesh *mesh, float *force, t_vector4 axis, t_mesh *target
 	float	delta;
 	float	tmp;
 
-	i = 0;
 	subdivision = 20;
 	delta = *force / subdivision;
 	max = *force;
 	*force = 0;
-	while (i < subdivision && is_t_mesh_intersecting(mesh, target) == BOOL_FALSE)
+	i = -1;
+	while (++i < subdivision && is_t_mesh_intersecting(mesh, target) == BOOL_FALSE)
 	{
-		i++;
 		*force += delta;
 		if (i == subdivision)
 			*force = max;
 		t_mesh_compute_next_vertices_in_world(mesh, axis);
 		if (is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
 		{
-			// printf("mesh intersect with %s\n", target->name);
 			if (axis.y == 0.0)
 			{
 				tmp = mesh->force.y;
@@ -173,24 +170,19 @@ void			test_move_axis(t_mesh *mesh, float *force, t_vector4 axis, t_mesh *target
 				{
 					t_mesh_compute_next_vertices_in_world(mesh, axis);
 					if (is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
-					{
-						// printf("here\n");
 						break;
-					}
 					mesh->force.y += 0.001;
 				}
-
 				if (is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
 				{
- 					// printf("here2\n");
 					mesh->force.y = tmp;
-					*force -= delta * 2;
+					*force -= delta;
 				}
 				i = subdivision;
 				axis.y = 0.0;
 			}
 			else
-				*force -= delta * 2;
+				*force -= delta;
 			if (ft_strcmp(target->name, "ladder") == 0 && axis.y == 0.0)
 				mesh->force.y = 0.02;
 		}

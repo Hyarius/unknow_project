@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 16:15:30 by gboutin           #+#    #+#             */
-/*   Updated: 2019/12/12 16:15:35 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/06 15:35:30 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void		init_keyboard_letter(t_keyboard *result)
 	result->key[SDL_SCANCODE_3] = SDL_SCANCODE_3;
 	result->key[SDL_SCANCODE_4] = SDL_SCANCODE_4;
 	result->key[SDL_SCANCODE_5] = SDL_SCANCODE_5;
+	result->key[SDL_SCANCODE_6] = SDL_SCANCODE_6;
 	result->key[SDL_SCANCODE_B] = SDL_SCANCODE_B;
 }
 
