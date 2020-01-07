@@ -156,7 +156,7 @@ int main(int argc, char **argv)
 	// t_mesh_set_name(&mesh, "cave");
 	// t_engine_add_mesh(engine, mesh);
 
-	// mesh = read_obj_file("ressources/objets/LevelUp.obj", create_t_vector4(0.0, 5.0, 0.0), create_t_vector4(1.0, 1.0, 1.0), 0.0);
+	// mesh = read_obj_file("ressources/objets/LevelUp.obj", create_t_vector4(0.0, 1.0, 0.0), create_t_vector4(1.0, 1.0, 1.0), 0.0);
 	// t_mesh_set_name(&mesh, "map");
 	// t_engine_add_mesh(engine, mesh);
 

@@ -117,14 +117,12 @@ void			test_move_axis(t_mesh *mesh, float *force, t_vector4 axis, t_mesh *target
 	int		subdivision;
 	int		i;
 	float	delta;
-	float	tmp;
 
 	i = 0;
 	subdivision = 20;
 	delta = *force / subdivision;
 	max = *force;
 	*force = 0;
-
 	while (i < subdivision && is_t_mesh_intersecting(mesh, target) == BOOL_FALSE)
 	{
 		i++;
@@ -134,35 +132,28 @@ void			test_move_axis(t_mesh *mesh, float *force, t_vector4 axis, t_mesh *target
 		t_mesh_compute_next_vertices_in_world(mesh, axis);
 		if (is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
 		{
-			if (axis.y == 0.0)
+			if (mesh->force.y == 0.0)
 			{
-				tmp = mesh->force.y;
-				mesh->force.y = 0.001;
-				axis.y = 1.0;
-				while (mesh->force.y < 0.015)
+				mesh->force.y = 0.015;
+				axis.y = 1;
+				t_mesh_compute_next_vertices_in_world(mesh, axis);
+				if (is_t_mesh_intersecting(mesh, target) == BOOL_FALSE)
 				{
-					t_mesh_compute_next_vertices_in_world(mesh, axis);
-					if (is_t_mesh_intersecting(mesh, target) == BOOL_FALSE)
-						break;
-					mesh->force.y += 0.001;
+					break;
 				}
-				
-				if (is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
-				{
-					printf("here\n");
-					mesh->force.y = tmp;
-					*force -= delta;
-				}
-				i = subdivision;
-				axis.y = 0.0;
+				mesh->force.y = 0.0;
+				*force -= delta;
 			}
 			else
 				*force -= delta;
 			if (ft_strcmp(target->name, "ladder") == 0 && axis.y == 0.0)
 				mesh->force.y = 0.02;
+			break;
 		}
 	}
 	t_mesh_compute_next_vertices_in_world(mesh, axis);
+	// if (is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
+	// 	error_exit(-1000, "intersection en fin de boucle");
 }
 
 int				can_move(t_mesh *mesh, t_engine *engine)
@@ -193,8 +184,8 @@ int				can_move(t_mesh *mesh, t_engine *engine)
 					j++;
 				}
 			}
-			if (is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
-				printf("%s\n", target->name);
+			// if (is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
+			// 	printf("%s\n", target->name);
 			if (t_mesh_on_mesh(mesh, target) == 1 && ft_strcmp(target->name, "end") == 0)
 				engine->playing = -1;
 			// if (is_t_mesh_intersecting(mesh, target) == BOOL_TRUE && ft_strcmp(target->name, "stair") == 0)
@@ -204,6 +195,16 @@ int				can_move(t_mesh *mesh, t_engine *engine)
 				test_move_axis(mesh, &(mesh->force.y), create_t_vector4(0, 1, 0), target);
 				test_move_axis(mesh, &(mesh->force.x), create_t_vector4(1, 0, 0), target);
 				test_move_axis(mesh, &(mesh->force.z), create_t_vector4(0, 0, 1), target);
+				if (mesh->force.z != 0.0 && mesh->force.x != 0.0)
+				{
+					t_mesh_compute_next_vertices_in_world(mesh, create_t_vector4(1, 1, 1));
+					if (is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
+					{
+						mesh->force.z = 0.0;
+						mesh->force.x = 0.0;
+					}
+					t_mesh_compute_next_vertices_in_world(mesh, create_t_vector4(1, 1, 1));
+				}
 			}
 		}
 		i++;
