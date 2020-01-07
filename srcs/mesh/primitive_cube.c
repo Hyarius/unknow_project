@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   primitive_cube.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/07 11:10:43 by gboutin           #+#    #+#             */
+/*   Updated: 2020/01/07 11:11:25 by gboutin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "unknow_project.h"
 
 static void	t_mesh_init_point_primitive_cube(t_mesh *result, t_vector4 size)
@@ -32,7 +44,8 @@ static void	t_mesh_init_uv_point_primitive_cube(t_mesh *result)
 	t_mesh_add_uv(result, create_t_vector4(2.0f / 3.0f, 1.0f, 0.0f));
 }
 
-static void	t_mesh_init_face_primitive_cube_next(t_mesh *result, t_face tmp_face1, t_face tmp_face2)
+static void	t_mesh_init_face_primitive_cube_next(t_mesh *result,
+										t_face tmp_face1, t_face tmp_face2)
 {
 	set_t_face_vertices(&tmp_face1, 7, 3, 6);
 	set_t_face_uvs(&tmp_face1, 8, 11, 9);
@@ -54,7 +67,8 @@ static void	t_mesh_init_face_primitive_cube_next(t_mesh *result, t_face tmp_face
 	t_mesh_add_face(result, tmp_face2);
 }
 
-static void	t_mesh_init_face_primitive_cube(t_mesh *result, t_face tmp_face1, t_face tmp_face2)
+static void	t_mesh_init_face_primitive_cube(t_mesh *result, t_face tmp_face1,
+															t_face tmp_face2)
 {
 	set_t_face_vertices(&tmp_face1, 2, 3, 1);
 	set_t_face_uvs(&tmp_face1, 0, 1, 3);
@@ -76,7 +90,8 @@ static void	t_mesh_init_face_primitive_cube(t_mesh *result, t_face tmp_face1, t_
 	t_mesh_add_face(result, tmp_face2);
 }
 
-t_mesh		create_primitive_cube(t_vector4 pos, t_vector4 size, char *texture_path, float gravity)
+t_mesh		create_primitive_cube(t_vector4 pos, t_vector4 size,
+											char *texture_path, float gravity)
 {
 	t_mesh	result;
 	t_face	tmp_face1;
