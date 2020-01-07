@@ -83,13 +83,13 @@ void			change_weapon(t_keyboard *p_keyboard, t_player *player)
 	static int index = 0; //changer pour une union
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_1]) == 1)
 		index = 0;
-	else if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_2]) == 1)
+	else if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_2]) == 1 && player->weapons[1].total_ammo >= 0)
 		index = 1;
-	else if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_3]) == 1)
+	else if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_3]) == 1 && player->weapons[2].total_ammo >= 0)
 		index = 2;
-	else if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_4]) == 1)
+	else if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_4]) == 1 && player->weapons[3].total_ammo >= 0)
 		index = 3;
-	else if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_5]) == 1)
+	else if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_5]) == 1 && player->weapons[4].total_ammo >= 0)
 		index = 4;
 	player->current_weapon = &player->weapons[index];
 }
@@ -137,7 +137,7 @@ void			shoot_weapon(t_engine *engine)
 				if (target->hp <= 0)
 				{
 					if (ft_strcmp(target->name, "wall_script") == 0)
-						t_mesh_activate_gravity(engine->user_engine->player->camera->body, 0.0f);
+						t_mesh_activate_gravity(&engine->user_engine->player->hitbox, 0.0f);
 					if (ft_strcmp(target->name, "Enemy") == 0)
 						t_mesh_set_name(target, "Dead_enemy");
 					t_mesh_set_visibility(target, BOOL_FALSE);

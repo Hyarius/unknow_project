@@ -104,11 +104,11 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos, char *path)
 	else if (index == 12 || index == 13 || index == 14)
 	{
 		if (index == 12)
-			mesh.name = "Healt_Pack";
+			mesh.name = "Health_Pack_";
 		else if (index == 13)
-			mesh.name = "Armor_Pack";
+			mesh.name = "Armor_Pack_";
 		else if (index == 14)
-			mesh.name = "Jet_Pack";
+			mesh.name = "Jet_Pack_";
 		mesh.size = create_t_vector4(0.2, 0.05, 0.2);
 		mesh.primitive = 1;
 		mesh.collectible = 1;
@@ -120,7 +120,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos, char *path)
 	}
 	else if (index == 15)
 	{
-		mesh.name = "Ammo_Pack";
+		mesh.name = "Ammo_Pack_";
 		mesh.size = create_t_vector4(0.2, 0.05, 0.2);
 		mesh.primitive = 1;
 		mesh.collectible = 1;
@@ -132,7 +132,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos, char *path)
 	}
 	else if (index == 16)
 	{
-		mesh.name = "Ammo_Pack";
+		mesh.name = "Ammo_Pack_";
 		mesh.size = create_t_vector4(0.2, 0.05, 0.2);
 		mesh.primitive = 1;
 		mesh.collectible = 1;
@@ -144,7 +144,7 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos, char *path)
 	}
 	else if (index == 17)
 	{
-		mesh.name = "Ammo_Pack";
+		mesh.name = "Ammo_Pack_";
 		mesh.size = create_t_vector4(0.2, 0.05, 0.2);
 		mesh.primitive = 1;
 		mesh.collectible = 1;
@@ -450,6 +450,8 @@ void		map_editor(t_camera *main_camera, t_gui *gui, t_engine *engine, t_mesh mes
 	static int		down_press = 0;
 	static int		equals_press = 0;
 	static int		minus_press = 0;
+	static int		i = 0;
+	char			*str;
 
 	if (color_armor == NULL)
 		color_armor = initialize_t_color(0.3, 0.3, 1.0, 1.0);
@@ -475,6 +477,13 @@ void		map_editor(t_camera *main_camera, t_gui *gui, t_engine *engine, t_mesh mes
 		t_mesh_set_color(&mesh, create_t_color(1.0, 1.0, 1.0, 1.0));
 		t_mesh_set_name(&mesh, mesh_editing.name);
 		mesh.hp = mesh_editing.hp;
+		mesh.collectible = mesh_editing.collectible;
+		if (mesh.collectible == 1)
+		{
+			str = ft_itoa(i);
+			mesh.name = ft_strjoinf(mesh.name, str, 2);
+			i++;
+		}
 		t_mesh_rotate(&mesh, mesh_editing.rotation);
 		cast_mesh(engine, &mesh);
 		mesh.pos.x = round_float(mesh.pos.x, 2);

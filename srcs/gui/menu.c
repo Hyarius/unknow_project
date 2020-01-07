@@ -142,18 +142,18 @@ void			pause_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, t_window 
 		        engine->playing = 9;
         if (pos.y > 54 && pos.y < 59)
         	if (t_mouse_state(mouse) == 2)
-					{
-						ft_get_leaks("UNKNOW_PROJECT", "ici");
-						// free_t_physic_engine(engine->physic_engine);
-						// ft_get_leaks("UNKNOW_PROJECT", "free physic");
-						free_t_visual_engine(engine->visual_engine);
-						ft_get_leaks("UNKNOW_PROJECT", "free visual");
-						// engine->physic_engine = initialize_t_physic_engine();
-						// ft_get_leaks("UNKNOW_PROJECT", "init physic");
-						engine->visual_engine = initialize_t_visual_engine(win);
-						ft_get_leaks("UNKNOW_PROJECT", "init visual");
+			{
+				ft_get_leaks("UNKNOW_PROJECT", "ici");
+				free_t_physic_engine(engine->physic_engine);
+				// ft_get_leaks("UNKNOW_PROJECT", "free physic");
+				free_t_visual_engine(engine->visual_engine);
+				// ft_get_leaks("UNKNOW_PROJECT", "free visual");
+				engine->physic_engine = initialize_t_physic_engine();
+				ft_get_leaks("UNKNOW_PROJECT", "init physic");
+				engine->visual_engine = initialize_t_visual_engine(win);
+				ft_get_leaks("UNKNOW_PROJECT", "init visual");
 		        engine->playing = 2;
-					}
+			}
         if (pos.y > 64 && pos.y < 70)
         	if (t_mouse_state(mouse) == 2)
 		        engine->playing = 0;

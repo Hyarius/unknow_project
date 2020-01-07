@@ -43,12 +43,25 @@ t_mesh	*initialize_t_mesh(t_vector4 pos)
 
 void	delete_t_mesh(t_mesh mesh)
 {
-	free_t_vector4_list(mesh.vertices);
-	free_t_vector4_list(mesh.uvs);
-	free_t_vector4_list(mesh.normales);
-	free_t_vector4_list(mesh.next_vertices_in_world);
-	free_t_vector4_list(mesh.vertices_in_world);
-	free_t_face_list(mesh.faces);
+	printf("ta mere1\n");
+	// if (mesh.vertices != NULL)
+	// 	free_t_vector4_list(mesh.vertices);
+	// printf("ta mere2\n");
+	// if (mesh.uvs != NULL)
+	// 	free_t_vector4_list(mesh.uvs);
+	// printf("ta mere3\n");
+	// if (mesh.normales != NULL)
+	// 	free_t_vector4_list(mesh.normales);
+	// printf("ta mere4\n");
+	// if (mesh.next_vertices_in_world != NULL)
+	// 	free_t_vector4_list(mesh.next_vertices_in_world);
+	// printf("ta mere5\n");
+	// if (mesh.vertices_in_world != NULL)
+	// 	free_t_vector4_list(mesh.vertices_in_world);
+	// printf("ta mere6\n");
+	// if (mesh.faces != NULL)
+	// 	free_t_face_list(mesh.faces);
+	// printf("ta mere7\n");
 	if (mesh.camera != NULL)
 		free_t_cam(mesh.camera);
 }

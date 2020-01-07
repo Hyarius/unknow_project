@@ -140,24 +140,20 @@ int		green_card(t_player *player)
 	return (BOOL_TRUE);
 }
 
-t_item		create_health_pack(void)
+t_item		create_health_pack(char *name)
 {
-	static int	num = 1;
 	t_item		item;
 
-	item.name = ft_strjoinf("Health_Pack_", ft_itoa(num), 2);
-	num++;
+	item.name = ft_strdup(name);
 	item.pf = heal;
 	return (item);
 }
 
-t_item		create_ammo_pack(int type)
+t_item		create_ammo_pack(char *name, int type)
 {
-	static int	num = 1;
 	t_item		item;
 
-	item.name = ft_strjoinf("Ammo_Pack_", ft_itoa(num), 2);
-	num++;
+	item.name = ft_strdup(name);
 	if (type == 1)
 		item.pf = refill_pistol;
 	else if (type == 2)
@@ -171,24 +167,20 @@ t_item		create_ammo_pack(int type)
 	return (item);
 }
 
-t_item		create_armor_pack(void)
+t_item		create_armor_pack(char *name)
 {
-	static int	num = 1;
 	t_item		item;
 
-	item.name = ft_strjoinf("Armor_Pack_", ft_itoa(num), 2);
-	num++;
+	item.name = ft_strdup(name);
 	item.pf = protect;
 	return (item);
 }
 
-t_item		create_jet_pack(void)
+t_item		create_jet_pack(char *name)
 {
-	static int	num = 1;
 	t_item		item;
 
-	item.name = ft_strjoinf("Jet_Pack_", ft_itoa(num), 2);
-	num++;
+	item.name = ft_strdup(name);
 	item.pf = jetpack;
 	return (item);
 }

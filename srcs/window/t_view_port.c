@@ -70,3 +70,14 @@ void		t_view_port_clear_buffers(t_view_port *view)
 	while (++i < view->window->size_x * view->window->size_y)
 		view->depth_buffer[i] = INT_MAX;
 }
+
+void		delete_t_view_port(t_view_port dest)
+{
+	free(dest.depth_buffer);
+}
+
+void		free_t_view_port(t_view_port *dest)
+{
+	delete_t_view_port(*dest);
+	free(dest);
+}

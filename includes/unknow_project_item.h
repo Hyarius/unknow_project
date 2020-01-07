@@ -9,10 +9,10 @@ typedef struct  	s_item
 	int 			(*pf)(t_player*);
 }       			t_item;
 
-t_item			create_health_pack(void);
-t_item			create_ammo_pack(int type);
-t_item			create_armor_pack(void);
-t_item			create_jet_pack(void);
+t_item			create_health_pack(char *name);
+t_item			create_ammo_pack(char *name, int type);
+t_item			create_armor_pack(char *name);
+t_item			create_jet_pack(char *name);
 t_item			create_color_card(int type);
 
 typedef struct	s_item_list

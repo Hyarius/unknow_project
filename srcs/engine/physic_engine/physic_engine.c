@@ -4,9 +4,12 @@ t_physic_engine	create_t_physic_engine()
 {
 	t_physic_engine	result;
 
+	ft_get_leaks("UNKNOW_PROJECT", "start init physic");
 	result.gravity_force = create_t_vector4(0, -GRAVITY * 3, 0);
 	result.mesh_list = initialize_t_mesh_list();
+	ft_get_leaks("UNKNOW_PROJECT", "init t_mesh_list");
 	result.item_list = initialize_t_item_list();
+	ft_get_leaks("UNKNOW_PROJECT", "init t_item_list");
 	return (result);
 }
 

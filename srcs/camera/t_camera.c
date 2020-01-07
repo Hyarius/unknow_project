@@ -62,12 +62,13 @@ void		t_camera_change_view_port(t_camera *camera, t_view_port *new_view_port)
 
 void		delete_t_cam(t_camera dest)
 {
-	delete_t_triangle_list(dest.triangle_color_list);
-	delete_t_color_list(dest.color_list);
-	delete_t_triangle_list(dest.triangle_texture_list);
-	delete_t_uv_list(dest.uv_list);
-	delete_t_color_list(dest.darkness_list);
-	free(dest.view_port);
+	// delete_t_triangle_list(dest.triangle_color_list);
+	// delete_t_color_list(dest.color_list);
+	// delete_t_triangle_list(dest.triangle_texture_list);
+	// delete_t_uv_list(dest.uv_list);
+	// delete_t_color_list(dest.darkness_list);
+	printf("here1\n");
+	free_t_view_port(dest.view_port);
 }
 
 void		free_t_cam(t_camera *dest)
