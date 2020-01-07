@@ -57,4 +57,17 @@ void			t_visual_engine_prepare_camera(t_visual_engine *engine);
 void			t_visual_engine_add_camera(t_visual_engine *engine, t_camera new_camera);
 t_camera		*t_visual_engine_get_main_camera(t_visual_engine *engine);
 
+typedef struct	s_sound_engine
+{
+	Mix_Music	**music;
+	Mix_Chunk	**sounds;
+}				t_sound_engine;
+
+t_sound_engine	create_t_sound_engine();
+t_sound_engine	*initialize_t_sound_engine();
+void			delete_t_sound_engine(t_sound_engine dest);
+void			free_t_sound_engine(t_sound_engine *dest);
+Mix_Music		**load_music();
+Mix_Chunk		**load_sounds();
+
 #endif

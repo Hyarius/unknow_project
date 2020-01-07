@@ -15,6 +15,8 @@ typedef struct	s_engine
 				*physic_engine;
 	t_user_engine
 				*user_engine;
+	t_sound_engine
+				*sound_engine;
 }				t_engine;
 
 t_engine		create_t_engine(t_window *p_window);
