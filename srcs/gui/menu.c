@@ -143,6 +143,9 @@ void			pause_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, t_window 
         if (pos.y > 54 && pos.y < 59)
         	if (t_mouse_state(mouse) == 2)
 			{
+				// clean_t_mesh_list(engine->physic_engine->mesh_list);
+				// clean_t_item_list(engine->physic_engine->item_list);
+				// clean_t_camera_list(engine->visual_engine->camera_list);
 				ft_get_leaks("UNKNOW_PROJECT", "ici");
 				free_t_physic_engine(engine->physic_engine);
 				// ft_get_leaks("UNKNOW_PROJECT", "free physic");

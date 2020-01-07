@@ -138,7 +138,7 @@ void			shoot_weapon(t_engine *engine)
 				{
 					if (ft_strcmp(target->name, "wall_script") == 0)
 						t_mesh_activate_gravity(&engine->user_engine->player->hitbox, 0.0f);
-					if (ft_strcmp(target->name, "Enemy") == 0)
+					if (ft_strcmp(target->name, "Enemy") == '_')
 						t_mesh_set_name(target, "Dead_enemy");
 					t_mesh_set_visibility(target, BOOL_FALSE);
 					target->no_hitbox = 1;
@@ -149,6 +149,24 @@ void			shoot_weapon(t_engine *engine)
 			engine->user_engine->player->current_weapon->ammo--;
 		}
 		engine->user_engine->player->shoot_time = engine->tick;
+	}
+}
+
+void			door_script(t_engine *engine, t_mesh *mesh)
+{
+	int		i;
+	t_mesh	*target;
+
+	i = 0;
+	while (i < engine->physic_engine->mesh_list->size)
+	{
+		target = t_mesh_list_get(engine->physic_engine->mesh_list, i);
+		if (ft_strcmp(target->name, "Enemy_wait") == 0)
+		{
+			target->name = "Enemy_boss";
+			t_mesh_set_visibility(target, BOOL_TRUE);
+		}
+		i++;
 	}
 }
 
@@ -181,11 +199,13 @@ void			player_action(t_camera *camera, t_keyboard *p_keyboard, t_engine *engine)
 			target = t_mesh_list_get(engine->physic_engine->mesh_list, i);
 			if (camera->body != target && target->bubble_radius + camera->body->bubble_radius >= calc_dist_vector4_to_vector4(camera->body->center, target->center) && (ft_strcmp(target->name, "door") == 0 || ft_strcmp(target->name, "door") == '_'))
 			{
-				if (ft_strcmp(target->name, "door") == 0 || (ft_strcmp(target->name, "door_red") == 0
-				&& engine->user_engine->player->red_card == 1) || (ft_strcmp(target->name, "door_blue") == 0
-				&& engine->user_engine->player->blue_card == 1) || (ft_strcmp(target->name, "door_green") == 0
-				&& engine->user_engine->player->green_card == 1))
+				if (ft_strcmp(target->name, "door") == 0 || ft_strcmp(target->name, "door_script") == 0 ||
+				(ft_strcmp(target->name, "door_red") == 0 && engine->user_engine->player->red_card == 1) ||
+				(ft_strcmp(target->name, "door_blue") == 0 && engine->user_engine->player->blue_card == 1) ||
+				(ft_strcmp(target->name, "door_green") == 0 && engine->user_engine->player->green_card == 1))
 				{
+					if (ft_strcmp(target->name, "door_script") == 0)
+						door_script(engine, target);
 					target->door.move = 1;
 					door = target;
 				}

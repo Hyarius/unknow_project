@@ -30,7 +30,7 @@ void	set_map_in_engine(t_engine *engine, t_mesh_list *meshs,
 			j++;
 		}
 		t_engine_add_mesh(engine, t_mesh_list_at(meshs, i));
-		if (ft_strcmp(t_engine_get_mesh(engine, i)->name, "Enemy") == 0)
+		if (ft_strcmp(t_engine_get_mesh(engine, i)->name, "Enemy") == '_')
 		{
 			link_enemy_to_camera(engine, k);
 			link_t_camera_to_t_mesh(engine, 2 + k, t_engine_get_mesh(engine, i));
@@ -66,7 +66,7 @@ void	load_map(t_camera *main_camera, t_engine *engine, char *path)
 	ft_get_leaks("UNKNOW_PROJECT", "player in engine");
 	t_engine_add_mesh(engine, engine->user_engine->player->hitbox);
 	set_map_in_engine(engine, meshs, item_list);
-	ft_get_leaks("UNKNOW_PROJECT", "fin de lecture de la map");
 	free_t_mesh_list(meshs);
 	free_t_item_list(item_list);
+	ft_get_leaks("UNKNOW_PROJECT", "fin de lecture de la map");
 }

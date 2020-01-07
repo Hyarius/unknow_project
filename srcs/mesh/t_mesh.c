@@ -27,6 +27,7 @@ t_mesh	create_t_mesh(t_vector4 pos)
 	result.faces = initialize_t_face_list();
 	result.normales = initialize_t_vector4_list();
 	result.rotation = create_t_vector4(0.0, 0.0, 0.0);
+	result.tick = -5;
 	t_mesh_look_at(&result);
 	return (result);
 }
@@ -308,7 +309,8 @@ void	t_mesh_set_name(t_mesh *mesh, char *name)
 		|| ft_strcmp(mesh->name, "elevator") == 0
 		|| ft_strcmp(mesh->name, "door_red") == 0
 		|| ft_strcmp(mesh->name, "door_blue") == 0
-		|| ft_strcmp(mesh->name, "door_green") == 0)
+		|| ft_strcmp(mesh->name, "door_green") == 0
+		|| ft_strcmp(mesh->name, "door_script") == 0)
 		mesh->door = create_t_door();
 	else if (ft_strcmp(mesh->name, "Enemy") == 0)
 		mesh->tick = 0;
