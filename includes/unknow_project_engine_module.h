@@ -10,7 +10,7 @@ typedef struct 	s_physic_engine
 {
 	t_mesh_list	*mesh_list;
 	t_item_list	*item_list;
-	t_vector3	gravity_force;
+	t_vector4	gravity_force;
 }				t_physic_engine;
 
 t_physic_engine	create_t_physic_engine();
@@ -20,9 +20,10 @@ void			free_t_physic_engine(t_physic_engine *dest);
 
 void			t_physic_engine_draw_mesh(t_physic_engine *p_physic_engine, t_camera *p_cam);
 void			t_physic_engine_add_mesh(t_physic_engine *physic_engine, t_mesh p_mesh);
+void			t_physic_engine_add_item(t_physic_engine *physic_engine, t_item p_item);
 t_mesh			*t_physic_engine_get_mesh(t_physic_engine *physic_engine, int index);
 void			t_physic_engine_compute_check_list(t_physic_engine *physic_engine);
-int				calc_max_velocity(t_mesh *mesh, t_mesh *target, t_vector3 axis);
+int				calc_max_velocity(t_mesh *mesh, t_mesh *target, t_vector4 axis);
 
 typedef struct	s_user_engine
 {
@@ -55,5 +56,18 @@ void			t_visual_engine_render_camera(t_visual_engine *engine);
 void			t_visual_engine_prepare_camera(t_visual_engine *engine);
 void			t_visual_engine_add_camera(t_visual_engine *engine, t_camera new_camera);
 t_camera		*t_visual_engine_get_main_camera(t_visual_engine *engine);
+
+typedef struct	s_sound_engine
+{
+	Mix_Music	**music;
+	Mix_Chunk	**sounds;
+}				t_sound_engine;
+
+t_sound_engine	create_t_sound_engine();
+t_sound_engine	*initialize_t_sound_engine();
+void			delete_t_sound_engine(t_sound_engine dest);
+void			free_t_sound_engine(t_sound_engine *dest);
+Mix_Music		**load_music();
+Mix_Chunk		**load_sounds();
 
 #endif

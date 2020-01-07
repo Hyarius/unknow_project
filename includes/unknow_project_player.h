@@ -11,6 +11,9 @@ typedef struct  s_weapon
 	int			mag_size;
 	int			total_ammo;
 	int			max_ammo;
+	int			dmg;
+	int			tick_shoot;
+	int			tick_reload;
 }               t_weapon;
 
 typedef struct  s_player
@@ -19,22 +22,24 @@ typedef struct  s_player
 	t_mesh		hitbox;
 	int			hp;
 	int			armor;
+	int			fuel;
 	float		speed;
-	t_weapon	weapons[4];
+	t_weapon	weapons[6];
 	t_weapon	*current_weapon;
+	int			red_card;
+	int			blue_card;
+	int			green_card;
+	int			shoot_time;
+	int			reload_time;
 }               t_player;
 
-typedef struct  s_enemy
-{
-	t_mesh		hitbox;
-	int			hp;
-	float		speed;
-	t_weapon	weapon;
-}               t_enemy;
+t_player		create_t_player(t_camera *cam);
+t_player		*initialize_t_player(t_camera *cam);
+void			read_player(char **split, t_player *player);
+void			delete_t_player(t_player player);
+void			free_t_player(t_player *player);
+t_weapon		create_t_weapons(int index, int ammo, int total_ammo);
+t_mesh_list 	*read_map_file(int fd, t_player *player);
 
-t_player		create_t_player(t_camera *cam, t_mesh hitbox);
-t_enemy			create_t_enemy(t_mesh hitbox);
-t_player		*initialize_t_player(t_camera *cam, t_mesh hitbox);
-t_weapon		create_t_weapons(int index);
 
 #endif

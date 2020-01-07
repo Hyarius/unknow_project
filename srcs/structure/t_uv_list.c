@@ -29,7 +29,7 @@ void		t_uv_list_push_back(t_uv_list *dest, t_uv to_add)
 	if ((dest->size + 1) >= dest->max_size)
 	{
 		tmp = dest->uvs;
-		if (!(dest->uvs = (t_uv *)malloc(sizeof(t_uv) \
+		if (!(dest->uvs = (t_uv *)malloc(sizeof(t_uv)
 							* (dest->size + 1 + PUSH_SIZE))))
 			error_exit(-14, "Can't realloc a t_uv array");
 		i = -1;
@@ -50,7 +50,7 @@ void		t_uv_list_add_back(t_uv_list *dest, t_uv *to_add)
 	if ((dest->size + 1) >= dest->max_size)
 	{
 		tmp = dest->uvs;
-		if (!(dest->uvs = (t_uv *)malloc(sizeof(t_uv) \
+		if (!(dest->uvs = (t_uv *)malloc(sizeof(t_uv)
 							* (dest->size + 1 + PUSH_SIZE))))
 			error_exit(-14, "Can't realloc a t_uv array");
 		i = -1;
@@ -74,4 +74,9 @@ t_uv		*t_uv_list_get(t_uv_list *dest, int index)
 void		clean_t_uv_list(t_uv_list *dest)
 {
 	dest->size = 0;
+}
+
+void		delete_t_uv_list(t_uv_list dest)
+{
+	free(dest.uvs);
 }

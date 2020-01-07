@@ -1,6 +1,6 @@
 #include "unknow_project.h"
 
-t_rasterizer	create_t_rasterizer(t_vector3 a, t_vector3 b, t_vector3 c)
+t_rasterizer	create_t_rasterizer(t_vector4 a, t_vector4 b, t_vector4 c)
 {
 	t_rasterizer	result;
 
@@ -11,12 +11,13 @@ t_rasterizer	create_t_rasterizer(t_vector3 a, t_vector3 b, t_vector3 c)
 	return (result);
 }
 
-t_rasterizer	*initialize_t_rasterizer(t_vector3 a, t_vector3 b, t_vector3 c)
+t_rasterizer	*initialize_t_rasterizer(t_vector4 a, t_vector4 b, t_vector4 c)
 {
 	t_rasterizer	*result;
 
 	if (!(result = (t_rasterizer *)malloc(sizeof(t_rasterizer))))
 		error_exit(-13, "Can't create a t_rasterizer");
+	// printf("malloc t_rasterizer\n");
 	*result = create_t_rasterizer(a, b, c);
 	return (result);
 }

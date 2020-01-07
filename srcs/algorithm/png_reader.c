@@ -80,7 +80,7 @@ t_texture *png_load(char *path)
 
 	if (!(texture = (t_texture *)malloc(sizeof(t_texture))))	//malloc du t_texture
 		error_exit(-29, "Can't malloc a t_texture");			//sortie si probleme
-
+	texture->path = path;
 	texture->surface = read_png_file(path);					//lecture du fichier .png
 
 	tmp_surface = IMG_Load(path);							//chargement de l'image par SDL dans tmp_surface

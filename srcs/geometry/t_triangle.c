@@ -1,6 +1,6 @@
 #include "unknow_project.h"
 
-t_triangle	create_t_triangle(t_vector3 p_a, t_vector3 p_b, t_vector3 p_c)
+t_triangle	create_t_triangle(t_vector4 p_a, t_vector4 p_b, t_vector4 p_c)
 {
 	t_triangle	result;
 
@@ -10,7 +10,7 @@ t_triangle	create_t_triangle(t_vector3 p_a, t_vector3 p_b, t_vector3 p_c)
 	return (result);
 }
 
-t_triangle	*initialize_t_triangle(t_vector3 p_a, t_vector3 p_b, t_vector3 p_c)
+t_triangle	*initialize_t_triangle(t_vector4 p_a, t_vector4 p_b, t_vector4 p_c)
 {
 	t_triangle	*result;
 
@@ -37,38 +37,38 @@ void		sort_t_triangles(t_triangle *a, t_triangle *b) // REGARDER SI UTILE, SINON
 void		sort_t_triangle_points(t_triangle *p_triangle) // REGARDER SI UTILE, SINON SUPPRIMER
 {
 	if (p_triangle->a.y > p_triangle->b.y || (p_triangle->a.y == p_triangle->b.y && p_triangle->a.x > p_triangle->b.x))
-		swap_t_vector3(&(p_triangle->a), &(p_triangle->b));
+		swap_t_vector4(&(p_triangle->a), &(p_triangle->b));
 	if (p_triangle->b.y > p_triangle->c.y || (p_triangle->b.y == p_triangle->c.y && p_triangle->b.x > p_triangle->c.x))
-		swap_t_vector3(&(p_triangle->b), &(p_triangle->c));
+		swap_t_vector4(&(p_triangle->b), &(p_triangle->c));
 	if (p_triangle->a.y > p_triangle->b.y || (p_triangle->a.y == p_triangle->b.y && p_triangle->a.x > p_triangle->b.x))
-		swap_t_vector3(&(p_triangle->a), &(p_triangle->b));
+		swap_t_vector4(&(p_triangle->a), &(p_triangle->b));
 }
 
-t_triangle	t_triangle_add_vector3(t_triangle triangle, t_vector3 to_add)
+t_triangle	t_triangle_add_vector4(t_triangle triangle, t_vector4 to_add)
 {
 	t_triangle	result;
 
-	result.a = add_vector3_to_vector3(triangle.a, to_add);
-	result.b = add_vector3_to_vector3(triangle.b, to_add);
-	result.c = add_vector3_to_vector3(triangle.c, to_add);
+	result.a = add_vector4_to_vector4(triangle.a, to_add);
+	result.b = add_vector4_to_vector4(triangle.b, to_add);
+	result.c = add_vector4_to_vector4(triangle.c, to_add);
 	return (result);
 }
 
 void		print_t_triangle(t_triangle p_triangle, char *triangle_name) // A SUPPRIMER
 {
-	printf("Triangle Name : %s\n", triangle_name);
-	print_t_vector3(p_triangle.a, "A : ");
-	print_t_vector3(p_triangle.b, "B : ");
-	print_t_vector3(p_triangle.c, "C : ");
+	printf("%s\n", triangle_name);
+	print_t_vector4(p_triangle.a, "A : ");
+	print_t_vector4(p_triangle.b, "B : ");
+	print_t_vector4(p_triangle.c, "C : ");
 }
 
-t_triangle	mult_triangle_by_vector3(t_triangle triangle, t_vector3 to_add)
+t_triangle	mult_triangle_by_vector4(t_triangle triangle, t_vector4 to_add)
 {
 	t_triangle	result;
 
-	result.a = mult_vector3_by_vector3(triangle.a, to_add);
-	result.b = mult_vector3_by_vector3(triangle.b, to_add);
-	result.c = mult_vector3_by_vector3(triangle.c, to_add);
+	result.a = mult_vector4_by_vector4(triangle.a, to_add);
+	result.b = mult_vector4_by_vector4(triangle.b, to_add);
+	result.c = mult_vector4_by_vector4(triangle.c, to_add);
 	return (result);
 }
 
@@ -84,13 +84,13 @@ t_triangle	compose_t_triangle_from_t_mesh(t_mesh *src, int *index)
 			error_exit(-14, "can't compose a triangle");
 		i++;
 	}
-	result.a = add_vector3_to_vector3(t_vector3_list_at(src->vertices, index[0]), src->pos);
-	result.b = add_vector3_to_vector3(t_vector3_list_at(src->vertices, index[1]), src->pos);
-	result.c = add_vector3_to_vector3(t_vector3_list_at(src->vertices, index[2]), src->pos);
+	result.a = add_vector4_to_vector4(t_vector4_list_at(src->vertices, index[0]), src->pos);
+	result.b = add_vector4_to_vector4(t_vector4_list_at(src->vertices, index[1]), src->pos);
+	result.c = add_vector4_to_vector4(t_vector4_list_at(src->vertices, index[2]), src->pos);
 	return (result);
 }
 
-t_triangle	compose_t_triangle_from_t_vertices(t_vector3_list *src, int *index)
+t_triangle	compose_t_triangle_from_t_vertices(t_vector4_list *src, int *index)
 {
 	t_triangle	result;
 	int			i;
@@ -102,13 +102,13 @@ t_triangle	compose_t_triangle_from_t_vertices(t_vector3_list *src, int *index)
 			error_exit(-14, "can't compose a triangle");
 		i++;
 	}
-	result.a = t_vector3_list_at(src, index[0]);
-	result.b = t_vector3_list_at(src, index[1]);
-	result.c = t_vector3_list_at(src, index[2]);
+	result.a = t_vector4_list_at(src, index[0]);
+	result.b = t_vector4_list_at(src, index[1]);
+	result.c = t_vector4_list_at(src, index[2]);
 	return (result);
 }
 
-void		t_triangle_get_min_max_value(t_triangle *triangle, t_vector3 *min, t_vector3 *max) // REGARDER SI UTILE, SINON SUPPRIMER
+void		t_triangle_get_min_max_value(t_triangle *triangle, t_vector4 *min, t_vector4 *max) // REGARDER SI UTILE, SINON SUPPRIMER
 {
 	max->x = get_big_float(triangle->a.x, triangle->b.x, triangle->c.x);
 	max->y = get_big_float(triangle->a.y, triangle->b.y, triangle->c.y);
@@ -131,12 +131,12 @@ int			t_triangle_is_bigger(t_triangle a, t_triangle b)  // REGARDER SI UTILE, SI
 	float s1;
 	float s2;
 
-	p1a = calc_dist_vector3_to_vector3(a.a, a.b);
-	p1b = calc_dist_vector3_to_vector3(a.a, a.c);
-	p1c = calc_dist_vector3_to_vector3(a.b, a.c);
-	p2a = calc_dist_vector3_to_vector3(b.a, b.b);
-	p2b = calc_dist_vector3_to_vector3(b.a, b.c);
-	p2c = calc_dist_vector3_to_vector3(b.b, b.c);
+	p1a = calc_dist_vector4_to_vector4(a.a, a.b);
+	p1b = calc_dist_vector4_to_vector4(a.a, a.c);
+	p1c = calc_dist_vector4_to_vector4(a.b, a.c);
+	p2a = calc_dist_vector4_to_vector4(b.a, b.b);
+	p2b = calc_dist_vector4_to_vector4(b.a, b.c);
+	p2c = calc_dist_vector4_to_vector4(b.b, b.c);
 	p1 = p1a + p1b + p1c;
 	p2 = p2a + p2b + p2c;
 	s1 = sqrt(p1 * (p1 - p1a) * (p1 - p1b) * (p1 * p1c));
@@ -150,17 +150,17 @@ int			t_triangle_equal(t_triangle a, t_triangle b) // REGARDER SI UTILE, SINON S
 {
 	sort_t_triangle_points(&a);
 	sort_t_triangle_points(&b);
-	if (t_vector3_equal(a.a, b.a) == BOOL_FALSE ||
-		t_vector3_equal(a.b, b.b) == BOOL_FALSE ||
-		t_vector3_equal(a.c, b.c) == BOOL_FALSE)
+	if (t_vector4_equal(a.a, b.a) == BOOL_FALSE ||
+		t_vector4_equal(a.b, b.b) == BOOL_FALSE ||
+		t_vector4_equal(a.c, b.c) == BOOL_FALSE)
 		return (BOOL_FALSE);
 	return (BOOL_TRUE);
 }
 
 int			t_triangle_similarity(t_triangle p_a, t_triangle p_b) // REGARDER SI UTILE, SINON SUPPRIMER
 {
-	t_vector3	a[3];
-	t_vector3	b[3];
+	t_vector4	a[3];
+	t_vector4	b[3];
 	int			result;
 	int			i;
 	int			j;
@@ -178,7 +178,7 @@ int			t_triangle_similarity(t_triangle p_a, t_triangle p_b) // REGARDER SI UTILE
 		j = 0;
 		while (j < 3)
 		{
-			if (t_vector3_equal(a[i], b[j]) == BOOL_TRUE)
+			if (t_vector4_equal(a[i], b[j]) == BOOL_TRUE)
 				result++;
 			j++;
 		}
@@ -187,10 +187,10 @@ int			t_triangle_similarity(t_triangle p_a, t_triangle p_b) // REGARDER SI UTILE
 	return (result);
 }
 
-int			t_triangle_similarity_segment(t_triangle p_a, t_vector3 p_b, t_vector3 p_c) // REGARDER SI UTILE, SINON SUPPRIMER
+int			t_triangle_similarity_segment(t_triangle p_a, t_vector4 p_b, t_vector4 p_c) // REGARDER SI UTILE, SINON SUPPRIMER
 {
-	t_vector3	a[3];
-	t_vector3	b[2];
+	t_vector4	a[3];
+	t_vector4	b[2];
 	int			result;
 	int			i;
 	int			j;
@@ -207,11 +207,54 @@ int			t_triangle_similarity_segment(t_triangle p_a, t_vector3 p_b, t_vector3 p_c
 		j = 0;
 		while (j < 2)
 		{
-			if (t_vector3_equal(a[i], b[j]) == BOOL_TRUE)
+			if (t_vector4_equal(a[i], b[j]) == BOOL_TRUE)
 				result++;
 			j++;
 		}
 		i++;
 	}
 	return (result);
+}
+
+float	maximum_dist_triangles(t_triangle tri1, t_triangle tri2)
+{
+	float	ret;
+	int		i;
+	float	dists[9];
+
+	dists[0] = size_line(create_t_line(tri1.a, tri2.a));
+	dists[0] = size_line(create_t_line(tri1.a, tri2.b));
+	dists[0] = size_line(create_t_line(tri1.a, tri2.c));
+	dists[0] = size_line(create_t_line(tri1.b, tri2.a));
+	dists[0] = size_line(create_t_line(tri1.b, tri2.b));
+	dists[0] = size_line(create_t_line(tri1.b, tri2.c));
+	dists[0] = size_line(create_t_line(tri1.c, tri2.a));
+	dists[0] = size_line(create_t_line(tri1.c, tri2.b));
+	dists[0] = size_line(create_t_line(tri1.c, tri2.c));
+	i = 0;
+	ret = 600;
+	while (i < 9)
+	{
+		if (ret > dists[i])
+			ret = dists[i];
+		i++;
+	}
+	return (ret);
+}
+
+int		triangles_intersection(t_triangle tri1, t_triangle tri2)
+{
+	t_line		seg;
+	t_vector4	intersection;
+
+	seg = create_t_line(tri1.a, tri1.b);
+	if (intersect_triangle_by_segment(tri2, seg, &intersection) > 0)
+		return (BOOL_TRUE);
+	seg = create_t_line(tri1.b, tri1.c);
+	if (intersect_triangle_by_segment(tri2, seg, &intersection) > 0)
+		return (BOOL_TRUE);
+	seg = create_t_line(tri1.a, tri1.c);
+	if (intersect_triangle_by_segment(tri2, seg, &intersection) > 0)
+		return (BOOL_TRUE);
+	return (BOOL_FALSE);
 }

@@ -1,49 +1,41 @@
 #include "unknow_project.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-t_gui create_t_gui(float x, int y)
+t_gui create_t_gui(void)
 {
 	t_gui	result;
 	int		idx;
 
-	idx = 0;
-	if (!(result.letter = (t_texture **)malloc(sizeof(t_texture*) * 95)))
+	if (!(result.letter = (t_letter **)malloc(sizeof(t_letter*) * 95)))
 		error_exit(-29, "Can't malloc a t_surface");
-	while (idx <= 94)
-	{
-		if (!(result.letter[idx] = (t_texture *)malloc(sizeof(t_texture))))
-			error_exit(-29, "Can't malloc a t_surface");
-		if (!(result.letter[idx]->surface = (t_surface *)malloc(sizeof(t_surface))))
-			error_exit(-29, "Can't malloc a t_surface");
-		idx++;
-	}
-	idx = 0;
-	if (!(result.menu = (t_texture **)malloc(sizeof(t_texture*) * 15)))
+	if (!(result.menu = (t_texture **)malloc(sizeof(t_texture*) * 17)))
 		error_exit(-29, "Can't malloc a t_surface");
-	while (idx <= 14)
+	idx = -1;
+	while (++idx <= 94)
 	{
-		if (!(result.menu[idx] = (t_texture *)malloc(sizeof(t_texture))))
+		if (!(result.letter[idx] = (t_letter *)malloc(sizeof(t_letter))))
 			error_exit(-29, "Can't malloc a t_surface");
-		if (!(result.menu[idx]->surface = (t_surface *)malloc(sizeof(t_surface))))
+		if (!(result.letter[idx]->let = (t_texture *)malloc(sizeof(t_texture))))
 			error_exit(-29, "Can't malloc a t_surface");
-		idx++;
+		if (!(result.letter[idx]->let->surface = (t_surface *)malloc(sizeof(t_surface))))
+			error_exit(-29, "Can't malloc a t_surface");
 	}
 	result.idx = 8;
 	result.sens = 2;
 	result.key_press = 0;
-    result.perso.hp = x;
-	result.perso.mun = y;
+	result.info_print = 0;
 	return (result);
 }
 
-t_gui *initialize_t_gui(float x, int y)
+t_gui *initialize_t_gui(void)
 {
 	t_gui *result;
 
 	if (!(result = (t_gui *)malloc(sizeof(t_gui))))
 		error_exit(-13, "Can't create a t_gui");
-
-	*result = create_t_gui(x, y);
-
+	*result = create_t_gui();
 	return (result);
 }
 
@@ -59,47 +51,55 @@ void	set_t_gui_texte(t_gui *gui)
 		load_letter(gui, &letter, i - 32);
 		i++;
 		letter++;
+
 	}
 }
 
-void	print_letter(t_camera *main_camera, t_gui *gui, char *str, t_rectangle rec)
+void	print_letter(t_camera *main_cam, t_gui *gui, char *str, t_rectangle rec)
 {
 	int		i;
 	int		idx;
 
 	i = 0;
-	t_view_port_clear_buffers(main_camera->view_port);
+	t_view_port_clear_buffers(main_cam->view_port);
 	while (i < ft_strlen(str))
 	{
 		idx = 0;
 		while (idx <= 94)
 		{
-			if (str[i] == gui->letter[idx]->letter)
+			if (str[i] == gui->letter[idx]->let->letter)
 			{
-			    draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->letter[idx]);
-				rec.pos = add_vector2_to_vector2(rec.pos, create_t_vector2(rec.size.x , 0.0));
+			    draw_rectangle_texture_cpu(main_cam->view_port, rec,
+											gui->letter[idx]->let);
+				rec.pos = add_vector2_to_vector2(rec.pos,
+											create_t_vector2(rec.size.x , 0.0));
 				break ;
 			}
 			idx++;
 		}
 		i++;
 	}
-	draw_buffer_opengl(main_camera->view_port->window, main_camera->view_port->window->color_data);
 }
 
 void	print_info_bar(t_camera *main_camera, t_player *player, t_gui *gui)
 {
-	char		*str;
+	char			*str;
 
 	str = ft_itoa(player->armor);
-	print_letter(main_camera, gui, ft_strcat(str, "%"), create_t_rectangle(create_t_vector2(-0.025, -0.87), create_t_vector2(0.02, 0.07)));
+	print_letter(main_camera, gui, ft_strcat(str, "%"),
+				create_t_rectangle(create_t_vector2(-0.70, -0.87),
+									create_t_vector2(0.02, 0.07)));
+	free(str);
 	str = ft_itoa(player->hp);
-	print_letter(main_camera, gui, ft_strcat(str, "%"), create_t_rectangle(create_t_vector2(-0.025, -0.97), create_t_vector2(0.02, 0.07)));
-	
+	print_letter(main_camera, gui, ft_strcat(str, "%"),
+				create_t_rectangle(create_t_vector2(-0.70, -0.97),
+									create_t_vector2(0.02, 0.07)));
+	free(str);
 	str = ft_itoa(player->current_weapon->ammo);
-	str = ft_strcat(str, " / ");
-	str = ft_strcat(str, ft_itoa(player->current_weapon->total_ammo));
-	
-	print_letter(main_camera, gui, str, create_t_rectangle(create_t_vector2(0.78, -0.90), create_t_vector2(0.01, 0.05)));
+	str = ft_strjoinf(str, " / ", 1);
+	str = ft_strjoinf(str, ft_itoa(player->current_weapon->total_ammo), 3);
+	print_letter(main_camera, gui, str,
+				create_t_rectangle(create_t_vector2(0.78, -0.90),
+									create_t_vector2(0.01, 0.05)));
 	free(str);
 }

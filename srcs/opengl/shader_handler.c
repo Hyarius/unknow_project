@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   shader_handler.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/12/12 16:20:56 by gboutin           #+#    #+#             */
+/*   Updated: 2019/12/12 16:21:01 by gboutin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "unknow_project.h"
 
 static char	*read_shader(const char *p_path)
@@ -8,13 +20,17 @@ static char	*read_shader(const char *p_path)
 
 	content = NULL;
 	line = NULL;
-	fd = open(p_path, O_RDONLY);
+	if ((fd = open(p_path, O_RDONLY)) < 0)
+		error_exit(-555, "can't read the shader");
 	while (get_next_line(fd, &line) > 0)
 	{
 		if (ft_strlen(content) != 0)
 			ft_stradd(&content, "\n");
 		ft_stradd(&content, line);
+		free(line);
 	}
+	free(line);
+	close(fd);
 	return (content);
 }
 
@@ -30,7 +46,8 @@ static void	compile_shader(GLuint p_id, char const *p_source)
 		error_exit(-2, "Error while compiling shader");
 }
 
-static void	compute_program(GLuint p_program_id, GLuint p_vertex_shader_id, GLuint p_fragment_shader_id)
+static void	compute_program(GLuint p_program_id, GLuint p_vertex_shader_id,
+													GLuint p_fragment_shader_id)
 {
 	GLint	result;
 
@@ -47,7 +64,8 @@ static void	compute_program(GLuint p_program_id, GLuint p_vertex_shader_id, GLui
 	glDeleteShader(p_fragment_shader_id);
 }
 
-GLuint		load_shaders(const char *p_vertex_file_path, const char *p_fragment_file_path)
+GLuint		load_shaders(const char *p_vertex_file_path,
+							const char *p_fragment_file_path)
 {
 	char	*vertex_content;
 	char	*fragment_content;
@@ -62,6 +80,8 @@ GLuint		load_shaders(const char *p_vertex_file_path, const char *p_fragment_file
 	fragment_content = read_shader(p_fragment_file_path);
 	compile_shader(vertex_shader_id, vertex_content);
 	compile_shader(fragment_shader_id, fragment_content);
+	free(vertex_content);
+	free(fragment_content);
 	compute_program(program_id, vertex_shader_id, fragment_shader_id);
 	return (program_id);
 }

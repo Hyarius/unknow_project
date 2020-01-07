@@ -5,7 +5,8 @@ void		start_sdl(void)
 	unsigned int seed;
 
 	seed = 1493368;
-	SDL_Init(SDL_INIT_EVERYTHING);
+	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
+		error_exit(ft_atoi(SDL_GetError()), "Erreur SDL_Init");
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
 	SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
@@ -26,8 +27,10 @@ t_window	*initialize_t_window(char *p_name, int p_size_x, int p_size_y)
 
 	if (!(win = (t_window *)malloc(sizeof(t_window))))
 		error_exit(-6, "Can't malloc a t_window");
-	win->window = SDL_CreateWindow(p_name, 0, 0, p_size_x, p_size_y,
-								SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
+	// printf("malloc t_window\n");
+	if ((win->window = SDL_CreateWindow(p_name, 0, 0, p_size_x, p_size_y,
+								SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL)) == NULL)
+		error_exit(ft_atoi(SDL_GetError()), "Erreur SDL_CreateWindow");
 	SDL_GetWindowSize(win->window, &win->size_x, &win->size_y);
 	win->context = SDL_GL_CreateContext(win->window);
 	glGenVertexArrays(1, &win->vertex_array);
@@ -99,14 +102,14 @@ void		prepare_screen(t_window *p_win, t_color color)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-void		render_screen(t_window *p_win)
+void		render_screen(t_window *p_win, t_engine *engine)
 {
-	check_frame();
+	check_frame(engine);
 	draw_buffer_opengl(p_win, p_win->color_data);
 	SDL_GL_SwapWindow(p_win->window);
 }
 
-int			is_point_in_screen(t_window *p_win, t_vector3 p_point)
+int			is_point_in_screen(t_window *p_win, t_vector4 p_point)
 {
 	if (p_point.x < 0 || p_point.x >= p_win->size_x ||
 		p_point.y < 0 || p_point.y >= p_win->size_y)

@@ -29,7 +29,7 @@ void		t_mesh_list_push_back(t_mesh_list *dest, t_mesh to_add)
 	if ((dest->size + 1) >= dest->max_size)
 	{
 		tmp = dest->mesh;
-		if (!(dest->mesh = (t_mesh *)malloc(sizeof(t_mesh) \
+		if (!(dest->mesh = (t_mesh *)malloc(sizeof(t_mesh)
 											* (dest->size + 1 + PUSH_SIZE))))
 			error_exit(-20, "Can't realloc a t_mesh array");
 		i = -1;
