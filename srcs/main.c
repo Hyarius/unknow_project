@@ -63,21 +63,17 @@ int main(int argc, char **argv)
 	t_engine	*engine;
 	t_gui		*gui;
 
+	if (Mix_OpenAudio(44100, AUDIO_S16SYS, 1, 1024) == -1)
+		error_exit(-100, (char*)Mix_GetError());
 	engine = initialize_t_engine(win);
 	gui = initialize_t_gui();
 
 	load_menu(gui);
 	TTF_Init();
 	set_t_gui_texte(gui);
-	if (Mix_OpenAudio(44100, AUDIO_S16SYS, 1, 1024) == -1)
-		error_exit(-100, (char*)Mix_GetError());
 
 	t_mesh		mesh;
 	t_camera	*main_camera;
-	Mix_Music	*musique;
-
-	if ((musique = Mix_LoadMUS("ressources/assets/sounds/mega_man_test.ogg")) == NULL)
-		error_exit(-101, (char*)Mix_GetError());
 	main_camera = t_camera_list_get(engine->visual_engine->camera_list, 0);
 	t_engine_place_camera(engine, 0, create_t_vector4(5.0, 5.0, 0.0));
 	t_camera_look_at_point(main_camera, create_t_vector4(0, 0, 0));
@@ -92,7 +88,6 @@ int main(int argc, char **argv)
 	mesh_editing = create_mesh_editing(0, engine->user_engine->player->camera->pos, path[engine->user_engine->keyboard->i]);
 	mesh = create_primitive_skybox(main_camera->pos, create_t_vector4(1.0, 1.0, 1.0), skybox);
 	Mix_VolumeMusic(MIX_MAX_VOLUME);
-	Mix_PlayMusic(musique, -1);
 	engine->playing = 2;
 
 	while (engine->playing != 0)
@@ -205,7 +200,6 @@ int main(int argc, char **argv)
 		t_engine_handle_event(main_camera, gui, engine);
 		render_screen(win, engine); // affiche la fenetre
 	}
-	Mix_FreeMusic(musique);
 	Mix_CloseAudio();
 	TTF_Quit();
 	// tar_ressources();

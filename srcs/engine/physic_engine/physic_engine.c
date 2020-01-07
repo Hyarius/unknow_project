@@ -229,6 +229,16 @@ int				can_move(t_mesh *mesh, t_engine *engine)
 				test_move_axis(mesh, &(mesh->force.y), create_t_vector4(0, 1, 0), target);
 				test_move_axis(mesh, &(mesh->force.x), create_t_vector4(1, 0, 0), target);
 				test_move_axis(mesh, &(mesh->force.z), create_t_vector4(0, 0, 1), target);
+				if (mesh->force.z != 0.0 && mesh->force.x != 0.0)
+				{
+					t_mesh_compute_next_vertices_in_world(mesh, create_t_vector4(1, 1, 1));
+					if (is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
+					{
+						mesh->force.z = 0.0;
+						mesh->force.x = 0.0;
+					}
+					t_mesh_compute_next_vertices_in_world(mesh, create_t_vector4(1, 1, 1));
+				}
 			}
 		}
 		i++;

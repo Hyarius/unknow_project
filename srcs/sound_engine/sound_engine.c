@@ -71,6 +71,10 @@ Mix_Chunk	**load_sounds()
 	i = 0;
 	while(i < nb_sounds)
 		if (!sounds[i++])
-			printf("Mix_LoadWAV: %s\n", Mix_GetError());
+		{
+			ft_putstr("Mix_LoadWAV: ");
+			ft_putstr(Mix_GetError());
+			write(1, "\n", 1);
+		}
 	return (sounds);
 }
