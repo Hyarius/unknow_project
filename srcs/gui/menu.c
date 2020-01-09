@@ -5,11 +5,11 @@ void            t_user_engine_handle_menu(t_camera *main_camera, t_gui *gui, t_e
     if (*play == 2)
         main_menu(main_camera, gui, engine, play);
     else if (*play == 3)
-        settings_menu(main_camera, gui, engine->user_engine, play);
+        settings_menu(main_camera, gui, engine, play);
     else if (*play == 4)
-        controls_menu(main_camera, gui, engine->user_engine, play);
+        controls_menu(main_camera, gui, engine, play);
     else if (*play == 5)
-        credits_menu(main_camera, gui, engine->user_engine, play);
+        credits_menu(main_camera, gui, engine, play);
 	else if (*play == 6)
 		play_menu(main_camera, engine, play);
 	else if (*play == 11)
@@ -21,7 +21,7 @@ void            t_user_engine_handle_menu(t_camera *main_camera, t_gui *gui, t_e
     else if (*play == -1)
         pause_menu(main_camera, gui, engine, play);
     else if (*play == -2)
-        settings_pause_menu(main_camera, gui, engine->user_engine, play);
+        settings_pause_menu(main_camera, gui, engine, play);
 }
 
 void			play_menu(t_camera *main_camera, t_engine *engine, int *play)
@@ -36,16 +36,18 @@ void			play_menu(t_camera *main_camera, t_engine *engine, int *play)
 	// printf("x = %d -- y = %d\n", pos.x, pos.y);
 	if (pos.x > 37 && pos.x < 61 && t_mouse_state(mouse) == 2)
 	{
+		Mix_PlayChannel(-1, engine->sound_engine->sounds[0], 0);
 		if (pos.y > 61 && pos.y < 69)
 		{
 			*play = 10;
-			path = ft_strdup("ressources/map/editing_map1.map");
+			path = ft_strdup("ressources/map/save1.map");
 		}
 		if (pos.y > 71 && pos.y < 79)
 			*play = 2;
 	}
 	if (pos.x > 6 && pos.x < 24 && t_mouse_state(mouse) == 2)
 	{
+		Mix_PlayChannel(-1, engine->sound_engine->sounds[0], 0);
 		if (pos.y > 29 && pos.y < 37)
 		{
 			*play = 1;
@@ -59,6 +61,7 @@ void			play_menu(t_camera *main_camera, t_engine *engine, int *play)
 	}
 	if (pos.x > 82 && pos.x < 95 && t_mouse_state(mouse) == 2)
 	{
+		Mix_PlayChannel(-1, engine->sound_engine->sounds[0], 0);
 		if (pos.y > 29 && pos.y < 37)
 		{
 			*play = 1;
@@ -104,18 +107,18 @@ void			main_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, int *play)
     pos = create_t_vector2_int(mouse->pos.x * 100 / WIN_X, mouse->pos.y * 100 / WIN_Y);
     if (pos.x > 43 && pos.x < 56)
     {
-        if (pos.y > 56 && pos.y < 61)
-            if (t_mouse_state(mouse) == 2)
+		if (t_mouse_state(mouse) == 2)
+        {
+			if (pos.y > 56 && pos.y < 61)
 		        *play = 6;
-        if (pos.y > 63 && pos.y < 68)
-        	if (t_mouse_state(mouse) == 2)
-		        *play = 3;
-        if (pos.y > 70 && pos.y < 75)
-        	if (t_mouse_state(mouse) == 2)
-		        *play = 5;
-        if (pos.y > 76 && pos.y < 82)
-        	if (t_mouse_state(mouse) == 2)
-		        *play = 0;
+			else if (pos.y > 63 && pos.y < 68)
+				*play = 3;
+			else if (pos.y > 70 && pos.y < 75)
+				*play = 5;
+			else if (pos.y > 76 && pos.y < 82)
+				*play = 0;
+			Mix_PlayChannel( -1, engine->sound_engine->sounds[0], 0 );
+		}
     }
     else
         engine->user_engine->mouse->clicked_left = BOOL_FALSE;
@@ -127,44 +130,46 @@ void			pause_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, int *play
 	t_keyboard *keyboard = engine->user_engine->keyboard;
     t_vector2_int	pos;
 	t_window		*win;
-
+	printf("pause\n");
 	get_t_mouse_info(mouse);
     pos = create_t_vector2_int(mouse->pos.x * 100 / WIN_X, mouse->pos.y * 100 / WIN_Y);
     if (pos.x > 39 && pos.x < 61)
     {
-        if (pos.y > 26 && pos.y < 32)
-            if (t_mouse_state(mouse) == 2)
-		        *play = 1;
-        if (pos.y > 36 && pos.y < 41)
-        	if (t_mouse_state(mouse) == 2)
-		        *play = -2;
-        if (pos.y > 45 && pos.y < 50)
-        	if (t_mouse_state(mouse) == 2)
-		        *play = 9;
-        if (pos.y > 54 && pos.y < 59)
-        	if (t_mouse_state(mouse) == 2)
+		if (t_mouse_state(mouse) == 2)
+		{
+			if (pos.y > 26 && pos.y < 32)
+				*play = 1;
+			else if (pos.y > 36 && pos.y < 41)
+				*play = -2;
+			else if (pos.y > 45 && pos.y < 50)
+				*play = 9;
+			else if (pos.y > 54 && pos.y < 59)
 			{
-						free_t_mesh_list(engine->physic_engine->mesh_list);
-						printf("%s\n", engine->physic_engine->mesh_list->mesh[0].name);
-						engine->physic_engine->mesh_list = initialize_t_mesh_list();
-		        *play = 2;
+				free_t_mesh_list(engine->physic_engine->mesh_list);
+				printf("%s\n", engine->physic_engine->mesh_list->mesh[0].name);
+				engine->physic_engine->mesh_list = initialize_t_mesh_list();
+				*play = 2;
 			}
-        if (pos.y > 64 && pos.y < 70)
-        	if (t_mouse_state(mouse) == 2)
-		        *play = 0;
+			else if (pos.y > 64 && pos.y < 70)
+				*play = 0;
+			Mix_PlayChannel( -1, engine->sound_engine->sounds[0], 0 );
+		}
     }
     else
         engine->user_engine->mouse->clicked_left = BOOL_FALSE;
 }
 
-void			settings_pause_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int *play)
+void			settings_pause_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, int *play)
 {
-	t_mouse *mouse = user_engine->mouse;
-	t_keyboard *keyboard = user_engine->keyboard;
+	t_mouse *mouse = engine->user_engine->mouse;
+	t_keyboard *keyboard = engine->user_engine->keyboard;
     t_vector2_int pos;
 
+	printf("settings pause\n");
 	get_t_mouse_info(mouse);
     pos = create_t_vector2_int(mouse->pos.x * 100 / WIN_X, mouse->pos.y * 100 / WIN_Y);
+	if (t_mouse_state(mouse) == 2)
+		Mix_PlayChannel( -1, engine->sound_engine->sounds[0], 0 );
     if (pos.x > 34 && pos.x < 64)
     {
         if (pos.y > 26 && pos.y < 32)
@@ -181,14 +186,14 @@ void			settings_pause_menu(t_camera *main_camera, t_gui *gui, t_user_engine *use
                 *play = -1;
     }
     else
-        user_engine->mouse->clicked_left = BOOL_FALSE;
+        engine->user_engine->mouse->clicked_left = BOOL_FALSE;
 }
 
-void        settings_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int *play)
+void        settings_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, int *play)
 {
 
-    t_mouse *mouse = user_engine->mouse;
-    t_keyboard *keyboard = user_engine->keyboard;
+    t_mouse *mouse = engine->user_engine->mouse;
+    t_keyboard *keyboard = engine->user_engine->keyboard;
     t_vector2_int pos;
 
 	get_t_mouse_info(mouse);
@@ -197,45 +202,45 @@ void        settings_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user
     draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.7, 0.4), create_t_vector2(-0.6, -0.94)), gui->menu[gui->idx]);
     if (pos.x > 16 && pos.x < 29)
     {
-        if (pos.y > 23 && pos.y < 26)
-        	if (t_mouse_state(mouse) == 2)
-		        printf("Mute master\n");
-        if (pos.y > 27 && pos.y < 30)
-        	if (t_mouse_state(mouse) == 2)
-		        printf("Mute music\n");
-        if (pos.y > 32 && pos.y < 35)
-        	if (t_mouse_state(mouse) == 2)
-		        printf("Mute sounds\n");
-        t_view_port_clear_buffers(main_camera->view_port);
-        if (pos.y > 44 && pos.y < 47)
-        {
-            draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.7, 0.4), create_t_vector2(-0.6, -0.94)), gui->menu[8]);
-            if (t_mouse_state(mouse) == 2)
-                gui->idx = 8;
-        }
-        if (pos.y > 48 && pos.y < 52)
-        {
-            draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.7, 0.4), create_t_vector2(-0.6, -0.94)), gui->menu[9]);
-            if (t_mouse_state(mouse) == 2)
-                gui->idx = 9;
-        }
-        if (pos.y > 53 && pos.y < 56)
-        {
-            draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.7, 0.4), create_t_vector2(-0.6, -0.94)), gui->menu[10]);
-            if (t_mouse_state(mouse) == 2)
-                gui->idx = 10;
-        }
-        if (pos.y > 72 && pos.y < 76)
-            if (t_mouse_state(mouse) == 2)
-                *play = 4;
+		if (t_mouse_state(mouse) == 2)
+		{
+			Mix_PlayChannel( -1, engine->sound_engine->sounds[0], 0 );
+			if (pos.y > 23 && pos.y < 26)
+				printf("Mute master\n");
+			if (pos.y > 27 && pos.y < 30)
+				printf("Mute music\n");
+			if (pos.y > 32 && pos.y < 35)
+				printf("Mute sounds\n");
+			t_view_port_clear_buffers(main_camera->view_port);
+			if (pos.y > 44 && pos.y < 47)
+			{
+				draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.7, 0.4), create_t_vector2(-0.6, -0.94)), gui->menu[8]);
+					gui->idx = 8;
+			}
+			if (pos.y > 48 && pos.y < 52)
+			{
+				draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.7, 0.4), create_t_vector2(-0.6, -0.94)), gui->menu[9]);
+					gui->idx = 9;
+			}
+			if (pos.y > 53 && pos.y < 56)
+			{
+				draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.7, 0.4), create_t_vector2(-0.6, -0.94)), gui->menu[10]);
+					gui->idx = 10;
+			}
+			if (pos.y > 72 && pos.y < 76)
+				*play = 4;
+		}
     }
     else if (pos.x > 43 && pos.x < 56)
     {
         if (t_mouse_state(mouse) == 2)
-            *play = 2;
+	    {
+			Mix_PlayChannel( -1, engine->sound_engine->sounds[0], 0 );
+			*play = 2;
+		}    
     }
     else
-        user_engine->mouse->clicked_left = BOOL_FALSE;
+        engine->user_engine->mouse->clicked_left = BOOL_FALSE;
     // if (pos.y > 65 && pos.y < 69)
     // {
     //     if (pos.x == 17)
@@ -257,14 +262,16 @@ void        settings_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user
     // }
 }
 
-void        controls_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int *play)
+void        controls_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, int *play)
 {
-    t_mouse *mouse = user_engine->mouse;
-    t_keyboard *keyboard = user_engine->keyboard;
+    t_mouse *mouse = engine->user_engine->mouse;
+    t_keyboard *keyboard = engine->user_engine->keyboard;
     t_vector2_int pos;
 
 	get_t_mouse_info(mouse);
     pos = create_t_vector2_int(mouse->pos.x * 100 / WIN_X, mouse->pos.y * 100 / WIN_Y);
+	if (t_mouse_state(mouse) == 2)
+		Mix_PlayChannel( -1, engine->sound_engine->sounds[0], 0 );
     if (gui->key_press != 2)
     {
         if (pos.x > 23 && pos.x < 44)
@@ -302,7 +309,7 @@ void        controls_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user
                 }
             }
             else
-                user_engine->mouse->clicked_left = BOOL_FALSE;
+                engine->user_engine->mouse->clicked_left = BOOL_FALSE;
         }
         if (pos.x > 64 && pos.x < 76)
         {
@@ -339,12 +346,12 @@ void        controls_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user
                 }
             }
             else
-                user_engine->mouse->clicked_left = BOOL_FALSE;
+                engine->user_engine->mouse->clicked_left = BOOL_FALSE;
         }
     }
     if (gui->key_press == 2)
     {
-        set_controls(main_camera, gui, user_engine, gui->key_change);
+        set_controls(main_camera, gui, engine->user_engine, gui->key_change);
     }
     if (pos.x > 43 && pos.x < 56)
         if (pos.y > 82 && pos.y < 86)
@@ -352,12 +359,14 @@ void        controls_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user
                 *play = 3;
 }
 
-void        sens_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int *play)
+void        sens_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, int *play)
 {
     int i;
-    t_mouse *mouse = user_engine->mouse;
-    t_keyboard *keyboard = user_engine->keyboard;
+    t_mouse *mouse = engine->user_engine->mouse;
+    t_keyboard *keyboard = engine->user_engine->keyboard;
 	get_t_mouse_info(mouse);
+	if (t_mouse_state(mouse) == 2)
+		Mix_PlayChannel( -1, engine->sound_engine->sounds[0], 0 );
     if (mouse->pos.x >= 420 && mouse->pos.x <= 620 && mouse->pos.y >= 635 && mouse->pos.y <= 835)
     {
         i = 1;
@@ -406,7 +415,7 @@ void        sens_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_eng
     else
     {
         sens_bis(main_camera, gui, gui->sens);
-        user_engine->mouse->clicked_left = BOOL_FALSE;
+        engine->user_engine->mouse->clicked_left = BOOL_FALSE;
     }
 }
 
@@ -422,26 +431,26 @@ void    sens_bis(t_camera *main_camera, t_gui *gui, int sens)
     }
 }
 
-void    set_controls(t_camera *main_camera, t_gui *gui, t_user_engine *engine, int key)
+void    set_controls(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int key)
 {
     int scan_code;
     draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(-1, 1), create_t_vector2(2, -2)), gui->menu[11]);
-    scan_code = engine->event.key.keysym.scancode;
+    scan_code = user_engine->event.key.keysym.scancode;
     if (scan_code >= 4 && scan_code <= 231)
     {
-        if (get_key_state(engine->keyboard, scan_code) == 1)
+        if (get_key_state(user_engine->keyboard, scan_code) == 1)
         {
-            engine->keyboard->key[key] = scan_code;
-            reset_key_state(engine->keyboard, scan_code);
+            user_engine->keyboard->key[key] = scan_code;
+            reset_key_state(user_engine->keyboard, scan_code);
             gui->key_press = 0;
         }
     }
 }
 
-void			credits_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int *play)
+void			credits_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, int *play)
 {
-	t_mouse *mouse = user_engine->mouse;
-	t_keyboard *keyboard = user_engine->keyboard;
+	t_mouse *mouse = engine->user_engine->mouse;
+	t_keyboard *keyboard = engine->user_engine->keyboard;
     t_vector2_int pos;
 
 	get_t_mouse_info(mouse);
@@ -450,10 +459,13 @@ void			credits_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engin
     {
         if (pos.y > 82 && pos.y < 86)
         	if (t_mouse_state(mouse) == 2)
-		        *play = 2;
+		    {
+				Mix_PlayChannel( -1, engine->sound_engine->sounds[0], 0 );	
+				*play = 2;
+			}    
     }
     else
-        user_engine->mouse->clicked_left = BOOL_FALSE;
+        engine->user_engine->mouse->clicked_left = BOOL_FALSE;
 }
 
 void		set_player_editing(t_camera *main_camera, t_gui *gui, t_engine *engine, int *play)
@@ -466,6 +478,8 @@ void		set_player_editing(t_camera *main_camera, t_gui *gui, t_engine *engine, in
 	player = engine->user_engine->player;
 	get_t_mouse_info(mouse);
     pos = create_t_vector2_int(mouse->pos.x * 100 / WIN_X, mouse->pos.y * 100 / WIN_Y);
+	if (t_mouse_state(mouse) == 2)
+		Mix_PlayChannel( -1, engine->sound_engine->sounds[0], 0 );
 	if (ft_strcmp(player->hitbox.name, "Player") == 0)
 	{
 		if (pos.y > 12 && pos.y < 21)
@@ -520,6 +534,8 @@ void		set_weapon_editing(t_camera *main_camera, t_gui *gui, t_engine *engine, in
 	player = engine->user_engine->player;
 	get_t_mouse_info(mouse);
 	pos = create_t_vector2_int(mouse->pos.x * 100 / WIN_X, mouse->pos.y * 100 / WIN_Y);
+	if (t_mouse_state(mouse) == 2)
+		Mix_PlayChannel( -1, engine->sound_engine->sounds[0], 0 );
 	if (t_mouse_state(mouse) == 2)
 	{
 		if (pos.y > 11 && pos.y < 15)
@@ -695,6 +711,8 @@ void		save_pause(t_camera *main_camera, t_gui *gui, t_engine *engine, int *play)
 
 	get_t_mouse_info(mouse);
 	pos = create_t_vector2_int(mouse->pos.x * 100 / WIN_X, mouse->pos.y * 100 / WIN_Y);
+	if (t_mouse_state(mouse) == 2)
+		Mix_PlayChannel( -1, engine->sound_engine->sounds[0], 0 );
 	if (t_mouse_state(mouse) == 2)
 	{
 		if (pos.y > 10 && pos.y < 18 && pos.x > 40 && pos.x < 59)
