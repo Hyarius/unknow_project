@@ -41,7 +41,7 @@ void			t_camera_list_push_back(t_camera_list *dest, t_camera to_add)
 		dest->max_size += PUSH_SIZE;
 	}
 	dest->camera[dest->size] = to_add;
-	ft_get_leaks("UNKNOW_PROJECT", "ici");
+	// ft_get_leaks("UNKNOW_PROJECT", "ici");
 	(dest->size)++;
 }
 

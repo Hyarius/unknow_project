@@ -155,6 +155,7 @@ int main(int argc, char **argv)
 			enemy_move(engine);
 			enemy_boss_look(engine);
 			enemy_boss_shoot(engine);
+			enemy_boss_spawn(engine);
 			drawing_front_hp(main_camera, engine);
 			drawing_front_mun(main_camera, texture2, engine->user_engine->player);
 			drawing_front_weapons(main_camera, texture_weapons, engine->user_engine->player);

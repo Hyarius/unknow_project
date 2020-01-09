@@ -48,25 +48,25 @@ void	load_map(t_camera *main_camera, t_engine *engine, char *path)
 	t_view_port	*view_port;
 	int			fd;
 
-	ft_get_leaks("UNKNOW_PROJECT", "start");
+	// ft_get_leaks("UNKNOW_PROJECT", "start");
 	view_port = t_camera_list_get(engine->visual_engine->camera_list, 0)->view_port;
 	t_engine_add_camera(engine,create_t_camera(view_port->window, create_t_vector4(0.0, 0.0, 0.0), 70, create_t_vector2(NEAR, FAR)));
 	view_port = t_camera_list_get(engine->visual_engine->camera_list, 1)->view_port;
 	resize_t_view_port(view_port, create_t_vector2_int(300, 240));
 	move_t_view_port(view_port, create_t_vector2_int(WIN_X - 300, 0));
-	ft_get_leaks("UNKNOW_PROJECT", "minimap");
+	// ft_get_leaks("UNKNOW_PROJECT", "minimap");
 	player = initialize_t_player(main_camera);
-	ft_get_leaks("UNKNOW_PROJECT", "creation du player");
+	// ft_get_leaks("UNKNOW_PROJECT", "creation du player");
 	if ((fd = open(path, O_RDONLY)) < 0)
 		error_exit(-7000, "imposible fd");
 	meshs = read_map_file(fd, player);
 	item_list = load_items(meshs);
 	close(fd);
 	engine->user_engine->player = player;
-	ft_get_leaks("UNKNOW_PROJECT", "player in engine");
+	// ft_get_leaks("UNKNOW_PROJECT", "player in engine");
 	t_engine_add_mesh(engine, engine->user_engine->player->hitbox);
 	set_map_in_engine(engine, meshs, item_list);
 	free_t_mesh_list(meshs);
 	free_t_item_list(item_list);
-	ft_get_leaks("UNKNOW_PROJECT", "fin de lecture de la map");
+	// ft_get_leaks("UNKNOW_PROJECT", "fin de lecture de la map");
 }

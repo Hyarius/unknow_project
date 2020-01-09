@@ -24,3 +24,8 @@ int		generate_nbr(int min, int max)
 	value += min;
 	return (value);
 }
+
+float generate_float(float rmin, float rmax) 
+{
+    return (rand() / (float)RAND_MAX) * (rmax - rmin) + rmin;
+}
