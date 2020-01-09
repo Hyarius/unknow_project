@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_camera_list.c                                    :+:      :+:    :+:   */
+/*   adding_t_camera_list.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 11:23:52 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/07 11:24:47 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/09 14:34:46 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,34 +76,4 @@ void			t_camera_list_add_back(t_camera_list *dest, t_camera *to_add)
 	}
 	dest->camera[dest->size] = *to_add;
 	(dest->size)++;
-}
-
-void			delete_t_camera_list(t_camera_list dest)
-{
-	free(dest.camera);
-}
-
-void			free_t_camera_list(t_camera_list *dest)
-{
-	delete_t_camera_list(*dest);
-	free(dest);
-}
-
-void			clean_t_camera_list(t_camera_list *dest)
-{
-	dest->size = 0;
-}
-
-t_camera		t_camera_list_at(t_camera_list *dest, int index)
-{
-	if (index < 0 || index >= dest->size)
-		error_exit(-24, "Segfault : t_camera_list out of range");
-	return (dest->camera[index]);
-}
-
-t_camera		*t_camera_list_get(t_camera_list *dest, int index)
-{
-	if (index < 0 || index >= dest->size)
-		error_exit(-24, "Segfault : t_camera_list out of range");
-	return (&(dest->camera[index]));
 }

@@ -1,6 +1,18 @@
-# include "unknow_project.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sound_engine.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/09 15:11:38 by gboutin           #+#    #+#             */
+/*   Updated: 2020/01/09 15:13:38 by gboutin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-t_sound_engine	create_t_sound_engine()
+#include "unknow_project.h"
+
+t_sound_engine	create_t_sound_engine(void)
 {
 	t_sound_engine	result;
 
@@ -9,7 +21,7 @@ t_sound_engine	create_t_sound_engine()
 	return (result);
 }
 
-t_sound_engine	*initialize_t_sound_engine()
+t_sound_engine	*initialize_t_sound_engine(void)
 {
 	t_sound_engine	*result;
 
@@ -31,18 +43,18 @@ void			free_t_sound_engine(t_sound_engine *dest)
 	free(dest);
 }
 
-Mix_Music	**load_music()
+Mix_Music		**load_music(void)
 {
-	Mix_Music 	**music;
-	int nb_music;
-	int i;
-	nb_music = 1;
+	Mix_Music	**music;
+	int			nb_music;
+	int			i;
 
+	nb_music = 1;
 	if (!(music = (Mix_Music**)malloc(sizeof(Mix_Music*) * nb_music)))
 		error_exit(66, "Couldn't malloc array of music (load_music)");
 	music[0] = Mix_LoadMUS("ressources/assets/sounds/IG_theme.ogg");
 	i = 0;
-	while(i < nb_music)
+	while (i < nb_music)
 		if (!music[i++])
 		{
 			ft_putstr("Mix_LoadWAV: ");
@@ -52,13 +64,13 @@ Mix_Music	**load_music()
 	return (music);
 }
 
-Mix_Chunk	**load_sounds()
+Mix_Chunk		**load_sounds(void)
 {
-	Mix_Chunk 	**sounds;
-	int nb_sounds;
-	int i;
-	nb_sounds = 7;
+	Mix_Chunk	**sounds;
+	int			nb_sounds;
+	int			i;
 
+	nb_sounds = 7;
 	if (!(sounds = (Mix_Chunk**)malloc(sizeof(Mix_Chunk*) * nb_sounds)))
 		error_exit(66, "Couldn't malloc array of sounds (load_sounds)");
 	sounds[0] = Mix_LoadWAV("ressources/assets/sounds/click.wav");
@@ -69,7 +81,7 @@ Mix_Chunk	**load_sounds()
 	sounds[5] = Mix_LoadWAV("ressources/assets/sounds/jetpack_stopping.wav");
 	sounds[6] = Mix_LoadWAV("ressources/assets/sounds/land.wav");
 	i = 0;
-	while(i < nb_sounds)
+	while (i < nb_sounds)
 		if (!sounds[i++])
 		{
 			ft_putstr("Mix_LoadWAV: ");

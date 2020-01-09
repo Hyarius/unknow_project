@@ -1,6 +1,18 @@
-# include "unknow_project.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   physic_engine.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/09 14:56:08 by gboutin           #+#    #+#             */
+/*   Updated: 2020/01/09 15:14:16 by gboutin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-t_physic_engine	create_t_physic_engine()
+#include "unknow_project.h"
+
+t_physic_engine	create_t_physic_engine(void)
 {
 	t_physic_engine	result;
 
@@ -10,7 +22,7 @@ t_physic_engine	create_t_physic_engine()
 	return (result);
 }
 
-t_physic_engine	*initialize_t_physic_engine()
+t_physic_engine	*initialize_t_physic_engine(void)
 {
 	t_physic_engine	*result;
 
@@ -108,38 +120,6 @@ int				can_move_axis(t_mesh *mesh, t_mesh *target, t_vector4 axis)
 	return (BOOL_TRUE);
 }
 
-/*
-** void			test_move_axis(t_mesh *mesh, float *force, t_vector4 axis, t_mesh *target)
-** {
-** 	float	max;
-** 	int		subdivision;
-** 	int		i;
-** 	float	delta;
-**
-** 	i = 0;
-** 	subdivision = 20;
-** 	delta = *force / subdivision;
-** 	max = *force;
-** 	*force = 0;
-** 	while (i < subdivision && is_t_mesh_intersecting(mesh, target) ==
-**< BOOL_FALSE)
-** 	{
-** 		i++;
-** 		*force += delta;
-** 		if (i == subdivision)
-** 			*force = max;
-** 		t_mesh_compute_next_vertices_in_world(mesh, axis);
-** 		if (is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
-** 		{
-** 			*force -= delta;
-** 			if (ft_strcmp(target->name, "ladder") == 0)
-** 				mesh->force.y = 0.02;
-** 		}
-** 	}
-** 	t_mesh_compute_next_vertices_in_world(mesh, axis);
-** }
-*/
-
 void			test_move_axis(t_mesh *mesh, float *force, t_vector4 axis, t_mesh *target)
 {
 	float	max;
@@ -170,7 +150,7 @@ void			test_move_axis(t_mesh *mesh, float *force, t_vector4 axis, t_mesh *target
 				{
 					t_mesh_compute_next_vertices_in_world(mesh, axis);
 					if (is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
-						break;
+						break ;
 					mesh->force.y += 0.001;
 				}
 				if (is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
@@ -248,8 +228,9 @@ int				can_move(t_mesh *mesh, t_engine *engine)
 
 void			t_physic_engine_compute_vertices_in_world(t_physic_engine *physic_engine)
 {
-	int i = 0;
+	int		i;
 
+	i = 0;
 	while (i < physic_engine->mesh_list->size)
 	{
 		t_mesh_compute_vertices_in_world(

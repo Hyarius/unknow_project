@@ -47,7 +47,7 @@ void			enemy_look(t_engine *engine);
 void			enemy_move(t_engine *engine);
 void    		save_map(t_engine *engine, int wich);
 void			save_player(t_engine *engine, int fd);
-void			link_t_camera_to_t_mesh(t_engine *engine, int index, t_mesh *mesh);
+void			link_camera_to_mesh(t_engine *engine, int index, t_mesh *mesh);
 t_mesh			create_mesh_editing(int index, t_vector4 pos, char *path);
 t_mesh			select_mesh(t_mesh mesh_editing, t_keyboard *p_keyboard, t_vector4 pos, char **path);
 void			cast_mesh(t_engine *engine, t_mesh *mesh_editing);

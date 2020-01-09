@@ -38,7 +38,6 @@ t_mesh		read_obj_file(char *path, t_vector4 pos, t_vector4 size, float gravity)
 			{
 				if (ft_tablen(line_split) == 5)
 				{
-					// Format : 2 - 1 - 3 - 4
 					i = 0;
 					while (i < 4)
 					{
@@ -59,7 +58,6 @@ t_mesh		read_obj_file(char *path, t_vector4 pos, t_vector4 size, float gravity)
 				}
 				else if (ft_tablen(line_split) == 4)
 				{
-					// Format : 2 - 1 - 3 - 4
 					i = 0;
 					while (i < 3)
 					{

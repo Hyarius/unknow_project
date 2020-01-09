@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   math_triangle.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/09 14:03:34 by gboutin           #+#    #+#             */
+/*   Updated: 2020/01/09 14:18:25 by gboutin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "unknow_project.h"
 
 int		is_triangle_parallele(t_triangle p_a, t_triangle p_b)
@@ -16,24 +28,8 @@ int		is_triangle_parallele(t_triangle p_a, t_triangle p_b)
 	return (BOOL_FALSE);
 }
 
-/*
-** int		intersect_triangle_by_segment(t_triangle p_triangle, t_vector4 p_normal,
-** 										t_line line, t_vector4 *intersection)
-** {
-** 	if (dot_t_vector4(p_normal,
-** 		normalize_t_vector4(substract_vector4_to_vector4(line.b, line.a))) == 0)
-** 		return (BOOL_ERROR);
-** 	*intersection = intersect_plane_by_line(p_normal, p_triangle.a,
-** 													line.a, line.b);
-** 	if (is_point_on_line(line.a, line.b, *intersection) == BOOL_FALSE)
-** 		return (BOOL_FALSE);
-** 	if (is_point_on_triangle(p_triangle, *intersection) == BOOL_FALSE)
-** 		return (BOOL_FALSE);
-** 	return (BOOL_TRUE);
-** }
-*/
-
-int		intersect_triangle_by_segment(t_triangle p_triangle, t_line line, t_vector4 *intersection)
+int		intersect_triangle_by_segment(t_triangle p_triangle, t_line line,
+														t_vector4 *intersection)
 {
 	t_vector4	t_v[6];
 	float		f[11];
@@ -57,7 +53,8 @@ int		intersect_triangle_by_segment(t_triangle p_triangle, t_line line, t_vector4
 	f[0] = (f[1] / f[2]);
 	if (f[0] < 0.0f || f[0] > 1.0f)
 		return (0);
-	*intersection = add_vector4_to_vector4(mult_vector4_by_float(t_v[3], f[0]), line.a);
+	*intersection = add_vector4_to_vector4(
+								mult_vector4_by_float(t_v[3], f[0]), line.a);
 	f[3] = dot_t_vector4(t_v[0], t_v[0]);
 	f[4] = dot_t_vector4(t_v[0], t_v[1]);
 	f[5] = dot_t_vector4(t_v[1], t_v[1]);
@@ -71,7 +68,7 @@ int		intersect_triangle_by_segment(t_triangle p_triangle, t_line line, t_vector4
 	f[10] = (f[4] * f[6] - f[3] * f[7]) / f[8];
 	if (f[10] < 0.0f || (f[9] + f[10]) > 1.0f)
 		return (0);
-	return 1;
+	return (1);
 }
 
 int		is_point_on_triangle(t_triangle a, t_vector4 point)

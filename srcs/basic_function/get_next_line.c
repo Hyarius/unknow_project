@@ -1,18 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/09 14:21:56 by gboutin           #+#    #+#             */
+/*   Updated: 2020/01/09 14:26:21 by gboutin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "unknow_project.h"
 
 static int			get_errors(int fd, char **line)
 {
-	char b[BUFF_SIZE + 1];
+	char	b[BUFF_SIZE + 1];
 
 	if ((fd < 0 || read(fd, b, 0) < 0 || BUFF_SIZE <= 0 || line == NULL))
 		return (1);
 	return (0);
 }
 
-
 static char			*get_read(const int fd, char *str, char *buff)
 {
-	int				ret;
+	int		ret;
 
 	if (str == NULL && (!(str = ft_strnew(0))))
 		return (NULL);
@@ -25,10 +36,10 @@ static char			*get_read(const int fd, char *str, char *buff)
 	return (str);
 }
 
-static t_list_fd		*ft_check_fd(const int fd, t_list_fd **begin)
+static t_list_fd	*ft_check_fd(const int fd, t_list_fd **begin)
 {
-	t_list_fd			*tmp;
-	t_list_fd			*new;
+	t_list_fd	*tmp;
+	t_list_fd	*new;
 
 	tmp = *begin;
 	new = NULL;
@@ -46,7 +57,7 @@ static t_list_fd		*ft_check_fd(const int fd, t_list_fd **begin)
 	return (new);
 }
 
-static int		end_of_gnl(t_list_fd **begin)
+static int			end_of_gnl(t_list_fd **begin)
 {
 	ft_lstdel(begin, &ft_del_cont);
 	return (0);
@@ -55,18 +66,17 @@ static int		end_of_gnl(t_list_fd **begin)
 int					get_next_line(const int fd, char **line)
 {
 	static t_list_fd	*begin = NULL;
-	char			*tmp;
-	char			*buff;
-	int				endline;
+	char				*tmp;
+	char				*buff;
+	int					endline;
 	t_list_fd			*current;
 
 	*line = NULL;
-	if (get_errors(fd, line) == 1 || !(current = ft_check_fd(fd, &begin)))
-		return (-1);
-	if (!(buff = ft_strnew(BUFF_SIZE)))
+	if (get_errors(fd, line) == 1 || !(current = ft_check_fd(fd, &begin))
+											|| !(buff = ft_strnew(BUFF_SIZE)))
 		return (-1);
 	current->rest = get_read(fd, (char*)current->rest, buff);
-	if ((ft_strcmp((char*)current->rest, "") == 0) && (read(fd, buff, BUFF_SIZE) == 0))
+	if ((ft_strcmp(current->rest, "") == 0) && (read(fd, buff, BUFF_SIZE) == 0))
 		return (end_of_gnl(&begin));
 	else if ((char*)current->rest)
 	{
@@ -79,6 +89,5 @@ int					get_next_line(const int fd, char **line)
 		ft_strdel((char**)&current->rest);
 		current->rest = tmp;
 	}
-	// ft_get_leaks("UNKNOW_PROJECT", "GNL");
 	return (1);
 }

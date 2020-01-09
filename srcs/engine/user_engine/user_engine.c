@@ -1,6 +1,18 @@
-# include "unknow_project.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   user_engine.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/09 15:09:52 by gboutin           #+#    #+#             */
+/*   Updated: 2020/01/09 15:10:49 by gboutin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-t_user_engine	create_t_user_engine()
+#include "unknow_project.h"
+
+t_user_engine	create_t_user_engine(void)
 {
 	t_user_engine	result;
 
@@ -9,7 +21,7 @@ t_user_engine	create_t_user_engine()
 	return (result);
 }
 
-t_user_engine	*initialize_t_user_engine()
+t_user_engine	*initialize_t_user_engine(void)
 {
 	t_user_engine	*result;
 
@@ -34,13 +46,16 @@ void			free_t_user_engine(t_user_engine *dest)
 void			t_user_engine_handle_camera(t_engine *engine, t_camera *cam,
 											t_window *p_win)
 {
-	t_mouse *mouse = engine->user_engine->mouse;
-	t_keyboard *keyboard = engine->user_engine->keyboard;
-	get_t_mouse_info(mouse); // recuperation des informations mouse (position, et boutton utiliser)
-	handle_t_camera_view_by_mouse(cam, mouse); // calcul du mouvement de l'angle de la camera a la souris
+	t_mouse		*mouse;
+	t_keyboard	*keyboard;
+
+	keyboard = engine->user_engine->keyboard;
+	mouse = engine->user_engine->mouse;
+	get_t_mouse_info(mouse);
+	handle_t_camera_view_by_mouse(cam, mouse);
 	SDL_WarpMouseInWindow(p_win->window, WIN_X / 2, WIN_Y / 2);
 	if (engine->playing == 1)
-		handle_t_camera_mouvement_by_key(cam, keyboard, engine); // deplacement cameras
+		handle_t_camera_mouvement_by_key(cam, keyboard, engine);
 	if (engine->playing == 10)
 		move_cam(cam, keyboard, engine);
 	compute_t_camera(cam);

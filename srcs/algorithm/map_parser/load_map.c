@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   load_map.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/09 13:40:38 by gboutin           #+#    #+#             */
+/*   Updated: 2020/01/09 13:44:22 by gboutin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "unknow_project.h"
 
 void	link_enemy_to_camera(t_engine *engine, int k)
@@ -34,7 +46,7 @@ void	set_map_in_engine(t_engine *engine, t_mesh_list *meshs,
 		{
 			if (k >= 0)
 				link_enemy_to_camera(engine, k);
-			link_t_camera_to_t_mesh(engine, 2 + k, t_engine_get_mesh(engine, i));
+			link_camera_to_mesh(engine, 2 + k, t_engine_get_mesh(engine, i));
 			k++;
 		}
 		i++;

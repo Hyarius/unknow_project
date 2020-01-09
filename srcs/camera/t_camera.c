@@ -8,32 +8,34 @@ t_camera	create_t_camera(t_window *window, t_vector4 p_pos, float p_fov, t_vecto
 				create_t_vector2_int(0, 0), create_t_vector2_int(window->size_x,
 				window->size_y));
 	result.body = NULL;
-	result.pos = p_pos; //position de la camera
-	result.fov = p_fov; // champ de vision
-	result.near = p_dist.x; //distance la plus proche pour voir un objet
-	result.far = p_dist.y; // distance la plus eloigne pour voir un objet
-	result.yaw = 0; // angle a laquel on voit l'objet
-	result.pitch = 0; // angle a laquel on voit l'objet
-	result.speed = 0.1f; // vitesse de deplacement
-	result.running = 1.8f; // action de courir
-	result.slowing = 1.0f; // ralentissement pour le recul
+	result.pos = p_pos;
+	result.fov = p_fov;
+	result.near = p_dist.x;
+	result.far = p_dist.y;
+	result.dist_max = 0.0f;
+	result.yaw = 0.0f;
+	result.pitch = 0.0f;
+	result.speed = 0.1f;
+	result.running = 1.8f;
+	result.slowing = 1.0f;
 	result.crounch = 0;
 	result.f_press = 0;
 	result.r_press = 0;
-	result.model = create_t_matrix(); // creation de la matrice d'identite permettant de faire les calculs matriciel par la suite
-	t_camera_look_at(&result); //calcul de l'angle de la camera
-	result.view = t_camera_compute_view(&result); //calcul de la matrice de vue
-	result.projection = compute_projection_matrix(&result); //calcul de la matrice de projection
-	result.sun_direction = normalize_t_vector4(create_t_vector4(0.2, -1, -0.4)); // direction de la lumiere
-	result.triangle_color_list = create_t_triangle_list(); // list des triangles
-	result.color_list = create_t_color_list(); //list des couleurs
+	result.model = create_t_matrix();
+	t_camera_look_at(&result);
+	result.view = t_camera_compute_view(&result);
+	result.projection = compute_projection_matrix(&result);
+	result.sun_direction = normalize_t_vector4(create_t_vector4(0.2, -1, -0.4));
+	result.triangle_color_list = create_t_triangle_list();
+	result.color_list = create_t_color_list();
 	result.triangle_texture_list = create_t_triangle_list();
 	result.uv_list = create_t_uv_list();
 	result.darkness_list = create_t_color_list();
 	return (result);
 }
 
-t_camera	*initialize_t_camera(t_window *window, t_vector4 p_pos, float p_fov, t_vector2 p_dist)
+t_camera	*initialize_t_camera(t_window *window, t_vector4 p_pos,
+												float p_fov, t_vector2 p_dist)
 {
 	t_camera	*result;
 
@@ -43,7 +45,8 @@ t_camera	*initialize_t_camera(t_window *window, t_vector4 p_pos, float p_fov, t_
 	return (result);
 }
 
-void		t_camera_set_view_port(t_camera *camera, t_vector2_int new_pos, t_vector2_int new_size)
+void		t_camera_set_view_port(t_camera *camera, t_vector2_int new_pos,
+														t_vector2_int new_size)
 {
 	move_t_view_port(camera->view_port, new_pos);
 	resize_t_view_port(camera->view_port, new_size);
@@ -54,7 +57,8 @@ void		t_camera_change_window(t_camera *camera, t_window *new_window)
 	t_view_port_change_window(camera->view_port, new_window);
 }
 
-void		t_camera_change_view_port(t_camera *camera, t_view_port *new_view_port)
+void		t_camera_change_view_port(t_camera *camera,
+													t_view_port *new_view_port)
 {
 	free(camera->view_port);
 	camera->view_port = new_view_port;
@@ -76,7 +80,7 @@ void		free_t_cam(t_camera *dest)
 	free(dest);
 }
 
-void		t_camera_look_at_point(t_camera *cam, t_vector4 targ) // calcul de l'angle de vue de la camera (forward, right, up)
+void		t_camera_look_at_point(t_camera *cam, t_vector4 targ)
 {
 	t_vector4	result;
 
@@ -90,7 +94,7 @@ void		t_camera_look_at_point(t_camera *cam, t_vector4 targ) // calcul de l'angle
 	t_camera_look_at(cam);
 }
 
-void		t_camera_look_at(t_camera *cam) // calcul de l'angle de vue de la camera (forward, right, up)
+void		t_camera_look_at(t_camera *cam)
 {
 	t_vector4	xaxis;
 	t_vector4	yaxis;
@@ -109,7 +113,7 @@ void		t_camera_look_at(t_camera *cam) // calcul de l'angle de vue de la camera (
 	cam->up = yaxis;
 }
 
-t_matrix	t_camera_compute_view(t_camera *cam) //calcul de la matrice de vue
+t_matrix	t_camera_compute_view(t_camera *cam)
 {
 	t_matrix	result;
 
@@ -137,7 +141,7 @@ void		t_camera_change_fov(t_camera *cam, float delta)
 		cam->fov /= delta;
 }
 
-t_matrix	compute_projection_matrix(t_camera *p_cam) //calcul de la matrice de projection
+t_matrix	compute_projection_matrix(t_camera *p_cam)
 {
 	t_matrix	result;
 	float		n;
@@ -149,7 +153,7 @@ t_matrix	compute_projection_matrix(t_camera *p_cam) //calcul de la matrice de pr
 	n = p_cam->near;
 	r = 1.0 / (tan(degree_to_radius(p_cam->fov / 2.0)));
 	f = p_cam->far;
-	t = 1.0 / (tan(degree_to_radius(p_cam->fov / 2.0))) / (4.0 / 3.0); // changer le (4/3) en (16/9) va changer le ratio de l'ecran, changeant l'apparence des cubes a l'ecran
+	t = 1.0 / (tan(degree_to_radius(p_cam->fov / 2.0))) / (4.0 / 3.0);
 	result.value[0][0] = t;
 	result.value[1][1] = r;
 	result.value[2][2] = f / (f - n);
@@ -164,14 +168,18 @@ void		compute_t_camera(t_camera *cam)
 	cam->projection = compute_projection_matrix(cam);
 }
 
-t_vector4	apply_t_camera(t_vector4 *src, t_matrix *mat) // applique la position de la camera
+t_vector4	apply_t_camera(t_vector4 *src, t_matrix *mat)
 {
-	t_vector4	result; // x -> coord a l'ecran en x de ce point / y -> coord a l'ecran en y de ce point / z -> distance reelle entre ce point et l'oeil de la camera
+	t_vector4	result;
 
-	result.x = src->x * mat->value[0][0] + src->y * mat->value[1][0] + src->z * mat->value[2][0] + mat->value[3][0];
-	result.y = src->x * mat->value[0][1] + src->y * mat->value[1][1] + src->z * mat->value[2][1] + mat->value[3][1];
-	result.z = src->x * mat->value[0][2] + src->y * mat->value[1][2] + src->z * mat->value[2][2] + mat->value[3][2];
-	result.w = src->x * mat->value[0][3] + src->y * mat->value[1][3] + src->z * mat->value[2][3] + mat->value[3][3];
+	result.x = src->x * mat->value[0][0] + src->y * mat->value[1][0]
+								+ src->z * mat->value[2][0] + mat->value[3][0];
+	result.y = src->x * mat->value[0][1] + src->y * mat->value[1][1]
+								+ src->z * mat->value[2][1] + mat->value[3][1];
+	result.z = src->x * mat->value[0][2] + src->y * mat->value[1][2]
+								+ src->z * mat->value[2][2] + mat->value[3][2];
+	result.w = src->x * mat->value[0][3] + src->y * mat->value[1][3]
+								+ src->z * mat->value[2][3] + mat->value[3][3];
 	if (result.w != 0)
 	{
 		result.x /= result.w;
@@ -181,10 +189,10 @@ t_vector4	apply_t_camera(t_vector4 *src, t_matrix *mat) // applique la position 
 	return (result);
 }
 
-void		t_camera_change_view(t_camera *cam, float delta_pitch, float delta_yaw)
+void		t_camera_change_view(t_camera *cam, float pitch, float yaw)
 {
-	cam->pitch = clamp_float_value(-89, cam->pitch + delta_pitch , 89);
-	cam->yaw += delta_yaw;
+	cam->pitch = clamp_float_value(-89, cam->pitch + pitch, 89);
+	cam->yaw += yaw;
 	t_camera_look_at(cam);
 }
 
@@ -208,7 +216,8 @@ void		move_cam(t_camera *camera, t_keyboard *key, t_engine *engine)
 		camera->pos.y -= 0.5;
 }
 
-void		move_camera(t_camera *camera, t_vector4 mouvement, t_engine *engine, float j)
+void		move_camera(t_camera *camera, t_vector4 mouvement,
+													t_engine *engine, float j)
 {
 	if (camera->body->no_hitbox == 1 && camera->body->is_visible == 0)
 		t_mesh_move(camera->body, camera->body->force);
@@ -221,7 +230,7 @@ void		move_camera(t_camera *camera, t_vector4 mouvement, t_engine *engine, float
 	engine->user_engine->player->hitbox.pos = camera->pos;
 }
 
-void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard, t_engine *engine) // calcul du mouvement de la cameraera au clavier
+void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard, t_engine *engine)
 {
 	t_mesh			*target;
 	t_vector4		tmp;
@@ -329,7 +338,7 @@ void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard,
 	camera->body->force = mult_vector4_by_vector4(camera->body->force, create_t_vector4(0.0, 1.0, 0.0));
 }
 
-void		handle_t_camera_view_by_mouse(t_camera *cam, t_mouse *p_mouse) // calcul du mouvement de l'angle de la camera a la souris
+void		handle_t_camera_view_by_mouse(t_camera *cam, t_mouse *p_mouse)
 {
 	float delta_pitch;
 	float delta_yaw;
@@ -339,14 +348,13 @@ void		handle_t_camera_view_by_mouse(t_camera *cam, t_mouse *p_mouse) // calcul d
 	t_camera_change_view(cam, delta_yaw, delta_pitch);
 }
 
-void 		t_camera_calc_depth(t_camera *p_cam)
+void		t_camera_calc_depth(t_camera *p_cam)
 {
 	t_triangle	triangle;
 	int			i;
 
-	p_cam->dist_max = 0.0f;
-	i = 0;
-	while (i < p_cam->triangle_color_list.size)
+	i = -1;
+	while (++i < p_cam->triangle_color_list.size)
 	{
 		triangle = t_triangle_list_at(&(p_cam->triangle_color_list), i);
 		if (triangle.a.z > p_cam->dist_max)
@@ -355,10 +363,9 @@ void 		t_camera_calc_depth(t_camera *p_cam)
 			p_cam->dist_max = triangle.b.z;
 		else if (triangle.c.z > p_cam->dist_max)
 			p_cam->dist_max = triangle.c.z;
-		i++;
 	}
-	i = 0;
-	while (i < p_cam->triangle_texture_list.size)
+	i = -1;
+	while (++i < p_cam->triangle_texture_list.size)
 	{
 		triangle = t_triangle_list_at(&(p_cam->triangle_texture_list), i);
 		if (triangle.a.z > p_cam->dist_max)
@@ -367,7 +374,6 @@ void 		t_camera_calc_depth(t_camera *p_cam)
 			p_cam->dist_max = triangle.b.z;
 		else if (triangle.c.z > p_cam->dist_max)
 			p_cam->dist_max = triangle.c.z;
-		i++;
 	}
 }
 
@@ -398,9 +404,11 @@ void		draw_depth_from_camera_on_screen(t_camera *p_cam)
 void		draw_triangle_from_camera_on_screen(t_camera *p_cam)
 {
 	if (p_cam->triangle_color_list.size > 0)
-		multithreading_draw_triangle_color_cpu(p_cam->view_port, &(p_cam->triangle_color_list), &(p_cam->color_list));
+		multithreading_draw_triangle_color_cpu(p_cam->view_port,
+						&(p_cam->triangle_color_list), &(p_cam->color_list));
 	if (p_cam->triangle_texture_list.size > 0)
-		multithreading_draw_triangle_texture_cpu(p_cam->view_port, &(p_cam->triangle_texture_list), &(p_cam->uv_list));
+		multithreading_draw_triangle_texture_cpu(p_cam->view_port,
+						&(p_cam->triangle_texture_list), &(p_cam->uv_list));
 }
 
 void		clean_t_camera(t_camera *camera)
@@ -413,7 +421,7 @@ void		clean_t_camera(t_camera *camera)
 	t_view_port_clear_buffers(camera->view_port);
 }
 
-void		link_t_camera_to_t_mesh(t_engine *engine, int index, t_mesh *mesh)
+void		link_camera_to_mesh(t_engine *engine, int index, t_mesh *mesh)
 {
 	t_camera	*camera;
 

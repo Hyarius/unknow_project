@@ -1,8 +1,20 @@
-# include "unknow_project.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycasting.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/09 13:11:51 by gboutin           #+#    #+#             */
+/*   Updated: 2020/01/09 13:14:37 by gboutin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "unknow_project.h"
 
 t_mesh	*cast_ray_next(t_vector4 pos, t_vector4 direction, t_mesh *mesh)
 {
-	int 		k;
+	int			k;
 	t_line		line;
 	t_vector4	intersection;
 
@@ -19,11 +31,12 @@ t_mesh	*cast_ray_next(t_vector4 pos, t_vector4 direction, t_mesh *mesh)
 	return (NULL);
 }
 
-t_mesh	*cast_ray(t_engine *engine, t_vector4 pos, t_vector4 direction, char *shooter)
+t_mesh	*cast_ray(t_engine *engine, t_vector4 pos, t_vector4 direction,
+																char *shooter)
 {
-	int 		i;
-	int 		j;
-	t_mesh 		*mesh;
+	int			i;
+	int			j;
+	t_mesh		*mesh;
 
 	i = -1;
 	direction = divide_vector4_by_float(direction, 10);

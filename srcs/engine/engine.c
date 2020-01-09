@@ -1,4 +1,16 @@
-# include "unknow_project.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   engine.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/09 15:01:07 by gboutin           #+#    #+#             */
+/*   Updated: 2020/01/09 15:05:27 by gboutin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "unknow_project.h"
 
 t_engine	create_t_engine(t_window *p_window)
 {
@@ -40,7 +52,7 @@ void		free_t_engine(t_engine *dest)
 void		t_engine_handle_camera(t_engine *p_engine, t_window *p_win)
 {
 	t_user_engine_handle_camera(p_engine,
-								t_visual_engine_get_main_camera(p_engine->visual_engine), p_win);
+			t_visual_engine_get_main_camera(p_engine->visual_engine), p_win);
 }
 
 void		t_engine_draw_mesh(t_engine *p_engine)
@@ -50,7 +62,8 @@ void		t_engine_draw_mesh(t_engine *p_engine)
 	i = 0;
 	while (i < p_engine->visual_engine->camera_list->size)
 	{
-		t_physic_engine_draw_mesh(p_engine->physic_engine, t_camera_list_get(p_engine->visual_engine->camera_list, i));
+		t_physic_engine_draw_mesh(p_engine->physic_engine,
+					t_camera_list_get(p_engine->visual_engine->camera_list, i));
 		i++;
 	}
 }
@@ -65,23 +78,24 @@ void		t_engine_add_item(t_engine *engine, t_item p_item)
 	t_physic_engine_add_item(engine->physic_engine, p_item);
 }
 
-void		t_engine_handle_event(t_camera *main_camera, t_gui *gui, t_engine *engine)
+void		t_engine_handle_event(t_camera *main_camera, t_gui *gui,
+															t_engine *engine)
 {
 	static float	size = 0.45;
 	t_mesh			*mesh;
 	int				i;
 
-	if (engine->playing == 1 && get_key_state(engine->user_engine->keyboard, SDL_SCANCODE_P) == 1)
+	if (engine->playing == 1
+		&& get_key_state(engine->user_engine->keyboard, SDL_SCANCODE_P) == 1)
 		engine->playing = -2;
-	else if (engine->playing <= -2 && get_key_state(engine->user_engine->keyboard, SDL_SCANCODE_P) == 1)
+	else if (engine->playing <= -2
+		&& get_key_state(engine->user_engine->keyboard, SDL_SCANCODE_P) == 1)
 		engine->playing = 1;
-	t_user_engine_handle_pause(main_camera, gui, engine->user_engine, &(engine->playing));
+	t_user_engine_handle_pause(main_camera, gui, engine->user_engine,
+															&(engine->playing));
 	t_user_engine_handle_menu(main_camera, gui, engine, &(engine->playing));
 	if (t_user_engine_poll_event(engine->user_engine) > 0)
-	{
 		t_user_engine_handle_quit(engine->user_engine, &(engine->playing));
-	}
-
 }
 
 t_mesh		*t_engine_get_mesh(t_engine *p_engine, int index)
@@ -95,15 +109,20 @@ void		t_engine_apply_physic(t_engine *engine)
 	t_physic_engine_apply_force(engine);
 }
 
-void		t_engine_place_camera(t_engine *engine, int index, t_vector4 p_new_pos)
+void		t_engine_place_camera(t_engine *engine, int index,
+															t_vector4 p_new_pos)
 {
-	t_camera_list_get(engine->visual_engine->camera_list, index)->pos = p_new_pos;
+	t_camera_list_get(engine->visual_engine->camera_list,
+													index)->pos = p_new_pos;
 }
 
-void		t_engine_camera_look_at(t_engine *engine, int index, t_vector4 target)
+void		t_engine_camera_look_at(t_engine *engine, int index,
+															t_vector4 target)
 {
-	t_camera_look_at_point(t_camera_list_get(engine->visual_engine->camera_list, index), target);
-	compute_t_camera(t_camera_list_get(engine->visual_engine->camera_list, index));
+	t_camera_look_at_point(t_camera_list_get(engine->visual_engine->camera_list,
+																index), target);
+	compute_t_camera(t_camera_list_get(engine->visual_engine->camera_list,
+																		index));
 }
 
 void		t_engine_render_camera(t_engine *engine)

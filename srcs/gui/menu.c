@@ -89,7 +89,7 @@ void			play_menu(t_camera *main_camera, t_engine *engine, int *play)
 	{
 		load_map(main_camera, engine, path);
 		if (*play == 1)
-			link_t_camera_to_t_mesh(engine, 0, t_engine_get_mesh(engine, 0));
+			link_camera_to_mesh(engine, 0, t_engine_get_mesh(engine, 0));
 		free(path);
 	}
 }

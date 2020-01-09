@@ -1,40 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   setting_float.c                                    :+:      :+:    :+:   */
+/*   cleanning_t_camera_list.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/08 13:44:15 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/09 13:57:18 by gboutin          ###   ########.fr       */
+/*   Created: 2020/01/09 14:31:22 by gboutin           #+#    #+#             */
+/*   Updated: 2020/01/09 14:31:37 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-float		round_float(float x, unsigned int round)
+void			delete_t_camera_list(t_camera_list dest)
 {
-	int		i;
-	float	ret;
-
-	i = 1;
-	if (round == 0)
-		return (0);
-	while (round > 1)
-	{
-		i = i * 10;
-		round--;
-	}
-	ret = x * i;
-	ret = roundf(ret);
-	ret = ret / i;
-	return (ret);
+	free(dest.camera);
 }
 
-t_vector4	round_t_vector4(t_vector4 a, unsigned int round)
+void			free_t_camera_list(t_camera_list *dest)
 {
-	a.x = round_float(a.x, round);
-	a.y = round_float(a.y, round);
-	a.z = round_float(a.z, round);
-	return (a);
+	delete_t_camera_list(*dest);
+	free(dest);
+}
+
+void			clean_t_camera_list(t_camera_list *dest)
+{
+	dest->size = 0;
 }
