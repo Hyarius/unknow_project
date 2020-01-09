@@ -1,9 +1,18 @@
-#include "unknow_project.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   t_gui.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/09 15:58:51 by gboutin           #+#    #+#             */
+/*   Updated: 2020/01/09 16:03:56 by gboutin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-t_gui create_t_gui(void)
+#include "unknow_project.h"
+
+t_gui	create_t_gui(void)
 {
 	t_gui	result;
 	int		idx;
@@ -19,7 +28,8 @@ t_gui create_t_gui(void)
 			error_exit(-29, "Can't malloc a t_surface");
 		if (!(result.letter[idx]->let = (t_texture *)malloc(sizeof(t_texture))))
 			error_exit(-29, "Can't malloc a t_surface");
-		if (!(result.letter[idx]->let->surface = (t_surface *)malloc(sizeof(t_surface))))
+		if (!(result.letter[idx]->let->surface =\
+										(t_surface *)malloc(sizeof(t_surface))))
 			error_exit(-29, "Can't malloc a t_surface");
 	}
 	result.idx = 8;
@@ -29,9 +39,9 @@ t_gui create_t_gui(void)
 	return (result);
 }
 
-t_gui *initialize_t_gui(void)
+t_gui	*initialize_t_gui(void)
 {
-	t_gui *result;
+	t_gui	*result;
 
 	if (!(result = (t_gui *)malloc(sizeof(t_gui))))
 		error_exit(-13, "Can't create a t_gui");
@@ -41,7 +51,7 @@ t_gui *initialize_t_gui(void)
 
 void	set_t_gui_texte(t_gui *gui)
 {
-	int 	i;
+	int		i;
 	char	letter;
 
 	i = 32;
@@ -51,7 +61,6 @@ void	set_t_gui_texte(t_gui *gui)
 		load_letter(gui, &letter, i - 32);
 		i++;
 		letter++;
-
 	}
 }
 
@@ -60,24 +69,22 @@ void	print_letter(t_camera *main_cam, t_gui *gui, char *str, t_rectangle rec)
 	int		i;
 	int		idx;
 
-	i = 0;
+	i = -1;
 	t_view_port_clear_buffers(main_cam->view_port);
-	while (i < ft_strlen(str))
+	while (++i < ft_strlen(str))
 	{
-		idx = 0;
-		while (idx <= 94)
+		idx = -1;
+		while (++idx <= 94)
 		{
 			if (str[i] == gui->letter[idx]->let->letter)
 			{
-			    draw_rectangle_texture_cpu(main_cam->view_port, rec,
+				draw_rectangle_texture_cpu(main_cam->view_port, rec,
 											gui->letter[idx]->let);
 				rec.pos = add_vector2_to_vector2(rec.pos,
-											create_t_vector2(rec.size.x , 0.0));
+											create_t_vector2(rec.size.x, 0.0));
 				break ;
 			}
-			idx++;
 		}
-		i++;
 	}
 }
 

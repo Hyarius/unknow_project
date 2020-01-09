@@ -236,25 +236,6 @@ void        settings_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user
     }
     else
         user_engine->mouse->clicked_left = BOOL_FALSE;
-    // if (pos.y > 65 && pos.y < 69)
-    // {
-    //     if (pos.x == 17)
-    //         if (t_mouse_state(mouse) == 2)
-    //             gui->sens = 1;
-    //     if (pos.x == 20)
-    //         if (t_mouse_state(mouse) == 2)
-    //             gui->sens = 2;
-    //     if (pos.x == 24)
-    //         if (t_mouse_state(mouse) == 2)
-    //             gui->sens = 3;
-    //     if (pos.x == 28)
-    //         if (t_mouse_state(mouse) == 2)
-    //             gui->sens = 4;
-    //     if (pos.x == 31)
-    //         if (t_mouse_state(mouse) == 2)
-    //             gui->sens = 5;
-    //     printf("Sensi = %d\n", gui->sens);
-    // }
 }
 
 void        controls_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int *play)
