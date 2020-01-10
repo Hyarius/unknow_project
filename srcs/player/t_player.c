@@ -116,6 +116,25 @@ void			reload_weapon(t_camera *camera, t_player *player, int tick)
 	}
 }
 
+void			player_take_dmg(t_engine *engine, int dmg)
+{
+	int	diff;
+
+	if (engine->user_engine->player->armor != 0)
+	{
+		if (engine->user_engine->player->armor >= dmg)
+			engine->user_engine->player->armor -= dmg;
+		else
+		{
+			diff = dmg - engine->user_engine->player->armor;
+			engine->user_engine->player->armor = 0;
+			engine->user_engine->player->hp -= diff;
+		}
+	}
+	else
+		engine->user_engine->player->hp -= dmg;
+}
+
 void			shoot_weapon(t_engine *engine)
 {
 	t_mesh	*target;
@@ -138,10 +157,11 @@ void			shoot_weapon(t_engine *engine)
 				{
 					if (ft_strcmp(target->name, "wall_script") == 0)
 						t_mesh_activate_gravity(&engine->user_engine->player->hitbox, 0.0f);
-					if (ft_strcmp(target->name, "Enemy") == '_')
-						t_mesh_set_name(target, "Dead_enemy");
-					t_mesh_set_visibility(target, BOOL_FALSE);
-					target->no_hitbox = 1;
+					destroy_mesh(target);
+					// if (ft_strcmp(target->name, "Enemy") == '_')
+					// 	t_mesh_set_name(target, "Dead_enemy");
+					// t_mesh_set_visibility(target, BOOL_FALSE);
+					// target->no_hitbox = 1;
 				}
 			}
 			if (ft_strcmp(engine->user_engine->player->current_weapon->name, "ar") == 0)

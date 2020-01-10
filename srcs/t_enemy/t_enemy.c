@@ -38,7 +38,7 @@ void		enemy_look(t_engine *engine)
 void		enemy_shoot(t_engine *engine)
 {
 	int			i;
-	int			diff;
+	// int			diff;
 	t_mesh		*target;
 	t_mesh		*mesh;
 
@@ -51,19 +51,20 @@ void		enemy_shoot(t_engine *engine)
 			mesh = cast_ray(engine, target->camera->pos, target->camera->forward, "Enemy_basic");
 			if (mesh != NULL && engine->tick - target->tick == 2 && ft_strcmp(mesh->name, "Player") == 0)
 			{
-				if (engine->user_engine->player->armor != 0)
-				{
-					if (engine->user_engine->player->armor >= 5)
-						engine->user_engine->player->armor -= 5;
-					else
-					{
-						diff = 5 - engine->user_engine->player->armor;
-						engine->user_engine->player->armor = 0;
-						engine->user_engine->player->hp -= diff;
-					}
-				}
-				else
-					engine->user_engine->player->hp -= 5;
+				player_take_dmg(engine, 5);
+				// if (engine->user_engine->player->armor != 0)
+				// {
+				// 	if (engine->user_engine->player->armor >= 5)
+				// 		engine->user_engine->player->armor -= 5;
+				// 	else
+				// 	{
+				// 		diff = 5 - engine->user_engine->player->armor;
+				// 		engine->user_engine->player->armor = 0;
+				// 		engine->user_engine->player->hp -= diff;
+				// 	}
+				// }
+				// else
+				// 	engine->user_engine->player->hp -= 5;
 				target->tick = -5;
 			}
 			else if (mesh != NULL && engine->tick - target->tick > 3 && ft_strcmp(mesh->name, "Player") == 0)

@@ -38,7 +38,7 @@ void			enemy_boss_look(t_engine *engine)
 void			enemy_boss_shoot(t_engine *engine)
 {
 	int			i;
-	int			diff;
+	// int			diff;
 	t_mesh		*target;
 	t_mesh		*mesh;
 
@@ -58,24 +58,26 @@ void			enemy_boss_shoot(t_engine *engine)
 				{
 					if (ft_strcmp(mesh->name, "Player") == 0)
 					{
-						if (engine->user_engine->player->armor != 0)
-						{
-							if (engine->user_engine->player->armor >= 30)
-								engine->user_engine->player->armor -= 30;
-							else
-							{
-								diff = 30 - engine->user_engine->player->armor;
-								engine->user_engine->player->armor = 0;
-								engine->user_engine->player->hp -= diff;
-							}
-						}
-						else
-							engine->user_engine->player->hp -= 30;
+						player_take_dmg(engine, 30);
+						// if (engine->user_engine->player->armor != 0)
+						// {
+						// 	if (engine->user_engine->player->armor >= 30)
+						// 		engine->user_engine->player->armor -= 30;
+						// 	else
+						// 	{
+						// 		diff = 30 - engine->user_engine->player->armor;
+						// 		engine->user_engine->player->armor = 0;
+						// 		engine->user_engine->player->hp -= diff;
+						// 	}
+						// }
+						// else
+						// 	engine->user_engine->player->hp -= 30;
 					}
 					else if (mesh->hp != -1)
 					{
-						t_mesh_set_visibility(mesh, BOOL_FALSE);
-						mesh->no_hitbox = 1;
+						destroy_mesh(mesh);
+						// t_mesh_set_visibility(mesh, BOOL_FALSE);
+						// mesh->no_hitbox = 1;
 					}
 				}
 				target->tick = engine->tick;
@@ -93,18 +95,18 @@ t_vector4	spawn_mine(t_vector4 pos)
 	if (ret.x > -1.5f && ret.x < 1.5f)
 	{
 		if (ret.x < 0)
-			ret.x -= 1.5f;
+			ret.x -= 1.0f;
 		else
-			ret.x += 1.5f;
+			ret.x += 1.0f;
 	}
 	ret.y = 0.0001;
 	ret.z = generate_float(pos.z - 4.5, pos.z + 4.5);
 	if (ret.z > -1.5f && ret.z < 1.5f)
 	{
 		if (ret.z < 0)
-			ret.z -= 1.5f;
+			ret.z -= 1.0f;
 		else
-			ret.z += 1.5f;
+			ret.z += 1.0f;
 	}
 	ret.w = 1.0;
 	return (ret);
@@ -133,10 +135,7 @@ void			enemy_boss_spawn(t_engine *engine)
 				t_mesh_set_color(&mesh, create_t_color(1.0, 1.0, 1.0, 1.0));
 				t_mesh_set_name(&mesh, "Enemy_mine");
 				mesh.hp = 10;
-				// cast_mesh_bis(engine, &mesh);
 				t_engine_add_mesh(engine, mesh);
-				// link_enemy_to_camera(engine, k);
-				// link_t_camera_to_t_mesh(engine, 2 + k, t_engine_get_mesh(engine, engine->physic_engine->mesh_list->size - 1));
 				j = engine->tick;
 			}
 		}

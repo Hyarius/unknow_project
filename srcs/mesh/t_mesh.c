@@ -420,3 +420,10 @@ void	t_mesh_free_move(t_mesh *mesh)
 	t_mesh_set_visibility(mesh, BOOL_FALSE);
 	mesh->no_hitbox = 1;
 }
+
+void	destroy_mesh(t_mesh *mesh)
+{
+	mesh->no_hitbox = 1;
+	t_mesh_set_visibility(mesh, BOOL_FALSE);
+	t_mesh_set_name(mesh, "mesh_destroy");
+}

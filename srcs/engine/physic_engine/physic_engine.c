@@ -232,6 +232,12 @@ int				can_move(t_mesh *mesh, t_engine *engine)
 			}
 			if (is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
 				printf("%s\n", target->name);
+			if (is_t_mesh_intersecting(mesh, target) == BOOL_TRUE && ft_strcmp(target->name, "Enemy") == '_')
+			{
+				player_take_dmg(engine, 10);
+				if (ft_strcmp(target->name, "Enemy_mine") == 0)
+					destroy_mesh(target);
+			}
 			if (t_mesh_on_mesh(mesh, target) == 1 && ft_strcmp(target->name, "end") == 0)
 				engine->playing = -1;
 			if (is_t_mesh_intersecting(mesh, target) == BOOL_TRUE && ft_strcmp(target->name, "stair") == 0)
