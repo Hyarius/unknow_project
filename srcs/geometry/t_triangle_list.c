@@ -73,13 +73,15 @@ void			t_triangle_list_add_back(t_triangle_list *dest, t_triangle *add)
 
 void			delete_t_triangle_list(t_triangle_list dest)
 {
-	free(dest.triangle);
+	ft_memdel((void**)&(dest.triangle));
+	// free(dest.triangle);
 }
 
 void			free_t_triangle_list(t_triangle_list *dest)
 {
 	delete_t_triangle_list(*dest);
-	free(dest);
+	ft_memdel((void**)&(dest));
+	// free(dest);
 }
 
 void			clean_t_triangle_list(t_triangle_list *dest)

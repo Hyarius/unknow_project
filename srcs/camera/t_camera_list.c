@@ -70,14 +70,16 @@ void			t_camera_list_add_back(t_camera_list *dest, t_camera *to_add)
 
 void			delete_t_camera_list(t_camera_list dest)
 {
+	ft_memdel((void**)&(dest.camera));
 	// free_t_cam(dest.camera);
-	free(dest.camera);
+	// free(dest.camera);
 }
 
 void			free_t_camera_list(t_camera_list *dest)
 {
 	delete_t_camera_list(*dest);
-	free(dest);
+	ft_memdel((void**)&(dest));
+	// free(dest);
 }
 
 void			clean_t_camera_list(t_camera_list *dest)

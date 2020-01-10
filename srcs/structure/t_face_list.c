@@ -75,14 +75,16 @@ void		t_face_list_add_back(t_face_list *dest, t_face *to_add)
 
 void		delete_t_face_list(t_face_list dest)
 {
-	free(dest.face);
+	ft_memdel((void**)&(dest.face));
+	// free(dest.face);
 	// printf("delete t_face_list\n");
 }
 
 void		free_t_face_list(t_face_list *dest)
 {
 	delete_t_face_list(*dest);
-	free(dest);
+	ft_memdel((void**)&(dest));
+	// free(dest);
 	// printf("free t_face_list\n");
 }
 

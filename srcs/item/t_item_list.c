@@ -60,13 +60,15 @@ void			t_item_list_erase(t_item_list *dest, int index)
 
 void			delete_t_item_list(t_item_list dest)
 {
-	free(dest.item);
+	ft_memdel((void**)&(dest.item));
+	// free(dest.item);
 }
 
 void			free_t_item_list(t_item_list *dest)
 {
 	delete_t_item_list(*dest);
-	free(dest);
+	ft_memdel((void**)&(dest));
+	// free(dest);
 }
 
 void			clean_t_item_list(t_item_list *dest)

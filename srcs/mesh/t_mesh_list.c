@@ -54,13 +54,15 @@ void		t_mesh_list_erase(t_mesh_list *dest, int index)
 
 void		delete_t_mesh_list(t_mesh_list dest)
 {
-	free(dest.mesh);
+	ft_memdel((void**)&(dest.mesh));
+	// free(dest.mesh);
 }
 
 void		free_t_mesh_list(t_mesh_list *dest)
 {
 	delete_t_mesh_list(*dest);
-	free(dest);
+	ft_memdel((void**)&(dest));
+	// free(dest);
 }
 
 void		clean_t_mesh_list(t_mesh_list *dest)

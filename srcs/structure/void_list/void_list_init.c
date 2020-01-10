@@ -23,15 +23,17 @@ t_void_list	*initialize_t_void_list(void)
 
 void		delete_t_void_list(t_void_list dest)
 {
-	free(dest.data);
-	dest.data = NULL;
+	ft_memdel((void**)&(dest.data));
+	// free(dest.data);
+	// dest.data = NULL;
 	dest.size = 0;
 }
 
 void		free_t_void_list(t_void_list *dest)
 {
 	delete_t_void_list(*dest);
-	free(dest);
+	ft_memdel((void**)&(dest));
+	// free(dest);
 }
 
 void		clean_t_void_list(t_void_list *dest)

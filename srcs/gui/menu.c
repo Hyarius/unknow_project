@@ -17,7 +17,7 @@ void            t_user_engine_handle_menu(t_camera *main_camera, t_gui *gui, t_e
 	else if (engine->playing == 12)
 		set_weapon_editing(main_camera, gui, engine, &engine->playing);
 	else if (engine->playing == 13 || engine->playing == 9)
-		save_pause(main_camera, gui, engine, &engine->playing);
+		save_pause(main_camera, gui, engine, win);
     else if (engine->playing == -1)
         pause_menu(main_camera, gui, engine, win);
     else if (engine->playing == -2)
@@ -146,7 +146,7 @@ void			pause_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, t_window 
 				// clean_t_mesh_list(engine->physic_engine->mesh_list);
 				// clean_t_item_list(engine->physic_engine->item_list);
 				// clean_t_camera_list(engine->visual_engine->camera_list);
-				// ft_get_leaks("UNKNOW_PROJECT", "ici");
+				// ft_get_leaks("UNKNOW_PROJECT", "debut fermeture");
 				free_t_physic_engine(engine->physic_engine);
 				// ft_get_leaks("UNKNOW_PROJECT", "free physic");
 				free_t_visual_engine(engine->visual_engine);
@@ -695,7 +695,7 @@ void		set_weapon_editing(t_camera *main_camera, t_gui *gui, t_engine *engine, in
 	}
 }
 
-void		save_pause(t_camera *main_camera, t_gui *gui, t_engine *engine, int *play)
+void		save_pause(t_camera *main_camera, t_gui *gui, t_engine *engine, t_window *win)
 {
 	t_mouse			*mouse = engine->user_engine->mouse;
 	t_keyboard		*keyboard = engine->user_engine->keyboard;
@@ -708,49 +708,56 @@ void		save_pause(t_camera *main_camera, t_gui *gui, t_engine *engine, int *play)
 		if (pos.y > 10 && pos.y < 18 && pos.x > 40 && pos.x < 59)
 		{
 			save_map(engine, 1);
-			if (*play == 13)
-				*play = 2;
-			if (*play == 9)
-				*play = -1;
+			if (engine->playing == 13)
+				engine->playing = 2;
+			if (engine->playing == 9)
+				engine->playing = -1;
 		}
 		if (pos.y > 26 && pos.y < 34 && pos.x > 40 && pos.x < 59)
 		{
 			save_map(engine, 2);
-			if (*play == 13)
-				*play = 2;
-			if (*play == 9)
-				*play = -1;
+			if (engine->playing == 13)
+				engine->playing = 2;
+			if (engine->playing == 9)
+				engine->playing = -1;
 		}
 		if (pos.y > 41 && pos.y < 49 && pos.x > 40 && pos.x < 59)
 		{
 			save_map(engine, 3);
-			if (*play == 13)
-				*play = 2;
-			if (*play == 9)
-				*play = -1;
+			if (engine->playing == 13)
+				engine->playing = 2;
+			if (engine->playing == 9)
+				engine->playing = -1;
 		}
 		if (pos.y > 57 && pos.y < 65 && pos.x > 40 && pos.x < 59)
 		{
 			save_map(engine, 4);
-			if (*play == 13)
-				*play = 2;
-			if (*play == 9)
-				*play = -1;
+			if (engine->playing == 13)
+				engine->playing = 2;
+			if (engine->playing == 9)
+				engine->playing = -1;
 		}
 		if (pos.y > 72 && pos.y < 80 && pos.x > 40 && pos.x < 59)
 		{
 			save_map(engine, 5);
-			if (*play == 13)
-				*play = 2;
-			if (*play == 9)
-				*play = -1;
+			if (engine->playing == 13)
+				engine->playing = 2;
+			if (engine->playing == 9)
+				engine->playing = -1;
 		}
 		if (pos.y > 91 && pos.y < 98 && pos.x > 40 && pos.x < 61)
 		{
-			if (*play == 13)
-				*play = 11;
-			if (*play == 9)
-				*play = -1;
+			if (engine->playing == 13)
+				engine->playing = 11;
+			if (engine->playing == 9)
+				engine->playing = -1;
+		}
+		if (engine->playing == 2)
+		{
+			free_t_physic_engine(engine->physic_engine);
+			free_t_visual_engine(engine->visual_engine);
+			engine->physic_engine = initialize_t_physic_engine();
+			engine->visual_engine = initialize_t_visual_engine(win);
 		}
 	}
 }

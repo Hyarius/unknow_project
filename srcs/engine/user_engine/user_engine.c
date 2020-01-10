@@ -22,14 +22,17 @@ t_user_engine	*initialize_t_user_engine()
 
 void			delete_t_user_engine(t_user_engine dest)
 {
-	free(dest.mouse);
-	free(dest.keyboard);
+	ft_memdel((void**)&(dest.mouse));
+	// free(dest.mouse);
+	ft_memdel((void**)&(dest.keyboard));
+	// free(dest.keyboard);
 }
 
 void			free_t_user_engine(t_user_engine *dest)
 {
 	delete_t_user_engine(*dest);
-	free(dest);
+	ft_memdel((void**)&(dest));
+	// free(dest);
 }
 
 void			t_user_engine_handle_camera(t_engine *engine, t_camera *cam,

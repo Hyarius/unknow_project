@@ -32,7 +32,8 @@ void			delete_t_physic_engine(t_physic_engine dest)
 void			free_t_physic_engine(t_physic_engine *dest)
 {
 	delete_t_physic_engine(*dest);
-	free(dest);
+	ft_memdel((void**)&(dest));
+	// free(dest);
 }
 
 void			t_physic_engine_draw_mesh(t_physic_engine *p_physic_engine,

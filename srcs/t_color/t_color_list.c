@@ -72,14 +72,16 @@ void			t_color_list_add_back(t_color_list *dest, t_color *to_add)
 
 void			delete_t_color_list(t_color_list dest)
 {
-	free(dest.color);
+	ft_memdel((void**)&(dest.color));
+	// free(dest.color);
 	// printf("delete t_color_list_push_back\n");
 }
 
 void			free_t_color_list(t_color_list *dest)
 {
 	delete_t_color_list(*dest);
-	free(dest);
+	ft_memdel((void**)&(dest));
+	// free(dest);
 	// printf("free t_color_list_push_back\n");
 }
 

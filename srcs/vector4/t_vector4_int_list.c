@@ -72,15 +72,17 @@ void				t_vector4_int_list_add_back(t_vector4_int_list *dest, t_vector4_int *to_
 
 void				delete_t_vector4_int_list(t_vector4_int_list dest)
 {
-	free(dest.vector);
-	dest.vector = NULL;
+	ft_memdel((void**)&(dest.vector));
+	// free(dest.vector);
+	// dest.vector = NULL;
 	dest.size = 0;
 }
 
 void				free_t_vector4_int_list(t_vector4_int_list *dest)
 {
 	delete_t_vector4_int_list(*dest);
-	free(dest);
+	ft_memdel((void**)&(dest));
+	// free(dest);
 }
 
 void				clean_t_vector4_int_list(t_vector4_int_list *dest)

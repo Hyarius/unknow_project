@@ -32,7 +32,8 @@ void		delete_t_engine(t_engine dest)
 void		free_t_engine(t_engine *dest)
 {
 	delete_t_engine(*dest);
-	free(dest);
+	ft_memdel((void**)&(dest));
+	// free(dest);
 }
 
 void		t_engine_handle_camera(t_engine *p_engine, t_window *p_win)

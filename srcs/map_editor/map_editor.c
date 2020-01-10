@@ -254,6 +254,7 @@ t_mesh		select_mesh(t_mesh mesh_editing, t_keyboard *key, t_vector4 pos, char **
 		if (key->i < 0)
 			key->i = 24;
 		press = 1;
+		mesh = create_mesh_editing(key->i, pos, path[key->i]);
 	}
 	else if (get_key_state(key, key->key[SDL_SCANCODE_2]) == 1 && press == 0)
 	{
@@ -261,10 +262,10 @@ t_mesh		select_mesh(t_mesh mesh_editing, t_keyboard *key, t_vector4 pos, char **
 		if (key->i > 24)
 			key->i = 0;
 		press = 1;
+		mesh = create_mesh_editing(key->i, pos, path[key->i]);
 	}
 	else if (get_key_state(key, key->key[SDL_SCANCODE_1]) == 0 && get_key_state(key, key->key[SDL_SCANCODE_2]) == 0)
 		press = 0;
-	mesh = create_mesh_editing(key->i, pos, path[key->i]);
 	return (mesh);
 }
 

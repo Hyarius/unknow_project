@@ -28,7 +28,8 @@ void	delete_t_player(t_player player)
 void	free_t_player(t_player *player)
 {
 	delete_t_player(*player);
-	free(player);
+	ft_memdel((void**)&(player));
+	// free(player);
 }
 
 t_weapon		create_t_weapons(int index, int ammo, int total_ammo)

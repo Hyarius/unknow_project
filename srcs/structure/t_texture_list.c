@@ -70,14 +70,16 @@ void			t_texture_list_add_back(t_texture_list *dest, t_texture *to_add)
 
 void			delete_t_texture_list(t_texture_list dest)
 {
-	free(dest.texture);
+	ft_memdel((void**)&(dest.texture));
+	// free(dest.texture);
 	// printf("delete t_texture_list\n");
 }
 
 void			free_t_texture_list(t_texture_list *dest)
 {
 	delete_t_texture_list(*dest);
-	free(dest);
+	ft_memdel((void**)&(dest));
+	// free(dest);
 	// printf("free t_texture_list\n");
 }
 

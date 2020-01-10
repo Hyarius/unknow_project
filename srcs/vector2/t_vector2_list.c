@@ -70,14 +70,16 @@ void			t_vector2_list_add_back(t_vector2_list *dest, t_vector2 *to_add)
 
 void			delete_t_vector2_list(t_vector2_list dest)
 {
-	free(dest.vector);
+	ft_memdel((void**)&(dest.vector));
+	// free(dest.vector);
 	// printf("delete t_vector2_list\n");
 }
 
 void			free_t_vector2_list(t_vector2_list *dest)
 {
 	delete_t_vector2_list(*dest);
-	free(dest);
+	ft_memdel((void**)&(dest));
+	// free(dest);
 	// printf("free t_vector2_list\n");
 }
 

@@ -70,14 +70,16 @@ void				t_vector2_int_list_add_back(t_vector2_int_list *dest, t_vector2_int *to_
 
 void				delete_t_vector2_int_list(t_vector2_int_list dest)
 {
-	free(dest.vector);
+	ft_memdel((void**)&(dest.vector));
+	// free(dest.vector);
 	// printf("delete t_vector2_int_list\n");
 }
 
 void				free_t_vector2_int_list(t_vector2_int_list *dest)
 {
 	delete_t_vector2_int_list(*dest);
-	free(dest);
+	ft_memdel((void**)&(dest));
+	// free(dest);
 	// printf("free t_vector2_int_list\n");
 }
 

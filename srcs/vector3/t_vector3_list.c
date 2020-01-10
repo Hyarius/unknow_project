@@ -69,7 +69,8 @@ void			t_vector3_list_add_back(t_vector3_list *dest, t_vector3 *to_add)
 
 void			delete_t_vector3_list(t_vector3_list dest)
 {
-	free(dest.vector);
+	ft_memdel((void**)&(dest.vector));
+	// free(dest.vector);
 	// printf("delete t_vector3_list\n");
 
 }
@@ -77,7 +78,8 @@ void			delete_t_vector3_list(t_vector3_list dest)
 void			free_t_vector3_list(t_vector3_list *dest)
 {
 	delete_t_vector3_list(*dest);
-	free(dest);
+	ft_memdel((void**)&(dest));
+	// free(dest);
 	// printf("free t_vector3_list\n");
 }
 

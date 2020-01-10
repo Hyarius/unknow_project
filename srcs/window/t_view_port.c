@@ -73,11 +73,13 @@ void		t_view_port_clear_buffers(t_view_port *view)
 
 void		delete_t_view_port(t_view_port dest)
 {
-	free(dest.depth_buffer);
+	ft_memdel((void**)&(dest.depth_buffer));
+	// free(dest.depth_buffer);
 }
 
 void		free_t_view_port(t_view_port *dest)
 {
 	delete_t_view_port(*dest);
-	free(dest);
+	ft_memdel((void**)&(dest));
+	// free(dest);
 }
