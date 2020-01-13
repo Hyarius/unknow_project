@@ -52,6 +52,10 @@ void		enemy_shoot(t_engine *engine)
 			mesh = cast_ray(engine, target->camera->pos, target->camera->forward, "Enemy");
 			if (mesh != NULL && engine->tick - j == 2 && ft_strcmp(mesh->name, "Player") == 0)
 			{
+				if (rand() % 2 == 0)
+					Mix_PlayChannel(4, engine->sound_engine->sounds[16], 0);
+				else
+					Mix_PlayChannel(4, engine->sound_engine->sounds[17], 0);
 				if (engine->user_engine->player->armor != 0)
 				{
 					if (engine->user_engine->player->armor >= 5)

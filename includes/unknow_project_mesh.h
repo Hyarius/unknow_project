@@ -90,7 +90,6 @@ void			t_mesh_compute_next_vertices_in_world(t_mesh *dest, t_vector4 axis);
 void			t_mesh_jump(t_mesh *body, t_vector4 jump);
 void			t_mesh_resize(t_mesh *mesh, t_vector4 modif);
 void			t_mesh_set_name(t_mesh *mesh, char *name);
-void			t_mesh_move_door(t_mesh	*mesh);
 int				t_mesh_on_mesh(t_mesh *body, t_mesh *target);
 
 #endif

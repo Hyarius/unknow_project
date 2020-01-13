@@ -88,6 +88,7 @@ int main(int argc, char **argv)
 	mesh_editing = create_mesh_editing(0, engine->user_engine->player->camera->pos, path[engine->user_engine->keyboard->i]);
 	mesh = create_primitive_skybox(main_camera->pos, create_t_vector4(1.0, 1.0, 1.0), skybox);
 	Mix_VolumeMusic(MIX_MAX_VOLUME);
+	// Mix_PlayMusic(engine->sound_engine->music[0], -1);
 	engine->playing = 2;
 	while (engine->playing != 0)
 	{

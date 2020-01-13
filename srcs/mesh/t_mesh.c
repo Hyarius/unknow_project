@@ -296,16 +296,24 @@ void	t_mesh_set_name(t_mesh *mesh, char *name)
 		mesh->tick = 0;
 }
 
-void	t_mesh_move_door(t_mesh *mesh)
+void	t_mesh_move_door(t_mesh *mesh, t_engine *engine)
 {
 	float	tmp;
 
 	if (mesh->door.tick <= 5 && mesh->door.move == 1)
 	{
 		if (mesh->door.state == 0)
+		{
+			if (!Mix_Playing(1))
+				Mix_PlayChannel(1, engine->sound_engine->sounds[12], 0);
 			tmp = 0.12f;
+		}	
 		else
+		{
+			if (!Mix_Playing(1))
+				Mix_PlayChannel(1, engine->sound_engine->sounds[13], 0);
 			tmp = -0.12f;
+		}
 		mesh->pos = add_vector4_to_vector4(mesh->pos,
 						create_t_vector4(0.0, tmp, 0.0));
 		mesh->center = add_vector4_to_vector4(mesh->center,

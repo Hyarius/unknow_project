@@ -165,7 +165,6 @@ void			settings_pause_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, 
 	t_keyboard *keyboard = engine->user_engine->keyboard;
     t_vector2_int pos;
 
-	printf("settings pause\n");
 	get_t_mouse_info(mouse);
     pos = create_t_vector2_int(mouse->pos.x * 100 / WIN_X, mouse->pos.y * 100 / WIN_Y);
 	if (t_mouse_state(mouse) == 2)
@@ -206,7 +205,7 @@ void        settings_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, i
 		{
 			Mix_PlayChannel( -1, engine->sound_engine->sounds[0], 0 );
 			if (pos.y > 23 && pos.y < 26)
-				printf("Mute master\n");
+				// Mix_Volume
 			if (pos.y > 27 && pos.y < 30)
 				printf("Mute music\n");
 			if (pos.y > 32 && pos.y < 35)
@@ -270,93 +269,46 @@ void        controls_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, i
 
 	get_t_mouse_info(mouse);
     pos = create_t_vector2_int(mouse->pos.x * 100 / WIN_X, mouse->pos.y * 100 / WIN_Y);
-	if (t_mouse_state(mouse) == 2)
-		Mix_PlayChannel( -1, engine->sound_engine->sounds[0], 0 );
     if (gui->key_press != 2)
     {
-        if (pos.x > 23 && pos.x < 44)
+		if (t_mouse_state(mouse) == 2)
         {
-            if (pos.y > 28 && pos.y < 32)
-            {
-                if (t_mouse_state(mouse) == 2)
-                {
-                    gui->key_change = SDL_SCANCODE_W;
-                    gui->key_press = 2;
-                }
-            }
-            else if (pos.y > 39 && pos.y < 44)
-            {
-                if (t_mouse_state(mouse) == 2)
-                {
-                    gui->key_change = SDL_SCANCODE_S;
-                    gui->key_press = 2;
-                }
-            }
-            else if (pos.y > 51 && pos.y < 57)
-            {
-                if (t_mouse_state(mouse) == 2)
-                {
-                    gui->key_change = SDL_SCANCODE_A;
-                    gui->key_press = 2;
-                }
-            }
-            else if (pos.y > 64 && pos.y < 69)
-            {
-                if (t_mouse_state(mouse) == 2)
-                {
-                    gui->key_change = SDL_SCANCODE_D;
-                    gui->key_press = 2;
-                }
-            }
-            else
-                engine->user_engine->mouse->clicked_left = BOOL_FALSE;
-        }
-        if (pos.x > 64 && pos.x < 76)
-        {
-            if (pos.y > 28 && pos.y < 32)
-            {
-                if (t_mouse_state(mouse) == 2)
-                {
-                    gui->key_change = SDL_SCANCODE_LCTRL;
-                    gui->key_press = 2;
-                }
-            }
-            else if (pos.y > 39 && pos.y < 44)
-            {
-                if (t_mouse_state(mouse) == 2)
-                {
-                    gui->key_change = SDL_SCANCODE_SPACE;
-                    gui->key_press = 2;
-                }
-            }
-            else if (pos.y > 51 && pos.y < 57)
-            {
-                if (t_mouse_state(mouse) == 2)
-                {
-                    gui->key_change = SDL_SCANCODE_LSHIFT;
-                    gui->key_press = 2;
-                }
-            }
-            else if (pos.y > 64 && pos.y < 69)
-            {
-                if (t_mouse_state(mouse) == 2)
-                {
-                    gui->key_change = SDL_SCANCODE_F;
-                    gui->key_press = 2;
-                }
-            }
-            else
-                engine->user_engine->mouse->clicked_left = BOOL_FALSE;
-        }
+			Mix_PlayChannel( -1, engine->sound_engine->sounds[0], 0 );
+			if (pos.x > 23 && pos.x < 44)
+			{
+				if (pos.y > 28 && pos.y < 32)
+					gui->key_change = SDL_SCANCODE_W;
+				else if (pos.y > 39 && pos.y < 44)
+					gui->key_change = SDL_SCANCODE_S;
+				else if (pos.y > 51 && pos.y < 57)
+					gui->key_change = SDL_SCANCODE_A;
+				else if (pos.y > 64 && pos.y < 69)
+					gui->key_change = SDL_SCANCODE_D;
+				else
+					engine->user_engine->mouse->clicked_left = BOOL_FALSE;
+				gui->key_press = 2;
+			}
+			if (pos.x > 64 && pos.x < 76)
+			{
+				if (pos.y > 28 && pos.y < 32)
+					gui->key_change = SDL_SCANCODE_LCTRL;
+				else if (pos.y > 39 && pos.y < 44)
+					gui->key_change = SDL_SCANCODE_SPACE;
+				else if (pos.y > 51 && pos.y < 57)
+					gui->key_change = SDL_SCANCODE_LSHIFT;
+				else if (pos.y > 64 && pos.y < 69)
+					gui->key_change = SDL_SCANCODE_F;
+				else
+					engine->user_engine->mouse->clicked_left = BOOL_FALSE;
+				gui->key_press = 2;
+			}
+			if (pos.x > 43 && pos.x < 56)
+				if (pos.y > 82 && pos.y < 86)
+						*play = 3;
+		}
     }
-    if (gui->key_press == 2)
-    {
-        set_controls(main_camera, gui, engine->user_engine, gui->key_change);
-    }
-    if (pos.x > 43 && pos.x < 56)
-        if (pos.y > 82 && pos.y < 86)
-            if (t_mouse_state(mouse) == 2)
-                *play = 3;
+    else
+		set_controls(main_camera, gui, engine->user_engine, gui->key_change);
 }
 
 void        sens_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, int *play)

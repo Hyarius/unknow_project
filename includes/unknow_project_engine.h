@@ -52,5 +52,6 @@ t_mesh			create_mesh_editing(int index, t_vector4 pos, char *path);
 t_mesh			select_mesh(t_mesh mesh_editing, t_keyboard *p_keyboard, t_vector4 pos, char **path);
 void			cast_mesh(t_engine *engine, t_mesh *mesh_editing);
 void			load_map(t_camera *main_camera, t_engine *engine, char *path);
+void			t_mesh_move_door(t_mesh	*mesh, t_engine *engine);
 
 #endif

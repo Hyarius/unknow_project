@@ -114,13 +114,24 @@ void			change_weapon(t_keyboard *p_keyboard, t_player *player)
 	player->current_weapon = &player->weapons[index];
 }
 
-void			reload_weapon(t_camera *camera, t_player *player, int tick)
+void			reload_weapon(t_camera *camera, t_player *player, int tick, t_engine *engine)
 {
 	int to_fill;
-
+	static int i = 0;
+	if (ft_strcmp(engine->user_engine->player->current_weapon->name, "pistol") == 0)
+		i = 18;
+	if (ft_strcmp(engine->user_engine->player->current_weapon->name, "ar") == 0)
+		i = 19;
+	if (ft_strcmp(engine->user_engine->player->current_weapon->name, "rifle") == 0)
+		i = 20;
+	if (ft_strcmp(engine->user_engine->player->current_weapon->name, "shotgun") == 0)
+		i = 21;
+	if (ft_strcmp(engine->user_engine->player->current_weapon->name, "rpg") == 0)
+		i = 21;
 	to_fill = player->current_weapon->mag_size - player->current_weapon->ammo;
 	if (tick - player->reload_time == player->current_weapon->tick_reload)
 	{
+		
 		while (to_fill > 0
 			&& player->current_weapon->ammo < player->current_weapon->mag_size
 			&& player->current_weapon->total_ammo > 0)
@@ -134,6 +145,8 @@ void			reload_weapon(t_camera *camera, t_player *player, int tick)
 		}
 		camera->r_press = 0;
 	}
+	if (!Mix_Playing(5))
+		Mix_PlayChannel(5, engine->sound_engine->sounds[i], 0);
 }
 
 void			shoot_weapon(t_engine *engine)
@@ -141,12 +154,23 @@ void			shoot_weapon(t_engine *engine)
 	t_mesh	*target;
 	float	dist;
 	static int	i = 0;
-
+	// ajouter un ID sur les armes pour eviter ces IF
+	if (ft_strcmp(engine->user_engine->player->current_weapon->name, "pistol") == 0)
+		i = 7;
+	if (ft_strcmp(engine->user_engine->player->current_weapon->name, "ar") == 0)
+		i = 8;
+	if (ft_strcmp(engine->user_engine->player->current_weapon->name, "rifle") == 0)
+		i = 9;
+	if (ft_strcmp(engine->user_engine->player->current_weapon->name, "shotgun") == 0)
+		i = 10;
+	if (ft_strcmp(engine->user_engine->player->current_weapon->name, "rpg") == 0)
+		i = 11;
 	dist = 0.0;
 	if (t_mouse_state(engine->user_engine->mouse) == 1 && engine->tick % engine->user_engine->player->current_weapon->tick_shoot == 0)
 	{
 		if (engine->user_engine->player->current_weapon->ammo > 0)
 		{
+			Mix_PlayChannel(-1, engine->sound_engine->sounds[i], 0);
 			target = cast_ray(engine, t_camera_list_get(engine->visual_engine->camera_list, 0)->pos, t_camera_list_get(engine->visual_engine->camera_list, 0)->forward, "Player");
 			if (target != NULL && target->hp > 0)
 			{
@@ -158,6 +182,7 @@ void			shoot_weapon(t_engine *engine)
 				{
 					if (ft_strcmp(target->name, "wall_script") == 0)
 					{
+						Mix_PlayChannel(-1, engine->sound_engine->sounds[14], 0);
 						t_mesh_activate_gravity(&engine->user_engine->player->hitbox, 0.0f);
 						engine->user_engine->player->current_weapon = &engine->user_engine->player->weapons[5];
 					}
@@ -228,13 +253,18 @@ void			player_action(t_camera *camera, t_keyboard *p_keyboard, t_engine *engine)
 		save_map(engine, 1);
 	change_weapon(engine->user_engine->keyboard, engine->user_engine->player);
 	if (door != NULL)
-		t_mesh_move_door(door);
+		t_mesh_move_door(door, engine);
 	if (elevator != NULL)
 		t_mesh_move_elevator(elevator, camera);
 	if (camera->r_press == 1)
-		reload_weapon(camera, engine->user_engine->player, engine->tick);
+	{
+		reload_weapon(camera, engine->user_engine->player, engine->tick, engine);
+	}	
 	if (engine->user_engine->player->shoot_time != engine->tick && camera->r_press != 1)
 		shoot_weapon(engine);
 	if (engine->user_engine->player->hp <= 0)
-		engine->playing = -2;
+	{
+		Mix_PlayChannel(-1, engine->sound_engine->sounds[15], 0);
+		engine->playing = -3;
+	}	
 }

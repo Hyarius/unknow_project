@@ -233,6 +233,7 @@ void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard,
 	int				i;
 	int				k;
 	int				l;
+	static int		in_air = 0;
 
 	j = 0.0;
 	i = 0;
@@ -244,13 +245,36 @@ void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard,
 		camera->body->force = create_t_vector4(0.0, 0.0, 0.0);
 		z = 0.1;
 	}
+	if (camera->body->force.y != 0.0)
+		in_air = 1;
+	if (camera->body->force.y > 0.02)
+	{
+		if (!Mix_Playing(3) && engine->user_engine->player->fuel > 0)
+			Mix_PlayChannel(3, engine->sound_engine->sounds[3], 0);
+		if (engine->user_engine->player->fuel == 0)
+		{
+			Mix_HaltChannel(3);
+			Mix_PlayChannel(3, engine->sound_engine->sounds[4], 0);
+		}
+	}
+	if (camera->body->force.y == 0.0)
+	{
+		if (in_air == 1)
+		{
+			in_air = 0;
+			Mix_PlayChannel(4, engine->sound_engine->sounds[6], 0);
+		}	
+	}
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_SPACE]) == 1 && engine->user_engine->player->fuel > 0)
 	{
 		camera->body->force.y = 0.04;
 		engine->user_engine->player->fuel--;
+		if (!Mix_Playing(3))
+			Mix_PlayChannel(3, engine->sound_engine->sounds[2], 0);
 	}
 	else if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_SPACE]) == 1 && camera->body->force.y == 0)
 	{
+		Mix_PlayChannel(4, engine->sound_engine->sounds[1], 0 );
 		camera->body->force.y = 0.04;
 	}
 	y = camera->body->force.y;
