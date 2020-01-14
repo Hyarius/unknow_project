@@ -81,5 +81,6 @@ t_mesh		read_obj_file(char *path, t_vector4 pos, t_vector4 size, char *texture_p
 	close(fd);
 	t_mesh_compute_normals(&result);
 	t_mesh_compute_bubble_box(&result);
+	result.size = create_t_vector4(size.x, size.y, size.z);
 	return(result);
 }

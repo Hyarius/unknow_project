@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 13:39:37 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/09 13:39:39 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/14 13:29:23 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	save_ammo(t_player *player, int fd, char *str)
 
 void	save_status(t_player *player, t_mesh cu, int fd, char *str)
 {
-	str = ft_strjoinf(str, ft_ftoa(cu.kinetic), 1);
+	str = ft_strjoinf(str, ft_ftoa(player->hitbox.kinetic), 1);
 	str = ft_strjoinf(str, " ", 1);
 	str = ft_strjoinf(str, ft_ftoa(cu.rotation.x), 3);
 	str = ft_strjoinf(str, " ", 1);

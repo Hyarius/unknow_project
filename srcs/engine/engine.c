@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 15:01:07 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/09 16:49:20 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/14 13:13:37 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ void		t_engine_handle_event(t_camera *main_camera, t_gui *gui,
 
 	if (engine->playing == 1
 		&& get_key_state(engine->user_engine->keyboard, SDL_SCANCODE_P) == 1)
-		engine->playing = -2;
-	else if (engine->playing <= -2
+		engine->playing = -1;
+	else if (engine->playing <= -1
 		&& get_key_state(engine->user_engine->keyboard, SDL_SCANCODE_P) == 1)
 		engine->playing = 1;
 	t_user_engine_handle_menu(main_camera, gui, engine, &(engine->playing));

@@ -157,13 +157,13 @@ t_mesh		create_mesh_editing(int index, t_vector4 pos, char *path)
 	else if (index == 18)
 	{
 		mesh.name = "ladder";
-		mesh.size = create_t_vector4(1.0, 2.0, -0.01);
+		mesh.size = create_t_vector4(0.2, 4.0, -0.05);
 		mesh.primitive = 1;
 		mesh.collectible = 0;
 		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
 		mesh.hp = -1;
 		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = path;
+		mesh.texture->path = "ressources/assets/textures/echelle.png";
 		mesh.kinetic = 0.0;
 	}
 	else if (index == 19)
@@ -441,6 +441,7 @@ void		map_editor(t_camera *main_camera, t_gui *gui, t_engine *engine, t_mesh mes
 	t_mesh			mesh;
 	t_vector4		normal;
 	static t_color	*color_armor = NULL;
+	static int		click = 0;
 	static int		l_press = 0;
 	static int		i_press = 0;
 	static int		b_press = 0;
@@ -484,7 +485,7 @@ void		map_editor(t_camera *main_camera, t_gui *gui, t_engine *engine, t_mesh mes
 			check_mesh_player(engine, mesh, main_camera);
 		t_engine_add_mesh(engine, mesh);
 	}
-	else if (get_mouse_state(engine->user_engine->mouse, MOUSE_RIGHT) == BOOL_TRUE)
+	else if (get_mouse_state(engine->user_engine->mouse, MOUSE_RIGHT) == BOOL_TRUE && click == 0)
 	{
 		target = cast_ray(engine, t_camera_list_get(engine->visual_engine->camera_list, 0)->pos, t_camera_list_get(engine->visual_engine->camera_list, 0)->forward, "Player");
 		if (target != NULL && ft_strcmp(target->name, "Player") != 0)
@@ -492,7 +493,10 @@ void		map_editor(t_camera *main_camera, t_gui *gui, t_engine *engine, t_mesh mes
 			t_mesh_set_visibility(target, BOOL_FALSE);
 			target->no_hitbox = 1;
 		}
+		click = 1;
 	}
+	else if (get_mouse_state(engine->user_engine->mouse, MOUSE_RIGHT) == BOOL_FALSE && click == 1)
+		click = 0;
 	if (get_key_state(engine->user_engine->keyboard, engine->user_engine->keyboard->key[SDL_SCANCODE_L]) == 1 && l_press == 0)
 	{
 		target = cast_ray(engine, t_camera_list_get(engine->visual_engine->camera_list, 0)->pos, t_camera_list_get(engine->visual_engine->camera_list, 0)->forward, "Player");

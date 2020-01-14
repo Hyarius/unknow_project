@@ -94,7 +94,7 @@ t_weapon		create_t_weapons(int index, int ammo, int total_ammo)
 
 void			change_weapon(t_keyboard *p_keyboard, t_player *player)
 {
-	static int index = 0; //changer pour une union
+	static int index = 0;
 
 	if (ft_strcmp(player->current_weapon->name, "bb") == 0)
 	{
@@ -103,13 +103,17 @@ void			change_weapon(t_keyboard *p_keyboard, t_player *player)
 	}
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_1]) == 1)
 		index = 0;
-	else if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_2]) == 1)
+	else if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_2]) == 1
+										&& player->weapons[1].total_ammo >= 0)
 		index = 1;
-	else if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_3]) == 1)
+	else if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_3]) == 1
+										&& player->weapons[2].total_ammo >= 0)
 		index = 2;
-	else if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_4]) == 1)
+	else if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_4]) == 1
+										&& player->weapons[3].total_ammo >= 0)
 		index = 3;
-	else if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_5]) == 1)
+	else if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_5]) == 1
+										&& player->weapons[4].total_ammo >= 0)
 		index = 4;
 	player->current_weapon = &player->weapons[index];
 }
@@ -187,10 +191,7 @@ void			shoot_weapon(t_engine *engine)
 						t_mesh_activate_gravity(&engine->user_engine->player->hitbox, 0.0f);
 						engine->user_engine->player->current_weapon = &engine->user_engine->player->weapons[5];
 					}
-					if (ft_strcmp(target->name, "Enemy") == 0)
-						t_mesh_set_name(target, "Dead_enemy");
-					t_mesh_set_visibility(target, BOOL_FALSE);
-					target->no_hitbox = 1;
+					destroy_mesh(target);
 				}
 			}
 			if (ft_strcmp(engine->user_engine->player->current_weapon->name, "ar") == 0)
@@ -254,16 +255,48 @@ void			player_action(t_camera *camera, t_keyboard *p_keyboard, t_engine *engine)
 		save_map(engine, 1);
 	change_weapon(engine->user_engine->keyboard, engine->user_engine->player);
 	if (door != NULL)
-		t_mesh_move_door(door);
+		t_mesh_move_door(door, engine);
 	if (elevator != NULL)
 		t_mesh_move_elevator(elevator, camera);
 	if (camera->r_press == 1)
-		reload_weapon(camera, engine->user_engine->player, engine->tick);
+		reload_weapon(camera, engine->user_engine->player, engine->tick, engine);
 	if (engine->user_engine->player->shoot_time != engine->tick && camera->r_press != 1)
 		shoot_weapon(engine);
 	if (engine->user_engine->player->hp <= 0)
 	{
 		Mix_PlayChannel(-1, engine->sound_engine->sounds[15], 0);
 		engine->playing = -3;
+	}
+}
+
+void			player_take_dmg(t_engine *engine, int dmg)
+{
+	int		diff;
+
+	if (engine->user_engine->player->armor != 0)
+	{
+		if (engine->user_engine->player->armor >= dmg)
+		{
+			//rajouter son degat armur
+			engine->user_engine->player->armor -= dmg;
+		}
+		else
+		{
+			if (rand() % 2 == 0)
+				Mix_PlayChannel(4, engine->sound_engine->sounds[16], 0);
+			else
+				Mix_PlayChannel(4, engine->sound_engine->sounds[17], 0);
+			diff = dmg - engine->user_engine->player->armor;
+			engine->user_engine->player->armor = 0;
+			engine->user_engine->player->hp -= diff;
+		}
+	}
+	else
+	{
+		if (rand() % 2 == 0)
+			Mix_PlayChannel(4, engine->sound_engine->sounds[16], 0);
+		else
+			Mix_PlayChannel(4, engine->sound_engine->sounds[17], 0);
+		engine->user_engine->player->hp -= dmg;
 	}
 }

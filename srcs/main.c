@@ -189,7 +189,7 @@ int main(int argc, char **argv)
     		draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->menu[15]);
 			print_set_weapon(main_camera, gui, engine);
 		}
-		else if (engine->playing == 13 || engine->playing == 9)
+		else if (engine->playing == 13 || engine->playing == -3)
 		{
 			t_engine_draw_mesh(engine);
 			t_engine_render_camera(engine);

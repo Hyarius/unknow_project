@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 13:46:27 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/09 13:46:28 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/14 15:42:24 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,12 @@ void	save_name(t_mesh current, int fd)
 	else if (current.primitive == 1)
 		test = ft_strdup("cube: ");
 	else if (current.primitive == 10)
-		write(fd, "# ", 2);
+	{
+		test = ft_strdup("#");
+		test = ft_strjoinf(test, current.name, 1);
+		test = ft_strjoinf(test, " ", 1);
+		printf("coucou on s'en fou\n");
+	}
 	test = ft_strjoinf(test, current.name, 1);
 	test = ft_strjoinf(test, " ", 1);
 	save_pos(current, fd, test);
@@ -120,8 +125,9 @@ void	save_map(t_engine *engine, int wich)
 	while (i < engine->physic_engine->mesh_list->size)
 	{
 		current = t_mesh_list_at(engine->physic_engine->mesh_list, i);
+		print_t_vector4(current.size, "size");
 		if (current.primitive >= 0 && (current.is_visible
-							|| !current.no_hitbox))
+			|| !current.no_hitbox) && ft_strcmp(current.name, "Player") != 0)
 			save_name(current, fd);
 		i++;
 	}

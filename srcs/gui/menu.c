@@ -1,46 +1,47 @@
 # include "unknow_project.h"
 
-void            t_user_engine_handle_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, int *play)
+void            t_user_engine_handle_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, t_window *win)
 {
-    if (*play == 2)
-        main_menu(main_camera, gui, engine, play);
-    else if (*play == 3)
-        settings_menu(main_camera, gui, engine, play);
-    else if (*play == 4)
-        controls_menu(main_camera, gui, engine, play);
-    else if (*play == 5)
-        credits_menu(main_camera, gui, engine, play);
-	else if (*play == 6)
-		play_menu(main_camera, engine, play);
-	else if (*play == 11)
-		set_player_editing(main_camera, gui, engine, play);
-	else if (*play == 12)
-		set_weapon_editing(main_camera, gui, engine, play);
-	else if (*play == 13 || *play == 9)
-		save_pause(main_camera, gui, engine, play);
-    else if (*play == -1)
-        pause_menu(main_camera, gui, engine, play);
-    else if (*play == -2)
-        settings_pause_menu(main_camera, gui, engine, play);
+    if (engine->playing == 2)
+        main_menu(main_camera, gui, engine, &engine->playing);
+    else if (engine->playing == 3)
+        settings_menu(main_camera, gui, engine, &engine->playing);
+    else if (engine->playing == 4)
+        controls_menu(main_camera, gui, engine, &engine->playing);
+    else if (engine->playing == 5)
+        credits_menu(main_camera, gui, engine, &engine->playing);
+	else if (engine->playing == 6)
+		play_menu(main_camera, engine, &engine->playing);
+	else if (engine->playing == 11)
+		set_player_editing(main_camera, gui, engine, &engine->playing);
+	else if (engine->playing == 12)
+		set_weapon_editing(main_camera, gui, engine, &engine->playing);
+	else if (engine->playing == 13 || engine->playing == -3)
+		save_pause(main_camera, gui, engine, win);
+    else if (engine->playing == -1)
+        pause_menu(main_camera, gui, engine, win);
+    else if (engine->playing == -2)
+        settings_pause_menu(main_camera, gui, engine, &engine->playing);
 }
 
 void			play_menu(t_camera *main_camera, t_engine *engine, int *play)
 {
-	t_mouse	*mouse = engine->user_engine->mouse;
-	t_keyboard	*keyboard = engine->user_engine->keyboard;
+	t_mouse			*mouse;
+	t_keyboard		*keyboard;
 	t_vector2_int	pos;
 	char			*path;
 
+	keyboard = engine->user_engine->keyboard;
+	mouse = engine->user_engine->mouse;
 	get_t_mouse_info(mouse);
 	pos = create_t_vector2_int(mouse->pos.x * 100 / WIN_X, mouse->pos.y * 100 / WIN_Y);
-	// printf("x = %d -- y = %d\n", pos.x, pos.y);
 	if (pos.x > 37 && pos.x < 61 && t_mouse_state(mouse) == 2)
 	{
 		Mix_PlayChannel(-1, engine->sound_engine->sounds[0], 0);
 		if (pos.y > 61 && pos.y < 69)
 		{
 			*play = 10;
-			path = ft_strdup("ressources/map/save1.map");
+			path = ft_strdup("ressources/map/save4.map");
 		}
 		if (pos.y > 71 && pos.y < 79)
 			*play = 2;
@@ -92,7 +93,7 @@ void			play_menu(t_camera *main_camera, t_engine *engine, int *play)
 	{
 		load_map(main_camera, engine, path);
 		if (*play == 1)
-			link_t_camera_to_t_mesh(engine, 0, t_engine_get_mesh(engine, 0));
+			link_camera_to_mesh(engine, 0, t_engine_get_mesh(engine, 0));
 		free(path);
 	}
 }
@@ -124,13 +125,12 @@ void			main_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, int *play)
         engine->user_engine->mouse->clicked_left = BOOL_FALSE;
 }
 
-void			pause_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, int *play)
+void			pause_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, t_window *win)
 {
-	t_mouse *mouse = engine->user_engine->mouse;
-	t_keyboard *keyboard = engine->user_engine->keyboard;
+	t_mouse			*mouse = engine->user_engine->mouse;
+	t_keyboard		*keyboard = engine->user_engine->keyboard;
     t_vector2_int	pos;
-	t_window		*win;
-	printf("pause\n");
+
 	get_t_mouse_info(mouse);
     pos = create_t_vector2_int(mouse->pos.x * 100 / WIN_X, mouse->pos.y * 100 / WIN_Y);
     if (pos.x > 39 && pos.x < 61)
@@ -138,20 +138,19 @@ void			pause_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, int *play
 		if (t_mouse_state(mouse) == 2)
 		{
 			if (pos.y > 26 && pos.y < 32)
-				*play = 1;
+				engine->playing = 1;
 			else if (pos.y > 36 && pos.y < 41)
-				*play = -2;
+				engine->playing = -2;
 			else if (pos.y > 45 && pos.y < 50)
-				*play = 9;
+				engine->playing = -3;
 			else if (pos.y > 54 && pos.y < 59)
 			{
 				free_t_mesh_list(engine->physic_engine->mesh_list);
-				printf("%s\n", engine->physic_engine->mesh_list->mesh[0].name);
 				engine->physic_engine->mesh_list = initialize_t_mesh_list();
-				*play = 2;
+				engine->playing = 2;
 			}
 			else if (pos.y > 64 && pos.y < 70)
-				*play = 0;
+				engine->playing = 0;
 			Mix_PlayChannel(-1, engine->sound_engine->sounds[0], 0);
 		}
     }
@@ -167,22 +166,20 @@ void			settings_pause_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, 
 
 	get_t_mouse_info(mouse);
     pos = create_t_vector2_int(mouse->pos.x * 100 / WIN_X, mouse->pos.y * 100 / WIN_Y);
-	if (t_mouse_state(mouse) == 2)
-		Mix_PlayChannel(-1, engine->sound_engine->sounds[0], 0);
     if (pos.x > 34 && pos.x < 64)
     {
-        if (pos.y > 26 && pos.y < 32)
-            if (t_mouse_state(mouse) == 2)
-                printf("Mute\n");
-        if (pos.y > 42 && pos.y < 46)
-            if (t_mouse_state(mouse) == 2)
-                printf("Sens +\n");
-        if (pos.y > 55 && pos.y < 60)
-            if (t_mouse_state(mouse) == 2)
-                printf("Sens -\n");
-        if (pos.y > 69 && pos.y < 75)
-            if (t_mouse_state(mouse) == 2)
-                *play = -1;
+		if (t_mouse_state(mouse) == 2)
+		{
+			if (pos.y > 26 && pos.y < 32)
+				printf("Mute\n");
+			if (pos.y > 42 && pos.y < 46)
+				printf("Sens +\n");
+			if (pos.y > 55 && pos.y < 60)
+				printf("Sens -\n");
+			if (pos.y > 69 && pos.y < 75)
+				*play = -1;
+			Mix_PlayChannel(-1, engine->sound_engine->sounds[0], 0);
+		}
     }
     else
         engine->user_engine->mouse->clicked_left = BOOL_FALSE;
@@ -254,7 +251,7 @@ void        controls_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, i
     {
 		if (t_mouse_state(mouse) == 2)
         {
-			Mix_PlayChannel(-1, engine->sound_engine->sounds[0], );
+			Mix_PlayChannel(-1, engine->sound_engine->sounds[0], 0);
 			if (pos.x > 23 && pos.x < 44)
 			{
 				if (pos.y > 28 && pos.y < 32)
@@ -412,48 +409,40 @@ void		set_player_editing(t_camera *main_camera, t_gui *gui, t_engine *engine, in
 	get_t_mouse_info(mouse);
     pos = create_t_vector2_int(mouse->pos.x * 100 / WIN_X, mouse->pos.y * 100 / WIN_Y);
 	if (t_mouse_state(mouse) == 2)
-		Mix_PlayChannel(-1, engine->sound_engine->sounds[0], 0);
-	if (ft_strcmp(player->hitbox.name, "Player") == 0)
 	{
-		if (pos.y > 12 && pos.y < 21)
+		if (ft_strcmp(player->hitbox.name, "Player") == 0)
 		{
-			if (pos.x > 27 && pos.x < 46)
-				if (t_mouse_state(mouse) == 2)
+			if (pos.y > 12 && pos.y < 21)
+			{
+				if (pos.x > 27 && pos.x < 46)
 					player->hitbox.kinetic = 20.0;
-			if (pos.x > 54 && pos.x < 72)
-				if (t_mouse_state(mouse) == 2)
+				if (pos.x > 54 && pos.x < 72)
 					player->hitbox.kinetic = 100.0;
-		}
-		if (pos.y > 34 && pos.y < 43)
-		{
-			if (pos.x > 54 && pos.x < 65)
-				if (t_mouse_state(mouse) == 2)
+			}
+			if (pos.y > 34 && pos.y < 43)
+			{
+				if (pos.x > 54 && pos.x < 65)
 					player->hp = 100;
-			if (pos.x > 37 && pos.x < 45)
-				if (t_mouse_state(mouse) == 2)
+				if (pos.x > 37 && pos.x < 45)
 					player->hp = 50;
-		}
-		if (pos.y > 56 && pos.y < 65)
-		{
-			if (pos.x > 61 && pos.x < 71)
-				if (t_mouse_state(mouse) == 2)
+			}
+			if (pos.y > 56 && pos.y < 65)
+			{
+				if (pos.x > 61 && pos.x < 71)
 					player->armor = 100;
-			if (pos.x > 46 && pos.x < 53)
-				if (t_mouse_state(mouse) == 2)
+				if (pos.x > 46 && pos.x < 53)
 					player->armor = 50;
-			if (pos.x > 32 && pos.x < 37)
-				if (t_mouse_state(mouse) == 2)
+				if (pos.x > 32 && pos.x < 37)
 					player->armor = 0;
-		}
-		if (pos.y > 67 && pos.y < 76 && pos.x > 30 && pos.x < 70)
-			if (t_mouse_state(mouse) == 2)
+			}
+			if (pos.y > 67 && pos.y < 76 && pos.x > 30 && pos.x < 70)
 				*play = 12;
-		if (pos.y > 78 && pos.y < 87 && pos.x > 37 && pos.x < 62)
-			if (t_mouse_state(mouse) == 2)
+			if (pos.y > 78 && pos.y < 87 && pos.x > 37 && pos.x < 62)
 				*play = 13;
-		if (pos.y > 90 && pos.y < 99 && pos.x > 39 && pos.x < 60)
-			if (t_mouse_state(mouse) == 2)
+			if (pos.y > 90 && pos.y < 99 && pos.x > 39 && pos.x < 60)
 				*play = 10;
+			Mix_PlayChannel(-1, engine->sound_engine->sounds[0], 0);
+		}
 	}
 }
 
@@ -468,175 +457,177 @@ void		set_weapon_editing(t_camera *main_camera, t_gui *gui, t_engine *engine, in
 	get_t_mouse_info(mouse);
 	pos = create_t_vector2_int(mouse->pos.x * 100 / WIN_X, mouse->pos.y * 100 / WIN_Y);
 	if (t_mouse_state(mouse) == 2)
-		Mix_PlayChannel(-1, engine->sound_engine->sounds[0], 0);
-	if (t_mouse_state(mouse) == 2)
 	{
-		if (pos.y > 11 && pos.y < 15)
+		if (t_mouse_state(mouse) == 2)
 		{
-			if (pos.x > 44 && pos.x < 48)
-				player->weapons[1].total_ammo = 0;
-			if (pos.x > 50 && pos.x < 55)
-				player->weapons[1].total_ammo = -1;
+			if (pos.y > 11 && pos.y < 15)
+			{
+				if (pos.x > 44 && pos.x < 48)
+					player->weapons[1].total_ammo = 0;
+				if (pos.x > 50 && pos.x < 55)
+					player->weapons[1].total_ammo = -1;
+			}
+			if (pos.y > 18 && pos.y < 22)
+			{
+				if (pos.x >= 52 && pos.x <= 54)
+				{
+					player->weapons[1].ammo = 0;
+					player->weapons[1].total_ammo = 0;
+				}
+				if (pos.x >= 55 && pos.x <= 57)
+				{
+					player->weapons[1].ammo = 30;
+					player->weapons[1].total_ammo = 0;
+				}
+				if (pos.x >= 58 && pos.x <= 60)
+				{
+					player->weapons[1].ammo = 30;
+					player->weapons[1].total_ammo = 30;
+				}
+				if (pos.x >= 61 && pos.x <= 63)
+				{
+					player->weapons[1].ammo = 30;
+					player->weapons[1].total_ammo = 60;
+				}
+				if (pos.x >= 64 && pos.x <= 66)
+				{
+					player->weapons[1].ammo = 30;
+					player->weapons[1].total_ammo = 90;
+				}
+				if (pos.x >= 67 && pos.x <= 69)
+				{
+					player->weapons[1].ammo = 30;
+					player->weapons[1].total_ammo = 120;
+				}
+			}
+			if (pos.y > 32 && pos.y < 36)
+			{
+				if (pos.x > 44 && pos.x < 48)
+					player->weapons[3].total_ammo = 0;
+				if (pos.x > 50 && pos.x < 55)
+					player->weapons[3].total_ammo = -1;
+			}
+			if (pos.y > 39 && pos.y < 43)
+			{
+				if (pos.x >= 52 && pos.x <= 54)
+				{
+					player->weapons[3].ammo = 0;
+					player->weapons[3].total_ammo = 0;
+				}
+				if (pos.x >= 55 && pos.x <= 57)
+				{
+					player->weapons[3].ammo = 8;
+					player->weapons[3].total_ammo = 0;
+				}
+				if (pos.x >= 58 && pos.x <= 60)
+				{
+					player->weapons[3].ammo = 8;
+					player->weapons[3].total_ammo = 8;
+				}
+				if (pos.x >= 61 && pos.x <= 63)
+				{
+					player->weapons[3].ammo = 8;
+					player->weapons[3].total_ammo = 16;
+				}
+				if (pos.x >= 64 && pos.x <= 66)
+				{
+					player->weapons[3].ammo = 8;
+					player->weapons[3].total_ammo = 24;
+				}
+				if (pos.x >= 67 && pos.x <= 69)
+				{
+					player->weapons[3].ammo = 8;
+					player->weapons[3].total_ammo = 32;
+				}
+			}
+			if (pos.y > 53 && pos.y < 57)
+			{
+				if (pos.x > 44 && pos.x < 48)
+					player->weapons[2].total_ammo = 0;
+				if (pos.x > 50 && pos.x < 55)
+					player->weapons[2].total_ammo = -1;
+			}
+			if (pos.y > 60 && pos.y < 64)
+			{
+				if (pos.x >= 52 && pos.x <= 54)
+				{
+					player->weapons[2].ammo = 0;
+					player->weapons[2].total_ammo = 0;
+				}
+				if (pos.x >= 55 && pos.x <= 57)
+				{
+					player->weapons[2].ammo = 10;
+					player->weapons[2].total_ammo = 0;
+				}
+				if (pos.x >= 58 && pos.x <= 60)
+				{
+					player->weapons[2].ammo = 10;
+					player->weapons[2].total_ammo = 10;
+				}
+				if (pos.x >= 61 && pos.x <= 63)
+				{
+					player->weapons[2].ammo = 10;
+					player->weapons[2].total_ammo = 20;
+				}
+				if (pos.x >= 64 && pos.x <= 66)
+				{
+					player->weapons[2].ammo = 10;
+					player->weapons[2].total_ammo = 30;
+				}
+				if (pos.x >= 67 && pos.x <= 69)
+				{
+					player->weapons[2].ammo = 10;
+					player->weapons[2].total_ammo = 40;
+				}
+			}
+			if (pos.y > 74 && pos.y < 78)
+			{
+				if (pos.x > 44 && pos.x < 48)
+					player->weapons[4].total_ammo = 0;
+				if (pos.x > 50 && pos.x < 55)
+					player->weapons[4].total_ammo = -1;
+			}
+			if (pos.y > 81 && pos.y < 85)
+			{
+				if (pos.x >= 52 && pos.x <= 54)
+				{
+					player->weapons[4].ammo = 0;
+					player->weapons[4].total_ammo = 0;
+				}
+				if (pos.x >= 55 && pos.x <= 57)
+				{
+					player->weapons[4].ammo = 1;
+					player->weapons[4].total_ammo = 0;
+				}
+				if (pos.x >= 58 && pos.x <= 60)
+				{
+					player->weapons[4].ammo = 1;
+					player->weapons[4].total_ammo = 1;
+				}
+				if (pos.x >= 61 && pos.x <= 63)
+				{
+					player->weapons[4].ammo = 1;
+					player->weapons[4].total_ammo = 2;
+				}
+				if (pos.x >= 64 && pos.x <= 66)
+				{
+					player->weapons[4].ammo = 1;
+					player->weapons[4].total_ammo = 3;
+				}
+				if (pos.x >= 67 && pos.x <= 69)
+				{
+					player->weapons[4].ammo = 1;
+					player->weapons[4].total_ammo = 4;
+				}
+			}
+			if (pos.y > 91 && pos.y < 98 && pos.x > 40 && pos.x < 61)
+				*play = 11;
+			Mix_PlayChannel(-1, engine->sound_engine->sounds[0], 0);
 		}
-		if (pos.y > 18 && pos.y < 22)
-		{
-			if (pos.x >= 52 && pos.x <= 54)
-			{
-				player->weapons[1].ammo = 0;
-				player->weapons[1].total_ammo = 0;
-			}
-			if (pos.x >= 55 && pos.x <= 57)
-			{
-				player->weapons[1].ammo = 30;
-				player->weapons[1].total_ammo = 0;
-			}
-			if (pos.x >= 58 && pos.x <= 60)
-			{
-				player->weapons[1].ammo = 30;
-				player->weapons[1].total_ammo = 30;
-			}
-			if (pos.x >= 61 && pos.x <= 63)
-			{
-				player->weapons[1].ammo = 30;
-				player->weapons[1].total_ammo = 60;
-			}
-			if (pos.x >= 64 && pos.x <= 66)
-			{
-				player->weapons[1].ammo = 30;
-				player->weapons[1].total_ammo = 90;
-			}
-			if (pos.x >= 67 && pos.x <= 69)
-			{
-				player->weapons[1].ammo = 30;
-				player->weapons[1].total_ammo = 120;
-			}
-		}
-		if (pos.y > 32 && pos.y < 36)
-		{
-			if (pos.x > 44 && pos.x < 48)
-				player->weapons[3].total_ammo = 0;
-			if (pos.x > 50 && pos.x < 55)
-				player->weapons[3].total_ammo = -1;
-		}
-		if (pos.y > 39 && pos.y < 43)
-		{
-			if (pos.x >= 52 && pos.x <= 54)
-			{
-				player->weapons[3].ammo = 0;
-				player->weapons[3].total_ammo = 0;
-			}
-			if (pos.x >= 55 && pos.x <= 57)
-			{
-				player->weapons[3].ammo = 8;
-				player->weapons[3].total_ammo = 0;
-			}
-			if (pos.x >= 58 && pos.x <= 60)
-			{
-				player->weapons[3].ammo = 8;
-				player->weapons[3].total_ammo = 8;
-			}
-			if (pos.x >= 61 && pos.x <= 63)
-			{
-				player->weapons[3].ammo = 8;
-				player->weapons[3].total_ammo = 16;
-			}
-			if (pos.x >= 64 && pos.x <= 66)
-			{
-				player->weapons[3].ammo = 8;
-				player->weapons[3].total_ammo = 24;
-			}
-			if (pos.x >= 67 && pos.x <= 69)
-			{
-				player->weapons[3].ammo = 8;
-				player->weapons[3].total_ammo = 32;
-			}
-		}
-		if (pos.y > 53 && pos.y < 57)
-		{
-			if (pos.x > 44 && pos.x < 48)
-				player->weapons[2].total_ammo = 0;
-			if (pos.x > 50 && pos.x < 55)
-				player->weapons[2].total_ammo = -1;
-		}
-		if (pos.y > 60 && pos.y < 64)
-		{
-			if (pos.x >= 52 && pos.x <= 54)
-			{
-				player->weapons[2].ammo = 0;
-				player->weapons[2].total_ammo = 0;
-			}
-			if (pos.x >= 55 && pos.x <= 57)
-			{
-				player->weapons[2].ammo = 10;
-				player->weapons[2].total_ammo = 0;
-			}
-			if (pos.x >= 58 && pos.x <= 60)
-			{
-				player->weapons[2].ammo = 10;
-				player->weapons[2].total_ammo = 10;
-			}
-			if (pos.x >= 61 && pos.x <= 63)
-			{
-				player->weapons[2].ammo = 10;
-				player->weapons[2].total_ammo = 20;
-			}
-			if (pos.x >= 64 && pos.x <= 66)
-			{
-				player->weapons[2].ammo = 10;
-				player->weapons[2].total_ammo = 30;
-			}
-			if (pos.x >= 67 && pos.x <= 69)
-			{
-				player->weapons[2].ammo = 10;
-				player->weapons[2].total_ammo = 40;
-			}
-		}
-		if (pos.y > 74 && pos.y < 78)
-		{
-			if (pos.x > 44 && pos.x < 48)
-				player->weapons[4].total_ammo = 0;
-			if (pos.x > 50 && pos.x < 55)
-				player->weapons[4].total_ammo = -1;
-		}
-		if (pos.y > 81 && pos.y < 85)
-		{
-			if (pos.x >= 52 && pos.x <= 54)
-			{
-				player->weapons[4].ammo = 0;
-				player->weapons[4].total_ammo = 0;
-			}
-			if (pos.x >= 55 && pos.x <= 57)
-			{
-				player->weapons[4].ammo = 1;
-				player->weapons[4].total_ammo = 0;
-			}
-			if (pos.x >= 58 && pos.x <= 60)
-			{
-				player->weapons[4].ammo = 1;
-				player->weapons[4].total_ammo = 1;
-			}
-			if (pos.x >= 61 && pos.x <= 63)
-			{
-				player->weapons[4].ammo = 1;
-				player->weapons[4].total_ammo = 2;
-			}
-			if (pos.x >= 64 && pos.x <= 66)
-			{
-				player->weapons[4].ammo = 1;
-				player->weapons[4].total_ammo = 3;
-			}
-			if (pos.x >= 67 && pos.x <= 69)
-			{
-				player->weapons[4].ammo = 1;
-				player->weapons[4].total_ammo = 4;
-			}
-		}
-		if (pos.y > 91 && pos.y < 98 && pos.x > 40 && pos.x < 61)
-			*play = 11;
 	}
 }
 
-void		save_pause(t_camera *main_camera, t_gui *gui, t_engine *engine, int *play)
+void		save_pause(t_camera *main_camera, t_gui *gui, t_engine *engine, t_window *win)
 {
 	t_mouse			*mouse = engine->user_engine->mouse;
 	t_keyboard		*keyboard = engine->user_engine->keyboard;
@@ -644,56 +635,65 @@ void		save_pause(t_camera *main_camera, t_gui *gui, t_engine *engine, int *play)
 
 	get_t_mouse_info(mouse);
 	pos = create_t_vector2_int(mouse->pos.x * 100 / WIN_X, mouse->pos.y * 100 / WIN_Y);
-	if (t_mouse_state(mouse) == 2)
-		Mix_PlayChannel(-1, engine->sound_engine->sounds[0], 0);
-	if (t_mouse_state(mouse) == 2)
+	if (pos.x > 40 && pos.x < 61)
 	{
-		if (pos.y > 10 && pos.y < 18 && pos.x > 40 && pos.x < 59)
+		if (t_mouse_state(mouse) == 2)
 		{
-			save_map(engine, 1);
-			if (*play == 13)
-				*play = 2;
-			if (*play == 9)
-				*play = -1;
-		}
-		if (pos.y > 26 && pos.y < 34 && pos.x > 40 && pos.x < 59)
-		{
-			save_map(engine, 2);
-			if (*play == 13)
-				*play = 2;
-			if (*play == 9)
-				*play = -1;
-		}
-		if (pos.y > 41 && pos.y < 49 && pos.x > 40 && pos.x < 59)
-		{
-			save_map(engine, 3);
-			if (*play == 13)
-				*play = 2;
-			if (*play == 9)
-				*play = -1;
-		}
-		if (pos.y > 57 && pos.y < 65 && pos.x > 40 && pos.x < 59)
-		{
-			save_map(engine, 4);
-			if (*play == 13)
-				*play = 2;
-			if (*play == 9)
-				*play = -1;
-		}
-		if (pos.y > 72 && pos.y < 80 && pos.x > 40 && pos.x < 59)
-		{
-			save_map(engine, 5);
-			if (*play == 13)
-				*play = 2;
-			if (*play == 9)
-				*play = -1;
-		}
-		if (pos.y > 91 && pos.y < 98 && pos.x > 40 && pos.x < 61)
-		{
-			if (*play == 13)
-				*play = 11;
-			if (*play == 9)
-				*play = -1;
+			if (pos.y > 10 && pos.y < 18)
+			{
+				save_map(engine, 1);
+				if (engine->playing == 13)
+					engine->playing = 2;
+				if (engine->playing == -3)
+					engine->playing = -1;
+			}
+			if (pos.y > 26 && pos.y < 34)
+			{
+				save_map(engine, 2);
+				if (engine->playing == 13)
+					engine->playing = 2;
+				if (engine->playing == -3)
+					engine->playing = -1;
+			}
+			if (pos.y > 41 && pos.y < 49)
+			{
+				save_map(engine, 3);
+				if (engine->playing == 13)
+					engine->playing = 2;
+				if (engine->playing == -3)
+					engine->playing = -1;
+			}
+			if (pos.y > 57 && pos.y < 65)
+			{
+				save_map(engine, 4);
+				if (engine->playing == 13)
+					engine->playing = 2;
+				if (engine->playing == -3)
+					engine->playing = -1;
+			}
+			if (pos.y > 72 && pos.y < 80)
+			{
+				save_map(engine, 5);
+				if (engine->playing == 13)
+					engine->playing = 2;
+				if (engine->playing == -3)
+					engine->playing = -1;
+			}
+			if (pos.y > 91 && pos.y < 98)
+			{
+				if (engine->playing == 13)
+					engine->playing = 11;
+				if (engine->playing == -3)
+					engine->playing = -1;
+			}
+			Mix_PlayChannel(-1, engine->sound_engine->sounds[0], 0);
 		}
 	}
+	// if (engine->playing == 2)
+	// {
+	// 	free_t_physic_engine(engine->physic_engine);
+	// 	free_t_visual_engine(engine->visual_engine);
+	// 	engine->physic_engine = initialize_t_physic_engine();
+	// 	engine->visual_engine = initialize_t_visual_engine(win);
+	// }
 }

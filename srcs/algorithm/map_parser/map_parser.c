@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 13:40:28 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/14 09:19:37 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/14 14:59:48 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,10 @@ void			set_mesh(t_mesh *mesh, char **line_split)
 	else
 		mesh->no_hitbox = 0;
 	mesh->kinetic = ft_atof(line_split[9]);
-	t_mesh_set_name(mesh, line_split[1]);
+	if (mesh->primitive == 10)
+		t_mesh_set_name(mesh, &line_split[0][1]);
+	else
+		t_mesh_set_name(mesh, line_split[1]);
 }
 
 t_mesh_list		*read_map_file(int fd, t_player *player)

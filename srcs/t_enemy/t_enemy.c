@@ -38,8 +38,7 @@ void		enemy_look(t_engine *engine)
 void		enemy_shoot(t_engine *engine)
 {
 	int			i;
-	int			diff;
-	static int	j = -5;
+	// int			diff;
 	t_mesh		*target;
 	t_mesh		*mesh;
 
@@ -50,31 +49,15 @@ void		enemy_shoot(t_engine *engine)
 		if (ft_strcmp(target->name, "Enemy") == 0)
 		{
 			mesh = cast_ray(engine, target->camera->pos, target->camera->forward, "Enemy");
-			if (mesh != NULL && engine->tick - j == 2 && ft_strcmp(mesh->name, "Player") == 0)
+			if (mesh != NULL && engine->tick - target->tick == 2 && ft_strcmp(mesh->name, "Player") == 0)
 			{
-				if (engine->user_engine->player->armor != 0)
-				{
-					if (engine->user_engine->player->armor >= 5)
-						engine->user_engine->player->armor -= 5;
-					else
-					{
-						if (rand() % 2 == 0)
-							Mix_PlayChannel(4, engine->sound_engine->sounds[16], 0);
-						else
-							Mix_PlayChannel(4, engine->sound_engine->sounds[17], 0);
-						diff = 5 - engine->user_engine->player->armor;
-						engine->user_engine->player->armor = 0;
-						engine->user_engine->player->hp -= diff;
-					}
-				}
-				else
-					engine->user_engine->player->hp -= 5;
-				j = -5;
+				player_take_dmg(engine, 5);
+				target->tick = -5;
 			}
-			else if (mesh != NULL && engine->tick - j > 3 && ft_strcmp(mesh->name, "Player") == 0)
-				j = engine->tick;
+			else if (mesh != NULL && engine->tick - target->tick > 3 && ft_strcmp(mesh->name, "Player") == 0)
+				target->tick = engine->tick;
 			else if (mesh == NULL || ft_strcmp(mesh->name, "Player") != 0)
-				j = -5;
+				target->tick = -5;
 		}
 		i++;
 	}

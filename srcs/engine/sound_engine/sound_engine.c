@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 15:11:38 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/14 09:46:25 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/14 15:07:45 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ Mix_Music		**load_music(void)
 		error_exit(66, "Couldn't malloc array of music (load_music)");
 	music[0] = Mix_LoadMUS("ressources/assets/sounds/IG_theme.wav");
 	i = 0;
-	while (i < nb_music)
-		if (!music[i++])
+	while (i++ < nb_music)
+		if (!music[i])
 		{
 			ft_putstr("Mix_LoadWAV: ");
 			ft_putstr(Mix_GetError());
@@ -70,7 +70,7 @@ Mix_Chunk		**load_sounds(void)
 	int			nb_sounds;
 	int			i;
 
-	nb_sounds = 22;
+	nb_sounds = 23;
 	if (!(sounds = (Mix_Chunk**)malloc(sizeof(Mix_Chunk*) * nb_sounds)))
 		error_exit(66, "Couldn't malloc array of sounds (load_sounds)");
 	sounds[0] = Mix_LoadWAV("ressources/assets/sounds/click.wav");
