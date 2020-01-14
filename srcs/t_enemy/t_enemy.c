@@ -58,6 +58,10 @@ void		enemy_shoot(t_engine *engine)
 						engine->user_engine->player->armor -= 5;
 					else
 					{
+						if (rand() % 2 == 0)
+							Mix_PlayChannel(4, engine->sound_engine->sounds[16], 0);
+						else
+							Mix_PlayChannel(4, engine->sound_engine->sounds[17], 0);
 						diff = 5 - engine->user_engine->player->armor;
 						engine->user_engine->player->armor = 0;
 						engine->user_engine->player->hp -= diff;

@@ -53,7 +53,7 @@ typedef struct		s_mesh
 }					t_mesh;
 
 t_mesh			create_t_mesh(t_vector4 pos);
-t_mesh			read_obj_file(char *path, t_vector4 pos, t_vector4 size, float gravity);
+t_mesh			read_obj_file(char *path, t_vector4 pos, t_vector4 size, char *texture_path);
 t_mesh			*initialize_t_mesh(t_vector4 pos);
 void			delete_t_mesh(t_mesh mesh);
 void			free_t_mesh(t_mesh *mesh);
@@ -90,7 +90,6 @@ void			t_mesh_compute_next_vertices_in_world(t_mesh *dest, t_vector4 axis);
 void			t_mesh_jump(t_mesh *body, t_vector4 jump);
 void			t_mesh_resize(t_mesh *mesh, t_vector4 modif);
 void			t_mesh_set_name(t_mesh *mesh, char *name);
-void			t_mesh_move_door(t_mesh	*mesh);
 int				t_mesh_on_mesh(t_mesh *body, t_mesh *target);
 
 #endif

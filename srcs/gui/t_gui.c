@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 15:58:51 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/09 16:03:56 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/13 09:41:41 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	print_letter(t_camera *main_cam, t_gui *gui, char *str, t_rectangle rec)
 
 void	print_info_bar(t_camera *main_camera, t_player *player, t_gui *gui)
 {
-	char			*str;
+	char	*str;
 
 	str = ft_itoa(player->armor);
 	print_letter(main_camera, gui, ft_strcat(str, "%"),
@@ -102,11 +102,14 @@ void	print_info_bar(t_camera *main_camera, t_player *player, t_gui *gui)
 				create_t_rectangle(create_t_vector2(-0.70, -0.97),
 									create_t_vector2(0.02, 0.07)));
 	free(str);
-	str = ft_itoa(player->current_weapon->ammo);
-	str = ft_strjoinf(str, " / ", 1);
-	str = ft_strjoinf(str, ft_itoa(player->current_weapon->total_ammo), 3);
-	print_letter(main_camera, gui, str,
-				create_t_rectangle(create_t_vector2(0.78, -0.90),
-									create_t_vector2(0.01, 0.05)));
-	free(str);
+	if (ft_strcmp(player->current_weapon->name, "bb") != 0)
+	{
+		str = ft_itoa(player->current_weapon->ammo);
+		str = ft_strjoinf(str, " / ", 1);
+		str = ft_strjoinf(str, ft_itoa(player->current_weapon->total_ammo), 3);
+		print_letter(main_camera, gui, str,
+					create_t_rectangle(create_t_vector2(0.78, -0.90),
+										create_t_vector2(0.01, 0.05)));
+		free(str);
+	}
 }

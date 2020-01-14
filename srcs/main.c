@@ -89,7 +89,7 @@ int main(int argc, char **argv)
 	mesh = create_primitive_skybox(main_camera->pos, create_t_vector4(1.0, 1.0, 1.0), skybox);
 	Mix_VolumeMusic(MIX_MAX_VOLUME);
 	engine->playing = 2;
-
+	// Mix_PlayMusic(engine->sound_engine->music[0], -1);
 	while (engine->playing != 0)
 	{
 		prepare_screen(win, create_t_color(0.2f, 0.2f, 0.2f, 1.0f));
@@ -98,14 +98,14 @@ int main(int argc, char **argv)
 		{
 			SDL_ShowCursor(SDL_ENABLE);
 		}
-		if (engine->playing <= -1)
+		if (engine->playing == -1)
 		{
 			t_engine_draw_mesh(engine);
 			t_engine_render_camera(engine);
    			t_view_port_clear_buffers(main_camera->view_port);
     		draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->menu[4]);
 		}
-		else if (engine->playing <= -2)
+		else if (engine->playing == -2)
 		{
 			t_engine_draw_mesh(engine);
 			t_engine_render_camera(engine);

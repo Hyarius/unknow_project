@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 13:40:28 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/09 13:40:29 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/14 09:19:37 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ t_mesh			init_primitive(char **line_split, char *texture_path)
 	}
 	else if (line_split[0][0] == '#')
 		mesh = read_obj_file(&line_split[0][1], vec[0], vec[1],
-							ft_atof(line_split[10]));
+							texture_path);
+	t_mesh_activate_gravity(&mesh, ft_atof(line_split[9]));
 	return (mesh);
 }
 
@@ -80,16 +81,19 @@ t_mesh_list		*read_map_file(int fd, t_player *player)
 	t_mesh_list	*result;
 	char		*line;
 	char		**s;
+	int i;
 
+	i = 0;
 	result = initialize_t_mesh_list();
-	while (get_next_line(fd, &line) > 0)
+	while ((i = get_next_line(fd, &line)) > 0)
 	{
 		if (ft_strlen(line) != 0)
 		{
 			s = ft_strsplit(line, ' ');
-			read_player(s, player);
-			if (ft_strcmp(s[0], "plane:") == 0 || ft_strcmp(s[0], "cube:") == 0
-				|| ft_strcmp(s[0], "item:") == 0 || s[0][0] == '#')
+			if (ft_strcmp(s[0], "player:") == 0)
+				read_player(s, player);
+			else if (ft_strcmp(s[0], "plane:") == 0 || s[0][0] == '#'
+			|| ft_strcmp(s[0], "item:") == 0 || ft_strcmp(s[0], "cube:") == 0)
 			{
 				mesh = init_texture(s);
 				set_mesh(&mesh, s);

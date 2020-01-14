@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 14:56:08 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/09 15:14:16 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/14 09:44:30 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,6 +191,7 @@ int				can_move(t_mesh *mesh, t_engine *engine)
 					{
 						if (engine->physic_engine->item_list->item[j].pf(engine->user_engine->player) == BOOL_TRUE)
 						{
+							Mix_PlayChannel(-1, engine->sound_engine->sounds[22], 0);
 							t_mesh_set_visibility(target, BOOL_FALSE);
 							target->no_hitbox = 1;
 						}
@@ -198,8 +199,8 @@ int				can_move(t_mesh *mesh, t_engine *engine)
 					j++;
 				}
 			}
-			if (is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
-				printf("%s\n", target->name);
+			// if (is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
+			// 	printf("%s\n", target->name);
 			if (t_mesh_on_mesh(mesh, target) == 1 && ft_strcmp(target->name, "end") == 0)
 				engine->playing = -1;
 			if (is_t_mesh_intersecting(mesh, target) == BOOL_TRUE && ft_strcmp(target->name, "stair") == 0)

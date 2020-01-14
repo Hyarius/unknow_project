@@ -42,9 +42,13 @@ void			t_user_engine_handle_camera(t_engine *engine, t_camera *cam, t_window *p_
 void			t_physic_engine_apply_force(t_engine *engine);
 void			player_action(t_camera *camera, t_keyboard *p_keyboard, t_engine *engine);
 void			shoot_weapon(t_engine *engine);
+void			player_take_dmg(t_engine *engine, int dmg);
 void			enemy_shoot(t_engine *engine);
 void			enemy_look(t_engine *engine);
 void			enemy_move(t_engine *engine);
+void			enemy_boss_look(t_engine *engine);
+void			enemy_boss_shoot(t_engine *engine);
+void			enemy_boss_spawn(t_engine *engine);
 void    		save_map(t_engine *engine, int wich);
 void			save_player(t_engine *engine, int fd);
 void			link_camera_to_mesh(t_engine *engine, int index, t_mesh *mesh);
@@ -52,5 +56,6 @@ t_mesh			create_mesh_editing(int index, t_vector4 pos, char *path);
 t_mesh			select_mesh(t_mesh mesh_editing, t_keyboard *p_keyboard, t_vector4 pos, char **path);
 void			cast_mesh(t_engine *engine, t_mesh *mesh_editing);
 void			load_map(t_camera *main_camera, t_engine *engine, char *path);
+void			t_mesh_move_door(t_mesh	*mesh, t_engine *engine);
 
 #endif

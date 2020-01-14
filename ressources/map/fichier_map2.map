@@ -3,7 +3,7 @@
 /* pour le player:
 /* primitive / name / coord 3 / size 3 / texture 1 / gravity 1 / rotation 3 / color 4 / hp 1 / armor 1 / fuel 1 / ammo gun 2 / ammo ar 2 / ammo rifle 2 / ammo shotgun 2 / ammo rpg 2 /card (red/blue/green) 3
 
-player: Player 0.0 20.0 0.0 0.3 0.5 0.3 NULL 100.0 0.0 0.0 0.0 1.0 0.4 1.0 1.0 100 100 100 15 15 30 120 0 10 0 20 0 5 0 0 0
+player: Player 0.0 2.0 0.0 0.3 0.5 0.3 NULL 100.0 0.0 0.0 0.0 1.0 0.4 1.0 1.0 100 100 100 15 15 30 120 0 10 0 20 0 5 0 0 0
 
 plane: end 10.0 0.0 10.0 0.3 0.0 0.3 NULL 0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0   -1
 

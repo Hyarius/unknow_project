@@ -1,6 +1,7 @@
 #include "unknow_project.h"
 
-t_camera	create_t_camera(t_window *window, t_vector4 p_pos, float p_fov, t_vector2 p_dist)
+t_camera	create_t_camera(t_window *window, t_vector4 p_pos, float p_fov,
+															t_vector2 p_dist)
 {
 	t_camera	result;
 
@@ -230,7 +231,7 @@ void		move_camera(t_camera *camera, t_vector4 mouvement,
 	engine->user_engine->player->hitbox.pos = camera->pos;
 }
 
-void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard, t_engine *engine)
+void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard, t_engine *engine) // calcul du mouvement de la cameraera au clavier
 {
 	t_mesh			*target;
 	t_vector4		tmp;
@@ -242,6 +243,7 @@ void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard,
 	int				i;
 	int				k;
 	int				l;
+	static int		in_air = 0;
 
 	j = 0.0;
 	i = 0;
@@ -253,13 +255,36 @@ void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard,
 		camera->body->force = create_t_vector4(0.0, 0.0, 0.0);
 		z = 0.1;
 	}
+	if (camera->body->force.y != 0.0)
+		in_air = 1;
+	if (camera->body->force.y > 0.02)
+	{
+		if (!Mix_Playing(3) && engine->user_engine->player->fuel > 0)
+			Mix_PlayChannel(3, engine->sound_engine->sounds[3], 0);
+		if (engine->user_engine->player->fuel == 0)
+		{
+			Mix_HaltChannel(3);
+			Mix_PlayChannel(3, engine->sound_engine->sounds[4], 0);
+		}
+	}
+	if (camera->body->force.y == 0.0)
+	{
+		if (in_air == 1)
+		{
+			in_air = 0;
+			Mix_PlayChannel(4, engine->sound_engine->sounds[6], 0);
+		}
+	}
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_SPACE]) == 1 && engine->user_engine->player->fuel > 0)
 	{
 		camera->body->force.y = 0.04;
 		engine->user_engine->player->fuel--;
+		if (!Mix_Playing(3))
+			Mix_PlayChannel(3, engine->sound_engine->sounds[2], 0);
 	}
 	else if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_SPACE]) == 1 && camera->body->force.y == 0)
 	{
+		Mix_PlayChannel(4, engine->sound_engine->sounds[1], 0 );
 		camera->body->force.y = 0.04;
 	}
 	y = camera->body->force.y;
@@ -340,8 +365,8 @@ void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard,
 
 void		handle_t_camera_view_by_mouse(t_camera *cam, t_mouse *p_mouse)
 {
-	float delta_pitch;
-	float delta_yaw;
+	float	delta_pitch;
+	float	delta_yaw;
 
 	delta_pitch = -(p_mouse->rel_pos.x / 10.0);
 	delta_yaw = p_mouse->rel_pos.y / 10.0;
@@ -385,19 +410,17 @@ void		draw_depth_from_camera_on_screen(t_camera *p_cam)
 	int			i;
 
 	t_camera_calc_depth(p_cam);
-	i = 0;
-	while (i < p_cam->triangle_color_list.size)
+	i = -1;
+	while (++i < p_cam->triangle_color_list.size)
 	{
 		triangle = t_triangle_list_at(&(p_cam->triangle_color_list), i);
 		draw_triangle_depth_cpu(p_cam->view_port, &triangle, p_cam->dist_max);
-		i++;
 	}
-	i = 0;
-	while (i < p_cam->triangle_texture_list.size)
+	i = -1;
+	while (++i < p_cam->triangle_texture_list.size)
 	{
 		triangle = t_triangle_list_at(&(p_cam->triangle_texture_list), i);
 		draw_triangle_depth_cpu(p_cam->view_port, &triangle, p_cam->dist_max);
-		i++;
 	}
 }
 
