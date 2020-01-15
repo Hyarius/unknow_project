@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/31 13:30:45 by adjouber          #+#    #+#             */
-/*   Updated: 2019/11/22 10:18:51 by gboutin          ###   ########.fr       */
+/*   Created: 2020/01/09 13:40:33 by gboutin           #+#    #+#             */
+/*   Updated: 2020/01/09 13:40:33 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ t_mesh			init_mesh(char **line_split)
 	mesh.hp = ft_atoi(line_split[17]);
 	mesh.no_hitbox = 0;
 	mesh.primitive = -1;
+	mesh.kinetic = ft_atof(line_split[9]);
 	t_mesh_set_name(&mesh, line_split[1]);
 	return (mesh);
 }
@@ -51,36 +52,20 @@ void			init_player(t_player *player, char **line_split)
 			ft_atoi(line_split[26]), ft_atoi(line_split[27]));
 	player->weapons[4] = create_t_weapons(4,
 			ft_atoi(line_split[28]), ft_atoi(line_split[29]));
+	player->weapons[5] = create_t_weapons(5, 0, 0);
 	player->red_card = ft_atoi(line_split[30]);
 	player->blue_card = ft_atoi(line_split[31]);
 	player->green_card = ft_atoi(line_split[32]);
 	player->current_weapon = &player->weapons[0];
 }
 
-t_player		*read_player(int fd, t_camera *main_camera)
+void			read_player(char **line_split, t_player *player)
 {
-	t_player	*player;
-	char		*line;
-	char		**line_split;
-	t_vector4	vector[3];
-
-	player = initialize_t_player(main_camera);
-	while (get_next_line(fd, &line) > 0)
+	if (ft_strcmp(line_split[0], "player:") == 0)
 	{
-		if (ft_strlen(line) != 0)
-		{
-			line_split = ft_strsplit(line, ' ');
-			if (ft_strcmp(line_split[0], "player:") == 0)
-			{
-				player->hitbox = init_mesh(line_split);
-				t_mesh_set_color(&player->hitbox,
-						create_t_color(0.5, 0.6, 0.0, 1.0));
-				init_player(player, line_split);
-			}
-			ft_freetab(line_split);
-		}
-		free(line);
+		player->hitbox = init_mesh(line_split);
+		t_mesh_set_color(&player->hitbox,
+		create_t_color(0.5, 0.6, 0.0, 1.0));
+		init_player(player, line_split);
 	}
-	free(line);
-	return (player);
 }

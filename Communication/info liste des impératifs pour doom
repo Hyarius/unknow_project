@@ -6,7 +6,7 @@ Doom Nukem project
 
 - elements visuels : oui
 
-- elements du decors : manques les texture pour les sprites ennemies
+- elements du decors : manque les sprites
 
 - texte : oui
 
@@ -26,6 +26,7 @@ Doom Nukem project
 
 - packaging : non
 
+
 bonus:
 
 - bonus conseilles : oui
@@ -34,4 +35,4 @@ bonus:
 
 - reseau : dans t reves
 
-- soyez fou : on a un moteur 3d
+- soyez fou : on a un moteur 3d 

@@ -6,7 +6,6 @@ t_surface *read_png_file(const char *filename)
 	png_structp	png_ptr;
 	png_infop	info_ptr;
 	t_surface	*surface;
-	char		*return_erreur;
 
 	int bit_depth;
 	int color_type;
@@ -15,11 +14,7 @@ t_surface *read_png_file(const char *filename)
 		error_exit(-29, "Can't malloc a t_surface");
 
 	if ((fp = fopen (filename, "rb")) == NULL)
-	{
-		return_erreur = ft_strjoinf(filename, " doesn't exist", 1);
-		error_exit(-500, return_erreur);		//ouverture du fichier .png. "rb" = read byte donc lecture uniquement et en byte.
-
-	}
+		error_exit(-500, ft_strjoin(filename, " doesn't exist"));		//ouverture du fichier .png. "rb" = read byte donc lecture uniquement et en byte.
 
 	png_ptr = png_create_read_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);	//fonction lib png pour creer une sorte de curseur que l'on appelle tete de lecture
 	info_ptr = png_create_info_struct (png_ptr);	//lib png, cree une structure qui stock l'encodage de la couleur qu'il detecte
@@ -78,14 +73,13 @@ t_surface *read_png_file(const char *filename)
 
 t_texture *png_load(char *path)
 {
-	t_texture	*texture;
-	SDL_Surface	*tmp_surface;
-	int			internal_format;
-	int			format;
+	t_texture *texture;
+	SDL_Surface *tmp_surface;
+	int internal_format;
+	int format;
 
 	if (!(texture = (t_texture *)malloc(sizeof(t_texture))))	//malloc du t_texture
 		error_exit(-29, "Can't malloc a t_texture");			//sortie si probleme
-
 	texture->path = path;
 	texture->surface = read_png_file(path);					//lecture du fichier .png
 

@@ -21,7 +21,8 @@ int		refill_pistol(t_player *player)
 	to_fill = player->weapons[0].mag_size;
 	if (player->weapons[0].total_ammo < player->weapons[0].max_ammo)
 	{
-		while (to_fill-- > 0 && player->weapons[0].total_ammo < player->weapons[0].max_ammo)
+		while (to_fill-- > 0
+			&& player->weapons[0].total_ammo < player->weapons[0].max_ammo)
 			player->weapons[0].total_ammo++;
 		return (BOOL_TRUE);
 	}
@@ -36,7 +37,8 @@ int		refill_ar(t_player *player)
 	to_fill = player->weapons[1].mag_size;
 	if (player->weapons[1].total_ammo < player->weapons[1].max_ammo)
 	{
-		while (to_fill-- > 0 && player->weapons[1].total_ammo < player->weapons[1].max_ammo)
+		while (to_fill-- > 0
+			&& player->weapons[1].total_ammo < player->weapons[1].max_ammo)
 			player->weapons[1].total_ammo++;
 		return (BOOL_TRUE);
 	}
@@ -51,7 +53,8 @@ int		refill_rifle(t_player *player)
 	to_fill = player->weapons[2].mag_size;
 	if (player->weapons[2].total_ammo < player->weapons[2].max_ammo)
 	{
-		while (to_fill-- > 0 && player->weapons[2].total_ammo < player->weapons[2].max_ammo)
+		while (to_fill-- > 0
+			&& player->weapons[2].total_ammo < player->weapons[2].max_ammo)
 			player->weapons[2].total_ammo++;
 		return (BOOL_TRUE);
 	}
@@ -66,7 +69,8 @@ int		refill_shotgun(t_player *player)
 	to_fill = player->weapons[3].mag_size;
 	if (player->weapons[3].total_ammo < player->weapons[3].max_ammo)
 	{
-		while (to_fill-- > 0 && player->weapons[3].total_ammo < player->weapons[3].max_ammo)
+		while (to_fill-- > 0
+			&& player->weapons[3].total_ammo < player->weapons[3].max_ammo)
 			player->weapons[3].total_ammo++;
 		return (BOOL_TRUE);
 	}
@@ -81,7 +85,8 @@ int		refill_rpg(t_player *player)
 	to_fill = player->weapons[4].mag_size;
 	if (player->weapons[4].total_ammo < player->weapons[4].max_ammo)
 	{
-		while (to_fill-- > 0 && player->weapons[4].total_ammo < player->weapons[4].max_ammo)
+		while (to_fill-- > 0
+			&& player->weapons[4].total_ammo < player->weapons[4].max_ammo)
 			player->weapons[4].total_ammo++;
 		return (BOOL_TRUE);
 	}
@@ -142,8 +147,6 @@ t_item		create_health_pack(void)
 
 	item.name = ft_strjoinf("Health_Pack_", ft_itoa(num), 2);
 	num++;
-	// t_mesh_set_color(&result, create_t_color(0.8, 0.0, 0.0 ,1.0));
-	// result.collectible = BOOL_TRUE;
 	item.pf = heal;
 	return (item);
 }
@@ -155,17 +158,6 @@ t_item		create_ammo_pack(int type)
 
 	item.name = ft_strjoinf("Ammo_Pack_", ft_itoa(num), 2);
 	num++;
-	// if (type == 1)
-	// 	t_mesh_set_color(&result, create_t_color(0.3, 0.3, 0.3 ,1.0));
-	// else if (type == 2)
-	// 	t_mesh_set_color(&result, create_t_color(0.0, 0.8, 0.0 ,1.0));
-	// else if (type == 3)
-	// 	t_mesh_set_color(&result, create_t_color(0.8, 0.8, 0.0 ,1.0));
-	// else if (type == 4)
-	// 	t_mesh_set_color(&result, create_t_color(0.4, 0.0, 0.0 ,1.0));
-	// else if (type == 5)
-	// 	t_mesh_set_color(&result, create_t_color(0.4, 0.0, 0.4 ,1.0));
-	// result.collectible = BOOL_TRUE;
 	if (type == 1)
 		item.pf = refill_pistol;
 	else if (type == 2)
@@ -186,8 +178,6 @@ t_item		create_armor_pack(void)
 
 	item.name = ft_strjoinf("Armor_Pack_", ft_itoa(num), 2);
 	num++;
-	// t_mesh_set_color(&result, create_t_color(0.0, 0.0, 0.8 ,1.0));
-	// result.collectible = BOOL_TRUE;
 	item.pf = protect;
 	return (item);
 }
@@ -199,8 +189,6 @@ t_item		create_jet_pack(void)
 
 	item.name = ft_strjoinf("Jet_Pack_", ft_itoa(num), 2);
 	num++;
-	// t_mesh_set_color(&result, create_t_color(0.8, 0.8, 0.5 ,1.0));
-	// result.collectible = BOOL_TRUE;
 	item.pf = jetpack;
 	return (item);
 }
@@ -211,23 +199,19 @@ t_item		create_color_card(int type)
 	t_mesh		result;
 
 	if (type == 1)
+	{
 		item.name = ft_strjoin("Card_", "Red");
-	else if (type == 2)
-		item.name = ft_strjoin("Card_", "Blue");
-	else if (type == 3)
-		item.name = ft_strjoin("Card_", "Green");
-	// if (type == 1)
-	// 	t_mesh_set_color(&result, create_t_color(1.0, 0.2, 0.2 ,1.0));
-	// else if (type == 2)
-	// 	t_mesh_set_color(&result, create_t_color(0.2, 0.2, 1.0 ,1.0));
-	// else if (type == 3)
-	// 	t_mesh_set_color(&result, create_t_color(0.2, 1.0, 0.2 ,1.0));
-	// result.collectible = BOOL_TRUE;
-	if (type == 1)
 		item.pf = red_card;
+	}
 	else if (type == 2)
+	{
+		item.name = ft_strjoin("Card_", "Blue");
 		item.pf = blue_card;
+	}
 	else if (type == 3)
+	{
+		item.name = ft_strjoin("Card_", "Green");
 		item.pf = green_card;
+	}
 	return (item);
 }

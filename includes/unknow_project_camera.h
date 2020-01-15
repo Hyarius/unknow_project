@@ -68,7 +68,7 @@ void		compute_t_camera(t_camera *cam);
 void		t_camera_change_fov(t_camera *cam, float delta);
 t_vector4	apply_t_camera(t_vector4 *src, t_matrix *mvp);
 t_matrix	t_camera_compute_view(t_camera *cam);
-float		t_camera_look_at_point(t_camera *cam, t_vector4 target);
+void		t_camera_look_at_point(t_camera *cam, t_vector4 target);
 void		t_camera_look_at(t_camera *cam);
 void		t_camera_change_view(t_camera *cam, float delta_yaw, float delta_pitch);
 void		handle_t_camera_view_by_mouse(t_camera *cam, t_mouse *p_mouse);
@@ -77,7 +77,7 @@ void		draw_triangle_from_camera_on_screen(t_camera *p_cam);
 void 		t_camera_calc_depth(t_camera *p_cam);
 void		draw_depth_from_camera_on_screen(t_camera *p_cam);
 void		clean_t_camera(t_camera *camera);
-// void		link_t_camera_to_t_mesh(t_camera *camera, t_mesh *mesh, float new_kinetic);
+// void		link_camera_to_mesh(t_camera *camera, t_mesh *mesh, float new_kinetic);
 void		t_mesh_move_elevator(t_mesh *mesh, t_camera *camera);
 
 #endif

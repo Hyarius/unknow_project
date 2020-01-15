@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   primitive_skybox.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/07 11:29:57 by gboutin           #+#    #+#             */
+/*   Updated: 2020/01/07 11:32:30 by gboutin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "unknow_project.h"
 
 static void	t_mesh_init_point_primitive_skybox(t_mesh *result, t_vector4 size)
@@ -5,14 +17,22 @@ static void	t_mesh_init_point_primitive_skybox(t_mesh *result, t_vector4 size)
 	size.x -= EPSILON;
 	size.y -= EPSILON;
 	size.z -= EPSILON;
-	t_mesh_add_point(result, create_t_vector4(-size.x / 2.0, -size.y / 2.0, -size.z / 2.0));
-	t_mesh_add_point(result, create_t_vector4(size.x / 2.0, -size.y / 2.0, -size.z / 2.0));
-	t_mesh_add_point(result, create_t_vector4(size.x / 2.0, -size.y / 2.0, size.z / 2.0));
-	t_mesh_add_point(result, create_t_vector4(-size.x / 2.0, -size.y / 2.0, size.z / 2.0));
-	t_mesh_add_point(result, create_t_vector4(-size.x / 2.0, size.y / 2.0, -size.z / 2.0));
-	t_mesh_add_point(result, create_t_vector4(size.x / 2.0, size.y / 2.0, -size.z / 2.0));
-	t_mesh_add_point(result, create_t_vector4(size.x / 2.0, size.y / 2.0, size.z / 2.0));
-	t_mesh_add_point(result, create_t_vector4(-size.x / 2.0, size.y / 2.0, size.z / 2.0));
+	t_mesh_add_point(result,
+				create_t_vector4(-size.x / 2.0, -size.y / 2.0, -size.z / 2.0));
+	t_mesh_add_point(result,
+				create_t_vector4(size.x / 2.0, -size.y / 2.0, -size.z / 2.0));
+	t_mesh_add_point(result,
+				create_t_vector4(size.x / 2.0, -size.y / 2.0, size.z / 2.0));
+	t_mesh_add_point(result,
+				create_t_vector4(-size.x / 2.0, -size.y / 2.0, size.z / 2.0));
+	t_mesh_add_point(result,
+				create_t_vector4(-size.x / 2.0, size.y / 2.0, -size.z / 2.0));
+	t_mesh_add_point(result,
+				create_t_vector4(size.x / 2.0, size.y / 2.0, -size.z / 2.0));
+	t_mesh_add_point(result,
+				create_t_vector4(size.x / 2.0, size.y / 2.0, size.z / 2.0));
+	t_mesh_add_point(result,
+				create_t_vector4(-size.x / 2.0, size.y / 2.0, size.z / 2.0));
 }
 
 static void	t_mesh_init_uv_point_primitive_skybox(t_mesh *result)
@@ -33,7 +53,8 @@ static void	t_mesh_init_uv_point_primitive_skybox(t_mesh *result)
 	t_mesh_add_uv(result, create_t_vector4(0.5f, 1.0f, 0.0f));
 }
 
-static void	t_mesh_init_face_primitive_skybox_next(t_mesh *result, t_face tmp_face1, t_face tmp_face2)
+static void	t_mesh_init_face_primitive_skybox_next(t_mesh *result,
+											t_face tmp_face1, t_face tmp_face2)
 {
 	set_t_face_vertices(&tmp_face1, 2, 7, 6);
 	set_t_face_uvs(&tmp_face1, 4, 8, 9);
@@ -55,7 +76,8 @@ static void	t_mesh_init_face_primitive_skybox_next(t_mesh *result, t_face tmp_fa
 	t_mesh_add_face(result, tmp_face2);
 }
 
-static void	t_mesh_init_face_primitive_skybox(t_mesh *result, t_face tmp_face1, t_face tmp_face2)
+static void	t_mesh_init_face_primitive_skybox(t_mesh *result, t_face tmp_face1,
+															t_face tmp_face2)
 {
 	set_t_face_vertices(&tmp_face1, 1, 3, 2);
 	set_t_face_uvs(&tmp_face1, 1, 3, 4);
@@ -77,7 +99,8 @@ static void	t_mesh_init_face_primitive_skybox(t_mesh *result, t_face tmp_face1, 
 	t_mesh_add_face(result, tmp_face2);
 }
 
-t_mesh		create_primitive_skybox(t_vector4 pos, t_vector4 size, t_texture *p_texture)
+t_mesh		create_primitive_skybox(t_vector4 pos, t_vector4 size,
+														t_texture *p_texture)
 {
 	t_mesh	result;
 	t_face	tmp_face1;

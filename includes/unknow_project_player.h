@@ -24,20 +24,22 @@ typedef struct  s_player
 	int			armor;
 	int			fuel;
 	float		speed;
-	t_weapon	weapons[5];
+	t_weapon	weapons[6];
 	t_weapon	*current_weapon;
 	int			red_card;
 	int			blue_card;
 	int			green_card;
 	int			shoot_time;
 	int			reload_time;
-
 }               t_player;
 
 t_player		create_t_player(t_camera *cam);
 t_player		*initialize_t_player(t_camera *cam);
-t_player		*read_player(int fd, t_camera *main_camera);
+void			read_player(char **split, t_player *player);
+void			delete_t_player(t_player player);
+void			free_t_player(t_player *player);
 t_weapon		create_t_weapons(int index, int ammo, int total_ammo);
+t_mesh_list 	*read_map_file(int fd, t_player *player);
 
 
 #endif

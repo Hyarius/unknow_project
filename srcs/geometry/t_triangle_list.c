@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   t_triangle_list.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/09 15:27:46 by gboutin           #+#    #+#             */
+/*   Updated: 2020/01/09 15:27:47 by gboutin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "unknow_project.h"
 
 t_triangle_list	create_t_triangle_list(void)
@@ -6,7 +18,6 @@ t_triangle_list	create_t_triangle_list(void)
 
 	if (!(list.triangle = (t_triangle *)malloc(sizeof(t_triangle) * PUSH_SIZE)))
 		error_exit(-32, "Can't malloc a t_triangle array");
-	// printf("malloc t_triangle_list.triangle\n");
 	list.size = 0;
 	list.max_size = PUSH_SIZE;
 	return (list);
@@ -18,7 +29,6 @@ t_triangle_list	*initialize_t_triangle_list(void)
 
 	if (!(list = (t_triangle_list *)malloc(sizeof(t_triangle_list))))
 		error_exit(-33, "Can't create a t_triangle_list array");
-	// printf("malloc t_triangle_list\n");
 	*list = create_t_triangle_list();
 	return (list);
 }
@@ -34,7 +44,6 @@ void			t_triangle_list_push_back(t_triangle_list *dest, t_triangle add)
 		if (!(dest->triangle = (t_triangle *)malloc(sizeof(t_triangle) \
 										* (dest->size + 1 + PUSH_SIZE))))
 			error_exit(-34, "Can't realloc a t_triangle array");
-		// printf("malloc t_triangle_list_push_back\n");
 		i = 0;
 		while (i < dest->size)
 		{
@@ -59,7 +68,6 @@ void			t_triangle_list_add_back(t_triangle_list *dest, t_triangle *add)
 		if (!(dest->triangle = (t_triangle *)malloc(sizeof(t_triangle) \
 										* (dest->size + 1 + PUSH_SIZE))))
 			error_exit(-35, "Can't realloc a t_triangle array");
-		// printf("malloc t_triangle_list_add_back\n");
 		i = 0;
 		while (i < dest->size)
 		{
@@ -78,14 +86,12 @@ void			t_triangle_list_add_back(t_triangle_list *dest, t_triangle *add)
 void			delete_t_triangle_list(t_triangle_list dest)
 {
 	free(dest.triangle);
-	printf("delete t_triangle_list\n");
 }
 
 void			free_t_triangle_list(t_triangle_list *dest)
 {
 	delete_t_triangle_list(*dest);
 	free(dest);
-	// printf("free t_triangle_list\n");
 }
 
 void			clean_t_triangle_list(t_triangle_list *dest)
@@ -118,7 +124,6 @@ void			t_triangle_list_resize(t_triangle_list *dest, int new_size)
 	if (!(dest->triangle = (t_triangle *)malloc(sizeof(t_triangle) \
 													* (new_size))))
 		error_exit(-35, "Can't realloc a t_triangle array");
-	// printf("malloc t_triangle_list_resize\n");
 	i = 0;
 	while (i < dest->size && i < new_size && i < old_size)
 	{

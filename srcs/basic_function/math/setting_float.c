@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 13:44:15 by adjouber          #+#    #+#             */
-/*   Updated: 2019/11/22 10:19:00 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/09 13:57:18 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 float		round_float(float x, unsigned int round)
 {
-	int 	i;
+	int		i;
 	float	ret;
 
 	i = 1;
