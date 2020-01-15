@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   t_rasterizer.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/15 15:50:18 by jubeal            #+#    #+#             */
+/*   Updated: 2020/01/15 15:50:23 by jubeal           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "unknow_project.h"
 
 t_rasterizer	create_t_rasterizer(t_vector4 a, t_vector4 b, t_vector4 c)
@@ -17,7 +29,6 @@ t_rasterizer	*initialize_t_rasterizer(t_vector4 a, t_vector4 b, t_vector4 c)
 
 	if (!(result = (t_rasterizer *)malloc(sizeof(t_rasterizer))))
 		error_exit(-13, "Can't create a t_rasterizer");
-	// printf("malloc t_rasterizer\n");
 	*result = create_t_rasterizer(a, b, c);
 	return (result);
 }
