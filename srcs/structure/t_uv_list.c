@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   t_uv_list.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/15 15:04:43 by jubeal            #+#    #+#             */
+/*   Updated: 2020/01/15 15:06:53 by jubeal           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "unknow_project.h"
 
 t_uv_list	create_t_uv_list(void)
@@ -42,28 +54,6 @@ void		t_uv_list_push_back(t_uv_list *dest, t_uv to_add)
 	dest->size++;
 }
 
-void		t_uv_list_add_back(t_uv_list *dest, t_uv *to_add)
-{
-	t_uv	*tmp;
-	int		i;
-
-	if ((dest->size + 1) >= dest->max_size)
-	{
-		tmp = dest->uvs;
-		if (!(dest->uvs = (t_uv *)malloc(sizeof(t_uv)
-							* (dest->size + 1 + PUSH_SIZE))))
-			error_exit(-14, "Can't realloc a t_uv array");
-		i = -1;
-		while (++i < dest->size)
-			dest->uvs[i] = tmp[i];
-		free(tmp);
-		dest->max_size += PUSH_SIZE;
-	}
-	dest->uvs[dest->size].texture = to_add->texture;
-	dest->uvs[dest->size].uv = to_add->uv;
-	dest->size++;
-}
-
 t_uv		*t_uv_list_get(t_uv_list *dest, int index)
 {
 	if (index < 0 || index >= dest->size)
@@ -74,9 +64,4 @@ t_uv		*t_uv_list_get(t_uv_list *dest, int index)
 void		clean_t_uv_list(t_uv_list *dest)
 {
 	dest->size = 0;
-}
-
-void		delete_t_uv_list(t_uv_list dest)
-{
-	free(dest.uvs);
 }

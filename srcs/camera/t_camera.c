@@ -70,7 +70,7 @@ void		delete_t_cam(t_camera dest)
 	delete_t_triangle_list(dest.triangle_color_list);
 	delete_t_color_list(dest.color_list);
 	delete_t_triangle_list(dest.triangle_texture_list);
-	delete_t_uv_list(dest.uv_list);
+	free(dest.uv_list.uvs);
 	delete_t_color_list(dest.darkness_list);
 	free(dest.view_port);
 }

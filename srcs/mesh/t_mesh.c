@@ -45,7 +45,8 @@ void	delete_t_mesh(t_mesh mesh)
 {
 	free_t_vector4_list(mesh.vertices);
 	free_t_vector4_list(mesh.uvs);
-	free_t_face_list(mesh.faces);
+	free(mesh.faces->face);
+	free(mesh.face);
 }
 
 void	free_t_mesh(t_mesh *mesh)
