@@ -6,7 +6,7 @@
 /*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 09:59:48 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/15 11:26:55 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/15 12:25:09 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,6 @@ t_vector4		convert_screen_to_opengl(t_view_port *p_view_port,
 	return (result);
 }
 
-t_vector2		convert_vector2_to_opengl(t_view_port *p_view_port,
-											t_vector2 source)
-{
-	t_vector2 result;
-
-	result.x = source.x / ((float)(p_view_port->size.x) / 2.0) - 1.0f;
-	result.y = -(source.y / ((float)(p_view_port->size.y) / 2.0) - 1.0f);
-	return (result);
-}
-
 t_vector4		convert_opengl_to_vector4(t_view_port *p_view_port,
 											t_vector4 source)
 {
@@ -44,12 +34,23 @@ t_vector4		convert_opengl_to_vector4(t_view_port *p_view_port,
 	return (result);
 }
 
-t_vector2_int	convert_vector2_to_vector2_int(t_vector2 base)
+float			degree_to_radius(float angle)
 {
-	return (create_t_vector2_int((int)(base.x), (int)(base.y)));
+	return ((float)(((float)angle) * M_PI / (float)180));
 }
 
-t_vector4		convert_vector2_to_vector4(t_vector2 base)
+float			radius_to_degree(float radian)
 {
-	return (create_t_vector4(base.x, base.y, 0.0));
+	return ((float)((float)(radian * 180) / M_PI));
+}
+
+t_uv			convert_t_uv_to_texture(t_uv *source)
+{
+	t_uv		result;
+
+	result = *source;
+	result.uv.a.y = 1 - result.uv.a.y;
+	result.uv.b.y = 1 - result.uv.b.y;
+	result.uv.c.y = 1 - result.uv.c.y;
+	return (result);
 }
