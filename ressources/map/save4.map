@@ -6,4 +6,4 @@ player: Player -21.00 1.00 32.10 0.30 0.50 0.30 NULL 100.00 0.00 0.00 0.00 0.50 
 #ressources/objets/5LAstSalle.obj ressources/objets/5LAstSalle.obj 0.50 1.00 5.00 1.00 1.00 1.00 ressources/assets/textures/map.png 0.00 0.00 0.00 0.00 1.00 1.00 1.00 1.00 200000
 cube: ladder -19.80 -3.00 14.60 0.20 4.00 -.05 ressources/assets/textures/echelle.png 0.00 0.00 0.00 0.00 1.00 1.00 1.00 1.00 -1
 cube: ladder -28.30 -3.00 18.50 0.20 4.00 -.05 ressources/assets/textures/echelle.png 0.00 0.00 0.00 0.00 1.00 1.00 1.00 1.00 -1
-cube: elevator -31.90 -11.00 12.60 2.00 12.00 2.00 ressources/assets/textures/cube_test.png 0.00 0.00 0.00 0.00 1.00 1.00 1.00 1.00 -1
+cube: elevator -31.90 -11.2 12.60 2.00 12.00 2.00 ressources/assets/textures/cube_test.png 0.00 0.00 0.00 0.00 1.00 1.00 1.00 1.00 -1

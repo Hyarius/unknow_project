@@ -335,7 +335,7 @@ void	t_mesh_move_elevator(t_mesh *mesh, t_camera *cam)
 {
 	float	tmp;
 
-	if (mesh->door.tick <= 10 && mesh->door.move == 1)
+	if (mesh->door.tick <= 17 && mesh->door.move == 1)
 	{
 		if (mesh->door.state == 0)
 			tmp = 0.5f;
@@ -353,7 +353,7 @@ void	t_mesh_move_elevator(t_mesh *mesh, t_camera *cam)
 		mesh->center = add_vector4_to_vector4(mesh->center,
 											create_t_vector4(0.0, tmp, 0.0));
 		mesh->door.tick++;
-		if (mesh->door.tick == 10)
+		if (mesh->door.tick == 17)
 		{
 			if (tmp == 0.5f)
 				mesh->door.state = 1;

@@ -121,18 +121,20 @@ void			change_weapon(t_keyboard *p_keyboard, t_player *player)
 void			reload_weapon(t_camera *camera, t_player *player, int tick, t_engine *engine)
 {
 	int			to_fill;
-	static int	i = 0;
+	// static int	i = 0;
 
-	if (ft_strcmp(engine->user_engine->player->current_weapon->name, "pistol") == 0)
-		i = 18;
-	if (ft_strcmp(engine->user_engine->player->current_weapon->name, "ar") == 0)
-		i = 19;
-	if (ft_strcmp(engine->user_engine->player->current_weapon->name, "rifle") == 0)
-		i = 20;
-	if (ft_strcmp(engine->user_engine->player->current_weapon->name, "shotgun") == 0)
-		i = 21;
-	if (ft_strcmp(engine->user_engine->player->current_weapon->name, "rpg") == 0)
-		i = 21;
+	// if (ft_strcmp(engine->user_engine->player->current_weapon->name, "pistol") == 0)
+	// 	i = 18;
+	// if (ft_strcmp(engine->user_engine->player->current_weapon->name, "ar") == 0)
+	// 	i = 19;
+	// if (ft_strcmp(engine->user_engine->player->current_weapon->name, "rifle") == 0)
+	// 	i = 20;
+	// if (ft_strcmp(engine->user_engine->player->current_weapon->name, "shotgun") == 0)
+	// 	i = 21;
+	// if (ft_strcmp(engine->user_engine->player->current_weapon->name, "rpg") == 0)
+	// 	i = 21;
+	// if (!Mix_Playing(5))
+	// 	Mix_PlayChannel(5, engine->sound_engine->sounds[i], 0);
 	to_fill = player->current_weapon->mag_size - player->current_weapon->ammo;
 	if (tick - player->reload_time == player->current_weapon->tick_reload)
 	{
@@ -149,8 +151,6 @@ void			reload_weapon(t_camera *camera, t_player *player, int tick, t_engine *eng
 		}
 		camera->r_press = 0;
 	}
-	if (!Mix_Playing(5))
-		Mix_PlayChannel(5, engine->sound_engine->sounds[i], 0);
 }
 
 void			shoot_weapon(t_engine *engine)
@@ -208,6 +208,18 @@ void			player_action(t_camera *camera, t_keyboard *p_keyboard, t_engine *engine)
 	static t_mesh	*elevator = NULL;
 	t_mesh			*target;
 	int				i;
+	static int		j = 0;
+
+	if (ft_strcmp(engine->user_engine->player->current_weapon->name, "pistol") == 0)
+		j = 18;
+	if (ft_strcmp(engine->user_engine->player->current_weapon->name, "ar") == 0)
+		j = 19;
+	if (ft_strcmp(engine->user_engine->player->current_weapon->name, "rifle") == 0)
+		j = 20;
+	if (ft_strcmp(engine->user_engine->player->current_weapon->name, "shotgun") == 0)
+		j = 21;
+	if (ft_strcmp(engine->user_engine->player->current_weapon->name, "rpg") == 0)
+		j = 21;
 
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_L]) == 1)
 	{
@@ -259,7 +271,12 @@ void			player_action(t_camera *camera, t_keyboard *p_keyboard, t_engine *engine)
 	if (elevator != NULL)
 		t_mesh_move_elevator(elevator, camera);
 	if (camera->r_press == 1)
+	{
+
+		if (!Mix_Playing(5))
+			Mix_PlayChannel(5, engine->sound_engine->sounds[j], 0);
 		reload_weapon(camera, engine->user_engine->player, engine->tick, engine);
+	}
 	if (engine->user_engine->player->shoot_time != engine->tick && camera->r_press != 1)
 		shoot_weapon(engine);
 	if (engine->user_engine->player->hp <= 0)
