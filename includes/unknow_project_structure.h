@@ -14,10 +14,7 @@ typedef struct	s_color
 t_color		create_t_color(float p_r, float p_g, float p_b, float p_a);
 t_color		*initialize_t_color(float p_r, float p_g, float p_b, float p_a);
 t_color 	create_t_color_from_int(int p_r, int p_g, int p_b, int p_a);
-t_color 	*initialize_t_color_from_int(int p_r, int p_g, int p_b, int p_a);
 t_color		fuze_t_color(t_color src1, t_color src2);
-t_color		merge_t_color(t_color src1, t_color delta);
-void 		print_t_color(t_color p_color, char *str);
 
 typedef struct	s_fuck_norme
 {
@@ -66,7 +63,6 @@ typedef struct	s_uv
 
 t_uv			create_t_uv(t_triangle p_triangle, t_texture *p_image);
 t_uv			*initialize_t_uv(t_triangle p_triangle, t_texture *p_image);
-void			print_t_uv(t_uv uv, char *texture_name);
 
 typedef struct	s_face
 {

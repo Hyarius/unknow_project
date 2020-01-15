@@ -6,7 +6,7 @@
 /*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 16:16:44 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/15 15:59:08 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/15 16:02:39 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	draw_rectangle_color_cpu(t_view_port *p_view_port, t_rectangle p_rec,
 	t_color_list_push_back(color_list, *p_color);
 	multithreading_draw_triangle_color_cpu(p_view_port, tri_list, color_list);
 	clean_t_triangle_list(tri_list);
-	clean_t_color_list(color_list);
+	color_list->size = 0;
 }
 
 void	draw_hud_rect(t_view_port *p_view_port,

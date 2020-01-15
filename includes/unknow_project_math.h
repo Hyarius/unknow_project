@@ -38,8 +38,6 @@ float			calc_rasterizer(t_rasterizer *rast, float x, float y);
 
 char			*ft_itoa(int n);
 int				generate_nbr(int min, int max);
-t_vector2_int_list
-				calc_line(t_vector2_int start, t_vector2_int end);
 t_vector4		cross_t_vector4(t_vector4 a, t_vector4 b);
 t_vector4 		normalize_t_vector4(t_vector4 v);
 float			dot_t_vector4(t_vector4 a, t_vector4 b);
