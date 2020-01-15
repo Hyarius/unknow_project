@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 13:40:28 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/14 14:59:48 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/15 11:05:17 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,26 @@ void			set_mesh(t_mesh *mesh, char **line_split)
 		t_mesh_set_name(mesh, line_split[1]);
 }
 
+void			read_map(t_mesh mesh, t_mesh_list *r, char **s, t_player *p)
+{
+	if (ft_strcmp(s[0], "player:") == 0)
+		read_player(s, p);
+	else if (ft_strcmp(s[0], "plane:") == 0 || s[0][0] == '#'
+	|| ft_strcmp(s[0], "item:") == 0 || ft_strcmp(s[0], "cube:") == 0)
+	{
+		mesh = init_texture(s);
+		set_mesh(&mesh, s);
+		t_mesh_list_push_back(r, mesh);
+	}
+}
+
 t_mesh_list		*read_map_file(int fd, t_player *player)
 {
 	t_mesh		mesh;
 	t_mesh_list	*result;
 	char		*line;
 	char		**s;
-	int i;
+	int			i;
 
 	i = 0;
 	result = initialize_t_mesh_list();
@@ -93,15 +106,7 @@ t_mesh_list		*read_map_file(int fd, t_player *player)
 		if (ft_strlen(line) != 0)
 		{
 			s = ft_strsplit(line, ' ');
-			if (ft_strcmp(s[0], "player:") == 0)
-				read_player(s, player);
-			else if (ft_strcmp(s[0], "plane:") == 0 || s[0][0] == '#'
-			|| ft_strcmp(s[0], "item:") == 0 || ft_strcmp(s[0], "cube:") == 0)
-			{
-				mesh = init_texture(s);
-				set_mesh(&mesh, s);
-				t_mesh_list_push_back(result, mesh);
-			}
+			read_map(mesh, result, s, player);
 			ft_freetab(s);
 		}
 		free(line);

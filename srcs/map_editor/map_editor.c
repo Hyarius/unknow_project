@@ -456,7 +456,7 @@ void		map_editor(t_camera *main_camera, t_gui *gui, t_engine *engine, t_mesh mes
 		color_armor = initialize_t_color(0.3, 0.3, 1.0, 1.0);
 
 	t_view_port_clear_buffers(main_camera->view_port);
-	draw_rectangle_color_cpu_front(main_camera->view_port, create_t_rectangle(create_t_vector2(0.0, 0.0), create_t_vector2(0.005, 0.01)), color_armor);
+	draw_hud_rect(main_camera->view_port, create_t_rectangle(create_t_vector2(0.0, 0.0), create_t_vector2(0.005, 0.01)), color_armor);
 	print_info_editing(main_camera, engine->user_engine->keyboard, gui);
 	player_editing(main_camera, engine, gui);
 	if (t_mouse_state(engine->user_engine->mouse) == 2)

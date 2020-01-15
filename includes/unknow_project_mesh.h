@@ -53,7 +53,7 @@ typedef struct		s_mesh
 }					t_mesh;
 
 t_mesh			create_t_mesh(t_vector4 pos);
-t_mesh			read_obj_file(char *path, t_vector4 pos, t_vector4 size, char *texture_path);
+t_mesh			read_obj_file(char *path, t_vector4 pos, t_vector4 size, char *txtr);
 t_mesh			*initialize_t_mesh(t_vector4 pos);
 void			delete_t_mesh(t_mesh mesh);
 void			free_t_mesh(t_mesh *mesh);

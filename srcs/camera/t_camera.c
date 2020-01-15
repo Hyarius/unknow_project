@@ -402,28 +402,6 @@ void		t_camera_calc_depth(t_camera *p_cam)
 	}
 }
 
-void		draw_depth_from_camera_on_screen(t_camera *p_cam)
-{
-	t_triangle	triangle;
-	t_line		line1;
-	t_line		line2;
-	int			i;
-
-	t_camera_calc_depth(p_cam);
-	i = -1;
-	while (++i < p_cam->triangle_color_list.size)
-	{
-		triangle = t_triangle_list_at(&(p_cam->triangle_color_list), i);
-		draw_triangle_depth_cpu(p_cam->view_port, &triangle, p_cam->dist_max);
-	}
-	i = -1;
-	while (++i < p_cam->triangle_texture_list.size)
-	{
-		triangle = t_triangle_list_at(&(p_cam->triangle_texture_list), i);
-		draw_triangle_depth_cpu(p_cam->view_port, &triangle, p_cam->dist_max);
-	}
-}
-
 void		draw_triangle_from_camera_on_screen(t_camera *p_cam)
 {
 	if (p_cam->triangle_color_list.size > 0)
