@@ -6,11 +6,11 @@
 
 typedef struct	s_mouse
 {
-	t_vector2_int
+	t_vec2_int
 				old_pos;
-	t_vector2_int
+	t_vec2_int
 				pos;
-	t_vector2_int
+	t_vec2_int
 				rel_pos;
 	int			button[MOUSE_BUTTON];
 	char		clicked_left;

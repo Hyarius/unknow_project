@@ -40,11 +40,11 @@ float			size_line(t_line line);
 
 typedef struct	s_rectangle
 {
-	t_vector2	pos;
-	t_vector2	size;
+	t_vec2	pos;
+	t_vec2	size;
 }				t_rectangle;
 
-t_rectangle		create_t_rectangle(t_vector2 p_pos, t_vector2 p_size);
-t_rectangle		*initialize_t_rectangle(t_vector2 p_pos, t_vector2 p_size);
+t_rectangle		create_t_rectangle(t_vec2 p_pos, t_vec2 p_size);
+t_rectangle		*initialize_t_rectangle(t_vec2 p_pos, t_vec2 p_size);
 
 #endif

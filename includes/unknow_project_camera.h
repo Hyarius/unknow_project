@@ -55,9 +55,9 @@ typedef struct	s_camera
 
 }				t_camera;
 
-t_camera	create_t_camera(t_window *window, t_vector4 p_pos, float p_fov, t_vector2 p_dist);
-t_camera	*initialize_t_camera(t_window *window, t_vector4 p_pos, float p_fov, t_vector2 p_dist);
-void		t_camera_set_view_port(t_camera *camera, t_vector2_int new_pos, t_vector2_int new_size);
+t_camera	create_t_camera(t_window *window, t_vector4 p_pos, float p_fov, t_vec2 p_dist);
+t_camera	*initialize_t_camera(t_window *window, t_vector4 p_pos, float p_fov, t_vec2 p_dist);
+void		t_camera_set_view_port(t_camera *camera, t_vec2_int new_pos, t_vec2_int new_size);
 void		t_camera_change_window(t_camera *camera, t_window *new_window);
 void		t_camera_change_view_port(t_camera *camera, t_view_port *new_view_port);
 void		delete_t_cam(t_camera dest);

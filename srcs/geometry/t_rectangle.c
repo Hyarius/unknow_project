@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   t_rectangle.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 16:16:08 by gboutin           #+#    #+#             */
-/*   Updated: 2019/12/12 16:16:09 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/15 16:05:05 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-t_rectangle	create_t_rectangle(t_vector2 p_pos, t_vector2 p_size)
+t_rectangle	create_t_rectangle(t_vec2 p_pos, t_vec2 p_size)
 {
 	t_rectangle	result;
 
@@ -21,7 +21,7 @@ t_rectangle	create_t_rectangle(t_vector2 p_pos, t_vector2 p_size)
 	return (result);
 }
 
-t_rectangle	*initialize_t_rectangle(t_vector2 p_pos, t_vector2 p_size)
+t_rectangle	*initialize_t_rectangle(t_vec2 p_pos, t_vec2 p_size)
 {
 	t_rectangle	*result;
 

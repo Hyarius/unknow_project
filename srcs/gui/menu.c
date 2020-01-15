@@ -28,13 +28,13 @@ void			play_menu(t_camera *main_camera, t_engine *engine, int *play)
 {
 	t_mouse			*mouse;
 	t_keyboard		*keyboard;
-	t_vector2_int	pos;
+	t_vec2_int	pos;
 	char			*path;
 
 	keyboard = engine->user_engine->keyboard;
 	mouse = engine->user_engine->mouse;
 	get_t_mouse_info(mouse);
-	pos = create_t_vector2_int(mouse->pos.x * 100 / WIN_X, mouse->pos.y * 100 / WIN_Y);
+	pos = create_vec2_int(mouse->pos.x * 100 / WIN_X, mouse->pos.y * 100 / WIN_Y);
 	if (pos.x > 37 && pos.x < 61 && t_mouse_state(mouse) == 2)
 	{
 		Mix_PlayChannel(-1, engine->sound_engine->sounds[0], 0);
@@ -102,10 +102,10 @@ void			main_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, int *play)
 {
 	t_mouse *mouse = engine->user_engine->mouse;
 	t_keyboard *keyboard = engine->user_engine->keyboard;
-    t_vector2_int pos;
+    t_vec2_int pos;
 
 	get_t_mouse_info(mouse);
-    pos = create_t_vector2_int(mouse->pos.x * 100 / WIN_X, mouse->pos.y * 100 / WIN_Y);
+    pos = create_vec2_int(mouse->pos.x * 100 / WIN_X, mouse->pos.y * 100 / WIN_Y);
     if (pos.x > 43 && pos.x < 56)
     {
 		if (t_mouse_state(mouse) == 2)
@@ -129,10 +129,10 @@ void			pause_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, t_window 
 {
 	t_mouse			*mouse = engine->user_engine->mouse;
 	t_keyboard		*keyboard = engine->user_engine->keyboard;
-    t_vector2_int	pos;
+    t_vec2_int	pos;
 
 	get_t_mouse_info(mouse);
-    pos = create_t_vector2_int(mouse->pos.x * 100 / WIN_X, mouse->pos.y * 100 / WIN_Y);
+    pos = create_vec2_int(mouse->pos.x * 100 / WIN_X, mouse->pos.y * 100 / WIN_Y);
     if (pos.x > 39 && pos.x < 61)
     {
 		if (t_mouse_state(mouse) == 2)
@@ -162,10 +162,10 @@ void			settings_pause_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, 
 {
 	t_mouse *mouse = engine->user_engine->mouse;
 	t_keyboard *keyboard = engine->user_engine->keyboard;
-    t_vector2_int pos;
+    t_vec2_int pos;
 
 	get_t_mouse_info(mouse);
-    pos = create_t_vector2_int(mouse->pos.x * 100 / WIN_X, mouse->pos.y * 100 / WIN_Y);
+    pos = create_vec2_int(mouse->pos.x * 100 / WIN_X, mouse->pos.y * 100 / WIN_Y);
     if (pos.x > 34 && pos.x < 64)
     {
 		if (t_mouse_state(mouse) == 2)
@@ -190,12 +190,12 @@ void        settings_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, i
 
     t_mouse *mouse = engine->user_engine->mouse;
     t_keyboard *keyboard = engine->user_engine->keyboard;
-    t_vector2_int pos;
+    t_vec2_int pos;
 
 	get_t_mouse_info(mouse);
-    pos = create_t_vector2_int(mouse->pos.x * 100 / WIN_X, mouse->pos.y * 100 / WIN_Y);
+    pos = create_vec2_int(mouse->pos.x * 100 / WIN_X, mouse->pos.y * 100 / WIN_Y);
     t_view_port_clear_buffers(main_camera->view_port);
-    draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.7, 0.4), create_t_vector2(-0.6, -0.94)), gui->menu[gui->idx]);
+    draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_vec2(0.7, 0.4), create_vec2(-0.6, -0.94)), gui->menu[gui->idx]);
     if (pos.x > 16 && pos.x < 29)
     {
 		if (t_mouse_state(mouse) == 2)
@@ -210,17 +210,17 @@ void        settings_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, i
 			t_view_port_clear_buffers(main_camera->view_port);
 			if (pos.y > 44 && pos.y < 47)
 			{
-				draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.7, 0.4), create_t_vector2(-0.6, -0.94)), gui->menu[8]);
+				draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_vec2(0.7, 0.4), create_vec2(-0.6, -0.94)), gui->menu[8]);
 					gui->idx = 8;
 			}
 			if (pos.y > 48 && pos.y < 52)
 			{
-				draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.7, 0.4), create_t_vector2(-0.6, -0.94)), gui->menu[9]);
+				draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_vec2(0.7, 0.4), create_vec2(-0.6, -0.94)), gui->menu[9]);
 					gui->idx = 9;
 			}
 			if (pos.y > 53 && pos.y < 56)
 			{
-				draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.7, 0.4), create_t_vector2(-0.6, -0.94)), gui->menu[10]);
+				draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_vec2(0.7, 0.4), create_vec2(-0.6, -0.94)), gui->menu[10]);
 					gui->idx = 10;
 			}
 			if (pos.y > 72 && pos.y < 76)
@@ -243,10 +243,10 @@ void        controls_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, i
 {
     t_mouse *mouse = engine->user_engine->mouse;
     t_keyboard *keyboard = engine->user_engine->keyboard;
-    t_vector2_int pos;
+    t_vec2_int pos;
 
 	get_t_mouse_info(mouse);
-    pos = create_t_vector2_int(mouse->pos.x * 100 / WIN_X, mouse->pos.y * 100 / WIN_Y);
+    pos = create_vec2_int(mouse->pos.x * 100 / WIN_X, mouse->pos.y * 100 / WIN_Y);
     if (gui->key_press != 2)
     {
 		if (t_mouse_state(mouse) == 2)
@@ -334,10 +334,10 @@ void        sens_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, int *
     }
     else if (mouse->pos.x >= 790 && mouse->pos.x <= 1050 && mouse->pos.y >= 1090 && mouse->pos.y <= 1160)
     {
-        draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.14, -0.83), create_t_vector2(0.05, 0.08)), gui->menu[7]);
-        draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.06, -0.88), create_t_vector2(0.05, 0.08)), gui->menu[7]);
-        draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.11, -0.92), create_t_vector2(0.05, 0.08)), gui->menu[7]);
-        draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(0.02, -0.85), create_t_vector2(0.05, 0.08)), gui->menu[7]);
+        draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_vec2(-0.14, -0.83), create_vec2(0.05, 0.08)), gui->menu[7]);
+        draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_vec2(-0.06, -0.88), create_vec2(0.05, 0.08)), gui->menu[7]);
+        draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_vec2(0.11, -0.92), create_vec2(0.05, 0.08)), gui->menu[7]);
+        draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_vec2(0.02, -0.85), create_vec2(0.05, 0.08)), gui->menu[7]);
         sens_bis(main_camera, gui, gui->sens);
         if (t_mouse_state(mouse) == 2)
             *play = 3;
@@ -356,7 +356,7 @@ void    sens_bis(t_camera *main_camera, t_gui *gui, int sens)
     i = 0;
     while (i < sens)
     {
-        draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(-0.5825 + i * 0.2175, -0.43), create_t_vector2(0.3, 0.5)), gui->menu[13]);
+        draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_vec2(-0.5825 + i * 0.2175, -0.43), create_vec2(0.3, 0.5)), gui->menu[13]);
         i++;
     }
 }
@@ -364,7 +364,7 @@ void    sens_bis(t_camera *main_camera, t_gui *gui, int sens)
 void    set_controls(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int key)
 {
     int scan_code;
-    draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_t_vector2(-1, 1), create_t_vector2(2, -2)), gui->menu[11]);
+    draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_vec2(-1, 1), create_vec2(2, -2)), gui->menu[11]);
     scan_code = user_engine->event.key.keysym.scancode;
     if (scan_code >= 4 && scan_code <= 231)
     {
@@ -381,10 +381,10 @@ void			credits_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, int *pl
 {
 	t_mouse *mouse = engine->user_engine->mouse;
 	t_keyboard *keyboard = engine->user_engine->keyboard;
-    t_vector2_int pos;
+    t_vec2_int pos;
 
 	get_t_mouse_info(mouse);
-    pos = create_t_vector2_int(mouse->pos.x * 100 / WIN_X, mouse->pos.y * 100 / WIN_Y);
+    pos = create_vec2_int(mouse->pos.x * 100 / WIN_X, mouse->pos.y * 100 / WIN_Y);
     if (pos.x > 43 && pos.x < 56)
     {
         if (pos.y > 82 && pos.y < 86)
@@ -403,11 +403,11 @@ void		set_player_editing(t_camera *main_camera, t_gui *gui, t_engine *engine, in
 	t_mouse			*mouse = engine->user_engine->mouse;
 	t_keyboard		*keyboard = engine->user_engine->keyboard;
 	t_player		*player;
-    t_vector2_int	pos;
+    t_vec2_int	pos;
 
 	player = engine->user_engine->player;
 	get_t_mouse_info(mouse);
-    pos = create_t_vector2_int(mouse->pos.x * 100 / WIN_X, mouse->pos.y * 100 / WIN_Y);
+    pos = create_vec2_int(mouse->pos.x * 100 / WIN_X, mouse->pos.y * 100 / WIN_Y);
 	if (t_mouse_state(mouse) == 2)
 	{
 		if (ft_strcmp(player->hitbox.name, "Player") == 0)
@@ -451,11 +451,11 @@ void		set_weapon_editing(t_camera *main_camera, t_gui *gui, t_engine *engine, in
 	t_mouse			*mouse = engine->user_engine->mouse;
 	t_keyboard		*keyboard = engine->user_engine->keyboard;
 	t_player		*player;
-    t_vector2_int	pos;
+    t_vec2_int	pos;
 
 	player = engine->user_engine->player;
 	get_t_mouse_info(mouse);
-	pos = create_t_vector2_int(mouse->pos.x * 100 / WIN_X, mouse->pos.y * 100 / WIN_Y);
+	pos = create_vec2_int(mouse->pos.x * 100 / WIN_X, mouse->pos.y * 100 / WIN_Y);
 	if (t_mouse_state(mouse) == 2)
 	{
 		if (pos.y > 11 && pos.y < 15)
@@ -628,10 +628,10 @@ void		save_pause(t_camera *main_camera, t_gui *gui, t_engine *engine, t_window *
 {
 	t_mouse			*mouse = engine->user_engine->mouse;
 	t_keyboard		*keyboard = engine->user_engine->keyboard;
-	t_vector2_int	pos;
+	t_vec2_int	pos;
 
 	get_t_mouse_info(mouse);
-	pos = create_t_vector2_int(mouse->pos.x * 100 / WIN_X, mouse->pos.y * 100 / WIN_Y);
+	pos = create_vec2_int(mouse->pos.x * 100 / WIN_X, mouse->pos.y * 100 / WIN_Y);
 	if (pos.x > 40 && pos.x < 61)
 	{
 		if (t_mouse_state(mouse) == 2)

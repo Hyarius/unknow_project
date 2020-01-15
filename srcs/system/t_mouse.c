@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_mouse.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 11:10:02 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/07 11:10:04 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/15 16:04:30 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ t_mouse	create_t_mouse(void)
 {
 	t_mouse	result;
 
-	result.old_pos = create_t_vector2_int(-1, -1);
-	result.pos = create_t_vector2_int(-1, -1);
-	result.rel_pos = create_t_vector2_int(0, 0);
+	result.old_pos = create_vec2_int(-1, -1);
+	result.pos = create_vec2_int(-1, -1);
+	result.rel_pos = create_vec2_int(0, 0);
 	result.button[MOUSE_LEFT] = BOOL_FALSE;
 	result.button[MOUSE_RIGHT] = BOOL_FALSE;
 	result.button[MOUSE_MIDDLE] = BOOL_FALSE;
@@ -44,7 +44,7 @@ void	get_t_mouse_info(t_mouse *mouse)
 	mouse->old_pos = mouse->pos;
 	mousestate = SDL_GetMouseState(&(mouse->pos.x), &(mouse->pos.y));
 	if (mouse->old_pos.x != -1)
-		mouse->rel_pos = create_t_vector2_int((mouse->pos.x - WIN_X / 2),
+		mouse->rel_pos = create_vec2_int((mouse->pos.x - WIN_X / 2),
 											(mouse->pos.y - WIN_Y / 2));
 	if (mousestate & SDL_BUTTON(SDL_BUTTON_LEFT))
 		mouse->button[MOUSE_LEFT] = BOOL_TRUE;

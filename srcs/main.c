@@ -77,11 +77,11 @@ int main(int argc, char **argv)
 	main_camera = t_camera_list_get(engine->visual_engine->camera_list, 0);
 	t_engine_place_camera(engine, 0, create_t_vector4(5.0, 5.0, 0.0));
 	t_camera_look_at_point(main_camera, create_t_vector4(0, 0, 0));
-	t_engine_add_camera(engine, create_t_camera(win, create_t_vector4(0.0, 0.0, 0.0), 70, create_t_vector2(NEAR, FAR)));
-	resize_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 1)->view_port, create_t_vector2_int(300, 240));
-	move_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 1)->view_port, create_t_vector2_int(WIN_X - 300, 0));
+	t_engine_add_camera(engine, create_t_camera(win, create_t_vector4(0.0, 0.0, 0.0), 70, create_vec2(NEAR, FAR)));
+	resize_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 1)->view_port, create_vec2_int(300, 240));
+	move_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 1)->view_port, create_vec2_int(WIN_X - 300, 0));
 
-	t_rectangle rec = create_t_rectangle(create_t_vector2(-1, 1), create_t_vector2(2, -2));
+	t_rectangle rec = create_t_rectangle(create_vec2(-1, 1), create_vec2(2, -2));
 	t_mesh	mesh_editing;
 	char	**path;
 	path = load_path_texture();
