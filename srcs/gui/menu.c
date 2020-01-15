@@ -458,172 +458,169 @@ void		set_weapon_editing(t_camera *main_camera, t_gui *gui, t_engine *engine, in
 	pos = create_t_vector2_int(mouse->pos.x * 100 / WIN_X, mouse->pos.y * 100 / WIN_Y);
 	if (t_mouse_state(mouse) == 2)
 	{
-		if (t_mouse_state(mouse) == 2)
+		if (pos.y > 11 && pos.y < 15)
 		{
-			if (pos.y > 11 && pos.y < 15)
-			{
-				if (pos.x > 44 && pos.x < 48)
-					player->weapons[1].total_ammo = 0;
-				if (pos.x > 50 && pos.x < 55)
-					player->weapons[1].total_ammo = -1;
-			}
-			if (pos.y > 18 && pos.y < 22)
-			{
-				if (pos.x >= 52 && pos.x <= 54)
-				{
-					player->weapons[1].ammo = 0;
-					player->weapons[1].total_ammo = 0;
-				}
-				if (pos.x >= 55 && pos.x <= 57)
-				{
-					player->weapons[1].ammo = 30;
-					player->weapons[1].total_ammo = 0;
-				}
-				if (pos.x >= 58 && pos.x <= 60)
-				{
-					player->weapons[1].ammo = 30;
-					player->weapons[1].total_ammo = 30;
-				}
-				if (pos.x >= 61 && pos.x <= 63)
-				{
-					player->weapons[1].ammo = 30;
-					player->weapons[1].total_ammo = 60;
-				}
-				if (pos.x >= 64 && pos.x <= 66)
-				{
-					player->weapons[1].ammo = 30;
-					player->weapons[1].total_ammo = 90;
-				}
-				if (pos.x >= 67 && pos.x <= 69)
-				{
-					player->weapons[1].ammo = 30;
-					player->weapons[1].total_ammo = 120;
-				}
-			}
-			if (pos.y > 32 && pos.y < 36)
-			{
-				if (pos.x > 44 && pos.x < 48)
-					player->weapons[3].total_ammo = 0;
-				if (pos.x > 50 && pos.x < 55)
-					player->weapons[3].total_ammo = -1;
-			}
-			if (pos.y > 39 && pos.y < 43)
-			{
-				if (pos.x >= 52 && pos.x <= 54)
-				{
-					player->weapons[3].ammo = 0;
-					player->weapons[3].total_ammo = 0;
-				}
-				if (pos.x >= 55 && pos.x <= 57)
-				{
-					player->weapons[3].ammo = 8;
-					player->weapons[3].total_ammo = 0;
-				}
-				if (pos.x >= 58 && pos.x <= 60)
-				{
-					player->weapons[3].ammo = 8;
-					player->weapons[3].total_ammo = 8;
-				}
-				if (pos.x >= 61 && pos.x <= 63)
-				{
-					player->weapons[3].ammo = 8;
-					player->weapons[3].total_ammo = 16;
-				}
-				if (pos.x >= 64 && pos.x <= 66)
-				{
-					player->weapons[3].ammo = 8;
-					player->weapons[3].total_ammo = 24;
-				}
-				if (pos.x >= 67 && pos.x <= 69)
-				{
-					player->weapons[3].ammo = 8;
-					player->weapons[3].total_ammo = 32;
-				}
-			}
-			if (pos.y > 53 && pos.y < 57)
-			{
-				if (pos.x > 44 && pos.x < 48)
-					player->weapons[2].total_ammo = 0;
-				if (pos.x > 50 && pos.x < 55)
-					player->weapons[2].total_ammo = -1;
-			}
-			if (pos.y > 60 && pos.y < 64)
-			{
-				if (pos.x >= 52 && pos.x <= 54)
-				{
-					player->weapons[2].ammo = 0;
-					player->weapons[2].total_ammo = 0;
-				}
-				if (pos.x >= 55 && pos.x <= 57)
-				{
-					player->weapons[2].ammo = 10;
-					player->weapons[2].total_ammo = 0;
-				}
-				if (pos.x >= 58 && pos.x <= 60)
-				{
-					player->weapons[2].ammo = 10;
-					player->weapons[2].total_ammo = 10;
-				}
-				if (pos.x >= 61 && pos.x <= 63)
-				{
-					player->weapons[2].ammo = 10;
-					player->weapons[2].total_ammo = 20;
-				}
-				if (pos.x >= 64 && pos.x <= 66)
-				{
-					player->weapons[2].ammo = 10;
-					player->weapons[2].total_ammo = 30;
-				}
-				if (pos.x >= 67 && pos.x <= 69)
-				{
-					player->weapons[2].ammo = 10;
-					player->weapons[2].total_ammo = 40;
-				}
-			}
-			if (pos.y > 74 && pos.y < 78)
-			{
-				if (pos.x > 44 && pos.x < 48)
-					player->weapons[4].total_ammo = 0;
-				if (pos.x > 50 && pos.x < 55)
-					player->weapons[4].total_ammo = -1;
-			}
-			if (pos.y > 81 && pos.y < 85)
-			{
-				if (pos.x >= 52 && pos.x <= 54)
-				{
-					player->weapons[4].ammo = 0;
-					player->weapons[4].total_ammo = 0;
-				}
-				if (pos.x >= 55 && pos.x <= 57)
-				{
-					player->weapons[4].ammo = 1;
-					player->weapons[4].total_ammo = 0;
-				}
-				if (pos.x >= 58 && pos.x <= 60)
-				{
-					player->weapons[4].ammo = 1;
-					player->weapons[4].total_ammo = 1;
-				}
-				if (pos.x >= 61 && pos.x <= 63)
-				{
-					player->weapons[4].ammo = 1;
-					player->weapons[4].total_ammo = 2;
-				}
-				if (pos.x >= 64 && pos.x <= 66)
-				{
-					player->weapons[4].ammo = 1;
-					player->weapons[4].total_ammo = 3;
-				}
-				if (pos.x >= 67 && pos.x <= 69)
-				{
-					player->weapons[4].ammo = 1;
-					player->weapons[4].total_ammo = 4;
-				}
-			}
-			if (pos.y > 91 && pos.y < 98 && pos.x > 40 && pos.x < 61)
-				*play = 11;
-			Mix_PlayChannel(-1, engine->sound_engine->sounds[0], 0);
+			if (pos.x > 44 && pos.x < 48)
+				player->weapons[1].total_ammo = 0;
+			if (pos.x > 50 && pos.x < 55)
+				player->weapons[1].total_ammo = -1;
 		}
+		if (pos.y > 18 && pos.y < 22)
+		{
+			if (pos.x >= 52 && pos.x <= 54)
+			{
+				player->weapons[1].ammo = 0;
+				player->weapons[1].total_ammo = 0;
+			}
+			if (pos.x >= 55 && pos.x <= 57)
+			{
+				player->weapons[1].ammo = 30;
+				player->weapons[1].total_ammo = 0;
+			}
+			if (pos.x >= 58 && pos.x <= 60)
+			{
+				player->weapons[1].ammo = 30;
+				player->weapons[1].total_ammo = 30;
+			}
+			if (pos.x >= 61 && pos.x <= 63)
+			{
+				player->weapons[1].ammo = 30;
+				player->weapons[1].total_ammo = 60;
+			}
+			if (pos.x >= 64 && pos.x <= 66)
+			{
+				player->weapons[1].ammo = 30;
+				player->weapons[1].total_ammo = 90;
+			}
+			if (pos.x >= 67 && pos.x <= 69)
+			{
+				player->weapons[1].ammo = 30;
+				player->weapons[1].total_ammo = 120;
+			}
+		}
+		if (pos.y > 32 && pos.y < 36)
+		{
+			if (pos.x > 44 && pos.x < 48)
+				player->weapons[3].total_ammo = 0;
+			if (pos.x > 50 && pos.x < 55)
+				player->weapons[3].total_ammo = -1;
+		}
+		if (pos.y > 39 && pos.y < 43)
+		{
+			if (pos.x >= 52 && pos.x <= 54)
+			{
+				player->weapons[3].ammo = 0;
+				player->weapons[3].total_ammo = 0;
+			}
+			if (pos.x >= 55 && pos.x <= 57)
+			{
+				player->weapons[3].ammo = 8;
+				player->weapons[3].total_ammo = 0;
+			}
+			if (pos.x >= 58 && pos.x <= 60)
+			{
+				player->weapons[3].ammo = 8;
+				player->weapons[3].total_ammo = 8;
+			}
+			if (pos.x >= 61 && pos.x <= 63)
+			{
+				player->weapons[3].ammo = 8;
+				player->weapons[3].total_ammo = 16;
+			}
+			if (pos.x >= 64 && pos.x <= 66)
+			{
+				player->weapons[3].ammo = 8;
+				player->weapons[3].total_ammo = 24;
+			}
+			if (pos.x >= 67 && pos.x <= 69)
+			{
+				player->weapons[3].ammo = 8;
+				player->weapons[3].total_ammo = 32;
+			}
+		}
+		if (pos.y > 53 && pos.y < 57)
+		{
+			if (pos.x > 44 && pos.x < 48)
+				player->weapons[2].total_ammo = 0;
+			if (pos.x > 50 && pos.x < 55)
+				player->weapons[2].total_ammo = -1;
+		}
+		if (pos.y > 60 && pos.y < 64)
+		{
+			if (pos.x >= 52 && pos.x <= 54)
+			{
+				player->weapons[2].ammo = 0;
+				player->weapons[2].total_ammo = 0;
+			}
+			if (pos.x >= 55 && pos.x <= 57)
+			{
+				player->weapons[2].ammo = 10;
+				player->weapons[2].total_ammo = 0;
+			}
+			if (pos.x >= 58 && pos.x <= 60)
+			{
+				player->weapons[2].ammo = 10;
+				player->weapons[2].total_ammo = 10;
+			}
+			if (pos.x >= 61 && pos.x <= 63)
+			{
+				player->weapons[2].ammo = 10;
+				player->weapons[2].total_ammo = 20;
+			}
+			if (pos.x >= 64 && pos.x <= 66)
+			{
+				player->weapons[2].ammo = 10;
+				player->weapons[2].total_ammo = 30;
+			}
+			if (pos.x >= 67 && pos.x <= 69)
+			{
+				player->weapons[2].ammo = 10;
+				player->weapons[2].total_ammo = 40;
+			}
+		}
+		if (pos.y > 74 && pos.y < 78)
+		{
+			if (pos.x > 44 && pos.x < 48)
+				player->weapons[4].total_ammo = 0;
+			if (pos.x > 50 && pos.x < 55)
+				player->weapons[4].total_ammo = -1;
+		}
+		if (pos.y > 81 && pos.y < 85)
+		{
+			if (pos.x >= 52 && pos.x <= 54)
+			{
+				player->weapons[4].ammo = 0;
+				player->weapons[4].total_ammo = 0;
+			}
+			if (pos.x >= 55 && pos.x <= 57)
+			{
+				player->weapons[4].ammo = 1;
+				player->weapons[4].total_ammo = 0;
+			}
+			if (pos.x >= 58 && pos.x <= 60)
+			{
+				player->weapons[4].ammo = 1;
+				player->weapons[4].total_ammo = 1;
+			}
+			if (pos.x >= 61 && pos.x <= 63)
+			{
+				player->weapons[4].ammo = 1;
+				player->weapons[4].total_ammo = 2;
+			}
+			if (pos.x >= 64 && pos.x <= 66)
+			{
+				player->weapons[4].ammo = 1;
+				player->weapons[4].total_ammo = 3;
+			}
+			if (pos.x >= 67 && pos.x <= 69)
+			{
+				player->weapons[4].ammo = 1;
+				player->weapons[4].total_ammo = 4;
+			}
+		}
+		if (pos.y > 91 && pos.y < 98 && pos.x > 40 && pos.x < 61)
+			*play = 11;
+		Mix_PlayChannel(-1, engine->sound_engine->sounds[0], 0);
 	}
 }
 
