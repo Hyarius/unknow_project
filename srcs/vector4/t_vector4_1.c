@@ -1,16 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_vector4_1.c                                      :+:      :+:    :+:   */
+/*   t_vector4_3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/15 11:24:48 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/15 11:25:28 by jubeal           ###   ########.fr       */
+/*   Created: 2020/01/15 11:25:39 by jubeal            #+#    #+#             */
+/*   Updated: 2020/01/15 12:17:57 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
+
+t_vector4	mult_vector4_by_vector4(t_vector4 a, t_vector4 b)
+{
+	t_vector4	result;
+
+	result = create_t_vector4(a.x * b.x, a.y * b.y, a.z * b.z);
+	return (result);
+}
+
+t_vector4	mult_vector4_by_float(t_vector4 a, float b)
+{
+	t_vector4	result;
+
+	result = create_t_vector4(a.x * b, a.y * b, a.z * b);
+	return (result);
+}
 
 int			t_vector4_equal(t_vector4 a, t_vector4 b)
 {
@@ -19,25 +35,22 @@ int			t_vector4_equal(t_vector4 a, t_vector4 b)
 	return (BOOL_TRUE);
 }
 
-float		t_vector4_length(t_vector4 a)
+void		swap_t_vector4(t_vector4 *a, t_vector4 *b)
 {
-	return (sqrt(a.x * a.x + a.y * a.y + a.z * a.z));
+	t_vector4	tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
 }
 
-char		*vector4_str(t_vector4 vector)
+t_vector4	inv_t_vector4(t_vector4 src)
 {
-	char *x;
-	char *y;
-	char *z;
-	char *result;
+	t_vector4	result;
 
-	x = ft_ftoa_p(vector.x, 5);
-	y = ft_ftoa_p(vector.y, 5);
-	z = ft_ftoa_p(vector.z, 5);
-	result = x;
-	result = ft_strjoinf(result, " / ", 1);
-	result = ft_strjoinf(result, y, 3);
-	result = ft_strjoinf(result, " / ", 1);
-	result = ft_strjoinf(result, z, 3);
+	result.x = -1 * src.x;
+	result.y = -1 * src.y;
+	result.z = -1 * src.z;
+	result.w = -1 * src.w;
 	return (result);
 }

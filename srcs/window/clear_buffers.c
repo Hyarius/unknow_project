@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_vector2.c                                        :+:      :+:    :+:   */
+/*   clear_buffers.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/15 11:48:24 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/15 12:13:19 by jubeal           ###   ########.fr       */
+/*   Created: 2020/01/15 10:03:02 by jubeal            #+#    #+#             */
+/*   Updated: 2020/01/15 11:27:21 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-t_vector2	create_t_vector2(float p_x, float p_y)
+void		t_view_port_clear_buffers(t_view_port *view)
 {
-	t_vector2	result;
+	int i;
 
-	result.x = p_x;
-	result.y = p_y;
-	return (result);
+	i = -1;
+	while (++i < view->window->size_x * view->window->size_y)
+		view->depth_buffer[i] = INT_MAX;
 }
 
-t_vector2	add_vector2_to_vector2(t_vector2 v1, t_vector2 v2)
+void		window_handler_clear_buffers(t_window *win)
 {
-	t_vector2	result;
+	int i;
 
-	result = create_t_vector2(v1.x + v2.x, v1.y + v2.y);
-	return (result);
+	i = -1;
+	while (++i < (win->size_x * win->size_y))
+		win->color_data[i].a = 0;
 }

@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_vector2.c                                        :+:      :+:    :+:   */
+/*   convert2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/15 11:48:24 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/15 12:13:19 by jubeal           ###   ########.fr       */
+/*   Created: 2020/01/15 09:58:50 by jubeal            #+#    #+#             */
+/*   Updated: 2020/01/15 11:27:24 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-t_vector2	create_t_vector2(float p_x, float p_y)
+float			degree_to_radius(float angle)
 {
-	t_vector2	result;
-
-	result.x = p_x;
-	result.y = p_y;
-	return (result);
+	return ((float)(((float)angle) * M_PI / (float)180));
 }
 
-t_vector2	add_vector2_to_vector2(t_vector2 v1, t_vector2 v2)
+float			radius_to_degree(float radian)
 {
-	t_vector2	result;
+	return ((float)((float)(radian * 180) / M_PI));
+}
 
-	result = create_t_vector2(v1.x + v2.x, v1.y + v2.y);
+t_uv			convert_t_uv_to_texture(t_uv *source)
+{
+	t_uv		result;
+
+	result = *source;
+	result.uv.a.y = 1 - result.uv.a.y;
+	result.uv.b.y = 1 - result.uv.b.y;
+	result.uv.c.y = 1 - result.uv.c.y;
 	return (result);
 }
