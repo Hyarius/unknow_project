@@ -63,7 +63,6 @@ typedef struct	s_uv
 
 t_uv			create_t_uv(t_triangle p_triangle, t_texture *p_image);
 t_uv			*initialize_t_uv(t_triangle p_triangle, t_texture *p_image);
-void			(t_uv uv, char *texture_name);
 
 typedef struct	s_face
 {
