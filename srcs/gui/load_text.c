@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_text.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 16:24:30 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/15 16:27:23 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/15 16:42:13 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,6 @@ void	load_letter(t_gui *gui, char *str, int idx)
 	TTF_Font	*police;
 	SDL_Color	color;
 
-	color[0] = 0;
-	color[1] = 0;
-	color[2] = 0;
 	str[1] = '\0';
 	police = TTF_OpenFont("ressources/assets/ttf/Tinos-Regular.ttf", 240);
 	gui->letter[idx]->font = TTF_RenderText_Blended(police, str, color);
