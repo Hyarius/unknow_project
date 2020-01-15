@@ -6,21 +6,18 @@
 /*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:53:46 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/15 15:53:47 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/15 18:01:59 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-void			change_weapon(t_keyboard *p_keyboard, t_player *player)
+void	change_weapon(t_keyboard *p_keyboard, t_player *player)
 {
 	static int index = 0;
 
-	if (ft_strcmp(player->current_weapon->name, "bb") == 0)
-	{
-		index = 5;
+	if (ft_strcmp(player->current_weapon->name, "bb") == 0 && (index = 5))
 		return ;
-	}
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_1]) == 1)
 		index = 0;
 	else if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_2]) == 1
@@ -38,20 +35,23 @@ void			change_weapon(t_keyboard *p_keyboard, t_player *player)
 	player->current_weapon = &player->weapons[index];
 }
 
-void			reload_weapon(t_camera *camera, t_player *player, int tick, t_engine *engine)
+void	reload_weapon(t_camera *camera, t_player *player, int tick,
+						t_engine *engine)
 {
 	int			to_fill;
 	static int	i = 0;
+	char		*weapon;
 
-	if (ft_strcmp(engine->user_engine->player->current_weapon->name, "pistol") == 0)
+	weapon = engine->user_engine->player->current_weapon->name;
+	if (ft_strcmp(weapon, "pistol") == 0)
 		i = 18;
-	if (ft_strcmp(engine->user_engine->player->current_weapon->name, "ar") == 0)
+	else if (ft_strcmp(weapon, "ar") == 0)
 		i = 19;
-	if (ft_strcmp(engine->user_engine->player->current_weapon->name, "rifle") == 0)
+	else if (ft_strcmp(weapon, "rifle") == 0)
 		i = 20;
-	if (ft_strcmp(engine->user_engine->player->current_weapon->name, "shotgun") == 0)
+	else if (ft_strcmp(weapon, "shotgun") == 0)
 		i = 21;
-	if (ft_strcmp(engine->user_engine->player->current_weapon->name, "rpg") == 0)
+	else if (ft_strcmp(weapon, "rpg") == 0)
 		i = 21;
 	to_fill = player->current_weapon->mag_size - player->current_weapon->ammo;
 	if (tick - player->reload_time == player->current_weapon->tick_reload)
@@ -73,48 +73,59 @@ void			reload_weapon(t_camera *camera, t_player *player, int tick, t_engine *eng
 		Mix_PlayChannel(5, engine->sound_engine->sounds[i], 0);
 }
 
-void			shoot_weapon(t_engine *engine)
+void	shoot_weapon2(t_engine, *engine)
 {
-	t_mesh	*target;
-	float	dist;
-	static int	i = 0;
+	Mix_PlayChannel(-1, engine->sound_engine->sounds[i], 0);
+	target = cast_ray(engine,
+	t_camera_list_get(engine->visual_engine->camera_list, 0)->pos,
+	t_camera_list_get(engine->visual_engine->camera_list, 0)->forward,
+	"Player");
+	if (target != NULL && target->hp > 0)
+	{
+		if (ft_strcmp(engine->user_engine->player->current_weapon->name,
+		"shotgun") == 0)
+			dist = calc_dist_vector4_to_vector4(engine->user_engine->player->hitbox.pos, target->pos);
+		if (engine->user_engine->player->current_weapon->dmg - dist * 4 >= 0)
+			target->hp -= engine->user_engine->player->current_weapon->dmg - dist * 4;
+		if (target->hp <= 0)
+		{
+			if (ft_strcmp(target->name, "wall_script") == 0)
+			{
+				Mix_PlayChannel(-1, engine->sound_engine->sounds[14], 0);
+				t_mesh_activate_gravity(&engine->user_engine->player->hitbox, 0.0f);
+				engine->user_engine->player->current_weapon = &engine->user_engine->player->weapons[5];
+			}
+			destroy_mesh(target);
+		}
+	}
+}
 
-	// ajouter un ID sur les armes pour eviter ces IF
-	if (ft_strcmp(engine->user_engine->player->current_weapon->name, "pistol") == 0)
+void	shoot_weapon(t_engine *engine)
+{
+	t_mesh		*target;
+	float		dist;
+	static int	i = 0;
+	char		*weapon;
+
+	weapon = engine->user_engine->player->current_weapon->name;
+	if (ft_strcmp(weapon, "pistol") == 0)
 		i = 7;
-	if (ft_strcmp(engine->user_engine->player->current_weapon->name, "ar") == 0)
+	if (ft_strcmp(weapon, "ar") == 0)
 		i = 8;
-	if (ft_strcmp(engine->user_engine->player->current_weapon->name, "rifle") == 0)
+	if (ft_strcmp(weapon, "rifle") == 0)
 		i = 9;
-	if (ft_strcmp(engine->user_engine->player->current_weapon->name, "shotgun") == 0)
+	if (ft_strcmp(weapon, "shotgun") == 0)
 		i = 10;
-	if (ft_strcmp(engine->user_engine->player->current_weapon->name, "rpg") == 0)
+	if (ft_strcmp(weapon, "rpg") == 0)
 		i = 11;
 	dist = 0.0;
-	if (t_mouse_state(engine->user_engine->mouse) == 1 && engine->tick % engine->user_engine->player->current_weapon->tick_shoot == 0)
+	if (t_mouse_state(engine->user_engine->mouse) == 1 && engine->tick
+		% engine->user_engine->player->current_weapon->tick_shoot == 0)
 	{
 		if (engine->user_engine->player->current_weapon->ammo > 0)
 		{
-			Mix_PlayChannel(-1, engine->sound_engine->sounds[i], 0);
-			target = cast_ray(engine, t_camera_list_get(engine->visual_engine->camera_list, 0)->pos, t_camera_list_get(engine->visual_engine->camera_list, 0)->forward, "Player");
-			if (target != NULL && target->hp > 0)
-			{
-				if (ft_strcmp(engine->user_engine->player->current_weapon->name, "shotgun") == 0)
-					dist = calc_dist_vector4_to_vector4(engine->user_engine->player->hitbox.pos, target->pos);
-				if (engine->user_engine->player->current_weapon->dmg - dist * 4 >= 0)
-					target->hp -= engine->user_engine->player->current_weapon->dmg - dist * 4;
-				if (target->hp <= 0)
-				{
-					if (ft_strcmp(target->name, "wall_script") == 0)
-					{
-						Mix_PlayChannel(-1, engine->sound_engine->sounds[14], 0);
-						t_mesh_activate_gravity(&engine->user_engine->player->hitbox, 0.0f);
-						engine->user_engine->player->current_weapon = &engine->user_engine->player->weapons[5];
-					}
-					destroy_mesh(target);
-				}
-			}
-			if (ft_strcmp(engine->user_engine->player->current_weapon->name, "ar") == 0)
+			if (ft_strcmp(engine->user_engine->player->current_weapon->name,
+			"ar") == 0)
 				engine->user_engine->player->current_weapon->ammo -= 2;
 			engine->user_engine->player->current_weapon->ammo--;
 		}
@@ -122,7 +133,7 @@ void			shoot_weapon(t_engine *engine)
 	}
 }
 
-void			player_action(t_camera *camera, t_keyboard *p_keyboard, t_engine *engine)
+void	player_action(t_camera *camera, t_keyboard *p_keyboard, t_engine *engine)
 {
 	static t_mesh	*door = NULL;
 	static t_mesh	*elevator = NULL;
@@ -186,37 +197,5 @@ void			player_action(t_camera *camera, t_keyboard *p_keyboard, t_engine *engine)
 	{
 		Mix_PlayChannel(-1, engine->sound_engine->sounds[15], 0);
 		engine->playing = -3;
-	}
-}
-
-void			player_take_dmg(t_engine *engine, int dmg)
-{
-	int		diff;
-
-	if (engine->user_engine->player->armor != 0)
-	{
-		if (engine->user_engine->player->armor >= dmg)
-		{
-			//rajouter son degat armur
-			engine->user_engine->player->armor -= dmg;
-		}
-		else
-		{
-			if (rand() % 2 == 0)
-				Mix_PlayChannel(4, engine->sound_engine->sounds[16], 0);
-			else
-				Mix_PlayChannel(4, engine->sound_engine->sounds[17], 0);
-			diff = dmg - engine->user_engine->player->armor;
-			engine->user_engine->player->armor = 0;
-			engine->user_engine->player->hp -= diff;
-		}
-	}
-	else
-	{
-		if (rand() % 2 == 0)
-			Mix_PlayChannel(4, engine->sound_engine->sounds[16], 0);
-		else
-			Mix_PlayChannel(4, engine->sound_engine->sounds[17], 0);
-		engine->user_engine->player->hp -= dmg;
 	}
 }
