@@ -437,9 +437,9 @@ void		draw_triangle_from_camera_on_screen(t_camera *p_cam)
 void		clean_t_camera(t_camera *camera)
 {
 	clean_t_triangle_list(&(camera->triangle_color_list));
-	clean_t_color_list(&(camera->color_list));
+	(&(camera->color_list))->size = 0;
 	clean_t_triangle_list(&(camera->triangle_texture_list));
-	clean_t_color_list(&(camera->darkness_list));
+	(&(camera->darkness_list))->size = 0;
 	clean_t_uv_list(&(camera->uv_list));
 	t_view_port_clear_buffers(camera->view_port);
 }
