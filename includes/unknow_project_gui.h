@@ -5,8 +5,8 @@
 
 typedef struct      s_button
 {
-    t_vector2_int   pos;
-    t_vector2_int   size;
+    t_vec2_int   pos;
+    t_vec2_int   size;
     char            clicked;
 }                   t_button;
 

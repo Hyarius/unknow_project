@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   visual_engine.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 15:06:45 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/09 15:08:50 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/15 16:04:30 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_visual_engine	create_t_visual_engine(t_window *p_window)
 	result.camera_list = initialize_t_camera_list();
 	result.main_camera = 0;
 	tmp = create_t_camera(p_window, create_t_vector4(0, 0, 0), FOV,
-									create_t_vector2(NEAR, FAR));
+									create_vec2(NEAR, FAR));
 	t_camera_list_push_back(result.camera_list, tmp);
 	return (result);
 }

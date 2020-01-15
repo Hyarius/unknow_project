@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_gui.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 15:58:51 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/13 09:41:41 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/15 16:04:30 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	print_letter(t_camera *main_cam, t_gui *gui, char *str, t_rectangle rec)
 				draw_rectangle_texture_cpu(main_cam->view_port, rec,
 											gui->letter[idx]->let);
 				rec.pos = add_vector2_to_vector2(rec.pos,
-											create_t_vector2(rec.size.x, 0.0));
+											create_vec2(rec.size.x, 0.0));
 				break ;
 			}
 		}
@@ -94,13 +94,13 @@ void	print_info_bar(t_camera *main_camera, t_player *player, t_gui *gui)
 
 	str = ft_itoa(player->armor);
 	print_letter(main_camera, gui, ft_strcat(str, "%"),
-				create_t_rectangle(create_t_vector2(-0.70, -0.87),
-									create_t_vector2(0.02, 0.07)));
+				create_t_rectangle(create_vec2(-0.70, -0.87),
+									create_vec2(0.02, 0.07)));
 	free(str);
 	str = ft_itoa(player->hp);
 	print_letter(main_camera, gui, ft_strcat(str, "%"),
-				create_t_rectangle(create_t_vector2(-0.70, -0.97),
-									create_t_vector2(0.02, 0.07)));
+				create_t_rectangle(create_vec2(-0.70, -0.97),
+									create_vec2(0.02, 0.07)));
 	free(str);
 	if (ft_strcmp(player->current_weapon->name, "bb") != 0)
 	{
@@ -108,8 +108,8 @@ void	print_info_bar(t_camera *main_camera, t_player *player, t_gui *gui)
 		str = ft_strjoinf(str, " / ", 1);
 		str = ft_strjoinf(str, ft_itoa(player->current_weapon->total_ammo), 3);
 		print_letter(main_camera, gui, str,
-					create_t_rectangle(create_t_vector2(0.78, -0.90),
-										create_t_vector2(0.01, 0.05)));
+					create_t_rectangle(create_vec2(0.78, -0.90),
+										create_vec2(0.01, 0.05)));
 		free(str);
 	}
 }

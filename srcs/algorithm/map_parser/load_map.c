@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 13:40:38 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/14 13:37:35 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/15 16:04:30 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ void	link_enemy_to_camera(t_engine *engine, int k)
 	t_engine_add_camera(engine,
 		create_t_camera(t_camera_list_get(engine->visual_engine->camera_list,
 		0)->view_port->window, create_t_vector4(0.0, 0.0, 0.0), 70,
-		create_t_vector2(NEAR, FAR)));
+		create_vec2(NEAR, FAR)));
 	resize_t_view_port(t_camera_list_get(engine->visual_engine->camera_list,
-		2 + k)->view_port, create_t_vector2_int(1, 1));
+		2 + k)->view_port, create_vec2_int(1, 1));
 	move_t_view_port(t_camera_list_get(engine->visual_engine->camera_list,
-		2 + k)->view_port, create_t_vector2_int(0, 0));
+		2 + k)->view_port, create_vec2_int(0, 0));
 }
 
 void	set_map_in_engine(t_engine *engine, t_mesh_list *meshs,

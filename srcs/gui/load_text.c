@@ -1,20 +1,36 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   load_text.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/15 16:24:30 by spuisais          #+#    #+#             */
+/*   Updated: 2020/01/15 16:27:23 by spuisais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "unknow_project.h"
 
-void    load_letter(t_gui *gui, char *str, int idx)
+void	load_letter(t_gui *gui, char *str, int idx)
 {
-    TTF_Font    *police;
-    SDL_Color   color = {0, 0, 0};
+	TTF_Font	*police;
+	SDL_Color	color;
 
-    str[1] = '\0';
-    police = TTF_OpenFont("ressources/assets/ttf/Tinos-Regular.ttf", 240);
-    gui->letter[idx]->font = TTF_RenderText_Blended(police, str, color);
-    gui->letter[idx]->let->surface->w = gui->letter[idx]->font->w;
-    gui->letter[idx]->let->surface->h = gui->letter[idx]->font->h;
-    gui->letter[idx]->let->surface->internalFormat = 4;
+	color[0] = 0;
+	color[1] = 0;
+	color[2] = 0;
+	str[1] = '\0';
+	police = TTF_OpenFont("ressources/assets/ttf/Tinos-Regular.ttf", 240);
+	gui->letter[idx]->font = TTF_RenderText_Blended(police, str, color);
+	gui->letter[idx]->let->surface->w = gui->letter[idx]->font->w;
+	gui->letter[idx]->let->surface->h = gui->letter[idx]->font->h;
+	gui->letter[idx]->let->surface->internalFormat = 4;
 	gui->letter[idx]->let->surface->pixels = gui->letter[idx]->font->pixels;
-    gui->letter[idx]->let->letter = str[0];
-    TTF_CloseFont(police);
+	gui->letter[idx]->let->letter = str[0];
+	TTF_CloseFont(police);
 }
+
 char	**load_path_texture(void)
 {
 	char	**path;
@@ -49,20 +65,20 @@ char	**load_path_texture(void)
 	return (path);
 }
 
-void    load_menu(t_gui *gui)
+void	load_menu(t_gui *gui)
 {
-    gui->menu[0] = png_load("ressources/assets/imgs/Title_screen.png");
-    gui->menu[1] = png_load("ressources/assets/imgs/settings_screen.png");
-    gui->menu[2] = png_load("ressources/assets/imgs/controls_screen.png");
-    gui->menu[3] = png_load("ressources/assets/imgs/credits_screen.png");
-    gui->menu[4] = png_load("ressources/assets/imgs/pause_menu.png");
+	gui->menu[0] = png_load("ressources/assets/imgs/Title_screen.png");
+	gui->menu[1] = png_load("ressources/assets/imgs/settings_screen.png");
+	gui->menu[2] = png_load("ressources/assets/imgs/controls_screen.png");
+	gui->menu[3] = png_load("ressources/assets/imgs/credits_screen.png");
+	gui->menu[4] = png_load("ressources/assets/imgs/pause_menu.png");
 	gui->menu[5] = png_load("ressources/assets/imgs/settings_pause_menu.png");
 	gui->menu[6] = png_load("ressources/assets/imgs/Play_menu.png");
-    gui->menu[7] = png_load("ressources/assets/imgs/Play_menu.png");
-    gui->menu[8] = png_load("ressources/assets/imgs/trainee.png");
-    gui->menu[9] = png_load("ressources/assets/imgs/recruit.png");
-    gui->menu[10] = png_load("ressources/assets/imgs/pirate.png");
-    gui->menu[11] = png_load("ressources/assets/textures/press_key.png");
+	gui->menu[7] = png_load("ressources/assets/imgs/Play_menu.png");
+	gui->menu[8] = png_load("ressources/assets/imgs/trainee.png");
+	gui->menu[9] = png_load("ressources/assets/imgs/recruit.png");
+	gui->menu[10] = png_load("ressources/assets/imgs/pirate.png");
+	gui->menu[11] = png_load("ressources/assets/textures/press_key.png");
 	gui->menu[12] = png_load("ressources/assets/imgs/Level_editor_menu.png");
 	gui->menu[13] = png_load("ressources/assets/imgs/yellow_line.png");
 	gui->menu[14] = png_load("ressources/assets/imgs/set_player.png");

@@ -46,18 +46,18 @@ typedef struct		s_view_port
 {
 	t_window		*window;
 
-	t_vector2_int	pos;
+	t_vec2_int	pos;
 
-	t_vector2_int	size;
+	t_vec2_int	size;
 
 	float			*depth_buffer;
 
 }					t_view_port;
 
-t_view_port	create_t_view_port(t_window *window, t_vector2_int pos, t_vector2_int size);
-t_view_port	*initialize_t_view_port(t_window *window, t_vector2_int pos, t_vector2_int size);
-void		move_t_view_port(t_view_port *view, t_vector2_int new_pos);
-void		resize_t_view_port(t_view_port *view, t_vector2_int new_size);
+t_view_port	create_t_view_port(t_window *window, t_vec2_int pos, t_vec2_int size);
+t_view_port	*initialize_t_view_port(t_window *window, t_vec2_int pos, t_vec2_int size);
+void		move_t_view_port(t_view_port *view, t_vec2_int new_pos);
+void		resize_t_view_port(t_view_port *view, t_vec2_int new_size);
 void		t_view_port_change_window(t_view_port *view, t_window *p_window);
 void 		t_view_port_clear_buffers(t_view_port *view);
 

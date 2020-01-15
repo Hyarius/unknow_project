@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   t_view_port.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 10:05:54 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/15 11:26:57 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/15 16:05:05 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-t_view_port	create_t_view_port(t_window *p_window, t_vector2_int p_pos,
-								t_vector2_int p_size)
+t_view_port	create_t_view_port(t_window *p_window, t_vec2_int p_pos,
+								t_vec2_int p_size)
 {
 	t_view_port	result;
 
 	result.window = p_window;
-	result.pos = create_t_vector2_int(0, 0);
-	result.size = create_t_vector2_int(0, 0);
+	result.pos = create_vec2_int(0, 0);
+	result.size = create_vec2_int(0, 0);
 	if (!(result.depth_buffer = (float *)malloc(sizeof(float) \
 								* p_window->size_x * p_window->size_y)))
 		error_exit(-456, "Can't malloc a float array properly");
@@ -28,8 +28,8 @@ t_view_port	create_t_view_port(t_window *p_window, t_vector2_int p_pos,
 	return (result);
 }
 
-t_view_port	*initialize_t_view_port(t_window *p_window, t_vector2_int p_pos,
-									t_vector2_int p_size)
+t_view_port	*initialize_t_view_port(t_window *p_window, t_vec2_int p_pos,
+									t_vec2_int p_size)
 {
 	t_view_port *result;
 
@@ -39,7 +39,7 @@ t_view_port	*initialize_t_view_port(t_window *p_window, t_vector2_int p_pos,
 	return (result);
 }
 
-void		move_t_view_port(t_view_port *view, t_vector2_int new_pos)
+void		move_t_view_port(t_view_port *view, t_vec2_int new_pos)
 {
 	if (new_pos.x >= view->window->size_x - view->size.x)
 		new_pos.x = view->window->size_x - view->size.x - 1;
@@ -52,7 +52,7 @@ void		move_t_view_port(t_view_port *view, t_vector2_int new_pos)
 	view->pos = new_pos;
 }
 
-void		resize_t_view_port(t_view_port *view, t_vector2_int new_size)
+void		resize_t_view_port(t_view_port *view, t_vec2_int new_size)
 {
 	if (new_size.x <= 0 || new_size.y <= 0)
 		error_exit(325869, "size unavailable for t_view_port");

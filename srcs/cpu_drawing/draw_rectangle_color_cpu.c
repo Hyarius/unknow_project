@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_rectangle_color_cpu.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 16:16:44 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/15 14:44:51 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/15 16:02:39 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	draw_rectangle_color_cpu(t_view_port *p_view_port, t_rectangle p_rec,
 	color_list->size = 0;
 }
 
-void	draw_rectangle_color_cpu_front(t_view_port *p_view_port,
+void	draw_hud_rect(t_view_port *p_view_port,
 											t_rectangle p_rec, t_color *p_color)
 {
 	t_triangle	tri;

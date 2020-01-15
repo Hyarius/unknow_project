@@ -28,22 +28,22 @@ typedef struct	s_vector3
     float		z;
 }				t_vector3;
 
-typedef struct	s_vector2
+typedef struct	s_vec2
 {
     float		x;
     float		y;
-}				t_vector2;
+}				t_vec2;
 
-t_vector2	create_t_vector2(float p_x, float p_y);
-t_vector2	add_vector2_to_vector2(t_vector2 v1, t_vector2 v2);
+t_vec2	create_vec2(float p_x, float p_y);
+t_vec2	add_vector2_to_vector2(t_vec2 v1, t_vec2 v2);
 
-typedef struct	s_vector2_int
+typedef struct	s_vec2_int
 {
     int			x;
     int			y;
-}				t_vector2_int;
+}				t_vec2_int;
 
-t_vector2_int
-				create_t_vector2_int(int p_x, int p_y);
+t_vec2_int
+				create_vec2_int(int p_x, int p_y);
 
 #endif

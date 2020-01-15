@@ -1,12 +1,12 @@
 #include "unknow_project.h"
 
 t_camera	create_t_camera(t_window *window, t_vector4 p_pos, float p_fov,
-															t_vector2 p_dist)
+															t_vec2 p_dist)
 {
 	t_camera	result;
 
 	result.view_port = initialize_t_view_port(window,
-				create_t_vector2_int(0, 0), create_t_vector2_int(window->size_x,
+				create_vec2_int(0, 0), create_vec2_int(window->size_x,
 				window->size_y));
 	result.body = NULL;
 	result.pos = p_pos;
@@ -36,7 +36,7 @@ t_camera	create_t_camera(t_window *window, t_vector4 p_pos, float p_fov,
 }
 
 t_camera	*initialize_t_camera(t_window *window, t_vector4 p_pos,
-												float p_fov, t_vector2 p_dist)
+												float p_fov, t_vec2 p_dist)
 {
 	t_camera	*result;
 
@@ -46,8 +46,8 @@ t_camera	*initialize_t_camera(t_window *window, t_vector4 p_pos,
 	return (result);
 }
 
-void		t_camera_set_view_port(t_camera *camera, t_vector2_int new_pos,
-														t_vector2_int new_size)
+void		t_camera_set_view_port(t_camera *camera, t_vec2_int new_pos,
+														t_vec2_int new_size)
 {
 	move_t_view_port(camera->view_port, new_pos);
 	resize_t_view_port(camera->view_port, new_size);
@@ -70,7 +70,7 @@ void		delete_t_cam(t_camera dest)
 	delete_t_triangle_list(dest.triangle_color_list);
 	delete_t_color_list(dest.color_list);
 	delete_t_triangle_list(dest.triangle_texture_list);
-	free(dest.uv_list.uvs);
+	delete_t_uv_list(dest.uv_list);
 	delete_t_color_list(dest.darkness_list);
 	free(dest.view_port);
 }
@@ -399,28 +399,6 @@ void		t_camera_calc_depth(t_camera *p_cam)
 			p_cam->dist_max = triangle.b.z;
 		else if (triangle.c.z > p_cam->dist_max)
 			p_cam->dist_max = triangle.c.z;
-	}
-}
-
-void		draw_depth_from_camera_on_screen(t_camera *p_cam)
-{
-	t_triangle	triangle;
-	t_line		line1;
-	t_line		line2;
-	int			i;
-
-	t_camera_calc_depth(p_cam);
-	i = -1;
-	while (++i < p_cam->triangle_color_list.size)
-	{
-		triangle = t_triangle_list_at(&(p_cam->triangle_color_list), i);
-		draw_triangle_depth_cpu(p_cam->view_port, &triangle, p_cam->dist_max);
-	}
-	i = -1;
-	while (++i < p_cam->triangle_texture_list.size)
-	{
-		triangle = t_triangle_list_at(&(p_cam->triangle_texture_list), i);
-		draw_triangle_depth_cpu(p_cam->view_port, &triangle, p_cam->dist_max);
 	}
 }
 
