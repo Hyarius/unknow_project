@@ -52,12 +52,10 @@ void		enemy_shoot(t_engine *engine)
 			mesh = cast_ray(engine, target->camera->pos, target->camera->forward, "Enemy");
 			if (mesh != NULL && engine->tick - j == 2 && ft_strcmp(mesh->name, "Player") == 0)
 			{
-				if (rand() % 2 == 0)
-					Mix_PlayChannel(4, engine->sound_engine->sounds[16], 0);
-				else
-					Mix_PlayChannel(4, engine->sound_engine->sounds[17], 0);
+				Mix_PlayChannel(-1, engine->sound_engine->sounds[23], 0); //trouver spatialisation du son
 				if (engine->user_engine->player->armor != 0)
 				{
+					Mix_PlayChannel(4, engine->sound_engine->sounds[24], 0);
 					if (engine->user_engine->player->armor >= 5)
 						engine->user_engine->player->armor -= 5;
 					else
@@ -68,7 +66,13 @@ void		enemy_shoot(t_engine *engine)
 					}
 				}
 				else
+				{
+					if (rand() % 2 == 0)
+						Mix_PlayChannel(4, engine->sound_engine->sounds[16], 0);
+					else
+						Mix_PlayChannel(4, engine->sound_engine->sounds[17], 0);
 					engine->user_engine->player->hp -= 5;
+				}	
 				j = -5;
 			}
 			else if (mesh != NULL && engine->tick - j > 3 && ft_strcmp(mesh->name, "Player") == 0)
