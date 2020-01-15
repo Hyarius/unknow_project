@@ -1,0 +1,38 @@
+Doom Nukem project
+
+- auteur : non
+
+- imperatif de wolf3d : oui
+
+- elements visuels : oui
+
+- elements du decors : manque les sprites
+
+- texte : oui
+
+- HUD : oui
+
+- deplacements : refaire les interactions
+
+- deplacements avances : oui
+
+- interactions avec le decors : finir deplacement
+
+- interactions avances : oui
+
+- ambiance globale du jeu : oui
+
+- editeur de niveau : textures, gravite, types darmes a choisir, niveau de vie, bonus choix musique
+
+- packaging : non
+
+
+bonus:
+
+- bonus conseilles : oui
+
+- multithreads : oui
+
+- reseau : dans t reves
+
+- soyez fou : on a un moteur 3d 
