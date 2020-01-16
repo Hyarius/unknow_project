@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_player2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:53:46 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/15 15:53:47 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/16 12:15:51 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void			reload_weapon(t_camera *camera, t_player *player, int tick, t_engine *eng
 	if (ft_strcmp(engine->user_engine->player->current_weapon->name, "rpg") == 0)
 		i = 21;
 	to_fill = player->current_weapon->mag_size - player->current_weapon->ammo;
+	if (!Mix_Playing(5) && tick - player->reload_time == 0)
+		Mix_PlayChannel(5, engine->sound_engine->sounds[i], 0);
 	if (tick - player->reload_time == player->current_weapon->tick_reload)
 	{
 		while (to_fill > 0
@@ -69,8 +71,6 @@ void			reload_weapon(t_camera *camera, t_player *player, int tick, t_engine *eng
 		}
 		camera->r_press = 0;
 	}
-	if (!Mix_Playing(5))
-		Mix_PlayChannel(5, engine->sound_engine->sounds[i], 0);
 }
 
 void			shoot_weapon(t_engine *engine)
@@ -197,7 +197,7 @@ void			player_take_dmg(t_engine *engine, int dmg)
 	{
 		if (engine->user_engine->player->armor >= dmg)
 		{
-			//rajouter son degat armur
+			Mix_PlayChannel(4, engine->sound_engine->sounds[24], 0);
 			engine->user_engine->player->armor -= dmg;
 		}
 		else

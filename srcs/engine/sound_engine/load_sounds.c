@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_sounds.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:41:59 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/15 15:43:34 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/16 11:14:00 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,10 @@ void			load_sounds2(Mix_Chunk **sounds)
 	sounds[20] = Mix_LoadWAV("ressources/assets/sounds/rifle_reload.wav");
 	sounds[21] = Mix_LoadWAV("ressources/assets/sounds/shotgun_reload.wav");
 	sounds[22] = Mix_LoadWAV("ressources/assets/sounds/pickup.wav");
+	sounds[23] = Mix_LoadWAV("ressources/assets/sounds/enemy_shoot.wav");
+	sounds[24] = Mix_LoadWAV("ressources/assets/sounds/hit_armor.wav");
+	sounds[25] = Mix_LoadWAV("ressources/assets/sounds/elevator_start.wav");
+	sounds[26] = Mix_LoadWAV("ressources/assets/sounds/elevator_end.wav");
 }
 
 Mix_Chunk		**load_sounds(void)
@@ -58,7 +62,7 @@ Mix_Chunk		**load_sounds(void)
 	int			nb_sounds;
 	int			i;
 
-	nb_sounds = 23;
+	nb_sounds = 27;
 	i = 0;
 	if (!(sounds = (Mix_Chunk**)malloc(sizeof(Mix_Chunk*) * nb_sounds)))
 		error_exit(66, "Couldn't malloc array of sounds (load_sounds)");

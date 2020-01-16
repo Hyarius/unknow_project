@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_vector4.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 11:24:08 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/15 12:19:52 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/16 11:55:33 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,30 +33,30 @@ t_vector4	*initialize_t_vector4(float p_x, float p_y, float p_z)
 	return (result);
 }
 
-t_vector4	add_vector4_to_vector4(t_vector4 a, t_vector4 b)
+int			t_vector4_equal(t_vector4 a, t_vector4 b)
 {
-	t_vector4	result;
-
-	result = create_t_vector4(a.x + b.x, a.y + b.y, a.z + b.z);
-	return (result);
+	if (a.x != b.x || a.y != b.y || a.z != b.z)
+		return (BOOL_FALSE);
+	return (BOOL_TRUE);
 }
 
-t_vector4	substract_vector4_to_vector4(t_vector4 a, t_vector4 b)
+void		swap_t_vector4(t_vector4 *a, t_vector4 *b)
 {
-	t_vector4	result;
+	t_vector4	tmp;
 
-	result = create_t_vector4(a.x - b.x, a.y - b.y, a.z - b.z);
-	return (result);
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
 }
 
-t_vector4	divide_vector4_by_float(t_vector4 a, float b)
+t_vector4	inv_t_vector4(t_vector4 src)
 {
 	t_vector4	result;
 
-	result.x = a.x / b;
-	result.y = a.y / b;
-	result.z = a.z / b;
-	result.w = a.w;
+	result.x = -1 * src.x;
+	result.y = -1 * src.y;
+	result.z = -1 * src.z;
+	result.w = -1 * src.w;
 	return (result);
 }
 

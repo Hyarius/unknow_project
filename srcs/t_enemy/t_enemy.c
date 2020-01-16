@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_enemy.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 14:18:48 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/15 14:28:02 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/16 10:24:27 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void		enemy_shoot(t_engine *engine)
 			if (mesh != NULL && engine->tick - target->tick == 2 &&
 				ft_strcmp(mesh->name, "Player") == 0)
 			{
+				Mix_PlayChannel(-1, engine->sound_engine->sounds[23], 0);
 				player_take_dmg(engine, 5);
 				target->tick = -5;
 			}

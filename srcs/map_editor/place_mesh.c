@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   place_mesh.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/16 11:49:52 by gboutin           #+#    #+#             */
+/*   Updated: 2020/01/16 11:49:53 by gboutin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "unknow_project.h"
 
-void			test_move_axis_bis(t_mesh *mesh, float *force, t_vector4 axis,
-																															t_mesh *target)
+void	test_move_axis_bis(t_mesh *mesh, float *force, t_vector4 axis,
+														t_mesh *target)
 {
 	float	max;
 	int		subdivision;
@@ -13,7 +25,8 @@ void			test_move_axis_bis(t_mesh *mesh, float *force, t_vector4 axis,
 	delta = *force / subdivision;
 	max = *force;
 	*force = 0;
-	while (i < subdivision && is_t_mesh_intersecting(mesh, target) == BOOL_FALSE)
+	while (i < subdivision
+		&& is_t_mesh_intersecting(mesh, target) == BOOL_FALSE)
 	{
 		i++;
 		*force += delta;
@@ -25,23 +38,26 @@ void			test_move_axis_bis(t_mesh *mesh, float *force, t_vector4 axis,
 	}
 }
 
-int				can_move_bis(t_mesh *mesh, t_engine *engine)
+int		can_move_bis(t_mesh *mesh, t_engine *engine)
 {
-	t_mesh	*ta;
+	t_mesh	*target;
 	int		i;
 	int		j;
 
 	i = 0;
 	while (i < engine->physic_engine->mesh_list->size)
 	{
-		ta = t_mesh_list_get(engine->physic_engine->mesh_list, i);
-		if (mesh != ta && ta->bubble_radius + mesh->bubble_radius
-			>= calc_dist_vector4_to_vector4(mesh->center, ta->center)
-			&& ta->no_hitbox == 0)
+		target = t_mesh_list_get(engine->physic_engine->mesh_list, i);
+		if (mesh != target && target->bubble_radius + mesh->bubble_radius
+			>= calc_dist_vector4_to_vector4(mesh->center, target->center)
+			&& target->no_hitbox == 0)
 		{
-			test_move_axis_bis(mesh, &(mesh->force.y), create_t_vector4(0, 1, 0), ta);
-			test_move_axis_bis(mesh, &(mesh->force.x), create_t_vector4(1, 0, 0), ta);
-			test_move_axis_bis(mesh, &(mesh->force.z), create_t_vector4(0, 0, 1), ta);
+			test_move_axis_bis(mesh, &(mesh->force.y),
+										create_t_vector4(0, 1, 0), target);
+			test_move_axis_bis(mesh, &(mesh->force.x),
+										create_t_vector4(1, 0, 0), target);
+			test_move_axis_bis(mesh, &(mesh->force.z),
+										create_t_vector4(0, 0, 1), target);
 		}
 		i++;
 	}
@@ -54,8 +70,8 @@ void	cast_mesh(t_engine *engine, t_mesh *mesh_editing)
 
 	cam = t_camera_list_get(engine->visual_engine->camera_list, 0);
 	mesh_editing->force = cam->forward;
-	while (mesh_editing->force.x != 0 && mesh_editing->force.y != 0 &&
-																									mesh_editing->force.z != 0)
+	while (mesh_editing->force.x != 0 && mesh_editing->force.y != 0
+										&& mesh_editing->force.z != 0)
 	{
 		if ((mesh_editing->pos.x - cam->pos.x > 10
 							|| mesh_editing->pos.x - cam->pos.x < -10)
