@@ -167,7 +167,7 @@ void		check_mesh_player(t_engine *engine, t_mesh mesh, t_camera *main_camera)
 	engine->user_engine->player->hitbox = mesh;
 }
 
-void		map_editor(t_camera *main_camera, t_gui *gui, t_engine *engine, t_mesh mesh_editing)
+void		map_editor(t_camera *main_camera, t_gui *gui, t_engine *engine, t_mesh_editing mesh_editing)
 {
 	t_mesh			*target;
 	t_mesh			mesh;
@@ -193,22 +193,22 @@ void		map_editor(t_camera *main_camera, t_gui *gui, t_engine *engine, t_mesh mes
 	player_editing(main_camera, engine, gui);
 	if (t_mouse_state(engine->user_engine->mouse) == 2)
 	{
-		if (mesh_editing.primitive == 1 || mesh_editing.primitive == -1)
+		if (mesh_editing.mesh.primitive == 1 || mesh_editing.mesh.primitive == -1)
 		{
-			if (mesh_editing.primitive == -1)
+			if (mesh_editing.mesh.primitive == -1)
 			{
-				mesh = create_primitive_cube(mesh_editing.pos, mesh_editing.size, mesh_editing.texture->path, mesh_editing.kinetic);
+				mesh = create_primitive_cube(mesh_editing.mesh.pos, mesh_editing.mesh.size, mesh_editing.path, mesh_editing.mesh.kinetic);
 				mesh.primitive = -1;
 			}
 			else
-				mesh = create_primitive_cube(mesh_editing.pos, mesh_editing.size, mesh_editing.texture->path, mesh_editing.kinetic);
+				mesh = create_primitive_cube(mesh_editing.mesh.pos, mesh_editing.mesh.size, mesh_editing.path, mesh_editing.mesh.kinetic);
 		}
-		else if (mesh_editing.primitive == 0)
-			mesh = create_primitive_plane(mesh_editing.pos, mesh_editing.size, mesh_editing.texture->path, mesh_editing.kinetic);
+		else if (mesh_editing.mesh.primitive == 0)
+			mesh = create_primitive_plane(mesh_editing.mesh.pos, mesh_editing.mesh.size, mesh_editing.path, mesh_editing.mesh.kinetic);
 		t_mesh_set_color(&mesh, create_t_color(1.0, 1.0, 1.0, 1.0));
-		t_mesh_set_name(&mesh, mesh_editing.name);
-		mesh.hp = mesh_editing.hp;
-		t_mesh_rotate(&mesh, mesh_editing.rotation);
+		t_mesh_set_name(&mesh, mesh_editing.mesh.name);
+		mesh.hp = mesh_editing.mesh.hp;
+		t_mesh_rotate(&mesh, mesh_editing.mesh.rotation);
 		cast_mesh(engine, &mesh);
 		mesh.pos.x = round_float(mesh.pos.x, 2);
 		mesh.pos.y = round_float(mesh.pos.y, 2);

@@ -6,256 +6,268 @@
 /*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 13:19:50 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/16 14:16:15 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/01/16 16:56:10 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-t_mesh		create_mesh_editing(int index, char *path)
+t_mesh		create_mesh_cube_wall(int index)
 {
-	t_mesh	mesh;
+	t_mesh	ret;
 
-	if (index == 0)
+	ret.name = "cube";
+	ret.size = create_t_vector4(1.0, 1.0, 1.0);
+	ret.primitive = 1;
+	ret.collectible = 0;
+	ret.rotation = create_t_vector4(0.0, 0.0, 0.0);
+	ret.hp = -1;
+	ret.kinetic = 0.0;
+	if (index == 1)
 	{
-		mesh.name = "cube";
-		mesh.size = create_t_vector4(1.0, 1.0, 1.0);
-		mesh.primitive = 1;
-		mesh.collectible = 0;
-		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
-		mesh.hp = -1;
-		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = path;
-		mesh.kinetic = 0.0;
+		ret.name = "wall";
+		ret.size = create_t_vector4(3.0, 2.0, 0.2);
+		ret.primitive = 1;
+		ret.collectible = 0;
+		ret.rotation = create_t_vector4(0.0, 0.0, 0.0);
+		ret.hp = -1;
+		ret.kinetic = 0.0;
 	}
-	else if (index == 1)
-	{
-		mesh.name = "wall";
-		mesh.size = create_t_vector4(3.0, 2.0, 0.2);
-		mesh.primitive = 1;
-		mesh.collectible = 0;
-		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
-		mesh.hp = -1;
-		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = path;
-		mesh.kinetic = 0.0;
-	}
-	else if (index == 2 || index == 3 || index == 4 || index == 5)
+	return (ret);
+}
+
+t_mesh		create_mesh_door(int index, t_mesh mesh)
+{
+	t_mesh	ret;
+
+	ret = mesh;
+	if (index == 2 || index == 3 || index == 4 || index == 5)
 	{
 		if (index == 2)
-			mesh.name = "door";
+			ret.name = "door";
 		else if (index == 3)
-			mesh.name = "door_red";
+			ret.name = "door_red";
 		else if (index == 4)
-			mesh.name = "door_blue";
+			ret.name = "door_blue";
 		else if (index == 5)
-			mesh.name = "door_green";
-		mesh.size = create_t_vector4(1.0, 2.0, 0.2);
-		mesh.primitive = 1;
-		mesh.collectible = 0;
-		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
-		mesh.hp = -1;
-		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = path;
-		mesh.kinetic = 0.0;
+			ret.name = "door_green";
+		ret.size = create_t_vector4(1.0, 2.0, 0.2);
+		ret.primitive = 1;
+		ret.collectible = 0;
+		ret.rotation = create_t_vector4(0.0, 0.0, 0.0);
+		ret.hp = -1;
+		ret.kinetic = 0.0;
 	}
-	else if (index == 6 || index == 7 || index == 8)
+	return (ret);
+}
+
+t_mesh		create_mesh_card(int index, t_mesh mesh)
+{
+	t_mesh	ret;
+
+	ret = mesh;
+	if (index == 6 || index == 7 || index == 8)
 	{
 		if (index == 6)
-			mesh.name = "Card_red";
+			ret.name = "Card_red";
 		else if (index == 7)
-			mesh.name = "Card_blue";
+			ret.name = "Card_blue";
 		else if (index == 8)
-			mesh.name = "Card_green";
-		mesh.size = create_t_vector4(0.2, 0.05, 0.2);
-		mesh.primitive = 1;
-		mesh.collectible = 1;
-		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
-		mesh.hp = -1;
-		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = path;
-		mesh.kinetic = 0.0;
+			ret.name = "Card_green";
+		ret.size = create_t_vector4(0.2, 0.05, 0.2);
+		ret.primitive = 1;
+		ret.collectible = 1;
+		ret.rotation = create_t_vector4(0.0, 0.0, 0.0);
+		ret.hp = -1;
+		ret.kinetic = 0.0;
 	}
-	else if (index == 9)
+	return (ret);
+}
+
+t_mesh		create_mesh_elevator_stair(int index, t_mesh mesh)
+{
+	t_mesh	ret;
+
+	ret = mesh;
+	if (index == 9)
 	{
-		mesh.name = "elevator";
-		mesh.size = create_t_vector4(2.0, 5.0, 2.0);
-		mesh.primitive = 1;
-		mesh.collectible = 0;
-		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
-		mesh.hp = -1;
-		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = path;
-		mesh.kinetic = 0.0;
+		ret.name = "elevator";
+		ret.size = create_t_vector4(2.0, 5.0, 2.0);
+		ret.rotation = create_t_vector4(0.0, 0.0, 0.0);
 	}
 	else if (index == 10)
 	{
-		mesh.name = "stair";
-		mesh.size = create_t_vector4(1.0, 0.2, 5.0);
-		mesh.primitive = 1;
-		mesh.collectible = 0;
-		mesh.rotation = create_t_vector4(10.0, 0.0, 0.0);
-		mesh.hp = -1;
-		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = path;
-		mesh.kinetic = 0.0;
+		ret.name = "stair";
+		ret.size = create_t_vector4(1.0, 0.2, 5.0);
+		ret.rotation = create_t_vector4(10.0, 0.0, 0.0);
 	}
-	else if (index == 11)
+	if (index == 9 || index == 10)
 	{
-		mesh.name = "stair";
-		mesh.size = create_t_vector4(1.0, 0.2, 5.0);
-		mesh.primitive = 1;
-		mesh.collectible = 0;
-		mesh.rotation = create_t_vector4(10.0, 0.0, 0.0);
-		mesh.hp = -1;
-		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = path;
-		mesh.kinetic = 0.0;
+		ret.primitive = 1;
+		ret.collectible = 0;
+		ret.hp = -1;
+		ret.kinetic = 0.0;
 	}
-	else if (index == 12 || index == 13 || index == 14)
+	return (ret);
+}
+
+t_mesh				create_mesh_stair(int index, t_mesh mesh)
+{
+	t_mesh ret;
+
+	ret = mesh;
+	if (index == 11)
+	{
+		ret.name = "stair";
+		ret.size = create_t_vector4(1.0, 0.2, 5.0);
+		ret.primitive = 1;
+		ret.collectible = 0;
+		ret.rotation = create_t_vector4(10.0, 0.0, 0.0);
+		ret.hp = -1;
+		ret.kinetic = 0.0;
+	}
+	return (ret);
+}
+
+t_mesh				create_mesh_item(int index, t_mesh mesh)
+{
+	t_mesh	ret;
+
+	ret = mesh;
+	if (index == 12 || index == 13 || index == 14)
 	{
 		if (index == 12)
-			mesh.name = "Healt_Pack";
+			ret.name = "Healt_Pack";
 		else if (index == 13)
-			mesh.name = "Armor_Pack";
+			ret.name = "Armor_Pack";
 		else if (index == 14)
-			mesh.name = "Jet_Pack";
-		mesh.size = create_t_vector4(0.2, 0.05, 0.2);
-		mesh.primitive = 1;
-		mesh.collectible = 1;
-		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
-		mesh.hp = -1;
-		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = path;
-		mesh.kinetic = 0.0;
+			ret.name = "Jet_Pack";
+		ret.size = create_t_vector4(0.2, 0.05, 0.2);
+		ret.primitive = 1;
+		ret.collectible = 1;
+		ret.rotation = create_t_vector4(0.0, 0.0, 0.0);
+		ret.hp = -1;
+		ret.kinetic = 0.0;
 	}
-	else if (index == 15)
+	return (ret);
+}
+
+t_mesh				create_mesh_ammo(int index, t_mesh mesh)
+{
+	t_mesh	ret;
+
+	ret = mesh;
+	if (index == 15 || index == 16 || index == 17)
 	{
-		mesh.name = "Ammo_Pack";
-		mesh.size = create_t_vector4(0.2, 0.05, 0.2);
-		mesh.primitive = 1;
-		mesh.collectible = 1;
-		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
-		mesh.hp = -2;
-		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = path;
-		mesh.kinetic = 0.0;
+		ret.name = "Ammo_Pack";
+		ret.size = create_t_vector4(0.2, 0.05, 0.2);
+		ret.primitive = 1;
+		ret.collectible = 1;
+		ret.rotation = create_t_vector4(0.0, 0.0, 0.0);
+		if (index == 15)
+			ret.hp = -2;
+		if (index == 16)
+			ret.hp = -3;
+		if (index == 17)
+			ret.hp = -4;
+		ret.kinetic = 0.0;
 	}
-	else if (index == 16)
-	{
-		mesh.name = "Ammo_Pack";
-		mesh.size = create_t_vector4(0.2, 0.05, 0.2);
-		mesh.primitive = 1;
-		mesh.collectible = 1;
-		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
-		mesh.hp = -3;
-		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = path;
-		mesh.kinetic = 0.0;
-	}
-	else if (index == 17)
-	{
-		mesh.name = "Ammo_Pack";
-		mesh.size = create_t_vector4(0.2, 0.05, 0.2);
-		mesh.primitive = 1;
-		mesh.collectible = 1;
-		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
-		mesh.hp = -4;
-		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = path;
-		mesh.kinetic = 0.0;
-	}
+	return (ret);
+}
+
+t_mesh_editing		create_mesh_editing(int index, char *path)
+{
+	t_mesh_editing	ret;
+
+	ret.path = path;
+	ret.mesh = create_mesh_cube_wall(index);
+	ret.mesh = create_mesh_door(index, ret.mesh);
+	ret.mesh = create_mesh_card(index, ret.mesh);
+	ret.mesh = create_mesh_elevator_stair(index, ret.mesh);
+	ret.mesh = create_mesh_stair(index, mesh);
+	ret.mesh = create_mesh_item(index, mesh);
+	ret.mesh = create_mesh_ammo(index, mesh);
+	ret.mesh = create_mesh_ladder_platform(index, mesh);
+	ret.mesh = create_mesh_plane_enemy(index, mesh);
+	ret.mesh = create_mesh_window_player(index, mesh);
+	ret.mesh = create_mesh_end(index, mesh);
 	else if (index == 18)
 	{
-		mesh.name = "ladder";
-		mesh.size = create_t_vector4(1.0, 2.0, -0.01);
-		mesh.primitive = 1;
-		mesh.collectible = 0;
-		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
-		mesh.hp = -1;
-		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = path;
-		mesh.kinetic = 0.0;
+		ret.name = "ladder";
+		ret.size = create_t_vector4(1.0, 2.0, -0.01);
+		ret.primitive = 1;
+		ret.collectible = 0;
+		ret.rotation = create_t_vector4(0.0, 0.0, 0.0);
+		ret.hp = -1;
+		ret.kinetic = 0.0;
 	}
 	else if (index == 19)
 	{
-		mesh.name = "platform";
-		mesh.size = create_t_vector4(1.0, 0.2, 1.0);
-		mesh.primitive = 1;
-		mesh.collectible = 0;
-		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
-		mesh.hp = -1;
-		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = path;
-		mesh.kinetic = 0.0;
+		ret.name = "platform";
+		ret.size = create_t_vector4(1.0, 0.2, 1.0);
+		ret.primitive = 1;
+		ret.collectible = 0;
+		ret.rotation = create_t_vector4(0.0, 0.0, 0.0);
+		ret.hp = -1;
+		ret.kinetic = 0.0;
 	}
 	else if (index == 20)
 	{
-		mesh.name = "plane";
-		mesh.size = create_t_vector4(1.0, 0.0, 1.0);
-		mesh.primitive = 0;
-		mesh.collectible = 0;
-		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
-		mesh.hp = -1;
-		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = path;
-		mesh.kinetic = 0.0;
+		ret.name = "plane";
+		ret.size = create_t_vector4(1.0, 0.0, 1.0);
+		ret.primitive = 0;
+		ret.collectible = 0;
+		ret.rotation = create_t_vector4(0.0, 0.0, 0.0);
+		ret.hp = -1;
+		ret.kinetic = 0.0;
 	}
 	else if (index == 21)
 	{
-		mesh.name = "Enemy";
-		mesh.size = create_t_vector4(0.3, 0.5, 0.3);
-		mesh.primitive = 1;
-		mesh.collectible = 0;
-		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
-		mesh.hp = -1;
-		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = path;
-		mesh.kinetic = 0.0;
+		ret.name = "Enemy";
+		ret.size = create_t_vector4(0.3, 0.5, 0.3);
+		ret.primitive = 1;
+		ret.collectible = 0;
+		ret.rotation = create_t_vector4(0.0, 0.0, 0.0);
+		ret.hp = -1;
+		ret.kinetic = 0.0;
 	}
 	else if (index == 22)
 	{
-		mesh.name = "window";
-		mesh.size = create_t_vector4(2.0, 2.0, 0.3);
-		mesh.primitive = 1;
-		mesh.collectible = 0;
-		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
-		mesh.hp = -1;
-		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = path;
-		mesh.kinetic = 0.0;
+		ret.name = "window";
+		ret.size = create_t_vector4(2.0, 2.0, 0.3);
+		ret.primitive = 1;
+		ret.collectible = 0;
+		ret.rotation = create_t_vector4(0.0, 0.0, 0.0);
+		ret.hp = -1;
+		ret.kinetic = 0.0;
 	}
 	else if (index == 24)
 	{
-		mesh.name = "end";
-		mesh.size = create_t_vector4(0.3, 0.1, 0.3);
-		mesh.primitive = 1;
-		mesh.collectible = 0;
-		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
-		mesh.hp = -1;
-		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = path;
-		mesh.kinetic = 0.0;
+		ret.name = "end";
+		ret.size = create_t_vector4(0.3, 0.1, 0.3);
+		ret.primitive = 1;
+		ret.collectible = 0;
+		ret.rotation = create_t_vector4(0.0, 0.0, 0.0);
+		ret.hp = -1;
+		ret.kinetic = 0.0;
 	}
 	else if (index == 23)
 	{
-		mesh.name = "Player";
-		mesh.size = create_t_vector4(0.3, 0.5, 0.3);
-		mesh.primitive = -1;
-		mesh.collectible = 0;
-		mesh.rotation = create_t_vector4(0.0, 0.0, 0.0);
-		mesh.hp = 100;
-		mesh.texture = (t_texture*)malloc(sizeof(t_texture));
-		mesh.texture->path = path;
-		mesh.kinetic = 100.0;
+		ret.name = "Player";
+		ret.size = create_t_vector4(0.3, 0.5, 0.3);
+		ret.primitive = -1;
+		ret.collectible = 0;
+		ret.rotation = create_t_vector4(0.0, 0.0, 0.0);
+		ret.hp = 100;
+		ret.kinetic = 100.0;
 	}
-	return (mesh);
+	return (ret);
 }
 
-t_mesh		select_mesh(t_keyboard *key, t_vector4 pos, char **path)
+t_mesh_editing		select_mesh(t_keyboard *key, t_vector4 pos, char **path)
 {
-	t_mesh		mesh;
-	static int	press = 0;
+	t_mesh_editing	mesh;
+	static int		press = 0;
 
 	if (get_key_state(key, key->key[SDL_SCANCODE_1]) == 1 && press == 0)
 	{
@@ -275,6 +287,6 @@ t_mesh		select_mesh(t_keyboard *key, t_vector4 pos, char **path)
 						&& get_key_state(key, key->key[SDL_SCANCODE_2]) == 0)
 		press = 0;
 	mesh = create_mesh_editing(key->i, path[key->i]);
-	mesh.pos = pos;
+	mesh.mesh.pos = pos;
 	return (mesh);
 }

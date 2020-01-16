@@ -93,4 +93,9 @@ void			t_mesh_set_name(t_mesh *mesh, char *name);
 int				t_mesh_on_mesh(t_mesh *body, t_mesh *target);
 void			destroy_mesh(t_mesh *mesh);
 
+typedef struct		s_mesh_editing
+{
+	t_mesh			mesh;
+	char			*path;
+}					t_mesh_editing;
 #endif

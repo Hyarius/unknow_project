@@ -6,7 +6,7 @@
 /*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:53:46 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/16 13:57:34 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/01/16 15:13:58 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	shoot_weapon2(t_engine *engine, int i)
 	t_mesh		*target;
 	float		dist;
 
-	Mix_PlayChannel(-1, engine->sound_engine->sounds[i], 0);
+	dist = 0.0;
 	target = cast_ray(engine,
 	t_camera_list_get(engine->visual_engine->camera_list, 0)->pos,
 	t_camera_list_get(engine->visual_engine->camera_list, 0)->forward,
@@ -88,8 +88,10 @@ void	shoot_weapon2(t_engine *engine, int i)
 		if (ft_strcmp(engine->user_engine->player->current_weapon->name,
 		"shotgun") == 0)
 			dist = calc_dist_vector4_to_vector4(engine->user_engine->player->hitbox.pos, target->pos);
+		printf("dmg = %f\n", engine->user_engine->player->current_weapon->dmg - dist * 4);
 		if (engine->user_engine->player->current_weapon->dmg - dist * 4 >= 0)
 			target->hp -= engine->user_engine->player->current_weapon->dmg - dist * 4;
+		printf("hp = %d\n", target->hp);
 		if (target->hp <= 0)
 		{
 			if (ft_strcmp(target->name, "wall_script") == 0)
@@ -101,6 +103,7 @@ void	shoot_weapon2(t_engine *engine, int i)
 			destroy_mesh(target);
 		}
 	}
+	Mix_PlayChannel(-1, engine->sound_engine->sounds[i], 0);
 }
 
 void	shoot_weapon(t_engine *engine)

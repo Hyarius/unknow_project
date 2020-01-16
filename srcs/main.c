@@ -82,7 +82,7 @@ int main(int argc, char **argv)
 	move_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 1)->view_port, create_vec2_int(WIN_X - 300, 0));
 
 	t_rectangle rec = create_t_rectangle(create_vec2(-1, 1), create_vec2(2, -2));
-	t_mesh	mesh_editing;
+	t_mesh_editing	mesh_editing;
 	char	**path;
 	path = load_path_texture();
 	mesh = create_primitive_skybox(main_camera->pos, create_t_vector4(1.0, 1.0, 1.0), skybox);
