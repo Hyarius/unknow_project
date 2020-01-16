@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:53:50 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/16 10:30:07 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/16 12:19:52 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,33 @@ t_weapon		create_t_weapons(int index, int ammo, int total_ammo)
 	result[2].total_ammo = total_ammo;
 	create_t_weapons2(index, ammo, total_ammo, result);
 	return (result[index]);
+}
+
+void			player_take_dmg(t_engine *engine, int dmg)
+{
+	int		diff;
+
+	if (engine->user_engine->player->armor != 0)
+	{
+		if (engine->user_engine->player->armor >= dmg)
+			engine->user_engine->player->armor -= dmg;
+		else
+		{
+			if (rand() % 2 == 0)
+				Mix_PlayChannel(4, engine->sound_engine->sounds[16], 0);
+			else
+				Mix_PlayChannel(4, engine->sound_engine->sounds[17], 0);
+			diff = dmg - engine->user_engine->player->armor;
+			engine->user_engine->player->armor = 0;
+			engine->user_engine->player->hp -= diff;
+		}
+	}
+	else
+	{
+		if (rand() % 2 == 0)
+			Mix_PlayChannel(4, engine->sound_engine->sounds[16], 0);
+		else
+			Mix_PlayChannel(4, engine->sound_engine->sounds[17], 0);
+		engine->user_engine->player->hp -= dmg;
+	}
 }
