@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_player2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:53:46 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/16 12:19:48 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/16 13:57:34 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,11 @@ void	reload_weapon(t_camera *camera, t_player *player, int tick,
 	}
 }
 
-void	shoot_weapon2(t_engine, *engine)
+void	shoot_weapon2(t_engine *engine, int i)
 {
+	t_mesh		*target;
+	float		dist;
+
 	Mix_PlayChannel(-1, engine->sound_engine->sounds[i], 0);
 	target = cast_ray(engine,
 	t_camera_list_get(engine->visual_engine->camera_list, 0)->pos,
@@ -124,6 +127,7 @@ void	shoot_weapon(t_engine *engine)
 	{
 		if (engine->user_engine->player->current_weapon->ammo > 0)
 		{
+			shoot_weapon2(engine, i);
 			if (ft_strcmp(engine->user_engine->player->current_weapon->name,
 			"ar") == 0)
 				engine->user_engine->player->current_weapon->ammo -= 2;

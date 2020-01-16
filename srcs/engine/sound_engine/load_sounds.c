@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_sounds.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:41:59 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/16 11:14:00 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/16 14:15:00 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ Mix_Music		**load_music(void)
 		if (!music[i])
 		{
 			ft_putstr("Mix_LoadWAV: ");
-			ft_putstr(Mix_GetError());
+			ft_putstr((char*)Mix_GetError());
 			write(1, "\n", 1);
 		}
 	return (music);
@@ -79,7 +79,7 @@ Mix_Chunk		**load_sounds(void)
 		if (!sounds[i++])
 		{
 			ft_putstr("Mix_LoadWAV: ");
-			ft_putstr(Mix_GetError());
+			ft_putstr((char*)Mix_GetError());
 			write(1, "\n", 1);
 		}
 	return (sounds);

@@ -43,7 +43,7 @@ void            load_letter(t_gui *gui, char *str, int idx);
 void            set_t_gui_texte(t_gui *gui);
 void            print_info_bar(t_camera *main_camera, t_player *player, t_gui *gui);
 void            load_menu(t_gui *gui);
-void            t_engine_handle_event(t_camera *main_camera, t_gui *gui, t_engine *engine);
+void            t_engine_handle_event(t_camera *main_camera, t_gui *gui, t_engine *engine, t_window *win);
 void            t_user_engine_handle_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, t_window *win);
 void            main_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, int *play);
 void			play_menu(t_camera *main_camera, t_engine *engine, int *play);

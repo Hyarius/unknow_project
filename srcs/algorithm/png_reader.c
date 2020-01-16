@@ -6,7 +6,7 @@
 /*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 14:32:25 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/15 14:47:48 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/16 13:58:40 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_surface		*read_png_file(const char *filename)
 	if (!(surface = (t_surface *)malloc(sizeof(t_surface))))
 		error_exit(-29, "Can't malloc a t_surface");
 	if ((fp = fopen(filename, "rb")) == NULL)
-		error_exit(-500, ft_strjoin(filename, " doesn't exist"));
+		error_exit(-500, ft_strjoin((char*)filename, " doesn't exist"));
 	png_ptr = png_create_read_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
 	info_ptr = png_create_info_struct(png_ptr);
 	png_init_io(png_ptr, fp);

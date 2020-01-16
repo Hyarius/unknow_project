@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 15:01:07 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/14 13:13:37 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/16 14:12:35 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void		t_engine_add_item(t_engine *engine, t_item p_item)
 }
 
 void		t_engine_handle_event(t_camera *main_camera, t_gui *gui,
-															t_engine *engine)
+											t_engine *engine, t_window *win)
 {
 	static float	size = 0.45;
 	t_mesh			*mesh;
@@ -91,7 +91,7 @@ void		t_engine_handle_event(t_camera *main_camera, t_gui *gui,
 	else if (engine->playing <= -1
 		&& get_key_state(engine->user_engine->keyboard, SDL_SCANCODE_P) == 1)
 		engine->playing = 1;
-	t_user_engine_handle_menu(main_camera, gui, engine, &(engine->playing));
+	t_user_engine_handle_menu(main_camera, gui, engine, win);
 	if (t_user_engine_poll_event(engine->user_engine) > 0)
 		t_user_engine_handle_quit(engine->user_engine, &(engine->playing));
 }

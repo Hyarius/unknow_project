@@ -85,7 +85,6 @@ int main(int argc, char **argv)
 	t_mesh	mesh_editing;
 	char	**path;
 	path = load_path_texture();
-	mesh_editing = create_mesh_editing(0, engine->user_engine->player->camera->pos, path[engine->user_engine->keyboard->i]);
 	mesh = create_primitive_skybox(main_camera->pos, create_t_vector4(1.0, 1.0, 1.0), skybox);
 	Mix_VolumeMusic(MIX_MAX_VOLUME);
 	engine->playing = 2;
@@ -170,7 +169,7 @@ int main(int argc, char **argv)
 			t_engine_prepare_camera(engine);
 			t_engine_draw_mesh(engine);
 			t_engine_render_camera(engine);
-			mesh_editing = select_mesh(mesh_editing, engine->user_engine->keyboard, engine->user_engine->player->camera->pos, path);
+			mesh_editing = select_mesh(engine->user_engine->keyboard, engine->user_engine->player->camera->pos, path);
 			map_editor(main_camera, gui, engine, mesh_editing);
 		}
 		else if (engine->playing == 11)
@@ -197,7 +196,7 @@ int main(int argc, char **argv)
     		draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->menu[16]);
 			// print_set_player(main_camera, gui, engine);
 		}
-		t_engine_handle_event(main_camera, gui, engine);
+		t_engine_handle_event(main_camera, gui, engine, win);
 		render_screen(win, engine); // affiche la fenetre
 	}
 	Mix_CloseAudio();
