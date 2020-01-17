@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   select_mesh.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 13:19:50 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/16 16:56:10 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/01/17 11:01:05 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,83 +184,83 @@ t_mesh_editing		create_mesh_editing(int index, char *path)
 	ret.mesh = create_mesh_door(index, ret.mesh);
 	ret.mesh = create_mesh_card(index, ret.mesh);
 	ret.mesh = create_mesh_elevator_stair(index, ret.mesh);
-	ret.mesh = create_mesh_stair(index, mesh);
-	ret.mesh = create_mesh_item(index, mesh);
-	ret.mesh = create_mesh_ammo(index, mesh);
-	ret.mesh = create_mesh_ladder_platform(index, mesh);
-	ret.mesh = create_mesh_plane_enemy(index, mesh);
-	ret.mesh = create_mesh_window_player(index, mesh);
-	ret.mesh = create_mesh_end(index, mesh);
-	else if (index == 18)
-	{
-		ret.name = "ladder";
-		ret.size = create_t_vector4(1.0, 2.0, -0.01);
-		ret.primitive = 1;
-		ret.collectible = 0;
-		ret.rotation = create_t_vector4(0.0, 0.0, 0.0);
-		ret.hp = -1;
-		ret.kinetic = 0.0;
-	}
-	else if (index == 19)
-	{
-		ret.name = "platform";
-		ret.size = create_t_vector4(1.0, 0.2, 1.0);
-		ret.primitive = 1;
-		ret.collectible = 0;
-		ret.rotation = create_t_vector4(0.0, 0.0, 0.0);
-		ret.hp = -1;
-		ret.kinetic = 0.0;
-	}
-	else if (index == 20)
-	{
-		ret.name = "plane";
-		ret.size = create_t_vector4(1.0, 0.0, 1.0);
-		ret.primitive = 0;
-		ret.collectible = 0;
-		ret.rotation = create_t_vector4(0.0, 0.0, 0.0);
-		ret.hp = -1;
-		ret.kinetic = 0.0;
-	}
-	else if (index == 21)
-	{
-		ret.name = "Enemy";
-		ret.size = create_t_vector4(0.3, 0.5, 0.3);
-		ret.primitive = 1;
-		ret.collectible = 0;
-		ret.rotation = create_t_vector4(0.0, 0.0, 0.0);
-		ret.hp = -1;
-		ret.kinetic = 0.0;
-	}
-	else if (index == 22)
-	{
-		ret.name = "window";
-		ret.size = create_t_vector4(2.0, 2.0, 0.3);
-		ret.primitive = 1;
-		ret.collectible = 0;
-		ret.rotation = create_t_vector4(0.0, 0.0, 0.0);
-		ret.hp = -1;
-		ret.kinetic = 0.0;
-	}
-	else if (index == 24)
-	{
-		ret.name = "end";
-		ret.size = create_t_vector4(0.3, 0.1, 0.3);
-		ret.primitive = 1;
-		ret.collectible = 0;
-		ret.rotation = create_t_vector4(0.0, 0.0, 0.0);
-		ret.hp = -1;
-		ret.kinetic = 0.0;
-	}
-	else if (index == 23)
-	{
-		ret.name = "Player";
-		ret.size = create_t_vector4(0.3, 0.5, 0.3);
-		ret.primitive = -1;
-		ret.collectible = 0;
-		ret.rotation = create_t_vector4(0.0, 0.0, 0.0);
-		ret.hp = 100;
-		ret.kinetic = 100.0;
-	}
+	ret.mesh = create_mesh_stair(index, ret.mesh);
+	ret.mesh = create_mesh_item(index, ret.mesh);
+	ret.mesh = create_mesh_ammo(index, ret.mesh);
+	// ret.mesh = create_mesh_ladder_platform(index, ret.mesh);
+	// ret.mesh = create_mesh_plane_enemy(index, ret.mesh);
+	// ret.mesh = create_mesh_window_player(index, ret.mesh);
+	// ret.mesh = create_mesh_end(index, ret.mesh);
+	// else if (index == 18)
+	// {
+	// 	ret.name = "ladder";
+	// 	ret.size = create_t_vector4(1.0, 2.0, -0.01);
+	// 	ret.primitive = 1;
+	// 	ret.collectible = 0;
+	// 	ret.rotation = create_t_vector4(0.0, 0.0, 0.0);
+	// 	ret.hp = -1;
+	// 	ret.kinetic = 0.0;
+	// }
+	// else if (index == 19)
+	// {
+	// 	ret.name = "platform";
+	// 	ret.size = create_t_vector4(1.0, 0.2, 1.0);
+	// 	ret.primitive = 1;
+	// 	ret.collectible = 0;
+	// 	ret.rotation = create_t_vector4(0.0, 0.0, 0.0);
+	// 	ret.hp = -1;
+	// 	ret.kinetic = 0.0;
+	// }
+	// else if (index == 20)
+	// {
+	// 	ret.name = "plane";
+	// 	ret.size = create_t_vector4(1.0, 0.0, 1.0);
+	// 	ret.primitive = 0;
+	// 	ret.collectible = 0;
+	// 	ret.rotation = create_t_vector4(0.0, 0.0, 0.0);
+	// 	ret.hp = -1;
+	// 	ret.kinetic = 0.0;
+	// }
+	// else if (index == 21)
+	// {
+	// 	ret.name = "Enemy";
+	// 	ret.size = create_t_vector4(0.3, 0.5, 0.3);
+	// 	ret.primitive = 1;
+	// 	ret.collectible = 0;
+	// 	ret.rotation = create_t_vector4(0.0, 0.0, 0.0);
+	// 	ret.hp = -1;
+	// 	ret.kinetic = 0.0;
+	// }
+	// else if (index == 22)
+	// {
+	// 	ret.name = "window";
+	// 	ret.size = create_t_vector4(2.0, 2.0, 0.3);
+	// 	ret.primitive = 1;
+	// 	ret.collectible = 0;
+	// 	ret.rotation = create_t_vector4(0.0, 0.0, 0.0);
+	// 	ret.hp = -1;
+	// 	ret.kinetic = 0.0;
+	// }
+	// else if (index == 24)
+	// {
+	// 	ret.name = "end";
+	// 	ret.size = create_t_vector4(0.3, 0.1, 0.3);
+	// 	ret.primitive = 1;
+	// 	ret.collectible = 0;
+	// 	ret.rotation = create_t_vector4(0.0, 0.0, 0.0);
+	// 	ret.hp = -1;
+	// 	ret.kinetic = 0.0;
+	// }
+	// else if (index == 23)
+	// {
+	// 	ret.name = "Player";
+	// 	ret.size = create_t_vector4(0.3, 0.5, 0.3);
+	// 	ret.primitive = -1;
+	// 	ret.collectible = 0;
+	// 	ret.rotation = create_t_vector4(0.0, 0.0, 0.0);
+	// 	ret.hp = 100;
+	// 	ret.kinetic = 100.0;
+	// }
 	return (ret);
 }
 
