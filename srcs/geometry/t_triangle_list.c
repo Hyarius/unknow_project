@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 15:27:46 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/09 15:27:47 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/17 11:23:59 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,36 +81,6 @@ void			t_triangle_list_add_back(t_triangle_list *dest, t_triangle *add)
 	dest->triangle[dest->size].b = add->b;
 	dest->triangle[dest->size].c = add->c;
 	dest->size++;
-}
-
-void			delete_t_triangle_list(t_triangle_list dest)
-{
-	free(dest.triangle);
-}
-
-void			free_t_triangle_list(t_triangle_list *dest)
-{
-	delete_t_triangle_list(*dest);
-	free(dest);
-}
-
-void			clean_t_triangle_list(t_triangle_list *dest)
-{
-	dest->size = 0;
-}
-
-t_triangle		t_triangle_list_at(t_triangle_list *dest, int index)
-{
-	if (index < 0 || index >= dest->size)
-		error_exit(-36, "Segfault : t_triangle_list out of range");
-	return (dest->triangle[index]);
-}
-
-t_triangle		*t_triangle_list_get(t_triangle_list *dest, int index)
-{
-	if (index < 0 || index >= dest->size)
-		error_exit(-36, "Segfault : t_triangle_list out of range");
-	return (&dest->triangle[index]);
 }
 
 void			t_triangle_list_resize(t_triangle_list *dest, int new_size)
