@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing_front.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:55:48 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/15 16:23:46 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/17 14:48:39 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,22 +71,23 @@ void	drawing_front_mun(t_camera *cam, t_texture **texture, t_player *player)
 void	drawing_front_weapons(t_camera *cam, t_texture **texture,
 															t_player *player)
 {
-	int		weapon;
+	// int		weapon;
 
-	if (ft_strcmp(player->current_weapon->name, "pistol") == 0)
-		weapon = 0;
-	else if (ft_strcmp(player->current_weapon->name, "ar") == 0)
-		weapon = 1;
-	else if (ft_strcmp(player->current_weapon->name, "rifle") == 0)
-		weapon = 2;
-	else if (ft_strcmp(player->current_weapon->name, "shotgun") == 0)
-		weapon = 3;
-	else if (ft_strcmp(player->current_weapon->name, "rpg") == 0)
-		weapon = 4;
-	else if (ft_strcmp(player->current_weapon->name, "bb") == 0)
-		weapon = 5;
+	// if (ft_strcmp(player->current_weapon->name, "pistol") == 0)
+	// 	weapon = 0;
+	// else if (ft_strcmp(player->current_weapon->name, "ar") == 0)
+	// 	weapon = 1;
+	// else if (ft_strcmp(player->current_weapon->name, "rifle") == 0)
+	// 	weapon = 2;
+	// else if (ft_strcmp(player->current_weapon->name, "shotgun") == 0)
+	// 	weapon = 3;
+	// else if (ft_strcmp(player->current_weapon->name, "rpg") == 0)
+	// 	weapon = 4;
+	// else if (ft_strcmp(player->current_weapon->name, "bb") == 0)
+	// 	weapon = 5;
+	// printf("player->current_weapon->index = %d\n", player->current_weapon->index);
 	t_view_port_clear_buffers(cam->view_port);
 	draw_rectangle_texture_cpu(cam->view_port, create_t_rectangle(
 					create_vec2(-0.65, -0.1), create_vec2(1.3, -0.9)),
-					texture[weapon]);
+					texture[player->current_weapon->index]);
 }

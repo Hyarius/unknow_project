@@ -14,6 +14,7 @@ typedef struct  s_weapon
 	int			dmg;
 	int			tick_shoot;
 	int			tick_reload;
+	int			index;
 }               t_weapon;
 
 typedef struct  s_player
@@ -38,6 +39,5 @@ t_player		*initialize_t_player(t_camera *cam);
 void			read_player(char **split, t_player *player);
 t_weapon		create_t_weapons(int index, int ammo, int total_ammo);
 t_mesh_list 	*read_map_file(int fd, t_player *player);
-
 
 #endif

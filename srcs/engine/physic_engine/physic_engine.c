@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   physic_engine.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 14:56:08 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/15 14:56:43 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/17 14:10:41 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,7 +191,7 @@ int				can_move(t_mesh *mesh, t_engine *engine)
 					{
 						if (engine->physic_engine->item_list->item[j].pf(engine->user_engine->player) == BOOL_TRUE)
 						{
-							Mix_PlayChannel(-1, engine->sound_engine->sounds[22], 0);
+							Mix_PlayChannel(-1, engine->sound_engine->sounds[23], 0);
 							t_mesh_set_visibility(target, BOOL_FALSE);
 							target->no_hitbox = 1;
 						}
