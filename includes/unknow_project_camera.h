@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unknow_project_camera.h                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:46:59 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 15:51:09 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/20 16:49:39 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct		s_camera
 	float			fov;
 	float			near;
 	float			far;
-	int				crounch;
+	int				crouch;
 	int				f_press;
 	int				r_press;
 }					t_camera;
