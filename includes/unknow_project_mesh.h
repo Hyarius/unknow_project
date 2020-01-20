@@ -82,6 +82,17 @@ void			t_mesh_resize(t_mesh *mesh, t_vec4 modif);
 void			t_mesh_set_name(t_mesh *mesh, char *name);
 int				t_mesh_on_mesh(t_mesh *body, t_mesh *target);
 void			destroy_mesh(t_mesh *mesh);
+t_mesh			create_mesh_cube_wall(int index);
+t_mesh			create_mesh_door(int index, t_mesh mesh);
+t_mesh			create_mesh_card(int index, t_mesh mesh);
+t_mesh			create_mesh_elevator_stair(int index, t_mesh mesh);
+t_mesh			create_mesh_stair(int index, t_mesh mesh);
+t_mesh			create_mesh_item(int index, t_mesh mesh);
+t_mesh			create_mesh_ammo(int index, t_mesh mesh);
+t_mesh			create_mesh_ladder_platform(int index, t_mesh mesh);
+t_mesh			create_mesh_plane_enemy(int index, t_mesh mesh);
+t_mesh			create_mesh_window_player(int index, t_mesh mesh);
+t_mesh			create_mesh_end(int index, t_mesh mesh);
 
 typedef struct		s_mesh_editing
 {
