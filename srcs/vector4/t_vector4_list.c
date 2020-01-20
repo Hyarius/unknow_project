@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_vec4_list.c                                   :+:      :+:    :+:   */
+/*   t_vector4_list.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 11:01:12 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/20 13:43:10 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-t_vec4_list	new_vec4_list(void)
+t_vec4_list		new_vec4_list(void)
 {
 	t_vec4_list list;
 
@@ -23,7 +23,7 @@ t_vec4_list	new_vec4_list(void)
 	return (list);
 }
 
-t_vec4_list	*initialize_t_vec4_list(void)
+t_vec4_list		*initialize_t_vec4_list(void)
 {
 	t_vec4_list *list;
 
@@ -36,7 +36,7 @@ t_vec4_list	*initialize_t_vec4_list(void)
 void			t_vec4_list_push_back(t_vec4_list *dest, t_vec4 to_add)
 {
 	t_vec4	*tmp;
-	int			i;
+	int		i;
 
 	if ((dest->size + 1) >= dest->max_size)
 	{
@@ -60,7 +60,7 @@ void			t_vec4_list_push_back(t_vec4_list *dest, t_vec4 to_add)
 void			t_vec4_list_add_back(t_vec4_list *dest, t_vec4 *to_add)
 {
 	t_vec4	*tmp;
-	int			i;
+	int		i;
 
 	if ((dest->size + 1) >= dest->max_size)
 	{
