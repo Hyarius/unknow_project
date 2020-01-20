@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unknow_project_algorythm.h                         :+:      :+:    :+:   */
+/*   unknow_project_algorithm.h                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:21:37 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 15:22:47 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/20 16:59:35 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UNKNOW_PROJECT_ALGORYTHM_H
-# define UNKNOW_PROJECT_ALGORYTHM_H
+#ifndef UNKNOW_PROJECT_ALGORITHM_H
+# define UNKNOW_PROJECT_ALGORITHM_H
 
 # include "unknow_project_mesh.h"
 

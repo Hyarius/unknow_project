@@ -6,7 +6,7 @@
 /*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:21:49 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/20 15:25:33 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/20 16:59:35 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include "unknow_project_system.h"
 # include "unknow_project_engine.h"
 # include "unknow_project_list.h"
-# include "unknow_project_algorythm.h"
+# include "unknow_project_algorithm.h"
 # include "unknow_project_gui.h"
 # include "unknow_project_game_engine.h"
 # include "unknow_project_player.h"
