@@ -1,52 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_vector4_1.c                                      :+:      :+:    :+:   */
+/*   t_vector4_math.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 11:25:39 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/16 11:55:03 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/20 11:28:39 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-t_vector4	add_vector4_to_vector4(t_vector4 a, t_vector4 b)
+t_vec4	add_vec4(t_vec4 a, t_vec4 b)
 {
-	t_vector4	result;
+	t_vec4	result;
 
-	result = create_t_vector4(a.x + b.x, a.y + b.y, a.z + b.z);
+	result = new_vec4(a.x + b.x, a.y + b.y, a.z + b.z);
 	return (result);
 }
 
-t_vector4	substract_vector4_to_vector4(t_vector4 a, t_vector4 b)
+t_vec4	substract_vec4(t_vec4 a, t_vec4 b)
 {
-	t_vector4	result;
+	t_vec4	result;
 
-	result = create_t_vector4(a.x - b.x, a.y - b.y, a.z - b.z);
+	result = new_vec4(a.x - b.x, a.y - b.y, a.z - b.z);
 	return (result);
 }
 
-t_vector4	mult_vector4_by_vector4(t_vector4 a, t_vector4 b)
+t_vec4	mult_vec4_by_vec4(t_vec4 a, t_vec4 b)
 {
-	t_vector4	result;
+	t_vec4	result;
 
-	result = create_t_vector4(a.x * b.x, a.y * b.y, a.z * b.z);
+	result = new_vec4(a.x * b.x, a.y * b.y, a.z * b.z);
 	return (result);
 }
 
-t_vector4	mult_vector4_by_float(t_vector4 a, float b)
+t_vec4	mult_vec4_by_float(t_vec4 a, float b)
 {
-	t_vector4	result;
+	t_vec4	result;
 
-	result = create_t_vector4(a.x * b, a.y * b, a.z * b);
+	result = new_vec4(a.x * b, a.y * b, a.z * b);
 	return (result);
 }
 
-t_vector4	divide_vector4_by_float(t_vector4 a, float b)
+t_vec4	divide_vec4_by_float(t_vec4 a, float b)
 {
-	t_vector4	result;
+	t_vec4	result;
 
 	result.x = a.x / b;
 	result.y = a.y / b;

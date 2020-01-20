@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 14:18:48 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/17 14:10:54 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/20 11:28:39 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 void		enemy_look_norm(t_camera *cam, t_mesh *target, float tmp)
 {
-	cam->pos = add_vector4_to_vector4(cam->body->pos,
-			create_t_vector4(0.15, 0.45, -0.15));
+	cam->pos = add_vec4(cam->body->pos,
+			new_vec4(0.15, 0.45, -0.15));
 	t_camera_look_at_point(cam, target->center);
 	tmp = (cam->yaw - cam->body->angle.x);
 	if (tmp > cam->body->angle.x + 1.0f
 		|| tmp < cam->body->angle.x - 1.0f)
 	{
 		t_mesh_rotate_around_point(cam->body,
-			create_t_vector4(0.0, tmp, 0.0), cam->body->center);
+			new_vec4(0.0, tmp, 0.0), cam->body->center);
 		cam->body->angle.x = cam->yaw;
 	}
 }
@@ -94,14 +94,14 @@ void		enemy_move(t_engine *engine)
 				mesh->camera->forward, "Enemy");
 			if (target != NULL && ft_strcmp(target->name, "Player") == 0)
 			{
-				mesh->force = divide_vector4_by_float(mesh->camera->forward,
+				mesh->force = divide_vec4_by_float(mesh->camera->forward,
 								25);
 				mesh->force.y = 0;
 				if (can_move(mesh, engine) == BOOL_TRUE)
 					t_mesh_move(mesh, mesh->force);
 			}
 			else
-				mesh->force = create_t_vector4(0.0, 0.0, 0.0);
+				mesh->force = new_vec4(0.0, 0.0, 0.0);
 		}
 		i++;
 	}

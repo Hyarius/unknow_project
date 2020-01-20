@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   t_color_list.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 14:38:40 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/15 14:46:16 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-t_color_list	create_t_color_list(void)
+t_color_list	new_color_list(void)
 {
 	t_color_list	list;
 
@@ -29,7 +29,7 @@ t_color_list	*initialize_t_color_list(void)
 
 	if (!(list = (t_color_list *)malloc(sizeof(t_color_list))))
 		error_exit(-26, "Can't create a t_color_list array");
-	*list = create_t_color_list();
+	*list = new_color_list();
 	return (list);
 }
 

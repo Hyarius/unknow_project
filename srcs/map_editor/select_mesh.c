@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   select_mesh.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 13:19:50 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/17 13:28:28 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,19 @@ t_mesh			create_mesh_cube_wall(int index)
 	t_mesh	ret;
 
 	ret.name = "cube";
-	ret.size = create_t_vector4(1.0, 1.0, 1.0);
+	ret.size = new_vec4(1.0, 1.0, 1.0);
 	ret.primitive = 1;
 	ret.collectible = 0;
-	ret.rotation = create_t_vector4(0.0, 0.0, 0.0);
+	ret.rotation = new_vec4(0.0, 0.0, 0.0);
 	ret.hp = -1;
 	ret.kinetic = 0.0;
 	if (index == 1)
 	{
 		ret.name = "wall";
-		ret.size = create_t_vector4(3.0, 2.0, 0.2);
+		ret.size = new_vec4(3.0, 2.0, 0.2);
 		ret.primitive = 1;
 		ret.collectible = 0;
-		ret.rotation = create_t_vector4(0.0, 0.0, 0.0);
+		ret.rotation = new_vec4(0.0, 0.0, 0.0);
 		ret.hp = -1;
 		ret.kinetic = 0.0;
 	}
@@ -51,10 +51,10 @@ t_mesh			create_mesh_door(int index, t_mesh mesh)
 			ret.name = "door_blue";
 		else if (index == 5)
 			ret.name = "door_green";
-		ret.size = create_t_vector4(1.0, 2.0, 0.2);
+		ret.size = new_vec4(1.0, 2.0, 0.2);
 		ret.primitive = 1;
 		ret.collectible = 0;
-		ret.rotation = create_t_vector4(0.0, 0.0, 0.0);
+		ret.rotation = new_vec4(0.0, 0.0, 0.0);
 		ret.hp = -1;
 		ret.kinetic = 0.0;
 	}
@@ -74,10 +74,10 @@ t_mesh			create_mesh_card(int index, t_mesh mesh)
 			ret.name = "Card_blue";
 		else if (index == 8)
 			ret.name = "Card_green";
-		ret.size = create_t_vector4(0.2, 0.05, 0.2);
+		ret.size = new_vec4(0.2, 0.05, 0.2);
 		ret.primitive = 1;
 		ret.collectible = 1;
-		ret.rotation = create_t_vector4(0.0, 0.0, 0.0);
+		ret.rotation = new_vec4(0.0, 0.0, 0.0);
 		ret.hp = -1;
 		ret.kinetic = 0.0;
 	}
@@ -92,14 +92,14 @@ t_mesh			create_mesh_elevator_stair(int index, t_mesh mesh)
 	if (index == 9)
 	{
 		ret.name = "elevator";
-		ret.size = create_t_vector4(2.0, 5.0, 2.0);
-		ret.rotation = create_t_vector4(0.0, 0.0, 0.0);
+		ret.size = new_vec4(2.0, 5.0, 2.0);
+		ret.rotation = new_vec4(0.0, 0.0, 0.0);
 	}
 	else if (index == 10)
 	{
 		ret.name = "stair";
-		ret.size = create_t_vector4(1.0, 0.2, 5.0);
-		ret.rotation = create_t_vector4(10.0, 0.0, 0.0);
+		ret.size = new_vec4(1.0, 0.2, 5.0);
+		ret.rotation = new_vec4(10.0, 0.0, 0.0);
 	}
 	if (index == 9 || index == 10)
 	{
@@ -119,10 +119,10 @@ t_mesh			create_mesh_stair(int index, t_mesh mesh)
 	if (index == 11)
 	{
 		ret.name = "stair";
-		ret.size = create_t_vector4(1.0, 0.2, 5.0);
+		ret.size = new_vec4(1.0, 0.2, 5.0);
 		ret.primitive = 1;
 		ret.collectible = 0;
-		ret.rotation = create_t_vector4(10.0, 0.0, 0.0);
+		ret.rotation = new_vec4(10.0, 0.0, 0.0);
 		ret.hp = -1;
 		ret.kinetic = 0.0;
 	}
@@ -142,10 +142,10 @@ t_mesh			create_mesh_item(int index, t_mesh mesh)
 			ret.name = "Armor_Pack";
 		else if (index == 14)
 			ret.name = "Jet_Pack";
-		ret.size = create_t_vector4(0.2, 0.05, 0.2);
+		ret.size = new_vec4(0.2, 0.05, 0.2);
 		ret.primitive = 1;
 		ret.collectible = 1;
-		ret.rotation = create_t_vector4(0.0, 0.0, 0.0);
+		ret.rotation = new_vec4(0.0, 0.0, 0.0);
 		ret.hp = -1;
 		ret.kinetic = 0.0;
 	}
@@ -160,10 +160,10 @@ t_mesh			create_mesh_ammo(int index, t_mesh mesh)
 	if (index == 15 || index == 16 || index == 17)
 	{
 		ret.name = "Ammo_Pack";
-		ret.size = create_t_vector4(0.2, 0.05, 0.2);
+		ret.size = new_vec4(0.2, 0.05, 0.2);
 		ret.primitive = 1;
 		ret.collectible = 1;
-		ret.rotation = create_t_vector4(0.0, 0.0, 0.0);
+		ret.rotation = new_vec4(0.0, 0.0, 0.0);
 		if (index == 15)
 			ret.hp = -2;
 		if (index == 16)
@@ -183,20 +183,20 @@ t_mesh			create_mesh_ladder_platform(int index, t_mesh mesh)
 	if (index == 18)
 	{
 		ret.name = "ladder";
-		ret.size = create_t_vector4(1.0, 2.0, -0.01);
+		ret.size = new_vec4(1.0, 2.0, -0.01);
 		ret.primitive = 1;
 		ret.collectible = 0;
-		ret.rotation = create_t_vector4(0.0, 0.0, 0.0);
+		ret.rotation = new_vec4(0.0, 0.0, 0.0);
 		ret.hp = -1;
 		ret.kinetic = 0.0;
 	}
 	else if (index == 19)
 	{
 		ret.name = "platform";
-		ret.size = create_t_vector4(1.0, 0.2, 1.0);
+		ret.size = new_vec4(1.0, 0.2, 1.0);
 		ret.primitive = 1;
 		ret.collectible = 0;
-		ret.rotation = create_t_vector4(0.0, 0.0, 0.0);
+		ret.rotation = new_vec4(0.0, 0.0, 0.0);
 		ret.hp = -1;
 		ret.kinetic = 0.0;
 	}
@@ -211,20 +211,20 @@ t_mesh			create_mesh_plane_enemy(int index, t_mesh mesh)
 	if (index == 20)
 	{
 		ret.name = "plane";
-		ret.size = create_t_vector4(1.0, 0.0, 1.0);
+		ret.size = new_vec4(1.0, 0.0, 1.0);
 		ret.primitive = 0;
 		ret.collectible = 0;
-		ret.rotation = create_t_vector4(0.0, 0.0, 0.0);
+		ret.rotation = new_vec4(0.0, 0.0, 0.0);
 		ret.hp = -1;
 		ret.kinetic = 0.0;
 	}
 	else if (index == 21)
 	{
 		ret.name = "Enemy";
-		ret.size = create_t_vector4(0.3, 0.5, 0.3);
+		ret.size = new_vec4(0.3, 0.5, 0.3);
 		ret.primitive = 1;
 		ret.collectible = 0;
-		ret.rotation = create_t_vector4(0.0, 0.0, 0.0);
+		ret.rotation = new_vec4(0.0, 0.0, 0.0);
 		ret.hp = -1;
 		ret.kinetic = 0.0;
 	}
@@ -239,20 +239,20 @@ t_mesh			create_mesh_window_player(int index, t_mesh mesh)
 	if (index == 22)
 	{
 		ret.name = "window";
-		ret.size = create_t_vector4(2.0, 2.0, 0.3);
+		ret.size = new_vec4(2.0, 2.0, 0.3);
 		ret.primitive = 1;
 		ret.collectible = 0;
-		ret.rotation = create_t_vector4(0.0, 0.0, 0.0);
+		ret.rotation = new_vec4(0.0, 0.0, 0.0);
 		ret.hp = -1;
 		ret.kinetic = 0.0;
 	}
 	else if (index == 23)
 	{
 		ret.name = "Player";
-		ret.size = create_t_vector4(0.3, 0.5, 0.3);
+		ret.size = new_vec4(0.3, 0.5, 0.3);
 		ret.primitive = -1;
 		ret.collectible = 0;
-		ret.rotation = create_t_vector4(0.0, 0.0, 0.0);
+		ret.rotation = new_vec4(0.0, 0.0, 0.0);
 		ret.hp = 100;
 		ret.kinetic = 100.0;
 	}
@@ -267,10 +267,10 @@ t_mesh			create_mesh_end(int index, t_mesh mesh)
 	if (index == 24)
 	{
 		ret.name = "end";
-		ret.size = create_t_vector4(0.3, 0.1, 0.3);
+		ret.size = new_vec4(0.3, 0.1, 0.3);
 		ret.primitive = 1;
 		ret.collectible = 0;
-		ret.rotation = create_t_vector4(0.0, 0.0, 0.0);
+		ret.rotation = new_vec4(0.0, 0.0, 0.0);
 		ret.hp = -1;
 		ret.kinetic = 0.0;
 	}
@@ -296,7 +296,7 @@ t_mesh_editing	create_mesh_editing(int index, char *path)
 	return (ret);
 }
 
-t_mesh_editing	select_mesh(t_keyboard *key, t_vector4 pos, char **path)
+t_mesh_editing	select_mesh(t_keyboard *key, t_vec4 pos, char **path)
 {
 	t_mesh_editing	mesh;
 	static int		press = 0;

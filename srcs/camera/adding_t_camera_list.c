@@ -6,13 +6,13 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 11:23:52 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/09 14:34:46 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-t_camera_list	create_t_camera_list(void)
+t_camera_list	new_camera_list(void)
 {
 	t_camera_list	list;
 
@@ -29,7 +29,7 @@ t_camera_list	*initialize_t_camera_list(void)
 
 	if (!(list = (t_camera_list *)malloc(sizeof(t_camera_list))))
 		error_exit(-19, "Can't create a t_camera_list array");
-	*list = create_t_camera_list();
+	*list = new_camera_list();
 	return (list);
 }
 

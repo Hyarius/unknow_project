@@ -6,13 +6,13 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 09:37:24 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 09:37:50 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-void			create_t_weapons3(int ammo, int total_ammo, t_weapon *result)
+void			new_weapons3(int ammo, int total_ammo, t_weapon *result)
 {
 	result[4].name = "rpg";
 	result[4].ammo = ammo;
@@ -30,7 +30,7 @@ void			create_t_weapons3(int ammo, int total_ammo, t_weapon *result)
 	result[5].index = 5;
 }
 
-void			create_t_weapons2(int ammo, int total_ammo, t_weapon *result)
+void			new_weapons2(int ammo, int total_ammo, t_weapon *result)
 {
 	result[2].name = "rifle";
 	result[2].ammo = ammo;
@@ -50,10 +50,10 @@ void			create_t_weapons2(int ammo, int total_ammo, t_weapon *result)
 	result[3].tick_shoot = 2;
 	result[3].tick_reload = 3;
 	result[3].index = 3;
-	create_t_weapons3(ammo, total_ammo, result);
+	new_weapons3(ammo, total_ammo, result);
 }
 
-t_weapon		create_t_weapons(int index, int ammo, int total_ammo)
+t_weapon		new_weapons(int index, int ammo, int total_ammo)
 {
 	t_weapon	result[6];
 
@@ -75,6 +75,6 @@ t_weapon		create_t_weapons(int index, int ammo, int total_ammo)
 	result[1].tick_shoot = 1;
 	result[1].tick_reload = 2;
 	result[1].index = 1;
-	create_t_weapons2(ammo, total_ammo, result);
+	new_weapons2(ammo, total_ammo, result);
 	return (result[index]);
 }

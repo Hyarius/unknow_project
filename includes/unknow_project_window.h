@@ -39,7 +39,7 @@ typedef struct		s_window
 //			window_handler
 void		start_sdl();
 t_window	*initialize_t_window(char *name, int size_x, int size_y);
-int 		is_point_in_screen(t_window *p_win, t_vector4 p_point);
+int 		is_point_in_screen(t_window *p_win, t_vec4 p_point);
 int			is_t_triangle_in_screen(t_window *p_win, t_triangle *p_triangle);
 
 typedef struct		s_view_port
@@ -54,7 +54,7 @@ typedef struct		s_view_port
 
 }					t_view_port;
 
-t_view_port	create_t_view_port(t_window *window, t_vec2_int pos, t_vec2_int size);
+t_view_port	new_view_port(t_window *window, t_vec2_int pos, t_vec2_int size);
 t_view_port	*initialize_t_view_port(t_window *window, t_vec2_int pos, t_vec2_int size);
 void		move_t_view_port(t_view_port *view, t_vec2_int new_pos);
 void		resize_t_view_port(t_view_port *view, t_vec2_int new_size);

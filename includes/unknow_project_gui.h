@@ -10,7 +10,7 @@ typedef struct      s_button
     char            clicked;
 }                   t_button;
 
-t_button            create_t_button();
+t_button            new_button();
 t_button            *initialize_t_button();
 
 int                 t_mouse_state(t_mouse *mouse);
@@ -33,7 +33,7 @@ typedef struct  s_gui
 	int			info_print;
 }               t_gui;
 
-t_gui           create_t_gui(void);
+t_gui           new_gui(void);
 t_gui           *initialize_t_gui(void);
 void            drawing_front_hp(t_camera *main_camera, t_player *player);
 void            drawing_front_mun(t_camera *main_camera, t_texture **texture, t_player *player);

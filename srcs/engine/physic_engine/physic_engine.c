@@ -6,17 +6,17 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 14:56:08 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/17 14:10:41 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/20 11:28:39 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-t_physic_engine	create_t_physic_engine(void)
+t_physic_engine	new_physic_engine(void)
 {
 	t_physic_engine	result;
 
-	result.gravity_force = create_t_vector4(0, -GRAVITY * 3, 0);
+	result.gravity_force = new_vec4(0, -GRAVITY * 3, 0);
 	result.mesh_list = initialize_t_mesh_list();
 	result.item_list = initialize_t_item_list();
 	return (result);
@@ -28,7 +28,7 @@ t_physic_engine	*initialize_t_physic_engine(void)
 
 	if (!(result = (t_physic_engine	*)malloc(sizeof(t_physic_engine))))
 		return (NULL);
-	*result = create_t_physic_engine();
+	*result = new_physic_engine();
 	return (result);
 }
 
@@ -74,10 +74,10 @@ t_mesh			*t_physic_engine_get_mesh(t_physic_engine *physic_engine,
 	return (t_mesh_list_get(physic_engine->mesh_list, index));
 }
 
-int				can_move_axis(t_mesh *mesh, t_mesh *target, t_vector4 axis)
+int				can_move_axis(t_mesh *mesh, t_mesh *target, t_vec4 axis)
 {
-	t_vector4	tmp;
-	t_vector4	delta_pos;
+	t_vec4	tmp;
+	t_vec4	delta_pos;
 	t_triangle	triangle_mesh;
 	t_triangle	triangle_target;
 	t_face		*mesh_face;
@@ -87,13 +87,13 @@ int				can_move_axis(t_mesh *mesh, t_mesh *target, t_vector4 axis)
 	int			j;
 
 	result = 0;
-	tmp = mult_vector4_by_vector4(mesh->force, axis);
-	delta_pos = add_vector4_to_vector4(mesh->pos, tmp);
-	clean_t_vector4_list(mesh->vertices_in_world);
+	tmp = mult_vec4_by_vec4(mesh->force, axis);
+	delta_pos = add_vec4(mesh->pos, tmp);
+	clean_t_vec4_list(mesh->vertices_in_world);
 	i = 0;
 	while (i < mesh->vertices->size)
 	{
-		t_vector4_list_push_back(mesh->vertices_in_world, add_vector4_to_vector4(t_vector4_list_at(mesh->vertices, i), delta_pos));
+		t_vec4_list_push_back(mesh->vertices_in_world, add_vec4(t_vec4_list_at(mesh->vertices, i), delta_pos));
 		i++;
 	}
 	j = 0;
@@ -108,7 +108,7 @@ int				can_move_axis(t_mesh *mesh, t_mesh *target, t_vector4 axis)
 			triangle_target = compose_t_triangle_from_t_vertices(target->vertices_in_world, target_face->index_vertices);
 			if (is_triangle_in_triangle(triangle_mesh, triangle_target) == BOOL_TRUE)
 			{
-				set_t_face_color(mesh_face, create_t_color(1.0, 0.0, 0.0, 1.0));
+				set_t_face_color(mesh_face, new_color(1.0, 0.0, 0.0, 1.0));
 				result++;
 			}
 			i++;
@@ -120,7 +120,7 @@ int				can_move_axis(t_mesh *mesh, t_mesh *target, t_vector4 axis)
 	return (BOOL_TRUE);
 }
 
-void			test_move_axis(t_mesh *mesh, float *force, t_vector4 axis, t_mesh *target)
+void			test_move_axis(t_mesh *mesh, float *force, t_vec4 axis, t_mesh *target)
 {
 	float	max;
 	int		subdivision;
@@ -180,7 +180,7 @@ int				can_move(t_mesh *mesh, t_engine *engine)
 	while (i < engine->physic_engine->mesh_list->size)
 	{
 		target = t_mesh_list_get(engine->physic_engine->mesh_list, i);
-		if (mesh != target && target->bubble_radius + mesh->bubble_radius >= calc_dist_vector4_to_vector4(mesh->center, target->center) && target->no_hitbox == 0)
+		if (mesh != target && target->bubble_radius + mesh->bubble_radius >= calc_dist_vec4(mesh->center, target->center) && target->no_hitbox == 0)
 		{
 			if (target->collectible == 1 && is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
 			{
@@ -213,18 +213,18 @@ int				can_move(t_mesh *mesh, t_engine *engine)
 				mesh->force.y = 0.015;
 			else if (target->collectible == 0)
 			{
-				test_move_axis(mesh, &(mesh->force.y), create_t_vector4(0, 1, 0), target);
-				test_move_axis(mesh, &(mesh->force.x), create_t_vector4(1, 0, 0), target);
-				test_move_axis(mesh, &(mesh->force.z), create_t_vector4(0, 0, 1), target);
+				test_move_axis(mesh, &(mesh->force.y), new_vec4(0, 1, 0), target);
+				test_move_axis(mesh, &(mesh->force.x), new_vec4(1, 0, 0), target);
+				test_move_axis(mesh, &(mesh->force.z), new_vec4(0, 0, 1), target);
 				if (mesh->force.z != 0.0 && mesh->force.x != 0.0)
 				{
-					t_mesh_compute_next_vertices_in_world(mesh, create_t_vector4(1, 1, 1));
+					t_mesh_compute_next_vertices_in_world(mesh, new_vec4(1, 1, 1));
 					if (is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
 					{
 						mesh->force.z = 0.0;
 						mesh->force.x = 0.0;
 					}
-					t_mesh_compute_next_vertices_in_world(mesh, create_t_vector4(1, 1, 1));
+					t_mesh_compute_next_vertices_in_world(mesh, new_vec4(1, 1, 1));
 				}
 			}
 		}
@@ -261,8 +261,8 @@ void			t_physic_engine_apply_force(t_engine *engine)
 	{
 		mesh = t_mesh_list_get(engine->physic_engine->mesh_list, i);
 		if (mesh->kinetic > 0)
-			mesh->force = add_vector4_to_vector4(mesh->force,
-					mult_vector4_by_float(engine->physic_engine->gravity_force,
+			mesh->force = add_vec4(mesh->force,
+					mult_vec4_by_float(engine->physic_engine->gravity_force,
 											mesh->kinetic * time_passed));
 		if (mesh->force.x != 0 || mesh->force.y != 0 || mesh->force.z != 0)
 			if (can_move(mesh, engine) == BOOL_TRUE)

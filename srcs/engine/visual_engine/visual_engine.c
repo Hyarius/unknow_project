@@ -6,20 +6,20 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 15:06:45 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/17 11:37:52 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-t_visual_engine	create_t_visual_engine(t_window *p_window)
+t_visual_engine	new_visual_engine(t_window *p_window)
 {
 	t_visual_engine	result;
 	t_camera		tmp;
 
 	result.camera_list = initialize_t_camera_list();
 	result.main_camera = 0;
-	tmp = create_t_camera(p_window, create_t_vector4(0, 0, 0), FOV,
+	tmp = new_camera(p_window, new_vec4(0, 0, 0), FOV,
 									create_vec2(NEAR, FAR));
 	t_camera_list_push_back(result.camera_list, tmp);
 	return (result);
@@ -31,7 +31,7 @@ t_visual_engine	*initialize_t_visual_engine(t_window *p_window)
 
 	if (!(result = (t_visual_engine *)malloc(sizeof(t_visual_engine))))
 		return (NULL);
-	*result = create_t_visual_engine(p_window);
+	*result = new_visual_engine(p_window);
 	return (result);
 }
 

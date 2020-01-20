@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 11:28:17 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/17 11:31:46 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int			t_triangle_similarity(t_triangle p_a, t_triangle p_b)
 {
-	t_vector4	a[3];
-	t_vector4	b[3];
+	t_vec4	a[3];
+	t_vec4	b[3];
 	int			result;
 	int			i;
 	int			j;
@@ -32,17 +32,17 @@ int			t_triangle_similarity(t_triangle p_a, t_triangle p_b)
 	{
 		j = -1;
 		while (++j < 3)
-			if (t_vector4_equal(a[i], b[j]) == BOOL_TRUE)
+			if (t_vec4_equal(a[i], b[j]) == BOOL_TRUE)
 				result++;
 	}
 	return (result);
 }
 
-int			t_triangle_similarity_segment(t_triangle p_a, t_vector4 p_b,
-																t_vector4 p_c)
+int			t_triangle_similarity_segment(t_triangle p_a, t_vec4 p_b,
+																t_vec4 p_c)
 {
-	t_vector4	a[3];
-	t_vector4	b[2];
+	t_vec4	a[3];
+	t_vec4	b[2];
 	int			result;
 	int			i;
 	int			j;
@@ -59,7 +59,7 @@ int			t_triangle_similarity_segment(t_triangle p_a, t_vector4 p_b,
 		j = 0;
 		while (j < 2)
 		{
-			if (t_vector4_equal(a[i], b[j]) == BOOL_TRUE)
+			if (t_vec4_equal(a[i], b[j]) == BOOL_TRUE)
 				result++;
 			j++;
 		}
@@ -74,15 +74,15 @@ float		maximum_dist_triangles(t_triangle tri1, t_triangle tri2)
 	int		i;
 	float	dists[9];
 
-	dists[0] = size_line(create_t_line(tri1.a, tri2.a));
-	dists[0] = size_line(create_t_line(tri1.a, tri2.b));
-	dists[0] = size_line(create_t_line(tri1.a, tri2.c));
-	dists[0] = size_line(create_t_line(tri1.b, tri2.a));
-	dists[0] = size_line(create_t_line(tri1.b, tri2.b));
-	dists[0] = size_line(create_t_line(tri1.b, tri2.c));
-	dists[0] = size_line(create_t_line(tri1.c, tri2.a));
-	dists[0] = size_line(create_t_line(tri1.c, tri2.b));
-	dists[0] = size_line(create_t_line(tri1.c, tri2.c));
+	dists[0] = size_line(new_line(tri1.a, tri2.a));
+	dists[0] = size_line(new_line(tri1.a, tri2.b));
+	dists[0] = size_line(new_line(tri1.a, tri2.c));
+	dists[0] = size_line(new_line(tri1.b, tri2.a));
+	dists[0] = size_line(new_line(tri1.b, tri2.b));
+	dists[0] = size_line(new_line(tri1.b, tri2.c));
+	dists[0] = size_line(new_line(tri1.c, tri2.a));
+	dists[0] = size_line(new_line(tri1.c, tri2.b));
+	dists[0] = size_line(new_line(tri1.c, tri2.c));
 	i = 0;
 	ret = 600;
 	while (i < 9)
@@ -97,15 +97,15 @@ float		maximum_dist_triangles(t_triangle tri1, t_triangle tri2)
 int			triangles_intersection(t_triangle tri1, t_triangle tri2)
 {
 	t_line		seg;
-	t_vector4	intersection;
+	t_vec4	intersection;
 
-	seg = create_t_line(tri1.a, tri1.b);
+	seg = new_line(tri1.a, tri1.b);
 	if (intersect_triangle_by_segment(tri2, seg, &intersection) > 0)
 		return (BOOL_TRUE);
-	seg = create_t_line(tri1.b, tri1.c);
+	seg = new_line(tri1.b, tri1.c);
 	if (intersect_triangle_by_segment(tri2, seg, &intersection) > 0)
 		return (BOOL_TRUE);
-	seg = create_t_line(tri1.a, tri1.c);
+	seg = new_line(tri1.a, tri1.c);
 	if (intersect_triangle_by_segment(tri2, seg, &intersection) > 0)
 		return (BOOL_TRUE);
 	return (BOOL_FALSE);

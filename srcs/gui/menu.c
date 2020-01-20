@@ -195,7 +195,7 @@ void        settings_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, i
 	get_t_mouse_info(mouse);
     pos = create_vec2_int(mouse->pos.x * 100 / WIN_X, mouse->pos.y * 100 / WIN_Y);
     t_view_port_clear_buffers(main_camera->view_port);
-    draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_vec2(0.7, 0.4), create_vec2(-0.6, -0.94)), gui->menu[gui->idx]);
+    draw_rectangle_texture_cpu(main_camera->view_port, new_rectangle(create_vec2(0.7, 0.4), create_vec2(-0.6, -0.94)), gui->menu[gui->idx]);
     if (pos.x > 16 && pos.x < 29)
     {
 		if (t_mouse_state(mouse) == 2)
@@ -210,17 +210,17 @@ void        settings_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, i
 			t_view_port_clear_buffers(main_camera->view_port);
 			if (pos.y > 44 && pos.y < 47)
 			{
-				draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_vec2(0.7, 0.4), create_vec2(-0.6, -0.94)), gui->menu[8]);
+				draw_rectangle_texture_cpu(main_camera->view_port, new_rectangle(create_vec2(0.7, 0.4), create_vec2(-0.6, -0.94)), gui->menu[8]);
 					gui->idx = 8;
 			}
 			if (pos.y > 48 && pos.y < 52)
 			{
-				draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_vec2(0.7, 0.4), create_vec2(-0.6, -0.94)), gui->menu[9]);
+				draw_rectangle_texture_cpu(main_camera->view_port, new_rectangle(create_vec2(0.7, 0.4), create_vec2(-0.6, -0.94)), gui->menu[9]);
 					gui->idx = 9;
 			}
 			if (pos.y > 53 && pos.y < 56)
 			{
-				draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_vec2(0.7, 0.4), create_vec2(-0.6, -0.94)), gui->menu[10]);
+				draw_rectangle_texture_cpu(main_camera->view_port, new_rectangle(create_vec2(0.7, 0.4), create_vec2(-0.6, -0.94)), gui->menu[10]);
 					gui->idx = 10;
 			}
 			if (pos.y > 72 && pos.y < 76)
@@ -334,10 +334,10 @@ void        sens_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, int *
     }
     else if (mouse->pos.x >= 790 && mouse->pos.x <= 1050 && mouse->pos.y >= 1090 && mouse->pos.y <= 1160)
     {
-        draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_vec2(-0.14, -0.83), create_vec2(0.05, 0.08)), gui->menu[7]);
-        draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_vec2(-0.06, -0.88), create_vec2(0.05, 0.08)), gui->menu[7]);
-        draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_vec2(0.11, -0.92), create_vec2(0.05, 0.08)), gui->menu[7]);
-        draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_vec2(0.02, -0.85), create_vec2(0.05, 0.08)), gui->menu[7]);
+        draw_rectangle_texture_cpu(main_camera->view_port, new_rectangle(create_vec2(-0.14, -0.83), create_vec2(0.05, 0.08)), gui->menu[7]);
+        draw_rectangle_texture_cpu(main_camera->view_port, new_rectangle(create_vec2(-0.06, -0.88), create_vec2(0.05, 0.08)), gui->menu[7]);
+        draw_rectangle_texture_cpu(main_camera->view_port, new_rectangle(create_vec2(0.11, -0.92), create_vec2(0.05, 0.08)), gui->menu[7]);
+        draw_rectangle_texture_cpu(main_camera->view_port, new_rectangle(create_vec2(0.02, -0.85), create_vec2(0.05, 0.08)), gui->menu[7]);
         sens_bis(main_camera, gui, gui->sens);
         if (t_mouse_state(mouse) == 2)
             *play = 3;
@@ -356,7 +356,7 @@ void    sens_bis(t_camera *main_camera, t_gui *gui, int sens)
     i = 0;
     while (i < sens)
     {
-        draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_vec2(-0.5825 + i * 0.2175, -0.43), create_vec2(0.3, 0.5)), gui->menu[13]);
+        draw_rectangle_texture_cpu(main_camera->view_port, new_rectangle(create_vec2(-0.5825 + i * 0.2175, -0.43), create_vec2(0.3, 0.5)), gui->menu[13]);
         i++;
     }
 }
@@ -364,7 +364,7 @@ void    sens_bis(t_camera *main_camera, t_gui *gui, int sens)
 void    set_controls(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int key)
 {
     int scan_code;
-    draw_rectangle_texture_cpu(main_camera->view_port, create_t_rectangle(create_vec2(-1, 1), create_vec2(2, -2)), gui->menu[11]);
+    draw_rectangle_texture_cpu(main_camera->view_port, new_rectangle(create_vec2(-1, 1), create_vec2(2, -2)), gui->menu[11]);
     scan_code = user_engine->event.key.keysym.scancode;
     if (scan_code >= 4 && scan_code <= 231)
     {

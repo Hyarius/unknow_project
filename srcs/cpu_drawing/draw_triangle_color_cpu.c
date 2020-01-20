@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 16:16:30 by gboutin           #+#    #+#             */
-/*   Updated: 2019/12/12 16:16:30 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@ t_triangle	convert_t_triangle(t_view_port *view_port, t_triangle *p_triangle)
 {
 	t_triangle	triangle;
 
-	triangle.a = convert_opengl_to_vector4(view_port, p_triangle->a);
-	triangle.b = convert_opengl_to_vector4(view_port, p_triangle->b);
-	triangle.c = convert_opengl_to_vector4(view_port, p_triangle->c);
+	triangle.a = convert_opengl_to_vec4(view_port, p_triangle->a);
+	triangle.b = convert_opengl_to_vec4(view_port, p_triangle->b);
+	triangle.c = convert_opengl_to_vec4(view_port, p_triangle->c);
 	triangle.a.w = 1.0 / triangle.a.w;
 	triangle.b.w = 1.0 / triangle.b.w;
 	triangle.c.w = 1.0 / triangle.c.w;
 	return (triangle);
 }
 
-void		get_min_max_draw_triangle(t_view_port *view_port, t_vector4 *min,
-																t_vector4 *max)
+void		get_min_max_draw_triangle(t_view_port *view_port, t_vec4 *min,
+																t_vec4 *max)
 {
 	if (min->x < 0)
 		min->x = 0;
@@ -41,7 +41,7 @@ void		get_min_max_draw_triangle(t_view_port *view_port, t_vector4 *min,
 void		draw_triangle_color_cpu_next(t_view_port *view_port,
 											t_color *p_color, t_fuck_norme data)
 {
-	data.pixel_sample = create_t_vector4(data.x, data.y, 0);
+	data.pixel_sample = new_vec4(data.x, data.y, 0);
 	data.w = calc_w(data);
 	if (data.w.x >= 0 && data.w.y >= 0 && data.w.z >= 0)
 	{
@@ -65,7 +65,7 @@ void		draw_triangle_color_cpu(t_view_port *view_port,
 	data.triangle = convert_t_triangle(view_port, p_triangle);
 	t_triangle_get_min_max_value(&data.triangle, &data.min, &data.max);
 	get_min_max_draw_triangle(view_port, &data.min, &data.max);
-	data.area = edge_t_vector4(data.triangle.a, data.triangle.b,
+	data.area = edge_t_vec4(data.triangle.a, data.triangle.b,
 														data.triangle.c);
 	data.y = data.min.y - 1;
 	while (++data.y <= data.max.y)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   obj_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 11:05:41 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/15 14:23:50 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void		create_face(t_mesh result, char **tab, char **line_split, int k)
 	int			index[4];
 	int			index_uv[4];
 
-	tmp_face = create_t_face();
+	tmp_face = new_face();
 	i = -1;
 	while (++i < k)
 	{
@@ -40,7 +40,7 @@ void		create_face(t_mesh result, char **tab, char **line_split, int k)
 	ft_freetab(tab);
 }
 
-void		read_obj(t_mesh result, char **line_split, t_vector4 size)
+void		read_obj(t_mesh result, char **line_split, t_vec4 size)
 {
 	char		**tab;
 	int			index[4];
@@ -48,16 +48,16 @@ void		read_obj(t_mesh result, char **line_split, t_vector4 size)
 	int			i;
 
 	if (ft_strcmp(line_split[0], "v") == 0)
-		t_mesh_add_point(&result, create_t_vector4(atof(line_split[1]) * size.x,
+		t_mesh_add_point(&result, new_vec4(atof(line_split[1]) * size.x,
 		atof(line_split[2]) * size.y, atof(line_split[3]) * size.z));
 	else if (ft_strcmp(line_split[0], "vt") == 0)
-		t_mesh_add_uv(&result, create_t_vector4(atof(line_split[1]),
+		t_mesh_add_uv(&result, new_vec4(atof(line_split[1]),
 						atof(line_split[2]), 0.0));
 	else if (ft_strcmp(line_split[0], "f") == 0)
 		create_face(result, tab, line_split, ft_tablen(line_split) - 1);
 }
 
-void		do_stuff(char *line, t_mesh result, t_vector4 size)
+void		do_stuff(char *line, t_mesh result, t_vec4 size)
 {
 	char		**line_split;
 
@@ -67,13 +67,13 @@ void		do_stuff(char *line, t_mesh result, t_vector4 size)
 	ft_freetab(line_split);
 }
 
-t_mesh		read_obj_file(char *path, t_vector4 pos, t_vector4 size, char *txtr)
+t_mesh		read_obj_file(char *path, t_vec4 pos, t_vec4 size, char *txtr)
 {
 	t_mesh		result;
 	char		*line;
 	int			fd;
 
-	result = create_t_mesh(pos);
+	result = new_mesh(pos);
 	if ((fd = open(path, O_RDONLY)) < 0)
 		error_exit(-8000, "impossible fd");
 	line = NULL;
@@ -89,6 +89,6 @@ t_mesh		read_obj_file(char *path, t_vector4 pos, t_vector4 size, char *txtr)
 	close(fd);
 	t_mesh_compute_normals(&result);
 	t_mesh_compute_bubble_box(&result);
-	result.size = create_t_vector4(size.x, size.y, size.z);
+	result.size = new_vec4(size.x, size.y, size.z);
 	return (result);
 }

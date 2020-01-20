@@ -1,25 +1,25 @@
 #ifndef UNKNOW_PROJECT_VECTOR_H
 # define UNKNOW_PROJECT_VECTOR_H
 
-typedef struct	s_vector4
+typedef struct	s_vec4
 {
     float		x;
     float		y;
     float		z;
     float		w;
-}				t_vector4;
+}				t_vec4;
 
-t_vector4 create_t_vector4(float p_x, float p_y, float p_z);
-t_vector4	*initialize_t_vector4(float p_x, float p_y, float p_z);
-t_vector4	add_vector4_to_vector4(t_vector4 a, t_vector4 b);
-t_vector4	substract_vector4_to_vector4(t_vector4 a, t_vector4 b);
-t_vector4	mult_vector4_by_vector4(t_vector4 a, t_vector4 b);
-t_vector4	mult_vector4_by_float(t_vector4 a, float b);
-t_vector4	divide_vector4_by_float(t_vector4 a, float b);
-t_vector4	inv_t_vector4(t_vector4 src);
-void		swap_t_vector4(t_vector4 *a, t_vector4 *b);
-int			t_vector4_equal(t_vector4 a, t_vector4 b);
-void		print_t_vector4(t_vector4 vector, char *str);;
+t_vec4          new_vec4(float p_x, float p_y, float p_z);
+t_vec4	        *initialize_t_vec4(float p_x, float p_y, float p_z);
+t_vec4	        add_vec4(t_vec4 a, t_vec4 b);
+t_vec4	        substract_vec4(t_vec4 a, t_vec4 b);
+t_vec4	        mult_vec4_by_vec4(t_vec4 a, t_vec4 b);
+t_vec4	        mult_vec4_by_float(t_vec4 a, float b);
+t_vec4	        divide_vec4_by_float(t_vec4 a, float b);
+t_vec4	        inv_t_vec4(t_vec4 src);
+void		    swap_t_vec4(t_vec4 *a, t_vec4 *b);
+int			    t_vec4_equal(t_vec4 a, t_vec4 b);
+void		    print_t_vec4(t_vec4 vector, char *str);;
 
 typedef struct	s_vector3
 {

@@ -6,13 +6,13 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:53:50 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/20 09:36:49 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-t_player		create_t_player(t_camera *cam)
+t_player		new_player(t_camera *cam)
 {
 	t_player	result;
 
@@ -28,7 +28,7 @@ t_player		*initialize_t_player(t_camera *cam)
 
 	if (!(result = (t_player *)malloc(sizeof(t_player))))
 		error_exit(-13, "Can't create a t_player array");
-	*result = create_t_player(cam);
+	*result = new_player(cam);
 	return (result);
 }
 

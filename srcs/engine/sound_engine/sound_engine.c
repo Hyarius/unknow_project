@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   sound_engine.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 15:11:38 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/15 15:41:56 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-t_sound_engine	create_t_sound_engine(void)
+t_sound_engine	new_sound_engine(void)
 {
 	t_sound_engine	result;
 
@@ -27,7 +27,7 @@ t_sound_engine	*initialize_t_sound_engine(void)
 
 	if (!(result = (t_sound_engine	*)malloc(sizeof(t_sound_engine))))
 		return (NULL);
-	*result = create_t_sound_engine();
+	*result = new_sound_engine();
 	return (result);
 }
 

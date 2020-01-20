@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:53:46 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/20 09:49:53 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/20 11:28:39 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	shoot_weapon2(t_engine *engine, t_weapon *weapon, t_mesh *target,
 	if (target != NULL && target->hp > 0)
 	{
 		if (ft_strcmp(weapon->name, "shotgun") == 0)
-			dist = calc_dist_vector4_to_vector4(
+			dist = calc_dist_vec4(
 				engine->user_engine->player->hitbox.pos, target->pos);
 		if (weapon->dmg - dist * 4 >= 0)
 			target->hp -= weapon->dmg - dist * 4;
@@ -153,7 +153,7 @@ void	player_action3(t_camera *camera, t_engine *engine, t_mesh **door, int i)
 	target = t_mesh_list_get(engine->physic_engine->mesh_list, i);
 	if (camera->body != target && target->bubble_radius
 	+ camera->body->bubble_radius
-	>= calc_dist_vector4_to_vector4(camera->body->center,
+	>= calc_dist_vec4(camera->body->center,
 	target->center) && (ft_strcmp(target->name, "door") == 0
 	|| ft_strcmp(target->name, "door") == '_'))
 	{
@@ -168,7 +168,7 @@ void	player_action3(t_camera *camera, t_engine *engine, t_mesh **door, int i)
 	}
 	if (camera->body != target && target->bubble_radius
 			+ camera->body->bubble_radius
-			>= calc_dist_vector4_to_vector4(camera->body->center,
+			>= calc_dist_vec4(camera->body->center,
 			target->center) && ft_strcmp(target->name, "elevator") == 0
 			&& (target->door.move = 1))
 		door[1] = target;
@@ -242,7 +242,7 @@ void	player_action(t_camera *camera, t_keyboard *p_keyboard, t_engine *engine)
 		while(i < engine->physic_engine->mesh_list->size && camera->f_press == 0)
 		{
 			target = t_mesh_list_get(engine->physic_engine->mesh_list, i);
-			if (camera->body != target && target->bubble_radius + camera->body->bubble_radius >= calc_dist_vector4_to_vector4(camera->body->center, target->center) && (ft_strcmp(target->name, "door") == 0 || ft_strcmp(target->name, "door") == '_'))
+			if (camera->body != target && target->bubble_radius + camera->body->bubble_radius >= calc_dist_vec4(camera->body->center, target->center) && (ft_strcmp(target->name, "door") == 0 || ft_strcmp(target->name, "door") == '_'))
 			{
 				if (ft_strcmp(target->name, "door") == 0 || (ft_strcmp(target->name, "door_red") == 0
 				&& engine->user_engine->player->red_card == 1) || (ft_strcmp(target->name, "door_blue") == 0
@@ -253,7 +253,7 @@ void	player_action(t_camera *camera, t_keyboard *p_keyboard, t_engine *engine)
 					door = target;
 				}
 			}
-			if (camera->body != target && target->bubble_radius + camera->body->bubble_radius >= calc_dist_vector4_to_vector4(camera->body->center, target->center) && ft_strcmp(target->name, "elevator") == 0)
+			if (camera->body != target && target->bubble_radius + camera->body->bubble_radius >= calc_dist_vec4(camera->body->center, target->center) && ft_strcmp(target->name, "elevator") == 0)
 			{
 				target->door.move = 1;
 				elevator = target;
@@ -270,7 +270,7 @@ void	player_action(t_camera *camera, t_keyboard *p_keyboard, t_engine *engine)
 	if (door != NULL)
 		t_mesh_move_door(door, engine);
 	if (elevator != NULL)
-		t_mesh_move_elevator(elevator, camera);
+		t_mesh_move_elevator(elevator, camera->body);
 	if (camera->r_press == 1)
 		reload_weapon(camera, engine->user_engine->player, engine->tick, engine);
 	if (engine->user_engine->player->shoot_time != engine->tick && camera->r_press != 1)

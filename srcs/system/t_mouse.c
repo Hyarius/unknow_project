@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   t_mouse.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 11:10:02 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/15 16:04:30 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-t_mouse	create_t_mouse(void)
+t_mouse	new_mouse(void)
 {
 	t_mouse	result;
 
@@ -33,7 +33,7 @@ t_mouse	*initialize_t_mouse(void)
 
 	if (!(result = (t_mouse *)malloc(sizeof(t_mouse))))
 		return (NULL);
-	*result = create_t_mouse();
+	*result = new_mouse();
 	return (result);
 }
 

@@ -6,13 +6,13 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 12:59:25 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/17 13:05:31 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-t_matrix	create_t_matrix(void)
+t_matrix	new_matrix(void)
 {
 	t_matrix	result;
 	int			i;
@@ -33,7 +33,7 @@ t_matrix	create_t_matrix(void)
 	return (result);
 }
 
-t_matrix	create_t_matrix_empty(void)
+t_matrix	new_matrix_empty(void)
 {
 	t_matrix	result;
 	int			i;
@@ -55,26 +55,26 @@ t_matrix	*initialize_t_matrix(void)
 
 	if (!(result = (t_matrix *)malloc(sizeof(t_matrix))))
 		error_exit(-13, "Can't create a t_matrix array");
-	*result = create_t_matrix();
+	*result = new_matrix();
 	return (result);
 }
 
-t_matrix	create_translation_matrix(t_vector4 translation)
+t_matrix	newranslation_matrix(t_vec4 translation)
 {
 	t_matrix	result;
 
-	result = create_t_matrix();
+	result = new_matrix();
 	result.value[3][0] = translation.x;
 	result.value[3][1] = translation.y;
 	result.value[3][2] = translation.z;
 	return (result);
 }
 
-t_matrix	create_scaling_matrix(t_vector4 scaling)
+t_matrix	create_scaling_matrix(t_vec4 scaling)
 {
 	t_matrix	result;
 
-	result = create_t_matrix();
+	result = new_matrix();
 	result.value[0][0] = scaling.x;
 	result.value[1][1] = scaling.y;
 	result.value[2][2] = scaling.z;

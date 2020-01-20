@@ -17,7 +17,7 @@ typedef struct	s_mouse
 	char		clicked_right;
 }				t_mouse;
 
-t_mouse		create_t_mouse();
+t_mouse		new_mouse();
 t_mouse		*initialize_t_mouse();
 void		get_t_mouse_info(t_mouse *mouse);
 void		print_t_mouse(t_mouse *mouse);
@@ -32,7 +32,7 @@ typedef struct	s_keyboard
 						//	!!! DANGER SI FREE DU STATE !!!
 }				t_keyboard;
 
-t_keyboard	create_t_keyboard();
+t_keyboard	new_keyboard();
 t_keyboard	*initialize_t_keyboard();
 int			get_key_state(t_keyboard *keyboard, int scan_code);
 void		reset_key_state(t_keyboard *keyboard, int scan_code);

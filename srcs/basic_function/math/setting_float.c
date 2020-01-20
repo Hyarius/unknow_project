@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 13:44:15 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/09 13:57:18 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/20 10:38:32 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ float		round_float(float x, unsigned int round)
 	return (ret);
 }
 
-t_vector4	round_t_vector4(t_vector4 a, unsigned int round)
+t_vec4	round_t_vec4(t_vec4 a, unsigned int round)
 {
 	a.x = round_float(a.x, round);
 	a.y = round_float(a.y, round);

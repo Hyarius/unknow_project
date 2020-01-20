@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   load_item.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 13:29:58 by adjouber          #+#    #+#             */
-/*   Updated: 2019/10/31 13:29:59 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-t_item			create_t_item(t_mesh mesh)
+t_item			new_item(t_mesh mesh)
 {
 	t_item		item;
 
@@ -41,7 +41,7 @@ t_item_list		*load_items(t_mesh_list *meshs)
 	{
 		if (t_mesh_list_at(meshs, i).collectible == 1)
 		{
-			item = create_t_item(t_mesh_list_at(meshs, i));
+			item = new_item(t_mesh_list_at(meshs, i));
 			t_item_list_push_back(result, item);
 		}
 		i++;

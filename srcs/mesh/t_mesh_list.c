@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   t_mesh_list.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/20 10:49:45 by gboutin           #+#    #+#             */
+/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "unknow_project.h"
 
-t_mesh_list	create_t_mesh_list(void)
+t_mesh_list	new_mesh_list(void)
 {
 	t_mesh_list	list;
 
@@ -17,7 +29,7 @@ t_mesh_list	*initialize_t_mesh_list(void)
 
 	if (!(list = (t_mesh_list *)malloc(sizeof(t_mesh_list))))
 		error_exit(-19, "Can't create a t_mesh_list array");
-	*list = create_t_mesh_list();
+	*list = new_mesh_list();
 	return (list);
 }
 
@@ -42,16 +54,6 @@ void		t_mesh_list_push_back(t_mesh_list *dest, t_mesh to_add)
 	(dest->size)++;
 }
 
-void		t_mesh_list_erase(t_mesh_list *dest, int index)
-{
-	delete_t_mesh(*t_mesh_list_get(dest, index));
-	while (index < dest->size)
-	{
-		dest[index + 1] = dest[index];
-		index++;
-	}
-}
-
 void		delete_t_mesh_list(t_mesh_list dest)
 {
 	free(dest.mesh);
@@ -61,36 +63,4 @@ void		free_t_mesh_list(t_mesh_list *dest)
 {
 	delete_t_mesh_list(*dest);
 	free(dest);
-}
-
-void		clean_t_mesh_list(t_mesh_list *dest)
-{
-	dest->size = 0;
-}
-
-t_mesh		t_mesh_list_at(t_mesh_list *dest, int index)
-{
-	if (index < 0 || index >= dest->size)
-		error_exit(-24, "Segfault : t_mesh_list out of range");
-	return (dest->mesh[index]);
-}
-
-t_mesh		*t_mesh_list_get(t_mesh_list *dest, int index)
-{
-	if (index < 0 || index >= dest->size)
-		error_exit(-24, "Segfault : t_mesh_list out of range");
-	return (&(dest->mesh[index]));
-}
-
-int			t_mesh_list_get_index(t_mesh_list *dest, t_mesh *mesh)
-{
-	int		i;
-
-	i = -1;
-	while (++i < dest->size)
-	{
-		if (dest[i].mesh == mesh)
-			return (i);
-	}
-	return (-1);
 }

@@ -3,47 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   t_vector4_list.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 11:01:12 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/15 11:05:43 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-t_vector4_list	create_t_vector4_list(void)
+t_vec4_list	new_vec4_list(void)
 {
-	t_vector4_list list;
+	t_vec4_list list;
 
-	if (!(list.vector = (t_vector4 *)malloc(sizeof(t_vector4) * PUSH_SIZE)))
-		error_exit(-18, "Can't malloc a t_vector4 array");
+	if (!(list.vector = (t_vec4 *)malloc(sizeof(t_vec4) * PUSH_SIZE)))
+		error_exit(-18, "Can't malloc a t_vec4 array");
 	list.size = 0;
 	list.max_size = PUSH_SIZE;
 	return (list);
 }
 
-t_vector4_list	*initialize_t_vector4_list(void)
+t_vec4_list	*initialize_t_vec4_list(void)
 {
-	t_vector4_list *list;
+	t_vec4_list *list;
 
-	if (!(list = (t_vector4_list *)malloc(sizeof(t_vector4_list))))
-		error_exit(-19, "Can't create a t_vector4_list array");
-	*list = create_t_vector4_list();
+	if (!(list = (t_vec4_list *)malloc(sizeof(t_vec4_list))))
+		error_exit(-19, "Can't create a t_vec4_list array");
+	*list = new_vec4_list();
 	return (list);
 }
 
-void			t_vector4_list_push_back(t_vector4_list *dest, t_vector4 to_add)
+void			t_vec4_list_push_back(t_vec4_list *dest, t_vec4 to_add)
 {
-	t_vector4	*tmp;
+	t_vec4	*tmp;
 	int			i;
 
 	if ((dest->size + 1) >= dest->max_size)
 	{
 		tmp = dest->vector;
-		if (!(dest->vector = (t_vector4 *)malloc(sizeof(t_vector4)
+		if (!(dest->vector = (t_vec4 *)malloc(sizeof(t_vec4)
 				* (dest->size + 1 + PUSH_SIZE))))
-			error_exit(-20, "Can't realloc a t_vector4 array");
+			error_exit(-20, "Can't realloc a t_vec4 array");
 		i = 0;
 		while (i < dest->size)
 		{
@@ -57,17 +57,17 @@ void			t_vector4_list_push_back(t_vector4_list *dest, t_vector4 to_add)
 	(dest->size)++;
 }
 
-void			t_vector4_list_add_back(t_vector4_list *dest, t_vector4 *to_add)
+void			t_vec4_list_add_back(t_vec4_list *dest, t_vec4 *to_add)
 {
-	t_vector4	*tmp;
+	t_vec4	*tmp;
 	int			i;
 
 	if ((dest->size + 1) >= dest->max_size)
 	{
 		tmp = dest->vector;
-		if (!(dest->vector = (t_vector4 *)malloc(sizeof(t_vector4)
+		if (!(dest->vector = (t_vec4 *)malloc(sizeof(t_vec4)
 			* (dest->size + 1 + PUSH_SIZE))))
-			error_exit(-20, "Can't realloc a t_vector4 array");
+			error_exit(-20, "Can't realloc a t_vec4 array");
 		i = 0;
 		while (i < dest->size)
 		{

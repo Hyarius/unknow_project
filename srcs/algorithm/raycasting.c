@@ -6,20 +6,20 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 13:11:51 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/09 13:14:37 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/20 11:28:39 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-t_mesh	*cast_ray_next(t_vector4 pos, t_vector4 direction, t_mesh *mesh)
+t_mesh	*cast_ray_next(t_vec4 pos, t_vec4 direction, t_mesh *mesh)
 {
 	int			k;
 	t_line		line;
-	t_vector4	intersection;
+	t_vec4	intersection;
 
 	k = -1;
-	line = create_t_line(pos, add_vector4_to_vector4(pos, direction));
+	line = new_line(pos, add_vec4(pos, direction));
 	while (++k < mesh->faces->size)
 	{
 		if ((mesh->no_hitbox == 0 || mesh->is_visible == 1)
@@ -31,7 +31,7 @@ t_mesh	*cast_ray_next(t_vector4 pos, t_vector4 direction, t_mesh *mesh)
 	return (NULL);
 }
 
-t_mesh	*cast_ray(t_engine *engine, t_vector4 pos, t_vector4 direction,
+t_mesh	*cast_ray(t_engine *engine, t_vec4 pos, t_vec4 direction,
 																char *shooter)
 {
 	int			i;
@@ -39,7 +39,7 @@ t_mesh	*cast_ray(t_engine *engine, t_vector4 pos, t_vector4 direction,
 	t_mesh		*mesh;
 
 	i = -1;
-	direction = divide_vector4_by_float(direction, 10);
+	direction = divide_vec4_by_float(direction, 10);
 	while (++i < 100)
 	{
 		j = -1;
@@ -53,7 +53,7 @@ t_mesh	*cast_ray(t_engine *engine, t_vector4 pos, t_vector4 direction,
 					return (mesh);
 			}
 		}
-		pos = add_vector4_to_vector4(pos, direction);
+		pos = add_vec4(pos, direction);
 	}
 	return (NULL);
 }

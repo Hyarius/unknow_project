@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 16:16:48 by gboutin           #+#    #+#             */
-/*   Updated: 2019/12/12 16:16:50 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@ void	init_triangle(t_triangle_list *tri_list, t_rectangle p_rec)
 {
 	t_triangle	tri;
 
-	tri = create_t_triangle(create_t_vector4(p_rec.pos.x, p_rec.pos.y, 1.0),
-				create_t_vector4(p_rec.pos.x + p_rec.size.x, p_rec.pos.y, 1.0),
-				create_t_vector4(p_rec.pos.x, p_rec.pos.y + p_rec.size.y, 1.0));
+	tri = new_triangle(new_vec4(p_rec.pos.x, p_rec.pos.y, 1.0),
+				new_vec4(p_rec.pos.x + p_rec.size.x, p_rec.pos.y, 1.0),
+				new_vec4(p_rec.pos.x, p_rec.pos.y + p_rec.size.y, 1.0));
 	t_triangle_list_push_back(tri_list, tri);
-	tri = create_t_triangle(
-		create_t_vector4(p_rec.pos.x + p_rec.size.x,
+	tri = new_triangle(
+		new_vec4(p_rec.pos.x + p_rec.size.x,
 				p_rec.pos.y + p_rec.size.y, 1.0),
-				create_t_vector4(p_rec.pos.x + p_rec.size.x, p_rec.pos.y, 1.0),
-				create_t_vector4(p_rec.pos.x, p_rec.pos.y + p_rec.size.y, 1.0));
+				new_vec4(p_rec.pos.x + p_rec.size.x, p_rec.pos.y, 1.0),
+				new_vec4(p_rec.pos.x, p_rec.pos.y + p_rec.size.y, 1.0));
 	t_triangle_list_push_back(tri_list, tri);
 }
 
@@ -41,11 +41,11 @@ void	draw_rectangle_texture_cpu(t_view_port *p_view_port, t_rectangle p_rec,
 		tri_list = initialize_t_triangle_list();
 	}
 	init_triangle(tri_list, p_rec);
-	uv = create_t_uv(create_t_triangle(create_t_vector4(0, 1, 0),
-			create_t_vector4(1, 1, 0), create_t_vector4(0, 0, 0)), p_texture);
+	uv = new_uv(new_triangle(new_vec4(0, 1, 0),
+			new_vec4(1, 1, 0), new_vec4(0, 0, 0)), p_texture);
 	t_uv_list_push_back(uv_list, uv);
-	uv = create_t_uv(create_t_triangle(create_t_vector4(1, 0, 0),
-			create_t_vector4(1, 1, 0), create_t_vector4(0, 0, 0)), p_texture);
+	uv = new_uv(new_triangle(new_vec4(1, 0, 0),
+			new_vec4(1, 1, 0), new_vec4(0, 0, 0)), p_texture);
 	t_uv_list_push_back(uv_list, uv);
 	multithreading_draw_triangle_texture_cpu(p_view_port, tri_list, uv_list);
 	clean_t_triangle_list(tri_list);

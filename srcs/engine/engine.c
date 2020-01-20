@@ -6,13 +6,13 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 15:01:07 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/17 11:44:55 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-t_engine	create_t_engine(t_window *p_window)
+t_engine	new_engine(t_window *p_window)
 {
 	t_engine	result;
 
@@ -31,7 +31,7 @@ t_engine	*initialize_t_engine(t_window *p_window)
 
 	if (!(result = (t_engine *)malloc(sizeof(t_engine))))
 		return (NULL);
-	*result = create_t_engine(p_window);
+	*result = new_engine(p_window);
 	return (result);
 }
 
