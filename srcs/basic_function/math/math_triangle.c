@@ -5,13 +5,31 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/20 13:11:44 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/20 13:18:34 by spuisais         ###   ########.fr       */
+/*   Created: 2020/01/09 14:03:34 by gboutin           #+#    #+#             */
+/*   Updated: 2020/01/20 13:23:01 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "unknow_project.h"
+
+int		intersect_triangle_by_segment2(float *f, t_vec4 *t_v,
+							t_triangle p_triangle, t_vec4 *intersection)
+{
+	f[3] = dot_t_vec4(t_v[0], t_v[0]);
+	f[4] = dot_t_vec4(t_v[0], t_v[1]);
+	f[5] = dot_t_vec4(t_v[1], t_v[1]);
+	t_v[5] = substract_vec4(*intersection, p_triangle.a);
+	f[6] = dot_t_vec4(t_v[5], t_v[0]);
+	f[7] = dot_t_vec4(t_v[5], t_v[1]);
+	f[8] = f[4] * f[4] - f[3] * f[5];
+	f[9] = (f[4] * f[7] - f[5] * f[6]) / f[8];
+	if (f[9] < 0.0f || f[9] > 1.0f)
+		return (0);
+	f[10] = (f[4] * f[6] - f[3] * f[7]) / f[8];
+	if (f[10] < 0.0f || (f[9] + f[10]) > 1.0f)
+		return (0);
+	return (1);
+}
 
 int		intersect_triangle_by_segment(t_triangle p_triangle, t_line line,
 														t_vec4 *intersection)
@@ -40,18 +58,5 @@ int		intersect_triangle_by_segment(t_triangle p_triangle, t_line line,
 		return (0);
 	*intersection = add_vec4(
 								mult_vec4_by_float(t_v[3], f[0]), line.a);
-	f[3] = dot_t_vec4(t_v[0], t_v[0]);
-	f[4] = dot_t_vec4(t_v[0], t_v[1]);
-	f[5] = dot_t_vec4(t_v[1], t_v[1]);
-	t_v[5] = substract_vec4(*intersection, p_triangle.a);
-	f[6] = dot_t_vec4(t_v[5], t_v[0]);
-	f[7] = dot_t_vec4(t_v[5], t_v[1]);
-	f[8] = f[4] * f[4] - f[3] * f[5];
-	f[9] = (f[4] * f[7] - f[5] * f[6]) / f[8];
-	if (f[9] < 0.0f || f[9] > 1.0f)
-		return (0);
-	f[10] = (f[4] * f[6] - f[3] * f[7]) / f[8];
-	if (f[10] < 0.0f || (f[9] + f[10]) > 1.0f)
-		return (0);
-	return (1);
+	return (intersect_triangle_by_segment2(f, t_v, p_triangle, intersection));
 }

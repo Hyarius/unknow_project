@@ -66,7 +66,7 @@ void		translate_camera(t_camera *camera, t_vec4 mouvement);
 t_matrix	compute_projection_matrix(t_camera *p_cam);
 void		compute_t_camera(t_camera *cam);
 void		t_camera_change_fov(t_camera *cam, float delta);
-t_vec4	apply_t_camera(t_vec4 *src, t_matrix *mvp);
+t_vec4		apply_t_camera(t_vec4 *src, t_matrix *mvp);
 t_matrix	t_camera_compute_view(t_camera *cam);
 void		t_camera_look_at_point(t_camera *cam, t_vec4 target);
 void		t_camera_look_at(t_camera *cam);
@@ -76,7 +76,21 @@ int			clip_triangle_to_plane(t_camera *p_camera, t_vec4 *p_points, t_vec4 *p_poi
 void		draw_triangle_from_camera_on_screen(t_camera *p_cam);
 void 		t_camera_calc_depth(t_camera *p_cam);
 void		clean_t_camera(t_camera *camera);
-// void		link_camera_to_mesh(t_camera *camera, t_mesh *mesh, float new_kinetic);
 void		t_mesh_move_elevator(t_mesh *mesh, t_mesh *body);
+
+typedef struct	s_clipping
+{
+	t_vec4 		out_p[3];
+	t_vec4 		in_p[3];
+	t_vec4 		out_uv[3];
+	t_vec4 		in_uv[3];
+	t_vec4		forward;
+	t_vec4		plane_center;
+	t_vec4		*clp_lst;
+	t_vec4		*clp_lst_uv;
+	int			out_nb;
+	int			in_nb;
+	float		dist[3];
+}				t_clipping;
 
 #endif

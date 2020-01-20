@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_player2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:53:46 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/20 11:28:39 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/20 13:26:11 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,7 +180,7 @@ void	player_action4(t_camera *camera, t_engine *engine, t_mesh **door)
 	if (door[0] != NULL)
 		t_mesh_move_door(door[0], engine);
 	if (door[1] != NULL)
-		t_mesh_move_elevator(door[1], camera);
+		t_mesh_move_elevator(door[1], camera->body);
 	if (engine->user_engine->player->shoot_time != engine->tick
 			&& camera->r_press != 1)
 		shoot_weapon(engine);

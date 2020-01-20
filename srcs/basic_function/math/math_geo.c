@@ -6,7 +6,7 @@
 /*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 17:05:09 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/20 11:44:11 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/20 13:31:03 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int			same_side(t_vec4 p1, t_vec4 p2, t_vec4 a, t_vec4 b)
 		return (BOOL_FALSE);
 }
 
-t_vec4		intersect_plane_by_line(t_vec4 p_normal, t_vec4 p_center,
+t_vec4		inter_plane_line(t_vec4 p_normal, t_vec4 p_center,
 											t_vec4 start, t_vec4 end)
 {
 	t_vec4	intersection;
@@ -59,7 +59,7 @@ int			is_point_on_line(t_vec4 a, t_vec4 b, t_vec4 c)
 	return (BOOL_FALSE);
 }
 
-float		calc_distance_to_plane(t_vec4 p_normal, t_vec4 p_center,
+float		dist_plane(t_vec4 p_normal, t_vec4 p_center,
 														t_vec4 p_point)
 {
 	t_vec4	normalized_plane;
@@ -73,7 +73,7 @@ float		calc_distance_to_plane(t_vec4 p_normal, t_vec4 p_center,
 	return (result);
 }
 
-t_vec4		interpolate_vec4_over_line(float ratio_x, float ratio_y,
+t_vec4		inter_vec4_line(float ratio_x, float ratio_y,
 													t_vec4 ua, t_vec4 ub)
 {
 	t_vec4	result;

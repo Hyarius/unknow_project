@@ -1,39 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_item_list2.c                                     :+:      :+:    :+:   */
+/*   t_jetpack.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/20 13:03:10 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/20 13:33:26 by spuisais         ###   ########.fr       */
+/*   Created: 2020/01/20 13:39:48 by spuisais          #+#    #+#             */
+/*   Updated: 2020/01/20 13:39:50 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-void			t_item_list_erase(t_item_list *dest, int index)
+int		jetpack(t_player *player)
 {
-	free_t_item(t_item_list_get(dest, index));
-	while (index < dest->size)
+	int	to_fill;
+
+	to_fill = 50;
+	if (player->fuel < 300)
 	{
-		dest[index + 1] = dest[index];
-		index++;
+		while (player->fuel < 300 && to_fill-- > 0)
+			player->fuel += 1;
+		return (BOOL_TRUE);
 	}
+	return (BOOL_FALSE);
 }
 
-void			delete_t_item_list(t_item_list dest)
+t_item	create_jet_pack(void)
 {
-	free(dest.item);
-}
+	static int	num = 1;
+	t_item		item;
 
-void			free_t_item_list(t_item_list *dest)
-{
-	delete_t_item_list(*dest);
-	free(dest);
-}
-
-void			clean_t_item_list(t_item_list *dest)
-{
-	dest->size = 0;
+	item.name = ft_strjoinf("Jet_Pack_", ft_itoa(num), 2);
+	num++;
+	item.pf = jetpack;
+	return (item);
 }
