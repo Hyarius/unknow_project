@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_refill_weapons.c                                 :+:      :+:    :+:   */
+/*   t_item_weapons.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 13:40:31 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/20 13:40:32 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/20 14:02:29 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,24 @@ int		refill_rpg(t_player *player)
 	}
 	else
 		return (BOOL_FALSE);
+}
+
+t_item		create_ammo_pack(int type)
+{
+	static int	num = 1;
+	t_item		item;
+
+	item.name = ft_strjoinf("Ammo_Pack_", ft_itoa(num), 2);
+	num++;
+	if (type == 1)
+		item.pf = refill_pistol;
+	else if (type == 2)
+		item.pf = refill_ar;
+	else if (type == 3)
+		item.pf = refill_rifle;
+	else if (type == 4)
+		item.pf = refill_shotgun;
+	else if (type == 5)
+		item.pf = refill_rpg;
+	return (item);
 }
