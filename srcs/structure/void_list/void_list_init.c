@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   void_list_init.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:44:25 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/15 15:44:26 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-t_void_list	create_t_void_list(void)
+t_void_list	new_void_list(void)
 {
 	t_void_list	list;
 
@@ -29,7 +29,7 @@ t_void_list	*initialize_t_void_list(void)
 
 	if (!(list = (t_void_list *)malloc(sizeof(t_void_list))))
 		error_exit(-16, "Can't create a t_void_list array");
-	*list = create_t_void_list();
+	*list = new_void_list();
 	return (list);
 }
 

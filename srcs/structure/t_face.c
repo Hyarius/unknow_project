@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   t_face.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:46:16 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/15 15:46:17 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-t_face	create_t_face(void)
+t_face	new_face(void)
 {
 	t_face	result;
 	int		i;
 
-	result.normale = create_t_vector4(0, 0, 0);
+	result.normale = new_vec4(0, 0, 0);
 	i = -1;
 	while (++i < 3)
 	{
-		result.color = create_t_color(1.0, 1.0, 1.0, 1.0);
+		result.color = new_color(1.0, 1.0, 1.0, 1.0);
 		result.index_vertices[i] = -1;
 		result.index_uvs[i] = -1;
 	}
@@ -35,7 +35,7 @@ t_face	*initialize_t_face(void)
 	if (!(result = (t_face *)malloc(sizeof(t_face))))
 		error_exit(-13, "Can't create a t_face");
 	printf("malloc t_face\n");
-	*result = create_t_face();
+	*result = new_face();
 	return (result);
 }
 

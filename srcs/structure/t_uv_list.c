@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   t_uv_list.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:04:43 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/15 15:06:53 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-t_uv_list	create_t_uv_list(void)
+t_uv_list	new_uv_list(void)
 {
 	t_uv_list	result;
 
@@ -29,7 +29,7 @@ t_uv_list	*initialize_t_uv_list(void)
 
 	if (!(result = (t_uv_list *)malloc(sizeof(t_uv_list))))
 		return (NULL);
-	*result = create_t_uv_list();
+	*result = new_uv_list();
 	return (result);
 }
 

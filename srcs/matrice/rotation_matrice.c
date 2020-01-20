@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:02:35 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/17 13:03:11 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_matrix	create_rotation_x_matrix(float angle)
 	t_matrix	result;
 	float		radian;
 
-	result = create_t_matrix();
+	result = new_matrix();
 	radian = degree_to_radius(angle);
 	result.value[1][1] = cos(radian);
 	result.value[2][1] = -sin(radian);
@@ -31,7 +31,7 @@ t_matrix	create_rotation_y_matrix(float angle)
 	t_matrix	result;
 	float		radian;
 
-	result = create_t_matrix();
+	result = new_matrix();
 	radian = degree_to_radius(angle);
 	result.value[0][0] = cos(radian);
 	result.value[0][2] = -sin(radian);
@@ -45,7 +45,7 @@ t_matrix	create_rotation_z_matrix(float angle)
 	t_matrix	result;
 	float		radian;
 
-	result = create_t_matrix();
+	result = new_matrix();
 	radian = degree_to_radius(angle);
 	result.value[0][0] = cos(radian);
 	result.value[0][1] = sin(radian);

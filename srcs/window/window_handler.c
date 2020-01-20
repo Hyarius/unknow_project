@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 10:11:18 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/15 11:26:58 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/20 10:38:32 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void		render_screen(t_window *p_win, t_engine *engine)
 	SDL_GL_SwapWindow(p_win->window);
 }
 
-int			is_point_in_screen(t_window *p_win, t_vector4 p_point)
+int			is_point_in_screen(t_window *p_win, t_vec4 p_point)
 {
 	if (p_point.x < 0 || p_point.x >= p_win->size_x ||
 		p_point.y < 0 || p_point.y >= p_win->size_y)

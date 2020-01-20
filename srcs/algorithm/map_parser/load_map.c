@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 13:40:38 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/15 16:04:30 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	link_enemy_to_camera(t_engine *engine, int k)
 {
 	t_engine_add_camera(engine,
-		create_t_camera(t_camera_list_get(engine->visual_engine->camera_list,
-		0)->view_port->window, create_t_vector4(0.0, 0.0, 0.0), 70,
+		new_camera(t_camera_list_get(engine->visual_engine->camera_list,
+		0)->view_port->window, new_vec4(0.0, 0.0, 0.0), 70,
 		create_vec2(NEAR, FAR)));
 	resize_t_view_port(t_camera_list_get(engine->visual_engine->camera_list,
 		2 + k)->view_port, create_vec2_int(1, 1));

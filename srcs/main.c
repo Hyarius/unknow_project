@@ -75,23 +75,23 @@ int main(int argc, char **argv)
 	t_mesh		mesh;
 	t_camera	*main_camera;
 	main_camera = t_camera_list_get(engine->visual_engine->camera_list, 0);
-	t_engine_place_camera(engine, 0, create_t_vector4(5.0, 5.0, 0.0));
-	t_camera_look_at_point(main_camera, create_t_vector4(0, 0, 0));
-	t_engine_add_camera(engine, create_t_camera(win, create_t_vector4(0.0, 0.0, 0.0), 70, create_vec2(NEAR, FAR)));
+	t_engine_place_camera(engine, 0, new_vec4(5.0, 5.0, 0.0));
+	t_camera_look_at_point(main_camera, new_vec4(0, 0, 0));
+	t_engine_add_camera(engine, new_camera(win, new_vec4(0.0, 0.0, 0.0), 70, create_vec2(NEAR, FAR)));
 	resize_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 1)->view_port, create_vec2_int(300, 240));
 	move_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 1)->view_port, create_vec2_int(WIN_X - 300, 0));
 
-	t_rectangle rec = create_t_rectangle(create_vec2(-1, 1), create_vec2(2, -2));
+	t_rectangle rec = new_rectangle(create_vec2(-1, 1), create_vec2(2, -2));
 	t_mesh_editing	mesh_editing;
 	char	**path;
 	path = load_path_texture();
-	mesh = create_primitive_skybox(main_camera->pos, create_t_vector4(1.0, 1.0, 1.0), skybox);
+	mesh = create_primitive_skybox(main_camera->pos, new_vec4(1.0, 1.0, 1.0), skybox);
 	Mix_VolumeMusic(MIX_MAX_VOLUME);
 	engine->playing = 2;
 	// Mix_PlayMusic(engine->sound_engine->music[0], -1);
 	while (engine->playing != 0)
 	{
-		prepare_screen(win, create_t_color(0.2f, 0.2f, 0.2f, 1.0f));
+		prepare_screen(win, new_color(0.2f, 0.2f, 0.2f, 1.0f));
 		t_engine_prepare_camera(engine);
 		if (engine->playing != 1 || engine->playing != 10)
 		{

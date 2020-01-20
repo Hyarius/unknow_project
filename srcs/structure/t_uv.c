@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   t_uv.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:45:08 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/15 15:46:05 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-t_uv	create_t_uv(t_triangle p_triangle, t_texture *p_texture)
+t_uv	new_uv(t_triangle p_triangle, t_texture *p_texture)
 {
 	t_uv	result;
 
@@ -27,6 +27,6 @@ t_uv	*initialize_t_uv(t_triangle p_triangle, t_texture *p_texture)
 
 	if (!(result = (t_uv *)malloc(sizeof(t_uv))))
 		return (NULL);
-	*result = create_t_uv(p_triangle, p_texture);
+	*result = new_uv(p_triangle, p_texture);
 	return (result);
 }

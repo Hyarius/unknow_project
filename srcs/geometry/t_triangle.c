@@ -6,13 +6,13 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 15:31:26 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/17 11:31:05 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-t_triangle	create_t_triangle(t_vector4 p_a, t_vector4 p_b, t_vector4 p_c)
+t_triangle	new_triangle(t_vec4 p_a, t_vec4 p_b, t_vec4 p_c)
 {
 	t_triangle	result;
 
@@ -22,13 +22,13 @@ t_triangle	create_t_triangle(t_vector4 p_a, t_vector4 p_b, t_vector4 p_c)
 	return (result);
 }
 
-t_triangle	*initialize_t_triangle(t_vector4 p_a, t_vector4 p_b, t_vector4 p_c)
+t_triangle	*initialize_t_triangle(t_vec4 p_a, t_vec4 p_b, t_vec4 p_c)
 {
 	t_triangle	*result;
 
 	if (!(result = (t_triangle *)malloc(sizeof(t_triangle))))
 		error_exit(-31, "Can't malloc a t_triangle");
-	*result = create_t_triangle(p_a, p_b, p_c);
+	*result = new_triangle(p_a, p_b, p_c);
 	return (result);
 }
 
@@ -50,19 +50,19 @@ void		sort_t_triangle_points(t_triangle *p_triangle)
 {
 	if (p_triangle->a.y > p_triangle->b.y || (p_triangle->a.y == p_triangle->b.y
 										&& p_triangle->a.x > p_triangle->b.x))
-		swap_t_vector4(&(p_triangle->a), &(p_triangle->b));
+		swap_t_vec4(&(p_triangle->a), &(p_triangle->b));
 	if (p_triangle->b.y > p_triangle->c.y || (p_triangle->b.y == p_triangle->c.y
 										&& p_triangle->b.x > p_triangle->c.x))
-		swap_t_vector4(&(p_triangle->b), &(p_triangle->c));
+		swap_t_vec4(&(p_triangle->b), &(p_triangle->c));
 	if (p_triangle->a.y > p_triangle->b.y || (p_triangle->a.y == p_triangle->b.y
 										&& p_triangle->a.x > p_triangle->b.x))
-		swap_t_vector4(&(p_triangle->a), &(p_triangle->b));
+		swap_t_vec4(&(p_triangle->a), &(p_triangle->b));
 }
 
 void		print_t_triangle(t_triangle p_triangle, char *triangle_name) // a supprimer
 {
 	printf("%s\n", triangle_name);
-	print_t_vector4(p_triangle.a, "A : ");
-	print_t_vector4(p_triangle.b, "B : ");
-	print_t_vector4(p_triangle.c, "C : ");
+	print_t_vec4(p_triangle.a, "A : ");
+	print_t_vec4(p_triangle.b, "B : ");
+	print_t_vec4(p_triangle.c, "C : ");
 }

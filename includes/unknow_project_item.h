@@ -22,7 +22,7 @@ typedef struct	s_item_list
 	int			max_size;
 }				t_item_list;
 
-t_item_list 	create_t_item_list();
+t_item_list 	new_item_list();
 t_item_list 	*initialize_t_item_list();
 void			t_item_list_push_back(t_item_list *dest, t_item to_add);
 void			t_item_list_erase(t_item_list *dest, int index);

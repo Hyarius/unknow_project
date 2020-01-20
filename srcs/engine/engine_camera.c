@@ -6,21 +6,21 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 11:40:31 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/17 11:41:03 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/20 10:38:32 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
 void		t_engine_place_camera(t_engine *engine, int index,
-															t_vector4 p_new_pos)
+															t_vec4 p_new_pos)
 {
 	t_camera_list_get(engine->visual_engine->camera_list,
 													index)->pos = p_new_pos;
 }
 
 void		t_engine_camera_look_at(t_engine *engine, int index,
-															t_vector4 target)
+															t_vec4 target)
 {
 	t_camera_look_at_point(t_camera_list_get(engine->visual_engine->camera_list,
 																index), target);

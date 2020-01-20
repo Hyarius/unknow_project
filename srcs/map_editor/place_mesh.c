@@ -6,13 +6,13 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 11:49:52 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/16 11:49:53 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/20 11:28:39 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-void	test_move_axis_bis(t_mesh *mesh, float *force, t_vector4 axis,
+void	test_move_axis_bis(t_mesh *mesh, float *force, t_vec4 axis,
 														t_mesh *target)
 {
 	float	max;
@@ -49,15 +49,15 @@ int		can_move_bis(t_mesh *mesh, t_engine *engine)
 	{
 		target = t_mesh_list_get(engine->physic_engine->mesh_list, i);
 		if (mesh != target && target->bubble_radius + mesh->bubble_radius
-			>= calc_dist_vector4_to_vector4(mesh->center, target->center)
+			>= calc_dist_vec4(mesh->center, target->center)
 			&& target->no_hitbox == 0)
 		{
 			test_move_axis_bis(mesh, &(mesh->force.y),
-										create_t_vector4(0, 1, 0), target);
+										new_vec4(0, 1, 0), target);
 			test_move_axis_bis(mesh, &(mesh->force.x),
-										create_t_vector4(1, 0, 0), target);
+										new_vec4(1, 0, 0), target);
 			test_move_axis_bis(mesh, &(mesh->force.z),
-										create_t_vector4(0, 0, 1), target);
+										new_vec4(0, 0, 1), target);
 		}
 		i++;
 	}
@@ -79,9 +79,9 @@ void	cast_mesh(t_engine *engine, t_mesh *mesh_editing)
 							|| mesh_editing->pos.y - cam->pos.y < -10)
 							|| (mesh_editing->pos.z - cam->pos.z > 10
 							|| mesh_editing->pos.z - cam->pos.z < -10))
-			mesh_editing->force = create_t_vector4(0.0, 0.0, 0.0);
+			mesh_editing->force = new_vec4(0.0, 0.0, 0.0);
 		if (can_move_bis(mesh_editing, engine) == BOOL_TRUE)
 			t_mesh_move(mesh_editing, mesh_editing->force);
 	}
-	mesh_editing->force = create_t_vector4(0.0, 0.0, 0.0);
+	mesh_editing->force = new_vec4(0.0, 0.0, 0.0);
 }

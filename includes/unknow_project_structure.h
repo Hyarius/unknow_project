@@ -11,16 +11,16 @@ typedef struct	s_color
 	float		a;
 }				t_color;
 
-t_color		create_t_color(float p_r, float p_g, float p_b, float p_a);
+t_color		new_color(float p_r, float p_g, float p_b, float p_a);
 t_color		*initialize_t_color(float p_r, float p_g, float p_b, float p_a);
-t_color 	create_t_color_from_int(int p_r, int p_g, int p_b, int p_a);
+t_color 	new_color_from_int(int p_r, int p_g, int p_b, int p_a);
 t_color		fuze_t_color(t_color src1, t_color src2);
 
 typedef struct	s_fuck_norme
 {
 	t_triangle	triangle;
-	t_vector4	min;
-	t_vector4	max;
+	t_vec4	min;
+	t_vec4	max;
 	t_triangle	st;
 	t_color		rgb;
 	float		s;
@@ -28,8 +28,8 @@ typedef struct	s_fuck_norme
 	int			pixel_index;
 	int			x;
 	int			y;
-	t_vector4	w;
-	t_vector4	pixel_sample;
+	t_vec4	w;
+	t_vec4	pixel_sample;
 	float		z;
 	float		area;
 }				t_fuck_norme;
@@ -61,7 +61,7 @@ typedef struct	s_uv
 	t_triangle	uv;
 }				t_uv;
 
-t_uv			create_t_uv(t_triangle p_triangle, t_texture *p_image);
+t_uv			new_uv(t_triangle p_triangle, t_texture *p_image);
 t_uv			*initialize_t_uv(t_triangle p_triangle, t_texture *p_image);
 
 typedef struct	s_face
@@ -69,10 +69,10 @@ typedef struct	s_face
 	t_color		color;
 	int			index_vertices[3];
 	int			index_uvs[3];
-	t_vector4	normale;
+	t_vec4	normale;
 }				t_face;
 
-t_face 			create_t_face();
+t_face 			new_face();
 t_face 			*initialize_t_face();
 void 			set_t_face_vertices(t_face *face, int a, int b, int c);
 void 			set_t_face_uvs(t_face *face, int a, int b, int c);

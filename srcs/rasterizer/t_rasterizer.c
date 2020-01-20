@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   t_rasterizer.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:50:18 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/15 15:50:23 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-t_rasterizer	create_t_rasterizer(t_vector4 a, t_vector4 b, t_vector4 c)
+t_rasterizer	new_rasterizer(t_vec4 a, t_vec4 b, t_vec4 c)
 {
 	t_rasterizer	result;
 
@@ -23,13 +23,13 @@ t_rasterizer	create_t_rasterizer(t_vector4 a, t_vector4 b, t_vector4 c)
 	return (result);
 }
 
-t_rasterizer	*initialize_t_rasterizer(t_vector4 a, t_vector4 b, t_vector4 c)
+t_rasterizer	*initialize_t_rasterizer(t_vec4 a, t_vec4 b, t_vec4 c)
 {
 	t_rasterizer	*result;
 
 	if (!(result = (t_rasterizer *)malloc(sizeof(t_rasterizer))))
 		error_exit(-13, "Can't create a t_rasterizer");
-	*result = create_t_rasterizer(a, b, c);
+	*result = new_rasterizer(a, b, c);
 	return (result);
 }
 

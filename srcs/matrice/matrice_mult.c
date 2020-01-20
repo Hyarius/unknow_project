@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrice_math.c                                     :+:      :+:    :+:   */
+/*   matrice_mult.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:04:53 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/17 13:05:12 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_matrix	mult_matrix_by_matrix(t_matrix m1, t_matrix m2)
 	int			j;
 	int			k;
 
-	result = create_t_matrix_empty();
+	result = new_matrix_empty();
 	i = -1;
 	while (++i < 4)
 	{
@@ -33,7 +33,7 @@ t_matrix	mult_matrix_by_matrix(t_matrix m1, t_matrix m2)
 	return (result);
 }
 
-t_vector4	mult_vector4_by_matrix(t_vector4 vertex, t_matrix m)
+t_vec4	mult_vec4_by_matrix(t_vec4 vertex, t_matrix m)
 {
 	float	result[3];
 
@@ -43,5 +43,5 @@ t_vector4	mult_vector4_by_matrix(t_vector4 vertex, t_matrix m)
 							+ m.value[2][1] * vertex.z + m.value[3][1];
 	result[2] = m.value[0][2] * vertex.x + m.value[1][2] * vertex.y \
 							+ m.value[2][2] * vertex.z + m.value[3][2];
-	return (create_t_vector4(result[0], result[1], result[2]));
+	return (new_vec4(result[0], result[1], result[2]));
 }

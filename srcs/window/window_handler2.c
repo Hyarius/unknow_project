@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window_handler2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 10:10:16 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/15 11:27:26 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void		initialize_t_window3(t_window *win, int i)
 	t_vector3	tmp_coord;
 	t_color		tmp_color;
 
-	tmp_color = create_t_color_from_int(255, 255, 255, 0);
+	tmp_color = new_color_from_int(255, 255, 255, 0);
 	i = -1;
 	while (++i < win->size_x)
 	{
@@ -47,7 +47,7 @@ void		initialize_t_window2(t_window *win)
 
 	i = -1;
 	while (++i < NB_THREAD_MAX)
-		win->data[i] = create_t_void_list();
+		win->data[i] = new_void_list();
 	win->program_color = load_shaders("ressources/shader/color_shader.vert",
 								"ressources/shader/color_shader.frag");
 	win->program_texture = load_shaders("ressources/shader/texture_shader.vert",

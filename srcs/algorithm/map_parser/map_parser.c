@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 13:40:28 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/15 11:05:17 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 t_mesh			init_primitive(char **line_split, char *texture_path)
 {
 	t_mesh		mesh;
-	t_vector4	vec[2];
+	t_vec4	vec[2];
 
-	vec[0] = create_t_vector4(ft_atof(line_split[2]),
+	vec[0] = new_vec4(ft_atof(line_split[2]),
 							ft_atof(line_split[3]), ft_atof(line_split[4]));
-	vec[1] = create_t_vector4(ft_atof(line_split[5]),
+	vec[1] = new_vec4(ft_atof(line_split[5]),
 							ft_atof(line_split[6]), ft_atof(line_split[7]));
 	if (ft_strcmp(line_split[0], "plane:") == 0)
 		mesh = create_primitive_plane(vec[0], vec[1],
@@ -50,7 +50,7 @@ t_mesh			init_texture(char **line_split)
 	if (ft_strcmp(line_split[8], "NULL") != 0)
 		texture_path = ft_strdup(line_split[8]);
 	else
-		color = create_t_color(ft_atof(line_split[13]),
+		color = new_color(ft_atof(line_split[13]),
 			ft_atof(line_split[14]),
 			ft_atof(line_split[15]),
 			ft_atof(line_split[16]));
@@ -62,7 +62,7 @@ t_mesh			init_texture(char **line_split)
 
 void			set_mesh(t_mesh *mesh, char **line_split)
 {
-	t_mesh_rotate(mesh, create_t_vector4(ft_atof(line_split[10]),
+	t_mesh_rotate(mesh, new_vec4(ft_atof(line_split[10]),
 				ft_atof(line_split[11]), ft_atof(line_split[12])));
 	mesh->hp = ft_atoi(line_split[17]);
 	if (ft_strcmp(line_split[ft_tablen(line_split) - 1], "*") == 0)

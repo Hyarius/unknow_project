@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   t_view_port.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 10:05:54 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/15 16:05:05 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-t_view_port	create_t_view_port(t_window *p_window, t_vec2_int p_pos,
+t_view_port	new_view_port(t_window *p_window, t_vec2_int p_pos,
 								t_vec2_int p_size)
 {
 	t_view_port	result;
@@ -35,7 +35,7 @@ t_view_port	*initialize_t_view_port(t_window *p_window, t_vec2_int p_pos,
 
 	if (!(result = (t_view_port *)malloc(sizeof(t_view_port))))
 		return (NULL);
-	*result = create_t_view_port(p_window, p_pos, p_size);
+	*result = new_view_port(p_window, p_pos, p_size);
 	return (result);
 }
 

@@ -6,13 +6,13 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 15:27:46 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/17 11:23:59 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-t_triangle_list	create_t_triangle_list(void)
+t_triangle_list	new_triangle_list(void)
 {
 	t_triangle_list	list;
 
@@ -29,7 +29,7 @@ t_triangle_list	*initialize_t_triangle_list(void)
 
 	if (!(list = (t_triangle_list *)malloc(sizeof(t_triangle_list))))
 		error_exit(-33, "Can't create a t_triangle_list array");
-	*list = create_t_triangle_list();
+	*list = new_triangle_list();
 	return (list);
 }
 

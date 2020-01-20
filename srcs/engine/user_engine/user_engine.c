@@ -6,13 +6,13 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 15:09:52 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/17 11:36:06 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-t_user_engine	create_t_user_engine(void)
+t_user_engine	new_user_engine(void)
 {
 	t_user_engine	result;
 
@@ -27,7 +27,7 @@ t_user_engine	*initialize_t_user_engine(void)
 
 	if (!(result = (t_user_engine *)malloc(sizeof(t_user_engine))))
 		return (NULL);
-	*result = create_t_user_engine();
+	*result = new_user_engine();
 	return (result);
 }
 

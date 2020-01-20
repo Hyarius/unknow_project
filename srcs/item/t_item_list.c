@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   t_item_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 16:32:28 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/15 16:34:08 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-t_item_list		create_t_item_list(void)
+t_item_list		new_item_list(void)
 {
 	t_item_list	list;
 
@@ -29,7 +29,7 @@ t_item_list		*initialize_t_item_list(void)
 
 	if (!(list = (t_item_list *)malloc(sizeof(t_item_list))))
 		error_exit(-19, "Can't create a t_item_list array");
-	*list = create_t_item_list();
+	*list = new_item_list();
 	return (list);
 }
 

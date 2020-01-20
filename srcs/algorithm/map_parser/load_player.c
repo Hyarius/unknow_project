@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 13:40:33 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/16 15:11:09 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 t_mesh			init_mesh(char **line_split)
 {
 	t_mesh		mesh;
-	t_vector4	vector[3];
+	t_vec4	vector[3];
 
-	vector[0] = create_t_vector4(ft_atof(line_split[2]),
+	vector[0] = new_vec4(ft_atof(line_split[2]),
 								ft_atof(line_split[3]) + 0.2,
 								ft_atof(line_split[4]));
-	vector[1] = create_t_vector4(ft_atof(line_split[5]),
+	vector[1] = new_vec4(ft_atof(line_split[5]),
 								ft_atof(line_split[6]),
 								ft_atof(line_split[7]));
-	vector[2] = create_t_vector4(ft_atof(line_split[10]),
+	vector[2] = new_vec4(ft_atof(line_split[10]),
 								ft_atof(line_split[11]),
 								ft_atof(line_split[12]));
 	mesh = create_primitive_cube(vector[0], vector[1], NULL,
@@ -42,17 +42,17 @@ void			init_player(t_player *player, char **line_split)
 	player->hp = ft_atoi(line_split[17]);
 	player->armor = ft_atoi(line_split[18]);
 	player->fuel = ft_atoi(line_split[19]);
-	player->weapons[0] = create_t_weapons(0,
+	player->weapons[0] = new_weapons(0,
 			ft_atoi(line_split[20]), ft_atoi(line_split[21]));
-	player->weapons[1] = create_t_weapons(1,
+	player->weapons[1] = new_weapons(1,
 			ft_atoi(line_split[22]), ft_atoi(line_split[23]));
-	player->weapons[2] = create_t_weapons(2,
+	player->weapons[2] = new_weapons(2,
 			ft_atoi(line_split[24]), ft_atoi(line_split[25]));
-	player->weapons[3] = create_t_weapons(3,
+	player->weapons[3] = new_weapons(3,
 			ft_atoi(line_split[26]), ft_atoi(line_split[27]));
-	player->weapons[4] = create_t_weapons(4,
+	player->weapons[4] = new_weapons(4,
 			ft_atoi(line_split[28]), ft_atoi(line_split[29]));
-	player->weapons[5] = create_t_weapons(5, 0, 0);
+	player->weapons[5] = new_weapons(5, 0, 0);
 	player->red_card = ft_atoi(line_split[30]);
 	player->blue_card = ft_atoi(line_split[31]);
 	player->green_card = ft_atoi(line_split[32]);
@@ -65,7 +65,7 @@ void			read_player(char **line_split, t_player *player)
 	{
 		player->hitbox = init_mesh(line_split);
 		t_mesh_set_color(&player->hitbox,
-		create_t_color(0.5, 0.6, 0.0, 1.0));
+		new_color(0.5, 0.6, 0.0, 1.0));
 		init_player(player, line_split);
 	}
 }
