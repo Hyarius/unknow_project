@@ -3,29 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   math_triangle.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 14:03:34 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/15 14:50:34 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/20 11:34:53 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-int		is_triangle_parallele(t_triangle p_a, t_triangle p_b)
+int		intersect_triangle_by_segment2(float *f, t_vector4 *t_v,
+							t_triangle p_triangle, t_vector4 *intersection)
 {
-	t_vector4	normal_a;
-	t_vector4	normal_b;
-	float		dot;
-
-	normal_a = cross_t_vector4(substract_vector4_to_vector4(p_a.b, p_a.a),
-			substract_vector4_to_vector4(p_a.c, p_a.a));
-	normal_b = cross_t_vector4(substract_vector4_to_vector4(p_b.b, p_b.a),
-			substract_vector4_to_vector4(p_b.c, p_b.a));
-	dot = dot_t_vector4(normal_a, normal_b);
-	if (dot == 1 || dot == -1)
-		return (BOOL_TRUE);
-	return (BOOL_FALSE);
+	f[3] = dot_t_vector4(t_v[0], t_v[0]);
+	f[4] = dot_t_vector4(t_v[0], t_v[1]);
+	f[5] = dot_t_vector4(t_v[1], t_v[1]);
+	t_v[5] = substract_vector4_to_vector4(*intersection, p_triangle.a);
+	f[6] = dot_t_vector4(t_v[5], t_v[0]);
+	f[7] = dot_t_vector4(t_v[5], t_v[1]);
+	f[8] = f[4] * f[4] - f[3] * f[5];
+	f[9] = (f[4] * f[7] - f[5] * f[6]) / f[8];
+	if (f[9] < 0.0f || f[9] > 1.0f)
+		return (0);
+	f[10] = (f[4] * f[6] - f[3] * f[7]) / f[8];
+	if (f[10] < 0.0f || (f[9] + f[10]) > 1.0f)
+		return (0);
+	return (1);
 }
 
 int		intersect_triangle_by_segment(t_triangle p_triangle, t_line line,
@@ -55,62 +58,5 @@ int		intersect_triangle_by_segment(t_triangle p_triangle, t_line line,
 		return (0);
 	*intersection = add_vector4_to_vector4(
 								mult_vector4_by_float(t_v[3], f[0]), line.a);
-	f[3] = dot_t_vector4(t_v[0], t_v[0]);
-	f[4] = dot_t_vector4(t_v[0], t_v[1]);
-	f[5] = dot_t_vector4(t_v[1], t_v[1]);
-	t_v[5] = substract_vector4_to_vector4(*intersection, p_triangle.a);
-	f[6] = dot_t_vector4(t_v[5], t_v[0]);
-	f[7] = dot_t_vector4(t_v[5], t_v[1]);
-	f[8] = f[4] * f[4] - f[3] * f[5];
-	f[9] = (f[4] * f[7] - f[5] * f[6]) / f[8];
-	if (f[9] < 0.0f || f[9] > 1.0f)
-		return (0);
-	f[10] = (f[4] * f[6] - f[3] * f[7]) / f[8];
-	if (f[10] < 0.0f || (f[9] + f[10]) > 1.0f)
-		return (0);
-	return (1);
-}
-
-int		is_point_on_triangle(t_triangle a, t_vector4 point)
-{
-	if (same_side(point, a.a, a.b, a.c) == BOOL_TRUE
-		&& same_side(point, a.b, a.c, a.a) == BOOL_TRUE
-		&& same_side(point, a.c, a.a, a.b) == BOOL_TRUE)
-		return (BOOL_TRUE);
-	else
-		return (BOOL_FALSE);
-}
-
-float	calc_distance_to_triangle(t_triangle p_triangle, t_vector4 point)
-{
-	float		sb;
-	float		sn;
-	float		sd;
-	t_vector4	normal;
-
-	normal = cross_t_vector4(substract_vector4_to_vector4(p_triangle.b,
-				p_triangle.a), substract_vector4_to_vector4(p_triangle.c,
-														p_triangle.a));
-	sn = -dot_t_vector4(normal,
-			substract_vector4_to_vector4(point, p_triangle.a));
-	sd = dot_t_vector4(normal, normal);
-	sb = sn / sd;
-	return (sb);
-}
-
-int		is_triangle_in_triangle(t_triangle p_a, t_triangle p_b)
-{
-	if (is_triangle_parallele(p_a, p_b) == BOOL_FALSE)
-		return (BOOL_FALSE);
-	if (calc_distance_to_triangle(p_a, p_b.a) != 0)
-		return (BOOL_FALSE);
-	if (is_point_on_triangle(p_a, p_b.a) == BOOL_TRUE ||
-		is_point_on_triangle(p_a, p_b.b) == BOOL_TRUE ||
-		is_point_on_triangle(p_a, p_b.c) == BOOL_TRUE)
-		return (BOOL_TRUE);
-	if (is_point_on_triangle(p_b, p_a.a) == BOOL_TRUE ||
-		is_point_on_triangle(p_b, p_a.b) == BOOL_TRUE ||
-		is_point_on_triangle(p_b, p_a.c) == BOOL_TRUE)
-		return (BOOL_TRUE);
-	return (BOOL_FALSE);
+	return (intersect_triangle_by_segment2(f, t_v, p_triangle, intersection));
 }

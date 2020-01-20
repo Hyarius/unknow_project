@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_mesh.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:04:38 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 10:16:18 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/20 11:25:41 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,33 @@ void	free_t_mesh(t_mesh *mesh)
 }
 
 
+void	t_mesh_rotate_around_point(t_mesh *mesh, t_vector4 delta_angle, t_vector4 center)
+{
+	t_matrix	translate;
+	t_matrix	rotation;
+	t_matrix	inv_translate;
+	t_vector4	*target;
+	int			i;
 
+	translate = create_translation_matrix(substract_vector4_to_vector4(center, \
+																	mesh->pos));
+	inv_translate = create_translation_matrix(inv_t_vector4(\
+							substract_vector4_to_vector4(center, mesh->pos)));
+	rotation = create_rotation_matrix(delta_angle.x, delta_angle.y,\
+													delta_angle.z);
+	mesh->angle = add_vector4_to_vector4(mesh->angle, delta_angle);
+	t_mesh_look_at(mesh);
+	i = -1;
+	while (++i < mesh->vertices->size)
+	{
+		target = t_vector4_list_get(mesh->vertices, i);
+		*target = mult_vector4_by_matrix(*target, inv_translate);
+		*target = mult_vector4_by_matrix(*target, rotation);
+		*target = mult_vector4_by_matrix(*target, translate);
+	}
+	t_mesh_compute_normals(mesh);
+	t_mesh_compute_bubble_box(mesh);
+}
 
 
 
