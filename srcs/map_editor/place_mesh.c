@@ -3,85 +3,81 @@
 /*                                                        :::      ::::::::   */
 /*   place_mesh.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/16 11:49:52 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 11:28:39 by gboutin          ###   ########.fr       */
+/*   Created: 2020/01/20 14:17:25 by adjouber          #+#    #+#             */
+/*   Updated: 2020/01/20 14:21:29 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-void	test_move_axis_bis(t_mesh *mesh, float *force, t_vec4 axis,
-														t_mesh *target)
+void		check_mesh_player(t_engine *engine, t_mesh mesh)
 {
-	float	max;
-	int		subdivision;
-	int		i;
-	float	delta;
-
-	i = 0;
-	subdivision = 20;
-	delta = *force / subdivision;
-	max = *force;
-	*force = 0;
-	while (i < subdivision
-		&& is_t_mesh_intersecting(mesh, target) == BOOL_FALSE)
-	{
-		i++;
-		*force += delta;
-		if (i == subdivision)
-			*force = max;
-		t_mesh_compute_next_vertices_in_world(mesh, axis);
-		if (is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
-			*force -= delta;
-	}
-}
-
-int		can_move_bis(t_mesh *mesh, t_engine *engine)
-{
-	t_mesh	*target;
-	int		i;
-	int		j;
+	int			i;
+	t_mesh		*target;
 
 	i = 0;
 	while (i < engine->physic_engine->mesh_list->size)
 	{
 		target = t_mesh_list_get(engine->physic_engine->mesh_list, i);
-		if (mesh != target && target->bubble_radius + mesh->bubble_radius
-			>= calc_dist_vec4(mesh->center, target->center)
-			&& target->no_hitbox == 0)
+		if (ft_strcmp(target->name, "Player") == 0)
 		{
-			test_move_axis_bis(mesh, &(mesh->force.y),
-										new_vec4(0, 1, 0), target);
-			test_move_axis_bis(mesh, &(mesh->force.x),
-										new_vec4(1, 0, 0), target);
-			test_move_axis_bis(mesh, &(mesh->force.z),
-										new_vec4(0, 0, 1), target);
+			target->is_visible = 0;
+			target->no_hitbox = 1;
+			t_mesh_set_name(target, "mesh");
 		}
 		i++;
 	}
-	return (BOOL_TRUE);
+	engine->user_engine->player->hitbox = mesh;
 }
 
-void	cast_mesh(t_engine *engine, t_mesh *mesh_editing)
+void		place_mesh_bis(t_engine *engine, t_mesh_editing edit, t_mesh *mesh)
 {
-	t_camera	*cam;
-
-	cam = t_camera_list_get(engine->visual_engine->camera_list, 0);
-	mesh_editing->force = cam->forward;
-	while (mesh_editing->force.x != 0 && mesh_editing->force.y != 0
-										&& mesh_editing->force.z != 0)
-	{
-		if ((mesh_editing->pos.x - cam->pos.x > 10
-							|| mesh_editing->pos.x - cam->pos.x < -10)
-							|| (mesh_editing->pos.y - cam->pos.y > 10
-							|| mesh_editing->pos.y - cam->pos.y < -10)
-							|| (mesh_editing->pos.z - cam->pos.z > 10
-							|| mesh_editing->pos.z - cam->pos.z < -10))
-			mesh_editing->force = new_vec4(0.0, 0.0, 0.0);
-		if (can_move_bis(mesh_editing, engine) == BOOL_TRUE)
-			t_mesh_move(mesh_editing, mesh_editing->force);
-	}
-	mesh_editing->force = new_vec4(0.0, 0.0, 0.0);
+	t_mesh_set_color(mesh, new_color(1.0, 1.0, 1.0, 1.0));
+	t_mesh_set_name(mesh, edit.mesh.name);
+	mesh->hp = edit.mesh.hp;
+	t_mesh_rotate(mesh, edit.mesh.rotation);
+	cast_mesh(engine, mesh);
+	mesh->pos.x = round_float(mesh->pos.x, 2);
+	mesh->pos.y = round_float(mesh->pos.y, 2);
+	mesh->pos.z = round_float(mesh->pos.z, 2);
+	if (ft_strcmp(mesh->name, "Player") == 0)
+		check_mesh_player(engine, *mesh);
 }
+
+void		place_mesh(t_engine *engine, t_mesh_editing edit)
+{
+	t_mesh		mesh;
+
+	if (t_mouse_state(engine->user_engine->mouse) == 2)
+	{
+		if (edit.mesh.primitive == 1 || edit.mesh.primitive == -1)
+		{
+			if (edit.mesh.primitive == -1)
+			{
+				mesh = create_primitive_cube(edit.mesh.pos,
+					edit.mesh.size, edit.path, edit.mesh.kinetic);
+				mesh.primitive = -1;
+			}
+			else
+				mesh = create_primitive_cube(edit.mesh.pos,
+					edit.mesh.size, edit.path, edit.mesh.kinetic);
+		}
+		else if (edit.mesh.primitive == 0)
+			mesh = create_primitive_plane(edit.mesh.pos,
+				edit.mesh.size, edit.path, edit.mesh.kinetic);
+		place_mesh_bis(engine, edit, &mesh);
+		// t_mesh_set_color(&mesh, new_color(1.0, 1.0, 1.0, 1.0));
+		// t_mesh_set_name(&mesh, edit.mesh.name);
+		// mesh.hp = edit.mesh.hp;
+		// t_mesh_rotate(&mesh, edit.mesh.rotation);
+		// cast_mesh(engine, &mesh);
+		// mesh.pos.x = round_float(mesh.pos.x, 2);
+		// mesh.pos.y = round_float(mesh.pos.y, 2);
+		// mesh.pos.z = round_float(mesh.pos.z, 2);
+		// if (ft_strcmp(mesh.name, "Player") == 0)
+		// 	check_mesh_player(engine, mesh);
+		t_engine_add_mesh(engine, mesh);
+	}
+}s

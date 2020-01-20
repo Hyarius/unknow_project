@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 13:46:27 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 10:38:32 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/20 14:07:17 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,6 @@ void	save_map(t_engine *engine, int wich)
 	while (i < engine->physic_engine->mesh_list->size)
 	{
 		current = t_mesh_list_at(engine->physic_engine->mesh_list, i);
-		print_t_vec4(current.size, "size");
 		if (current.primitive >= 0 && (current.is_visible
 			|| !current.no_hitbox) && ft_strcmp(current.name, "Player") != 0)
 			save_name(current, fd);

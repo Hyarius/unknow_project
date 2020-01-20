@@ -6,13 +6,13 @@
 /*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 12:49:31 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/20 13:44:46 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/01/20 14:18:04 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-void		player_editing(t_camera *main_camera, t_engine *engine, t_gui *gui)
+void		player_editing(t_engine *engine, t_gui *gui)
 {
 	static int	b_press = 0;
 	static int	print = 0;
@@ -33,26 +33,7 @@ void		player_editing(t_camera *main_camera, t_engine *engine, t_gui *gui)
 		engine->playing = 11;
 }
 
-void		check_mesh_player(t_engine *engine, t_mesh mesh, t_camera *main_camera)
-{
-	int			i;
-	t_mesh		*target;
-
-	i = 0;
-	while (i < engine->physic_engine->mesh_list->size)
-	{
-		target = t_mesh_list_get(engine->physic_engine->mesh_list, i);
-		if (ft_strcmp(target->name, "Player") == 0)
-		{
-			target->is_visible = 0;
-			target->no_hitbox = 1;
-		}
-		i++;
-	}
-	engine->user_engine->player->hitbox = mesh;
-}
-
-void		map_editor(t_camera *main_camera, t_gui *gui, t_engine *engine, t_mesh_editing mesh_editing)
+void		map_editor(t_camera *cam, t_gui *gui, t_engine *engine, t_mesh_editing mesh_editing)
 {
 	t_mesh			*target;
 	t_mesh			mesh;
@@ -72,37 +53,11 @@ void		map_editor(t_camera *main_camera, t_gui *gui, t_engine *engine, t_mesh_edi
 	if (color_armor == NULL)
 		color_armor = initialize_t_color(0.3, 0.3, 1.0, 1.0);
 
-	t_view_port_clear_buffers(main_camera->view_port);
-	draw_hud_rect(main_camera->view_port, new_rectangle(create_vec2(0.0, 0.0), create_vec2(0.005, 0.01)), color_armor);
-	print_info_editing(main_camera, engine->user_engine->keyboard, gui);
-	player_editing(main_camera, engine, gui);
-	if (t_mouse_state(engine->user_engine->mouse) == 2)
-	{
-		if (mesh_editing.mesh.primitive == 1 || mesh_editing.mesh.primitive == -1)
-		{
-			if (mesh_editing.mesh.primitive == -1)
-			{
-				mesh = create_primitive_cube(mesh_editing.mesh.pos, mesh_editing.mesh.size, mesh_editing.path, mesh_editing.mesh.kinetic);
-				mesh.primitive = -1;
-			}
-			else
-				mesh = create_primitive_cube(mesh_editing.mesh.pos, mesh_editing.mesh.size, mesh_editing.path, mesh_editing.mesh.kinetic);
-		}
-		else if (mesh_editing.mesh.primitive == 0)
-			mesh = create_primitive_plane(mesh_editing.mesh.pos, mesh_editing.mesh.size, mesh_editing.path, mesh_editing.mesh.kinetic);
-		t_mesh_set_color(&mesh, new_color(1.0, 1.0, 1.0, 1.0));
-		t_mesh_set_name(&mesh, mesh_editing.mesh.name);
-		mesh.hp = mesh_editing.mesh.hp;
-		t_mesh_rotate(&mesh, mesh_editing.mesh.rotation);
-		cast_mesh(engine, &mesh);
-		mesh.pos.x = round_float(mesh.pos.x, 2);
-		mesh.pos.y = round_float(mesh.pos.y, 2);
-		mesh.pos.z = round_float(mesh.pos.z, 2);
-		if (ft_strcmp(mesh.name, "Player") == 0)
-			check_mesh_player(engine, mesh, main_camera);
-		t_engine_add_mesh(engine, mesh);
-	}
-	else if (get_mouse_state(engine->user_engine->mouse, MOUSE_RIGHT) == BOOL_TRUE && click == 0)
+	t_view_port_clear_buffers(cam->view_port);
+	draw_hud_rect(cam->view_port, new_rectangle(create_vec2(0.0, 0.0), create_vec2(0.005, 0.01)), color_armor);
+	print_info_editing(cam, engine->user_engine->keyboard, gui);
+	player_editing(engine, gui);
+	if (get_mouse_state(engine->user_engine->mouse, MOUSE_RIGHT) == BOOL_TRUE && click == 0)
 	{
 		target = cast_ray(engine, t_camera_list_get(engine->visual_engine->camera_list, 0)->pos, t_camera_list_get(engine->visual_engine->camera_list, 0)->forward, "Player");
 		if (target != NULL && ft_strcmp(target->name, "Player") != 0)

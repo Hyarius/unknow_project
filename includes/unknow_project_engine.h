@@ -58,5 +58,7 @@ void			cast_mesh(t_engine *engine, t_mesh *mesh_editing);
 void			load_map(t_camera *main_camera, t_engine *engine, char *path);
 void			t_mesh_move_door(t_mesh	*mesh, t_engine *engine);
 void			player_take_dmg(t_engine *engine, int dmg);
+void			check_mesh_player(t_engine *engine, t_mesh mesh);
+void			place_mesh(t_engine *engine, t_mesh_editing edit);
 
 #endif
