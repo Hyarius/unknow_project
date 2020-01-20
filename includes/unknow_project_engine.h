@@ -60,5 +60,12 @@ void			t_mesh_move_door(t_mesh	*mesh, t_engine *engine);
 void			player_take_dmg(t_engine *engine, int dmg);
 void			check_mesh_player(t_engine *engine, t_mesh mesh);
 void			place_mesh(t_engine *engine, t_mesh_editing edit);
+void			rotate_mesh(t_engine *engine);
+void			left_move(t_engine *engine);
+void			right_move(t_engine *engine);
+void			up_move(t_engine *engine);
+void			down_move(t_engine *engine);
+void			equals_move(t_engine *engine);
+void			minus_move(t_engine *engine);
 
 #endif

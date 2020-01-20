@@ -1,14 +1,10 @@
-player: Player -12.0 0.0 2.0 0.3 0.5 0.3 NULL 100.0 0.0 0.0 0.0 1.0 0.4 1.0 1.0 100 0 0 15 15 0 0 0 0 0 0 0 0 0 0 0
-
-plane: plane 0.0 0.0 0.0 100.0 0.0 100.0 NULL 0.0 0.0 0.0 0.0 1.0 0.0 0.0 1.0    -1
-plane: plane 0.0 -0.01 0.0 100.0 0.0 100.0 NULL 0.0 0.0 0.0 0.0 1.0 0.0 0.0 1.0    -1
-
-cube: Enemy 1.0 0.0 4.0 0.3 0.5 0.3 NULL 0.0 0.0 90.0 0.0 0.0 0.0 0.0 1.0    50
-cube: Enemy 3.0 0.0 4.0 0.3 0.5 0.3 NULL 0.0 0.0 90.0 0.0 0.0 0.0 0.0 1.0    50
-cube: Enemy 5.0 0.0 4.0 0.3 0.5 0.3 NULL 0.0 0.0 90.0 0.0 0.0 0.0 0.0 1.0    50
-
-#ressources/objets/1Entree.obj 1entree 0.5 0.0 5.0 1.0 1.0 1.0 ressources/assets/textures/map.png 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0    200000
-#ressources/objets/2salleGrille.obj 2salleGrille 0.5 1.0 5.0 1.0 1.0 1.0 ressources/assets/textures/map.png 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0    200000
-#ressources/objets/3SalleChiante.obj 3SalleChiante 0.5 2.0 5.0 1.0 1.0 1.0 ressources/assets/textures/map.png 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0    200000
-#ressources/objets/4Octogone.obj 4Octogone 0.5 3.0 5.0 1.0 1.0 1.0 ressources/assets/textures/map.png 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0    200000
-#ressources/objets/5LAstSalle.obj 5LAstSalle 0.5 4.0 5.0 1.0 1.0 1.0 ressources/assets/textures/map.png 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0    200000
+player: Player -21.00 1.00 32.10 0.30 0.50 0.30 NULL 100.00 0.00 0.00 0.00 0.50 0.60 0.00 1.0 100 100 20 15 15 30 120 10 40 8 32 1 4 0 0 0
+#ressources/objets/1Entree.obj ressources/objets/1Entree.obj 0.50 1.00 5.00 1.00 1.00 1.00 ressources/assets/textures/map.png 0.00 0.00 0.00 0.00 1.00 1.00 1.00 1.00 200000 
+#ressources/objets/2salleGrille.obj ressources/objets/2salleGrille.obj 0.50 1.00 5.00 1.00 1.00 1.00 ressources/assets/textures/map.png 0.00 0.00 0.00 0.00 1.00 1.00 1.00 1.00 200000 
+#ressources/objets/3SalleChiante.obj ressources/objets/3SalleChiante.obj 0.50 1.00 5.00 1.00 1.00 1.00 ressources/assets/textures/map.png 0.00 0.00 0.00 0.00 1.00 1.00 1.00 1.00 200000 
+#ressources/objets/4Octogone.obj ressources/objets/4Octogone.obj 0.50 1.00 5.00 1.00 1.00 1.00 ressources/assets/textures/map.png 0.00 0.00 0.00 0.00 1.00 1.00 1.00 1.00 200000 
+#ressources/objets/5LAstSalle.obj ressources/objets/5LAstSalle.obj 0.50 1.00 5.00 1.00 1.00 1.00 ressources/assets/textures/map.png 0.00 0.00 0.00 0.00 1.00 1.00 1.00 1.00 200000 
+cube: ladder -19.80 -3.00 14.60 0.20 4.00 -.05 ressources/assets/textures/echelle.png 0.00 0.00 0.00 0.00 1.00 1.00 1.00 1.00 -1 
+cube: ladder -28.30 -3.00 18.50 0.20 4.00 -.05 ressources/assets/textures/echelle.png 0.00 0.00 0.00 0.00 1.00 1.00 1.00 1.00 -1 
+cube: elevator -31.90 -11.00 12.60 2.00 12.00 2.00 ressources/assets/textures/cube_test.png 0.00 0.00 0.00 0.00 1.00 1.00 1.00 1.00 -1 
+cube: cube -5.40 1.30 0.10 1.00 1.00 1.00 ressources/assets/textures/cube_test.png 0.00 0.00 0.00 0.00 1.00 1.00 1.00 1.00 -1 #

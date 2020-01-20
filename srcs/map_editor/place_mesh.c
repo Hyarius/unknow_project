@@ -6,7 +6,7 @@
 /*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 14:17:25 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/20 14:21:29 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/01/20 14:29:02 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,16 +68,6 @@ void		place_mesh(t_engine *engine, t_mesh_editing edit)
 			mesh = create_primitive_plane(edit.mesh.pos,
 				edit.mesh.size, edit.path, edit.mesh.kinetic);
 		place_mesh_bis(engine, edit, &mesh);
-		// t_mesh_set_color(&mesh, new_color(1.0, 1.0, 1.0, 1.0));
-		// t_mesh_set_name(&mesh, edit.mesh.name);
-		// mesh.hp = edit.mesh.hp;
-		// t_mesh_rotate(&mesh, edit.mesh.rotation);
-		// cast_mesh(engine, &mesh);
-		// mesh.pos.x = round_float(mesh.pos.x, 2);
-		// mesh.pos.y = round_float(mesh.pos.y, 2);
-		// mesh.pos.z = round_float(mesh.pos.z, 2);
-		// if (ft_strcmp(mesh.name, "Player") == 0)
-		// 	check_mesh_player(engine, mesh);
 		t_engine_add_mesh(engine, mesh);
 	}
-}s
+}
