@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   t_vector4.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 11:24:08 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/20 13:41:40 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/20 13:56:30 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-t_vec4	new_vec4(float p_x, float p_y, float p_z)
+t_vec4		new_vec4(float p_x, float p_y, float p_z)
 {
 	t_vec4 result;
 
@@ -23,7 +23,7 @@ t_vec4	new_vec4(float p_x, float p_y, float p_z)
 	return (result);
 }
 
-t_vec4	*initialize_t_vec4(float p_x, float p_y, float p_z)
+t_vec4		*initialize_t_vec4(float p_x, float p_y, float p_z)
 {
 	t_vec4 *result;
 
@@ -49,7 +49,7 @@ void		swap_t_vec4(t_vec4 *a, t_vec4 *b)
 	*b = tmp;
 }
 
-t_vec4	inv_t_vec4(t_vec4 src)
+t_vec4		inv_t_vec4(t_vec4 src)
 {
 	t_vec4	result;
 
@@ -58,9 +58,4 @@ t_vec4	inv_t_vec4(t_vec4 src)
 	result.z = -1 * src.z;
 	result.w = -1 * src.w;
 	return (result);
-}
-
-void		print_t_vec4(t_vec4 vector, char *str) // A SUPPRIMER
-{
-	printf("%s : %0.4f / %0.4f / %0.4f / %0.4f\n", str, vector.x, vector.y, vector.z, vector.w);
 }
