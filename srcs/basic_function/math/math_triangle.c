@@ -5,14 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/09 14:03:34 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 11:44:52 by spuisais         ###   ########.fr       */
+/*   Created: 2020/01/20 12:52:17 by spuisais          #+#    #+#             */
+/*   Updated: 2020/01/20 12:52:45 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-int		is_triangle_parallele(t_triangle p_a, t_triangle p_b)
+int		intersect_triangle_by_segment2(float *f, t_vector4 *t_v,
+							t_triangle p_triangle, t_vector4 *intersection)
 {
 	t_vec4	normal_a;
 	t_vec4	normal_b;
