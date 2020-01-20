@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_triangle_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 11:28:17 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/20 11:48:00 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int			t_triangle_similarity(t_triangle p_a, t_triangle p_b)
 {
-	t_vec4	a[3];
-	t_vec4	b[3];
+	t_vec4		a[3];
+	t_vec4		b[3];
 	int			result;
 	int			i;
 	int			j;
@@ -41,8 +41,8 @@ int			t_triangle_similarity(t_triangle p_a, t_triangle p_b)
 int			t_triangle_similarity_segment(t_triangle p_a, t_vec4 p_b,
 																t_vec4 p_c)
 {
-	t_vec4	a[3];
-	t_vec4	b[2];
+	t_vec4		a[3];
+	t_vec4		b[2];
 	int			result;
 	int			i;
 	int			j;
@@ -96,7 +96,7 @@ float		maximum_dist_triangles(t_triangle tri1, t_triangle tri2)
 
 int			triangles_intersection(t_triangle tri1, t_triangle tri2)
 {
-	t_line		seg;
+	t_line	seg;
 	t_vec4	intersection;
 
 	seg = new_line(tri1.a, tri1.b);

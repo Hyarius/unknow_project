@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   math_triangle.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 14:03:34 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 11:28:39 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/20 11:44:52 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int		is_triangle_parallele(t_triangle p_a, t_triangle p_b)
 {
 	t_vec4	normal_a;
 	t_vec4	normal_b;
-	float		dot;
+	float	dot;
 
 	normal_a = cross_t_vec4(substract_vec4(p_a.b, p_a.a),
 			substract_vec4(p_a.c, p_a.a));
@@ -32,7 +32,7 @@ int		intersect_triangle_by_segment(t_triangle p_triangle, t_line line,
 														t_vec4 *intersection)
 {
 	t_vec4	t_v[6];
-	float		f[11];
+	float	f[11];
 
 	t_v[0] = substract_vec4(p_triangle.b, p_triangle.a);
 	t_v[1] = substract_vec4(p_triangle.c, p_triangle.a);
@@ -83,9 +83,9 @@ int		is_point_on_triangle(t_triangle a, t_vec4 point)
 
 float	calc_distance_to_triangle(t_triangle p_triangle, t_vec4 point)
 {
-	float		sb;
-	float		sn;
-	float		sd;
+	float	sb;
+	float	sn;
+	float	sd;
 	t_vec4	normal;
 
 	normal = cross_t_vec4(substract_vec4(p_triangle.b,

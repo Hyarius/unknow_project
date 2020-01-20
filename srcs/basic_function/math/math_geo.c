@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   math_geo.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 17:05:09 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/20 11:28:39 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/20 11:44:11 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-int				same_side(t_vec4 p1, t_vec4 p2, t_vec4 a, t_vec4 b)
+int			same_side(t_vec4 p1, t_vec4 p2, t_vec4 a, t_vec4 b)
 {
 	t_vec4	cp1;
 	t_vec4	cp2;
@@ -33,7 +33,7 @@ t_vec4		intersect_plane_by_line(t_vec4 p_normal, t_vec4 p_center,
 	t_vec4	intersection;
 	t_vec4	basic_line;
 	t_vec4	normalized_plane;
-	float		tabf[4];
+	float	tabf[4];
 
 	normalized_plane = normalize_t_vec4(p_normal);
 	tabf[0] = dot_t_vec4(normalized_plane, p_center);
@@ -45,7 +45,7 @@ t_vec4		intersect_plane_by_line(t_vec4 p_normal, t_vec4 p_center,
 	return (add_vec4(start, intersection));
 }
 
-int				is_point_on_line(t_vec4 a, t_vec4 b, t_vec4 c)
+int			is_point_on_line(t_vec4 a, t_vec4 b, t_vec4 c)
 {
 	float dist_tot;
 	float dist_part_one;
@@ -59,11 +59,11 @@ int				is_point_on_line(t_vec4 a, t_vec4 b, t_vec4 c)
 	return (BOOL_FALSE);
 }
 
-float			calc_distance_to_plane(t_vec4 p_normal, t_vec4 p_center,
+float		calc_distance_to_plane(t_vec4 p_normal, t_vec4 p_center,
 														t_vec4 p_point)
 {
 	t_vec4	normalized_plane;
-	float		result;
+	float	result;
 
 	normalized_plane = normalize_t_vec4(p_normal);
 	result = p_point.x * normalized_plane.x

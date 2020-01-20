@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   physic_engine.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 14:56:08 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 11:28:39 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/20 11:47:29 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,8 @@ t_mesh			*t_physic_engine_get_mesh(t_physic_engine *physic_engine,
 
 int				can_move_axis(t_mesh *mesh, t_mesh *target, t_vec4 axis)
 {
-	t_vec4	tmp;
-	t_vec4	delta_pos;
+	t_vec4		tmp;
+	t_vec4		delta_pos;
 	t_triangle	triangle_mesh;
 	t_triangle	triangle_target;
 	t_face		*mesh_face;
