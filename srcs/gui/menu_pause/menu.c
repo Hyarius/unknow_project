@@ -17,85 +17,11 @@ void            t_user_engine_handle_menu(t_camera *main_camera, t_gui *gui, t_e
 	else if (engine->playing == 12)
 		set_weapon_editing(main_camera, gui, engine, &engine->playing);
 	else if (engine->playing == 13 || engine->playing == -3)
-		save_pause(main_camera, gui, engine, win);
+		save_pause(main_camera, engine, win);
     else if (engine->playing == -1)
-        pause_menu(main_camera, gui, engine, win);
+        pause_menu(main_camera, engine, win);
     else if (engine->playing == -2)
-        settings_pause_menu(main_camera, gui, engine, &engine->playing);
-}
-
-void			play_menu(t_camera *main_camera, t_engine *engine, int *play)
-{
-	t_mouse			*mouse;
-	t_keyboard		*keyboard;
-	t_vec2_int	pos;
-	char			*path;
-
-	keyboard = engine->user_engine->keyboard;
-	mouse = engine->user_engine->mouse;
-	get_t_mouse_info(mouse);
-	pos = create_vec2_int(mouse->pos.x * 100 / WIN_X, mouse->pos.y * 100 / WIN_Y);
-	if (pos.x > 37 && pos.x < 61 && t_mouse_state(mouse) == 2)
-	{
-		Mix_PlayChannel(-1, engine->sound_engine->sounds[0], 0);
-		if (pos.y > 61 && pos.y < 69)
-		{
-			*play = 10;
-			path = ft_strdup("ressources/map/save4.map");
-		}
-		if (pos.y > 71 && pos.y < 79)
-			*play = 2;
-	}
-	if (pos.x > 6 && pos.x < 24 && t_mouse_state(mouse) == 2)
-	{
-		Mix_PlayChannel(-1, engine->sound_engine->sounds[0], 0);
-		if (pos.y > 29 && pos.y < 37)
-		{
-			*play = 1;
-			path = ft_strdup("ressources/map/fichier_map.map");
-		}
-		if (pos.y > 39 && pos.y < 47)
-		{
-			*play = 1;
-			path = ft_strdup("ressources/map/fichier_map2.map");
-		}
-	}
-	if (pos.x > 82 && pos.x < 95 && t_mouse_state(mouse) == 2)
-	{
-		Mix_PlayChannel(-1, engine->sound_engine->sounds[0], 0);
-		if (pos.y > 29 && pos.y < 37)
-		{
-			*play = 1;
-			path = ft_strdup("ressources/map/save1.map");
-		}
-		if (pos.y > 39 && pos.y < 47)
-		{
-			*play = 1;
-			path = ft_strdup("ressources/map/save2.map");
-		}
-		if (pos.y > 49 && pos.y < 57)
-		{
-			*play = 1;
-			path = ft_strdup("ressources/map/save3.map");
-		}
-		if (pos.y > 59 && pos.y < 67)
-		{
-			*play = 1;
-			path = ft_strdup("ressources/map/save4.map");
-		}
-		if (pos.y > 69 && pos.y < 77)
-		{
-			*play = 1;
-			path = ft_strdup("ressources/map/save5.map");
-		}
-	}
-	if (*play == 10 || *play == 1)
-	{
-		load_map(main_camera, engine, path);
-		if (*play == 1)
-			link_camera_to_mesh(engine, 0, t_engine_get_mesh(engine, 0));
-		free(path);
-	}
+        settings_pause_menu(main_camera, engine, &engine->playing);
 }
 
 void			main_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, int *play)
@@ -118,66 +44,6 @@ void			main_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, int *play)
 				*play = 5;
 			else if (pos.y > 76 && pos.y < 82)
 				*play = 0;
-			Mix_PlayChannel(-1, engine->sound_engine->sounds[0], 0);
-		}
-    }
-    else
-        engine->user_engine->mouse->clicked_left = BOOL_FALSE;
-}
-
-void			pause_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, t_window *win)
-{
-	t_mouse			*mouse = engine->user_engine->mouse;
-	t_keyboard		*keyboard = engine->user_engine->keyboard;
-    t_vec2_int	pos;
-
-	get_t_mouse_info(mouse);
-    pos = create_vec2_int(mouse->pos.x * 100 / WIN_X, mouse->pos.y * 100 / WIN_Y);
-    if (pos.x > 39 && pos.x < 61)
-    {
-		if (t_mouse_state(mouse) == 2)
-		{
-			if (pos.y > 26 && pos.y < 32)
-				engine->playing = 1;
-			else if (pos.y > 36 && pos.y < 41)
-				engine->playing = -2;
-			else if (pos.y > 45 && pos.y < 50)
-				engine->playing = -3;
-			else if (pos.y > 54 && pos.y < 59)
-			{
-				free_t_mesh_list(engine->physic_engine->mesh_list);
-				engine->physic_engine->mesh_list = initialize_t_mesh_list();
-				engine->playing = 2;
-			}
-			else if (pos.y > 64 && pos.y < 70)
-				engine->playing = 0;
-			Mix_PlayChannel(-1, engine->sound_engine->sounds[0], 0);
-		}
-    }
-    else
-        engine->user_engine->mouse->clicked_left = BOOL_FALSE;
-}
-
-void			settings_pause_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, int *play)
-{
-	t_mouse *mouse = engine->user_engine->mouse;
-	t_keyboard *keyboard = engine->user_engine->keyboard;
-    t_vec2_int pos;
-
-	get_t_mouse_info(mouse);
-    pos = create_vec2_int(mouse->pos.x * 100 / WIN_X, mouse->pos.y * 100 / WIN_Y);
-    if (pos.x > 34 && pos.x < 64)
-    {
-		if (t_mouse_state(mouse) == 2)
-		{
-			if (pos.y > 26 && pos.y < 32)
-				printf("Mute\n");
-			if (pos.y > 42 && pos.y < 46)
-				printf("Sens +\n");
-			if (pos.y > 55 && pos.y < 60)
-				printf("Sens -\n");
-			if (pos.y > 69 && pos.y < 75)
-				*play = -1;
 			Mix_PlayChannel(-1, engine->sound_engine->sounds[0], 0);
 		}
     }
@@ -622,75 +488,4 @@ void		set_weapon_editing(t_camera *main_camera, t_gui *gui, t_engine *engine, in
 			*play = 11;
 		Mix_PlayChannel(-1, engine->sound_engine->sounds[0], 0);
 	}
-}
-
-void		save_pause(t_camera *main_camera, t_gui *gui, t_engine *engine, t_window *win)
-{
-	t_mouse			*mouse = engine->user_engine->mouse;
-	t_keyboard		*keyboard = engine->user_engine->keyboard;
-	t_vec2_int	pos;
-
-	get_t_mouse_info(mouse);
-	pos = create_vec2_int(mouse->pos.x * 100 / WIN_X, mouse->pos.y * 100 / WIN_Y);
-	if (pos.x > 40 && pos.x < 61)
-	{
-		if (t_mouse_state(mouse) == 2)
-		{
-			if (pos.y > 10 && pos.y < 18)
-			{
-				save_map(engine, 1);
-				if (engine->playing == 13)
-					engine->playing = 2;
-				if (engine->playing == -3)
-					engine->playing = -1;
-			}
-			if (pos.y > 26 && pos.y < 34)
-			{
-				save_map(engine, 2);
-				if (engine->playing == 13)
-					engine->playing = 2;
-				if (engine->playing == -3)
-					engine->playing = -1;
-			}
-			if (pos.y > 41 && pos.y < 49)
-			{
-				save_map(engine, 3);
-				if (engine->playing == 13)
-					engine->playing = 2;
-				if (engine->playing == -3)
-					engine->playing = -1;
-			}
-			if (pos.y > 57 && pos.y < 65)
-			{
-				save_map(engine, 4);
-				if (engine->playing == 13)
-					engine->playing = 2;
-				if (engine->playing == -3)
-					engine->playing = -1;
-			}
-			if (pos.y > 72 && pos.y < 80)
-			{
-				save_map(engine, 5);
-				if (engine->playing == 13)
-					engine->playing = 2;
-				if (engine->playing == -3)
-					engine->playing = -1;
-			}
-			if (pos.y > 91 && pos.y < 98)
-			{
-				if (engine->playing == 13)
-					engine->playing = 11;
-				if (engine->playing == -3)
-					engine->playing = -1;
-			}
-			Mix_PlayChannel(-1, engine->sound_engine->sounds[0], 0);
-		}
-	}
-	// if (engine->playing == 2)
-	// {
-	// 	free_t_physic_engine(engine->physic_engine);
-	// 	free_t_visual_engine(engine->visual_engine);
-	// 	engine->physic_engine = initialize_t_physic_engine();
-	// 	engine->visual_engine = initialize_t_visual_engine(win);
-	// }
 }

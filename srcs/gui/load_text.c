@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_text.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 16:24:30 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/15 16:42:13 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/20 15:43:51 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,17 @@ void	load_letter(t_gui *gui, char *str, int idx)
 	TTF_CloseFont(police);
 }
 
+void	load_path_texture2(char **path)
+{
+	path[18] = ft_strdup("ressources/assets/textures/cube_test.png");
+	path[19] = ft_strdup("ressources/assets/textures/cube_test.png");
+	path[20] = ft_strdup("ressources/assets/textures/cube_test.png");
+	path[21] = ft_strdup("ressources/assets/textures/cube_test.png");
+	path[22] = ft_strdup("ressources/assets/textures/window.png");
+	path[23] = ft_strdup("ressources/assets/textures/cube_test.png");
+	path[24] = ft_strdup("ressources/assets/textures/cube_test.png");
+}
+
 char	**load_path_texture(void)
 {
 	char	**path;
@@ -46,19 +57,13 @@ char	**load_path_texture(void)
 	path[9] = ft_strdup("ressources/assets/textures/cube_test.png");
 	path[10] = ft_strdup("ressources/assets/textures/cube_test.png");
 	path[11] = ft_strdup("ressources/assets/textures/cube_test.png");
-	path[12] = ft_strdup("ressources/assets/textures/cube_test.png");
-	path[13] = ft_strdup("ressources/assets/textures/cube_test.png");
+	path[12] = ft_strdup("ressources/assets/textures/health.png");
+	path[13] = ft_strdup("ressources/assets/textures/armor.png");
 	path[14] = ft_strdup("ressources/assets/textures/cube_test.png");
-	path[15] = ft_strdup("ressources/assets/textures/cube_test.png");
-	path[16] = ft_strdup("ressources/assets/textures/cube_test.png");
-	path[17] = ft_strdup("ressources/assets/textures/cube_test.png");
-	path[18] = ft_strdup("ressources/assets/textures/cube_test.png");
-	path[19] = ft_strdup("ressources/assets/textures/cube_test.png");
-	path[20] = ft_strdup("ressources/assets/textures/cube_test.png");
-	path[21] = ft_strdup("ressources/assets/textures/cube_test.png");
-	path[22] = ft_strdup("ressources/assets/textures/window.png");
-	path[23] = ft_strdup("ressources/assets/textures/cube_test.png");
-	path[24] = ft_strdup("ressources/assets/textures/cube_test.png");
+	path[15] = ft_strdup("ressources/assets/textures/ar.png");
+	path[16] = ft_strdup("ressources/assets/textures/rifle.png");
+	path[17] = ft_strdup("ressources/assets/textures/shotgun.png");
+	load_path_texture2(path);
 	return (path);
 }
 

@@ -50,14 +50,14 @@ void			play_menu(t_camera *main_camera, t_engine *engine, int *play);
 void            option_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, int *play);
 void            settings_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, int *play);
 void            controls_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, int *play);
-void            pause_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, t_window *win);
-void            settings_pause_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, int *play);
+void            pause_menu(t_camera *main_camera, t_engine *engine, t_window *win);
+void            settings_pause_menu(t_camera *main_camera, t_engine *engine, int *play);
 void            credits_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, int *play);
 void            sens_bis(t_camera *main_camera, t_gui *gui, int sens);
 void            set_controls(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int key);
 void			set_player_editing(t_camera *main_camera, t_gui *gui, t_engine *engine, int *play);
 void			set_weapon_editing(t_camera *main_camera, t_gui *gui, t_engine *engine, int *play);
-void			save_pause(t_camera *main_camera, t_gui *gui, t_engine *engine, t_window *win);
+void			save_pause(t_camera *main_camera, t_engine *engine, t_window *win);
 void            main_pause(t_camera *main_camera, t_gui *gui, t_engine *engine, int *play);
 void			print_set_player(t_camera *main_camera, t_gui *gui, t_engine *engine);
 void			print_set_weapon(t_camera *main_camera, t_gui *gui, t_engine *engine);
@@ -67,5 +67,6 @@ void			print_set_ar(t_camera *cam, t_gui *gui, t_player *plr);
 void			print_set_rifle(t_camera *cam, t_gui *gui, t_player *plr);
 void			print_set_shotgun(t_camera *cam, t_gui *gui, t_player *plr);
 void			print_set_walldest(t_camera *cam, t_gui *gui, t_player *plr);
+void			close_map(t_engine *engine);
 
 #endif
