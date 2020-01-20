@@ -26,6 +26,11 @@ t_item			create_ammo_pack(int type);
 t_item			create_armor_pack(void);
 t_item			create_jet_pack(void);
 t_item			create_color_card(int type);
+int				refill_pistol(t_player *player);
+int				refill_ar(t_player *player);
+int				refill_rifle(t_player *player);
+int				refill_shotgun(t_player *player);
+int				refill_rpg(t_player *player);
 
 typedef struct	s_item_list
 {
