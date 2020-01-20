@@ -63,5 +63,9 @@ void			print_set_player(t_camera *main_camera, t_gui *gui, t_engine *engine);
 void			print_set_weapon(t_camera *main_camera, t_gui *gui, t_engine *engine);
 void			map_editor(t_camera *main_camera, t_gui *gui, t_engine *engine, t_mesh_editing mesh_editing);
 char			**load_path_texture(void);
+void			print_set_ar(t_camera *cam, t_gui *gui, t_player *plr);
+void			print_set_rifle(t_camera *cam, t_gui *gui, t_player *plr);
+void			print_set_shotgun(t_camera *cam, t_gui *gui, t_player *plr);
+void			print_set_walldest(t_camera *cam, t_gui *gui, t_player *plr);
 
 #endif

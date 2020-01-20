@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   physic_engine.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/09 14:56:08 by gboutin           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2020/01/20 11:31:05 by jubeal           ###   ########.fr       */
-=======
-/*   Updated: 2020/01/20 11:28:39 by gboutin          ###   ########.fr       */
->>>>>>> 58d0095a255fb66f686e5516ec18f8f993391c05
+/*   Created: 2020/01/20 13:05:35 by adjouber          #+#    #+#             */
+/*   Updated: 2020/01/20 13:06:40 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +74,6 @@ t_mesh			*t_physic_engine_get_mesh(t_physic_engine *physic_engine,
 	return (t_mesh_list_get(physic_engine->mesh_list, index));
 }
 
-<<<<<<< HEAD
-void			test_move_axis(t_mesh *mesh, float *force, t_vector4 axis, t_mesh *target)
-=======
 int				can_move_axis(t_mesh *mesh, t_mesh *target, t_vec4 axis)
 {
 	t_vec4	tmp;
@@ -128,7 +121,6 @@ int				can_move_axis(t_mesh *mesh, t_mesh *target, t_vec4 axis)
 }
 
 void			test_move_axis(t_mesh *mesh, float *force, t_vec4 axis, t_mesh *target)
->>>>>>> 58d0095a255fb66f686e5516ec18f8f993391c05
 {
 	float	max;
 	int		subdivision;
