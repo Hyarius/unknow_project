@@ -43,29 +43,22 @@ t_vec4 		normalize_t_vec4(t_vec4 v);
 float			dot_t_vec4(t_vec4 a, t_vec4 b);
 float			edge_t_vec4(t_vec4 a, t_vec4 b, t_vec4 c);
 int				intersect_segment_by_segment(t_vec4 a, t_vec4 b, t_vec4 c, t_vec4 d);
-t_vec4		intersect_plane_by_line(t_vec4 p_normal, t_vec4 p_center, t_vec4 start, t_vec4 end);
-/*
-** int				intersect_triangle_by_segment(t_triangle p_triangle, t_vec4 p_normal, t_line line, t_vec4 *intersection);
-*/
+t_vec4		inter_plane_line(t_vec4 p_normal, t_vec4 p_center, t_vec4 start, t_vec4 end);
 int				intersect_triangle_by_segment(t_triangle p_triangle, t_line line, t_vec4 *intersection);
 
 int				is_point_on_line(t_vec4 a, t_vec4 b, t_vec4 c);
-float			calc_distance_to_triangle(t_triangle p_triangle, t_vec4 point);
-float			calc_distance_to_plane(t_vec4 p_normal, t_vec4 p_center, t_vec4 p_point);
+float			dist_plane(t_vec4 p_normal, t_vec4 p_center, t_vec4 p_point);
 float			clamp_float_value(float min, float value, float max);
 float			calc_dist_vec4(t_vec4 a, t_vec4 b);
 int				clamp_int_value(int min, int value, int max);
-t_vec4		interpolate_vec4_over_line(float ratio_x, float ratio_y, t_vec4 ua, t_vec4 ub);
-float			interpolate_ratio(float a, float b, float c);
+t_vec4		inter_vec4_line(float ratio_x, float ratio_y, t_vec4 ua, t_vec4 ub);
+float			inter_ratio(float a, float b, float c);
 int				get_short(int a, int b, int c);
 int				get_big(int a, int b, int c);
 float			get_short_float(float a, float b, float c);
 float			get_big_float(float a, float b, float c);
 
-int				is_point_on_triangle(t_triangle a, t_vec4 point);
-int				is_triangle_parallele(t_triangle p_a, t_triangle p_b);
 int 			is_triangle_cut_triangle(t_triangle p_a, t_triangle p_b);
-int 			is_triangle_in_triangle(t_triangle p_a, t_triangle p_b);
 
 int				old_intersect(t_triangle p_triangle, t_vec4 p_normal, t_line line, t_vec4 *intersection);
 int				is_same_sign(float a, float b);

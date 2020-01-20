@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   math.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 17:00:32 by adjouber          #+#    #+#             */
-/*   Updated: 2019/12/09 11:09:41 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/20 12:49:29 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int		clamp_int_value(int min, int value, int max)
 	return (value);
 }
 
-float	interpolate_ratio(float a, float b, float c)
+float	inter_ratio(float a, float b, float c)
 {
 	if (b - a == 0)
 		return (0);

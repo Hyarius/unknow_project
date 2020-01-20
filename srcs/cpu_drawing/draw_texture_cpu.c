@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 16:15:37 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 11:41:09 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/20 13:30:20 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_triangle	init_st_triangle(t_uv *p_uv, t_triangle *triangle)
 
 t_vec4		calc_w(t_fuck_norme data)
 {
-	t_vec4 result;
+	t_vec4		result;
 
 	result = new_vec4(
 		edge_t_vec4(data.triangle.b, data.triangle.c, data.pixel_sample)
