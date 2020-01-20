@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   unknow_project.h                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/20 15:21:49 by spuisais          #+#    #+#             */
+/*   Updated: 2020/01/20 15:25:33 by spuisais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef UNKNOW_PROJECT_H
 # define UNKNOW_PROJECT_H
 
@@ -16,28 +28,27 @@
 # include "unknow_project_player.h"
 # include "unknow_project_item.h"
 
-//			PNG reader
-t_texture 		*png_load(char *path);
+t_texture		*png_load(char *path);
 
-//			Shader - handler
-GLuint			load_shaders(const char * p_vertex_file_path,
-						const char * p_fragment_file_path);
+GLuint			load_shaders(const char *p_vertex_file_path,
+						const char *p_fragment_file_path);
 
-//			convert
-t_vec4		convert_screen_to_opengl(t_view_port *p_view_port, t_vec4 source);
-t_vec4		convert_opengl_to_vec4(t_view_port *p_view_port, t_vec4 source);
+t_vec4			convert_screen_to_opengl(t_view_port *p_view_port,
+										t_vec4 source);
+t_vec4			convert_opengl_to_vec4(t_view_port *p_view_port, t_vec4 source);
 float			degree_to_radius(float angle);
 float			radius_to_degree(float radian);
-t_uv 			convert_t_uv_to_texture(t_uv *source);
+t_uv			convert_t_uv_to_texture(t_uv *source);
 
 void			prepare_screen(t_window *win, t_color color);
 void			check_frame(t_engine *engine);
 void			render_screen(t_window *win, t_engine *engine);
-void 			clear_buffers(t_window *win);
+void			clear_buffers(t_window *win);
 void			draw_pixel(t_window *p_win, int x, int y, t_color color);
 
 t_triangle		compose_t_triangle_from_t_mesh(t_mesh *src, int *index);
-t_triangle		compose_t_triangle_from_t_vertices(t_vec4_list *src, int *index);
+t_triangle		compose_t_triangle_from_t_vertices(t_vec4_list *src,
+													int *index);
 
 void			ft_get_leaks(char *prog_name, char *msg);
 

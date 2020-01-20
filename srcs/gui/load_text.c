@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_text.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 16:24:30 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/15 16:42:13 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/20 15:43:55 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	load_letter(t_gui *gui, char *str, int idx)
 	gui->letter[idx]->font = TTF_RenderText_Blended(police, str, color);
 	gui->letter[idx]->let->surface->w = gui->letter[idx]->font->w;
 	gui->letter[idx]->let->surface->h = gui->letter[idx]->font->h;
-	gui->letter[idx]->let->surface->internalFormat = 4;
+	gui->letter[idx]->let->surface->intern_format = 4;
 	gui->letter[idx]->let->surface->pixels = gui->letter[idx]->font->pixels;
 	gui->letter[idx]->let->letter = str[0];
 	TTF_CloseFont(police);

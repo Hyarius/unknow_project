@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   unknow_project_list.h                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/20 15:57:08 by spuisais          #+#    #+#             */
+/*   Updated: 2020/01/20 15:57:55 by spuisais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef UNKNOW_PROJECT_LIST_H
 # define UNKNOW_PROJECT_LIST_H
 
@@ -11,8 +23,8 @@ typedef struct	s_mesh_list
 	int			max_size;
 }				t_mesh_list;
 
-t_mesh_list 	new_mesh_list();
-t_mesh_list 	*initialize_t_mesh_list();
+t_mesh_list		new_mesh_list();
+t_mesh_list		*initialize_t_mesh_list();
 void			t_mesh_list_push_back(t_mesh_list *dest, t_mesh to_add);
 void			delete_t_mesh_list(t_mesh_list dest);
 void			free_t_mesh_list(t_mesh_list *dest);

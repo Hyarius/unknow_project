@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   unknow_project_includes.h                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/20 16:10:07 by spuisais          #+#    #+#             */
+/*   Updated: 2020/01/20 16:10:08 by spuisais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef UNKNOW_PROJECT_INCLUDES_H
 # define UNKNOW_PROJECT_INCLUDES_H
 
@@ -9,13 +21,13 @@
 
 # include <pthread.h>
 
-# include <SDL.h> // Basic sdl function
+# include <SDL.h>
 
-# include <OpenGL/gl3.h> // Basic opengl
-# include <OpenGL/gl3ext.h> // Basic opengl extension
+# include <OpenGL/gl3.h>
+# include <OpenGL/gl3ext.h>
 
-# include <SDL_image.h> // Adding loading function for PNJ, BMP, GIF
-# include <SDL_ttf.h> // Handle text printing / creation
-# include <SDL_mixer.h> // Handle sound effect
+# include <SDL_image.h>
+# include <SDL_ttf.h>
+# include <SDL_mixer.h>
 
 #endif
