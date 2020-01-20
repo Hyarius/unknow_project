@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_gui.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 15:58:51 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/15 16:04:30 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/20 09:52:37 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	print_info_bar(t_camera *main_camera, t_player *player, t_gui *gui)
 				create_t_rectangle(create_vec2(-0.70, -0.97),
 									create_vec2(0.02, 0.07)));
 	free(str);
-	if (ft_strcmp(player->current_weapon->name, "bb") != 0)
+	if (player->current_weapon->index != 5)
 	{
 		str = ft_itoa(player->current_weapon->ammo);
 		str = ft_strjoinf(str, " / ", 1);

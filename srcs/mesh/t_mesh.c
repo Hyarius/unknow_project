@@ -1,10 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   t_mesh.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/20 10:04:38 by gboutin           #+#    #+#             */
+/*   Updated: 2020/01/20 10:16:18 by gboutin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "unknow_project.h"
 
 t_mesh	create_t_mesh(t_vector4 pos)
 {
 	t_mesh		result;
-	static int	num = 1;
-	char		*str;
 
 	result.camera = NULL;
 	result.primitive = 10;
@@ -31,16 +41,6 @@ t_mesh	create_t_mesh(t_vector4 pos)
 	return (result);
 }
 
-t_mesh	*initialize_t_mesh(t_vector4 pos)
-{
-	t_mesh	*result;
-
-	if (!(result = (t_mesh *)malloc(sizeof(t_mesh))))
-		error_exit(-13, "Can't create a t_mesh array");
-	*result = create_t_mesh(pos);
-	return (result);
-}
-
 void	delete_t_mesh(t_mesh mesh)
 {
 	free_t_vector4_list(mesh.vertices);
@@ -54,6 +54,11 @@ void	free_t_mesh(t_mesh *mesh)
 	delete_t_mesh(*mesh);
 	free(mesh);
 }
+
+
+
+
+
 
 void	t_mesh_add_uv(t_mesh *dest, t_vector4 new_uv)
 {
@@ -144,34 +149,6 @@ void	t_mesh_look_at(t_mesh *mesh)
 	mesh->up = inv_t_vector4(yaxis);
 }
 
-void	t_mesh_rotate_around_point(t_mesh *mesh, t_vector4 angle,
-									t_vector4 center)
-{
-	t_matrix	translate;
-	t_matrix	rotation;
-	t_matrix	inv_translate;
-	t_vector4	*target;
-	int			i;
-
-	translate = create_translation_matrix(substract_vector4_to_vector4(center,
-																	mesh->pos));
-	inv_translate = create_translation_matrix(inv_t_vector4(
-							substract_vector4_to_vector4(center, mesh->pos)));
-	rotation = create_rotation_matrix(angle.x, angle.y, angle.z);
-	mesh->angle = add_vector4_to_vector4(mesh->angle, angle);
-	t_mesh_look_at(mesh);
-	i = -1;
-	while (++i < mesh->vertices->size)
-	{
-		target = t_vector4_list_get(mesh->vertices, i);
-		*target = mult_vector4_by_matrix(*target, inv_translate);
-		*target = mult_vector4_by_matrix(*target, rotation);
-		*target = mult_vector4_by_matrix(*target, translate);
-	}
-	t_mesh_compute_normals(mesh);
-	t_mesh_compute_bubble_box(mesh);
-}
-
 void	t_mesh_rotate(t_mesh *mesh, t_vector4 delta_angle)
 {
 	t_matrix	rotation;
@@ -215,16 +192,6 @@ void	t_mesh_apply_force(t_mesh *dest)
 	dest->center = add_vector4_to_vector4(dest->center, dest->force);
 }
 
-void	t_mesh_set_force(t_mesh *dest, t_vector4 new_force)
-{
-	dest->force = new_force;
-}
-
-void	t_mesh_add_force(t_mesh *dest, t_vector4 delta_force)
-{
-	dest->force = add_vector4_to_vector4(dest->force, delta_force);
-}
-
 void	t_mesh_activate_gravity(t_mesh *dest, float gravity)
 {
 	dest->kinetic = gravity;
@@ -261,12 +228,6 @@ void	t_mesh_compute_next_vertices_in_world(t_mesh *dest, t_vector4 axis)
 	while (++i < dest->vertices->size)
 		t_vector4_list_push_back(dest->next_vertices_in_world,
 		add_vector4_to_vector4(t_vector4_list_at(dest->vertices, i), next_pos));
-}
-
-void	t_mesh_jump(t_mesh *body, t_vector4 jump) // a supprimer si pas utiliser
-{
-	if (body->kinetic < -12.0f)
-		body->kinetic = -12.0f;
 }
 
 void	t_mesh_resize(t_mesh *mesh, t_vector4 modif)
@@ -400,14 +361,6 @@ int		t_mesh_on_mesh(t_mesh *body, t_mesh *target)
 		&& (body->pos.z + 0.3 >= z_min && body->pos.z <= z_max))
 		return (1);
 	return (0);
-}
-
-void	t_mesh_free_move(t_mesh *mesh)
-{
-	t_mesh_set_name(mesh, "tmp");
-	t_mesh_activate_gravity(mesh, 0.0f);
-	t_mesh_set_visibility(mesh, BOOL_FALSE);
-	mesh->no_hitbox = 1;
 }
 
 void	destroy_mesh(t_mesh *mesh)
