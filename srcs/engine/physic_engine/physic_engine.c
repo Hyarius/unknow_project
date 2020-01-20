@@ -6,11 +6,7 @@
 /*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 14:56:08 by gboutin           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2020/01/20 11:31:05 by jubeal           ###   ########.fr       */
-=======
-/*   Updated: 2020/01/20 11:28:39 by gboutin          ###   ########.fr       */
->>>>>>> 58d0095a255fb66f686e5516ec18f8f993391c05
+/*   Updated: 2020/01/20 11:51:34 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,57 +74,7 @@ t_mesh			*t_physic_engine_get_mesh(t_physic_engine *physic_engine,
 	return (t_mesh_list_get(physic_engine->mesh_list, index));
 }
 
-<<<<<<< HEAD
-void			test_move_axis(t_mesh *mesh, float *force, t_vector4 axis, t_mesh *target)
-=======
-int				can_move_axis(t_mesh *mesh, t_mesh *target, t_vec4 axis)
-{
-	t_vec4	tmp;
-	t_vec4	delta_pos;
-	t_triangle	triangle_mesh;
-	t_triangle	triangle_target;
-	t_face		*mesh_face;
-	t_face		*target_face;
-	int			result;
-	int			i;
-	int			j;
-
-	result = 0;
-	tmp = mult_vec4_by_vec4(mesh->force, axis);
-	delta_pos = add_vec4(mesh->pos, tmp);
-	clean_t_vec4_list(mesh->vertices_in_world);
-	i = 0;
-	while (i < mesh->vertices->size)
-	{
-		t_vec4_list_push_back(mesh->vertices_in_world, add_vec4(t_vec4_list_at(mesh->vertices, i), delta_pos));
-		i++;
-	}
-	j = 0;
-	while (j < mesh->faces->size)
-	{
-		mesh_face = t_face_list_get(mesh->faces, j);
-		triangle_mesh = compose_t_triangle_from_t_vertices(mesh->vertices_in_world, mesh_face->index_vertices);
-		i = 0;
-		while (i < target->faces->size)
-		{
-			target_face = t_face_list_get(target->faces, i);
-			triangle_target = compose_t_triangle_from_t_vertices(target->vertices_in_world, target_face->index_vertices);
-			if (is_triangle_in_triangle(triangle_mesh, triangle_target) == BOOL_TRUE)
-			{
-				set_t_face_color(mesh_face, new_color(1.0, 0.0, 0.0, 1.0));
-				result++;
-			}
-			i++;
-		}
-		j++;
-	}
-	if (result > 0)
-		return (BOOL_FALSE);
-	return (BOOL_TRUE);
-}
-
 void			test_move_axis(t_mesh *mesh, float *force, t_vec4 axis, t_mesh *target)
->>>>>>> 58d0095a255fb66f686e5516ec18f8f993391c05
 {
 	float	max;
 	int		subdivision;
