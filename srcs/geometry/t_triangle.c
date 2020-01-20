@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_triangle.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 15:31:26 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/20 14:50:58 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void		sort_t_triangle_points(t_triangle *p_triangle)
 		swap_t_vec4(&(p_triangle->a), &(p_triangle->b));
 }
 
-void		print_t_triangle(t_triangle p_triangle, char *triangle_name) // a supprimer
+void		print_t_triangle(t_triangle p_triangle, char *triangle_name)
 {
 	printf("%s\n", triangle_name);
 	print_t_vec4(p_triangle.a, "A : ");

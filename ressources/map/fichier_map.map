@@ -115,7 +115,7 @@ cube: stair -10.0 0.0 12.5 1.0 1.0 1.0 ressources/assets/textures/cube_number.pn
 cube: stair -10.0 0.0 13.0 1.0 1.1 1.0 ressources/assets/textures/cube_number.png 0.0 0.0 90.0 0.0 1.0 1.0 0.0 1.0   -1
 
 cube: wall -1.0 0.0 -5.0 2.0 2.0 0.1 ressources/assets/textures/window.png 0.0 0.0 0.0 0.0 0.8 0.8 0.0 1.0    -1   #
-cube: stair -10.0 0.0 25.0 10.0 0.05 1.0 ressources/assets/textures/cube_number.png 0.0 10.0 90.0 0.0 1.0 0.0 1.0 1.0    -1
+cube: cube -10.0 0.0 25.0 10.0 0.05 1.0 ressources/assets/textures/cube_number.png 0.0 10.0 90.0 0.0 1.0 0.0 1.0 1.0    -1
 
 /cube: Enemy 1.0 0.0 4.0 0.3 0.5 0.3 ressources/assets/textures/gaygory.png 0.0 0.0 90.0 0.0 0.0 0.0 0.0 1.0    50
 /cube: Enemy 12.0 0.0 4.0 0.3 0.5 0.3 ressources/assets/textures/gaygory.png 0.0 0.0 90.0 0.0 0.0 0.0 0.0 1.0    50
