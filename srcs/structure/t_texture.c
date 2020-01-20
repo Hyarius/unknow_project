@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_texture.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:44:10 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/20 15:43:55 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ t_color	get_pixel_color(t_texture *texture, int x, int y)
 		y < 0 || y >= texture->surface->h)
 		return (new_color(0.0, 0.0, 1.0, 1.0));
 	pixel_index = (x + y * texture->surface->w) \
-					* texture->surface->internalFormat;
+					* texture->surface->intern_format;
 	i = -1;
 	while (++i < 3)
 		info[i] = texture->surface->pixels[pixel_index + i];
-	if (texture->surface->internalFormat == 4)
+	if (texture->surface->intern_format == 4)
 		info[3] = texture->surface->pixels[pixel_index + 3];
 	else
 		info[3] = 255;

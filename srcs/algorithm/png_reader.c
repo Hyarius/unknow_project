@@ -6,7 +6,7 @@
 /*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 14:32:25 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/17 13:19:49 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/20 15:43:55 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ void			change_format(int color_type, t_surface *surface)
 	if (color_type == PNG_COLOR_TYPE_RGB)
 	{
 		surface->format = GL_RGB;
-		surface->internalFormat = 3;
+		surface->intern_format = 3;
 	}
 	else if (color_type == PNG_COLOR_TYPE_RGB_ALPHA)
 	{
 		surface->format = GL_RGBA;
-		surface->internalFormat = 4;
+		surface->intern_format = 4;
 	}
 	else
 		error_exit(0, "XXX");
@@ -34,12 +34,12 @@ void			set_row_pointers(t_surface *s, png_structp png_ptr)
 	int			i;
 
 	s->pixels = (GLubyte *)malloc(sizeof(GLubyte) * s->w
-						* s->h * s->internalFormat);
+						* s->h * s->intern_format);
 	row_pointers = (png_bytep *)malloc(sizeof(png_bytep) * s->h);
 	i = -1;
 	while (++i < s->h)
 		row_pointers[i] = (png_bytep)(s->pixels + ((s->h - (i + 1)) * s->w
-		* s->internalFormat));
+		* s->intern_format));
 	png_read_image(png_ptr, row_pointers);
 	free(row_pointers);
 }

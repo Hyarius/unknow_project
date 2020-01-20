@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_camera.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:18:59 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/20 14:56:34 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/20 16:49:39 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_camera	new_camera(t_window *window, t_vec4 p_pos, float p_fov,
 	result.speed = 0.1f;
 	result.running = 1.8f;
 	result.slowing = 1.0f;
-	result.crounch = 0;
+	result.crouch = 0;
 	result.f_press = 0;
 	result.r_press = 0;
 	new_camera2(&result);
@@ -157,13 +157,13 @@ void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard,
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_LCTRL]) == 1)
 	{
 		j = 0.2;
-		if (camera->crounch == 0)
+		if (camera->crouch == 0)
 		{
 			t_mesh_resize(camera->body, new_vec4(0.0, -0.2, 0.0));
-			camera->crounch = 1;
+			camera->crouch = 1;
 		}
 	}
-	else if (camera->crounch == 1)
+	else if (camera->crouch == 1)
 	{
 		k = 0;
 		l = 0;
@@ -181,7 +181,7 @@ void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard,
 		if (k == l)
 		{
 			t_mesh_resize(camera->body, new_vec4(0.0, 0.2, 0.0));
-			camera->crounch = 0;
+			camera->crouch = 0;
 			j = 0.0;
 		}
 		else
