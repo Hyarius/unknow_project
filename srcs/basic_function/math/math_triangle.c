@@ -6,7 +6,7 @@
 /*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 14:03:34 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 11:50:26 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/20 13:20:17 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int		intersect_triangle_by_segment(t_triangle p_triangle, t_line line,
 														t_vec4 *intersection)
 {
 	t_vec4	t_v[6];
-	float		f[11];
+	float	f[11];
 
 	t_v[0] = substract_vec4(p_triangle.b, p_triangle.a);
 	t_v[1] = substract_vec4(p_triangle.c, p_triangle.a);
