@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 14:13:47 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/20 11:28:39 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/20 13:43:41 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void			enemy_boss_shoot(t_engine *engine)
 	}
 }
 
-t_vec4		spawn_mine(t_vec4 pos)
+t_vec4			spawn_mine(t_vec4 pos)
 {
 	t_vec4	ret;
 

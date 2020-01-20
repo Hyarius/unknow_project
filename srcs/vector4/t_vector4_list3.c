@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 11:01:06 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/20 10:39:31 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/20 13:42:45 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void			delete_t_vec4_list(t_vec4_list dest)
 
 void			t_vec4_list_resize(t_vec4_list *dest, int new_size)
 {
-	t_vec4	*tmp;
+	t_vec4		*tmp;
 	int			i;
 	int			old_size;
 

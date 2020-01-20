@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_item_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 16:32:28 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/20 13:04:04 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,32 +57,6 @@ void			t_item_list_push_back(t_item_list *dest, t_item to_add)
 	(dest->size)++;
 }
 
-void			t_item_list_erase(t_item_list *dest, int index)
-{
-	free_t_item(t_item_list_get(dest, index));
-	while (index < dest->size)
-	{
-		dest[index + 1] = dest[index];
-		index++;
-	}
-}
-
-void			delete_t_item_list(t_item_list dest)
-{
-	free(dest.item);
-}
-
-void			free_t_item_list(t_item_list *dest)
-{
-	delete_t_item_list(*dest);
-	free(dest);
-}
-
-void			clean_t_item_list(t_item_list *dest)
-{
-	dest->size = 0;
-}
-
 t_item			t_item_list_at(t_item_list *dest, int index)
 {
 	if (index < 0 || index >= dest->size)
@@ -95,18 +69,4 @@ t_item			*t_item_list_get(t_item_list *dest, int index)
 	if (index < 0 || index >= dest->size)
 		error_exit(-24, "Segfault : t_item_list out of range");
 	return (&(dest->item[index]));
-}
-
-int				t_item_list_get_index(t_item_list *dest, t_item *item)
-{
-	int i;
-
-	i = 0;
-	while (i < dest->size)
-	{
-		if (dest[i].item == item)
-			return (i);
-		i++;
-	}
-	return (-1);
 }

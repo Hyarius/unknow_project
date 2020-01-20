@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 13:40:28 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/20 11:41:36 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_mesh			init_primitive(char **line_split, char *texture_path)
 {
 	t_mesh		mesh;
-	t_vec4	vec[2];
+	t_vec4		vec[2];
 
 	vec[0] = new_vec4(ft_atof(line_split[2]),
 							ft_atof(line_split[3]), ft_atof(line_split[4]));

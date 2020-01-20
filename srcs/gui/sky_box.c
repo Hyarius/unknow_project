@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sky_box.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/20 13:45:55 by gboutin           #+#    #+#             */
+/*   Updated: 2020/01/20 13:46:05 by gboutin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "unknow_project.h"
 
 void	draw_skybox(t_window *p_win, t_camera *p_cam, t_mesh *mesh)
@@ -7,8 +19,8 @@ void	draw_skybox(t_window *p_win, t_camera *p_cam, t_mesh *mesh)
 	int			j;
 	t_uv		tmp_uv;
 	t_triangle	triangle;
-	t_vec4	points[3];
-	t_vec4	points_uv[3];
+	t_vec4		points[3];
+	t_vec4		points_uv[3];
 	t_face		face;
 	float		result;
 
