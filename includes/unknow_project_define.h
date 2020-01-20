@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   unknow_project_define.h                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/20 15:51:41 by gboutin           #+#    #+#             */
+/*   Updated: 2020/01/20 15:52:30 by gboutin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef UNKNOW_PROJECT_DEFINE_H
 # define UNKNOW_PROJECT_DEFINE_H
 
@@ -13,7 +25,6 @@
 
 # define BUFF_SIZE 1
 
-# define FPS 60000
 # define PUSH_SIZE 150
 
 # define MOUSE_BUTTON 3

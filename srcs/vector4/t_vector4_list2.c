@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 11:01:09 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/20 13:45:40 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/20 15:32:28 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,4 @@ t_vec4			*t_vec4_list_get(t_vec4_list *dest, int index)
 	if (index < 0 || index >= dest->size)
 		error_exit(-24, "Segfault : t_vec4_list out of range");
 	return (&dest->vector[index]);
-}
-
-float			*t_vec4_list_obtain(t_vec4_list *dest, int index)
-{
-	if (index < 0 || index >= dest->size)
-		error_exit(-24, "Segfault : t_vec4_list out of range");
-	return (&dest->value[index * 3]);
 }
