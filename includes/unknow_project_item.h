@@ -31,7 +31,6 @@ void			free_t_item_list(t_item_list *dest);
 void			clean_t_item_list(t_item_list *dest);
 t_item			t_item_list_at(t_item_list *dest, int index);
 t_item			*t_item_list_get(t_item_list *dest, int index);
-int				t_item_list_get_index(t_item_list *dest, t_item *mesh);
 
 t_item_list		*load_items(t_mesh_list *meshs);
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   math_triangle.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 14:03:34 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 13:20:17 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/20 13:50:48 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int		intersect_triangle_by_segment(t_triangle p_triangle, t_line line,
 	f[0] = (f[1] / f[2]);
 	if (f[0] < 0.0f || f[0] > 1.0f)
 		return (0);
-	*intersection = add_vec4(
-								mult_vec4_by_float(t_v[3], f[0]), line.a);
+	*intersection = add_vec4(mult_vec4_by_float(t_v[3], f[0]), line.a);
 	return (intersect_triangle_by_segment2(f, t_v, p_triangle, intersection));
 }

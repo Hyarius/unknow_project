@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:04:53 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/20 13:44:17 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_matrix	mult_matrix_by_matrix(t_matrix m1, t_matrix m2)
 	return (result);
 }
 
-t_vec4	mult_vec4_by_matrix(t_vec4 vertex, t_matrix m)
+t_vec4		mult_vec4_by_matrix(t_vec4 vertex, t_matrix m)
 {
 	float	result[3];
 

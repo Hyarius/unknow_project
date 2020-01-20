@@ -6,13 +6,13 @@
 /*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:18:59 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/20 14:32:04 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/20 14:56:34 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-t_camera	new_camera2(t_camera *result)
+void		new_camera2(t_camera *result)
 {
 	result->model = new_matrix();
 	t_camera_look_at(result);

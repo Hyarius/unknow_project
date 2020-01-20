@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 09:59:48 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/20 10:38:32 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/20 13:40:29 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,19 @@ t_vec4		convert_opengl_to_vec4(t_view_port *p_view_port,
 	return (result);
 }
 
-float			degree_to_radius(float angle)
+float		degree_to_radius(float angle)
 {
 	return ((float)(((float)angle) * M_PI / (float)180));
 }
 
-float			radius_to_degree(float radian)
+float		radius_to_degree(float radian)
 {
 	return ((float)((float)(radian * 180) / M_PI));
 }
 
-t_uv			convert_t_uv_to_texture(t_uv *source)
+t_uv		convert_t_uv_to_texture(t_uv *source)
 {
-	t_uv		result;
+	t_uv	result;
 
 	result = *source;
 	result.uv.a.y = 1 - result.uv.a.y;

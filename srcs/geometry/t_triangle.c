@@ -6,7 +6,7 @@
 /*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 15:31:26 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 14:50:58 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/20 14:54:51 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,4 @@ void		sort_t_triangle_points(t_triangle *p_triangle)
 	if (p_triangle->a.y > p_triangle->b.y || (p_triangle->a.y == p_triangle->b.y
 										&& p_triangle->a.x > p_triangle->b.x))
 		swap_t_vec4(&(p_triangle->a), &(p_triangle->b));
-}
-
-void		print_t_triangle(t_triangle p_triangle, char *triangle_name)
-{
-	printf("%s\n", triangle_name);
-	print_t_vec4(p_triangle.a, "A : ");
-	print_t_vec4(p_triangle.b, "B : ");
-	print_t_vec4(p_triangle.c, "C : ");
 }

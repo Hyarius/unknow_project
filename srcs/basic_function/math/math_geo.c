@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   math_geo.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 17:05:09 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/20 13:20:40 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/20 13:31:03 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int			is_point_on_line(t_vec4 a, t_vec4 b, t_vec4 c)
 	return (BOOL_FALSE);
 }
 
-float			dist_plane(t_vec4 p_normal, t_vec4 p_center,
+float		dist_plane(t_vec4 p_normal, t_vec4 p_center,
 														t_vec4 p_point)
 {
 	t_vec4	normalized_plane;

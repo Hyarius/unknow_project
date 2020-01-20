@@ -14,7 +14,6 @@ t_triangle		new_triangle(t_vec4 p_a, t_vec4 p_b, t_vec4 p_c);
 t_triangle		*initialize_t_triangle(t_vec4 p_a, t_vec4 p_b, t_vec4 p_c);
 void			sort_t_triangles(t_triangle *a, t_triangle *b);
 void 			sort_t_triangle_points(t_triangle *p_triangle);
-void			print_t_triangle(t_triangle p_triangle, char *triangle_name);
 t_triangle		t_triangle_add_vec4(t_triangle triangle, t_vec4 to_add);
 t_triangle		mult_triangle_by_vec4(t_triangle triangle, t_vec4 to_add);
 void			t_triangle_get_min_max_value(t_triangle *triangle, t_vec4 *min, t_vec4 *max);
