@@ -12,7 +12,7 @@ typedef struct	s_matrix
 t_matrix 		new_matrix();
 t_matrix 		*initialize_t_matrix();
 t_matrix 		new_matrix_empty();
-t_matrix 		newranslation_matrix(t_vec4 translation);
+t_matrix 		new_translation_matrix(t_vec4 translation);
 t_matrix 		create_scaling_matrix(t_vec4 scaling);
 t_matrix 		create_rotation_x_matrix(float angle);
 t_matrix 		create_rotation_y_matrix(float angle);

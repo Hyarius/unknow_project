@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   creation_t_matrice.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 12:59:25 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/20 13:50:41 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,7 @@ t_matrix	new_matrix_empty(void)
 	return (result);
 }
 
-t_matrix	*initialize_t_matrix(void)
-{
-	t_matrix	*result;
-
-	if (!(result = (t_matrix *)malloc(sizeof(t_matrix))))
-		error_exit(-13, "Can't create a t_matrix array");
-	*result = new_matrix();
-	return (result);
-}
-
-t_matrix	newranslation_matrix(t_vec4 translation)
+t_matrix	new_translation_matrix(t_vec4 translation)
 {
 	t_matrix	result;
 
@@ -68,30 +58,4 @@ t_matrix	newranslation_matrix(t_vec4 translation)
 	result.value[3][1] = translation.y;
 	result.value[3][2] = translation.z;
 	return (result);
-}
-
-t_matrix	create_scaling_matrix(t_vec4 scaling)
-{
-	t_matrix	result;
-
-	result = new_matrix();
-	result.value[0][0] = scaling.x;
-	result.value[1][1] = scaling.y;
-	result.value[2][2] = scaling.z;
-	return (result);
-}
-
-void		print_t_matrix(t_matrix *m) // a supprimer
-{
-	int	i;
-
-	i = 0;
-	printf("--------------------------------------------------------------\n");
-	while (i < 4)
-	{
-		printf("|\t%-.2f|\t%-.2f|\t%-.2f|\t%-.2f|\n", m->value[0][i],\
-				m->value[1][i], m->value[2][i], m->value[3][i]);
-		i++;
-	}
-	printf("--------------------------------------------------------------\n");
 }

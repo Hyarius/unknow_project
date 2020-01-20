@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_mesh_move.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:28:21 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 11:35:27 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/20 13:50:01 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ void	t_mesh_rotate_around_point(t_mesh *mesh, t_vec4 angle,
 	t_vec4		*target;
 	int			i;
 
-	translate = newranslation_matrix(substract_vec4(center,
+	translate = new_translation_matrix(substract_vec4(center,
 																	mesh->pos));
-	inv_translate = newranslation_matrix(inv_t_vec4(
+	inv_translate = new_translation_matrix(inv_t_vec4(
 							substract_vec4(center, mesh->pos)));
 	rotation = create_rotation_matrix(angle.x, angle.y, angle.z);
 	mesh->angle = add_vec4(mesh->angle, angle);
