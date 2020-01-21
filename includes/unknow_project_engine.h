@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unknow_project_engine.h                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:45:15 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 16:48:32 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/21 13:52:51 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,10 @@ void				move_cam(t_camera *camera, t_keyboard *key,
 void				t_user_engine_handle_camera(t_engine *engine,
 											t_camera *cam, t_window *p_win);
 void				t_physic_engine_apply_force(t_engine *engine);
-void				player_action(t_camera *camera,
-									t_keyboard *p_keyboard, t_engine *engine);
-void				shoot_weapon(t_engine *engine);
+void				player_action(t_camera *camera, t_keyboard *p_keyboard,
+								t_engine *engine, t_texture **texture_weapons);
+void				shoot_weapon(t_engine *engine, t_camera *camera,
+								t_texture **texture_weapons);
 void				player_take_dmg(t_engine *engine, int dmg);
 void				enemy_shoot(t_engine *engine);
 void				enemy_look(t_engine *engine);
