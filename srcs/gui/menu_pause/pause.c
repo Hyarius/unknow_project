@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pause.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:46:46 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/20 15:57:30 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/01/21 15:13:56 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,18 @@ void	settings_pause_menu(t_camera *main_camera, t_engine *engine, int *play)
 		if (t_mouse_state(mou) == 2)
 		{
 			if (pos.y > 26 && pos.y < 32)
-				printf("Mute\n");
+			{
+				if (Mix_VolumeMusic(-1) == 128 || Mix_Volume(-1, -1) == 128)
+				{
+					Mix_VolumeMusic(0);
+					Mix_Volume(-1, 0);
+				}
+				else if (Mix_VolumeMusic(-1) == 0 || Mix_Volume(-1, -1) == 0)
+				{
+					Mix_VolumeMusic(MIX_MAX_VOLUME);
+					Mix_Volume(-1, MIX_MAX_VOLUME);
+				}
+			}
 			if (pos.y > 42 && pos.y < 46)
 				printf("Sens +\n");
 			if (pos.y > 55 && pos.y < 60)

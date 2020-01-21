@@ -68,11 +68,30 @@ void        settings_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, i
 		{
 			Mix_PlayChannel(-1, engine->sound_engine->sounds[0], 0);
 			if (pos.y > 23 && pos.y < 26)
-				// Mix_Volume
+			{
+				if (Mix_VolumeMusic(-1) == 0)
+					Mix_VolumeMusic(MIX_MAX_VOLUME);
+				else if (Mix_VolumeMusic(-1) == 128)
+					Mix_VolumeMusic(0);
+				if (Mix_Volume(-1, -1) == 0)
+					Mix_Volume(-1, MIX_MAX_VOLUME);
+				else if (Mix_Volume(-1, -1) == 128)
+					Mix_Volume(-1, 0);
+			}
 			if (pos.y > 27 && pos.y < 30)
-				printf("Mute music\n");
+			{
+				if (Mix_VolumeMusic(-1) == 0)
+					Mix_VolumeMusic(MIX_MAX_VOLUME);
+				else if (Mix_VolumeMusic(-1) == 128)
+					Mix_VolumeMusic(0);
+			}
 			if (pos.y > 32 && pos.y < 35)
-				printf("Mute sounds\n");
+			{	
+				if (Mix_Volume(-1, -1) == 0)
+					Mix_Volume(-1, MIX_MAX_VOLUME);
+				else if (Mix_Volume(-1, -1) == 128)
+					Mix_Volume(-1, 0);
+			}
 			t_view_port_clear_buffers(main_camera->view_port);
 			if (pos.y > 44 && pos.y < 47)
 			{
