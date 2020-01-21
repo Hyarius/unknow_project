@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 13:40:38 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/21 10:55:35 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ void	set_map_in_engine(t_engine *engine, t_mesh_list *meshs,
 			j++;
 		}
 		t_engine_add_mesh(engine, t_mesh_list_at(meshs, i));
-		if (ft_strcmp(t_engine_get_mesh(engine, i)->name, "Enemy") == 0)
+		if (ft_strcmp(t_engine_get_mesh(engine, i)->name, "Enemy") == 0
+		|| ft_strcmp(t_engine_get_mesh(engine, i)->name, "Enemy_boss") == 0)
 		{
 			link_enemy_to_camera(engine, k);
 			link_camera_to_mesh(engine, 2 + k, t_engine_get_mesh(engine, i));

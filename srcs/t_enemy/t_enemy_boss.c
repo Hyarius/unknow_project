@@ -3,47 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   t_enemy_boss.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 14:13:47 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/20 13:53:12 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/21 11:03:24 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
-
-void			enemy_boss_look(t_engine *engine)
-{
-	int			i;
-	t_camera	*cam;
-	t_mesh		*target;
-	float		tmp;
-
-	i = -1;
-	while (++i < engine->physic_engine->mesh_list->size
-		&& (target = t_mesh_list_get(engine->physic_engine->mesh_list, i)))
-		if (ft_strcmp(target->name, "Player") == 0)
-			break ;
-	i = -1;
-	while (++i < engine->visual_engine->camera_list->size)
-	{
-		cam = t_camera_list_get(engine->visual_engine->camera_list, i);
-		if (cam->body != NULL && ft_strcmp(cam->body->name, "Enemy_boss") == 0)
-		{
-			cam->pos = add_vec4(cam->body->pos,
-								new_vec4(0.15, 0.45, -0.15));
-			t_camera_look_at_point(cam, target->center);
-			tmp = (cam->yaw - cam->body->angle.x);
-			if (tmp > cam->body->angle.x + 1.0f
-				|| tmp < cam->body->angle.x - 1.0f)
-			{
-				t_mesh_rotate_around_point(cam->body,
-					new_vec4(0.0, tmp, 0.0), cam->body->center);
-				cam->body->angle.x = cam->yaw;
-			}
-		}
-	}
-}
 
 void			enemy_boss_shoot(t_engine *engine)
 {
@@ -57,7 +24,6 @@ void			enemy_boss_shoot(t_engine *engine)
 		target = t_mesh_list_get(engine->physic_engine->mesh_list, i);
 		if (ft_strcmp(target->name, "Enemy_boss") == 0)
 		{
-			printf("shoot = %d\n", engine->tick % target->tick);
 			if (target->tick == -5)
 				target->tick = engine->tick;
 			if (engine->tick % target->tick == 6)
@@ -101,14 +67,11 @@ t_vec4			spawn_mine(t_vec4 pos)
 void			enemy_boss_spawn(t_engine *engine)
 {
 	int				i;
-	int				k;
 	t_mesh			*target;
 	t_mesh			mesh;
-	static int		j;
+	static int		j = 0;
 
 	i = -1;
-	j = 0;
-	k = engine->visual_engine->camera_list->size - 3;
 	while (++i < engine->physic_engine->mesh_list->size)
 	{
 		target = t_mesh_list_get(engine->physic_engine->mesh_list, i);

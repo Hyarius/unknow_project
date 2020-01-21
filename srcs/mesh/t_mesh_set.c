@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:30:47 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 11:35:01 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/21 10:50:35 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	t_mesh_set_name(t_mesh *mesh, char *name)
 		|| ft_strcmp(mesh->name, "door_blue") == 0
 		|| ft_strcmp(mesh->name, "door_green") == 0)
 		mesh->door = new_door();
-	else if (ft_strcmp(mesh->name, "Enemy") == 0)
+	else if (ft_strcmp(mesh->name, "Enemy") == 0
+		|| ft_strcmp(mesh->name, "Enemy_boss") == 0)
 		mesh->tick = 0;
 }

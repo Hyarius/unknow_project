@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:53:50 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/21 10:23:07 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void			player_take_dmg(t_engine *engine, int dmg)
 {
 	int		diff;
 
+	Mix_PlayChannel(-1, engine->sound_engine->sounds[24], 0);
 	if (engine->user_engine->player->armor != 0)
 	{
 		Mix_PlayChannel(4, engine->sound_engine->sounds[25], 0);
