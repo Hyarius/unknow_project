@@ -88,7 +88,7 @@ int main(int argc, char **argv)
 	mesh = create_primitive_skybox(main_camera->pos, new_vec4(1.0, 1.0, 1.0), skybox);
 	Mix_VolumeMusic(MIX_MAX_VOLUME);
 	engine->playing = 2;
-	// Mix_PlayMusic(engine->sound_engine->music[0], -1);
+	Mix_PlayMusic(engine->sound_engine->music[0], -1);
 	while (engine->playing != 0)
 	{
 		prepare_screen(win, new_color(0.2f, 0.2f, 0.2f, 1.0f));

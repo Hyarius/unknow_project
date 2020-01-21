@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_map_editor2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 13:21:05 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/20 13:43:14 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/01/21 13:28:53 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void		print_set_weapon(t_camera *cam, t_gui *gui, t_engine *engine)
 		print_set_activate_weapon(cam, gui, plr);
 		print_set_ar(cam, gui, plr);
 		print_set_shotgun(cam, gui, plr);
-		print_set_ar(cam, gui, plr);
+		print_set_rifle(cam, gui, plr);
 		print_set_walldest(cam, gui, plr);
 	}
 }

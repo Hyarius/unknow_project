@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 12:57:57 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/21 12:58:32 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/21 15:08:26 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,5 @@ void	player_action(t_camera *camera, t_keyboard *p_keyboard,
 		camera->f_press = 0;
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_B]) == 1)
 		save_map(engine, 1);
-	printf("r_press = %d\n", camera->r_press);
 	player_action4(camera, engine, door);
 }
