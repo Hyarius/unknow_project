@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collision_detection.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 13:15:31 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 10:38:32 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/21 13:37:48 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int				sat_test(t_face *face, t_mesh *target, t_mesh *mesh_qui_bouge)
 	return (BOOL_FALSE);
 }
 
-int				is_t_mesh_intersecting(t_mesh *mesh_compared, t_mesh *target)
+int				mesh_intersect(t_mesh *mesh_compared, t_mesh *target)
 {
 	int		i;
 

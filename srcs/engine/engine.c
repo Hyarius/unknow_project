@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   engine.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 15:01:07 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/21 13:08:39 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,6 @@ void		free_t_engine(t_engine *dest)
 
 void		t_engine_apply_physic(t_engine *engine)
 {
-	t_physic_engine_compute_vertices_in_world(engine->physic_engine);
+	t_p_engine_comp_vert_world(engine->physic_engine);
 	t_physic_engine_apply_force(engine);
 }

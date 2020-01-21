@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_mesh_compute.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:32:34 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 11:28:39 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/21 13:11:17 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	t_mesh_compute_vertices_in_world(t_mesh *dest)
 													dest->pos));
 }
 
-void	t_mesh_compute_next_vertices_in_world(t_mesh *dest, t_vec4 axis)
+void	t_mesh_comp_necxt_vert_world(t_mesh *dest, t_vec4 axis)
 {
 	t_vec4	next_pos;
 	t_face	*dest_face;
