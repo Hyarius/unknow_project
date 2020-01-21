@@ -6,7 +6,7 @@
 /*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:46:46 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/21 15:18:05 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/21 15:22:02 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,3 @@ void	settings_pause_menu(t_engine *engine, int *play)
 	else
 		engine->user_engine->mouse->clicked_left = BOOL_FALSE;
 }
-

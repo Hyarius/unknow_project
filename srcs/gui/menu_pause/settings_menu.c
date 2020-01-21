@@ -6,7 +6,7 @@
 /*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 14:45:37 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/21 15:17:57 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/21 15:21:00 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	settings_sounds(t_vec2_int pos)
 			Mix_VolumeMusic(0);
 	}
 	if (pos.y > 32 && pos.y < 35)
-	{	
+	{
 		if (Mix_Volume(-1, -1) == 0)
 			Mix_Volume(-1, MIX_MAX_VOLUME);
 		else if (Mix_Volume(-1, -1) == 128)

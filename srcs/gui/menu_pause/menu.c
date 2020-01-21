@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   menu.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 13:51:42 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/21 15:05:58 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/21 15:19:57 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,88 +59,9 @@ void	main_menu(t_engine *engine, int *play)
 				*play = 0;
 			Mix_PlayChannel(-1, engine->sound_engine->sounds[0], 0);
 		}
-<<<<<<< HEAD
-    }
-    else
-        engine->user_engine->mouse->clicked_left = BOOL_FALSE;
-}
-
-void        settings_menu(t_camera *main_camera, t_gui *gui, t_engine *engine, int *play)
-{
-
-    t_mouse *mouse = engine->user_engine->mouse;
-    t_keyboard *keyboard = engine->user_engine->keyboard;
-    t_vec2_int pos;
-
-	get_t_mouse_info(mouse);
-    pos = create_vec2_int(mouse->pos.x * 100 / WIN_X, mouse->pos.y * 100 / WIN_Y);
-    t_view_port_clear_buffers(main_camera->view_port);
-    draw_rectangle_texture_cpu(main_camera->view_port, new_rectangle(create_vec2(0.7, 0.4), create_vec2(-0.6, -0.94)), gui->menu[gui->idx]);
-    if (pos.x > 16 && pos.x < 29)
-    {
-		if (t_mouse_state(mouse) == 2)
-		{
-			Mix_PlayChannel(-1, engine->sound_engine->sounds[0], 0);
-			if (pos.y > 23 && pos.y < 26)
-			{
-				if (Mix_VolumeMusic(-1) == 0)
-					Mix_VolumeMusic(MIX_MAX_VOLUME);
-				else if (Mix_VolumeMusic(-1) == 128)
-					Mix_VolumeMusic(0);
-				if (Mix_Volume(-1, -1) == 0)
-					Mix_Volume(-1, MIX_MAX_VOLUME);
-				else if (Mix_Volume(-1, -1) == 128)
-					Mix_Volume(-1, 0);
-			}
-			if (pos.y > 27 && pos.y < 30)
-			{
-				if (Mix_VolumeMusic(-1) == 0)
-					Mix_VolumeMusic(MIX_MAX_VOLUME);
-				else if (Mix_VolumeMusic(-1) == 128)
-					Mix_VolumeMusic(0);
-			}
-			if (pos.y > 32 && pos.y < 35)
-			{	
-				if (Mix_Volume(-1, -1) == 0)
-					Mix_Volume(-1, MIX_MAX_VOLUME);
-				else if (Mix_Volume(-1, -1) == 128)
-					Mix_Volume(-1, 0);
-			}
-			t_view_port_clear_buffers(main_camera->view_port);
-			if (pos.y > 44 && pos.y < 47)
-			{
-				draw_rectangle_texture_cpu(main_camera->view_port, new_rectangle(create_vec2(0.7, 0.4), create_vec2(-0.6, -0.94)), gui->menu[8]);
-					gui->idx = 8;
-			}
-			if (pos.y > 48 && pos.y < 52)
-			{
-				draw_rectangle_texture_cpu(main_camera->view_port, new_rectangle(create_vec2(0.7, 0.4), create_vec2(-0.6, -0.94)), gui->menu[9]);
-					gui->idx = 9;
-			}
-			if (pos.y > 53 && pos.y < 56)
-			{
-				draw_rectangle_texture_cpu(main_camera->view_port, new_rectangle(create_vec2(0.7, 0.4), create_vec2(-0.6, -0.94)), gui->menu[10]);
-					gui->idx = 10;
-			}
-			if (pos.y > 72 && pos.y < 76)
-				*play = 4;
-		}
-    }
-    else if (pos.x > 43 && pos.x < 56)
-    {
-        if (t_mouse_state(mouse) == 2)
-	    {
-			Mix_PlayChannel(-1, engine->sound_engine->sounds[0], 0);
-			*play = 2;
-		}
-    }
-    else
-        engine->user_engine->mouse->clicked_left = BOOL_FALSE;
-=======
 	}
 	else
 		engine->user_engine->mouse->clicked_left = BOOL_FALSE;
->>>>>>> e921707eb7a5dff71d8c4097c59b3ff39acdb8d4
 }
 
 void	credits_menu(t_engine *engine, int *play)
