@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 11:05:41 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/21 16:16:47 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void		create_face(t_mesh result, char **tab, char **line_split, int k)
 		index[i] = ft_atoi(tab[0]) - 1;
 		if (ft_tablen(tab) >= 2 && ft_strlen(tab[1]) != 0)
 			index_uv[i] = ft_atoi(tab[1]) - 1;
+		ft_freetab(tab);
 	}
 	set_t_face_vertices(&tmp_face, index[0], index[1], index[2]);
 	set_t_face_uvs(&tmp_face, index_uv[0], index_uv[1], index_uv[2]);
@@ -37,7 +38,6 @@ void		create_face(t_mesh result, char **tab, char **line_split, int k)
 		set_t_face_uvs(&tmp_face, index_uv[0], index_uv[2], index_uv[3]);
 		t_mesh_add_face(&result, tmp_face);
 	}
-	ft_freetab(tab);
 }
 
 void		read_obj(t_mesh result, char **line_split, t_vec4 size)
@@ -55,6 +55,7 @@ void		read_obj(t_mesh result, char **line_split, t_vec4 size)
 						atof(line_split[2]), 0.0));
 	else if (ft_strcmp(line_split[0], "f") == 0)
 		create_face(result, tab, line_split, ft_tablen(line_split) - 1);
+
 }
 
 void		do_stuff(char *line, t_mesh result, t_vec4 size)

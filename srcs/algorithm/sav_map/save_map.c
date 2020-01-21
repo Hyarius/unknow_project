@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 13:46:27 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/21 15:07:14 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/21 17:12:05 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	save_pos(t_mesh current, int fd, char *test)
 {
 	test = ft_strjoinf(test, ft_ftoa(current.pos.x), 3);
 	test = ft_strjoinf(test, " ", 1);
-	test = ft_strjoinf(test, ft_ftoa(current.pos.y), 1);
+	test = ft_strjoinf(test, ft_ftoa(current.pos.y), 3);
 	test = ft_strjoinf(test, " ", 1);
 	test = ft_strjoinf(test, ft_ftoa(current.pos.z), 3);
 	test = ft_strjoinf(test, " ", 1);
@@ -61,7 +61,7 @@ void	save_pos(t_mesh current, int fd, char *test)
 	}
 	else
 		test = ft_strjoinf(test, "NULL ", 1);
-	test = ft_strjoinf(test, ft_ftoa(current.kinetic), 1);
+	test = ft_strjoinf(test, ft_ftoa(current.kinetic), 3);
 	test = ft_strjoinf(test, " ", 1);
 	save_color(current, fd, test);
 }
@@ -98,9 +98,9 @@ char	*command_system(int wich)
 	char	*command;
 
 	file = ft_itoa(wich);
-	command = ft_strjoin("rm -rf ressources/map/save", file);
+	command = ft_strjoin("ressources/map/save", file);
 	command = ft_strjoinf(command, ".map", 1);
-	system(command);
+	remove((const char*)command);
 	command = ft_strjoinf("touch ressources/map/save", file, 2);
 	command = ft_strjoinf(command, ".map", 1);
 	system(command);

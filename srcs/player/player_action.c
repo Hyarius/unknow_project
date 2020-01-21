@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_action.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 12:57:57 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/21 15:19:49 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/21 15:27:33 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	player_action(t_camera *camera, t_keyboard *p_keyboard,
 						t_engine *engine, t_texture **texture_weapons)
 {
 	t_mesh			*target;
-	static	t_mesh	*door[2] = {NULL, NULL};
+	static t_mesh	*door[2] = {NULL, NULL};
 	int				i;
 
 	player_action2(p_keyboard, engine, camera);
@@ -108,5 +108,5 @@ void	player_action(t_camera *camera, t_keyboard *p_keyboard,
 		camera->f_press = 0;
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_B]) == 1)
 		save_map(engine, 1);
-	player_action4(camera, engine, door);
+	player_action4(camera, engine, door, texture_weapons);
 }

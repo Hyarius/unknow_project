@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 13:40:38 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/21 10:55:35 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/21 16:48:25 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,16 +57,16 @@ void	load_map(t_camera *main_camera, t_engine *engine, char *path)
 {
 	t_item_list *item_list;
 	t_mesh_list	*meshs;
-	t_player	*player;
 	int			fd;
 
-	player = initialize_t_player(main_camera);
+	engine->user_engine->player = initialize_t_player(main_camera);
 	if ((fd = open(path, O_RDONLY)) < 0)
 		error_exit(-7000, "imposible fd");
-	meshs = read_map_file(fd, player);
+	meshs = read_map_file(fd, engine->user_engine->player);
 	item_list = load_items(meshs);
 	close(fd);
-	engine->user_engine->player = player;
 	t_engine_add_mesh(engine, engine->user_engine->player->hitbox);
 	set_map_in_engine(engine, meshs, item_list);
+	free_t_item_list(item_list);
+	free_t_mesh_list(meshs);
 }

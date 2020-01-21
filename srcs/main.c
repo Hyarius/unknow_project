@@ -144,18 +144,13 @@ int main(int argc, char **argv)
 		else if (engine->playing == 1)
 		{
 			mesh.pos = main_camera->pos;
-
 			draw_t_mesh(main_camera, &mesh);
 			t_engine_render_camera(engine);
-
 			SDL_ShowCursor(SDL_DISABLE);
 			t_engine_apply_physic(engine);
-
 			t_engine_handle_camera(engine, win);
 			t_engine_prepare_camera(engine);
-
 			t_engine_draw_mesh(engine);
-
 			t_engine_render_camera(engine);
 			player_action(main_camera, engine->user_engine->keyboard, engine, texture_weapons);
 			enemy_look(engine);
@@ -169,6 +164,7 @@ int main(int argc, char **argv)
 		}
 		else if (engine->playing == 10)
 		{
+			// ft_get_leaks("UNKNOW_PROJECT", "map editor");
 			mesh.pos = main_camera->pos;
 			draw_t_mesh(main_camera, &mesh);
 			t_engine_render_camera(engine);

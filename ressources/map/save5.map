@@ -1,9 +1,10 @@
-player: Player -21.00 1.00 32.10 0.30 0.50 0.30 NULL 20.00 0.00 0.00 0.00 0.50 0.60 0.00 1.0 50 50 20 15 15 30 120 10 40 8 32 1 4 0 0 0
-#ressources/objets/1Entree.obj ressources/objets/1Entree.obj 0.50 1.00 5.00 1.00 1.00 1.00 ressources/assets/textures/map.png 0.00 0.00 0.00 0.00 1.00 1.00 1.00 1.00 200000 
-#ressources/objets/2salleGrille.obj ressources/objets/2salleGrille.obj 0.50 1.00 5.00 1.00 1.00 1.00 ressources/assets/textures/map.png 0.00 0.00 0.00 0.00 1.00 1.00 1.00 1.00 200000 
-#ressources/objets/3SalleChiante.obj ressources/objets/3SalleChiante.obj 0.50 1.00 5.00 1.00 1.00 1.00 ressources/assets/textures/map.png 0.00 0.00 0.00 0.00 1.00 1.00 1.00 1.00 200000 
-#ressources/objets/4Octogone.obj ressources/objets/4Octogone.obj 0.50 1.00 5.00 1.00 1.00 1.00 ressources/assets/textures/map.png 0.00 0.00 0.00 0.00 1.00 1.00 1.00 1.00 200000 
-#ressources/objets/5LAstSalle.obj ressources/objets/5LAstSalle.obj 0.50 1.00 5.00 1.00 1.00 1.00 ressources/assets/textures/map.png 0.00 0.00 0.00 0.00 1.00 1.00 1.00 1.00 200000 
-cube: ladder -19.80 -3.00 14.60 0.20 4.00 -.05 ressources/assets/textures/echelle.png 0.00 0.00 0.00 0.00 1.00 1.00 1.00 1.00 -1 
-cube: ladder -28.30 -3.00 18.50 0.20 4.00 -.05 ressources/assets/textures/echelle.png 0.00 0.00 0.00 0.00 1.00 1.00 1.00 1.00 -1 
-cube: elevator -31.90 -11.00 12.60 2.00 12.00 2.00 ressources/assets/textures/cube_test.png 0.00 0.00 0.00 0.00 1.00 1.00 1.00 1.00 -1 
+player: Player -3.30 0.00 -5.50 0.30 0.50 0.30 NULL 100.00 0.00 0.00 0.00 0.50 0.60 0.00 1.0 100 0 0 15 15 0 0 0 0 0 0 0 0 0 0 0
+plane: plane 0.00 0.00 0.00 100.00 0.00 100.00 NULL 0.00 0.00 0.00 0.00 1.00 0.00 0.00 1.00 -1 
+plane: plane 0.00 -.01 0.00 100.00 0.00 100.00 NULL 0.00 0.00 0.00 0.00 1.00 0.00 0.00 1.00 -1 
+cube: cube -5.70 1.20 -3.90 1.00 1.00 1.00 ressources/assets/textures/cube_test.png 0.00 0.00 0.00 0.00 1.00 1.00 1.00 1.00 -1 
+cube: cube -5.30 2.20 -2.60 1.00 1.00 1.00 ressources/assets/textures/cube_test.png 0.00 0.00 0.00 0.00 1.00 1.00 1.00 1.00 -1 
+cube: cube -5.60 2.60 1.70 1.00 1.00 1.00 ressources/assets/textures/cube_test.png 0.00 0.00 0.00 0.00 1.00 1.00 1.00 1.00 -1 
+cube: cube -5.90 0.60 2.70 1.00 1.00 1.00 ressources/assets/textures/cube_test.png 0.00 0.00 0.00 0.00 1.00 1.00 1.00 1.00 -1 
+cube: cube -5.10 0.70 0.20 1.00 1.00 1.00 ressources/assets/textures/cube_test.png 0.00 0.00 0.00 0.00 1.00 1.00 1.00 1.00 -1 
+cube: cube -4.30 1.20 -.40 1.00 1.00 1.00 ressources/assets/textures/cube_test.png 0.00 0.00 0.00 0.00 1.00 1.00 1.00 1.00 -1 
+cube: window -4.30 0.90 -1.70 2.00 2.00 0.30 ressources/assets/textures/window.png 0.00 0.00 0.00 0.00 1.00 1.00 1.00 1.00 -1 
