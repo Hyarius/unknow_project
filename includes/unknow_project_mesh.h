@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unknow_project_mesh.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:48:49 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/20 15:53:26 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/21 13:11:17 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void					t_mesh_rotate_around_point(t_mesh *mesh,
 void					t_mesh_look_at(t_mesh *mesh);
 void					t_mesh_set_visibility(t_mesh *dest, int new_state);
 void					t_mesh_compute_vertices_in_world(t_mesh *dest);
-void					t_mesh_compute_next_vertices_in_world(t_mesh *dest,
+void					t_mesh_comp_necxt_vert_world(t_mesh *dest,
 							t_vec4 axis);
 void					t_mesh_resize(t_mesh *mesh, t_vec4 modif);
 void					t_mesh_set_name(t_mesh *mesh, char *name);
