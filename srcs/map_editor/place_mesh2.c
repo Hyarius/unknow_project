@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   place_mesh2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 11:49:52 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 14:17:09 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/01/21 13:37:48 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ void	test_move_axis_bis(t_mesh *mesh, float *force, t_vec4 axis,
 	max = *force;
 	*force = 0;
 	while (i < subdivision
-		&& is_t_mesh_intersecting(mesh, target) == BOOL_FALSE)
+		&& mesh_intersect(mesh, target) == BOOL_FALSE)
 	{
 		i++;
 		*force += delta;
 		if (i == subdivision)
 			*force = max;
-		t_mesh_compute_next_vertices_in_world(mesh, axis);
-		if (is_t_mesh_intersecting(mesh, target) == BOOL_TRUE)
+		t_mesh_comp_necxt_vert_world(mesh, axis);
+		if (mesh_intersect(mesh, target) == BOOL_TRUE)
 			*force -= delta;
 	}
 }

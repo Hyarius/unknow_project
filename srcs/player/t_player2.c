@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_player2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:53:46 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/21 12:58:33 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/21 14:07:45 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,13 @@ void	shoot_weapon2(t_engine *engine, t_weapon *weapon, t_mesh *target,
 	Mix_PlayChannel(-1, engine->sound_engine->sounds[weapon->index + 7], 0);
 }
 
-void	shoot_weapon(t_engine *engine)
+void	shoot_weapon(t_engine *engine, t_camera *cam, t_texture **texture_weapons)
 {
 	t_mesh		*target;
 	t_weapon	*weapon;
 	float		dist;
-
+	static	int i = 0;
+	
 	dist = 0.0;
 	weapon = engine->user_engine->player->current_weapon;
 	if (ft_strcmp(weapon->name, "bb") == 0)
@@ -109,6 +110,10 @@ void	shoot_weapon(t_engine *engine)
 	{
 		if (weapon->ammo > 0)
 		{
+			t_view_port_clear_buffers(cam->view_port);
+			draw_rectangle_texture_cpu(cam->view_port, new_rectangle(
+			create_vec2(-0.65, -0.1), create_vec2(1.3, -0.9)),
+			texture_weapons[engine->user_engine->player->current_weapon->index + 6]);
 			shoot_weapon2(engine, weapon, target, dist);
 			if (ft_strcmp(weapon->name, "ar") == 0)
 				weapon->ammo -= 2;

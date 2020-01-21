@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 12:57:57 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/21 15:08:26 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/21 15:13:53 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	player_action3(t_camera *camera, t_engine *engine, t_mesh **door,
 		door[1] = target;
 }
 
-void	player_action4(t_camera *camera, t_engine *engine, t_mesh **door)
+void	player_action4(t_camera *camera, t_engine *engine, t_mesh **door, t_texture **texture_weapons)
 {
 	change_weapon(engine->user_engine->keyboard, engine->user_engine->player);
 	if (door[0] != NULL)
@@ -76,7 +76,7 @@ void	player_action4(t_camera *camera, t_engine *engine, t_mesh **door)
 																engine);
 	if (engine->user_engine->player->shoot_time != engine->tick
 			&& camera->r_press != 1)
-		shoot_weapon(engine);
+		shoot_weapon(engine, camera, texture_weapons);
 	if (engine->user_engine->player->hp <= 0)
 	{
 		Mix_PlayChannel(-1, engine->sound_engine->sounds[15], 0);
@@ -85,7 +85,7 @@ void	player_action4(t_camera *camera, t_engine *engine, t_mesh **door)
 }
 
 void	player_action(t_camera *camera, t_keyboard *p_keyboard,
-						t_engine *engine)
+						t_engine *engine, t_texture **texture_weapons)
 {
 	t_mesh			*target;
 	static	t_mesh	*door[2] = {NULL, NULL};

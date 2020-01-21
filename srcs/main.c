@@ -50,13 +50,23 @@ int main(int argc, char **argv)
 	texture2[5] = png_load("ressources/assets/imgs/Hands_baby.png");
 
 
-	t_texture *texture_weapons[6];
-	texture_weapons[0] = png_load("ressources_backup/assets/imgs/pistol.png");
-	texture_weapons[1] = png_load("ressources_backup/assets/imgs/AR.png");
-	texture_weapons[2] = png_load("ressources_backup/assets/imgs/rifle.png");
-	texture_weapons[3] = png_load("ressources_backup/assets/imgs/shotgun.png");
-	texture_weapons[4] = png_load("ressources_backup/assets/imgs/wall_destroyer.png");
+	t_texture *texture_weapons[16];
+	texture_weapons[0] = png_load("ressources/assets/imgs/pistol.png");
+	texture_weapons[1] = png_load("ressources/assets/imgs/ar.png");
+	texture_weapons[2] = png_load("ressources/assets/imgs/rifle.png");
+	texture_weapons[3] = png_load("ressources/assets/imgs/shotgun.png");
+	texture_weapons[4] = png_load("ressources/assets/imgs/wall_destroyer.png");
 	texture_weapons[5] = png_load("ressources/assets/imgs/Hands_baby.png");
+	texture_weapons[6] = png_load("ressources/assets/imgs/pistol_shoot_0.png");
+	texture_weapons[7] = png_load("ressources/assets/imgs/ar_shoot_0.png");
+	texture_weapons[8] = png_load("ressources/assets/imgs/rifle_shoot_0.png");
+	texture_weapons[9] = png_load("ressources/assets/imgs/shotgun_shoot_0.png");
+	texture_weapons[10] = png_load("ressources/assets/imgs/wall_destroyer_shoot_0.png");
+	texture_weapons[11] = png_load("ressources/assets/imgs/pistol_shoot_1.png");
+	texture_weapons[12] = png_load("ressources/assets/imgs/ar_shoot_1.png");
+	texture_weapons[13] = png_load("ressources/assets/imgs/rifle_shoot_1.png");
+	texture_weapons[14] = png_load("ressources/assets/imgs/shotgun_shoot_1.png");
+	texture_weapons[15] = png_load("ressources/assets/imgs/wall_destroyer_shoot_1.png");
 
 	t_texture *skybox = png_load("ressources/assets/textures/skybox.png");
 
@@ -147,7 +157,7 @@ int main(int argc, char **argv)
 			t_engine_draw_mesh(engine);
 
 			t_engine_render_camera(engine);
-			player_action(main_camera, engine->user_engine->keyboard, engine);
+			player_action(main_camera, engine->user_engine->keyboard, engine, texture_weapons);
 			enemy_look(engine);
 			enemy_shoot(engine);
 			enemy_move(engine);
