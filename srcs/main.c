@@ -145,7 +145,7 @@ int main(int argc, char **argv)
 		{
 			mesh.pos = main_camera->pos;
 
-			draw_skybox(win, main_camera, &mesh);
+			draw_t_mesh(main_camera, &mesh);
 			t_engine_render_camera(engine);
 
 			SDL_ShowCursor(SDL_DISABLE);
@@ -170,7 +170,7 @@ int main(int argc, char **argv)
 		else if (engine->playing == 10)
 		{
 			mesh.pos = main_camera->pos;
-			draw_skybox(win, main_camera, &mesh);
+			draw_t_mesh(main_camera, &mesh);
 			t_engine_render_camera(engine);
 
 			SDL_ShowCursor(SDL_DISABLE);
