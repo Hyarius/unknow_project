@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 13:46:27 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 15:27:25 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/01/21 15:07:14 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ void	save_name(t_mesh current, int fd)
 		test = ft_strdup("#");
 		test = ft_strjoinf(test, current.name, 1);
 		test = ft_strjoinf(test, " ", 1);
-		printf("coucou on s'en fou\n");
 	}
 	test = ft_strjoinf(test, current.name, 1);
 	test = ft_strjoinf(test, " ", 1);

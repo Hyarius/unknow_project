@@ -6,7 +6,7 @@
 /*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:46:46 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/21 15:13:56 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/21 15:18:05 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	close_map(t_engine *engine)
 	engine->playing = 2;
 }
 
-void	pause_menu(t_camera *main_camera, t_engine *engine, t_window *win)
+void	pause_menu(t_engine *engine, t_window *win)
 {
 	t_mouse		*mou;
 	t_vec2_int	pos;
@@ -48,7 +48,7 @@ void	pause_menu(t_camera *main_camera, t_engine *engine, t_window *win)
 		engine->user_engine->mouse->clicked_left = BOOL_FALSE;
 }
 
-void	settings_pause_menu(t_camera *main_camera, t_engine *engine, int *play)
+void	settings_pause_menu(t_engine *engine, int *play)
 {
 	t_mouse		*mou;
 	t_vec2_int	pos;
@@ -79,9 +79,11 @@ void	settings_pause_menu(t_camera *main_camera, t_engine *engine, int *play)
 				printf("Sens -\n");
 			if (pos.y > 69 && pos.y < 75)
 				*play = -1;
+			// sens_pause(a voir);
 			Mix_PlayChannel(-1, engine->sound_engine->sounds[0], 0);
 		}
 	}
 	else
 		engine->user_engine->mouse->clicked_left = BOOL_FALSE;
 }
+

@@ -6,7 +6,7 @@
 /*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 12:57:57 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/21 14:16:47 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/21 15:19:05 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ void	player_action3(t_camera *camera, t_engine *engine, t_mesh **door,
 		door[1] = target;
 }
 
-void	player_action4(t_camera *camera, t_engine *engine, t_mesh **door, t_texture **texture_weapons)
+void	player_action4(t_camera *camera, t_engine *engine, t_mesh **door,
+						t_texture **texture_weapons)
 {
 	change_weapon(engine->user_engine->keyboard, engine->user_engine->player);
 	if (door[0] != NULL)
@@ -107,6 +108,5 @@ void	player_action(t_camera *camera, t_keyboard *p_keyboard,
 		camera->f_press = 0;
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_B]) == 1)
 		save_map(engine, 1);
-	printf("r_press = %d\n", camera->r_press);
-	player_action4(camera, engine, door, texture_weapons);
+	player_action4(camera, engine, door);
 }

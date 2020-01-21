@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save_menu.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:00:42 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/20 16:45:43 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/01/21 13:14:55 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void		save_pause_bis(t_engine *engine, t_vec2_int pos)
 	}
 }
 
-void		save_pause(t_camera *main_camera, t_engine *engine, t_window *win)
+void		save_pause(t_engine *engine, t_window *win)
 {
 	t_mouse		*mou;
 	t_vec2_int	pos;
