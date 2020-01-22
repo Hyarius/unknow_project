@@ -6,7 +6,7 @@
 /*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 11:49:52 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/21 13:37:48 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/22 14:06:13 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	test_move_axis_bis(t_mesh *mesh, float *force, t_vec4 axis,
 		*force += delta;
 		if (i == subdivision)
 			*force = max;
-		t_mesh_comp_necxt_vert_world(mesh, axis);
+		t_mesh_comp_next_vert_world(mesh, axis);
 		if (mesh_intersect(mesh, target) == BOOL_TRUE)
 			*force -= delta;
 	}
