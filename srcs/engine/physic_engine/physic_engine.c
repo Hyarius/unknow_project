@@ -6,61 +6,62 @@
 /*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 14:56:08 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/21 13:43:44 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/22 15:38:55 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
+int				test_move_axis2(t_mesh *mesh, float *tab, t_vec4 axis,
+														t_mesh *target)
+{
+	float	tmp;
+
+	if (axis.y == 0.0)
+	{
+		tmp = mesh->force.y;
+		mesh->force.y = 0.015;
+		axis.y = 1;
+		t_mesh_comp_next_vert_world(mesh, axis);
+		if (mesh_intersect(mesh, target) == BOOL_TRUE)
+		{
+			mesh->force.y = tmp;
+			tab[0] -= tab[1];
+		}
+		axis.y = 0.0;
+	}
+	else
+		tab[0] -= tab[1];
+	return (20);
+}
+
 void			test_move_axis(t_mesh *mesh, float *force, t_vec4 axis,
 														t_mesh *target)
 {
 	float	max;
-	int		subdivision;
 	int		i;
-	float	delta;
-	float	tmp;
+	float	tab[2];
 
-	subdivision = 20;
-	delta = *force / subdivision;
+	tab[1] = *force / 20;
 	max = *force;
 	*force = 0;
 	i = -1;
-	while (++i < subdivision && mesh_intersect(mesh, target) == BOOL_FALSE)
+	while (++i < 20 && mesh_intersect(mesh, target) == BOOL_FALSE)
 	{
-		*force += delta;
-		if (i == subdivision)
+		*force += tab[1];
+		if (i == 20)
 			*force = max;
-		t_mesh_comp_necxt_vert_world(mesh, axis);
+		t_mesh_comp_next_vert_world(mesh, axis);
 		if (mesh_intersect(mesh, target) == BOOL_TRUE)
 		{
-			if (axis.y == 0.0)
-			{
-				tmp = mesh->force.y;
-				mesh->force.y = 0.001;
-				axis.y = 1.0;
-				while (mesh->force.y < 0.015)
-				{
-					t_mesh_comp_necxt_vert_world(mesh, axis);
-					if (mesh_intersect(mesh, target) == BOOL_TRUE)
-						break ;
-					mesh->force.y += 0.001;
-				}
-				if (mesh_intersect(mesh, target) == BOOL_TRUE)
-				{
-					mesh->force.y = tmp;
-					*force -= delta;
-				}
-				i = subdivision;
-				axis.y = 0.0;
-			}
-			else
-				*force -= delta;
+			tab[0] = *force;
+			i = test_move_axis2(mesh, tab, axis, target);
+			*force = tab[0];
 			if (ft_strcmp(target->name, "ladder") == 0 && axis.y == 0.0)
 				mesh->force.y = 0.02;
 		}
 	}
-	t_mesh_comp_necxt_vert_world(mesh, axis);
+	t_mesh_comp_next_vert_world(mesh, axis);
 }
 
 void			can_move3(t_mesh *mesh, t_engine *engine, t_mesh *tar)
@@ -77,13 +78,13 @@ void			can_move3(t_mesh *mesh, t_engine *engine, t_mesh *tar)
 		test_move_axis(mesh, &(mesh->force.z), new_vec4(0, 0, 1), tar);
 		if (mesh->force.z != 0.0 && mesh->force.x != 0.0)
 		{
-			t_mesh_comp_necxt_vert_world(mesh, new_vec4(1, 1, 1));
+			t_mesh_comp_next_vert_world(mesh, new_vec4(1, 1, 1));
 			if (mesh_intersect(mesh, tar) == BOOL_TRUE)
 			{
 				mesh->force.z = 0.0;
 				mesh->force.x = 0.0;
 			}
-			t_mesh_comp_necxt_vert_world(mesh, new_vec4(1, 1, 1));
+			t_mesh_comp_next_vert_world(mesh, new_vec4(1, 1, 1));
 		}
 	}
 }
