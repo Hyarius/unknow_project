@@ -6,7 +6,7 @@
 /*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 14:45:37 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/22 13:01:59 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/22 13:13:59 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	settings_menu_next(t_camera *main_camera, t_gui *gui,
 													t_vec2_int pos, int *play)
 {
 	settings_sounds(pos);
+	// settings_sens(pos); //a terminer
 	if (pos.y > 44 && pos.y < 47)
 	{
 		draw_rectangle_texture_cpu(main_camera->view_port,
