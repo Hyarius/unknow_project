@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 11:25:39 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/20 13:41:26 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/22 15:16:59 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_vec4	substract_vec4(t_vec4 a, t_vec4 b)
 	return (result);
 }
 
-t_vec4	mult_vec4_by_vec4(t_vec4 a, t_vec4 b)
+t_vec4	mult_2_vec4(t_vec4 a, t_vec4 b)
 {
 	t_vec4	result;
 

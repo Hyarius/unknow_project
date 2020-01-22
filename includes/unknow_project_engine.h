@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unknow_project_engine.h                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:45:15 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/21 14:12:28 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/22 10:48:25 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void				t_engine_prepare_camera(t_engine *engine);
 void				t_engine_add_camera(t_engine *p_engine,
 														t_camera new_camera);
 int					can_move(t_mesh *mesh, t_engine *engine);
-void				handle_t_camera_mouvement_by_key(t_camera *camera,
+void				handle_camera_mouvement_by_key(t_camera *camera,
 									t_keyboard *p_keyboard, t_engine *engine);
 void				move_camera(t_camera *camera, t_vec4 mouvement,
 													t_engine *engine, float j);

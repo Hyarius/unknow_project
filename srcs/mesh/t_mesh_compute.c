@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_mesh_compute.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:32:34 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/21 13:11:17 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/22 15:16:59 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	t_mesh_comp_necxt_vert_world(t_mesh *dest, t_vec4 axis)
 	i = -1;
 	clean_t_vec4_list(dest->next_vertices_in_world);
 	next_pos = add_vec4(dest->pos,
-				mult_vec4_by_vec4(dest->force, axis));
+				mult_2_vec4(dest->force, axis));
 	while (++i < dest->vertices->size)
 		t_vec4_list_push_back(dest->next_vertices_in_world,
 		add_vec4(t_vec4_list_at(dest->vertices, i), next_pos));

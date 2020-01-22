@@ -10,7 +10,8 @@ void	tar_ressources(void)
 	command = ft_strdup("tar -cvf ressources.tar ressources");
 	system(command);
 	free(command);
- 	command = ft_strdup("rm -rf ressources/assets/musics ressources/assets ressources");
+	command = ft_strdup("rm -rf ressources/assets/musics \
+								ressources/assets ressources");
 	system(command);
 	free(command);
 }
@@ -24,24 +25,29 @@ void	untar_ressources(void)
 	free(command);
 }
 
-int main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
-	TTF_Font    *police;
-	SDL_Surface *font = NULL;
-	SDL_Color color = {0, 0, 0};
+	t_window		*win;
+	t_texture		*skybox;
+	t_engine		*engine;
+	t_gui			*gui;
+	t_mesh			mesh;
+	t_camera		*main_camera;
+	t_rectangle		rec;
+	t_mesh_editing	mesh_editing;
+	char			**path;
+	t_texture		*texture2[6];
+	t_texture		*texture_weapons[16];
 
 	if (argc != 1)
 		error_exit(-1, "Bad argument");
 
 	// untar_ressources();
 	Mix_Init(MIX_INIT_OGG);
-	// printf("%s\n", Mix_GetError());
-	start_sdl(); //initialisation de la SDL
+	start_sdl();
 
-	t_window *win;
-	win = initialize_t_window(argv[0], WIN_X, WIN_Y);	//creation et initialisation de la window
+	win = initialize_t_window(argv[0], WIN_X, WIN_Y);
 
-	t_texture *texture2[6];
 	texture2[0] = png_load("ressources/assets/textures/pistol_ammo.png");
 	texture2[1] = png_load("ressources/assets/textures/ar_ammo.png");
 	texture2[2] = png_load("ressources/assets/textures/rifle_ammo.png");
@@ -49,8 +55,6 @@ int main(int argc, char **argv)
 	texture2[4] = png_load("ressources/assets/textures/wall_destroyer_ammo.png");
 	texture2[5] = png_load("ressources/assets/imgs/Hands_baby.png");
 
-
-	t_texture *texture_weapons[16];
 	texture_weapons[0] = png_load("ressources/assets/imgs/pistol.png");
 	texture_weapons[1] = png_load("ressources/assets/imgs/ar.png");
 	texture_weapons[2] = png_load("ressources/assets/imgs/rifle.png");
@@ -68,11 +72,7 @@ int main(int argc, char **argv)
 	texture_weapons[14] = png_load("ressources/assets/imgs/shotgun_shoot_1.png");
 	texture_weapons[15] = png_load("ressources/assets/imgs/wall_destroyer_shoot_1.png");
 
-	t_texture *skybox = png_load("ressources/assets/textures/skybox.png");
-
-	t_engine	*engine;
-	t_gui		*gui;
-
+	skybox = png_load("ressources/assets/textures/skybox.png");
 	if (Mix_OpenAudio(44100, AUDIO_S16SYS, 1, 1024) == -1)
 		error_exit(-100, (char*)Mix_GetError());
 	engine = initialize_t_engine(win);
@@ -82,8 +82,6 @@ int main(int argc, char **argv)
 	TTF_Init();
 	set_t_gui_texte(gui);
 
-	t_mesh		mesh;
-	t_camera	*main_camera;
 	main_camera = t_camera_list_get(engine->visual_engine->camera_list, 0);
 	t_engine_place_camera(engine, 0, new_vec4(5.0, 5.0, 0.0));
 	t_camera_look_at_point(main_camera, new_vec4(0, 0, 0));
@@ -91,9 +89,7 @@ int main(int argc, char **argv)
 	resize_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 1)->view_port, create_vec2_int(300, 240));
 	move_t_view_port(t_camera_list_get(engine->visual_engine->camera_list, 1)->view_port, create_vec2_int(WIN_X - 300, 0));
 
-	t_rectangle rec = new_rectangle(create_vec2(-1, 1), create_vec2(2, -2));
-	t_mesh_editing	mesh_editing;
-	char	**path;
+	rec = new_rectangle(create_vec2(-1, 1), create_vec2(2, -2));
 	path = load_path_texture();
 	mesh = create_primitive_skybox(main_camera->pos, new_vec4(1.0, 1.0, 1.0), skybox);
 	Mix_VolumeMusic(MIX_MAX_VOLUME);
@@ -111,15 +107,15 @@ int main(int argc, char **argv)
 		{
 			t_engine_draw_mesh(engine);
 			t_engine_render_camera(engine);
-   			t_view_port_clear_buffers(main_camera->view_port);
-    		draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->menu[4]);
+			t_view_port_clear_buffers(main_camera->view_port);
+			draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->menu[4]);
 		}
 		else if (engine->playing == -2)
 		{
 			t_engine_draw_mesh(engine);
 			t_engine_render_camera(engine);
-   			t_view_port_clear_buffers(main_camera->view_port);
-    		draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->menu[5]);
+			t_view_port_clear_buffers(main_camera->view_port);
+			draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->menu[5]);
 		}
 		else if (engine->playing == 2)
 		{
@@ -164,11 +160,9 @@ int main(int argc, char **argv)
 		}
 		else if (engine->playing == 10)
 		{
-			// ft_get_leaks("UNKNOW_PROJECT", "map editor");
 			mesh.pos = main_camera->pos;
 			draw_t_mesh(main_camera, &mesh);
 			t_engine_render_camera(engine);
-
 			SDL_ShowCursor(SDL_DISABLE);
 			t_engine_apply_physic(engine);
 			t_engine_handle_camera(engine, win);
@@ -182,28 +176,27 @@ int main(int argc, char **argv)
 		{
 			t_engine_draw_mesh(engine);
 			t_engine_render_camera(engine);
-   			t_view_port_clear_buffers(main_camera->view_port);
-    		draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->menu[14]);
+			t_view_port_clear_buffers(main_camera->view_port);
+			draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->menu[14]);
 			print_set_player(main_camera, gui, engine);
 		}
 		else if (engine->playing == 12)
 		{
 			t_engine_draw_mesh(engine);
 			t_engine_render_camera(engine);
-   			t_view_port_clear_buffers(main_camera->view_port);
-    		draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->menu[15]);
+			t_view_port_clear_buffers(main_camera->view_port);
+			draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->menu[15]);
 			print_set_weapon(main_camera, gui, engine);
 		}
 		else if (engine->playing == 13 || engine->playing == -3)
 		{
 			t_engine_draw_mesh(engine);
 			t_engine_render_camera(engine);
-   			t_view_port_clear_buffers(main_camera->view_port);
-    		draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->menu[16]);
-			// print_set_player(main_camera, gui, engine);
+			t_view_port_clear_buffers(main_camera->view_port);
+			draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->menu[16]);
 		}
 		t_engine_handle_event(main_camera, gui, engine, win);
-		render_screen(win, engine); // affiche la fenetre
+		render_screen(win, engine);
 	}
 	Mix_CloseAudio();
 	TTF_Quit();

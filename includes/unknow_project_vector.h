@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unknow_project_vector.h                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:33:29 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/20 15:38:45 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/22 15:16:59 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_vec4			new_vec4(float p_x, float p_y, float p_z);
 t_vec4			*initialize_t_vec4(float p_x, float p_y, float p_z);
 t_vec4			add_vec4(t_vec4 a, t_vec4 b);
 t_vec4			substract_vec4(t_vec4 a, t_vec4 b);
-t_vec4			mult_vec4_by_vec4(t_vec4 a, t_vec4 b);
+t_vec4			mult_2_vec4(t_vec4 a, t_vec4 b);
 t_vec4			mult_vec4_by_float(t_vec4 a, float b);
 t_vec4			divide_vec4_by_float(t_vec4 a, float b);
 t_vec4			inv_t_vec4(t_vec4 src);

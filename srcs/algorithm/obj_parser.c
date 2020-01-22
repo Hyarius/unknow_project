@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 11:05:41 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/21 16:16:47 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/22 08:47:35 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void		read_obj(t_mesh result, char **line_split, t_vec4 size)
 						atof(line_split[2]), 0.0));
 	else if (ft_strcmp(line_split[0], "f") == 0)
 		create_face(result, tab, line_split, ft_tablen(line_split) - 1);
-
 }
 
 void		do_stuff(char *line, t_mesh result, t_vec4 size)

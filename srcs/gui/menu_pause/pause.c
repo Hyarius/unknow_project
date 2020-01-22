@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:46:46 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/21 17:16:21 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/22 10:32:20 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	close_map(t_engine *engine)
 {
 	// free physique engine et visual engine et le player dans user_engine
-	free_t_mesh_list(engine->physic_engine->mesh_list);
+	delete_t_physic_engine(*engine->physic_engine);
 	engine->physic_engine->mesh_list = initialize_t_mesh_list();
 	engine->playing = 2;
 }

@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 12:57:57 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/21 15:27:33 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/22 09:42:10 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	player_action4(t_camera *camera, t_engine *engine, t_mesh **door,
 		t_mesh_move_elevator(door[1], camera->body);
 	if (camera->r_press == 1)
 		reload_weapon(camera, engine->user_engine->player, engine->tick,
-																engine);
+													engine, texture_weapons);
 	if (engine->user_engine->player->shoot_time != engine->tick
 			&& camera->r_press != 1)
 		shoot_weapon(engine, camera, texture_weapons);

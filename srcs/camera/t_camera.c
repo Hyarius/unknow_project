@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_camera.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:18:59 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/20 16:49:39 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/22 15:19:22 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void		new_camera2(t_camera *result)
 	result->triangle_texture_list = new_triangle_list();
 	result->uv_list = new_uv_list();
 	result->darkness_list = new_color_list();
+	result->draw_weapon = 1;
 }
 
 t_camera	new_camera(t_window *window, t_vec4 p_pos, float p_fov,
@@ -63,134 +64,55 @@ t_camera	*initialize_t_camera(t_window *window, t_vec4 p_pos,
 	return (result);
 }
 
-void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard, t_engine *engine)
+void		jet_pack(t_camera *cam, t_player *player, t_engine *engine)
 {
-	t_mesh		*target;
-	t_vec4		tmp;
-	t_vec4		mouvement;
-	t_vec4		save;
-	float		y;
-	float		j;
-	float		z;
-	int			i;
-	int			k;
-	int			l;
 	static int	in_air = 0;
 
-	j = 0.0;
-	i = 0;
-	z = 0.0;
-	mouvement = new_vec4(0, 0, 0);
-	save = new_vec4(0, 0, 0);
-	if (engine->user_engine->player->hitbox.kinetic == 0.0f)
-	{
-		camera->body->force = new_vec4(0.0, 0.0, 0.0);
-		z = 0.1;
-	}
-	if (camera->body->force.y != 0.0)
+	if (cam->body->force.y != 0.0 && player->fuel > 0)
 		in_air = 1;
-	if (camera->body->force.y > 0.02)
+	if (cam->body->force.y > 0.02)
 	{
-		if (!Mix_Playing(3) && engine->user_engine->player->fuel > 0)
+		if (!Mix_Playing(3) && player->fuel > 0)
 			Mix_PlayChannel(3, engine->sound_engine->sounds[3], 0);
-		if (engine->user_engine->player->fuel == 0)
+		if (player->fuel == 0 && in_air == 1)
 		{
 			Mix_HaltChannel(3);
 			Mix_PlayChannel(3, engine->sound_engine->sounds[4], 0);
 		}
 	}
-	if (camera->body->force.y == 0.0)
+	if (cam->body->force.y == 0.0 && in_air == 1)
 	{
-		if (in_air == 1)
-		{
-			in_air = 0;
-			Mix_PlayChannel(4, engine->sound_engine->sounds[6], 0);
-		}
+		in_air = 0;
+		Mix_PlayChannel(4, engine->sound_engine->sounds[6], 0);
 	}
-	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_SPACE]) == 1 && engine->user_engine->player->fuel > 0)
-	{
-		camera->body->force.y = 0.04;
-		engine->user_engine->player->fuel--;
-		if (!Mix_Playing(3))
-			Mix_PlayChannel(3, engine->sound_engine->sounds[2], 0);
-	}
-	else if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_SPACE]) == 1 && camera->body->force.y == 0)
-	{
-		Mix_PlayChannel(4, engine->sound_engine->sounds[1], 0 );
-		camera->body->force.y = 0.04;
-	}
-	y = camera->body->force.y;
-	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_LSHIFT]) == 1 && camera->body->force.y == 0)
-		tmp = new_vec4(camera->speed * camera->running, z, camera->speed * camera->running);
+}
+
+void		handle_camera_mouvement_by_key(t_camera *cam, t_keyboard *keyboard,
+															t_engine *engine)
+{
+	t_vec4		tmp;
+	t_vec4		save;
+	float		y;
+	float		z;
+
+	z = 0.0;
+	if (engine->user_engine->player->hitbox.kinetic == 0.0f && (z = 0.1))
+		cam->body->force = new_vec4(0.0, 0.0, 0.0);
+	jet_pack(cam, engine->user_engine->player, engine);
+	jump(keyboard, engine->user_engine->player, cam, engine);
+	y = cam->body->force.y;
+	if (get_key_state(keyboard, keyboard->key[SDL_SCANCODE_LSHIFT]) == 1
+													&& cam->body->force.y == 0)
+		tmp = new_vec4(cam->speed * cam->running, z, cam->speed * cam->running);
 	else
-		tmp = new_vec4(camera->speed, z, camera->speed);
-	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_S]) == 1)
-	{
-		tmp = new_vec4(camera->speed / camera->slowing, z, camera->speed / camera->slowing);
-		camera->body->force = add_vec4(mult_vec4_by_vec4(normalize_t_vec4(mult_vec4_by_vec4(camera->forward, new_vec4(-1.0, -1.0, -1.0))), tmp), mouvement);
-		save = new_vec4(camera->body->force.x, camera->body->force.y, camera->body->force.z);
-	}
-	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_W]) == 1)
-	{
-		camera->body->force = add_vec4(mult_vec4_by_vec4(normalize_t_vec4(mult_vec4_by_vec4(camera->forward, new_vec4(1.0, 1.0, 1.0))), tmp), mouvement);
-		if (save.x != 0 || save.y != 0 || save.z != 0)
-			save = add_vec4(divide_vec4_by_float(camera->body->force, 2), divide_vec4_by_float(save, 2));
-		else
-			save = new_vec4(camera->body->force.x, camera->body->force.y, camera->body->force.z);
-	}
-	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_D]) == 1)
-	{
-		camera->body->force = add_vec4(mult_vec4_by_vec4(camera->right, tmp), mouvement);
-		if (save.x != 0 || save.y != 0 || save.z != 0)
-			save = add_vec4(divide_vec4_by_float(camera->body->force, 2), divide_vec4_by_float(save, 2));
-		else
-			save = new_vec4(camera->body->force.x, camera->body->force.y, camera->body->force.z);
-	}
-	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_A]) == 1)
-	{
-		camera->body->force = add_vec4(mult_vec4_by_vec4(inv_t_vec4(camera->right), tmp), mouvement);
-		if (save.x != 0 || save.y != 0 || save.z != 0)
-			save = add_vec4(divide_vec4_by_float(camera->body->force, 2), divide_vec4_by_float(save, 2));
-		else
-			save = new_vec4(camera->body->force.x, camera->body->force.y, camera->body->force.z);
-	}
-	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_LCTRL]) == 1)
-	{
-		j = 0.2;
-		if (camera->crouch == 0)
-		{
-			t_mesh_resize(camera->body, new_vec4(0.0, -0.2, 0.0));
-			camera->crouch = 1;
-		}
-	}
-	else if (camera->crouch == 1)
-	{
-		k = 0;
-		l = 0;
-		while (i < engine->physic_engine->mesh_list->size)
-		{
-			target = t_mesh_list_get(engine->physic_engine->mesh_list, i);
-			if (camera->body != target && target->bubble_radius + camera->body->bubble_radius >= calc_dist_vec4(camera->body->center, target->center))
-			{
-				k++;
-				if (camera->body->pos.y > target->pos.y || target->pos.y - camera->body->pos.y >= 0.49)
-					l++;
-			}
-			i++;
-		}
-		if (k == l)
-		{
-			t_mesh_resize(camera->body, new_vec4(0.0, 0.2, 0.0));
-			camera->crouch = 0;
-			j = 0.0;
-		}
-		else
-			j = 0.2;
-	}
+		tmp = new_vec4(cam->speed, z, cam->speed);
+	save = forward_backward(keyboard, cam, tmp, new_vec4(0, 0, 0));
+	save = left_right(keyboard, cam, tmp, save);
 	if (y != 0.0f)
-		camera->body->force = new_vec4(save.x, y, save.z);
+		cam->body->force = new_vec4(save.x, y, save.z);
 	else
-		camera->body->force = save;
-	move_camera(camera, camera->body->force, engine, j);
-	camera->body->force = mult_vec4_by_vec4(camera->body->force, new_vec4(0.0, 1.0, 0.0));
+		cam->body->force = save;
+	move_camera(cam, cam->body->force, engine,
+										control_up_down(keyboard, cam, engine));
+	cam->body->force = mult_2_vec4(cam->body->force, new_vec4(0.0, 1.0, 0.0));
 }

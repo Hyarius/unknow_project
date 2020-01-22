@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 11:25:39 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 11:28:39 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/22 15:16:59 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ t_triangle	mult_triangle_by_vec4(t_triangle triangle, t_vec4 to_add)
 {
 	t_triangle	result;
 
-	result.a = mult_vec4_by_vec4(triangle.a, to_add);
-	result.b = mult_vec4_by_vec4(triangle.b, to_add);
-	result.c = mult_vec4_by_vec4(triangle.c, to_add);
+	result.a = mult_2_vec4(triangle.a, to_add);
+	result.b = mult_2_vec4(triangle.b, to_add);
+	result.c = mult_2_vec4(triangle.c, to_add);
 	return (result);
 }
 
