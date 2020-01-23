@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_player2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:53:46 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/23 15:00:21 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/23 15:08:01 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	reload_weapon(t_camera *camera, t_player *player, int tick,
 		Mix_PlayChannel(5, engine->sound_engine->sounds[weapon->index + 18], 0);
 	if (tick - player->reload_time == weapon->tick_reload)
 	{
-		drawing_front_reload(camera);
 		while (to_fill > 0
 			&& weapon->ammo < weapon->mag_size
 			&& weapon->total_ammo > 0)
