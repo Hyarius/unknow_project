@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_player2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:53:46 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/23 15:08:01 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/23 15:58:25 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,19 @@ void	change_weapon(t_keyboard *p_keyboard, t_player *player)
 	player->current_weapon = &player->weapons[index];
 }
 
+
+void	drawing_front_reload(t_camera *cam)
+{
+	static t_texture	*icon = NULL;
+
+	if (icon == NULL)
+		icon = png_load("ressources/assets/imgs/reload_icon.png");
+	t_view_port_clear_buffers(cam->view_port);
+	draw_rectangle_texture_cpu(cam->view_port, new_rectangle(
+					create_vec2(0.1, 0.1), create_vec2(-0.2, -0.2)),
+					icon);
+}
+
 void	reload_weapon(t_camera *camera, t_player *player, int tick,
 						t_engine *engine)
 {
@@ -46,7 +59,11 @@ void	reload_weapon(t_camera *camera, t_player *player, int tick,
 		return ;
 	to_fill = weapon->mag_size - weapon->ammo;
 	if (!Mix_Playing(5) && tick - player->reload_time == 0)
+	{
 		Mix_PlayChannel(5, engine->sound_engine->sounds[weapon->index + 18], 0);
+	}
+	if (tick - player->reload_time < weapon->tick_reload)
+		drawing_front_reload(camera);
 	if (tick - player->reload_time == weapon->tick_reload)
 	{
 		while (to_fill > 0
