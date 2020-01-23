@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing_front.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:55:48 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/22 10:06:28 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/23 15:00:12 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,3 +63,4 @@ void	drawing_front_weapons(t_camera *cam, t_texture **texture,
 					create_vec2(-0.65, -0.1), create_vec2(1.3, -0.9)),
 					texture[player->current_weapon->index]);
 }
+
