@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   physic_engine.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 14:56:08 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/22 15:38:55 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/23 17:01:15 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ void			can_move3(t_mesh *mesh, t_engine *engine, t_mesh *tar)
 	if (t_mesh_on_mesh(mesh, tar) == 1 && ft_strcmp(tar->name, "end") == 0)
 		engine->playing = -1;
 	if (mesh_intersect(mesh, tar) == BOOL_TRUE
-		&& ft_strcmp(tar->name, "stair") == 0)
+		&& (ft_strcmp(tar->name, "stair") == 0
+		|| ft_strcmp(tar->name, "ressources/objets/stair.obj") == 0))
 		mesh->force.y = 0.020;
 	else if (tar->collectible == 0)
 	{
