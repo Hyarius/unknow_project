@@ -47,11 +47,11 @@ plane: plane 0.0 0.0 20.0 20.0 0.0 20.0 ressources/assets/textures/metal_floor.p
 plane: plane 20.0 0.0 20.0 20.0 0.0 20.0 ressources/assets/textures/metal_floor.png 0.0 0.0 0.0 0.0 1.0 0.0 0.0 1.0    -1
 plane: plane 40.0 0.0 20.0 20.0 0.0 20.0 ressources/assets/textures/metal_floor.png 0.0 0.0 0.0 0.0 1.0 0.0 0.0 1.0    -1
 
-plane: plane -40.0 0.0 40.0 20.0 0.0 20.0 ressources/assets/textures/grille2.png 0.0 0.0 0.0 0.0 1.0 0.0 0.0 1.0    -1
-plane: plane -20.0 0.0 40.0 20.0 0.0 20.0 ressources/assets/textures/grille2.png 0.0 0.0 0.0 0.0 1.0 0.0 0.0 1.0    -1
-plane: plane 0.0 0.0 40.0 20.0 0.0 20.0 ressources/assets/textures/grille2.png 0.0 0.0 0.0 0.0 1.0 0.0 0.0 1.0    -1
-plane: plane 20.0 0.0 40.0 20.0 0.0 20.0 ressources/assets/textures/grille2.png 0.0 0.0 0.0 0.0 1.0 0.0 0.0 1.0    -1
-plane: plane 40.0 0.0 40.0 20.0 0.0 20.0 ressources/assets/textures/grille2.png 0.0 0.0 0.0 0.0 1.0 0.0 0.0 1.0    -1
+plane: plane -40.0 0.0 40.0 20.0 0.0 20.0 ressources/assets/textures/grille.png 0.0 0.0 0.0 0.0 1.0 0.0 0.0 1.0    -1
+plane: plane -20.0 0.0 40.0 20.0 0.0 20.0 ressources/assets/textures/grille.png 0.0 0.0 0.0 0.0 1.0 0.0 0.0 1.0    -1
+plane: plane 0.0 0.0 40.0 20.0 0.0 20.0 ressources/assets/textures/grille.png 0.0 0.0 0.0 0.0 1.0 0.0 0.0 1.0    -1
+plane: plane 20.0 0.0 40.0 20.0 0.0 20.0 ressources/assets/textures/grille.png 0.0 0.0 0.0 0.0 1.0 0.0 0.0 1.0    -1
+plane: plane 40.0 0.0 40.0 20.0 0.0 20.0 ressources/assets/textures/grille.png 0.0 0.0 0.0 0.0 1.0 0.0 0.0 1.0    -1
 
 cube: wall 50.0 0.0 50.0 -100.0 100.0 100.0 ressources/assets/textures/cube_test.png 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0    -1 *
 cube: wall 50.0 0.0 -50.0 -100.0 100.0 100.0 ressources/assets/textures/cube_test.png 0.0 0.0 90.0 0.0 0.0 0.0 1.0 1.0    -1 *

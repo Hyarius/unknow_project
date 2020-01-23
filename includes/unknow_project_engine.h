@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:45:15 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/22 10:48:25 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/23 09:05:32 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,14 @@ void				up_move(t_engine *engine);
 void				down_move(t_engine *engine);
 void				equals_move(t_engine *engine);
 void				minus_move(t_engine *engine);
+void				jump(t_keyboard *keyboard, t_player *player, t_camera *cam,
+															t_engine *engine);
+float				control_up_down_next(t_camera *cam, t_mesh_list *meshs);
+float				control_up_down(t_keyboard *keyboard, t_camera *cam,
+															t_engine *engine);
+t_vec4				forward_backward(t_keyboard *keyboard, t_camera *cam,
+													t_vec4 tmp, t_vec4 save);
+t_vec4				left_right(t_keyboard *keyboard, t_camera *cam, t_vec4 tmp,
+																t_vec4 save);
 
 #endif

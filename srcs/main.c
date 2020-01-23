@@ -4,15 +4,15 @@ void	tar_ressources(void)
 {
 	char	*command;
 
-	command = ft_strdup("rm -rf ressources.tar");
-	system(command);
+	command = ft_strdup("ressources.tar");
+	remove(command);
 	free(command);
 	command = ft_strdup("tar -cvf ressources.tar ressources");
 	system(command);
 	free(command);
-	command = ft_strdup("rm -rf ressources/assets/musics \
+	command = ft_strdup("ressources/assets/musics \
 								ressources/assets ressources");
-	system(command);
+	remove(command);
 	free(command);
 }
 
@@ -20,7 +20,7 @@ void	untar_ressources(void)
 {
 	char	*command;
 
-	command = ft_strdup("tar xvf ressources.tar");
+	command = ft_strdup("tar xf ressources.tar");
 	system(command);
 	free(command);
 }
@@ -42,7 +42,7 @@ int		main(int argc, char **argv)
 	if (argc != 1)
 		error_exit(-1, "Bad argument");
 
-	// untar_ressources();
+	untar_ressources();
 	Mix_Init(MIX_INIT_OGG);
 	start_sdl();
 
@@ -200,6 +200,6 @@ int		main(int argc, char **argv)
 	}
 	Mix_CloseAudio();
 	TTF_Quit();
-	// tar_ressources();
+	tar_ressources();
 	return (0);
 }

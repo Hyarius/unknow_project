@@ -31,11 +31,11 @@ plane: plane -20.00 0.00 20.00 20.00 0.00 20.00 ressources/assets/textures/metal
 plane: plane 0.00 0.00 20.00 20.00 0.00 20.00 ressources/assets/textures/metal_floor.png 0.00 0.00 0.00 0.00 1.00 1.00 1.00 1.00 -1
 plane: plane 20.00 0.00 20.00 20.00 0.00 20.00 ressources/assets/textures/metal_floor.png 0.00 0.00 0.00 0.00 1.00 1.00 1.00 1.00 -1
 plane: plane 40.00 0.00 20.00 20.00 0.00 20.00 ressources/assets/textures/metal_floor.png 0.00 0.00 0.00 0.00 1.00 1.00 1.00 1.00 -1
-plane: plane -40.00 0.00 40.00 20.00 0.00 20.00 ressources/assets/textures/grille2.png 0.00 0.00 0.00 0.00 1.00 1.00 1.00 1.00 -1
-plane: plane -20.00 0.00 40.00 20.00 0.00 20.00 ressources/assets/textures/grille2.png 0.00 0.00 0.00 0.00 1.00 1.00 1.00 1.00 -1
-plane: plane 0.00 0.00 40.00 20.00 0.00 20.00 ressources/assets/textures/grille2.png 0.00 0.00 0.00 0.00 1.00 1.00 1.00 1.00 -1
-plane: plane 20.00 0.00 40.00 20.00 0.00 20.00 ressources/assets/textures/grille2.png 0.00 0.00 0.00 0.00 1.00 1.00 1.00 1.00 -1
-plane: plane 40.00 0.00 40.00 20.00 0.00 20.00 ressources/assets/textures/grille2.png 0.00 0.00 0.00 0.00 1.00 1.00 1.00 1.00 -1
+plane: plane -40.00 0.00 40.00 20.00 0.00 20.00 ressources/assets/textures/grille.png 0.00 0.00 0.00 0.00 1.00 1.00 1.00 1.00 -1
+plane: plane -20.00 0.00 40.00 20.00 0.00 20.00 ressources/assets/textures/grille.png 0.00 0.00 0.00 0.00 1.00 1.00 1.00 1.00 -1
+plane: plane 0.00 0.00 40.00 20.00 0.00 20.00 ressources/assets/textures/grille.png 0.00 0.00 0.00 0.00 1.00 1.00 1.00 1.00 -1
+plane: plane 20.00 0.00 40.00 20.00 0.00 20.00 ressources/assets/textures/grille.png 0.00 0.00 0.00 0.00 1.00 1.00 1.00 1.00 -1
+plane: plane 40.00 0.00 40.00 20.00 0.00 20.00 ressources/assets/textures/grille.png 0.00 0.00 0.00 0.00 1.00 1.00 1.00 1.00 -1
 cube: wall 50.00 0.00 50.00 -100.00 100.00 100.00 ressources/assets/textures/cube_test.png 0.00 0.00 0.00 0.00 1.00 1.00 1.00 1.00 -1 *
 cube: wall 50.00 0.00 -50.00 -100.00 100.00 100.00 ressources/assets/textures/cube_test.png 0.00 0.00 90.00 0.00 1.00 1.00 1.00 1.00 -1 *
 cube: wall -50.00 0.00 50.00 -100.00 100.00 100.00 ressources/assets/textures/cube_test.png 0.00 0.00 -90.00 0.00 1.00 1.00 1.00 1.00 -1 *

@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:46:59 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/22 15:21:31 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/23 09:05:22 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,15 +76,7 @@ int					clip_triangle_to_plane(t_camera *p_camera,
 void				draw_triangle_from_camera_on_screen(t_camera *p_cam);
 void				clean_t_camera(t_camera *camera);
 void				t_mesh_move_elevator(t_mesh *mesh, t_mesh *body);
-void				jump(t_keyboard *keyboard, t_player *player, t_camera *cam,
-															t_engine *engine);
-float				control_up_down_next(t_camera *cam, t_mesh_list *meshs);
-float				control_up_down(t_keyboard *keyboard, t_camera *cam,
-															t_engine *engine);
-t_vec4				forward_backward(t_keyboard *keyboard, t_camera *cam,
-													t_vec4 tmp, t_vec4 save);
-t_vec4				left_right(t_keyboard *keyboard, t_camera *cam, t_vec4 tmp,
-																t_vec4 save);
+
 
 typedef struct		s_clipping
 {
