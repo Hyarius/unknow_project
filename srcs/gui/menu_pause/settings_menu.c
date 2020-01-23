@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   settings_menu.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 14:45:37 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/22 13:13:59 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/23 13:56:40 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,28 @@ void	settings_sounds(t_vec2_int pos)
 	}
 }
 
+void	settings_sens(t_vec2_int pos, t_engine *engine)
+{
+	if (pos.y >= 66 && pos.y <= 69)
+	{
+		if (pos.x >= 16 && pos.x <= 18)
+			engine->user_engine->mouse->sens = 20;
+		else if (pos.x >= 19 && pos.x <= 21)
+			engine->user_engine->mouse->sens = 15;
+		else if (pos.x >= 23 && pos.x <= 25)
+			engine->user_engine->mouse->sens = 10;
+		else if (pos.x >= 27 && pos.x <= 29)
+			engine->user_engine->mouse->sens = 5;
+		else if (pos.x >= 30 && pos.x <= 32)
+			engine->user_engine->mouse->sens = 3;
+	}
+}
+
 void	settings_menu_next(t_camera *main_camera, t_gui *gui,
-													t_vec2_int pos, int *play)
+											t_vec2_int pos, t_engine *engine)
 {
 	settings_sounds(pos);
-	// settings_sens(pos); //a terminer
+	settings_sens(pos, engine);
 	if (pos.y > 44 && pos.y < 47)
 	{
 		draw_rectangle_texture_cpu(main_camera->view_port,
@@ -68,11 +85,10 @@ void	settings_menu_next(t_camera *main_camera, t_gui *gui,
 		gui->idx = 10;
 	}
 	if (pos.y > 72 && pos.y < 76)
-		*play = 4;
+		engine->playing = 4;
 }
 
-void	settings_menu(t_camera *main_camera, t_gui *gui, t_engine *engine,
-																	int *play)
+void	settings_menu(t_camera *main_camera, t_gui *gui, t_engine *engine)
 {
 	t_mouse		*mou;
 	t_vec2_int	pos;
@@ -86,10 +102,10 @@ void	settings_menu(t_camera *main_camera, t_gui *gui, t_engine *engine,
 														gui->menu[gui->idx]);
 	if (t_mouse_state(mou) == 2)
 	{
-		if (pos.x > 16 && pos.x < 29)
-			settings_menu_next(main_camera, gui, pos, play);
+		if (pos.x > 16 && pos.x < 32)
+			settings_menu_next(main_camera, gui, pos, engine);
 		else if (pos.x > 43 && pos.x < 56)
-			*play = 2;
+			engine->playing = 2;
 		Mix_PlayChannel(-1, engine->sound_engine->sounds[0], 0);
 	}
 }

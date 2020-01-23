@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:46:46 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/22 10:32:20 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/23 14:09:28 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,24 @@ void	mute_unmute(void)
 	}
 }
 
+void	sens_pause(t_mouse *mouse, t_vec2_int pos)
+{
+	if (pos.y > 42 && pos.y < 46)
+	{
+		if (mouse->sens == 5)
+			mouse->sens = mouse->sens - 2;
+		else if (mouse->sens > 5)
+			mouse->sens = mouse->sens - 5;
+	}
+	if (pos.y > 55 && pos.y < 60)
+	{
+		if (mouse->sens == 3)
+			mouse->sens = mouse->sens + 2;
+		else if (mouse->sens < 20)
+			mouse->sens = mouse->sens + 5;
+	}
+}
+
 void	settings_pause_menu(t_engine *engine, int *play)
 {
 	t_mouse		*mou;
@@ -77,13 +95,9 @@ void	settings_pause_menu(t_engine *engine, int *play)
 		{
 			if (pos.y > 26 && pos.y < 32)
 				mute_unmute();
-			if (pos.y > 42 && pos.y < 46)
-				printf("Sens +\n");
-			if (pos.y > 55 && pos.y < 60)
-				printf("Sens -\n");
 			if (pos.y > 69 && pos.y < 75)
 				*play = -1;
-			// sens_pause(a voir);
+			sens_pause(engine->user_engine->mouse, pos);
 			Mix_PlayChannel(-1, engine->sound_engine->sounds[0], 0);
 		}
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unknow_project_system.h                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:38:53 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/20 15:39:48 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/23 13:50:34 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct	s_mouse
 	int			button[MOUSE_BUTTON];
 	char		clicked_left;
 	char		clicked_right;
+	int			sens;
 }				t_mouse;
 
 t_mouse			new_mouse();

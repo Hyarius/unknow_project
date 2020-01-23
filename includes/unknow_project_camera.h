@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:46:59 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/23 09:05:22 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/23 15:03:27 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ int					clip_triangle_to_plane(t_camera *p_camera,
 void				draw_triangle_from_camera_on_screen(t_camera *p_cam);
 void				clean_t_camera(t_camera *camera);
 void				t_mesh_move_elevator(t_mesh *mesh, t_mesh *body);
-
 
 typedef struct		s_clipping
 {

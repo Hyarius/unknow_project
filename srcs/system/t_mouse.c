@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 11:10:02 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/23 13:56:27 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_mouse	new_mouse(void)
 	result.button[MOUSE_MIDDLE] = BOOL_FALSE;
 	result.clicked_left = BOOL_FALSE;
 	result.clicked_right = BOOL_FALSE;
+	result.sens = 10;
 	return (result);
 }
 

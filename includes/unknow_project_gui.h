@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:10:18 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/21 15:11:40 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/23 13:35:29 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void			t_user_engine_handle_menu(t_camera *main_camera, t_gui *gui,
 void			main_menu(t_engine *engine, int *play);
 void			play_menu(t_camera *main_camera, t_engine *engine, int *play);
 void			settings_menu(t_camera *main_camera, t_gui *gui,
-												t_engine *engine, int *play);
+															t_engine *engine);
 void			controls_menu(t_camera *main_camera, t_gui *gui,
 												t_engine *engine, int *play);
 void			pause_menu(t_engine *engine, t_window *win);

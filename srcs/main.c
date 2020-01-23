@@ -2,17 +2,19 @@
 
 void	tar_ressources(void)
 {
-	char	*command;
+	char *command;
 
-	command = ft_strdup("ressources.tar");
-	remove(command);
-	free(command);
-	command = ft_strdup("tar -cvf ressources.tar ressources");
+	// command = ft_strdup("ressources.tar");
+	// remove(command);
+	// free(command);
+	command = ft_strdup("tar -cf ressources.tar ressources");
 	system(command);
 	free(command);
-	command = ft_strdup("ressources/assets/musics \
-								ressources/assets ressources");
-	remove(command);
+	command = ft_strdup("bzip2 ressources.tar");
+	system(command);
+	free(command);
+	command = ft_strdup("rm -rf ressources");
+	system(command);
 	free(command);
 }
 
@@ -20,6 +22,9 @@ void	untar_ressources(void)
 {
 	char	*command;
 
+	command = ft_strdup("bunzip2 ressources.tar.bz2");
+	system(command);
+	free(command);
 	command = ft_strdup("tar xf ressources.tar");
 	system(command);
 	free(command);
@@ -66,11 +71,6 @@ int		main(int argc, char **argv)
 	texture_weapons[8] = png_load("ressources/assets/imgs/rifle_shoot_0.png");
 	texture_weapons[9] = png_load("ressources/assets/imgs/shotgun_shoot_0.png");
 	texture_weapons[10] = png_load("ressources/assets/imgs/wall_destroyer_shoot_0.png");
-	texture_weapons[11] = png_load("ressources/assets/imgs/pistol_shoot_1.png");
-	texture_weapons[12] = png_load("ressources/assets/imgs/ar_shoot_1.png");
-	texture_weapons[13] = png_load("ressources/assets/imgs/rifle_shoot_1.png");
-	texture_weapons[14] = png_load("ressources/assets/imgs/shotgun_shoot_1.png");
-	texture_weapons[15] = png_load("ressources/assets/imgs/wall_destroyer_shoot_1.png");
 
 	skybox = png_load("ressources/assets/textures/skybox.png");
 	if (Mix_OpenAudio(44100, AUDIO_S16SYS, 1, 1024) == -1)
@@ -199,7 +199,9 @@ int		main(int argc, char **argv)
 		render_screen(win, engine);
 	}
 	Mix_CloseAudio();
+	Mix_Quit();
 	TTF_Quit();
+	SDL_Quit();
 	tar_ressources();
 	return (0);
 }

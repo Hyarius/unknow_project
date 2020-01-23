@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_camera2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 14:17:00 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/20 14:32:13 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/23 13:56:21 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void		handle_t_camera_view_by_mouse(t_camera *cam, t_mouse *p_mouse)
 	float	delta_pitch;
 	float	delta_yaw;
 
-	delta_pitch = -(p_mouse->rel_pos.x / 10.0);
-	delta_yaw = p_mouse->rel_pos.y / 10.0;
+	delta_pitch = -(p_mouse->rel_pos.x / p_mouse->sens);
+	delta_yaw = p_mouse->rel_pos.y / p_mouse->sens;
 	t_camera_change_view(cam, delta_yaw, delta_pitch);
 }
 
