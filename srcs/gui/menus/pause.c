@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:46:46 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/27 14:00:23 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/27 17:07:29 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,26 @@
 
 void	close_map(t_engine *engine)
 {
+
+	t_camera	*main_camera;
+
 	free_t_item_list(engine->physic_engine->item_list);
 	free_t_mesh_list(engine->physic_engine->mesh_list);
+	free_t_camera_list(engine->visual_engine->camera_list);
 	engine->physic_engine->mesh_list = initialize_t_mesh_list();
 	engine->physic_engine->item_list = initialize_t_item_list();
+	engine->visual_engine = initialize_t_visual_engine(engine->win);
+	main_camera = t_camera_list_get(engine->visual_engine->camera_list, 0);
+	t_engine_place_camera(engine, 0, new_vec4(5.0, 5.0, 0.0));
+	t_camera_look_at_point(main_camera, new_vec4(0, 0, 0));
+	t_engine_add_camera(engine, new_camera(engine->win, new_vec4(0.0, 0.0, 0.0),
+												70, create_vec2(NEAR, FAR)));
+	resize_t_view_port(t_camera_list_get(
+		engine->visual_engine->camera_list, 1)->view_port,
+								create_vec2_int(300, 240));
+	move_t_view_port(t_camera_list_get(
+		engine->visual_engine->camera_list, 1)->view_port,
+								create_vec2_int(WIN_X - 300, 0));
 	engine->playing = 2;
 }
 
