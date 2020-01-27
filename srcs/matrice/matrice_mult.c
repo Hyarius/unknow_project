@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:04:53 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 13:44:17 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/27 14:29:33 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ t_matrix	mult_matrix_by_matrix(t_matrix m1, t_matrix m2)
 	t_matrix	result;
 	int			i;
 	int			j;
-	int			k;
 
 	result = new_matrix_empty();
 	i = -1;

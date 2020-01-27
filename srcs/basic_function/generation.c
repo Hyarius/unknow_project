@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   generation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 15:50:52 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/15 14:50:21 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/27 14:05:20 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int		generate_nbr(int min, int max)
 {
 	int	value;
-	int	tmp;
 
 	if (min < 0)
 		max += -min;

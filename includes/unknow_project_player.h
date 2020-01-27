@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unknow_project_player.h                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:46:16 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/20 15:47:49 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/27 13:50:25 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,6 @@ t_player		*initialize_t_player(t_camera *cam);
 void			read_player(char **split, t_player *player);
 t_weapon		new_weapons(int index, int ammo, int total_ammo);
 t_mesh_list		*read_map_file(int fd, t_player *player);
+void			change_weapon(t_keyboard *p_keyboard, t_player *player);
 
 #endif

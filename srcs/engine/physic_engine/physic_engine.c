@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 14:56:08 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/23 17:01:15 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/01/27 14:33:22 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,6 @@ int				can_move(t_mesh *mesh, t_engine *engine)
 {
 	t_mesh	*tar;
 	int		i;
-	int		j;
 
 	i = 0;
 	while (i < engine->physic_engine->mesh_list->size)

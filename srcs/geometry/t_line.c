@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 15:27:35 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/27 14:21:40 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,6 @@ t_line	*initialize_t_line(t_vec4 p_a, t_vec4 p_b)
 		error_exit(-31, "Can't malloc a t_line");
 	*result = new_line(p_a, p_b);
 	return (result);
-}
-
-void	print_t_line(t_line line, char *str)
-{
-	printf("%s\n", str);
-	print_t_vec4(line.a, "Point A");
-	print_t_vec4(line.b, "Point B");
 }
 
 float	size_line(t_line line)

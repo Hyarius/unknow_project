@@ -6,7 +6,11 @@
 /*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:12:31 by adjouber          #+#    #+#             */
+<<<<<<< HEAD:srcs/gui/menu_pause/play_menu.c
 /*   Updated: 2020/01/23 16:46:49 by spuisais         ###   ########.fr       */
+=======
+/*   Updated: 2020/01/27 15:01:50 by gboutin          ###   ########.fr       */
+>>>>>>> e3e816daa40f85036bb8de54e56662bbeac2b09e:srcs/gui/menus/play_menu.c
 /*                                                                            */
 /* ************************************************************************** */
 

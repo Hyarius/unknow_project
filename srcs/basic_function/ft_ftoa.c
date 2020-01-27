@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 14:03:19 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/09 14:03:21 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/27 14:04:48 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	create_string(float nb, char *rest, int i, size_t precision)
 {
-	int		afterdots;
+	size_t	afterdots;
 	int		dot;
 
 	dot = 0;

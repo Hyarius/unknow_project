@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:00:42 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/21 13:14:55 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/27 14:01:16 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void		save_pause_bis(t_engine *engine, t_vec2_int pos)
 	}
 }
 
-void		save_pause(t_engine *engine, t_window *win)
+void		save_pause(t_engine *engine)
 {
 	t_mouse		*mou;
 	t_vec2_int	pos;

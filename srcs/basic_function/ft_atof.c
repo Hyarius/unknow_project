@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atof.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 17:09:04 by adjouber          #+#    #+#             */
-/*   Updated: 2019/11/05 16:46:35 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/01/27 14:03:28 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ float	ft_atof(char *s)
 	int		neg;
 	int		e;
 	int		c;
-	int		i;
 
 	a = 0.0;
 	neg = 1;

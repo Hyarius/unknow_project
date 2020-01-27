@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   place_mesh.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 14:17:25 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/23 16:28:26 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/01/27 13:48:07 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ void		place_mesh_bis(t_engine *engine, t_mesh_editing edit, t_mesh *mesh)
 		check_mesh_player(engine, *mesh);
 }
 
-// t_mesh		place_stair()
-
 void		place_mesh(t_engine *engine, t_mesh_editing edit)
 {
 	t_mesh		mesh;
@@ -69,8 +67,6 @@ void		place_mesh(t_engine *engine, t_mesh_editing edit)
 		else if (edit.mesh.primitive == 0)
 			mesh = create_primitive_plane(edit.mesh.pos,
 				edit.mesh.size, edit.path, edit.mesh.kinetic);
-		// else if (edit.mesh.primitive == 5)
-			// mesh = place_stair();
 		place_mesh_bis(engine, edit, &mesh);
 		t_engine_add_mesh(engine, mesh);
 	}

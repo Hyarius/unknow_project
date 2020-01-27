@@ -4,9 +4,6 @@ void	tar_ressources(void)
 {
 	char *command;
 
-	// command = ft_strdup("ressources.tar");
-	// remove(command);
-	// free(command);
 	command = ft_strdup("tar -cf ressources.tar ressources");
 	system(command);
 	free(command);
@@ -155,7 +152,7 @@ int		main(int argc, char **argv)
 			drawing_front_hp(main_camera, engine->user_engine->player);
 			drawing_front_mun(main_camera, texture2, engine->user_engine->player);
 			drawing_front_weapons(main_camera, texture_weapons, engine->user_engine->player);
-			draw_minimap(main_camera, engine, win);
+			draw_minimap(engine);
 			print_info_bar(main_camera, engine->user_engine->player, gui);
 		}
 		else if (engine->playing == 10)
@@ -195,7 +192,7 @@ int		main(int argc, char **argv)
 			t_view_port_clear_buffers(main_camera->view_port);
 			draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->menu[16]);
 		}
-		t_engine_handle_event(main_camera, gui, engine, win);
+		t_engine_handle_event(main_camera, gui, engine);
 		render_screen(win, engine);
 	}
 	Mix_CloseAudio();

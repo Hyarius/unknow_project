@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   place_mesh2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 11:49:52 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/22 14:06:13 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/27 13:48:29 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int		can_move_bis(t_mesh *mesh, t_engine *engine)
 {
 	t_mesh	*target;
 	int		i;
-	int		j;
 
 	i = 0;
 	while (i < engine->physic_engine->mesh_list->size)

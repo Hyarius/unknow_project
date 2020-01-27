@@ -6,13 +6,13 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 16:28:51 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/20 11:28:39 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/27 13:55:57 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-void	draw_minimap(t_camera *main_camera, t_engine *engine, t_window *win)
+void	draw_minimap(t_engine *engine)
 {
 	t_camera	*cam;
 

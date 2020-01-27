@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:32:34 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/22 15:42:07 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/27 14:23:08 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	t_mesh_compute_bubble_box(t_mesh *mesh)
 
 void	t_mesh_compute_vertices_in_world(t_mesh *dest)
 {
-	t_face	*dest_face;
 	int		i;
 
 	i = -1;
@@ -76,7 +75,6 @@ void	t_mesh_compute_vertices_in_world(t_mesh *dest)
 void	t_mesh_comp_next_vert_world(t_mesh *dest, t_vec4 axis)
 {
 	t_vec4	next_pos;
-	t_face	*dest_face;
 	int		i;
 
 	i = -1;
