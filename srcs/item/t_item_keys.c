@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_item_keys.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 13:42:14 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/20 13:44:23 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/27 14:23:52 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int		green_card(t_player *player)
 t_item	create_color_card(int type)
 {
 	t_item		item;
-	t_mesh		result;
 
+	item.name = NULL;
 	if (type == 1)
 	{
 		item.name = ft_strjoin("Card_", "Red");

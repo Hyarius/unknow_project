@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unknow_project_window.h                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:28:31 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/20 15:32:33 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/27 14:29:19 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ t_window			*initialize_t_window(char *name, int size_x, int size_y);
 int					is_point_in_screen(t_window *p_win, t_vec4 p_point);
 int					is_t_triangle_in_screen(t_window *p_win,
 											t_triangle *p_triangle);
+void				window_handler_clear_buffers(t_window *win);
 
 typedef struct		s_view_port
 {

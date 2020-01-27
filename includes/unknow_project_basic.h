@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:41:06 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 15:43:12 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/27 14:58:39 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,7 @@ void		*ft_memcpy(void *dst, const void *src, size_t n);
 void		ft_lstdelone(t_list_fd **alst, void (*del)(void*, size_t));
 float		round_float(float x, unsigned int round);
 t_vec4		round_t_vec4(t_vec4 a, unsigned int round);
+void		ft_strdel(char **as);
+float		generate_float(float rmin, float rmax);
 
 #endif

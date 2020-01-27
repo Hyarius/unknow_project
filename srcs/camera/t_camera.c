@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:18:59 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/23 09:27:45 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/27 14:41:13 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,6 @@ void		handle_camera_mouvement_by_key(t_camera *cam, t_keyboard *keyboard,
 		cam->body->force = new_vec4(save.x, y, save.z);
 	else
 		cam->body->force = save;
-	move_camera(cam, cam->body->force, engine,
-										control_up_down(keyboard, cam, engine));
+	move_camera(cam, engine, control_up_down(keyboard, cam, engine));
 	cam->body->force = mult_2_vec4(cam->body->force, new_vec4(0.0, 1.0, 0.0));
 }

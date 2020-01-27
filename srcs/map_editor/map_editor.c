@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   map_editor.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 12:49:31 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/20 15:19:11 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/01/27 13:45:03 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-void		player_editing(t_engine *engine, t_gui *gui)
+void		player_editing(t_engine *engine)
 {
 	static int	b_press = 0;
 	static int	print = 0;
@@ -112,7 +112,6 @@ void		activate_visibility(t_engine *engine)
 void		map_editor(t_camera *cam, t_gui *gui, t_engine *engine,
 													t_mesh_editing mesh_editing)
 {
-	t_mesh			*target;
 	static t_color	*color = NULL;
 
 	if (color == NULL)
@@ -121,7 +120,7 @@ void		map_editor(t_camera *cam, t_gui *gui, t_engine *engine,
 	draw_hud_rect(cam->view_port, new_rectangle(create_vec2(0.0, 0.0),
 											create_vec2(0.005, 0.01)), color);
 	print_info_editing(cam, engine->user_engine->keyboard, gui);
-	player_editing(engine, gui);
+	player_editing(engine);
 	place_mesh(engine, mesh_editing);
 	delete_mesh(engine);
 	activate_hitbox(engine);

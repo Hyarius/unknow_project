@@ -6,14 +6,14 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 13:51:42 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/23 16:26:43 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/01/27 14:02:42 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
 void	t_user_engine_handle_menu(t_camera *main_camera, t_gui *gui,
-											t_engine *engine, t_window *win)
+											t_engine *engine)
 {
 	if (engine->playing == 2)
 		main_menu(engine, &engine->playing);
@@ -30,9 +30,9 @@ void	t_user_engine_handle_menu(t_camera *main_camera, t_gui *gui,
 	else if (engine->playing == 12)
 		set_weapon_editing(engine, &engine->playing);
 	else if (engine->playing == 13 || engine->playing == -3)
-		save_pause(engine, win);
+		save_pause(engine);
 	else if (engine->playing == -1)
-		pause_menu(engine, win);
+		pause_menu(engine);
 	else if (engine->playing == -2)
 		settings_pause_menu(engine, &engine->playing);
 }

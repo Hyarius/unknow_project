@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 13:29:58 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/27 14:24:08 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ t_item			new_item(t_mesh mesh)
 {
 	t_item		item;
 
+	item.name = NULL;
 	if (ft_strcmp(mesh.name, "Ammo_Pack") == '_')
 		item = create_ammo_pack(mesh.hp * -1);
 	else if (ft_strcmp(mesh.name, "Health_Pack") == '_')

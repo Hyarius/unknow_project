@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 14:17:00 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/23 13:56:21 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/27 14:18:07 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,7 @@ void		link_camera_to_mesh(t_engine *engine, int index, t_mesh *mesh)
 		mesh->camera = camera;
 }
 
-void		move_camera(t_camera *camera, t_vec4 mouvement,
-													t_engine *engine, float j)
+void		move_camera(t_camera *camera, t_engine *engine, float j)
 {
 	if (camera->body->no_hitbox == 1 && camera->body->is_visible == 0)
 		t_mesh_move(camera->body, camera->body->force);

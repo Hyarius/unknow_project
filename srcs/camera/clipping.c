@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clipping.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 13:38:37 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/20 13:53:21 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/27 14:59:17 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,14 +89,16 @@ void		clip_triangle_to_plane2(t_vec4 *p_points, t_vec4 *p_points_uv,
 		{
 			cara->in_p[cara->in_nb] = p_points[i];
 			if (p_points_uv != NULL)
-				cara->in_uv[cara->in_nb] = p_points_uv[i];
+				cara->in_uv[cara->in_nb] = divide_vec4_by_float(p_points_uv[i],
+																p_points[i].w);
 			cara->in_nb++;
 		}
 		else
 		{
 			cara->out_p[cara->out_nb] = p_points[i];
 			if (p_points_uv != NULL)
-				cara->out_uv[cara->out_nb] = p_points_uv[i];
+				cara->out_uv[cara->out_nb] = divide_vec4_by_float(
+												p_points_uv[i], p_points[i].w);
 			cara->out_nb++;
 		}
 		i++;
@@ -107,7 +109,6 @@ int			clip_triangle_to_plane(t_camera *p_camera, t_vec4 *p_points,
 										t_vec4 *p_points_uv)
 {
 	t_clipping	cara;
-	int			i;
 
 	cara.clp_lst = p_camera->clipping_list;
 	cara.clp_lst_uv = p_camera->clipping_list_uv;
