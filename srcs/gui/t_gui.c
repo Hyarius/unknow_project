@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_gui.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 15:58:51 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/23 16:10:20 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_gui	new_gui(void)
 
 	if (!(result.letter = (t_letter **)malloc(sizeof(t_letter*) * 95)))
 		error_exit(-29, "Can't malloc a t_surface");
-	if (!(result.menu = (t_texture **)malloc(sizeof(t_texture*) * 17)))
+	if (!(result.menu = (t_texture **)malloc(sizeof(t_texture*) * 18)))
 		error_exit(-29, "Can't malloc a t_surface");
 	idx = -1;
 	while (++idx <= 94)
