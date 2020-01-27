@@ -6,7 +6,7 @@
 /*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 13:51:42 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/21 15:19:57 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/23 16:25:12 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	t_user_engine_handle_menu(t_camera *main_camera, t_gui *gui,
 	if (engine->playing == 2)
 		main_menu(engine, &engine->playing);
 	else if (engine->playing == 3)
-		settings_menu(main_camera, gui, engine, &engine->playing);
+		settings_menu(main_camera, gui, engine);
 	else if (engine->playing == 4)
 		controls_menu(main_camera, gui, engine, &engine->playing);
 	else if (engine->playing == 5)

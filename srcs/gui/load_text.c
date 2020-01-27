@@ -6,7 +6,7 @@
 /*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 16:24:30 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/20 17:11:25 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/01/23 16:09:25 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,5 @@ void	load_menu(t_gui *gui)
 	gui->menu[14] = png_load("ressources/assets/imgs/set_player.png");
 	gui->menu[15] = png_load("ressources/assets/imgs/set_weapon.png");
 	gui->menu[16] = png_load("ressources/assets/imgs/save_editor.png");
+	gui->menu[17] = png_load("ressources/assets/imgs/synopsis.png");
 }
