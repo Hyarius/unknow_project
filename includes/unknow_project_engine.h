@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:45:15 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/23 09:05:32 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/27 15:14:10 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 typedef struct		s_engine
 {
+	t_window		*win;
 	int				playing;
 	int				tick;
 	t_visual_engine	*visual_engine;
@@ -48,10 +49,8 @@ void				t_engine_add_camera(t_engine *p_engine,
 int					can_move(t_mesh *mesh, t_engine *engine);
 void				handle_camera_mouvement_by_key(t_camera *camera,
 									t_keyboard *p_keyboard, t_engine *engine);
-void				move_camera(t_camera *camera, t_vec4 mouvement,
-													t_engine *engine, float j);
-void				move_cam(t_camera *camera, t_keyboard *key,
-															t_engine *engine);
+void				move_camera(t_camera *camera, t_engine *engine, float j);
+void				move_cam(t_camera *camera, t_keyboard *key);
 void				t_user_engine_handle_camera(t_engine *engine,
 											t_camera *cam, t_window *p_win);
 void				t_physic_engine_apply_force(t_engine *engine);
@@ -96,5 +95,9 @@ t_vec4				forward_backward(t_keyboard *keyboard, t_camera *cam,
 													t_vec4 tmp, t_vec4 save);
 t_vec4				left_right(t_keyboard *keyboard, t_camera *cam, t_vec4 tmp,
 																t_vec4 save);
+int					t_engine_return_mesh_len(t_engine *engine);
+void				reload_weapon(t_camera *camera, t_player *player, int tick,
+															t_engine *engine);
+void				t_p_engine_comp_vert_world(t_physic_engine *physic_engine);
 
 #endif

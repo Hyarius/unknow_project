@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_camera4.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 14:17:06 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/20 14:32:14 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/27 14:21:08 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void		delete_t_cam(t_camera dest)
 	delete_t_triangle_list(dest.triangle_color_list);
 	delete_t_color_list(dest.color_list);
 	delete_t_triangle_list(dest.triangle_texture_list);
-	delete_t_uv_list(dest.uv_list);
 	delete_t_color_list(dest.darkness_list);
 	free(dest.view_port);
 }

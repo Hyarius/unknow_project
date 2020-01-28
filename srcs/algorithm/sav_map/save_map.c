@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 13:46:27 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/21 17:12:05 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/27 14:11:51 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	save_name(t_mesh current, int fd)
 {
 	char	*test;
 
+	test = NULL;
 	if (ft_strcmp(current.name, "end") == 0)
 	{
 		test = ft_strdup("plane: ");

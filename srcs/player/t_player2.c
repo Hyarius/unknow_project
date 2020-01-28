@@ -6,7 +6,7 @@
 /*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:53:46 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/24 10:35:58 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/28 10:34:40 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,11 @@ void	reload_weapon(t_camera *camera, t_player *player, int tick,
 	if (tick - player->reload_time == weapon->tick_reload)
 	{
 		while (to_fill > 0 && weapon->ammo < weapon->mag_size
+<<<<<<< HEAD
 			&& weapon->total_ammo > 0 && (to_fill--) > -1)
+=======
+			&& weapon->total_ammo > 0)
+>>>>>>> fad6ac1a9f1901434c0ebb151c92975df95b88ae
 		{
 			weapon->ammo++;
 			weapon->total_ammo--;
@@ -114,6 +118,7 @@ void	shoot_weapon(t_engine *engine, t_camera *cam,
 	float		dist;
 
 	dist = 0.0;
+	target = NULL;
 	weapon = engine->user_engine->player->current_weapon;
 	if (ft_strcmp(weapon->name, "bb") == 0)
 		return ;

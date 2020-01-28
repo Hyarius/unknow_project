@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 11:05:41 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/22 15:41:47 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/27 14:08:06 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,8 @@ void		create_face(t_mesh result, char **tab, char **line_split, int k)
 void		read_obj(t_mesh result, char **line_split, t_vec4 size)
 {
 	char		**tab;
-	int			index[4];
-	int			index_uv[4];
-	int			i;
 
+	tab = NULL;
 	if (ft_strcmp(line_split[0], "v") == 0)
 		t_mesh_add_point(&result, new_vec4(atof(line_split[1]) * size.x,
 		atof(line_split[2]) * size.y, atof(line_split[3]) * size.z));

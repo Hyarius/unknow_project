@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 13:40:28 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 11:41:36 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/27 14:24:28 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ t_mesh_list		*read_map_file(int fd, t_player *player)
 
 	i = 0;
 	result = initialize_t_mesh_list();
+	mesh.name = NULL;
 	while ((i = get_next_line(fd, &line)) > 0)
 	{
 		if (ft_strlen(line) != 0)

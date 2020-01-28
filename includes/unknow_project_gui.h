@@ -6,7 +6,7 @@
 /*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:10:18 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/24 13:00:34 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/28 10:34:38 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,29 +55,28 @@ void			drawing_front_mun(t_camera *main_camera, t_texture **texture,
 															t_player *player);
 void			drawing_front_weapons(t_camera *main_camera,
 										t_texture **texture, t_player *player);
-void			draw_minimap(t_camera *main_camera, t_engine *engine,
-																t_window *win);
+void			draw_minimap(t_engine *engine);
 void			load_letter(t_gui *gui, char *str, int idx);
 void			set_t_gui_texte(t_gui *gui);
 void			print_info_bar(t_camera *main_camera, t_player *player,
 																t_gui *gui);
 void			load_menu(t_gui *gui);
 void			t_engine_handle_event(t_camera *main_camera, t_gui *gui,
-											t_engine *engine, t_window *win);
+															t_engine *engine);
 void			t_user_engine_handle_menu(t_camera *main_camera, t_gui *gui,
-											t_engine *engine, t_window *win);
+															t_engine *engine);
 void			main_menu(t_engine *engine, int *play);
 void			play_menu(t_camera *main_camera, t_engine *engine, int *play);
 void			settings_menu(t_camera *main_camera, t_gui *gui,
 															t_engine *engine);
 void			controls_menu(t_camera *main_camera, t_gui *gui,
 												t_engine *engine, int *play);
-void			pause_menu(t_engine *engine, t_window *win);
+void			pause_menu(t_engine *engine);
 void			settings_pause_menu(t_engine *engine, int *play);
 void			credits_menu(t_engine *engine, int *play);
 void			set_player_editing(t_engine *engine, int *play);
 void			set_weapon_editing(t_engine *engine, int *play);
-void			save_pause(t_engine *engine, t_window *win);
+void			save_pause(t_engine *engine);
 void			print_set_player(t_camera *main_camera, t_gui *gui,
 															t_engine *engine);
 void			print_set_weapon(t_camera *main_camera, t_gui *gui,
@@ -90,5 +89,6 @@ void			print_set_rifle(t_camera *cam, t_gui *gui, t_player *plr);
 void			print_set_shotgun(t_camera *cam, t_gui *gui, t_player *plr);
 void			print_set_walldest(t_camera *cam, t_gui *gui, t_player *plr);
 void			close_map(t_engine *engine);
-
+void			print_info_editing(t_camera *main_camera, t_keyboard *key,
+																	t_gui *gui);
 #endif

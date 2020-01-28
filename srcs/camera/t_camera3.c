@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_camera3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 14:17:04 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/20 14:32:14 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/27 14:18:49 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void		t_camera_change_view(t_camera *cam, float pitch, float yaw)
 	t_camera_look_at(cam);
 }
 
-void		move_cam(t_camera *camera, t_keyboard *key, t_engine *engine)
+void		move_cam(t_camera *camera, t_keyboard *key)
 {
 	if (get_key_state(key, key->key[SDL_SCANCODE_W]) == 1)
 		camera->pos = add_vec4(camera->pos,

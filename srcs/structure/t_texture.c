@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   t_texture.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:44:10 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/20 15:43:55 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/27 14:17:26 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-t_color	get_pixel_color(t_texture *texture, int x, int y)
+t_color				get_pixel_color(t_texture *texture, int x, int y)
 {
 	int				i;
 	unsigned char	info[4];
 	int				pixel_index;
 	t_color			result;
 
-	if (x < 0 || x >= texture->surface->w ||
-		y < 0 || y >= texture->surface->h)
+	if (x < 0 || (GLuint)x >= texture->surface->w ||
+		y < 0 || (GLuint)y >= texture->surface->h)
 		return (new_color(0.0, 0.0, 1.0, 1.0));
 	pixel_index = (x + y * texture->surface->w) \
 					* texture->surface->intern_format;
