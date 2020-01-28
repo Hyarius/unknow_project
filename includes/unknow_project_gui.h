@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unknow_project_gui.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:10:18 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/23 13:35:29 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/24 13:00:34 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@ typedef struct	s_gui
 	int			key_change;
 	int			sens;
 	int			info_print;
+	int			menu_nbr;
+	t_texture	*text_weap[16];
+	t_texture	*text_am[6];
 }				t_gui;
 
 t_gui			new_gui(void);

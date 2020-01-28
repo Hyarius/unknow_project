@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unknow_project.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:21:49 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/21 10:26:38 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/24 13:21:19 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,17 @@ t_triangle		compose_t_triangle_from_t_mesh(t_mesh *src, int *index);
 t_triangle		compose_t_triangle_from_t_vertices(t_vec4_list *src,
 													int *index);
 void			ft_get_leaks(char *prog_name, char *msg);
+void			tar_ressources(void);
+void			untar_ressources(void);
+void			display_tittle_screen(t_camera *main_camera, t_gui *gui,
+									t_engine *engin, t_window *win);
+void			game_playing(t_camera *main_camera, t_gui *gui,
+									t_engine *engine, t_window *win);
+void			game_pausing(t_camera *main_camera, t_gui *gui,
+									t_engine *engin, t_window *win);
+void			level_editing(t_camera *main_camera, t_gui *gui,
+									t_engine *engin, t_window *win);
+void			level_editing_pausing(t_camera *main_camera, t_gui *gui,
+									t_engine *engin, t_window *win);
 
 #endif

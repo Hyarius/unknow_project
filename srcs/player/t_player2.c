@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_player2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:53:46 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/23 15:58:25 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/24 10:35:58 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	change_weapon(t_keyboard *p_keyboard, t_player *player)
 	player->current_weapon = &player->weapons[index];
 }
 
-
 void	drawing_front_reload(t_camera *cam)
 {
 	static t_texture	*icon = NULL;
@@ -59,26 +58,21 @@ void	reload_weapon(t_camera *camera, t_player *player, int tick,
 		return ;
 	to_fill = weapon->mag_size - weapon->ammo;
 	if (!Mix_Playing(5) && tick - player->reload_time == 0)
-	{
 		Mix_PlayChannel(5, engine->sound_engine->sounds[weapon->index + 18], 0);
-	}
 	if (tick - player->reload_time < weapon->tick_reload)
 		drawing_front_reload(camera);
 	if (tick - player->reload_time == weapon->tick_reload)
 	{
-		while (to_fill > 0
-			&& weapon->ammo < weapon->mag_size
-			&& weapon->total_ammo > 0)
+		while (to_fill > 0 && weapon->ammo < weapon->mag_size
+			&& weapon->total_ammo > 0 && (to_fill--) > -1)
 		{
 			weapon->ammo++;
 			weapon->total_ammo--;
-			to_fill--;
 			if (ft_strcmp(weapon->name, "pistol") == 0
 				&& weapon->ammo == weapon->mag_size)
 				weapon->total_ammo = 15;
 		}
 		camera->r_press = 0;
-		// t_view_port_clear_buffers(camera->view_port);
 	}
 }
 
