@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:10:18 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/27 14:33:00 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/28 08:53:40 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void			drawing_front_mun(t_camera *main_camera, t_texture **texture,
 															t_player *player);
 void			drawing_front_weapons(t_camera *main_camera,
 										t_texture **texture, t_player *player);
+void			create_minimap(t_engine *engine);
 void			draw_minimap(t_engine *engine);
 void			load_letter(t_gui *gui, char *str, int idx);
 void			set_t_gui_texte(t_gui *gui);

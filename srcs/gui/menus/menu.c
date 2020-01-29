@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   menu.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 13:51:42 by gboutin           #+#    #+#             */
-<<<<<<< HEAD:srcs/gui/menu_pause/menu.c
-/*   Updated: 2020/01/27 10:00:29 by spuisais         ###   ########.fr       */
-=======
-/*   Updated: 2020/01/27 14:02:42 by gboutin          ###   ########.fr       */
->>>>>>> e3e816daa40f85036bb8de54e56662bbeac2b09e:srcs/gui/menus/menu.c
+/*   Updated: 2020/01/28 08:56:28 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

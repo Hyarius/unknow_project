@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:41:59 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/23 15:08:34 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/28 10:25:43 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ Mix_Music		**load_music(void)
 		error_exit(66, "Couldn't malloc array of music (load_music)");
 	music[0] = Mix_LoadMUS("ressources/assets/sounds/IG_theme.ogg");
 	i = 0;
-	while (i++ < nb_music)
-		if (!music[i])
+	while (i < nb_music)
+		if (!music[i++])
 		{
 			ft_putstr("Mix_LoadWAV: ");
 			ft_putstr((char*)Mix_GetError());

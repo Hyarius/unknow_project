@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   play_menu.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:12:31 by adjouber          #+#    #+#             */
-<<<<<<< HEAD:srcs/gui/menu_pause/play_menu.c
-/*   Updated: 2020/01/23 16:46:49 by spuisais         ###   ########.fr       */
-=======
-/*   Updated: 2020/01/27 15:01:50 by gboutin          ###   ########.fr       */
->>>>>>> e3e816daa40f85036bb8de54e56662bbeac2b09e:srcs/gui/menus/play_menu.c
+/*   Updated: 2020/01/28 12:59:48 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +29,11 @@ void	show_synopsis(t_engine *engine, t_camera *camera)
 	{
 		t_view_port_clear_buffers(camera->view_port);
 		return ;
-	}	
+	}
 }
 
-void	open_scenario_or_editor(t_vec2_int pos, int *play, char **path, t_engine *engine, t_camera *camera)
+void	open_scenario_or_editor(t_vec2_int pos, int *play, char **path,
+										t_engine *engine, t_camera *camera)
 {
 	if (pos.x > 37 && pos.x < 61)
 	{

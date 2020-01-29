@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:45:15 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/27 15:14:10 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/28 08:50:11 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct		s_engine
 	t_window		*win;
 	int				playing;
 	int				tick;
+	t_camera		*main_camera;
 	t_visual_engine	*visual_engine;
 	t_physic_engine	*physic_engine;
 	t_user_engine	*user_engine;
