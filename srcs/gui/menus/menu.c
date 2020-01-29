@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   menu.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 13:51:42 by gboutin           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2020/01/28 15:43:07 by spuisais         ###   ########.fr       */
-=======
-/*   Updated: 2020/01/28 08:56:28 by gboutin          ###   ########.fr       */
->>>>>>> 54b23eab35bf6d72a34aad2de392d71fd2a0af89
+/*   Updated: 2020/01/29 11:03:26 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +25,8 @@ void	t_user_engine_handle_menu(t_camera *main_camera, t_gui *gui,
 		credits_menu(engine, &engine->playing);
 	else if (engine->playing == 6)
 		play_menu(main_camera, engine, &engine->playing);
+	else if (engine->playing == 7)
+		synopsis_menu(engine, &engine->playing);
 	else if (engine->playing == 11)
 		set_player_editing(engine, &engine->playing);
 	else if (engine->playing == 12)
@@ -39,8 +37,6 @@ void	t_user_engine_handle_menu(t_camera *main_camera, t_gui *gui,
 		pause_menu(engine);
 	else if (engine->playing == -2)
 		settings_pause_menu(engine, &engine->playing);
-	else if (engine->playing == 15)
-		synopsis_menu(engine, &engine->playing);
 }
 
 void	main_menu(t_engine *engine, int *play)

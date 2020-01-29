@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   user_engine.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 15:09:52 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/29 11:48:45 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ t_user_engine	new_user_engine(void)
 
 	result.mouse = initialize_t_mouse();
 	result.keyboard = initialize_t_keyboard();
+	result.player = NULL;
 	return (result);
 }
 
