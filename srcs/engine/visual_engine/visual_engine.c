@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   visual_engine.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 15:06:45 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/28 14:12:55 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_visual_engine	new_visual_engine(t_window *p_window)
 
 	result.camera_list = initialize_t_camera_list();
 	result.main_camera = 0;
+	result.textures_path = NULL;
 	tmp = new_camera(p_window, new_vec4(0, 0, 0), FOV,
 									create_vec2(NEAR, FAR));
 	t_camera_list_push_back(result.camera_list, tmp);

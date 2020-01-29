@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   user_engine_handle.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 11:35:45 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/27 14:33:52 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/29 13:26:09 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@ void			t_user_engine_handle_camera(t_engine *engine, t_camera *cam,
 	get_t_mouse_info(mouse);
 	handle_t_camera_view_by_mouse(cam, mouse);
 	SDL_WarpMouseInWindow(p_win->window, WIN_X / 2, WIN_Y / 2);
-	if (engine->playing == 1)
+	printf("HERE 2\n");
+	if (engine->playing == 2)
 		handle_camera_mouvement_by_key(cam, keyboard, engine);
-	if (engine->playing == 10)
+	if (engine->playing == 4)
 		move_cam(cam, keyboard);
 	compute_t_camera(cam);
 }

@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_text.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 16:24:30 by spuisais          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2020/01/23 16:09:25 by spuisais         ###   ########.fr       */
-=======
-/*   Updated: 2020/01/27 13:55:10 by gboutin          ###   ########.fr       */
->>>>>>> e3e816daa40f85036bb8de54e56662bbeac2b09e
+/*   Updated: 2020/01/28 14:12:00 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +17,6 @@ void	load_letter(t_gui *gui, char *str, int idx)
 	TTF_Font	*police;
 	SDL_Color	color;
 
-	str[1] = '\0';
 	color.r = 0;
 	police = TTF_OpenFont("ressources/assets/ttf/Tinos-Regular.ttf", 240);
 	gui->letter[idx]->font = TTF_RenderText_Blended(police, str, color);
@@ -47,7 +42,7 @@ void	load_path_texture2(char **path)
 char	**load_path_texture(void)
 {
 	char	**path;
-
+	
 	if (!(path = (char**)malloc(sizeof(char*) * 25)))
 		error_exit(2, "error malloc");
 	path[0] = ft_strdup("ressources/assets/textures/cube_test.png");

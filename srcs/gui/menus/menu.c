@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   menu.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 13:51:42 by gboutin           #+#    #+#             */
-<<<<<<< HEAD:srcs/gui/menu_pause/menu.c
-/*   Updated: 2020/01/27 10:00:29 by spuisais         ###   ########.fr       */
-=======
-/*   Updated: 2020/01/27 14:02:42 by gboutin          ###   ########.fr       */
->>>>>>> e3e816daa40f85036bb8de54e56662bbeac2b09e:srcs/gui/menus/menu.c
+/*   Updated: 2020/01/28 14:55:09 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +15,25 @@
 void	t_user_engine_handle_menu(t_camera *main_camera, t_gui *gui,
 											t_engine *engine)
 {
-	if (engine->playing == 2)
+	if (engine->menu_nbr == 0)
 		main_menu(engine, &engine->playing);
-	else if (engine->playing == 3)
+	else if (engine->menu_nbr == 1)
 		settings_menu(main_camera, gui, engine);
-	else if (engine->playing == 4)
+	else if (engine->menu_nbr == 2)
 		controls_menu(main_camera, gui, engine, &engine->playing);
-	else if (engine->playing == 5)
+	else if (engine->menu_nbr == 3)
 		credits_menu(engine, &engine->playing);
-	else if (engine->playing == 6)
+	else if (engine->menu_nbr == 6)
 		play_menu(main_camera, engine, &engine->playing);
-	else if (engine->playing == 11)
+	else if (engine->menu_nbr == 14)
 		set_player_editing(engine, &engine->playing);
-	else if (engine->playing == 12)
+	else if (engine->menu_nbr == 15)
 		set_weapon_editing(engine, &engine->playing);
-	else if (engine->playing == 13 || engine->playing == -3)
+	else if (engine->menu_nbr == 16)
 		save_pause(engine);
-	else if (engine->playing == -1)
+	else if (engine->menu_nbr == 4)
 		pause_menu(engine);
-	else if (engine->playing == -2)
+	else if (engine->menu_nbr == 5)
 		settings_pause_menu(engine, &engine->playing);
 }
 

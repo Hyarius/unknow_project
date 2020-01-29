@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   play_menu.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:12:31 by adjouber          #+#    #+#             */
-<<<<<<< HEAD:srcs/gui/menu_pause/play_menu.c
-/*   Updated: 2020/01/23 16:46:49 by spuisais         ###   ########.fr       */
-=======
-/*   Updated: 2020/01/27 15:01:50 by gboutin          ###   ########.fr       */
->>>>>>> e3e816daa40f85036bb8de54e56662bbeac2b09e:srcs/gui/menus/play_menu.c
+/*   Updated: 2020/01/29 13:27:45 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,10 +112,10 @@ void	play_menu(t_camera *main_camera, t_engine *engine, int *play)
 		open_save(pos, play, &path);
 		Mix_PlayChannel(-1, engine->sound_engine->sounds[0], 0);
 	}
-	if (*play == 10 || *play == 1)
+	if (*play == 5 || *play == 2 || *play == 7)
 	{
 		load_map(main_camera, engine, path);
-		if (*play == 1)
+		if (*play == 2 || *play == 7)
 			link_camera_to_mesh(engine, 0, t_engine_get_mesh(engine, 0));
 		free(path);
 	}

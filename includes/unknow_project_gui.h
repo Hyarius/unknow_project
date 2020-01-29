@@ -6,7 +6,7 @@
 /*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:10:18 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/28 10:34:38 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/28 14:36:04 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ typedef struct	s_gui
 	int			key_change;
 	int			sens;
 	int			info_print;
-	int			menu_nbr;
 	t_texture	*text_weap[16];
 	t_texture	*text_am[6];
 }				t_gui;
@@ -91,4 +90,5 @@ void			print_set_walldest(t_camera *cam, t_gui *gui, t_player *plr);
 void			close_map(t_engine *engine);
 void			print_info_editing(t_camera *main_camera, t_keyboard *key,
 																	t_gui *gui);
+void			create_minimap(t_engine *engine);
 #endif

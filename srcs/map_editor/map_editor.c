@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_editor.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 12:49:31 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/27 13:45:03 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/29 13:11:20 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void		player_editing(t_engine *engine)
 	static int	b_press = 0;
 	static int	print = 0;
 
-	if (print == 1 && engine->playing == 10)
+	if (print == 1 && engine->playing == 4)
 		print = 0;
 	if (get_key_state(engine->user_engine->keyboard,
 		engine->user_engine->keyboard->key[SDL_SCANCODE_B]) == 1
@@ -30,7 +30,10 @@ void		player_editing(t_engine *engine)
 		engine->user_engine->keyboard->key[SDL_SCANCODE_B]) == 0)
 		b_press = 0;
 	if (print == 1)
-		engine->playing = 11;
+	{
+		engine->menu_nbr = 14;
+		engine->playing = 5;
+	}
 }
 
 void		delete_mesh(t_engine *engine)

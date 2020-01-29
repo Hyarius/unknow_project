@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_gui.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 15:58:51 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/23 16:10:20 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/28 14:10:11 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,16 @@ t_gui	*initialize_t_gui(void)
 void	set_t_gui_texte(t_gui *gui)
 {
 	int		i;
-	char	letter;
+	char	letter[2];
 
-	i = 32;
-	letter = ' ';
-	while (i <= 126)
+	i = 0;
+	letter[0] = ' ';
+	letter[1] = '\0';
+	while (i < 94)
 	{
-		load_letter(gui, &letter, i - 32);
+		load_letter(gui, letter, i);
 		i++;
-		letter++;
+		letter[0]++;
 	}
 }
 
@@ -68,10 +69,12 @@ void	print_letter(t_camera *main_cam, t_gui *gui, char *str, t_rectangle rec)
 {
 	int		i;
 	int		idx;
+	int		len;
 
 	i = -1;
+	len = ft_strlen(str);
 	t_view_port_clear_buffers(main_cam->view_port);
-	while (++i < ft_strlen(str))
+	while (++i < len)
 	{
 		idx = -1;
 		while (++idx <= 94)
@@ -93,14 +96,12 @@ void	print_info_bar(t_camera *main_camera, t_player *player, t_gui *gui)
 	char	*str;
 
 	str = ft_itoa(player->armor);
-	print_letter(main_camera, gui, ft_strcat(str, "%"),
-				new_rectangle(create_vec2(-0.70, -0.87),
-									create_vec2(0.02, 0.07)));
+	print_letter(main_camera, gui, str,
+		new_rectangle(create_vec2(-0.70, -0.87), create_vec2(0.02, 0.07)));
 	free(str);
 	str = ft_itoa(player->hp);
-	print_letter(main_camera, gui, ft_strcat(str, "%"),
-				new_rectangle(create_vec2(-0.70, -0.97),
-									create_vec2(0.02, 0.07)));
+	print_letter(main_camera, gui, str,
+		new_rectangle(create_vec2(-0.70, -0.97), create_vec2(0.02, 0.07)));
 	free(str);
 	if (player->current_weapon->index != 5)
 	{

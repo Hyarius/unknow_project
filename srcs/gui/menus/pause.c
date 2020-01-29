@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pause.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:46:46 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/27 17:07:29 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/28 14:57:39 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void	close_map(t_engine *engine)
 	move_t_view_port(t_camera_list_get(
 		engine->visual_engine->camera_list, 1)->view_port,
 								create_vec2_int(WIN_X - 300, 0));
-	engine->playing = 2;
+	engine->playing = 1;
+	engine->menu_nbr = 0;
 }
 
 void	pause_menu(t_engine *engine)
@@ -50,11 +51,11 @@ void	pause_menu(t_engine *engine)
 		if (t_mouse_state(mou) == 2)
 		{
 			if (pos.y > 26 && pos.y < 32)
-				engine->playing = 1;
+				engine->playing = 2;
 			else if (pos.y > 36 && pos.y < 41)
-				engine->playing = -2;
+				engine->menu_nbr = 5;
 			else if (pos.y > 45 && pos.y < 50)
-				engine->playing = -3;
+				engine->menu_nbr = 16;
 			else if (pos.y > 54 && pos.y < 59)
 				close_map(engine);
 			else if (pos.y > 64 && pos.y < 70)

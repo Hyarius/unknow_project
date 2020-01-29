@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 10:11:18 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/20 10:38:32 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/28 11:25:42 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ void		prepare_screen(t_window *p_win, t_color color)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-void		render_screen(t_window *p_win, t_engine *engine)
+void		render_screen(t_engine *engine)
 {
 	check_frame(engine);
-	draw_buffer_opengl(p_win, p_win->color_data);
-	SDL_GL_SwapWindow(p_win->window);
+	draw_buffer_opengl(engine->win, engine->win->color_data);
+	SDL_GL_SwapWindow(engine->win->window);
 }
 
 int			is_point_in_screen(t_window *p_win, t_vec4 p_point)
