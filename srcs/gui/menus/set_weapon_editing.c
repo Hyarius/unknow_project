@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_weapon_editing.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 13:07:01 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/21 13:43:00 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/29 14:46:05 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ void		set_weapon_editing(t_engine *engine, int *play)
 		set_rifle_editing(pos, player);
 		set_rpg_editing(pos, player);
 		if (pos.y > 91 && pos.y < 98 && pos.x > 40 && pos.x < 61)
-			*play = 11;
+			engine->menu_nbr = 14;
 		Mix_PlayChannel(-1, engine->sound_engine->sounds[0], 0);
 	}
 }

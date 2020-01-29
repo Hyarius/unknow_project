@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   control_menu.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 14:48:47 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/21 15:00:02 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/29 14:26:25 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void		controls_menu(t_camera *main_camera, t_gui *gui, t_engine *engine,
 				control_right_part(pos, gui);
 			if (pos.x > 43 && pos.x < 56)
 				if (pos.y > 82 && pos.y < 86)
-					*play = 3;
+					engine->menu_nbr = 1;
 		}
 	}
 	else if (gui->key_press == 2)

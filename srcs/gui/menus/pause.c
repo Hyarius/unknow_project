@@ -6,7 +6,7 @@
 /*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:46:46 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/29 14:10:06 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/29 15:06:33 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	close_map(t_engine *engine)
 	engine->physic_engine->item_list = initialize_t_item_list();
 	engine->visual_engine = initialize_t_visual_engine(engine->win);
 	create_minimap(engine);
-	engine->playing = 2;
+	engine->playing = 1;
+	engine->menu_nbr = 0;
 }
 
 void	pause_menu(t_engine *engine)
@@ -85,7 +86,7 @@ void	sens_pause(t_mouse *mouse, t_vec2_int pos)
 	}
 }
 
-void	settings_pause_menu(t_engine *engine, int *play)
+void	settings_pause_menu(t_engine *engine)
 {
 	t_mouse		*mou;
 	t_vec2_int	pos;
@@ -100,7 +101,7 @@ void	settings_pause_menu(t_engine *engine, int *play)
 			if (pos.y > 26 && pos.y < 32)
 				mute_unmute();
 			if (pos.y > 69 && pos.y < 75)
-				*play = -1;
+				engine->menu_nbr = 4;
 			sens_pause(engine->user_engine->mouse, pos);
 			Mix_PlayChannel(-1, engine->sound_engine->sounds[0], 0);
 		}

@@ -6,7 +6,7 @@
 /*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 12:02:06 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/29 13:24:27 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/29 14:59:05 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	display_tittle_screen(t_camera *camera, t_gui *gui, t_engine *engine)
 	(void)engine;
 	SDL_ShowCursor(SDL_ENABLE);
 	rec = new_rectangle(create_vec2(-1, 1), create_vec2(2, -2));
-	draw_rectangle_texture_cpu(camera->view_port, rec, gui->menu[0]);
+	draw_rectangle_texture_cpu(camera->view_port, rec,
+					gui->menu[engine->menu_nbr]);
 }
 
 void	game_playing(t_camera *camera, t_gui *gui, t_engine *engine)
@@ -33,9 +34,7 @@ void	game_playing(t_camera *camera, t_gui *gui, t_engine *engine)
 	t_engine_render_camera(engine);
 	SDL_ShowCursor(SDL_DISABLE);
 	t_engine_apply_physic(engine);
-	printf("HERE 1\n");
 	t_engine_handle_camera(engine, engine->win);
-	printf("HERE 3\n");
 	t_engine_prepare_camera(engine);
 	t_engine_draw_mesh(engine);
 	t_engine_render_camera(engine);

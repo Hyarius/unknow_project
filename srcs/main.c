@@ -6,7 +6,7 @@
 /*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 14:24:27 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/29 14:10:58 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/29 14:50:53 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ int			main(int argc, char **argv)
 	playing_functions[3] = game_pausing;
 	playing_functions[4] = level_editing;
 	playing_functions[5] = level_editing_pausing;
-	engine->playing = 2;
 	while (engine->playing != 0)
 	{
 		prepare_screen(engine->win, new_color(0.2f, 0.2f, 0.2f, 1.0f));

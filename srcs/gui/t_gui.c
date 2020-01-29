@@ -6,7 +6,7 @@
 /*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 15:58:51 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/29 14:10:50 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/29 14:17:29 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	set_t_gui_texte(t_gui *gui)
 void	print_letter(t_camera *main_cam, t_gui *gui, char *str, t_rectangle rec)
 {
 	int		i;
-	int		len;
 	int		idx;
 	int		len;
 
