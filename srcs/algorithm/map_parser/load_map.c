@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 13:40:38 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/27 17:07:12 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/28 10:06:22 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	link_enemy_to_camera(t_engine *engine, int k)
 {
-	printf("visual camera size = %d\n", engine->visual_engine->camera_list->size);
 	t_engine_add_camera(engine,
 		new_camera(t_camera_list_get(engine->visual_engine->camera_list,
 		0)->view_port->window, new_vec4(0.0, 0.0, 0.0), 70,
