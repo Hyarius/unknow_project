@@ -157,6 +157,7 @@ int		main(int argc, char **argv)
 		}
 		else if (engine->playing == 10)
 		{
+
 			mesh.pos = main_camera->pos;
 			draw_t_mesh(main_camera, &mesh);
 			t_engine_render_camera(engine);

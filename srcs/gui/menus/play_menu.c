@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   play_menu.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:12:31 by adjouber          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2020/01/29 10:15:47 by spuisais         ###   ########.fr       */
+=======
+/*   Updated: 2020/01/28 12:59:48 by gboutin          ###   ########.fr       */
+>>>>>>> 54b23eab35bf6d72a34aad2de392d71fd2a0af89
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +18,7 @@
 
 void	synopsis_menu(t_engine *engine, int *play)
 {
+<<<<<<< HEAD
 	t_mouse			*mou;
 	t_vec2_int		pos;
 	
@@ -28,6 +33,28 @@ void	synopsis_menu(t_engine *engine, int *play)
 }
 
 void	open_scenario_or_editor(t_vec2_int pos, int *play, char **path)
+=======
+	static int			tmp = 0;
+	static t_texture	*img = NULL;
+
+	if (img == NULL)
+		img = png_load("ressources/assets/imgs/synopsis.png");
+	if (tmp == 0)
+		tmp = engine->tick;
+	t_view_port_clear_buffers(camera->view_port);
+	draw_rectangle_texture_cpu(camera->view_port, new_rectangle(
+					create_vec2(-1.0, -1.0), create_vec2(2.0, 2.0)),
+					img);
+	if (engine->tick - tmp == 100)
+	{
+		t_view_port_clear_buffers(camera->view_port);
+		return ;
+	}
+}
+
+void	open_scenario_or_editor(t_vec2_int pos, int *play, char **path,
+										t_engine *engine, t_camera *camera)
+>>>>>>> 54b23eab35bf6d72a34aad2de392d71fd2a0af89
 {
 	if (pos.x > 37 && pos.x < 61)
 	{

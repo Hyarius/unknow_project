@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:46:46 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/27 14:00:23 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/28 08:57:05 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,11 @@ void	close_map(t_engine *engine)
 {
 	free_t_item_list(engine->physic_engine->item_list);
 	free_t_mesh_list(engine->physic_engine->mesh_list);
+	free_t_camera_list(engine->visual_engine->camera_list);
 	engine->physic_engine->mesh_list = initialize_t_mesh_list();
 	engine->physic_engine->item_list = initialize_t_item_list();
+	engine->visual_engine = initialize_t_visual_engine(engine->win);
+	create_minimap(engine);
 	engine->playing = 2;
 }
 

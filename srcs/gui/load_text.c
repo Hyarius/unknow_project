@@ -6,7 +6,11 @@
 /*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 16:24:30 by spuisais          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2020/01/28 14:26:27 by spuisais         ###   ########.fr       */
+=======
+/*   Updated: 2020/01/28 10:59:45 by gboutin          ###   ########.fr       */
+>>>>>>> 54b23eab35bf6d72a34aad2de392d71fd2a0af89
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +21,6 @@ void	load_letter(t_gui *gui, char *str, int idx)
 	TTF_Font	*police;
 	SDL_Color	color;
 
-	str[1] = '\0';
 	color.r = 0;
 	police = TTF_OpenFont("ressources/assets/ttf/Tinos-Regular.ttf", 240);
 	gui->letter[idx]->font = TTF_RenderText_Blended(police, str, color);
