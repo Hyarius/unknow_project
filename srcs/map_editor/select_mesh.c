@@ -6,7 +6,7 @@
 /*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 13:19:50 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/20 12:46:15 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/01/29 15:26:54 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,8 @@ t_mesh_editing	create_mesh_editing(int index, char *path)
 	ret.mesh = create_mesh_cube_wall(index);
 	ret.mesh = create_mesh_door(index, ret.mesh);
 	ret.mesh = create_mesh_card(index, ret.mesh);
-	ret.mesh = create_mesh_elevator_stair(index, ret.mesh);
-	ret.mesh = create_mesh_stair(index, ret.mesh);
+	ret.mesh = create_mesh_elevator(index, ret.mesh);
+	ret.mesh = create_mesh_slope(index, ret.mesh);
 	ret.mesh = create_mesh_item(index, ret.mesh);
 	ret.mesh = create_mesh_ammo(index, ret.mesh);
 	ret.mesh = create_mesh_ladder_platform(index, ret.mesh);
@@ -110,14 +110,14 @@ t_mesh_editing	select_mesh(t_keyboard *key, t_vec4 pos, char **path)
 
 	if (get_key_state(key, key->key[SDL_SCANCODE_1]) == 1 && press == 0)
 	{
-		key->i--;
+		key->i = (key->i == 12) ? key->i - 2 : key->i - 1;
 		if (key->i < 0)
 			key->i = 24;
 		press = 1;
 	}
 	else if (get_key_state(key, key->key[SDL_SCANCODE_2]) == 1 && press == 0)
 	{
-		key->i++;
+		key->i = (key->i == 10) ? key->i + 2 : key->i + 1;
 		if (key->i > 24)
 			key->i = 0;
 		press = 1;

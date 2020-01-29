@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 09:37:24 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/29 15:33:11 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ t_weapon		new_weapons(int index, int ammo, int total_ammo)
 	result[0].max_ammo = result[0].mag_size * MAX_MAGS;
 	result[0].total_ammo = total_ammo;
 	result[0].dmg = 10;
-	result[0].tick_shoot = 1;
+	result[0].tick_shoot = 4;
 	result[0].tick_reload = 2;
 	result[0].index = 0;
 	result[1].name = "ar";
