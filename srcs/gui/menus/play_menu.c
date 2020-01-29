@@ -6,30 +6,23 @@
 /*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:12:31 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/29 13:27:45 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/29 13:33:24 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-void	show_synopsis(t_engine *engine, t_camera *camera)
+void	synopsis_menu(t_engine *engine, int *play)
 {
-	static int			tmp = 0;
-	static t_texture	*img = NULL;
-
-	if (img == NULL)
-		img = png_load("ressources/assets/imgs/synopsis.png");
-	if (tmp == 0)
-		tmp = engine->tick;
-	t_view_port_clear_buffers(camera->view_port);
-	draw_rectangle_texture_cpu(camera->view_port, new_rectangle(
-					create_vec2(-1.0, -1.0), create_vec2(2.0, 2.0)),
-					img);
-	if (engine->tick - tmp == 100)
-	{
-		t_view_port_clear_buffers(camera->view_port);
-		return ;
-	}	
+	t_mouse			*mou;
+	t_vec2_int		pos;
+	
+	mou = engine->user_engine->mouse;
+	get_t_mouse_info(mou);
+	pos = create_vec2_int(mou->pos.x * 100 / WIN_X, mou->pos.y * 100 / WIN_Y);
+	if (t_mouse_state(mou) == 2)
+		if ((pos.x > 85 && pos.x < 96) && (pos.y > 83 && pos.y < 96))
+				*play = 1;
 }
 
 void	open_scenario_or_editor(t_vec2_int pos, int *play, char **path, t_engine *engine, t_camera *camera)
@@ -48,9 +41,8 @@ void	open_scenario_or_editor(t_vec2_int pos, int *play, char **path, t_engine *e
 	{
 		if (pos.y > 29 && pos.y < 37)
 		{
-			show_synopsis(engine, camera);
-			*play = 1;
-			*path = ft_strdup("ressources/map/fichier_map.map");
+			*play = 7;
+			*path = ft_strdup("ressources/map/save1.map");
 		}
 		if (pos.y > 39 && pos.y < 47)
 		{
