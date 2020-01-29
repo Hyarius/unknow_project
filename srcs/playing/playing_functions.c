@@ -6,7 +6,7 @@
 /*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 12:02:06 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/29 14:59:05 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/29 17:14:43 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	game_playing(t_camera *camera, t_gui *gui, t_engine *engine)
 	t_mesh		mesh;
 
 	mesh = create_primitive_skybox(camera->pos, new_vec4(1.0, 1.0, 1.0),
-						png_load("ressources/assets/textures/skybox.png"));
+						gui->skybox);
 	mesh.pos = camera->pos;
 	draw_t_mesh(camera, &mesh);
 	t_engine_render_camera(engine);
@@ -42,7 +42,6 @@ void	game_playing(t_camera *camera, t_gui *gui, t_engine *engine)
 										engine, gui->text_weap);
 	enemy_look(engine);
 	enemy_shoot(engine);
-	enemy_move(engine);
 	drawing_front_hp(camera, engine->user_engine->player);
 	drawing_front_mun(camera, gui->text_am, engine->user_engine->player);
 	drawing_front_weapons(camera, gui->text_weap,
@@ -70,7 +69,7 @@ void	level_editing(t_camera *camera, t_gui *gui, t_engine *engine)
 	t_mesh_editing	mesh_editing;
 
 	mesh = create_primitive_skybox(camera->pos, new_vec4(1.0, 1.0, 1.0),
-						png_load("ressources/assets/textures/skybox.png"));
+						gui->skybox);
 	mesh.pos = camera->pos;
 	draw_t_mesh(camera, &mesh);
 	t_engine_render_camera(engine);

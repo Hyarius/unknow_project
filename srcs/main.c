@@ -6,7 +6,7 @@
 /*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 14:24:27 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/29 14:50:53 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/29 17:14:54 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void		load_textures(t_gui *gui, t_engine *engine)
 	gui->text_weap[8] = png_load("ressources/assets/imgs/rifle_shoot_0.png");
 	gui->text_weap[9] = png_load("ressources/assets/imgs/shotgun_shoot_0.png");
 	gui->text_weap[10] = png_load("ressources/assets/imgs/wall_destroyer_shoot_0.png");
+	gui->skybox = png_load("ressources/assets/textures/skybox.png");
 }
 
 int			main(int argc, char **argv)
@@ -66,6 +67,7 @@ int			main(int argc, char **argv)
 	t_engine		*engine;
 	t_gui			*gui;
 	t_playing_funct	playing_functions[6];
+	t_camera		*camera;
 
 	if (argc != 1)
 		error_exit(-1, "Bad argument");
@@ -81,13 +83,14 @@ int			main(int argc, char **argv)
 	playing_functions[3] = game_pausing;
 	playing_functions[4] = level_editing;
 	playing_functions[5] = level_editing_pausing;
+	camera = t_camera_list_get(engine->visual_engine->camera_list, 0);
 	while (engine->playing != 0)
-	{
+	{	
 		prepare_screen(engine->win, new_color(0.2f, 0.2f, 0.2f, 1.0f));
 		t_engine_prepare_camera(engine);
 		if (engine->playing != 0)
-			playing_functions[engine->playing](t_camera_list_get(engine->visual_engine->camera_list, 0), gui, engine);
-		t_engine_handle_event(t_camera_list_get(engine->visual_engine->camera_list, 0), gui, engine);
+			playing_functions[engine->playing](camera, gui, engine);
+		t_engine_handle_event(camera, gui, engine);
 		render_screen(engine);
 	}
 	exit_prog();
