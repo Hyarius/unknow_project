@@ -192,6 +192,10 @@ int		main(int argc, char **argv)
 			t_view_port_clear_buffers(main_camera->view_port);
 			draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->menu[16]);
 		}
+		else if (engine->playing == 15)
+		{
+			draw_rectangle_texture_cpu(main_camera->view_port, rec, gui->menu[17]);
+		}
 		t_engine_handle_event(main_camera, gui, engine);
 		render_screen(win, engine);
 	}

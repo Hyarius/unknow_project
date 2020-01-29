@@ -6,11 +6,7 @@
 /*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 13:51:42 by gboutin           #+#    #+#             */
-<<<<<<< HEAD:srcs/gui/menu_pause/menu.c
-/*   Updated: 2020/01/27 10:00:29 by spuisais         ###   ########.fr       */
-=======
-/*   Updated: 2020/01/27 14:02:42 by gboutin          ###   ########.fr       */
->>>>>>> e3e816daa40f85036bb8de54e56662bbeac2b09e:srcs/gui/menus/menu.c
+/*   Updated: 2020/01/28 15:43:07 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +35,8 @@ void	t_user_engine_handle_menu(t_camera *main_camera, t_gui *gui,
 		pause_menu(engine);
 	else if (engine->playing == -2)
 		settings_pause_menu(engine, &engine->playing);
+	else if (engine->playing == 15)
+		synopsis_menu(engine, &engine->playing);
 }
 
 void	main_menu(t_engine *engine, int *play)

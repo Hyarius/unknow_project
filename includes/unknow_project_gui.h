@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unknow_project_gui.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:10:18 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/27 14:33:00 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/28 14:13:35 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void			t_engine_handle_event(t_camera *main_camera, t_gui *gui,
 void			t_user_engine_handle_menu(t_camera *main_camera, t_gui *gui,
 															t_engine *engine);
 void			main_menu(t_engine *engine, int *play);
+void			synopsis_menu(t_engine *engine, int *play);
 void			play_menu(t_camera *main_camera, t_engine *engine, int *play);
 void			settings_menu(t_camera *main_camera, t_gui *gui,
 															t_engine *engine);
