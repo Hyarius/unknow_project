@@ -6,7 +6,7 @@
 /*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:45:15 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/28 14:35:54 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/29 14:05:15 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct		s_engine
 	int				playing;
 	int				menu_nbr;
 	int				tick;
+	t_camera		*main_camera;
 	t_visual_engine	*visual_engine;
 	t_physic_engine	*physic_engine;
 	t_user_engine	*user_engine;

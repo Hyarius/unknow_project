@@ -6,7 +6,7 @@
 /*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 13:51:42 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/28 14:55:09 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/29 14:10:03 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ void	t_user_engine_handle_menu(t_camera *main_camera, t_gui *gui,
 		credits_menu(engine, &engine->playing);
 	else if (engine->menu_nbr == 6)
 		play_menu(main_camera, engine, &engine->playing);
-	else if (engine->menu_nbr == 14)
+	else if (engine->menu_nbr == 17)
+		synopsis_menu(engine, &engine->playing);
+	else if (engine->playing == 11)
 		set_player_editing(engine, &engine->playing);
 	else if (engine->menu_nbr == 15)
 		set_weapon_editing(engine, &engine->playing);

@@ -6,7 +6,7 @@
 /*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:12:31 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/29 13:33:24 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/29 14:10:10 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	synopsis_menu(t_engine *engine, int *play)
 				*play = 1;
 }
 
-void	open_scenario_or_editor(t_vec2_int pos, int *play, char **path, t_engine *engine, t_camera *camera)
+void	open_scenario_or_editor(t_vec2_int pos, int *play, char **path)
 {
 	if (pos.x > 37 && pos.x < 61)
 	{
@@ -100,14 +100,21 @@ void	play_menu(t_camera *main_camera, t_engine *engine, int *play)
 	pos = create_vec2_int(mou->pos.x * 100 / WIN_X, mou->pos.y * 100 / WIN_Y);
 	if (t_mouse_state(mou) == 2)
 	{
-		open_scenario_or_editor(pos, play, &path, engine, main_camera);
+		open_scenario_or_editor(pos, play, &path);
 		open_save(pos, play, &path);
 		Mix_PlayChannel(-1, engine->sound_engine->sounds[0], 0);
 	}
+<<<<<<< HEAD
 	if (*play == 5 || *play == 2 || *play == 7)
 	{
 		load_map(main_camera, engine, path);
 		if (*play == 2 || *play == 7)
+=======
+	if (*play == 10 || *play == 1 || *play == 7)
+	{
+		load_map(main_camera, engine, path);
+		if (*play == 1 || *play == 7)
+>>>>>>> 1636ba99aec1c5337797439f96cec2eed4b5bac5
 			link_camera_to_mesh(engine, 0, t_engine_get_mesh(engine, 0));
 		free(path);
 	}

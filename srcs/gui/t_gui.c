@@ -6,7 +6,7 @@
 /*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 15:58:51 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/28 14:10:11 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/29 14:10:50 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_gui	new_gui(void)
 	t_gui	result;
 	int		idx;
 
-	if (!(result.letter = (t_letter **)malloc(sizeof(t_letter*) * 95)))
+	if (!(result.letter = (t_letter **)malloc(sizeof(t_letter*) * 96)))
 		error_exit(-29, "Can't malloc a t_surface");
 	if (!(result.menu = (t_texture **)malloc(sizeof(t_texture*) * 18)))
 		error_exit(-29, "Can't malloc a t_surface");
@@ -68,6 +68,7 @@ void	set_t_gui_texte(t_gui *gui)
 void	print_letter(t_camera *main_cam, t_gui *gui, char *str, t_rectangle rec)
 {
 	int		i;
+	int		len;
 	int		idx;
 	int		len;
 
@@ -94,14 +95,16 @@ void	print_letter(t_camera *main_cam, t_gui *gui, char *str, t_rectangle rec)
 void	print_info_bar(t_camera *main_camera, t_player *player, t_gui *gui)
 {
 	char	*str;
+	t_vec2	size;
 
+	size = create_vec2(0.02, 0.07);
 	str = ft_itoa(player->armor);
 	print_letter(main_camera, gui, str,
-		new_rectangle(create_vec2(-0.70, -0.87), create_vec2(0.02, 0.07)));
+		new_rectangle(create_vec2(-0.70, -0.87), size));
 	free(str);
 	str = ft_itoa(player->hp);
 	print_letter(main_camera, gui, str,
-		new_rectangle(create_vec2(-0.70, -0.97), create_vec2(0.02, 0.07)));
+		new_rectangle(create_vec2(-0.70, -0.97), size));
 	free(str);
 	if (player->current_weapon->index != 5)
 	{

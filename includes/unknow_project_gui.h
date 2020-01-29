@@ -6,7 +6,7 @@
 /*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:10:18 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/28 14:36:04 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/29 14:05:22 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void			drawing_front_mun(t_camera *main_camera, t_texture **texture,
 															t_player *player);
 void			drawing_front_weapons(t_camera *main_camera,
 										t_texture **texture, t_player *player);
+void			create_minimap(t_engine *engine);
 void			draw_minimap(t_engine *engine);
 void			load_letter(t_gui *gui, char *str, int idx);
 void			set_t_gui_texte(t_gui *gui);
@@ -65,6 +66,7 @@ void			t_engine_handle_event(t_camera *main_camera, t_gui *gui,
 void			t_user_engine_handle_menu(t_camera *main_camera, t_gui *gui,
 															t_engine *engine);
 void			main_menu(t_engine *engine, int *play);
+void			synopsis_menu(t_engine *engine, int *play);
 void			play_menu(t_camera *main_camera, t_engine *engine, int *play);
 void			settings_menu(t_camera *main_camera, t_gui *gui,
 															t_engine *engine);
