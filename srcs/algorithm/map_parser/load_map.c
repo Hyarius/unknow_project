@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 13:40:38 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/28 10:06:22 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/29 15:13:29 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void	link_enemy_to_camera(t_engine *engine, int k)
 		0)->view_port->window, new_vec4(0.0, 0.0, 0.0), 70,
 		create_vec2(NEAR, FAR)));
 	resize_t_view_port(t_camera_list_get(engine->visual_engine->camera_list,
-		2 + k)->view_port, create_vec2_int(1, 1));
+		k)->view_port, create_vec2_int(1, 1));
 	move_t_view_port(t_camera_list_get(engine->visual_engine->camera_list,
-		2 + k)->view_port, create_vec2_int(0, 0));
+		k)->view_port, create_vec2_int(0, 0));
 }
 
 void	set_map_in_engine(t_engine *engine, t_mesh_list *meshs,
@@ -33,7 +33,7 @@ void	set_map_in_engine(t_engine *engine, t_mesh_list *meshs,
 
 	i = 0;
 	j = 0;
-	k = 0;
+	k = 2;
 	while (i < meshs->size)
 	{
 		if (t_mesh_list_at(meshs, i).collectible == 1)
@@ -42,11 +42,11 @@ void	set_map_in_engine(t_engine *engine, t_mesh_list *meshs,
 			j++;
 		}
 		t_engine_add_mesh(engine, t_mesh_list_at(meshs, i));
-		if (ft_strcmp(t_engine_get_mesh(engine, i)->name, "Enemy") == 0
-		|| ft_strcmp(t_engine_get_mesh(engine, i)->name, "Enemy_boss") == 0)
+		if (ft_strcmp(t_engine_get_mesh(engine, i + 1)->name, "Enemy") == 0
+		|| ft_strcmp(t_engine_get_mesh(engine, i + 1)->name, "Enemy_boss") == 0)
 		{
 			link_enemy_to_camera(engine, k);
-			link_camera_to_mesh(engine, 2 + k, t_engine_get_mesh(engine, i));
+			link_camera_to_mesh(engine, k, t_engine_get_mesh(engine, i + 1));
 			k++;
 		}
 		i++;
