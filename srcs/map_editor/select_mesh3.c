@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   select_mesh3.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 12:45:19 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/20 12:46:05 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/01/29 14:19:20 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_mesh			create_mesh_plane_enemy(int index, t_mesh mesh)
 		ret.primitive = 1;
 		ret.collectible = 0;
 		ret.rotation = new_vec4(0.0, 0.0, 0.0);
-		ret.hp = -1;
+		ret.hp = 50;
 		ret.kinetic = 0.0;
 	}
 	return (ret);

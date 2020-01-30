@@ -6,7 +6,7 @@
 /*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:12:31 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/29 11:53:53 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/29 13:25:19 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ void	synopsis_menu(t_engine *engine, int *play)
 {
 	t_mouse			*mou;
 	t_vec2_int		pos;
-	
+
 	mou = engine->user_engine->mouse;
 	get_t_mouse_info(mou);
 	pos = create_vec2_int(mou->pos.x * 100 / WIN_X, mou->pos.y * 100 / WIN_Y);
 	if (t_mouse_state(mou) == 2)
 		if ((pos.x > 85 && pos.x < 96) && (pos.y > 83 && pos.y < 96))
-				*play = 1;
+			*play = 1;
 }
 
 void	open_scenario_or_editor(t_vec2_int pos, int *play, char **path)
