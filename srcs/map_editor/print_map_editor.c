@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_map_editor.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 12:49:02 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/20 13:15:20 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/01/30 11:18:52 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void		print_info_editing(t_camera *main_camera, t_keyboard *key,
 			gui->info_print = 1;
 		else if (gui->info_print == 1)
 			gui->info_print = 0;
-		printf("%d\n", gui->info_print);
 		r_press = 1;
 	}
 	else if (get_key_state(key, key->key[SDL_SCANCODE_R]) == 0)
