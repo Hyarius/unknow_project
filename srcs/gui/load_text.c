@@ -6,7 +6,7 @@
 /*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 16:24:30 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/30 10:21:36 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/30 13:21:24 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	load_path_texture2(char **path)
 char	**load_path_texture(void)
 {
 	char	**path;
-	
+
 	if (!(path = (char**)malloc(sizeof(char*) * 25)))
 		error_exit(2, "error malloc");
 	path[0] = ft_strdup("ressources/assets/textures/cube_test.png");

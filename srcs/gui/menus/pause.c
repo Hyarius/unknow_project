@@ -6,7 +6,7 @@
 /*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:46:46 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/30 11:17:22 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/30 11:28:32 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	close_map(t_engine *engine)
 	engine->physic_engine->mesh_list = initialize_t_mesh_list();
 	engine->physic_engine->item_list = initialize_t_item_list();
 	engine->visual_engine = initialize_t_visual_engine(engine->win);
-	engine->visual_engine->textures_path = load_path_texture();
 	create_minimap(engine);
 	engine->playing = 1;
 	engine->menu_nbr = 0;

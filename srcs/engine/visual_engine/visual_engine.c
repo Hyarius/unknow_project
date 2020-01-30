@@ -6,7 +6,7 @@
 /*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 15:06:45 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/28 14:12:55 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/30 11:28:23 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_visual_engine	new_visual_engine(t_window *p_window)
 
 	result.camera_list = initialize_t_camera_list();
 	result.main_camera = 0;
-	result.textures_path = NULL;
+	result.textures_path = load_path_texture();
 	tmp = new_camera(p_window, new_vec4(0, 0, 0), FOV,
 									create_vec2(NEAR, FAR));
 	t_camera_list_push_back(result.camera_list, tmp);

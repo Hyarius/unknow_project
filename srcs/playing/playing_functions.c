@@ -6,7 +6,7 @@
 /*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 12:02:06 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/30 11:20:50 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/30 11:57:30 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	game_pausing(t_camera *camera, t_gui *gui, t_engine *engine)
 	t_engine_render_camera(engine);
 	t_view_port_clear_buffers(camera->view_port);
 	draw_rectangle_texture_cpu(camera->view_port, rec,
-									gui->menu[engine->menu_nbr]);	
+									gui->menu[engine->menu_nbr]);
 }
 
 void	level_editing(t_camera *camera, t_gui *gui, t_engine *engine)
