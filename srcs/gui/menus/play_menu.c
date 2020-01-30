@@ -6,7 +6,7 @@
 /*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:12:31 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/29 14:44:42 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/29 15:37:19 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,11 +104,10 @@ void	play_menu(t_camera *main_camera, t_engine *engine, int *play)
 		open_save(pos, play, &path);
 		Mix_PlayChannel(-1, engine->sound_engine->sounds[0], 0);
 	}
-	if (*play == 5 || *play == 2 || engine->menu_nbr == 17)
+	if (*play == 4 || *play == 2 || engine->menu_nbr == 17)
 	{
 		load_map(main_camera, engine, path);
-		if (*play == 2 || *play == 5)
-			link_camera_to_mesh(engine, 0, t_engine_get_mesh(engine, 0));
+		link_camera_to_mesh(engine, 0, t_engine_get_mesh(engine, 0));
 		free(path);
 	}
 }

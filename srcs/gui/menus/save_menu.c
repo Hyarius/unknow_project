@@ -6,7 +6,7 @@
 /*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:00:42 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/29 13:02:50 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/30 10:43:57 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,25 +44,25 @@ void		save_pause_bis(t_engine *engine, t_vec2_int pos)
 	if (pos.y > 10 && pos.y < 18)
 	{
 		save_map(engine, 1);
-		if (engine->menu_nbr == 5)
+		if (engine->playing == 5)
 			close_map(engine);
-		if (engine->menu_nbr == 3)
+		if (engine->playing == 3)
 			engine->menu_nbr = 4;
 	}
 	if (pos.y > 26 && pos.y < 34)
 	{
 		save_map(engine, 2);
-		if (engine->menu_nbr == 5)
+		if (engine->playing == 5)
 			close_map(engine);
-		if (engine->menu_nbr == 3)
+		if (engine->playing == 3)
 			engine->menu_nbr = 4;
 	}
 	if (pos.y > 41 && pos.y < 49)
 	{
 		save_map(engine, 3);
-		if (engine->menu_nbr == 5)
+		if (engine->playing == 5)
 			close_map(engine);
-		if (engine->menu_nbr == 3)
+		if (engine->playing == 3)
 			engine->menu_nbr = 4;
 	}
 }

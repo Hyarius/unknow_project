@@ -6,7 +6,7 @@
 /*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 13:51:42 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/29 15:04:35 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/30 10:30:04 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	t_user_engine_handle_menu(t_camera *main_camera, t_gui *gui,
 											t_engine *engine)
 {
+	SDL_ShowCursor(SDL_ENABLE);
 	if (engine->menu_nbr == 0)
 		main_menu(engine);
 	else if (engine->menu_nbr == 1)
@@ -27,7 +28,7 @@ void	t_user_engine_handle_menu(t_camera *main_camera, t_gui *gui,
 		play_menu(main_camera, engine, &engine->playing);
 	else if (engine->menu_nbr == 17)
 		synopsis_menu(engine);
-	else if (engine->playing == 11)
+	else if (engine->menu_nbr == 14)
 		set_player_editing(engine);
 	else if (engine->menu_nbr == 15)
 		set_weapon_editing(engine, &engine->playing);

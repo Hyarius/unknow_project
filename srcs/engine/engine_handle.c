@@ -6,7 +6,7 @@
 /*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 11:44:08 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/29 14:59:03 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/30 10:27:42 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void		t_engine_handle_event(t_camera *main_camera, t_gui *gui,
 		engine->playing = 2;
 	if (engine->playing != 2 && engine->playing != 4)
 		t_user_engine_handle_menu(main_camera, gui, engine);
+	else
+		SDL_ShowCursor(SDL_DISABLE);
 	if (t_user_engine_poll_event(engine->user_engine) > 0)
 		t_user_engine_handle_quit(engine->user_engine, &(engine->playing));
 }

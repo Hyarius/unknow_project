@@ -6,7 +6,7 @@
 /*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:21:49 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/28 13:16:48 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/30 11:17:44 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include "unknow_project_gui.h"
 # include "unknow_project_player.h"
 # include "unknow_project_item.h"
+# include "time_exe.h"
 
 typedef void	(*t_playing_funct)(t_camera *, t_gui *, t_engine *);
 t_texture		*png_load(char *path);

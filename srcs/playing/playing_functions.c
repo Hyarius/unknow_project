@@ -6,7 +6,11 @@
 /*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 12:02:06 by jubeal            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2020/01/29 16:27:29 by adjouber         ###   ########.fr       */
+=======
+/*   Updated: 2020/01/30 11:20:50 by jubeal           ###   ########.fr       */
+>>>>>>> b27255dd4b4b5802155bd066c5db54ef530cce9a
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +21,6 @@ void	display_tittle_screen(t_camera *camera, t_gui *gui, t_engine *engine)
 	t_rectangle		rec;
 
 	(void)engine;
-	SDL_ShowCursor(SDL_ENABLE);
 	rec = new_rectangle(create_vec2(-1, 1), create_vec2(2, -2));
 	draw_rectangle_texture_cpu(camera->view_port, rec,
 					gui->menu[engine->menu_nbr]);
@@ -28,11 +31,10 @@ void	game_playing(t_camera *camera, t_gui *gui, t_engine *engine)
 	t_mesh		mesh;
 
 	mesh = create_primitive_skybox(camera->pos, new_vec4(1.0, 1.0, 1.0),
-						png_load("ressources/assets/textures/skybox.png"));
+						gui->skybox);
 	mesh.pos = camera->pos;
 	draw_t_mesh(camera, &mesh);
 	t_engine_render_camera(engine);
-	SDL_ShowCursor(SDL_DISABLE);
 	t_engine_apply_physic(engine);
 	t_engine_handle_camera(engine, engine->win);
 	t_engine_prepare_camera(engine);
@@ -42,7 +44,6 @@ void	game_playing(t_camera *camera, t_gui *gui, t_engine *engine)
 										engine, gui->text_weap);
 	enemy_look(engine);
 	enemy_shoot(engine);
-	enemy_move(engine);
 	drawing_front_hp(camera, engine->user_engine->player);
 	drawing_front_mun(camera, gui->text_am, engine->user_engine->player);
 	drawing_front_weapons(camera, gui->text_weap,
@@ -56,7 +57,6 @@ void	game_pausing(t_camera *camera, t_gui *gui, t_engine *engine)
 	t_rectangle		rec;
 
 	rec = new_rectangle(create_vec2(-1, 1), create_vec2(2, -2));
-	SDL_ShowCursor(SDL_ENABLE);
 	t_engine_draw_mesh(engine);
 	t_engine_render_camera(engine);
 	t_view_port_clear_buffers(camera->view_port);
@@ -70,11 +70,10 @@ void	level_editing(t_camera *camera, t_gui *gui, t_engine *engine)
 	t_mesh_editing	mesh_editing;
 
 	mesh = create_primitive_skybox(camera->pos, new_vec4(1.0, 1.0, 1.0),
-						png_load("ressources/assets/textures/skybox.png"));
+						gui->skybox);
 	mesh.pos = camera->pos;
 	draw_t_mesh(camera, &mesh);
 	t_engine_render_camera(engine);
-	SDL_ShowCursor(SDL_DISABLE);
 	t_engine_apply_physic(engine);
 	t_engine_handle_camera(engine, engine->win);
 	t_engine_prepare_camera(engine);

@@ -6,7 +6,7 @@
 /*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:10:18 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/29 14:42:00 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/29 16:48:48 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct	s_gui
 	int			info_print;
 	t_texture	*text_weap[16];
 	t_texture	*text_am[6];
+	t_texture	*skybox;
 }				t_gui;
 
 t_gui			new_gui(void);
