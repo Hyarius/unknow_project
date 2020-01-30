@@ -6,7 +6,7 @@
 /*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 10:00:18 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/15 11:26:56 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/30 13:26:44 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ void		check_frame(t_engine *engine)
 	if (frame_actual - beginsecond > 1000)
 	{
 		engine->tick++;
-		printf("nb_frame = %d\n", nb_frame);
+		ft_putstr("nb_frame = ");
+		ft_putnbr(nb_frame);
+		write(1, "\n", 1);
 		nb_frame = 0;
 		beginsecond = 0;
 	}

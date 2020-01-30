@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   engine_camera.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 11:40:31 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 10:38:32 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/28 14:23:29 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void		t_engine_camera_look_at(t_engine *engine, int index,
 
 void		t_engine_render_camera(t_engine *engine)
 {
-	if (engine->playing == 10)
+	if (engine->playing == 4)
 		t_visual_engine_render_first_camera(engine->visual_engine);
 	else
 		t_visual_engine_render_camera(engine->visual_engine);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   menu.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 13:51:42 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/29 11:03:26 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/30 10:30:04 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,32 @@
 void	t_user_engine_handle_menu(t_camera *main_camera, t_gui *gui,
 											t_engine *engine)
 {
-	if (engine->playing == 2)
-		main_menu(engine, &engine->playing);
-	else if (engine->playing == 3)
+	SDL_ShowCursor(SDL_ENABLE);
+	if (engine->menu_nbr == 0)
+		main_menu(engine);
+	else if (engine->menu_nbr == 1)
 		settings_menu(main_camera, gui, engine);
-	else if (engine->playing == 4)
+	else if (engine->menu_nbr == 2)
 		controls_menu(main_camera, gui, engine, &engine->playing);
-	else if (engine->playing == 5)
-		credits_menu(engine, &engine->playing);
-	else if (engine->playing == 6)
+	else if (engine->menu_nbr == 3)
+		credits_menu(engine);
+	else if (engine->menu_nbr == 6)
 		play_menu(main_camera, engine, &engine->playing);
-	else if (engine->playing == 7)
-		synopsis_menu(engine, &engine->playing);
-	else if (engine->playing == 11)
-		set_player_editing(engine, &engine->playing);
-	else if (engine->playing == 12)
+	else if (engine->menu_nbr == 17)
+		synopsis_menu(engine);
+	else if (engine->menu_nbr == 14)
+		set_player_editing(engine);
+	else if (engine->menu_nbr == 15)
 		set_weapon_editing(engine, &engine->playing);
-	else if (engine->playing == 13 || engine->playing == -3)
+	else if (engine->menu_nbr == 16)
 		save_pause(engine);
-	else if (engine->playing == -1)
+	else if (engine->menu_nbr == 4)
 		pause_menu(engine);
-	else if (engine->playing == -2)
-		settings_pause_menu(engine, &engine->playing);
+	else if (engine->menu_nbr == 5)
+		settings_pause_menu(engine);
 }
 
-void	main_menu(t_engine *engine, int *play)
+void	main_menu(t_engine *engine)
 {
 	t_mouse		*mou;
 	t_vec2_int	pos;
@@ -52,13 +53,13 @@ void	main_menu(t_engine *engine, int *play)
 		if (t_mouse_state(mou) == 2)
 		{
 			if (pos.y > 56 && pos.y < 61)
-				*play = 6;
+				engine->menu_nbr = 6;
 			else if (pos.y > 63 && pos.y < 68)
-				*play = 3;
+				engine->menu_nbr = 1;
 			else if (pos.y > 70 && pos.y < 75)
-				*play = 5;
+				engine->menu_nbr = 3;
 			else if (pos.y > 76 && pos.y < 82)
-				*play = 0;
+				engine->playing = 0;
 			Mix_PlayChannel(-1, engine->sound_engine->sounds[0], 0);
 		}
 	}
@@ -66,7 +67,7 @@ void	main_menu(t_engine *engine, int *play)
 		engine->user_engine->mouse->clicked_left = BOOL_FALSE;
 }
 
-void	credits_menu(t_engine *engine, int *play)
+void	credits_menu(t_engine *engine)
 {
 	t_mouse		*mou;
 	t_vec2_int	pos;
@@ -80,7 +81,7 @@ void	credits_menu(t_engine *engine, int *play)
 			if (t_mouse_state(mou) == 2)
 			{
 				Mix_PlayChannel(-1, engine->sound_engine->sounds[0], 0);
-				*play = 2;
+				engine->menu_nbr = 0;
 			}
 	}
 	else
@@ -114,7 +115,7 @@ void	modif_player(t_vec2_int pos, t_player *player)
 	}
 }
 
-void	set_player_editing(t_engine *engine, int *play)
+void	set_player_editing(t_engine *engine)
 {
 	t_mouse		*mou;
 	t_player	*player;
@@ -130,11 +131,11 @@ void	set_player_editing(t_engine *engine, int *play)
 		{
 			modif_player(pos, player);
 			if (pos.y > 67 && pos.y < 76 && pos.x > 30 && pos.x < 70)
-				*play = 12;
+				engine->menu_nbr = 15;
 			if (pos.y > 78 && pos.y < 87 && pos.x > 37 && pos.x < 62)
-				*play = 13;
+				engine->menu_nbr = 16;
 			if (pos.y > 90 && pos.y < 99 && pos.x > 39 && pos.x < 60)
-				*play = 10;
+				engine->playing = 4;
 			Mix_PlayChannel(-1, engine->sound_engine->sounds[0], 0);
 		}
 	}

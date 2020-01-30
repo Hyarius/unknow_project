@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unknow_project_engine.h                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:45:15 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/28 08:50:11 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/29 14:05:15 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef struct		s_engine
 {
 	t_window		*win;
 	int				playing;
+	int				menu_nbr;
 	int				tick;
 	t_camera		*main_camera;
 	t_visual_engine	*visual_engine;

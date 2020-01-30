@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unknow_project_mesh.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:48:49 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/22 14:06:13 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/29 15:19:48 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,8 @@ void					destroy_mesh(t_mesh *mesh);
 t_mesh					create_mesh_cube_wall(int index);
 t_mesh					create_mesh_door(int index, t_mesh mesh);
 t_mesh					create_mesh_card(int index, t_mesh mesh);
-t_mesh					create_mesh_elevator_stair(int index, t_mesh mesh);
-t_mesh					create_mesh_stair(int index, t_mesh mesh);
+t_mesh					create_mesh_elevator(int index, t_mesh mesh);
+t_mesh					create_mesh_slope(int index, t_mesh mesh);
 t_mesh					create_mesh_item(int index, t_mesh mesh);
 t_mesh					create_mesh_ammo(int index, t_mesh mesh);
 t_mesh					create_mesh_ladder_platform(int index, t_mesh mesh);

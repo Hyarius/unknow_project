@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_gui.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 15:58:51 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/28 11:15:36 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/29 14:17:29 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,12 @@ void	set_t_gui_texte(t_gui *gui)
 void	print_letter(t_camera *main_cam, t_gui *gui, char *str, t_rectangle rec)
 {
 	int		i;
-	int		len;
 	int		idx;
+	int		len;
 
 	i = -1;
-	t_view_port_clear_buffers(main_cam->view_port);
 	len = ft_strlen(str);
+	t_view_port_clear_buffers(main_cam->view_port);
 	while (++i < len)
 	{
 		idx = -1;

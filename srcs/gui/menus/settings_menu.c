@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   settings_menu.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 14:45:37 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/23 13:56:40 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/29 13:09:23 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	settings_menu_next(t_camera *main_camera, t_gui *gui,
 		gui->idx = 10;
 	}
 	if (pos.y > 72 && pos.y < 76)
-		engine->playing = 4;
+		engine->menu_nbr = 2;
 }
 
 void	settings_menu(t_camera *main_camera, t_gui *gui, t_engine *engine)
@@ -105,7 +105,7 @@ void	settings_menu(t_camera *main_camera, t_gui *gui, t_engine *engine)
 		if (pos.x > 16 && pos.x < 32)
 			settings_menu_next(main_camera, gui, pos, engine);
 		else if (pos.x > 43 && pos.x < 56)
-			engine->playing = 2;
+			engine->menu_nbr = 0;
 		Mix_PlayChannel(-1, engine->sound_engine->sounds[0], 0);
 	}
 }

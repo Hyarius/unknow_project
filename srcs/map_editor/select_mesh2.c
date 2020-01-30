@@ -6,13 +6,13 @@
 /*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 12:42:32 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/23 15:52:53 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/01/29 15:25:41 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-t_mesh			create_mesh_elevator_stair(int index, t_mesh mesh)
+t_mesh			create_mesh_elevator(int index, t_mesh mesh)
 {
 	t_mesh	ret;
 
@@ -23,14 +23,6 @@ t_mesh			create_mesh_elevator_stair(int index, t_mesh mesh)
 		ret.size = new_vec4(2.0, 5.0, 2.0);
 		ret.rotation = new_vec4(0.0, 0.0, 0.0);
 		ret.primitive = 1;
-	}
-	else if (index == 10)
-	{
-		ret.name = "stair";
-		ret.primitive = 5;
-	}
-	if (index == 9 || index == 10)
-	{
 		ret.collectible = 0;
 		ret.hp = -1;
 		ret.kinetic = 0.0;
@@ -38,12 +30,12 @@ t_mesh			create_mesh_elevator_stair(int index, t_mesh mesh)
 	return (ret);
 }
 
-t_mesh			create_mesh_stair(int index, t_mesh mesh)
+t_mesh			create_mesh_slope(int index, t_mesh mesh)
 {
 	t_mesh ret;
 
 	ret = mesh;
-	if (index == 11)
+	if (index == 10)
 	{
 		ret.name = "stair";
 		ret.size = new_vec4(1.0, 0.2, 5.0);

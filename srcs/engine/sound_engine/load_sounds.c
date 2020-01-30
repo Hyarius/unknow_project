@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_sounds.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:41:59 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/29 10:24:35 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/29 14:09:53 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ Mix_Music		**load_music(void)
 	while (i < nb_music)
 		if (!music[i++])
 		{
-			ft_putstr("Mix_LoadWAV: ");
+			ft_putstr("Mix_LoadWAV1: ");
 			ft_putstr((char*)Mix_GetError());
 			write(1, "\n", 1);
 		}
@@ -79,7 +79,7 @@ Mix_Chunk		**load_sounds(void)
 	while (i < nb_sounds)
 		if (!sounds[i++])
 		{
-			ft_putstr("Mix_LoadWAV: ");
+			ft_putstr("Mix_LoadWAV2: ");
 			ft_putstr((char*)Mix_GetError());
 			write(1, "\n", 1);
 		}
