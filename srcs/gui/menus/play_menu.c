@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   play_menu.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:12:31 by adjouber          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2020/01/29 13:25:19 by spuisais         ###   ########.fr       */
-=======
-/*   Updated: 2020/01/30 11:59:14 by jubeal           ###   ########.fr       */
->>>>>>> 7de4b513cbd9a3dcd2e8529f13fabd1c72c093f2
+/*   Updated: 2020/01/30 14:21:02 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +22,7 @@ void	synopsis_menu(t_engine *engine)
 	pos = create_vec2_int(mou->pos.x * 100 / WIN_X, mou->pos.y * 100 / WIN_Y);
 	if (t_mouse_state(mou) == 2)
 		if ((pos.x > 85 && pos.x < 96) && (pos.y > 83 && pos.y < 96))
-<<<<<<< HEAD
-			*play = 1;
-=======
 			engine->playing = 2;
->>>>>>> 7de4b513cbd9a3dcd2e8529f13fabd1c72c093f2
 }
 
 void	open_scenario_or_editor(t_vec2_int pos, t_engine *engine, char **path)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_text.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 16:24:30 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/30 13:21:24 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/30 15:41:38 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,6 @@ void	load_menu(t_gui *gui)
 	gui->menu[15] = png_load("ressources/assets/imgs/set_weapon.png");
 	gui->menu[16] = png_load("ressources/assets/imgs/save_editor.png");
 	gui->menu[17] = png_load("ressources/assets/imgs/synopsis.png");
+	gui->menu[18] = png_load("ressources/assets/imgs/game_over.png");
+	gui->menu[19] = png_load("ressources/assets/imgs/fin_jeu.png");
 }

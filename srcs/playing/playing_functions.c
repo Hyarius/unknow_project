@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   playing_functions.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 12:02:06 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/30 13:54:29 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/30 15:22:50 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	display_tittle_screen(t_camera *camera, t_gui *gui, t_engine *engine)
 {
 	t_rectangle		rec;
 
-	(void)engine;
 	rec = new_rectangle(create_vec2(-1, 1), create_vec2(2, -2));
 	draw_rectangle_texture_cpu(camera->view_port, rec,
 					gui->menu[engine->menu_nbr]);

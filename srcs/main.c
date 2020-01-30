@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 14:24:27 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/30 13:20:11 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/30 15:18:49 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ t_playing_funct	*initialize_prog(t_gui **gui, t_engine **engine, char **argv)
 
 	begin_prog(engine, gui, argv);
 	load_textures(*gui);
-	Mix_VolumeMusic(MIX_MAX_VOLUME);
+	Mix_VolumeMusic(0);
 	Mix_PlayMusic((*engine)->sound_engine->music[0], -1);
 	if (!(result = (t_playing_funct *)malloc(sizeof(t_playing_funct) * 6)))
 		error_exit(-56, "t_playing_funct can't be malloc");

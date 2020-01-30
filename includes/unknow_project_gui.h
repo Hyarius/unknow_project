@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unknow_project_gui.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:10:18 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/29 16:48:48 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/30 15:08:22 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,4 +94,6 @@ void			close_map(t_engine *engine);
 void			print_info_editing(t_camera *main_camera, t_keyboard *key,
 																	t_gui *gui);
 void			create_minimap(t_engine *engine);
+void			game_over(t_engine *engine);
+
 #endif

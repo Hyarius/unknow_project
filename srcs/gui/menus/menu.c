@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   menu.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 13:51:42 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/30 10:30:04 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/30 15:47:04 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,10 @@ void	t_user_engine_handle_menu(t_camera *main_camera, t_gui *gui,
 		pause_menu(engine);
 	else if (engine->menu_nbr == 5)
 		settings_pause_menu(engine);
+	else if (engine->menu_nbr == 18)
+		game_over(engine);
+	else if (engine->menu_nbr == 19)
+		end_screen(engine);
 }
 
 void	main_menu(t_engine *engine)
