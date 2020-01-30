@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   select_mesh2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 12:42:32 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/29 15:25:41 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/01/30 17:46:43 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_mesh			create_mesh_item(int index, t_mesh mesh)
 	if (index == 12 || index == 13 || index == 14)
 	{
 		if (index == 12)
-			ret.name = "Healt_Pack";
+			ret.name = "Health_Pack";
 		else if (index == 13)
 			ret.name = "Armor_Pack";
 		else if (index == 14)

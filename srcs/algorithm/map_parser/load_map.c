@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 13:40:38 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/29 15:13:29 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/30 17:37:31 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	load_map(t_camera *main_camera, t_engine *engine, char *path)
 	int			fd;
 
 	engine->user_engine->player = initialize_t_player(main_camera);
+	engine->user_engine->player->difficulty = engine->difficulty;
 	if ((fd = open(path, O_RDONLY)) < 0)
 		error_exit(-7000, "imposible fd");
 	meshs = read_map_file(fd, engine->user_engine->player);

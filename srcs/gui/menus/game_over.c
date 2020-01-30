@@ -6,7 +6,7 @@
 /*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 14:57:13 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/30 15:51:27 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/30 17:06:31 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	game_over(t_engine *engine)
 	mou = engine->user_engine->mouse;
 	get_t_mouse_info(mou);
 	pos = create_vec2_int(mou->pos.x * 100 / WIN_X, mou->pos.y * 100 / WIN_Y);
-	printf("pos = %d|%d\n", pos.x, pos.y);
 	if (t_mouse_state(mou) == 2)
 	{
 		if ((pos.x > 38 && pos.x < 61) && (pos.y > 86 && pos.y < 92))
@@ -40,7 +39,6 @@ void	end_screen(t_engine *engine)
 	mou = engine->user_engine->mouse;
 	get_t_mouse_info(mou);
 	pos = create_vec2_int(mou->pos.x * 100 / WIN_X, mou->pos.y * 100 / WIN_Y);
-	printf("pos = %d|%d\n", pos.x, pos.y);
 	if (t_mouse_state(mou) == 2)
 	{
 		if ((pos.x > 85 && pos.x < 96) && (pos.y > 83 && pos.y < 96))
