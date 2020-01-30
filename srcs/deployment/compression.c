@@ -6,7 +6,7 @@
 /*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 10:40:10 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/29 12:54:57 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/30 13:56:31 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@ void	tar_ressources(void)
 {
 	char *command;
 
-	command = ft_strdup("tar -jcf ressources.tar.bz2 ressources");
-	system(command);
-	free(command);
-	command = ft_strdup("rm -rf ressources");
+	command = ft_strdup("tar -jcf ressources.tar.bz2 ressources && \
+							rm -rf ressources");
 	system(command);
 	free(command);
 }
