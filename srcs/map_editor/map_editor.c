@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_editor.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 12:49:31 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/30 11:19:31 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/31 16:15:29 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ void		map_editor(t_camera *cam, t_gui *gui, t_engine *engine,
 	draw_hud_rect(cam->view_port, new_rectangle(create_vec2(0.0, 0.0),
 											create_vec2(0.005, 0.01)), color);
 	print_info_editing(cam, engine->user_engine->keyboard, gui);
+	print_info_texture(cam, gui, mesh_editing);
 	player_editing(engine);
 	place_mesh(engine, mesh_editing);
 	delete_mesh(engine);

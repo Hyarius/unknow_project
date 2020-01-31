@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:10:18 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/31 14:42:27 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/01/31 16:22:27 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,13 @@ void			print_set_walldest(t_camera *cam, t_gui *gui, t_player *plr);
 void			close_map(t_engine *engine);
 void			print_info_editing(t_camera *main_camera, t_keyboard *key,
 																	t_gui *gui);
+void			print_info_texture(t_camera *main_cam, t_gui *gui,
+												t_mesh_editing mesh_editing);
 void			create_minimap(t_engine *engine);
 int				select_texture(t_keyboard *key, t_visual_engine *engine);
 void			game_over(t_engine *engine);
+void			print_letter(t_camera *main_cam, t_gui *gui, char *str,
+															t_rectangle rec);
+
 
 #endif

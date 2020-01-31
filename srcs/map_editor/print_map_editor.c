@@ -3,14 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   print_map_editor.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 12:49:02 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/30 11:18:52 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/31 16:25:49 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
+
+void		print_info_texture(t_camera *main_cam, t_gui *gui,
+													t_mesh_editing mesh_editing)
+{
+	char			*str;
+	static t_color	*color = NULL;
+
+	if (color == NULL)
+		color = initialize_t_color(0.7, 0.7, 0.7, 1.0);
+	t_view_port_clear_buffers(main_cam->view_port);
+	draw_hud_rect(main_cam->view_port, new_rectangle(create_vec2(1.0, 1.0),
+											create_vec2(-0.3, -0.2)), color);
+	str = ft_strdup(&mesh_editing.path[27]);
+	print_letter(main_cam, gui, str, new_rectangle(create_vec2(0.72, 0.82), create_vec2(0.02, 0.15)));
+}
 
 void		print_info_editing(t_camera *main_camera, t_keyboard *key,
 																	t_gui *gui)
