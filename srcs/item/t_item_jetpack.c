@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_jetpack.c                                        :+:      :+:    :+:   */
+/*   t_item_jetpack.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 13:39:48 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/20 13:39:50 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/31 13:55:20 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ int		jetpack(t_player *player)
 	return (BOOL_FALSE);
 }
 
-t_item	create_jet_pack(void)
+t_item	create_jet_pack(char *str)
 {
 	static int	num = 1;
 	t_item		item;
 
-	item.name = ft_strjoinf("Jet_Pack_", ft_itoa(num), 2);
+	item.name = str;
 	num++;
 	item.pf = jetpack;
 	return (item);

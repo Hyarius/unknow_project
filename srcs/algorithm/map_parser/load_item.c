@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 13:29:58 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/27 14:24:08 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/31 13:54:30 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ t_item			new_item(t_mesh mesh)
 
 	item.name = NULL;
 	if (ft_strcmp(mesh.name, "Ammo_Pack") == '_')
-		item = create_ammo_pack(mesh.hp * -1);
+		item = create_ammo_pack(mesh.hp * -1, mesh.name);
 	else if (ft_strcmp(mesh.name, "Health_Pack") == '_')
-		item = create_health_pack();
+		item = create_health_pack(mesh.name);
 	else if (ft_strcmp(mesh.name, "Armor_Pack") == '_')
-		item = create_armor_pack();
+		item = create_armor_pack(mesh.name);
 	else if (ft_strcmp(mesh.name, "Jet_Pack") == '_')
-		item = create_jet_pack();
+		item = create_jet_pack(mesh.name);
 	else if (ft_strcmp(mesh.name, "Card") == '_')
 		item = create_color_card(mesh.hp * -1);
 	return (item);
@@ -43,6 +43,7 @@ t_item_list		*load_items(t_mesh_list *meshs)
 		if (t_mesh_list_at(meshs, i).collectible == 1)
 		{
 			item = new_item(t_mesh_list_at(meshs, i));
+			printf("%s\n", item.name);
 			t_item_list_push_back(result, item);
 		}
 		i++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   settings_menu.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 14:45:37 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/30 17:38:14 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/31 11:41:28 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,9 @@ void	settings_sens(t_vec2_int pos, t_engine *engine)
 	}
 }
 
-void	settings_menu_next(t_camera *main_camera, t_gui *gui,
-											t_vec2_int pos, t_engine *engine)
+void	settings_difficulty(t_vec2_int pos, t_camera *main_camera,
+												t_gui *gui, t_engine *engine)
 {
-	settings_sounds(pos);
-	settings_sens(pos, engine);
 	if (pos.y > 44 && pos.y < 47)
 	{
 		draw_rectangle_texture_cpu(main_camera->view_port,
@@ -87,6 +85,14 @@ void	settings_menu_next(t_camera *main_camera, t_gui *gui,
 		gui->idx = 10;
 		engine->difficulty = 1.5;
 	}
+}
+
+void	settings_menu_next(t_camera *main_camera, t_gui *gui,
+											t_vec2_int pos, t_engine *engine)
+{
+	settings_sounds(pos);
+	settings_sens(pos, engine);
+	settings_difficulty(pos, main_camera, gui, engine);
 	if (pos.y > 72 && pos.y < 76)
 		engine->menu_nbr = 2;
 }

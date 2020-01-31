@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_item.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 16:32:33 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/20 14:02:23 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/31 13:55:02 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,23 +40,23 @@ int		protect(t_player *player)
 	return (BOOL_FALSE);
 }
 
-t_item	create_health_pack(void)
+t_item	create_health_pack(char *str)
 {
 	static int	num = 1;
 	t_item		item;
 
-	item.name = ft_strjoinf("Health_Pack_", ft_itoa(num), 2);
+	item.name = str;
 	num++;
 	item.pf = heal;
 	return (item);
 }
 
-t_item	create_armor_pack(void)
+t_item	create_armor_pack(char *str)
 {
 	static int	num = 1;
 	t_item		item;
 
-	item.name = ft_strjoinf("Armor_Pack_", ft_itoa(num), 2);
+	item.name = str;
 	num++;
 	item.pf = protect;
 	return (item);

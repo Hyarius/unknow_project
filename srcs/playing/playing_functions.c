@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   playing_functions.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 12:02:06 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/30 15:22:50 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/31 11:58:10 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	game_playing(t_camera *camera, t_gui *gui, t_engine *engine)
 	drawing_front_mun(camera, gui->text_am, engine->user_engine->player);
 	drawing_front_weapons(camera, gui->text_weap,
 								engine->user_engine->player);
-	draw_minimap(engine);
+	// draw_minimap(engine);
 	print_info_bar(camera, engine->user_engine->player, gui);
 }
 

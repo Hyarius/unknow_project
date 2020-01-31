@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 14:17:25 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/27 13:48:07 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/31 11:45:01 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,20 @@ void		place_mesh_bis(t_engine *engine, t_mesh_editing edit, t_mesh *mesh)
 		check_mesh_player(engine, *mesh);
 }
 
+void		set_collectible(t_mesh *mesh, t_mesh_editing edit)
+{
+	char		*str;
+	static int	i = 1;
+
+	mesh->collectible = edit.mesh.collectible;
+	if (mesh->collectible == 1)
+	{
+		str = ft_itoa(i);
+		mesh->name = ft_strjoinf(mesh->name, str, 2);
+		i++;
+	}
+}
+
 void		place_mesh(t_engine *engine, t_mesh_editing edit)
 {
 	t_mesh		mesh;
@@ -68,6 +82,7 @@ void		place_mesh(t_engine *engine, t_mesh_editing edit)
 			mesh = create_primitive_plane(edit.mesh.pos,
 				edit.mesh.size, edit.path, edit.mesh.kinetic);
 		place_mesh_bis(engine, edit, &mesh);
+		set_collectible(&mesh, edit);
 		t_engine_add_mesh(engine, mesh);
 	}
 }

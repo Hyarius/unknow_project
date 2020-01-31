@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_player.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:53:50 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/30 17:37:52 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/31 10:42:13 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ t_player		new_player(t_camera *cam)
 	result.camera = cam;
 	result.shoot_time = 10;
 	result.speed = 1.0;
-	result.difficulty = 1.0;
 	return (result);
 }
 

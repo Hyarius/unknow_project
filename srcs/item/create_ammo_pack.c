@@ -6,18 +6,18 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:14:14 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 15:14:53 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/31 13:53:55 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-t_item		create_ammo_pack(int type)
+t_item		create_ammo_pack(int type, char *str)
 {
 	static int	num = 1;
 	t_item		item;
 
-	item.name = ft_strjoinf("Ammo_Pack_", ft_itoa(num), 2);
+	item.name = str;
 	num++;
 	if (type == 1)
 		item.pf = refill_pistol;

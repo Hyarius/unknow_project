@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 13:40:28 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/30 17:32:34 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/31 11:35:30 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ void			set_mesh(t_mesh *mesh, char **line_split, t_player *p)
 	t_mesh_rotate(mesh, new_vec4(ft_atof(line_split[10]),
 				ft_atof(line_split[11]), ft_atof(line_split[12])));
 	mesh->hp = (int)(ft_atoi(line_split[17]) * p->difficulty);
-	printf("mesh->hp = %d\n", mesh->hp);
 	if (ft_strcmp(line_split[ft_tablen(line_split) - 1], "*") == 0)
 		t_mesh_set_visibility(mesh, BOOL_FALSE);
 	if (ft_strcmp(line_split[ft_tablen(line_split) - 1], "#") == 0)
