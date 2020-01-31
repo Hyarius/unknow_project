@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   place_mesh.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 14:17:25 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/27 13:48:07 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/30 14:32:02 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void		place_mesh(t_engine *engine, t_mesh_editing edit)
 			if (edit.mesh.primitive == -1)
 			{
 				mesh = create_primitive_cube(edit.mesh.pos,
-					edit.mesh.size, edit.path, edit.mesh.kinetic);
+					edit.mesh.size, NULL, edit.mesh.kinetic);
 				mesh.primitive = -1;
 			}
 			else

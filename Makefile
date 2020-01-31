@@ -34,7 +34,7 @@ LIB =		SDL2 SDL2_image SDL2_mixer SDL2_ttf png
 ##
 
 ##Basics flags for 42
-CFLAGS=		-std=c89 -O3 -flto -Wno-deprecated-declarations #-Wall -Wextra -Werror
+CFLAGS=		-std=c89 -O3 -flto -Wno-deprecated-declarations -Wall -Wextra -Werror
 
 ##Create the flags to includes every .h needed by this program
 IFLAGS =	$(foreach dir, $(INC_DIR), -I$(dir)) $(foreach dir, $(shell find ~/.brew/include -type d), -I$(dir))

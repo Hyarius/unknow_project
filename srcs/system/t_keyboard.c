@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 16:15:30 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/30 16:10:52 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ t_keyboard	new_keyboard(void)
 	result.key[SDL_SCANCODE_DOWN] = SDL_SCANCODE_DOWN;
 	result.key[SDL_SCANCODE_EQUALS] = SDL_SCANCODE_EQUALS;
 	result.key[SDL_SCANCODE_MINUS] = SDL_SCANCODE_MINUS;
+	result.key[SDL_SCANCODE_RIGHTBRACKET] = SDL_SCANCODE_RIGHTBRACKET;
+	result.key[SDL_SCANCODE_LEFTBRACKET] = SDL_SCANCODE_LEFTBRACKET;
 	result.state = SDL_GetKeyboardState(NULL);
 	result.i = 0;
 	return (result);

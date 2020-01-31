@@ -6,7 +6,7 @@
 /*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 14:24:27 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/29 17:14:54 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/30 14:55:19 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ void		exit_prog(void)
 	Mix_Quit();
 	TTF_Quit();
 	SDL_Quit();
-	tar_ressources();
+	/*tar_ressources();*/
 }
 
 void		begin_prog(t_engine **engine, t_gui **gui, char **argv)
 {
 	t_window	*win;
-	
-	untar_ressources();
+
+	/*untar_ressources();*/
 	start_sdl();
 	TTF_Init();
 	Mix_Init(MIX_INIT_OGG);
@@ -41,7 +41,7 @@ void		begin_prog(t_engine **engine, t_gui **gui, char **argv)
 
 void		load_textures(t_gui *gui, t_engine *engine)
 {
-	engine->visual_engine->textures_path = load_path_texture();
+	load_path_texture(engine->visual_engine);
 	gui->text_am[0] = png_load("ressources/assets/textures/pistol_ammo.png");
 	gui->text_am[1] = png_load("ressources/assets/textures/ar_ammo.png");
 	gui->text_am[2] = png_load("ressources/assets/textures/rifle_ammo.png");
@@ -85,7 +85,7 @@ int			main(int argc, char **argv)
 	playing_functions[5] = level_editing_pausing;
 	camera = t_camera_list_get(engine->visual_engine->camera_list, 0);
 	while (engine->playing != 0)
-	{	
+	{
 		prepare_screen(engine->win, new_color(0.2f, 0.2f, 0.2f, 1.0f));
 		t_engine_prepare_camera(engine);
 		if (engine->playing != 0)

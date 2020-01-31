@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unknow_project_engine.h                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:45:15 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/29 14:05:15 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/30 14:10:27 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void				link_camera_to_mesh(t_engine *engine, int index,
 																t_mesh *mesh);
 t_mesh_editing		create_mesh_editing(int index, char *path);
 t_mesh_editing		select_mesh(t_keyboard *p_keyboard, t_vec4 pos,
-																char **path);
+													t_visual_engine *engine);
 void				cast_mesh(t_engine *engine, t_mesh *mesh_editing);
 void				load_map(t_camera *main_camera, t_engine *engine,
 																char *path);

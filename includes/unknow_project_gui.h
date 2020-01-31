@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unknow_project_gui.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:10:18 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/29 16:48:48 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/31 14:31:30 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,14 @@ void			print_set_weapon(t_camera *main_camera, t_gui *gui,
 															t_engine *engine);
 void			map_editor(t_camera *main_camera, t_gui *gui, t_engine *engine,
 												t_mesh_editing mesh_editing);
-char			**load_path_texture(void);
+void			load_path_texture(t_visual_engine *visual_engine);
+void			load_texture_cube_wall(t_visual_engine *engine);
+void			load_texture_door(t_visual_engine *engine);
+void			load_texture_key_elevator(t_visual_engine *engine);
+void			load_texture_slope_pack(t_visual_engine *engine);
+void			load_texture_ammo_ladder(t_visual_engine *engine);
+void			load_texture_platform_plane(t_visual_engine *engine);
+void			load_texture_end(t_visual_engine *engine);
 void			print_set_ar(t_camera *cam, t_gui *gui, t_player *plr);
 void			print_set_rifle(t_camera *cam, t_gui *gui, t_player *plr);
 void			print_set_shotgun(t_camera *cam, t_gui *gui, t_player *plr);
@@ -94,4 +101,5 @@ void			close_map(t_engine *engine);
 void			print_info_editing(t_camera *main_camera, t_keyboard *key,
 																	t_gui *gui);
 void			create_minimap(t_engine *engine);
+int				select_texture(t_keyboard *key, t_visual_engine *engine);
 #endif

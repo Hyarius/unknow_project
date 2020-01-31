@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unknow_project_engine_module.h                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:59:26 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/28 10:34:41 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/30 13:20:34 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ typedef struct		s_visual_engine
 {
 	int				main_camera;
 	t_camera_list	*camera_list;
-	char			**textures_path;
+	char			**path[25];
+	int				len[25];
 }					t_visual_engine;
 
 t_visual_engine		new_visual_engine(t_window *p_window);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_text.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 16:24:30 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/30 10:21:36 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/31 14:26:33 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,45 +26,6 @@ void	load_letter(t_gui *gui, char *str, int idx)
 	gui->letter[idx]->let->surface->pixels = gui->letter[idx]->font->pixels;
 	gui->letter[idx]->let->letter = str[0];
 	TTF_CloseFont(police);
-}
-
-void	load_path_texture2(char **path)
-{
-	path[18] = ft_strdup("ressources/assets/textures/cube_test.png");
-	path[19] = ft_strdup("ressources/assets/textures/cube_test.png");
-	path[20] = ft_strdup("ressources/assets/textures/cube_test.png");
-	path[21] = ft_strdup("ressources/assets/textures/enemy.png");
-	path[22] = ft_strdup("ressources/assets/textures/window.png");
-	path[23] = ft_strdup("ressources/assets/textures/cube_test.png");
-	path[24] = ft_strdup("ressources/assets/textures/cube_test.png");
-}
-
-char	**load_path_texture(void)
-{
-	char	**path;
-	
-	if (!(path = (char**)malloc(sizeof(char*) * 25)))
-		error_exit(2, "error malloc");
-	path[0] = ft_strdup("ressources/assets/textures/cube_test.png");
-	path[1] = ft_strdup("ressources/assets/textures/cube_test.png");
-	path[2] = ft_strdup("ressources/assets/textures/door.png");
-	path[3] = ft_strdup("ressources/assets/textures/red_door.png");
-	path[4] = ft_strdup("ressources/assets/textures/blue_door.png");
-	path[5] = ft_strdup("ressources/assets/textures/green_door.png");
-	path[6] = ft_strdup("ressources/assets/textures/key_red.png");
-	path[7] = ft_strdup("ressources/assets/textures/key_blue.png");
-	path[8] = ft_strdup("ressources/assets/textures/key_green.png");
-	path[9] = ft_strdup("ressources/assets/textures/cube_test.png");
-	path[10] = ft_strdup("ressources/assets/textures/cube_test.png");
-	path[11] = ft_strdup("ressources/assets/textures/cube_test.png");
-	path[12] = ft_strdup("ressources/assets/textures/health.png");
-	path[13] = ft_strdup("ressources/assets/textures/armor.png");
-	path[14] = ft_strdup("ressources/assets/textures/jet_pack.png");
-	path[15] = ft_strdup("ressources/assets/textures/ar.png");
-	path[16] = ft_strdup("ressources/assets/textures/rifle.png");
-	path[17] = ft_strdup("ressources/assets/textures/shotgun.png");
-	load_path_texture2(path);
-	return (path);
 }
 
 void	load_menu(t_gui *gui)
@@ -87,4 +48,51 @@ void	load_menu(t_gui *gui)
 	gui->menu[15] = png_load("ressources/assets/imgs/set_weapon.png");
 	gui->menu[16] = png_load("ressources/assets/imgs/save_editor.png");
 	gui->menu[17] = png_load("ressources/assets/imgs/synopsis.png");
+}
+
+void	load_texture_cube_wall(t_visual_engine *engine)
+{
+	engine->len[0] = 3;
+	if (!(engine->path[0] = (char**)malloc(sizeof(char*) * 3)))
+		error_exit(2, "error malloc");
+	engine->path[0][0] = ft_strdup("ressources/assets/textures/iron.png");
+	engine->path[0][1] = ft_strdup("ressources/assets/textures/brick.png");
+	engine->path[0][2] = ft_strdup("ressources/assets/textures/wood.png");
+	engine->len[1] = 3;
+	if (!(engine->path[1] = (char**)malloc(sizeof(char*) * 3)))
+		error_exit(2, "error malloc");
+	engine->path[1][0] = ft_strdup("ressources/assets/textures/iron.png");
+	engine->path[1][1] = ft_strdup("ressources/assets/textures/brick.png");
+	engine->path[1][2] = ft_strdup("ressources/assets/textures/wood.png");
+}
+
+void	load_texture_door(t_visual_engine *engine)
+{
+	engine->len[2] = 1;
+	if (!(engine->path[2] = (char**)malloc(sizeof(char*) * 1)))
+		error_exit(2, "error malloc");
+	engine->path[2][0] = ft_strdup("ressources/assets/textures/door.png");
+	engine->len[3] = 1;
+	if (!(engine->path[3] = (char**)malloc(sizeof(char*) * 1)))
+		error_exit(2, "error malloc");
+	engine->path[3][0] = ft_strdup("ressources/assets/textures/red_door.png");
+	engine->len[4] = 1;
+	if (!(engine->path[4] = (char**)malloc(sizeof(char*) * 1)))
+		error_exit(2, "error malloc");
+	engine->path[4][0] = ft_strdup("ressources/assets/textures/blue_door.png");
+	engine->len[5] = 1;
+	if (!(engine->path[5] = (char**)malloc(sizeof(char*) * 1)))
+		error_exit(2, "error malloc");
+	engine->path[5][0] = ft_strdup("ressources/assets/textures/green_door.png");
+}
+
+void	load_path_texture(t_visual_engine *engine)
+{
+	load_texture_cube_wall(engine);
+	load_texture_door(engine);
+	load_texture_key_elevator(engine);
+	load_texture_slope_pack(engine);
+	load_texture_ammo_ladder(engine);
+	load_texture_platform_plane(engine);
+	load_texture_end(engine);
 }

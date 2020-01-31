@@ -6,7 +6,7 @@
 /*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 12:45:19 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/20 12:46:05 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/01/30 16:40:13 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,45 @@ t_mesh			create_mesh_end(int index, t_mesh mesh)
 		ret.kinetic = 0.0;
 	}
 	return (ret);
+}
+
+void			select_texture_next(t_keyboard *key, t_visual_engine *engine,
+															int *i, int *press)
+{
+	if (get_key_state(key, key->key[SDL_SCANCODE_RIGHTBRACKET]) == 1
+																&& *press == 0)
+	{
+		(*i)++;
+		if (*i >= engine->len[key->i])
+			*i = 0;
+		*press = 1;
+	}
+	if (get_key_state(key, key->key[SDL_SCANCODE_LEFTBRACKET]) == 1
+																&& *press == 0)
+	{
+		(*i)--;
+		if (*i < 0)
+			*i = engine->len[key->i] - 1;
+		*press = 1;
+	}
+	else if (get_key_state(key, key->key[SDL_SCANCODE_RIGHTBRACKET]) == 0
+				&& get_key_state(key, key->key[SDL_SCANCODE_LEFTBRACKET]) == 0)
+		*press = 0;
+}
+
+int				select_texture(t_keyboard *key, t_visual_engine *engine)
+{
+	static int	tmp = -9;
+	static int	press = 0;
+	static int	i = 0;
+
+	if (tmp == -9)
+		tmp = key->i;
+	if (tmp != key->i)
+	{
+		tmp = key->i;
+		i = 0;
+	}
+	select_texture_next(key, engine, &i, &press);
+	return (i);
 }

@@ -6,11 +6,7 @@
 /*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 12:02:06 by jubeal            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2020/01/29 16:27:29 by adjouber         ###   ########.fr       */
-=======
-/*   Updated: 2020/01/30 11:20:50 by jubeal           ###   ########.fr       */
->>>>>>> b27255dd4b4b5802155bd066c5db54ef530cce9a
+/*   Updated: 2020/01/30 14:10:59 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +77,7 @@ void	level_editing(t_camera *camera, t_gui *gui, t_engine *engine)
 	t_engine_render_camera(engine);
 	mesh_editing = select_mesh(engine->user_engine->keyboard,
 		engine->user_engine->player->camera->pos,
-		engine->visual_engine->textures_path);
+		engine->visual_engine);
 	map_editor(camera, gui, engine, mesh_editing);
 }
 

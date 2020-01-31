@@ -6,7 +6,7 @@
 /*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 13:19:50 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/29 15:26:54 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/01/30 16:13:44 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,10 +103,12 @@ t_mesh_editing	create_mesh_editing(int index, char *path)
 	return (ret);
 }
 
-t_mesh_editing	select_mesh(t_keyboard *key, t_vec4 pos, char **path)
+t_mesh_editing	select_mesh(t_keyboard *key, t_vec4 pos,
+														t_visual_engine *engine)
 {
 	t_mesh_editing	mesh;
 	static int		press = 0;
+	int				i;
 
 	if (get_key_state(key, key->key[SDL_SCANCODE_1]) == 1 && press == 0)
 	{
@@ -125,7 +127,8 @@ t_mesh_editing	select_mesh(t_keyboard *key, t_vec4 pos, char **path)
 	else if (get_key_state(key, key->key[SDL_SCANCODE_1]) == 0
 						&& get_key_state(key, key->key[SDL_SCANCODE_2]) == 0)
 		press = 0;
-	mesh = create_mesh_editing(key->i, path[key->i]);
+	i = select_texture(key, engine);
+	mesh = create_mesh_editing(key->i, engine->path[key->i][i]);
 	mesh.mesh.pos = pos;
 	return (mesh);
 }
