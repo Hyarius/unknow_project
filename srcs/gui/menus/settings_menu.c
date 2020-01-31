@@ -6,7 +6,7 @@
 /*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 14:45:37 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/30 17:38:14 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/31 13:57:10 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,15 @@ void	settings_sens(t_vec2_int pos, t_engine *engine)
 	}
 }
 
+void	hard_mode(t_camera *main_camera, t_gui *gui, t_engine *engine)
+{
+	draw_rectangle_texture_cpu(main_camera->view_port,
+			new_rectangle(create_vec2(0.7, 0.4),
+			create_vec2(-0.6, -0.94)), gui->menu[10]);
+	gui->idx = 10;
+	engine->difficulty = 1.5;
+}
+
 void	settings_menu_next(t_camera *main_camera, t_gui *gui,
 											t_vec2_int pos, t_engine *engine)
 {
@@ -80,13 +89,7 @@ void	settings_menu_next(t_camera *main_camera, t_gui *gui,
 		engine->difficulty = 1.0;
 	}
 	if (pos.y > 53 && pos.y < 56)
-	{
-		draw_rectangle_texture_cpu(main_camera->view_port,
-				new_rectangle(create_vec2(0.7, 0.4),
-				create_vec2(-0.6, -0.94)), gui->menu[10]);
-		gui->idx = 10;
-		engine->difficulty = 1.5;
-	}
+		hard_mode(main_camera, gui, engine);
 	if (pos.y > 72 && pos.y < 76)
 		engine->menu_nbr = 2;
 }

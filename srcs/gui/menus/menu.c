@@ -6,7 +6,7 @@
 /*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 13:51:42 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/30 15:47:04 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/31 13:55:41 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	t_user_engine_handle_menu(t_camera *main_camera, t_gui *gui,
 	else if (engine->menu_nbr == 1)
 		settings_menu(main_camera, gui, engine);
 	else if (engine->menu_nbr == 2)
-		controls_menu(main_camera, gui, engine, &engine->playing);
+		controls_menu(main_camera, gui, engine);
 	else if (engine->menu_nbr == 3)
 		credits_menu(engine);
 	else if (engine->menu_nbr == 6)
@@ -38,10 +38,7 @@ void	t_user_engine_handle_menu(t_camera *main_camera, t_gui *gui,
 		pause_menu(engine);
 	else if (engine->menu_nbr == 5)
 		settings_pause_menu(engine);
-	else if (engine->menu_nbr == 18)
-		game_over(engine);
-	else if (engine->menu_nbr == 19)
-		end_screen(engine);
+	t_user_engine_handle_menu_next(engine);
 }
 
 void	main_menu(t_engine *engine)

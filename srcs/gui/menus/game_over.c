@@ -6,7 +6,7 @@
 /*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 14:57:13 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/30 17:06:31 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/31 13:55:13 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,12 @@ void	end_screen(t_engine *engine)
 			close_map(engine);
 		}
 	}
+}
+
+void	t_user_engine_handle_menu_next(t_engine *engine)
+{
+	if (engine->menu_nbr == 18)
+		game_over(engine);
+	else if (engine->menu_nbr == 19)
+		end_screen(engine);
 }
