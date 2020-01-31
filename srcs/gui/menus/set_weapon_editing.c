@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_weapon_editing.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 13:07:01 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/29 14:46:05 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/31 13:56:28 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ void		set_rpg_editing(t_vec2_int pos, t_player *player)
 	}
 }
 
-void		set_weapon_editing(t_engine *engine, int *play)
+void		set_weapon_editing(t_engine *engine)
 {
 	t_mouse		*mou;
 	t_player	*player;

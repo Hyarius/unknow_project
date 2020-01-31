@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 13:40:28 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/27 14:24:28 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/31 11:35:30 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,11 @@ t_mesh			init_texture(char **line_split)
 	return (mesh);
 }
 
-void			set_mesh(t_mesh *mesh, char **line_split)
+void			set_mesh(t_mesh *mesh, char **line_split, t_player *p)
 {
 	t_mesh_rotate(mesh, new_vec4(ft_atof(line_split[10]),
 				ft_atof(line_split[11]), ft_atof(line_split[12])));
-	mesh->hp = ft_atoi(line_split[17]);
+	mesh->hp = (int)(ft_atoi(line_split[17]) * p->difficulty);
 	if (ft_strcmp(line_split[ft_tablen(line_split) - 1], "*") == 0)
 		t_mesh_set_visibility(mesh, BOOL_FALSE);
 	if (ft_strcmp(line_split[ft_tablen(line_split) - 1], "#") == 0)
@@ -86,7 +86,7 @@ void			read_map(t_mesh mesh, t_mesh_list *r, char **s, t_player *p)
 	|| ft_strcmp(s[0], "item:") == 0 || ft_strcmp(s[0], "cube:") == 0)
 	{
 		mesh = init_texture(s);
-		set_mesh(&mesh, s);
+		set_mesh(&mesh, s, p);
 		t_mesh_list_push_back(r, mesh);
 	}
 }

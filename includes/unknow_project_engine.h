@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:45:15 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/30 14:10:27 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/01/31 15:05:55 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct		s_engine
 	int				playing;
 	int				menu_nbr;
 	int				tick;
+	float			difficulty;
 	t_camera		*main_camera;
 	t_visual_engine	*visual_engine;
 	t_physic_engine	*physic_engine;

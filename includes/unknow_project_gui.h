@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:10:18 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/31 14:31:30 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/01/31 14:42:27 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,18 +66,20 @@ void			t_engine_handle_event(t_camera *main_camera, t_gui *gui,
 															t_engine *engine);
 void			t_user_engine_handle_menu(t_camera *main_camera, t_gui *gui,
 															t_engine *engine);
+void			t_user_engine_handle_menu_next(t_engine *engine);
+
 void			main_menu(t_engine *engine);
 void			synopsis_menu(t_engine *engine);
 void			play_menu(t_camera *main_camera, t_engine *engine, int *play);
 void			settings_menu(t_camera *main_camera, t_gui *gui,
 															t_engine *engine);
 void			controls_menu(t_camera *main_camera, t_gui *gui,
-												t_engine *engine, int *play);
+												t_engine *engine);
 void			pause_menu(t_engine *engine);
 void			settings_pause_menu(t_engine *engine);
 void			credits_menu(t_engine *engine);
 void			set_player_editing(t_engine *engine);
-void			set_weapon_editing(t_engine *engine, int *play);
+void			set_weapon_editing(t_engine *engine);
 void			save_pause(t_engine *engine);
 void			print_set_player(t_camera *main_camera, t_gui *gui,
 															t_engine *engine);
@@ -102,4 +104,6 @@ void			print_info_editing(t_camera *main_camera, t_keyboard *key,
 																	t_gui *gui);
 void			create_minimap(t_engine *engine);
 int				select_texture(t_keyboard *key, t_visual_engine *engine);
+void			game_over(t_engine *engine);
+
 #endif

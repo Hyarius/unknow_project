@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unknow_project_item.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:58:23 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/20 16:09:32 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/01/31 13:55:50 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ typedef struct	s_item
 	int			(*pf)(t_player*);
 }				t_item;
 
-t_item			create_health_pack(void);
-t_item			create_ammo_pack(int type);
-t_item			create_armor_pack(void);
-t_item			create_jet_pack(void);
+t_item			create_health_pack(char *str);
+t_item			create_ammo_pack(int type, char *str);
+t_item			create_armor_pack(char *str);
+t_item			create_jet_pack(char *str);
 t_item			create_color_card(int type);
 int				refill_pistol(t_player *player);
 int				refill_ar(t_player *player);

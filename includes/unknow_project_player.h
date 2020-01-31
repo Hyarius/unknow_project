@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unknow_project_player.h                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:46:16 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/27 13:50:25 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/01/30 17:30:28 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct	s_player
 	int			green_card;
 	int			shoot_time;
 	int			reload_time;
+	float		difficulty;
 }				t_player;
 
 t_player		new_player(t_camera *cam);

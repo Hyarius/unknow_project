@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   select_mesh2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 12:42:32 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/29 15:25:41 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/01/31 11:22:58 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,11 @@ t_mesh			create_mesh_item(int index, t_mesh mesh)
 	if (index == 12 || index == 13 || index == 14)
 	{
 		if (index == 12)
-			ret.name = "Healt_Pack";
+			ret.name = "Health_Pack_";
 		else if (index == 13)
-			ret.name = "Armor_Pack";
+			ret.name = "Armor_Pack_";
 		else if (index == 14)
-			ret.name = "Jet_Pack";
+			ret.name = "Jet_Pack_";
 		ret.size = new_vec4(0.2, 0.05, 0.2);
 		ret.primitive = 1;
 		ret.collectible = 1;
@@ -78,7 +78,7 @@ t_mesh			create_mesh_ammo(int index, t_mesh mesh)
 	ret = mesh;
 	if (index == 15 || index == 16 || index == 17)
 	{
-		ret.name = "Ammo_Pack";
+		ret.name = "Ammo_Pack_";
 		ret.size = new_vec4(0.2, 0.05, 0.2);
 		ret.primitive = 1;
 		ret.collectible = 1;

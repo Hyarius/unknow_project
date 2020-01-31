@@ -6,7 +6,7 @@
 /*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 16:24:30 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/31 14:26:33 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/01/31 15:05:21 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void	load_menu(t_gui *gui)
 	gui->menu[15] = png_load("ressources/assets/imgs/set_weapon.png");
 	gui->menu[16] = png_load("ressources/assets/imgs/save_editor.png");
 	gui->menu[17] = png_load("ressources/assets/imgs/synopsis.png");
+	gui->menu[18] = png_load("ressources/assets/imgs/game_over.png");
+	gui->menu[19] = png_load("ressources/assets/imgs/fin_jeu.png");
 }
 
 void	load_texture_cube_wall(t_visual_engine *engine)

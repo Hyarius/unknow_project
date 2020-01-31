@@ -6,7 +6,7 @@
 /*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 12:02:06 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/30 14:10:59 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/01/31 15:06:55 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	display_tittle_screen(t_camera *camera, t_gui *gui, t_engine *engine)
 {
 	t_rectangle		rec;
 
-	(void)engine;
 	rec = new_rectangle(create_vec2(-1, 1), create_vec2(2, -2));
 	draw_rectangle_texture_cpu(camera->view_port, rec,
 					gui->menu[engine->menu_nbr]);
@@ -44,7 +43,7 @@ void	game_playing(t_camera *camera, t_gui *gui, t_engine *engine)
 	drawing_front_mun(camera, gui->text_am, engine->user_engine->player);
 	drawing_front_weapons(camera, gui->text_weap,
 								engine->user_engine->player);
-	draw_minimap(engine);
+	/*draw_minimap(engine);*/
 	print_info_bar(camera, engine->user_engine->player, gui);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   control_menu.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 14:48:47 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/29 14:26:25 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/31 13:53:24 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,7 @@ void		control_left_part(t_vec2_int pos, t_gui *gui)
 	}
 }
 
-void		controls_menu(t_camera *main_camera, t_gui *gui, t_engine *engine,
-																	int *play)
+void		controls_menu(t_camera *main_camera, t_gui *gui, t_engine *engine)
 {
 	t_mouse		*mou;
 	t_vec2_int	pos;

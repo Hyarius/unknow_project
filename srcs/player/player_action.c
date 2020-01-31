@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_action.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 12:57:57 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/29 13:14:04 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/30 15:21:39 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	player_action4(t_camera *camera, t_engine *engine, t_mesh **door,
 	{
 		Mix_PlayChannel(-1, engine->sound_engine->sounds[15], 0);
 		engine->playing = 3;
-		engine->menu_nbr = 4;
+		engine->menu_nbr = 18;
 	}
 }
 

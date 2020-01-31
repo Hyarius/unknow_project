@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 15:06:45 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/30 14:20:34 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/01/31 14:44:36 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_visual_engine	new_visual_engine(t_window *p_window)
 
 	result.camera_list = initialize_t_camera_list();
 	result.main_camera = 0;
+	load_path_texture(&result);
 	tmp = new_camera(p_window, new_vec4(0, 0, 0), FOV,
 									create_vec2(NEAR, FAR));
 	t_camera_list_push_back(result.camera_list, tmp);

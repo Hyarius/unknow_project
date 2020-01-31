@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   play_menu.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:12:31 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/29 15:37:19 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/30 14:21:02 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ void	synopsis_menu(t_engine *engine)
 {
 	t_mouse			*mou;
 	t_vec2_int		pos;
-	
+
 	mou = engine->user_engine->mouse;
 	get_t_mouse_info(mou);
 	pos = create_vec2_int(mou->pos.x * 100 / WIN_X, mou->pos.y * 100 / WIN_Y);
 	if (t_mouse_state(mou) == 2)
 		if ((pos.x > 85 && pos.x < 96) && (pos.y > 83 && pos.y < 96))
-				engine->playing = 2;
+			engine->playing = 2;
 }
 
 void	open_scenario_or_editor(t_vec2_int pos, t_engine *engine, char **path)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   settings_menu.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 14:45:37 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/29 13:09:23 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/31 14:10:42 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,17 +58,16 @@ void	settings_sens(t_vec2_int pos, t_engine *engine)
 	}
 }
 
-void	settings_menu_next(t_camera *main_camera, t_gui *gui,
-											t_vec2_int pos, t_engine *engine)
+void	settings_difficulty(t_vec2_int pos, t_camera *main_camera,
+												t_gui *gui, t_engine *engine)
 {
-	settings_sounds(pos);
-	settings_sens(pos, engine);
 	if (pos.y > 44 && pos.y < 47)
 	{
 		draw_rectangle_texture_cpu(main_camera->view_port,
 				new_rectangle(create_vec2(0.7, 0.4),
 				create_vec2(-0.6, -0.94)), gui->menu[8]);
 		gui->idx = 8;
+		engine->difficulty = 0.5;
 	}
 	if (pos.y > 48 && pos.y < 52)
 	{
@@ -76,6 +75,7 @@ void	settings_menu_next(t_camera *main_camera, t_gui *gui,
 				new_rectangle(create_vec2(0.7, 0.4),
 				create_vec2(-0.6, -0.94)), gui->menu[9]);
 		gui->idx = 9;
+		engine->difficulty = 1.0;
 	}
 	if (pos.y > 53 && pos.y < 56)
 	{
@@ -83,7 +83,16 @@ void	settings_menu_next(t_camera *main_camera, t_gui *gui,
 				new_rectangle(create_vec2(0.7, 0.4),
 				create_vec2(-0.6, -0.94)), gui->menu[10]);
 		gui->idx = 10;
+		engine->difficulty = 1.5;
 	}
+}
+
+void	settings_menu_next(t_camera *main_camera, t_gui *gui,
+											t_vec2_int pos, t_engine *engine)
+{
+	settings_sounds(pos);
+	settings_sens(pos, engine);
+	settings_difficulty(pos, main_camera, gui, engine);
 	if (pos.y > 72 && pos.y < 76)
 		engine->menu_nbr = 2;
 }

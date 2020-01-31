@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   physic_engine.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 14:56:08 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/28 14:37:11 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/01/31 13:51:00 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void			can_move3(t_mesh *mesh, t_engine *engine, t_mesh *tar)
 	if (t_mesh_on_mesh(mesh, tar) == 1 && ft_strcmp(tar->name, "end") == 0)
 	{
 		engine->playing = 3;
-		engine->menu_nbr = 4;
+		engine->menu_nbr = 19;
 	}
 	if (mesh_intersect(mesh, tar) == BOOL_TRUE
 		&& (ft_strcmp(tar->name, "stair") == 0
@@ -104,8 +104,10 @@ void			can_move2(t_engine *engine, t_mesh *tar)
 	{
 		if (ft_strcmp(tar->name, t_item_list_get(item_list, j)->name) == 0)
 		{
+			printf("collectible\n");
 			if (item_list->item[j].pf(engine->user_engine->player) == BOOL_TRUE)
 			{
+				printf("%s\n", tar->name);
 				Mix_PlayChannel(-1, engine->sound_engine->sounds[23], 0);
 				t_mesh_set_visibility(tar, BOOL_FALSE);
 				tar->no_hitbox = 1;
