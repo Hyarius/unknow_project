@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 15:11:38 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/05 10:14:37 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,13 @@ t_sound_engine	*initialize_t_sound_engine(void)
 {
 	t_sound_engine	*result;
 
-	if (!(result = (t_sound_engine	*)malloc(sizeof(t_sound_engine))))
+	if (!(result = (t_sound_engine	*)ft_memalloc(sizeof(t_sound_engine))))
 		return (NULL);
 	*result = new_sound_engine();
 	return (result);
 }
 
-void			delete_t_sound_engine(t_sound_engine dest)
+void			free_t_sound_engine(t_sound_engine **dest)
 {
-	free(dest.music);
-	free(dest.sounds);
-}
-
-void			free_t_sound_engine(t_sound_engine *dest)
-{
-	delete_t_sound_engine(*dest);
-	free(dest);
+	ft_memdel((void**)dest);
 }

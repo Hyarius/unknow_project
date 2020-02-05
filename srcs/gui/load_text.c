@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_text.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 16:24:30 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/31 15:05:21 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/02/05 12:02:15 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,14 @@ void	load_menu(t_gui *gui)
 void	load_texture_cube_wall(t_visual_engine *engine)
 {
 	engine->len[0] = 3;
-	if (!(engine->path[0] = (char**)malloc(sizeof(char*) * 3)))
-		error_exit(2, "error malloc");
+	if (!(engine->path[0] = (char**)ft_memalloc(sizeof(char*) * 3)))
+		error_exit(2, "error ft_memalloc");
 	engine->path[0][0] = ft_strdup("ressources/assets/textures/iron.png");
 	engine->path[0][1] = ft_strdup("ressources/assets/textures/brick.png");
 	engine->path[0][2] = ft_strdup("ressources/assets/textures/wood.png");
 	engine->len[1] = 3;
-	if (!(engine->path[1] = (char**)malloc(sizeof(char*) * 3)))
-		error_exit(2, "error malloc");
+	if (!(engine->path[1] = (char**)ft_memalloc(sizeof(char*) * 3)))
+		error_exit(2, "error ft_memalloc");
 	engine->path[1][0] = ft_strdup("ressources/assets/textures/iron.png");
 	engine->path[1][1] = ft_strdup("ressources/assets/textures/brick.png");
 	engine->path[1][2] = ft_strdup("ressources/assets/textures/wood.png");
@@ -71,25 +71,29 @@ void	load_texture_cube_wall(t_visual_engine *engine)
 void	load_texture_door(t_visual_engine *engine)
 {
 	engine->len[2] = 1;
-	if (!(engine->path[2] = (char**)malloc(sizeof(char*) * 1)))
-		error_exit(2, "error malloc");
+	if (!(engine->path[2] = (char**)ft_memalloc(sizeof(char*) * 1)))
+		error_exit(2, "error ft_memalloc");
 	engine->path[2][0] = ft_strdup("ressources/assets/textures/door.png");
 	engine->len[3] = 1;
-	if (!(engine->path[3] = (char**)malloc(sizeof(char*) * 1)))
-		error_exit(2, "error malloc");
+	if (!(engine->path[3] = (char**)ft_memalloc(sizeof(char*) * 1)))
+		error_exit(2, "error ft_memalloc");
 	engine->path[3][0] = ft_strdup("ressources/assets/textures/red_door.png");
 	engine->len[4] = 1;
-	if (!(engine->path[4] = (char**)malloc(sizeof(char*) * 1)))
-		error_exit(2, "error malloc");
+	if (!(engine->path[4] = (char**)ft_memalloc(sizeof(char*) * 1)))
+		error_exit(2, "error ft_memalloc");
 	engine->path[4][0] = ft_strdup("ressources/assets/textures/blue_door.png");
 	engine->len[5] = 1;
-	if (!(engine->path[5] = (char**)malloc(sizeof(char*) * 1)))
-		error_exit(2, "error malloc");
+	if (!(engine->path[5] = (char**)ft_memalloc(sizeof(char*) * 1)))
+		error_exit(2, "error ft_memalloc");
 	engine->path[5][0] = ft_strdup("ressources/assets/textures/green_door.png");
 }
 
 void	load_path_texture(t_visual_engine *engine)
 {
+	int	i;
+	int	j;
+
+	i = -1;
 	load_texture_cube_wall(engine);
 	load_texture_door(engine);
 	load_texture_key_elevator(engine);
@@ -97,4 +101,11 @@ void	load_path_texture(t_visual_engine *engine)
 	load_texture_ammo_ladder(engine);
 	load_texture_platform_plane(engine);
 	load_texture_end(engine);
+	while (++i < 25)
+	{
+		j = -1;
+		while (++j < engine->len[i])
+			if (engine->path[i][j] == NULL)
+				error_exit(-69, "Error malloc texture");
+	}
 }

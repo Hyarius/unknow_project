@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 14:21:56 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/09 14:26:21 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/05 16:04:45 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static t_list_fd	*ft_check_fd(const int fd, t_list_fd **begin)
 			return (tmp);
 		tmp = tmp->next;
 	}
-	if (!(new = (t_list_fd*)malloc(sizeof(t_list_fd))))
+	if (!(new = (t_list_fd*)ft_memalloc(sizeof(t_list_fd))))
 		return (NULL);
 	new->rest = NULL;
 	new->fd = fd;
@@ -86,8 +86,11 @@ int					get_next_line(const int fd, char **line)
 			tmp = ft_strdup(((char*)current->rest) + endline);
 		else
 			tmp = ft_strdup(((char*)current->rest) + endline + 1);
+		if (!tmp)
+			error_exit(-70, "ft_strdup failed");
 		ft_strdel((char**)&current->rest);
-		current->rest = tmp;
+		// ft_strdel(&buff);
+		ft_strdel(&tmp);
 	}
 	return (1);
 }

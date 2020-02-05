@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unknow_project.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:21:49 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/30 11:57:03 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/02/05 18:03:26 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include "unknow_project_player.h"
 # include "unknow_project_item.h"
 
-typedef void	(*t_playing_funct)(t_camera *, t_gui *, t_engine *);
+typedef void	(*t_playing_funct)(t_camera *, t_gui *, t_engine *, t_mesh);
 t_texture		*png_load(char *path);
 GLuint			load_shaders(const char *p_vertex_file_path,
 						const char *p_fragment_file_path);
@@ -47,15 +47,15 @@ t_triangle		compose_t_triangle_from_t_vertices(t_vec4_list *src,
 void			ft_get_leaks(char *prog_name, char *msg);
 void			tar_ressources(void);
 void			untar_ressources(void);
-void			display_tittle_screen(t_camera *main_camera, t_gui *gui,
-									t_engine *engin);
+void			display_title_screen(t_camera *main_camera, t_gui *gui,
+									t_engine *engine, t_mesh mesh);
 void			game_playing(t_camera *main_camera, t_gui *gui,
-									t_engine *engine);
-void			game_pausing(t_camera *main_camera, t_gui *gui,
-									t_engine *engin);
+									t_engine *engine, t_mesh mesh);
+void			game_paused(t_camera *main_camera, t_gui *gui,
+									t_engine *engine, t_mesh mesh);
 void			level_editing(t_camera *main_camera, t_gui *gui,
-									t_engine *engin);
-void			level_editing_pausing(t_camera *main_camera, t_gui *gui,
-									t_engine *engin);
+									t_engine *engine, t_mesh mesh);
+void			level_editing_paused(t_camera *main_camera, t_gui *gui,
+									t_engine *engine, t_mesh mesh);
 
 #endif

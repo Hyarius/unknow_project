@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_triangle.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 15:31:26 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 14:54:51 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/02/05 10:14:37 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ t_triangle	*initialize_t_triangle(t_vec4 p_a, t_vec4 p_b, t_vec4 p_c)
 {
 	t_triangle	*result;
 
-	if (!(result = (t_triangle *)malloc(sizeof(t_triangle))))
-		error_exit(-31, "Can't malloc a t_triangle");
+	if (!(result = (t_triangle *)ft_memalloc(sizeof(t_triangle))))
+		error_exit(-31, "Can't ft_memalloc a t_triangle");
 	*result = new_triangle(p_a, p_b, p_c);
 	return (result);
 }

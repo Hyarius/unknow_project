@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:10:18 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/31 16:22:27 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/02/03 16:45:11 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ int				select_texture(t_keyboard *key, t_visual_engine *engine);
 void			game_over(t_engine *engine);
 void			print_letter(t_camera *main_cam, t_gui *gui, char *str,
 															t_rectangle rec);
+void			free_t_gui(t_gui *dest);
 
 
 #endif

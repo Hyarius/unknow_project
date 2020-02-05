@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_face.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:46:16 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/30 11:19:19 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/02/05 10:14:37 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_face	*initialize_t_face(void)
 {
 	t_face	*result;
 
-	if (!(result = (t_face *)malloc(sizeof(t_face))))
+	if (!(result = (t_face *)ft_memalloc(sizeof(t_face))))
 		error_exit(-13, "Can't create a t_face");
 	*result = new_face();
 	return (result);

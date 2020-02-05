@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:45:08 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/05 10:14:37 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_uv	*initialize_t_uv(t_triangle p_triangle, t_texture *p_texture)
 {
 	t_uv	*result;
 
-	if (!(result = (t_uv *)malloc(sizeof(t_uv))))
+	if (!(result = (t_uv *)ft_memalloc(sizeof(t_uv))))
 		return (NULL);
 	*result = new_uv(p_triangle, p_texture);
 	return (result);

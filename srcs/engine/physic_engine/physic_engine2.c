@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   physic_engine2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 13:16:09 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/21 13:19:31 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/02/05 14:27:47 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_physic_engine	*initialize_t_physic_engine(void)
 {
 	t_physic_engine	*result;
 
-	if (!(result = (t_physic_engine	*)malloc(sizeof(t_physic_engine))))
+	if (!(result = (t_physic_engine	*)ft_memalloc(sizeof(t_physic_engine))))
 		return (NULL);
 	*result = new_physic_engine();
 	return (result);
@@ -34,13 +34,16 @@ t_physic_engine	*initialize_t_physic_engine(void)
 
 void			delete_t_physic_engine(t_physic_engine dest)
 {
-	free_t_mesh_list(dest.mesh_list);
+	if (dest.mesh_list->size > 0)
+		free_t_mesh_list(&dest.mesh_list);
+	if (dest.item_list->size > 0)
+		free_t_item_list(&dest.item_list);
 }
 
-void			free_t_physic_engine(t_physic_engine *dest)
+void			free_t_physic_engine(t_physic_engine **dest)
 {
-	delete_t_physic_engine(*dest);
-	free(dest);
+	delete_t_physic_engine(**dest);
+	ft_memdel((void**)dest);
 }
 
 void			t_physic_engine_apply_force(t_engine *engine)

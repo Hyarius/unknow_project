@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 11:29:31 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/05 10:14:37 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_door		*initialize_t_door(void)
 {
 	t_door	*result;
 
-	if (!(result = (t_door *)malloc(sizeof(t_door))))
+	if (!(result = (t_door *)ft_memalloc(sizeof(t_door))))
 		return (NULL);
 	*result = new_door();
 	return (result);

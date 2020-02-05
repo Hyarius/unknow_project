@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_gui.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 15:58:51 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/30 15:43:47 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/02/05 10:14:37 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,20 @@ t_gui	new_gui(void)
 	t_gui	result;
 	int		idx;
 
-	if (!(result.letter = (t_letter **)malloc(sizeof(t_letter*) * 96)))
-		error_exit(-29, "Can't malloc a t_surface");
-	if (!(result.menu = (t_texture **)malloc(sizeof(t_texture*) * 20)))
-		error_exit(-29, "Can't malloc a t_surface");
+	if (!(result.letter = (t_letter **)ft_memalloc(sizeof(t_letter*) * 96)))
+		error_exit(-29, "Can't ft_memalloc a t_surface");
+	if (!(result.menu = (t_texture **)ft_memalloc(sizeof(t_texture*) * 20)))
+		error_exit(-29, "Can't ft_memalloc a t_surface");
 	idx = -1;
 	while (++idx <= 94)
 	{
-		if (!(result.letter[idx] = (t_letter *)malloc(sizeof(t_letter))))
-			error_exit(-29, "Can't malloc a t_surface");
-		if (!(result.letter[idx]->let = (t_texture *)malloc(sizeof(t_texture))))
-			error_exit(-29, "Can't malloc a t_surface");
+		if (!(result.letter[idx] = (t_letter *)ft_memalloc(sizeof(t_letter))))
+			error_exit(-29, "Can't ft_memalloc a t_surface");
+		if (!(result.letter[idx]->let = (t_texture *)ft_memalloc(sizeof(t_texture))))
+			error_exit(-29, "Can't ft_memalloc a t_surface");
 		if (!(result.letter[idx]->let->surface =\
-										(t_surface *)malloc(sizeof(t_surface))))
-			error_exit(-29, "Can't malloc a t_surface");
+										(t_surface *)ft_memalloc(sizeof(t_surface))))
+			error_exit(-29, "Can't ft_memalloc a t_surface");
 	}
 	result.idx = 8;
 	result.sens = 2;
@@ -43,10 +43,67 @@ t_gui	*initialize_t_gui(void)
 {
 	t_gui	*result;
 
-	if (!(result = (t_gui *)malloc(sizeof(t_gui))))
+	if (!(result = (t_gui *)ft_memalloc(sizeof(t_gui))))
 		error_exit(-13, "Can't create a t_gui");
 	*result = new_gui();
 	return (result);
+}
+
+void	delete_t_surface(t_surface dest)
+{
+	ft_memdel((void**)dest.pixels);
+}
+
+void	free_t_surface(t_surface *dest)
+{
+	delete_t_surface(*dest);
+	ft_memdel((void**)dest);
+}
+
+void	delete_t_texture(t_texture dest)
+{
+	if (ft_strlen(dest.path) > 0)
+		ft_strdel(&dest.path);
+	if (dest.surface != NULL)
+	{
+		free_t_surface(dest.surface);
+	}
+}
+
+void	free_t_texture(t_texture **dest) // TOUT CASSÉ
+{
+	if (*dest != NULL)
+	{
+		delete_t_texture(**dest);
+		ft_memdel((void**)dest);
+	}
+}
+
+void	delete_t_gui(t_gui dest)
+{
+	int	i;
+
+	i = 0;
+	free_t_texture(&dest.skybox);
+}
+
+void	delete_t_letter(t_letter dest)
+{
+	free_t_texture(&dest.let);
+}
+
+void	free_t_letter(t_letter **dest)
+{
+	delete_t_letter(**dest);
+	ft_memdel((void**)dest);
+}
+
+void	free_t_gui(t_gui *dest)
+{
+	/*free_t_letter(&(*gui)->letter);
+	free_t_texture((*gui)->menu);*/
+	delete_t_gui(*dest);
+	/*ft_memdel((void**)dest);*/
 }
 
 void	set_t_gui_texte(t_gui *gui)
@@ -100,11 +157,11 @@ void	print_info_bar(t_camera *main_camera, t_player *player, t_gui *gui)
 	str = ft_itoa(player->armor);
 	print_letter(main_camera, gui, str,
 		new_rectangle(create_vec2(-0.70, -0.87), size));
-	free(str);
+	ft_memdel((void**)&str);
 	str = ft_itoa(player->hp);
 	print_letter(main_camera, gui, str,
 		new_rectangle(create_vec2(-0.70, -0.97), size));
-	free(str);
+	ft_memdel((void**)&str);
 	if (player->current_weapon->index != 5)
 	{
 		str = ft_itoa(player->current_weapon->ammo);
@@ -113,6 +170,6 @@ void	print_info_bar(t_camera *main_camera, t_player *player, t_gui *gui)
 		print_letter(main_camera, gui, str,
 					new_rectangle(create_vec2(0.78, -0.90),
 										create_vec2(0.01, 0.05)));
-		free(str);
+		ft_memdel((void**)&str);
 	}
 }

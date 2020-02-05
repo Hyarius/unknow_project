@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unknow_project_structure.h                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:40:11 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/20 15:45:48 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/02/04 17:22:34 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,6 @@ t_face			*initialize_t_face();
 void			set_t_face_vertices(t_face *face, int a, int b, int c);
 void			set_t_face_uvs(t_face *face, int a, int b, int c);
 void			set_t_face_color(t_face *face, t_color color);
+void			free_t_texture(t_texture **dest);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   string_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 16:16:07 by adjouber          #+#    #+#             */
-/*   Updated: 2019/10/31 16:16:08 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/02/05 15:34:49 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ char		*ft_strnew(int size)
 	int		i;
 
 	ret = NULL;
-	if (!(ret = (char *)malloc(sizeof(char) * (size + 1))))
-		return (NULL);
+	if (!(ret = (char *)ft_memalloc(sizeof(char) * (size + 1))))
+		error_exit(-121, "can't ft_memalloc strnew");
 	i = 0;
 	while (i <= size)
 	{
@@ -47,6 +47,8 @@ char		*ft_strdup(char *src)
 	int		i;
 
 	i = 0;
+	if (src == NULL)
+		return (NULL);
 	ret = ft_strnew(ft_strlen(src));
 	while (src[i] != '\0')
 	{

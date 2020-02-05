@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_handler.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 16:14:29 by adjouber          #+#    #+#             */
-/*   Updated: 2019/10/31 16:14:30 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/02/04 17:02:46 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_del_cont(void *content, size_t size)
 {
 	if (content != NULL)
 	{
-		free(content);
+		ft_memdel((void**)&content);
 		size = 0;
 	}
 }

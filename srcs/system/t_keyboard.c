@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 16:15:30 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/30 16:10:52 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/02/05 10:14:37 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_keyboard	*initialize_t_keyboard(void)
 {
 	t_keyboard	*result;
 
-	if (!(result = (t_keyboard *)malloc(sizeof(t_keyboard))))
+	if (!(result = (t_keyboard *)ft_memalloc(sizeof(t_keyboard))))
 		return (NULL);
 	*result = new_keyboard();
 	return (result);

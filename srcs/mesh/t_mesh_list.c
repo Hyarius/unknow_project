@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:49:45 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/05 15:31:05 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ t_mesh_list	new_mesh_list(void)
 {
 	t_mesh_list	list;
 
-	if (!(list.mesh = (t_mesh *)malloc(sizeof(t_mesh) * PUSH_SIZE)))
-		error_exit(-18, "Can't malloc a t_mesh array");
+	if (!(list.mesh = (t_mesh *)ft_memalloc(sizeof(t_mesh) * PUSH_SIZE)))
+		error_exit(-18, "Can't ft_memalloc a t_mesh array");
 	list.size = 0;
 	list.max_size = PUSH_SIZE;
 	return (list);
@@ -27,7 +27,7 @@ t_mesh_list	*initialize_t_mesh_list(void)
 {
 	t_mesh_list	*list;
 
-	if (!(list = (t_mesh_list *)malloc(sizeof(t_mesh_list))))
+	if (!(list = (t_mesh_list *)ft_memalloc(sizeof(t_mesh_list))))
 		error_exit(-19, "Can't create a t_mesh_list array");
 	*list = new_mesh_list();
 	return (list);
@@ -41,13 +41,13 @@ void		t_mesh_list_push_back(t_mesh_list *dest, t_mesh to_add)
 	if ((dest->size + 1) >= dest->max_size)
 	{
 		tmp = dest->mesh;
-		if (!(dest->mesh = (t_mesh *)malloc(sizeof(t_mesh)
+		if (!(dest->mesh = (t_mesh *)ft_memalloc(sizeof(t_mesh)
 											* (dest->size + 1 + PUSH_SIZE))))
 			error_exit(-20, "Can't realloc a t_mesh array");
 		i = -1;
 		while (++i < dest->size)
 			dest->mesh[i] = tmp[i];
-		free(tmp);
+		ft_memdel((void**)&tmp);
 		dest->max_size += PUSH_SIZE;
 	}
 	dest->mesh[dest->size] = to_add;
@@ -56,11 +56,19 @@ void		t_mesh_list_push_back(t_mesh_list *dest, t_mesh to_add)
 
 void		delete_t_mesh_list(t_mesh_list dest)
 {
-	free(dest.mesh);
+	int		i;
+
+	i = 0;
+	while (i < dest.size)
+	{
+		delete_t_mesh(t_mesh_list_get(&dest, i));
+		i++;
+	}
+	ft_memdel((void**)&dest.mesh);
 }
 
-void		free_t_mesh_list(t_mesh_list *dest)
+void		free_t_mesh_list(t_mesh_list **dest)
 {
-	delete_t_mesh_list(*dest);
-	free(dest);
+	delete_t_mesh_list(**dest);
+	ft_memdel((void**)dest);
 }

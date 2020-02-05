@@ -11,6 +11,17 @@ void	ft_get_leaks(char *prog_name, char *msg)
 	ft_putstr(msg);
 	ft_putchar('\n');
 	system(cmd);
-	free(tmp);
-	free(cmd);
+	ft_memdel((void**)&tmp);
+	ft_memdel((void**)&cmd);
+}
+
+void	*debug_malloc(size_t size, const char *file, int32_t line, const char *func)
+{
+	void *ptr;
+
+	ptr = malloc(size);
+	if (ptr != NULL)
+		ft_bzero(ptr, size);
+	printf("Allocating %10lu bytes at\t%-10p in %-40s\t, line: %10d, function: %30s\n", size, ptr, file, line, func);
+	return (ptr);
 }

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   playing_functions.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 12:02:06 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/31 15:06:55 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/02/05 18:01:44 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-void	display_tittle_screen(t_camera *camera, t_gui *gui, t_engine *engine)
+void	display_title_screen(t_camera *camera, t_gui *gui, t_engine *engine, t_mesh mesh)
 {
 	t_rectangle		rec;
 
@@ -21,12 +21,9 @@ void	display_tittle_screen(t_camera *camera, t_gui *gui, t_engine *engine)
 					gui->menu[engine->menu_nbr]);
 }
 
-void	game_playing(t_camera *camera, t_gui *gui, t_engine *engine)
+void	game_playing(t_camera *camera, t_gui *gui, t_engine *engine, t_mesh mesh)
 {
-	t_mesh		mesh;
-
-	mesh = create_primitive_skybox(camera->pos, new_vec4(1.0, 1.0, 1.0),
-						gui->skybox);
+	//pourquoi on cree la skybox en permanence ici?
 	mesh.pos = camera->pos;
 	draw_t_mesh(camera, &mesh);
 	t_engine_render_camera(engine);
@@ -43,11 +40,11 @@ void	game_playing(t_camera *camera, t_gui *gui, t_engine *engine)
 	drawing_front_mun(camera, gui->text_am, engine->user_engine->player);
 	drawing_front_weapons(camera, gui->text_weap,
 								engine->user_engine->player);
-	/*draw_minimap(engine);*/
+	draw_minimap(engine);
 	print_info_bar(camera, engine->user_engine->player, gui);
 }
 
-void	game_pausing(t_camera *camera, t_gui *gui, t_engine *engine)
+void	game_paused(t_camera *camera, t_gui *gui, t_engine *engine, t_mesh mesh)
 {
 	t_rectangle		rec;
 
@@ -59,13 +56,10 @@ void	game_pausing(t_camera *camera, t_gui *gui, t_engine *engine)
 									gui->menu[engine->menu_nbr]);
 }
 
-void	level_editing(t_camera *camera, t_gui *gui, t_engine *engine)
+void	level_editing(t_camera *camera, t_gui *gui, t_engine *engine, t_mesh mesh)
 {
-	t_mesh			mesh;
 	t_mesh_editing	mesh_editing;
 
-	mesh = create_primitive_skybox(camera->pos, new_vec4(1.0, 1.0, 1.0),
-						gui->skybox);
 	mesh.pos = camera->pos;
 	draw_t_mesh(camera, &mesh);
 	t_engine_render_camera(engine);
@@ -80,7 +74,7 @@ void	level_editing(t_camera *camera, t_gui *gui, t_engine *engine)
 	map_editor(camera, gui, engine, mesh_editing);
 }
 
-void	level_editing_pausing(t_camera *camera, t_gui *gui, t_engine *engine)
+void	level_editing_paused(t_camera *camera, t_gui *gui, t_engine *engine, t_mesh mesh)
 {
 	t_rectangle		rec;
 

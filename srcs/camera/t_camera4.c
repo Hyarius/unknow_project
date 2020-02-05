@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 14:17:06 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/27 14:21:08 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/05 16:20:12 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,20 @@
 
 void		delete_t_cam(t_camera dest)
 {
+	if (dest.body != NULL)
+		free_t_mesh(&dest.body);
+	free_t_view_port(&dest.view_port);
 	delete_t_triangle_list(dest.triangle_color_list);
-	delete_t_color_list(dest.color_list);
 	delete_t_triangle_list(dest.triangle_texture_list);
+	delete_t_color_list(dest.color_list);
+	delete_t_uv_list(dest.uv_list);
 	delete_t_color_list(dest.darkness_list);
-	free(dest.view_port);
 }
 
-void		free_t_cam(t_camera *dest)
+void		free_t_cam(t_camera **dest)
 {
-	delete_t_cam(*dest);
-	free(dest);
+	delete_t_cam(**dest);
+	ft_memdel((void**)dest);
 }
 
 void		t_camera_look_at_point(t_camera *cam, t_vec4 targ)

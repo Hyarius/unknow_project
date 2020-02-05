@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 13:40:28 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/31 11:35:30 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/05 16:25:37 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,31 @@ t_mesh			init_primitive(char **line_split, char *texture_path)
 {
 	t_mesh		mesh;
 	t_vec4		vec[2];
+	int			test;
 
+	test = 0;
+	mesh.name = NULL;
 	vec[0] = new_vec4(ft_atof(line_split[2]),
 							ft_atof(line_split[3]), ft_atof(line_split[4]));
 	vec[1] = new_vec4(ft_atof(line_split[5]),
 							ft_atof(line_split[6]), ft_atof(line_split[7]));
-	if (ft_strcmp(line_split[0], "plane:") == 0)
+	if (ft_strcmp(line_split[0], "plane:") == 0 && ++test)
 		mesh = create_primitive_plane(vec[0], vec[1],
 					texture_path, ft_atof(line_split[9]));
-	else if (ft_strcmp(line_split[0], "cube:") == 0)
+	else if (ft_strcmp(line_split[0], "cube:") == 0 && ++test)
 		mesh = create_primitive_cube(vec[0], vec[1],
 					texture_path, ft_atof(line_split[9]));
-	else if (ft_strcmp(line_split[0], "item:") == 0)
+	else if (ft_strcmp(line_split[0], "item:") == 0 && ++test)
 	{
 		mesh = create_primitive_cube(vec[0], vec[1],
 					texture_path, ft_atof(line_split[9]));
 		mesh.collectible = 1;
 	}
-	else if (line_split[0][0] == '#')
+	else if (line_split[0][0] == '#' && ++test)
 		mesh = read_obj_file(&line_split[0][1], vec[0], vec[1],
 							texture_path);
-	t_mesh_activate_gravity(&mesh, ft_atof(line_split[9]));
+	if (test)
+		t_mesh_activate_gravity(&mesh, ft_atof(line_split[9]));
 	return (mesh);
 }
 
@@ -57,6 +61,7 @@ t_mesh			init_texture(char **line_split)
 	mesh = init_primitive(line_split, texture_path);
 	if (texture_path == NULL)
 		t_mesh_set_color(&mesh, color);
+	ft_strdel(&texture_path);
 	return (mesh);
 }
 
@@ -80,6 +85,7 @@ void			set_mesh(t_mesh *mesh, char **line_split, t_player *p)
 
 void			read_map(t_mesh mesh, t_mesh_list *r, char **s, t_player *p)
 {
+	// ft_get_leaks("UNKNOW_PROJECT", "read map 1");
 	if (ft_strcmp(s[0], "player:") == 0)
 		read_player(s, p);
 	else if (ft_strcmp(s[0], "plane:") == 0 || s[0][0] == '#'
@@ -89,6 +95,7 @@ void			read_map(t_mesh mesh, t_mesh_list *r, char **s, t_player *p)
 		set_mesh(&mesh, s, p);
 		t_mesh_list_push_back(r, mesh);
 	}
+	// ft_get_leaks("UNKNOW_PROJECT", "read map 6");
 }
 
 t_mesh_list		*read_map_file(int fd, t_player *player)
@@ -102,16 +109,21 @@ t_mesh_list		*read_map_file(int fd, t_player *player)
 	i = 0;
 	result = initialize_t_mesh_list();
 	mesh.name = NULL;
+	// ft_get_leaks("UNKNOW_PROJECT", "read map file 3");
 	while ((i = get_next_line(fd, &line)) > 0)
 	{
 		if (ft_strlen(line) != 0)
 		{
-			s = ft_strsplit(line, ' ');
+			if (!(s = ft_strsplit(line, ' ')))
+				return (NULL);
 			read_map(mesh, result, s, player);
-			ft_freetab(s);
+			// ft_get_leaks("UNKNOW_PROJECT", "read map file 3.3");
+			ft_freetab(&s);
 		}
-		free(line);
+		ft_strdel(&line);
 	}
-	free(line);
+	// ft_get_leaks("UNKNOW_PROJECT", "read map file 4");
+	ft_strdel(&line);
+	// ft_get_leaks("UNKNOW_PROJECT", "read map file 5");
 	return (result);
 }

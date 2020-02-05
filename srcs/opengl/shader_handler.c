@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 16:20:56 by gboutin           #+#    #+#             */
-/*   Updated: 2019/12/12 16:21:01 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/04 15:56:07 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,10 @@ static char	*read_shader(const char *p_path)
 		if (ft_strlen(content) != 0)
 			ft_stradd(&content, "\n");
 		ft_stradd(&content, line);
-		free(line);
+		ft_memdel((void**)&line);
+		line = NULL;
 	}
-	free(line);
+	ft_memdel((void**)&line);
 	close(fd);
 	return (content);
 }
@@ -67,6 +68,7 @@ static void	compute_program(GLuint p_program_id, GLuint p_vertex_shader_id,
 GLuint		load_shaders(const char *p_vertex_file_path,
 							const char *p_fragment_file_path)
 {
+
 	char	*vertex_content;
 	char	*fragment_content;
 	GLuint	vertex_shader_id;
@@ -80,8 +82,8 @@ GLuint		load_shaders(const char *p_vertex_file_path,
 	fragment_content = read_shader(p_fragment_file_path);
 	compile_shader(vertex_shader_id, vertex_content);
 	compile_shader(fragment_shader_id, fragment_content);
-	free(vertex_content);
-	free(fragment_content);
+	ft_memdel((void**)&vertex_content);
+	ft_memdel((void**)&fragment_content);
 	compute_program(program_id, vertex_shader_id, fragment_shader_id);
 	return (program_id);
 }

@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 15:27:35 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/27 14:21:40 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/05 10:14:37 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ t_line	*initialize_t_line(t_vec4 p_a, t_vec4 p_b)
 {
 	t_line	*result;
 
-	if (!(result = (t_line *)malloc(sizeof(t_line))))
-		error_exit(-31, "Can't malloc a t_line");
+	if (!(result = (t_line *)ft_memalloc(sizeof(t_line))))
+		error_exit(-31, "Can't ft_memalloc a t_line");
 	*result = new_line(p_a, p_b);
 	return (result);
 }

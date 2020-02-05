@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 13:39:37 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/21 17:13:41 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/05 17:12:18 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	save_card(t_player *player, int fd, char *str)
 	str = ft_strjoinf(str, " ", 1);
 	str = ft_strjoinf(str, ft_itoa(player->green_card), 3);
 	write(fd, str, ft_strlen(str));
-	free(str);
 	write(fd, "\n", 1);
 }
 
@@ -78,7 +77,8 @@ void	save_player_pos(t_player *player, t_mesh current, int fd)
 {
 	char	*str;
 
-	str = ft_strdup("player: Player ");
+	if (!(str = ft_strdup("player: Player ")))
+		error_exit(-70, "ft_strdup failed.");
 	str = ft_strjoinf(str, ft_ftoa(current.pos.x), 3);
 	str = ft_strjoinf(str, " ", 1);
 	str = ft_strjoinf(str, ft_ftoa(current.pos.y), 3);
@@ -93,6 +93,7 @@ void	save_player_pos(t_player *player, t_mesh current, int fd)
 	str = ft_strjoinf(str, " ", 1);
 	str = ft_strjoinf(str, "NULL ", 1);
 	save_status(player, current, fd, str);
+	ft_strdel(&str);
 }
 
 void	save_player(t_engine *engine, int fd)

@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 10:05:54 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/05 10:14:37 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ t_view_port	new_view_port(t_window *p_window, t_vec2_int p_pos,
 	result.window = p_window;
 	result.pos = create_vec2_int(0, 0);
 	result.size = create_vec2_int(0, 0);
-	if (!(result.depth_buffer = (float *)malloc(sizeof(float) \
+	if (!(result.depth_buffer = (float *)ft_memalloc(sizeof(float) \
 								* p_window->size_x * p_window->size_y)))
-		error_exit(-456, "Can't malloc a float array properly");
+		error_exit(-456, "Can't ft_memalloc a float array properly");
 	move_t_view_port(&result, p_pos);
 	resize_t_view_port(&result, p_size);
 	return (result);
@@ -33,7 +33,7 @@ t_view_port	*initialize_t_view_port(t_window *p_window, t_vec2_int p_pos,
 {
 	t_view_port *result;
 
-	if (!(result = (t_view_port *)malloc(sizeof(t_view_port))))
+	if (!(result = (t_view_port *)ft_memalloc(sizeof(t_view_port))))
 		return (NULL);
 	*result = new_view_port(p_window, p_pos, p_size);
 	return (result);
@@ -66,10 +66,10 @@ void		resize_t_view_port(t_view_port *view, t_vec2_int new_size)
 void		t_view_port_change_window(t_view_port *view, t_window *p_window)
 {
 	view->window = p_window;
-	free(view->depth_buffer);
-	if (!(view->depth_buffer = (float *)malloc(sizeof(float) \
+	ft_memdel((void**)&view->depth_buffer);
+	if (!(view->depth_buffer = (float *)ft_memalloc(sizeof(float) \
 									* p_window->size_x * p_window->size_y)))
-		error_exit(-456, "Can't malloc a float array properly");
+		error_exit(-456, "Can't ft_memalloc a float array properly");
 	move_t_view_port(view, view->pos);
 	resize_t_view_port(view, view->size);
 }

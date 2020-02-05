@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_map_editor.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 12:49:02 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/31 16:25:49 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/02/05 11:51:00 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void		print_info_texture(t_camera *main_cam, t_gui *gui,
 	t_view_port_clear_buffers(main_cam->view_port);
 	draw_hud_rect(main_cam->view_port, new_rectangle(create_vec2(1.0, 1.0),
 											create_vec2(-0.3, -0.2)), color);
-	str = ft_strdup(&mesh_editing.path[27]);
+	if (!(str = ft_strdup(&mesh_editing.path[27])))
+		error_exit(-70, "ft_strdup failed.");
 	print_letter(main_cam, gui, str, new_rectangle(create_vec2(0.72, 0.82), create_vec2(0.02, 0.15)));
 }
 

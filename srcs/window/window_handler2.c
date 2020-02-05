@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 10:10:16 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/05 10:14:37 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,12 @@ void		initialize_t_window2(t_window *win)
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_ALWAYS);
 	SDL_GL_SetSwapInterval(0);
-	if (!(win->vertex_data = (t_vector3 *)malloc(sizeof(t_vector3) \
+	if (!(win->vertex_data = (t_vector3 *)ft_memalloc(sizeof(t_vector3) \
 										* win->size_x * win->size_y)))
-		error_exit(-456, "Can't malloc a t_vector3 array properly");
-	if (!(win->color_data = (t_color *)malloc(sizeof(t_color) \
+		error_exit(-456, "Can't ft_memalloc a t_vector3 array properly");
+	if (!(win->color_data = (t_color *)ft_memalloc(sizeof(t_color) \
 										* win->size_x * win->size_y)))
-		error_exit(-456, "Can't malloc a t_color array properly");
+		error_exit(-456, "Can't ft_memalloc a t_color array properly");
 	initialize_t_window3(win, i);
 	glBindBuffer(GL_ARRAY_BUFFER, win->color_fixed_buffer);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * win->size_x * win->size_y \
@@ -73,8 +73,8 @@ t_window	*initialize_t_window(char *p_name, int p_size_x, int p_size_y)
 {
 	t_window	*win;
 
-	if (!(win = (t_window *)malloc(sizeof(t_window))))
-		error_exit(-6, "Can't malloc a t_window");
+	if (!(win = (t_window *)ft_memalloc(sizeof(t_window))))
+		error_exit(-6, "Can't ft_memalloc a t_window");
 	if ((win->window = SDL_CreateWindow(p_name, 0, 0, p_size_x, p_size_y,
 								SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL)) == NULL)
 		error_exit(ft_atoi(SDL_GetError()), "Erreur SDL_CreateWindow");

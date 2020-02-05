@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collision_detection.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 13:15:31 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/21 13:37:48 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/02/05 16:28:33 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_triangle		is_triangle_target(t_face *face, t_mesh *target)
 	return (result);
 }
 
-int				sat_test(t_face *face, t_mesh *target, t_mesh *mesh_qui_bouge)
+int				sat_test(t_face *face, t_mesh *target, t_mesh *moving_mesh)
 {
 	t_triangle	tri_comp;
 	t_triangle	tri_tar;
@@ -34,16 +34,16 @@ int				sat_test(t_face *face, t_mesh *target, t_mesh *mesh_qui_bouge)
 
 	tri_tar = is_triangle_target(face, target);
 	i = -1;
-	while (++i < mesh_qui_bouge->faces->size)
+	while (++i < moving_mesh->faces->size)
 	{
-		if (mesh_qui_bouge->next_vertices_in_world->size == 0)
+		if (moving_mesh->next_vertices_in_world->size == 0)
 			break ;
-		current = t_face_list_get(mesh_qui_bouge->faces, i);
-		tri_comp.a = t_vec4_list_at(mesh_qui_bouge->next_vertices_in_world,
+		current = t_face_list_get(moving_mesh->faces, i);
+		tri_comp.a = t_vec4_list_at(moving_mesh->next_vertices_in_world,
 													current->index_vertices[0]);
-		tri_comp.b = t_vec4_list_at(mesh_qui_bouge->next_vertices_in_world,
+		tri_comp.b = t_vec4_list_at(moving_mesh->next_vertices_in_world,
 													current->index_vertices[1]);
-		tri_comp.c = t_vec4_list_at(mesh_qui_bouge->next_vertices_in_world,
+		tri_comp.c = t_vec4_list_at(moving_mesh->next_vertices_in_world,
 													current->index_vertices[2]);
 		if (triangles_intersection(tri_comp, tri_tar))
 			return (BOOL_TRUE);

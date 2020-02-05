@@ -3,21 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 14:24:27 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/31 15:16:40 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/02/05 17:55:34 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-void			exit_prog(void)
+void			exit_prog(t_engine **engine, t_gui **gui, t_playing_funct **play,
+							t_camera **camera)
 {
+	(void)play;
+	(void)camera;
 	Mix_CloseAudio();
 	Mix_Quit();
 	TTF_Quit();
 	SDL_Quit();
+	free_t_engine(engine);
+	// free_t_gui(*gui);
 	tar_ressources();
 }
 
@@ -71,14 +76,14 @@ t_playing_funct	*initialize_prog(t_gui **gui, t_engine **engine, char **argv)
 	load_textures(*gui);
 	Mix_VolumeMusic(0);
 	Mix_PlayMusic((*engine)->sound_engine->music[0], -1);
-	if (!(result = (t_playing_funct *)malloc(sizeof(t_playing_funct) * 6)))
-		error_exit(-56, "t_playing_funct can't be malloc");
+	if (!(result = (t_playing_funct *)ft_memalloc(sizeof(t_playing_funct) * 6)))
+		error_exit(-56, "t_playing_funct can't be ft_memalloc");
 	result[0] = NULL;
-	result[1] = display_tittle_screen;
+	result[1] = display_title_screen;
 	result[2] = game_playing;
-	result[3] = game_pausing;
+	result[3] = game_paused;
 	result[4] = level_editing;
-	result[5] = level_editing_pausing;
+	result[5] = level_editing_paused;
 	return (result);
 }
 
@@ -88,6 +93,7 @@ int				main(int argc, char **argv)
 	t_gui			*gui;
 	t_playing_funct	*playing_functions;
 	t_camera		*camera;
+	t_mesh			mesh;
 
 	if (argc != 1)
 		error_exit(-1, "Bad argument");
@@ -95,15 +101,18 @@ int				main(int argc, char **argv)
 	gui = NULL;
 	playing_functions = initialize_prog(&gui, &engine, argv);
 	camera = t_camera_list_get(engine->visual_engine->camera_list, 0);
+	mesh = create_primitive_skybox(camera->pos, new_vec4(1.0, 1.0, 1.0),
+						gui->skybox);
 	while (engine->playing != 0)
 	{
 		prepare_screen(engine->win, new_color(0.2f, 0.2f, 0.2f, 1.0f));
 		t_engine_prepare_camera(engine);
 		if (engine->playing != 0)
-			playing_functions[engine->playing](camera, gui, engine);
+			playing_functions[engine->playing](camera, gui, engine, mesh);
+		//leaks fait entre les deux
 		t_engine_handle_event(camera, gui, engine);
 		render_screen(engine);
 	}
-	exit_prog();
+	exit_prog(&engine, &gui, &playing_functions, &camera);
 	return (0);
 }

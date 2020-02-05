@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 11:10:02 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/23 13:56:27 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/05 10:14:37 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_mouse	*initialize_t_mouse(void)
 {
 	t_mouse	*result;
 
-	if (!(result = (t_mouse *)malloc(sizeof(t_mouse))))
+	if (!(result = (t_mouse *)ft_memalloc(sizeof(t_mouse))))
 		return (NULL);
 	*result = new_mouse();
 	return (result);

@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 14:35:31 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/05 10:14:37 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_color	*initialize_t_color(float p_r, float p_g, float p_b, float p_a)
 {
 	t_color	*color;
 
-	if (!(color = (t_color *)malloc(sizeof(t_color))))
+	if (!(color = (t_color *)ft_memalloc(sizeof(t_color))))
 		return (NULL);
 	*color = new_color(p_r, p_g, p_b, p_a);
 	return (color);

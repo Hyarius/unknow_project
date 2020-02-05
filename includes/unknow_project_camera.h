@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:46:59 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/23 15:03:27 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/04 17:31:22 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_camera			new_camera(t_window *window, t_vec4 p_pos, float p_fov,
 t_camera			*initialize_t_camera(t_window *window, t_vec4 p_pos,
 													float p_fov, t_vec2 p_dist);
 void				delete_t_cam(t_camera dest);
-void				free_t_cam(t_camera *dest);
+void				free_t_cam(t_camera **dest);
 void				translate_camera(t_camera *camera, t_vec4 mouvement);
 t_matrix			compute_projection_matrix(t_camera *p_cam);
 void				compute_t_camera(t_camera *cam);

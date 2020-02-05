@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   string_parsing.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 17:07:46 by adjouber          #+#    #+#             */
-/*   Updated: 2019/10/31 17:08:22 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/02/05 10:14:37 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char		*ft_strcut(char **src, char delim)
 		*src = ft_strdup(&(tmp[j + 1]));
 	else
 		*src = NULL;
-	free(tmp);
+	ft_memdel((void**)&tmp);
 	return (ret);
 }
 
@@ -81,7 +81,7 @@ char		*ft_strsub(char const *s, unsigned int start, size_t len)
 	i = 0;
 	if (s == NULL)
 		return (NULL);
-	if (!(section = (char*)malloc(sizeof(char) * len + 1)))
+	if (!(section = (char*)ft_memalloc(sizeof(char) * len + 1)))
 		return (NULL);
 	while (len != 0)
 	{

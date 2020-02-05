@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unknow_project_mesh.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:48:49 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/29 15:19:48 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/02/04 17:38:36 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ typedef struct			s_mesh
 t_mesh					new_mesh(t_vec4 pos);
 t_mesh					read_obj_file(char *path, t_vec4 pos, t_vec4 size,
 										char *txtr);
-void					delete_t_mesh(t_mesh mesh);
-void					free_t_mesh(t_mesh *mesh);
+void					delete_t_mesh(t_mesh *mesh);
+void					free_t_mesh(t_mesh **mesh);
 void					t_mesh_add_point(t_mesh *dest, t_vec4 new_point);
 void					t_mesh_add_uv(t_mesh *dest, t_vec4 new_uv);
 void					t_mesh_add_face(t_mesh *dest, t_face new_face);

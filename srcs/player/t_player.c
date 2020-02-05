@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:53:50 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/31 10:42:13 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/05 10:14:37 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_player		*initialize_t_player(t_camera *cam)
 {
 	t_player *result;
 
-	if (!(result = (t_player *)malloc(sizeof(t_player))))
+	if (!(result = (t_player *)ft_memalloc(sizeof(t_player))))
 		error_exit(-13, "Can't create a t_player array");
 	*result = new_player(cam);
 	return (result);
@@ -57,4 +57,9 @@ void			player_take_dmg(t_engine *engine, int dmg)
 			Mix_PlayChannel(4, engine->sound_engine->sounds[17], 0);
 		engine->user_engine->player->hp -= dmg;
 	}
+}
+
+void		free_t_player(t_player **dest)
+{
+	ft_memdel((void**)dest);
 }

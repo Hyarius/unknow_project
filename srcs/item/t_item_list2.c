@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 13:03:10 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/27 14:54:39 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/04 17:16:12 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 void			delete_t_item_list(t_item_list dest)
 {
-	free(dest.item);
+	ft_memdel((void**)&dest.item);
 }
 
-void			free_t_item_list(t_item_list *dest)
+void			free_t_item_list(t_item_list **dest)
 {
-	delete_t_item_list(*dest);
-	free(dest);
+	delete_t_item_list(**dest);
+	ft_memdel((void**)dest);
 }
 
 void			clean_t_item_list(t_item_list *dest)

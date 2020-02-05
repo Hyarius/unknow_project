@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_sounds.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:41:59 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/29 14:09:53 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/02/05 10:14:37 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ Mix_Music		**load_music(void)
 	int			i;
 
 	nb_music = 1;
-	if (!(music = (Mix_Music**)malloc(sizeof(Mix_Music*) * nb_music)))
-		error_exit(66, "Couldn't malloc array of music (load_music)");
+	if (!(music = (Mix_Music**)ft_memalloc(sizeof(Mix_Music*) * nb_music)))
+		error_exit(66, "Couldn't ft_memalloc array of music (load_music)");
 	music[0] = Mix_LoadMUS("ressources/assets/sounds/IG_theme.ogg");
 	i = 0;
 	while (i < nb_music)
@@ -65,8 +65,8 @@ Mix_Chunk		**load_sounds(void)
 
 	nb_sounds = 28;
 	i = 0;
-	if (!(sounds = (Mix_Chunk**)malloc(sizeof(Mix_Chunk*) * nb_sounds)))
-		error_exit(66, "Couldn't malloc array of sounds (load_sounds)");
+	if (!(sounds = (Mix_Chunk**)ft_memalloc(sizeof(Mix_Chunk*) * nb_sounds)))
+		error_exit(66, "Couldn't ft_memalloc array of sounds (load_sounds)");
 	sounds[0] = Mix_LoadWAV("ressources/assets/sounds/click.wav");
 	sounds[1] = Mix_LoadWAV("ressources/assets/sounds/jump.wav");
 	sounds[2] = Mix_LoadWAV("ressources/assets/sounds/jetpack_ignition.wav");

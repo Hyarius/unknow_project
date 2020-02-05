@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:58:23 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/31 13:55:50 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/04 17:23:41 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_item_list		*initialize_t_item_list(void);
 void			t_item_list_push_back(t_item_list *dest, t_item to_add);
 void			t_item_list_erase(t_item_list *dest, int index);
 void			delete_t_item_list(t_item_list dest);
-void			free_t_item_list(t_item_list *dest);
+void			free_t_item_list(t_item_list **dest);
 void			clean_t_item_list(t_item_list *dest);
 t_item			t_item_list_at(t_item_list *dest, int index);
 t_item			*t_item_list_get(t_item_list *dest, int index);

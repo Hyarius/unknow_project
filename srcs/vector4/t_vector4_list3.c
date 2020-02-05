@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 11:01:06 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/20 13:42:45 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/05 10:14:37 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void			delete_t_vec4_list(t_vec4_list dest)
 {
-	free(dest.vector);
-	dest.vector = NULL;
+	// ft_memdel((void**)dest.vector);
 	dest.size = 0;
+	dest.max_size = 0;
 }
 
 void			t_vec4_list_resize(t_vec4_list *dest, int new_size)
@@ -27,7 +27,7 @@ void			t_vec4_list_resize(t_vec4_list *dest, int new_size)
 
 	old_size = dest->size;
 	tmp = dest->vector;
-	if (!(dest->vector = (t_vec4 *)malloc(sizeof(t_vec4) * (new_size))))
+	if (!(dest->vector = (t_vec4 *)ft_memalloc(sizeof(t_vec4) * (new_size))))
 		error_exit(-20, "Can't realloc a t_vec4 array");
 	i = 0;
 	while (i < dest->size && i < new_size && i < old_size)
@@ -36,7 +36,7 @@ void			t_vec4_list_resize(t_vec4_list *dest, int new_size)
 		i++;
 	}
 	if (old_size != 0)
-		free(tmp);
+		ft_memdel((void**)&tmp);
 	dest->max_size = new_size;
 	dest->size = i;
 }

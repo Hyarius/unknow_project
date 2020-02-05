@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:04:38 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 13:48:59 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/02/05 16:29:57 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,24 @@ t_mesh	new_mesh(t_vec4 pos)
 	return (result);
 }
 
-void	delete_t_mesh(t_mesh mesh)
+void	delete_t_mesh(t_mesh *mesh)
 {
-	free_t_vec4_list(mesh.vertices);
-	free_t_vec4_list(mesh.uvs);
-	free(mesh.faces->face);
-	free(mesh.faces);
+	ft_strdel(&mesh->name);
+	free_t_vec4_list((mesh)->vertices_in_world);
+	free_t_vec4_list((mesh)->next_vertices_in_world);
+	free_t_vec4_list((mesh)->vertices);
+	free_t_vec4_list((mesh)->normales);
+	if ((mesh)->texture != NULL)
+		free_t_texture(&(mesh)->texture);
+	free_t_vec4_list((mesh)->uvs);
+	ft_memdel((void**)&mesh->faces->face);
+	ft_memdel((void**)&mesh->faces);
 }
 
-void	free_t_mesh(t_mesh *mesh)
+void	free_t_mesh(t_mesh **mesh)
 {
 	delete_t_mesh(*mesh);
-	free(mesh);
+	ft_memdel((void**)mesh);
 }
 
 void	t_mesh_resize(t_mesh *mesh, t_vec4 modif)

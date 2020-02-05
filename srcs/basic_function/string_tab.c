@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   string_tab.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 16:18:14 by adjouber          #+#    #+#             */
-/*   Updated: 2019/10/31 17:07:37 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/02/05 15:27:52 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,16 @@ int		ft_tablen(char **tab)
 	return (i);
 }
 
-void	ft_freetab(char **tab)
+void	ft_freetab(char ***tab)
 {
 	int	i;
+	int len;
 
-	i = 0;
-	while (i < ft_tablen(tab))
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
+	i = -1;
+	len = ft_tablen(*tab);
+	while (++i < len)
+		ft_strdel(&(*tab)[i]);
+	ft_memdel((void**)tab);
 }
 
 char	*ft_strjoinf(char *s1, char *s2, int c)
@@ -41,8 +40,8 @@ char	*ft_strjoinf(char *s1, char *s2, int c)
 
 	str = ft_strjoin(s1, s2);
 	if (c == 1 || c == 3)
-		free(s1);
+		ft_strdel(&s1);
 	if (c == 2 || c == 3)
-		free(s2);
+		ft_strdel(&s2);
 	return (str);
 }

@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:30:47 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/21 10:50:35 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/05 11:50:35 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	t_mesh_set_visibility(t_mesh *dest, int new_state)
 
 void	t_mesh_set_name(t_mesh *mesh, char *name)
 {
-	mesh->name = ft_strdup(name);
+	if (!(mesh->name = ft_strdup(name)))
+		error_exit(-70, "ft_strdup failed.");
 	if (ft_strcmp(mesh->name, "door") == 0
 		|| ft_strcmp(mesh->name, "elevator") == 0
 		|| ft_strcmp(mesh->name, "door_red") == 0

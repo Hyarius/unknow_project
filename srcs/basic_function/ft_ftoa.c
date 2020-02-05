@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 14:03:19 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/27 14:04:48 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/05 10:14:37 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	*ft_ftoa_p(float n, size_t precision)
 	j = -1;
 	nb = (long int)n;
 	first = ft_itoa(nb);
-	flt = (char *)malloc(100);
+	flt = (char *)ft_memalloc(100);
 	n -= (float)nb;
 	if (n < 0)
 	{
@@ -60,7 +60,7 @@ char	*ft_ftoa_p(float n, size_t precision)
 	while (first[++i])
 		flt[++j] = first[i];
 	create_string(n, flt, i, precision);
-	free(first);
+	ft_memdel((void**)&first);
 	return (flt);
 }
 
@@ -76,7 +76,7 @@ char	*ft_ftoa(float n)
 	j = -1;
 	nb = (long int)n;
 	first = ft_itoa(nb);
-	flt = (char *)malloc(100);
+	flt = (char *)ft_memalloc(100);
 	n -= (float)nb;
 	if (n < 0)
 	{
@@ -87,6 +87,6 @@ char	*ft_ftoa(float n)
 	while (first[++i])
 		flt[++j] = first[i];
 	create_string(n, flt, i, 2);
-	free(first);
+	ft_memdel((void**)&first);
 	return (flt);
 }

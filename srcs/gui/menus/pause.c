@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pause.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:46:46 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/31 14:43:05 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/02/04 17:33:53 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	close_map(t_engine *engine)
 {
-	free_t_item_list(engine->physic_engine->item_list);
-	free_t_mesh_list(engine->physic_engine->mesh_list);
-	free_t_camera_list(engine->visual_engine->camera_list);
+	free_t_item_list(&engine->physic_engine->item_list);
+	free_t_mesh_list(&engine->physic_engine->mesh_list);
+	free_t_camera_list(&engine->visual_engine->camera_list);
 	engine->physic_engine->mesh_list = initialize_t_mesh_list();
 	engine->physic_engine->item_list = initialize_t_item_list();
 	engine->visual_engine = initialize_t_visual_engine(engine->win);

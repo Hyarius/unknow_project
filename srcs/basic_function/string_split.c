@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   string_split.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 16:17:47 by adjouber          #+#    #+#             */
-/*   Updated: 2019/10/31 16:17:47 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/02/05 15:58:46 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,28 +82,29 @@ static int		ft_let(char const *str, char c)
 
 char			**ft_strsplit(char const *s, char c)
 {
-	char		**array;
-	int			nb_word;
+	char		**tab;
 	int			i;
+	int			len;
 
-	i = 0;
+	i = -1;
+	len = ft_count_word(s, c);
 	if (s == NULL)
 		return (NULL);
 	while (ft_is_sep(*s, c))
 		s++;
-	nb_word = ft_count_word(s, c);
-	if (!(array = (char**)malloc(sizeof(char*) * (nb_word + 1))))
+	if (!(tab = (char**)ft_memalloc(sizeof(char*) * (len + 1))))
 		return (NULL);
-	while (i < nb_word)
+	while (++i < len)
 	{
-		if (!(array[i] = (char*)malloc(sizeof(char*) * (ft_let(s, c) + 1))))
+		if (!(tab[i] = (char*)ft_memalloc(sizeof(char*) * (ft_let(s, c) + 1))))
+			ft_freetab(&tab);
+		if (!tab)
 			return (NULL);
-		ft_strncpy_end(array[i], s, ft_let(s, c));
+		ft_strncpy_end(tab[i], s, ft_let(s, c));
 		s += ft_let(s, c);
 		while (ft_is_sep(*s, c))
 			++s;
-		i++;
 	}
-	array[i] = NULL;
-	return (array);
+	tab[i] = NULL;
+	return (tab);
 }

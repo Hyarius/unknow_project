@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 14:56:08 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/31 13:51:00 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/04 17:27:31 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,8 @@ void			can_move2(t_engine *engine, t_mesh *tar)
 	{
 		if (ft_strcmp(tar->name, t_item_list_get(item_list, j)->name) == 0)
 		{
-			printf("collectible\n");
 			if (item_list->item[j].pf(engine->user_engine->player) == BOOL_TRUE)
 			{
-				printf("%s\n", tar->name);
 				Mix_PlayChannel(-1, engine->sound_engine->sounds[23], 0);
 				t_mesh_set_visibility(tar, BOOL_FALSE);
 				tar->no_hitbox = 1;

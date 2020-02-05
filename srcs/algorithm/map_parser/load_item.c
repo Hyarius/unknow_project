@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 13:29:58 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/31 13:54:30 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/04 09:47:14 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ t_item_list		*load_items(t_mesh_list *meshs)
 		if (t_mesh_list_at(meshs, i).collectible == 1)
 		{
 			item = new_item(t_mesh_list_at(meshs, i));
-			printf("%s\n", item.name);
 			t_item_list_push_back(result, item);
 		}
 		i++;

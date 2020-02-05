@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:45:15 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/31 15:05:55 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/02/05 13:23:19 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ typedef struct		s_engine
 
 t_engine			new_engine(t_window *p_window);
 t_engine			*initialize_t_engine(t_window *p_window);
-void				delete_t_engine(t_engine dest);
-void				free_t_engine(t_engine *dest);
+void				delete_t_engine(t_engine *dest);
+void				free_t_engine(t_engine **dest);
 void				t_engine_add_mesh(t_engine *engine, t_mesh p_mesh);
 void				t_engine_add_item(t_engine *engine, t_item p_item);
 t_mesh				*t_engine_get_mesh(t_engine *p_engine, int index);
@@ -76,7 +76,7 @@ t_mesh_editing		create_mesh_editing(int index, char *path);
 t_mesh_editing		select_mesh(t_keyboard *p_keyboard, t_vec4 pos,
 													t_visual_engine *engine);
 void				cast_mesh(t_engine *engine, t_mesh *mesh_editing);
-void				load_map(t_camera *main_camera, t_engine *engine,
+int					load_map(t_camera *main_camera, t_engine *engine,
 																char *path);
 void				t_mesh_move_door(t_mesh	*mesh, t_engine *engine);
 void				player_take_dmg(t_engine *engine, int dmg);

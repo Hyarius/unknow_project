@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   user_engine.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 15:09:52 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/29 11:48:45 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/02/05 10:14:37 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_user_engine	*initialize_t_user_engine(void)
 {
 	t_user_engine	*result;
 
-	if (!(result = (t_user_engine *)malloc(sizeof(t_user_engine))))
+	if (!(result = (t_user_engine *)ft_memalloc(sizeof(t_user_engine))))
 		return (NULL);
 	*result = new_user_engine();
 	return (result);
@@ -34,12 +34,13 @@ t_user_engine	*initialize_t_user_engine(void)
 
 void			delete_t_user_engine(t_user_engine dest)
 {
-	free(dest.mouse);
-	free(dest.keyboard);
+	ft_memdel((void**)&dest.player);
+	ft_memdel((void**)&dest.mouse);
+	ft_memdel((void**)&dest.keyboard);
 }
 
-void			free_t_user_engine(t_user_engine *dest)
+void			free_t_user_engine(t_user_engine **dest)
 {
-	delete_t_user_engine(*dest);
-	free(dest);
+	delete_t_user_engine(**dest);
+	ft_memdel((void**)dest);
 }

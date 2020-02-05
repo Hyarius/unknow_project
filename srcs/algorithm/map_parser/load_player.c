@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 13:40:33 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/21 16:41:51 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/05 14:27:01 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,7 @@ void			read_player(char **line_split, t_player *player)
 	if (ft_strcmp(line_split[0], "player:") == 0)
 	{
 		player->hitbox = init_mesh(line_split);
-		t_mesh_set_color(&player->hitbox,
-		new_color(0.5, 0.6, 0.0, 1.0));
+		t_mesh_set_color(&player->hitbox, new_color(0.5, 0.6, 0.0, 1.0));
 		init_player(player, line_split);
 	}
 }

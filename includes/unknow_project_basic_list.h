@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:24:19 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 15:40:05 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/04 17:24:24 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_void_list				*initialize_t_void_list(void);
 void					t_void_list_add_back(t_void_list *dest, int nb, ...);
 void					t_void_list_push_back(t_void_list *dest, void *to_add);
 void					delete_t_void_list(t_void_list dest);
-void					free_t_void_list(t_void_list *dest);
+void					free_t_void_list(t_void_list **dest);
 void					clean_t_void_list(t_void_list *dest);
 void					*t_void_list_at(t_void_list *dest, int index);
 void					**t_void_list_get(t_void_list *dest, int index);
@@ -48,7 +48,7 @@ void					t_triangle_list_push_back(t_triangle_list *dest,
 void					t_triangle_list_add_back(t_triangle_list *dest,
 															t_triangle *to_add);
 void					delete_t_triangle_list(t_triangle_list dest);
-void					free_t_triangle_list(t_triangle_list *dest);
+void					free_t_triangle_list(t_triangle_list **dest);
 void					clean_t_triangle_list(t_triangle_list *dest);
 t_triangle				t_triangle_list_at(t_triangle_list *dest, int index);
 t_triangle				*t_triangle_list_get(t_triangle_list *dest, int index);

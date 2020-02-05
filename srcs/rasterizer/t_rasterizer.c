@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:50:18 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/05 10:14:37 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_rasterizer	*initialize_t_rasterizer(t_vec4 a, t_vec4 b, t_vec4 c)
 {
 	t_rasterizer	*result;
 
-	if (!(result = (t_rasterizer *)malloc(sizeof(t_rasterizer))))
+	if (!(result = (t_rasterizer *)ft_memalloc(sizeof(t_rasterizer))))
 		error_exit(-13, "Can't create a t_rasterizer");
 	*result = new_rasterizer(a, b, c);
 	return (result);

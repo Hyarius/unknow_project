@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 13:40:38 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/31 10:44:01 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/05 17:34:24 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	set_map_in_engine(t_engine *engine, t_mesh_list *meshs,
 	}
 }
 
-void	load_map(t_camera *main_camera, t_engine *engine, char *path)
+int		load_map(t_camera *main_camera, t_engine *engine, char *path)
 {
 	t_item_list *item_list;
 	t_mesh_list	*meshs;
@@ -62,12 +62,15 @@ void	load_map(t_camera *main_camera, t_engine *engine, char *path)
 	engine->user_engine->player = initialize_t_player(main_camera);
 	engine->user_engine->player->difficulty = engine->difficulty;
 	if ((fd = open(path, O_RDONLY)) < 0)
-		error_exit(-7000, "imposible fd");
-	meshs = read_map_file(fd, engine->user_engine->player);
+		error_exit(-7000, "impossible fd");
+	if (!(meshs = read_map_file(fd, engine->user_engine->player)))
+		return (0);
 	item_list = load_items(meshs);
 	close(fd);
 	t_engine_add_mesh(engine, engine->user_engine->player->hitbox);
 	set_map_in_engine(engine, meshs, item_list);
-	free_t_item_list(item_list);
-	free_t_mesh_list(meshs);
+	free_t_item_list(&item_list);
+	ft_memdel((void**)&meshs->mesh);
+	ft_memdel((void**)&meshs);
+	return (1);
 }

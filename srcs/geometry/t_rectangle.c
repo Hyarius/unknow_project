@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 16:16:08 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/05 10:14:37 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ t_rectangle	*initialize_t_rectangle(t_vec2 p_pos, t_vec2 p_size)
 {
 	t_rectangle	*result;
 
-	if (!(result = (t_rectangle *)malloc(sizeof(t_rectangle))))
-		error_exit(-31, "Can't malloc a t_rectangle");
+	if (!(result = (t_rectangle *)ft_memalloc(sizeof(t_rectangle))))
+		error_exit(-31, "Can't ft_memalloc a t_rectangle");
 	*result = new_rectangle(p_pos, p_size);
 	return (result);
 }

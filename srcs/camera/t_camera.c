@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_camera.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:18:59 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/29 13:01:12 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/02/05 10:14:37 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ t_camera	*initialize_t_camera(t_window *window, t_vec4 p_pos,
 {
 	t_camera	*result;
 
-	if (!(result = (t_camera *)malloc(sizeof(t_camera))))
-		error_exit(-31, "Can't malloc a t_camera");
+	if (!(result = (t_camera *)ft_memalloc(sizeof(t_camera))))
+		error_exit(-31, "Can't ft_memalloc a t_camera");
 	*result = new_camera(window, p_pos, p_fov, p_dist);
 	return (result);
 }

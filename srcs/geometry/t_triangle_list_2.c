@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 11:23:47 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/17 11:23:54 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/04 17:14:05 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 void			delete_t_triangle_list(t_triangle_list dest)
 {
-	free(dest.triangle);
+	ft_memdel((void**)&dest.triangle);
 }
 
-void			free_t_triangle_list(t_triangle_list *dest)
+void			free_t_triangle_list(t_triangle_list **dest)
 {
-	delete_t_triangle_list(*dest);
-	free(dest);
+	delete_t_triangle_list(**dest);
+	ft_memdel((void**)dest);
 }
 
 void			clean_t_triangle_list(t_triangle_list *dest)

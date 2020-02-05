@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_vector4.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 11:24:08 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/20 13:56:30 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/02/05 10:14:37 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_vec4		*initialize_t_vec4(float p_x, float p_y, float p_z)
 {
 	t_vec4 *result;
 
-	if (!(result = (t_vec4 *)malloc(sizeof(t_vec4))))
+	if (!(result = (t_vec4 *)ft_memalloc(sizeof(t_vec4))))
 		return (NULL);
 	*result = new_vec4(p_x, p_y, p_z);
 	return (result);

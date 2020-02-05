@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 15:01:07 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/31 10:42:18 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/05 14:27:39 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,24 +32,24 @@ t_engine	*initialize_t_engine(t_window *p_window)
 {
 	t_engine	*result;
 
-	if (!(result = (t_engine *)malloc(sizeof(t_engine))))
+	if (!(result = (t_engine *)ft_memalloc(sizeof(t_engine))))
 		return (NULL);
 	*result = new_engine(p_window);
 	return (result);
 }
 
-void		delete_t_engine(t_engine dest)
+void		delete_t_engine(t_engine *dest)
 {
-	free_t_physic_engine(dest.physic_engine);
-	free_t_user_engine(dest.user_engine);
-	free_t_visual_engine(dest.visual_engine);
-	free_t_sound_engine(dest.sound_engine);
+	free_t_visual_engine(&(dest)->visual_engine);
+	free_t_physic_engine(&(dest)->physic_engine);
+	free_t_user_engine(&(dest)->user_engine);
+	free_t_sound_engine(&(dest)->sound_engine);
 }
 
-void		free_t_engine(t_engine *dest)
+void		free_t_engine(t_engine **dest)
 {
 	delete_t_engine(*dest);
-	free(dest);
+	ft_memdel((void**)dest);
 }
 
 void		t_engine_apply_physic(t_engine *engine)

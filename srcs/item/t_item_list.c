@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_item_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 16:32:28 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/20 13:04:04 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/02/05 10:14:37 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ t_item_list		new_item_list(void)
 {
 	t_item_list	list;
 
-	if (!(list.item = (t_item *)malloc(sizeof(t_item) * PUSH_SIZE)))
-		error_exit(-18, "Can't malloc a t_item array");
+	if (!(list.item = (t_item *)ft_memalloc(sizeof(t_item) * PUSH_SIZE)))
+		error_exit(-18, "Can't ft_memalloc a t_item array");
 	list.size = 0;
 	list.max_size = PUSH_SIZE;
 	return (list);
@@ -27,7 +27,7 @@ t_item_list		*initialize_t_item_list(void)
 {
 	t_item_list *list;
 
-	if (!(list = (t_item_list *)malloc(sizeof(t_item_list))))
+	if (!(list = (t_item_list *)ft_memalloc(sizeof(t_item_list))))
 		error_exit(-19, "Can't create a t_item_list array");
 	*list = new_item_list();
 	return (list);
@@ -41,7 +41,7 @@ void			t_item_list_push_back(t_item_list *dest, t_item to_add)
 	if ((dest->size + 1) >= dest->max_size)
 	{
 		tmp = dest->item;
-		if (!(dest->item = (t_item *)malloc(sizeof(t_item)
+		if (!(dest->item = (t_item *)ft_memalloc(sizeof(t_item)
 		* (dest->size + 1 + PUSH_SIZE))))
 			error_exit(-20, "Can't realloc a t_item array");
 		i = 0;
@@ -50,7 +50,7 @@ void			t_item_list_push_back(t_item_list *dest, t_item to_add)
 			dest->item[i] = tmp[i];
 			i++;
 		}
-		free(tmp);
+		ft_memdel((void**)&tmp);
 		dest->max_size += PUSH_SIZE;
 	}
 	dest->item[dest->size] = to_add;
