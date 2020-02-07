@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 11:05:41 by spuisais          #+#    #+#             */
-/*   Updated: 2020/02/05 16:50:09 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/06 10:15:53 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,6 @@ t_mesh		read_obj_file(char *path, t_vec4 pos, t_vec4 size, char *txtr)
 	close(fd);
 	t_mesh_compute_normals(&result);
 	t_mesh_compute_bubble_box(&result);
-	ft_strdel(&txtr);
 	result.size = new_vec4(size.x, size.y, size.z);
 	return (result);
 }

@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:57:08 by spuisais          #+#    #+#             */
-/*   Updated: 2020/02/04 17:24:50 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/06 11:28:00 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct	s_mesh_list
 t_mesh_list		new_mesh_list();
 t_mesh_list		*initialize_t_mesh_list();
 void			t_mesh_list_push_back(t_mesh_list *dest, t_mesh to_add);
-void			delete_t_mesh_list(t_mesh_list dest);
+void			delete_t_mesh_list(t_mesh_list *dest);
 void			free_t_mesh_list(t_mesh_list **dest);
 t_mesh			t_mesh_list_at(t_mesh_list *dest, int index);
 t_mesh			*t_mesh_list_get(t_mesh_list *dest, int index);

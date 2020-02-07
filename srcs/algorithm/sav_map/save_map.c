@@ -6,38 +6,38 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 13:46:27 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/04 17:36:31 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/06 14:10:31 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-void	save_color(t_mesh cu, int fd, char **test)
+void	save_color(t_mesh cu, int fd, char **str)
 {
-	*test = ft_strjoinf(*test, ft_ftoa(cu.rotation.x), 3);
-	*test = ft_strjoinf(*test, " ", 1);
-	*test = ft_strjoinf(*test, ft_ftoa(cu.rotation.y), 3);
-	*test = ft_strjoinf(*test, " ", 1);
-	*test = ft_strjoinf(*test, ft_ftoa(cu.rotation.z), 3);
-	*test = ft_strjoinf(*test, " ", 1);
-	*test = ft_strjoinf(*test, ft_ftoa(t_face_list_get(cu.faces, 0)->color.r), 3);
-	*test = ft_strjoinf(*test, " ", 1);
-	*test = ft_strjoinf(*test, ft_ftoa(t_face_list_get(cu.faces, 0)->color.g), 3);
-	*test = ft_strjoinf(*test, " ", 1);
-	*test = ft_strjoinf(*test, ft_ftoa(t_face_list_get(cu.faces, 0)->color.b), 3);
-	*test = ft_strjoinf(*test, " ", 1);
-	*test = ft_strjoinf(*test, ft_ftoa(t_face_list_get(cu.faces, 0)->color.a), 3);
-	*test = ft_strjoinf(*test, " ", 1);
-	*test = ft_strjoinf(*test, ft_itoa(cu.hp), 3);
-	*test = ft_strjoinf(*test, " ", 1);
+	*str = ft_strjoinf(*str, ft_ftoa(cu.rotation.x), 3);
+	*str = ft_strjoinf(*str, " ", 1);
+	*str = ft_strjoinf(*str, ft_ftoa(cu.rotation.y), 3);
+	*str = ft_strjoinf(*str, " ", 1);
+	*str = ft_strjoinf(*str, ft_ftoa(cu.rotation.z), 3);
+	*str = ft_strjoinf(*str, " ", 1);
+	*str = ft_strjoinf(*str, ft_ftoa(t_face_list_get(cu.faces, 0)->color.r), 3);
+	*str = ft_strjoinf(*str, " ", 1);
+	*str = ft_strjoinf(*str, ft_ftoa(t_face_list_get(cu.faces, 0)->color.g), 3);
+	*str = ft_strjoinf(*str, " ", 1);
+	*str = ft_strjoinf(*str, ft_ftoa(t_face_list_get(cu.faces, 0)->color.b), 3);
+	*str = ft_strjoinf(*str, " ", 1);
+	*str = ft_strjoinf(*str, ft_ftoa(t_face_list_get(cu.faces, 0)->color.a), 3);
+	*str = ft_strjoinf(*str, " ", 1);
+	*str = ft_strjoinf(*str, ft_itoa(cu.hp), 3);
+	*str = ft_strjoinf(*str, " ", 1);
 	if (cu.no_hitbox == 1)
-		*test = ft_strjoinf(*test, "#\n", 1);
+		*str = ft_strjoinf(*str, "#\n", 1);
 	else if (cu.is_visible == 0)
-		*test = ft_strjoinf(*test, "*\n", 1);
+		*str = ft_strjoinf(*str, "*\n", 1);
 	else
-		*test = ft_strjoinf(*test, "\n", 1);
-	write(fd, *test, ft_strlen(*test));
-	ft_memdel((void**)test);
+		*str = ft_strjoinf(*str, "\n", 1);
+	write(fd, *str, ft_strlen(*str));
+	ft_memdel((void**)str);
 }
 
 void	save_pos(t_mesh current, int fd, char *test)

@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/05 10:13:04 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/05 14:52:57 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/06 11:02:33 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,14 @@ void	*ft_memset(void *b, int c, size_t len)
 	}
 	return (b);
 }
+/*
+void	*ft_memalloc(size_t size)
+{
+	size_t	*dest;
 
-// void	*ft_memalloc(size_t size)
-// {
-// 	size_t	*dest;
-
-// 	if (!(dest = (size_t*)malloc(sizeof(size_t) * size)))
-// 		return (NULL);
-// 	ft_memset(dest, 0, size);
-// 	return (dest);
-// }
+	if (!(dest = (size_t*)malloc(sizeof(size_t) * size)))
+		return (NULL);
+	ft_memset(dest, 0, size);
+	return (dest);
+}
+*/

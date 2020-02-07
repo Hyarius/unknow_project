@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 15:06:45 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/05 10:14:37 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/06 14:08:34 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void			delete_t_visual_engine(t_visual_engine dest)
 	i = 0;
 	if (dest.camera_list->size > 0)
 		free_t_camera_list(&dest.camera_list);
-	while(i < 25)
+	while (i < 25)
 	{
 		j = 0;
 		while (j < dest.len[i])

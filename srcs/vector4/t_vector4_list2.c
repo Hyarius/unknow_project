@@ -6,16 +6,16 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 11:01:09 by jubeal            #+#    #+#             */
-/*   Updated: 2020/02/04 14:21:37 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/06 11:14:24 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-void			free_t_vec4_list(t_vec4_list *dest)
+void			free_t_vec4_list(t_vec4_list **dest)
 {
 	delete_t_vec4_list(*dest);
-	// ft_memdel((void**)dest);
+	ft_memdel((void**)dest);
 }
 
 void			clean_t_vec4_list(t_vec4_list *dest)

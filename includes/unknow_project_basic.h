@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:41:06 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/05 14:50:36 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/06 11:02:27 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void		ft_lstadd(t_list_fd **alst, t_list_fd *new);
 void		ft_lstdel(t_list_fd **alst, void (*del)(void *, size_t));
 void		ft_del_cont(void *content, size_t size);
 void		ft_memdel(void **ap);
-//void		*ft_memalloc(size_t size);
+/*void		*ft_memalloc(size_t size);*/
 void		*ft_memcpy(void *dst, const void *src, size_t n);
 void		ft_lstdelone(t_list_fd **alst, void (*del)(void*, size_t));
 float		round_float(float x, unsigned int round);

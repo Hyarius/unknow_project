@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 15:58:51 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/05 10:14:37 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/06 16:32:14 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ t_gui	new_gui(void)
 	t_gui	result;
 	int		idx;
 
-	if (!(result.letter = (t_letter **)ft_memalloc(sizeof(t_letter*) * 96)))
+	if (!(result.letter = (t_letter **)ft_memalloc(sizeof(t_letter*) * 94)))
 		error_exit(-29, "Can't ft_memalloc a t_surface");
 	if (!(result.menu = (t_texture **)ft_memalloc(sizeof(t_texture*) * 20)))
 		error_exit(-29, "Can't ft_memalloc a t_surface");
 	idx = -1;
-	while (++idx <= 94)
+	while (++idx < 94)
 	{
 		if (!(result.letter[idx] = (t_letter *)ft_memalloc(sizeof(t_letter))))
 			error_exit(-29, "Can't ft_memalloc a t_surface");
@@ -51,59 +51,86 @@ t_gui	*initialize_t_gui(void)
 
 void	delete_t_surface(t_surface dest)
 {
-	ft_memdel((void**)dest.pixels);
+	ft_memdel((void**)&dest.pixels);
 }
 
-void	free_t_surface(t_surface *dest)
+void	free_t_surface(t_surface **dest)
 {
-	delete_t_surface(*dest);
+	delete_t_surface(**dest);
 	ft_memdel((void**)dest);
 }
 
-void	delete_t_texture(t_texture dest)
+void	delete_t_texture(t_texture *dest)
 {
-	if (ft_strlen(dest.path) > 0)
-		ft_strdel(&dest.path);
-	if (dest.surface != NULL)
+	printf("here\n");
+	if (dest->path != NULL)
+	 	ft_strdel(&(dest->path));
+	if (dest->surface != NULL)
+		free_t_surface(&(dest->surface));
+}
+
+void	free_t_texture(t_texture **dest)
+{
+	static int	i = 0;
+
+	if (*dest != NULL && dest != NULL)
 	{
-		free_t_surface(dest.surface);
+		printf("1.1.1\n");
+		delete_t_texture(*dest);
+		/*if ((*dest)->surface != NULL)
+			free_t_surface(&((*dest)->surface));*/
+		printf("1.1.2\n");
+		if (i == 0)
+		{
+			ft_memdel((void**)dest);
+			i++;
+		}
+		printf("1.1.3\n");
 	}
 }
 
-void	free_t_texture(t_texture **dest) // TOUT CASSÉ
+void	delete_t_letter(t_letter *dest)
 {
-	if (*dest != NULL)
-	{
-		delete_t_texture(**dest);
-		ft_memdel((void**)dest);
-	}
+	if (dest->let != NULL)
+		free_t_texture(&dest->let);
+}
+
+void	free_t_letter(t_letter **dest)
+{
+	printf("1.1\n");
+	delete_t_letter(*dest);
+	printf("1.2\n");
+	ft_memdel((void**)dest);
 }
 
 void	delete_t_gui(t_gui dest)
 {
 	int	i;
 
-	i = 0;
+	i = -1;
+	printf("1\n");
+	while (++i < 94)
+		free_t_letter(&dest.letter[i]);
+	printf("2\n");
+	i = -1;
+	while (++i < 20)
+		free_t_texture(&dest.menu[i]);
+	printf("3\n");
+	i = -1;
+	while (++i < 16)
+		free_t_texture(&dest.text_weap[i]);
+	printf("4\n");
+	i = -1;
+	while (++i < 6)
+		free_t_texture(&dest.text_am[i]);
+	printf("5\n");
 	free_t_texture(&dest.skybox);
-}
-
-void	delete_t_letter(t_letter dest)
-{
-	free_t_texture(&dest.let);
-}
-
-void	free_t_letter(t_letter **dest)
-{
-	delete_t_letter(**dest);
-	ft_memdel((void**)dest);
 }
 
 void	free_t_gui(t_gui *dest)
 {
-	/*free_t_letter(&(*gui)->letter);
-	free_t_texture((*gui)->menu);*/
 	delete_t_gui(*dest);
-	/*ft_memdel((void**)dest);*/
+	ft_memdel((void**)dest);
 }
 
 void	set_t_gui_texte(t_gui *gui)

@@ -6,23 +6,25 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 14:24:27 by jubeal            #+#    #+#             */
-/*   Updated: 2020/02/05 17:55:34 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/06 15:33:17 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-void			exit_prog(t_engine **engine, t_gui **gui, t_playing_funct **play,
-							t_camera **camera)
+void			exit_prog(t_engine **engine, t_gui **gui,
+									t_playing_funct **play, t_camera **camera)
 {
 	(void)play;
 	(void)camera;
+	(void)gui;
+	(void)engine;
+	free_t_engine(engine);
+	// free_t_gui(*gui);
 	Mix_CloseAudio();
 	Mix_Quit();
 	TTF_Quit();
 	SDL_Quit();
-	free_t_engine(engine);
-	// free_t_gui(*gui);
 	tar_ressources();
 }
 
@@ -109,7 +111,6 @@ int				main(int argc, char **argv)
 		t_engine_prepare_camera(engine);
 		if (engine->playing != 0)
 			playing_functions[engine->playing](camera, gui, engine, mesh);
-		//leaks fait entre les deux
 		t_engine_handle_event(camera, gui, engine);
 		render_screen(engine);
 	}

@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 16:20:56 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/04 15:56:07 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/06 14:12:21 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ static void	compute_program(GLuint p_program_id, GLuint p_vertex_shader_id,
 GLuint		load_shaders(const char *p_vertex_file_path,
 							const char *p_fragment_file_path)
 {
-
 	char	*vertex_content;
 	char	*fragment_content;
 	GLuint	vertex_shader_id;

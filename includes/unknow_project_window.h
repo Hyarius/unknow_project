@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:28:31 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/27 14:29:19 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/06 09:51:00 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,6 @@ void				resize_t_view_port(t_view_port *view, t_vec2_int new_size);
 void				t_view_port_change_window(t_view_port *view,
 											t_window *p_window);
 void				t_view_port_clear_buffers(t_view_port *view);
+void				free_t_view_port(t_view_port **dest);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:49:45 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/05 15:31:05 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/06 14:46:11 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,21 +54,20 @@ void		t_mesh_list_push_back(t_mesh_list *dest, t_mesh to_add)
 	(dest->size)++;
 }
 
-void		delete_t_mesh_list(t_mesh_list dest)
+void		delete_t_mesh_list(t_mesh_list *dest)
 {
 	int		i;
 
 	i = 0;
-	while (i < dest.size)
+	while (i < dest->size)
 	{
-		delete_t_mesh(t_mesh_list_get(&dest, i));
+		delete_t_mesh(t_mesh_list_get(dest, i));
 		i++;
 	}
-	ft_memdel((void**)&dest.mesh);
 }
 
 void		free_t_mesh_list(t_mesh_list **dest)
 {
-	delete_t_mesh_list(**dest);
-	ft_memdel((void**)dest);
+	delete_t_mesh_list(*dest);
+	ft_memdel((void **)dest);
 }

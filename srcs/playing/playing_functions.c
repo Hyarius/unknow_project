@@ -6,24 +6,26 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 12:02:06 by jubeal            #+#    #+#             */
-/*   Updated: 2020/02/05 18:01:44 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/06 09:43:50 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-void	display_title_screen(t_camera *camera, t_gui *gui, t_engine *engine, t_mesh mesh)
+void	display_title_screen(t_camera *camera, t_gui *gui, t_engine *engine,
+																	t_mesh mesh)
 {
 	t_rectangle		rec;
 
+	mesh.pos = camera->pos;
 	rec = new_rectangle(create_vec2(-1, 1), create_vec2(2, -2));
 	draw_rectangle_texture_cpu(camera->view_port, rec,
 					gui->menu[engine->menu_nbr]);
 }
 
-void	game_playing(t_camera *camera, t_gui *gui, t_engine *engine, t_mesh mesh)
+void	game_playing(t_camera *camera, t_gui *gui, t_engine *engine,
+																	t_mesh mesh)
 {
-	//pourquoi on cree la skybox en permanence ici?
 	mesh.pos = camera->pos;
 	draw_t_mesh(camera, &mesh);
 	t_engine_render_camera(engine);
@@ -48,6 +50,7 @@ void	game_paused(t_camera *camera, t_gui *gui, t_engine *engine, t_mesh mesh)
 {
 	t_rectangle		rec;
 
+	mesh.pos = camera->pos;
 	rec = new_rectangle(create_vec2(-1, 1), create_vec2(2, -2));
 	t_engine_draw_mesh(engine);
 	t_engine_render_camera(engine);
@@ -56,7 +59,8 @@ void	game_paused(t_camera *camera, t_gui *gui, t_engine *engine, t_mesh mesh)
 									gui->menu[engine->menu_nbr]);
 }
 
-void	level_editing(t_camera *camera, t_gui *gui, t_engine *engine, t_mesh mesh)
+void	level_editing(t_camera *camera, t_gui *gui, t_engine *engine,
+																	t_mesh mesh)
 {
 	t_mesh_editing	mesh_editing;
 
@@ -74,10 +78,12 @@ void	level_editing(t_camera *camera, t_gui *gui, t_engine *engine, t_mesh mesh)
 	map_editor(camera, gui, engine, mesh_editing);
 }
 
-void	level_editing_paused(t_camera *camera, t_gui *gui, t_engine *engine, t_mesh mesh)
+void	level_editing_paused(t_camera *camera, t_gui *gui, t_engine *engine,
+																	t_mesh mesh)
 {
 	t_rectangle		rec;
 
+	mesh.pos = camera->pos;
 	rec = new_rectangle(create_vec2(-1, 1), create_vec2(2, -2));
 	t_engine_draw_mesh(engine);
 	t_engine_render_camera(engine);

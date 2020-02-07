@@ -6,17 +6,17 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 11:01:06 by jubeal            #+#    #+#             */
-/*   Updated: 2020/02/05 10:14:37 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/06 11:12:22 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-void			delete_t_vec4_list(t_vec4_list dest)
+void			delete_t_vec4_list(t_vec4_list *dest)
 {
-	// ft_memdel((void**)dest.vector);
-	dest.size = 0;
-	dest.max_size = 0;
+	ft_memdel((void**)&dest->vector);
+	dest->size = 0;
+	dest->max_size = 0;
 }
 
 void			t_vec4_list_resize(t_vec4_list *dest, int new_size)

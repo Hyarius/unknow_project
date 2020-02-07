@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 10:40:10 by jubeal            #+#    #+#             */
-/*   Updated: 2020/02/05 11:30:06 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/06 10:20:47 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	tar_ressources(void)
 							rm -rf ressources")))
 		error_exit(-70, "ft_strdup failed");
 	system(command);
-	ft_memdel((void**)&command);
+	ft_strdel(&command);
 }
 
 void	untar_ressources(void)
@@ -30,5 +30,5 @@ void	untar_ressources(void)
 	if (!(command = ft_strdup("tar -jxf ressources.tar.bz2")))
 		error_exit(-70, "ft_strdup failed");
 	system(command);
-	ft_memdel((void**)&command);
+	ft_strdel(&command);
 }

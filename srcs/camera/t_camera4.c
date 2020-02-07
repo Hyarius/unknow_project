@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 14:17:06 by jubeal            #+#    #+#             */
-/*   Updated: 2020/02/05 16:20:12 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/06 11:25:19 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void		delete_t_cam(t_camera dest)
 	delete_t_triangle_list(dest.triangle_color_list);
 	delete_t_triangle_list(dest.triangle_texture_list);
 	delete_t_color_list(dest.color_list);
-	delete_t_uv_list(dest.uv_list);
 	delete_t_color_list(dest.darkness_list);
+	delete_t_uv_list(dest.uv_list);
 }
 
 void		free_t_cam(t_camera **dest)

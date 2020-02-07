@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 15:27:46 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/05 10:14:37 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/06 14:09:12 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ t_triangle_list	new_triangle_list(void)
 {
 	t_triangle_list	list;
 
-	if (!(list.triangle = (t_triangle *)ft_memalloc(sizeof(t_triangle) * PUSH_SIZE)))
+	if (!(list.triangle = (t_triangle *)ft_memalloc(sizeof(t_triangle)
+																* PUSH_SIZE)))
 		error_exit(-32, "Can't ft_memalloc a t_triangle array");
 	list.size = 0;
 	list.max_size = PUSH_SIZE;

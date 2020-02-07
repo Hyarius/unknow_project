@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:04:38 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/05 16:29:57 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/06 15:00:15 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,16 @@ t_mesh	new_mesh(t_vec4 pos)
 void	delete_t_mesh(t_mesh *mesh)
 {
 	ft_strdel(&mesh->name);
-	free_t_vec4_list((mesh)->vertices_in_world);
-	free_t_vec4_list((mesh)->next_vertices_in_world);
-	free_t_vec4_list((mesh)->vertices);
-	free_t_vec4_list((mesh)->normales);
-	if ((mesh)->texture != NULL)
-		free_t_texture(&(mesh)->texture);
-	free_t_vec4_list((mesh)->uvs);
+	if (mesh->vertices_in_world != NULL)
+		free_t_vec4_list(&mesh->vertices_in_world);
+	if (mesh->next_vertices_in_world != NULL)
+		free_t_vec4_list(&mesh->next_vertices_in_world);
+	if (mesh->vertices != NULL)
+		free_t_vec4_list(&mesh->vertices);
+	if (mesh->normales != NULL)
+		free_t_vec4_list(&mesh->normales);
+	if (mesh->uvs != NULL)
+		free_t_vec4_list(&(mesh)->uvs);
 	ft_memdel((void**)&mesh->faces->face);
 	ft_memdel((void**)&mesh->faces);
 }
@@ -80,5 +83,6 @@ void	destroy_mesh(t_mesh *mesh)
 {
 	mesh->no_hitbox = 1;
 	t_mesh_set_visibility(mesh, BOOL_FALSE);
+	ft_strdel(&mesh->name);
 	t_mesh_set_name(mesh, "mesh_destroy");
 }

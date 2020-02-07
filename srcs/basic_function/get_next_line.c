@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 14:21:56 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/05 16:04:45 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/06 14:15:48 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,7 @@ int					get_next_line(const int fd, char **line)
 			tmp = ft_strdup(((char*)current->rest) + endline);
 		else
 			tmp = ft_strdup(((char*)current->rest) + endline + 1);
-		if (!tmp)
-			error_exit(-70, "ft_strdup failed");
 		ft_strdel((char**)&current->rest);
-		// ft_strdel(&buff);
 		ft_strdel(&tmp);
 	}
 	return (1);

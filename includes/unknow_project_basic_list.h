@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:24:19 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/04 17:24:24 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/06 11:14:22 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ t_vec4_list				new_vec4_list(void);
 t_vec4_list				*initialize_t_vec4_list(void);
 void					t_vec4_list_push_back(t_vec4_list *dest, t_vec4 to_add);
 void					t_vec4_list_add_back(t_vec4_list *dest, t_vec4 *to_add);
-void					delete_t_vec4_list(t_vec4_list dest);
-void					free_t_vec4_list(t_vec4_list *dest);
+void					delete_t_vec4_list(t_vec4_list *dest);
+void					free_t_vec4_list(t_vec4_list **dest);
 void					clean_t_vec4_list(t_vec4_list *dest);
 t_vec4					t_vec4_list_at(t_vec4_list *dest, int index);
 t_vec4					*t_vec4_list_get(t_vec4_list *dest, int index);
@@ -105,6 +105,7 @@ t_uv_list				*initialize_t_uv_list(void);
 void					t_uv_list_push_back(t_uv_list *dest, t_uv to_add);
 t_uv					*t_uv_list_get(t_uv_list *dest, int index);
 void					clean_t_uv_list(t_uv_list *dest);
+void					delete_t_uv_list(t_uv_list dest);
 
 typedef struct			s_face_list
 {
