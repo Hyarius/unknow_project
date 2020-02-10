@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pause.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:46:46 by adjouber          #+#    #+#             */
-/*   Updated: 2020/02/10 15:26:20 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/10 18:44:36 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,13 @@
 
 void	close_map(t_engine *engine)
 {
-	printf("here 1\n");
 	free_t_physic_engine(&engine->physic_engine);
-	printf("here 2\n");
 	free_t_visual_engine(&engine->visual_engine);
-	printf("here 3\n");
 	ft_memdel((void**)&engine->user_engine->player);
-	printf("here 4\n");
 	engine->physic_engine = initialize_t_physic_engine();
-	printf("here  5\n");
 	engine->visual_engine = initialize_t_visual_engine(engine->win);
-	printf("here  6\n");
+	create_minimap(engine);
 	engine->playing = 1;
-	printf("here  7\n");
 	engine->menu_nbr = 0;
 }
 
