@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_mesh.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:04:38 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/06 15:00:15 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/07 15:12:45 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void	delete_t_mesh(t_mesh *mesh)
 		free_t_vec4_list(&mesh->normales);
 	if (mesh->uvs != NULL)
 		free_t_vec4_list(&(mesh)->uvs);
+	if (mesh->texture != NULL)
+		free_t_texture(&mesh->texture);
 	ft_memdel((void**)&mesh->faces->face);
 	ft_memdel((void**)&mesh->faces);
 }
@@ -61,7 +63,6 @@ void	delete_t_mesh(t_mesh *mesh)
 void	free_t_mesh(t_mesh **mesh)
 {
 	delete_t_mesh(*mesh);
-	ft_memdel((void**)mesh);
 }
 
 void	t_mesh_resize(t_mesh *mesh, t_vec4 modif)

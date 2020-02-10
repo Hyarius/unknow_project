@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_gui.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 15:58:51 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/06 16:32:14 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/07 14:58:22 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,37 +56,28 @@ void	delete_t_surface(t_surface dest)
 
 void	free_t_surface(t_surface **dest)
 {
+	printf("0.0\n");	
 	delete_t_surface(**dest);
+	printf("0.1\n");	
 	ft_memdel((void**)dest);
+	printf("0.2\n");	
 }
 
 void	delete_t_texture(t_texture *dest)
 {
-	printf("here\n");
-	if (dest->path != NULL)
-	 	ft_strdel(&(dest->path));
 	if (dest->surface != NULL)
-		free_t_surface(&(dest->surface));
+		free_t_surface(&dest->surface);
+	printf("before\n");
+	printf("ptr path = %p\n", &dest->path);
+	printf("ptr path = %p\n", dest->path);
+	ft_strdel(&dest->path);
+	printf("after\n");
 }
 
 void	free_t_texture(t_texture **dest)
 {
-	static int	i = 0;
-
-	if (*dest != NULL && dest != NULL)
-	{
-		printf("1.1.1\n");
-		delete_t_texture(*dest);
-		/*if ((*dest)->surface != NULL)
-			free_t_surface(&((*dest)->surface));*/
-		printf("1.1.2\n");
-		if (i == 0)
-		{
-			ft_memdel((void**)dest);
-			i++;
-		}
-		printf("1.1.3\n");
-	}
+	delete_t_texture(*dest);
+	ft_memdel((void**)dest);
 }
 
 void	delete_t_letter(t_letter *dest)
@@ -97,9 +88,7 @@ void	delete_t_letter(t_letter *dest)
 
 void	free_t_letter(t_letter **dest)
 {
-	printf("1.1\n");
 	delete_t_letter(*dest);
-	printf("1.2\n");
 	ft_memdel((void**)dest);
 }
 
@@ -108,22 +97,17 @@ void	delete_t_gui(t_gui dest)
 	int	i;
 
 	i = -1;
-	printf("1\n");
 	while (++i < 94)
 		free_t_letter(&dest.letter[i]);
-	printf("2\n");
 	i = -1;
 	while (++i < 20)
 		free_t_texture(&dest.menu[i]);
-	printf("3\n");
 	i = -1;
 	while (++i < 16)
 		free_t_texture(&dest.text_weap[i]);
-	printf("4\n");
 	i = -1;
 	while (++i < 6)
 		free_t_texture(&dest.text_am[i]);
-	printf("5\n");
 	free_t_texture(&dest.skybox);
 }
 
