@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:10:18 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/03 16:45:11 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/10 15:40:24 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,11 @@ typedef struct	s_gui
 	int			key_change;
 	int			sens;
 	int			info_print;
-	t_texture	*text_weap[16];
+	t_texture	*text_weap[11];
 	t_texture	*text_am[6];
 	t_texture	*skybox;
+	char		**path[25];
+	int			len[25];
 }				t_gui;
 
 t_gui			new_gui(void);
@@ -87,14 +89,14 @@ void			print_set_weapon(t_camera *main_camera, t_gui *gui,
 															t_engine *engine);
 void			map_editor(t_camera *main_camera, t_gui *gui, t_engine *engine,
 												t_mesh_editing mesh_editing);
-void			load_path_texture(t_visual_engine *visual_engine);
-void			load_texture_cube_wall(t_visual_engine *engine);
-void			load_texture_door(t_visual_engine *engine);
-void			load_texture_key_elevator(t_visual_engine *engine);
-void			load_texture_slope_pack(t_visual_engine *engine);
-void			load_texture_ammo_ladder(t_visual_engine *engine);
-void			load_texture_platform_plane(t_visual_engine *engine);
-void			load_texture_end(t_visual_engine *engine);
+void			load_path_texture(t_gui *gui);
+void			load_texture_cube_wall(t_gui *gui);
+void			load_texture_door(t_gui *gui);
+void			load_texture_key_elevator(t_gui *gui);
+void			load_texture_slope_pack(t_gui *gui);
+void			load_texture_ammo_ladder(t_gui *gui);
+void			load_texture_platform_plane(t_gui *gui);
+void			load_texture_end(t_gui *gui);
 void			print_set_ar(t_camera *cam, t_gui *gui, t_player *plr);
 void			print_set_rifle(t_camera *cam, t_gui *gui, t_player *plr);
 void			print_set_shotgun(t_camera *cam, t_gui *gui, t_player *plr);
@@ -105,11 +107,12 @@ void			print_info_editing(t_camera *main_camera, t_keyboard *key,
 void			print_info_texture(t_camera *main_cam, t_gui *gui,
 												t_mesh_editing mesh_editing);
 void			create_minimap(t_engine *engine);
-int				select_texture(t_keyboard *key, t_visual_engine *engine);
+int				select_texture(t_keyboard *key, t_gui *gui);
 void			game_over(t_engine *engine);
 void			print_letter(t_camera *main_cam, t_gui *gui, char *str,
 															t_rectangle rec);
 void			free_t_gui(t_gui *dest);
+t_mesh_editing	select_mesh(t_keyboard *p_keyboard, t_vec4 pos, t_gui *gui);
 
 
 #endif

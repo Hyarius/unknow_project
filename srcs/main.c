@@ -3,24 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 14:24:27 by jubeal            #+#    #+#             */
-/*   Updated: 2020/02/07 16:17:54 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/02/10 16:44:08 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
 void			exit_prog(t_engine **engine, t_gui **gui,
-									t_playing_funct **play, t_camera **camera)
+														t_playing_funct **play)
 {
-	(void)play;
-	(void)camera;
-	(void)gui;
-	(void)engine;
 	free_t_engine(engine);
-	// free_t_gui(*gui);
+	free_t_gui(*gui);
+	ft_memdel((void**)play);
 	Mix_CloseAudio();
 	Mix_Quit();
 	TTF_Quit();
@@ -75,6 +72,7 @@ t_playing_funct	*initialize_prog(t_gui **gui, t_engine **engine, char **argv)
 	t_playing_funct	*result;
 
 	begin_prog(engine, gui, argv);
+	load_path_texture(*gui);
 	load_textures(*gui);
 	Mix_VolumeMusic(0);
 	Mix_PlayMusic((*engine)->sound_engine->music[0], -1);
@@ -114,6 +112,7 @@ int				main(int argc, char **argv)
 		t_engine_handle_event(camera, gui, engine);
 		render_screen(engine);
 	}
-	exit_prog(&engine, &gui, &playing_functions, &camera);
+	exit_prog(&engine, &gui, &playing_functions);
+	ft_get_leaks("UNKNOW_PROJECT", "the end");
 	return (0);
 }

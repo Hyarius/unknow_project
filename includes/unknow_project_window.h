@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:28:31 by spuisais          #+#    #+#             */
-/*   Updated: 2020/02/06 09:51:00 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/10 16:33:15 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 
 typedef struct		s_window
 {
-	SDL_DisplayMode	current;
 	SDL_Window		*window;
 
 	int				size_x;

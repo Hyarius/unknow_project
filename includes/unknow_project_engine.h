@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:45:15 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/05 13:23:19 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/10 15:40:13 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct		s_engine
 	t_sound_engine	*sound_engine;
 }					t_engine;
 
+void				free_t_window(t_window **dest);
 t_engine			new_engine(t_window *p_window);
 t_engine			*initialize_t_engine(t_window *p_window);
 void				delete_t_engine(t_engine *dest);
@@ -73,8 +74,6 @@ void				save_player(t_engine *engine, int fd);
 void				link_camera_to_mesh(t_engine *engine, int index,
 																t_mesh *mesh);
 t_mesh_editing		create_mesh_editing(int index, char *path);
-t_mesh_editing		select_mesh(t_keyboard *p_keyboard, t_vec4 pos,
-													t_visual_engine *engine);
 void				cast_mesh(t_engine *engine, t_mesh *mesh_editing);
 int					load_map(t_camera *main_camera, t_engine *engine,
 																char *path);

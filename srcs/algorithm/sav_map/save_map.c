@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 13:46:27 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/06 14:10:31 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/10 13:19:37 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	save_color(t_mesh cu, int fd, char **str)
 	else
 		*str = ft_strjoinf(*str, "\n", 1);
 	write(fd, *str, ft_strlen(*str));
-	ft_memdel((void**)str);
 }
 
 void	save_pos(t_mesh current, int fd, char *test)
@@ -91,6 +90,7 @@ void	save_name(t_mesh current, int fd)
 	test = ft_strjoinf(test, current.name, 1);
 	test = ft_strjoinf(test, " ", 1);
 	save_pos(current, fd, test);
+	ft_strdel(&test);
 }
 
 char	*command_system(int wich)
@@ -117,7 +117,7 @@ void	save_map(t_engine *engine, int wich)
 
 	command = command_system(wich);
 	fd = open(command + 6, O_WRONLY);
-	ft_memdel((void**)&command);
+	ft_strdel(&command);
 	if (fd < 0)
 		error_exit(-7001, "impossible fd");
 	save_player(engine, fd);

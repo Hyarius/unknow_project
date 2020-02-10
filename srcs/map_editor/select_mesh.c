@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   select_mesh.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 13:19:50 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/30 16:13:44 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/02/10 15:39:26 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ t_mesh_editing	create_mesh_editing(int index, char *path)
 }
 
 t_mesh_editing	select_mesh(t_keyboard *key, t_vec4 pos,
-														t_visual_engine *engine)
+														t_gui *gui)
 {
 	t_mesh_editing	mesh;
 	static int		press = 0;
@@ -127,8 +127,8 @@ t_mesh_editing	select_mesh(t_keyboard *key, t_vec4 pos,
 	else if (get_key_state(key, key->key[SDL_SCANCODE_1]) == 0
 						&& get_key_state(key, key->key[SDL_SCANCODE_2]) == 0)
 		press = 0;
-	i = select_texture(key, engine);
-	mesh = create_mesh_editing(key->i, engine->path[key->i][i]);
+	i = select_texture(key, gui);
+	mesh = create_mesh_editing(key->i, gui->path[key->i][i]);
 	mesh.mesh.pos = pos;
 	return (mesh);
 }

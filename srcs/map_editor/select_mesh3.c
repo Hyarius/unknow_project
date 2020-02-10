@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   select_mesh3.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 12:45:19 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/31 14:38:56 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/02/10 15:37:49 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,14 +86,14 @@ t_mesh			create_mesh_end(int index, t_mesh mesh)
 	return (ret);
 }
 
-void			select_texture_next(t_keyboard *key, t_visual_engine *engine,
+void			select_texture_next(t_keyboard *key, t_gui *gui,
 															int *i, int *press)
 {
 	if (get_key_state(key, key->key[SDL_SCANCODE_RIGHTBRACKET]) == 1
 																&& *press == 0)
 	{
 		(*i)++;
-		if (*i >= engine->len[key->i])
+		if (*i >= gui->len[key->i])
 			*i = 0;
 		*press = 1;
 	}
@@ -102,7 +102,7 @@ void			select_texture_next(t_keyboard *key, t_visual_engine *engine,
 	{
 		(*i)--;
 		if (*i < 0)
-			*i = engine->len[key->i] - 1;
+			*i = gui->len[key->i] - 1;
 		*press = 1;
 	}
 	else if (get_key_state(key, key->key[SDL_SCANCODE_RIGHTBRACKET]) == 0
@@ -110,7 +110,7 @@ void			select_texture_next(t_keyboard *key, t_visual_engine *engine,
 		*press = 0;
 }
 
-int				select_texture(t_keyboard *key, t_visual_engine *engine)
+int				select_texture(t_keyboard *key, t_gui *gui)
 {
 	static int	tmp = -9;
 	static int	press = 0;
@@ -123,6 +123,6 @@ int				select_texture(t_keyboard *key, t_visual_engine *engine)
 		tmp = key->i;
 		i = 0;
 	}
-	select_texture_next(key, engine, &i, &press);
+	select_texture_next(key, gui, &i, &press);
 	return (i);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing_front.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:55:48 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/28 10:34:39 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/02/10 11:20:49 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,41 +14,37 @@
 
 void	drawing_front_hp(t_camera *cam, t_player *player)
 {
-	static t_color	*col_back = NULL;
-	static t_color	*col_hp = NULL;
-	static t_color	*col_armor = NULL;
-	static t_color	*col_jet = NULL;
+	t_color		col_back;
+	t_color		col_hp;
+	t_color		col_armor;
+	t_color		col_jet;
 
-	if (col_back == NULL && col_hp == NULL && col_armor == NULL)
-	{
-		col_back = initialize_t_color(0.7, 0.7, 0.7, 1.0);
-		col_hp = initialize_t_color(1.0, 0.3, 0.3, 1.0);
-		col_armor = initialize_t_color(0.3, 0.3, 1.0, 1.0);
-		col_jet = initialize_t_color(1.0, 1.0, 0.3, 1.0);
-	}
+	col_back = new_color(0.7, 0.7, 0.7, 1.0);
+	col_hp = new_color(1.0, 0.3, 0.3, 1.0);
+	col_armor = new_color(0.3, 0.3, 1.0, 1.0);
+	col_jet = new_color(1.0, 1.0, 0.3, 1.0);
 	t_view_port_clear_buffers(cam->view_port);
 	draw_hud_rect(cam->view_port, new_rectangle(
-		create_vec2(-0.90, -1), create_vec2(0.44, 0.22)), col_back);
+		create_vec2(-0.90, -1), create_vec2(0.44, 0.22)), &col_back);
 	t_view_port_clear_buffers(cam->view_port);
 	draw_hud_rect(cam->view_port, new_rectangle(create_vec2(-0.88, -0.98),
-		create_vec2(0.4 * (float)(player->hp) / 100, 0.08)), col_hp);
+		create_vec2(0.4 * (float)(player->hp) / 100, 0.08)), &col_hp);
 	draw_hud_rect(cam->view_port, new_rectangle(create_vec2(-0.88, -0.88),
-		create_vec2(0.4 * (float)(player->armor) / 100, 0.08)), col_armor);
+		create_vec2(0.4 * (float)(player->armor) / 100, 0.08)), &col_armor);
 	draw_hud_rect(cam->view_port, new_rectangle(create_vec2(-0.90, -0.77),
-		create_vec2(0.2 * (float)(player->fuel) / 100, 0.08)), col_jet);
+		create_vec2(0.2 * (float)(player->fuel) / 100, 0.08)), &col_jet);
 	draw_hud_rect(cam->view_port, new_rectangle(
-		create_vec2(0.0, 0.0), create_vec2(0.005, 0.01)), col_hp);
+		create_vec2(0.0, 0.0), create_vec2(0.005, 0.01)), &col_hp);
 }
 
 void	drawing_front_mun(t_camera *cam, t_texture **texture, t_player *player)
 {
-	static t_color	*color = NULL;
+	t_color		color;
 
-	if (color == NULL)
-		color = initialize_t_color(0.7, 0.7, 0.7, 1.0);
+	color = new_color(0.7, 0.7, 0.7, 1.0);
 	draw_rectangle_color_cpu(cam->view_port, new_rectangle(
 					create_vec2(0.75, -1.0), create_vec2(0.25, 0.20)),
-					color);
+					&color);
 	t_view_port_clear_buffers(cam->view_port);
 	draw_rectangle_texture_cpu(cam->view_port, new_rectangle(
 					create_vec2(1.0, -0.8), create_vec2(-0.2, -0.2)),

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_gui.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 15:58:51 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/07 14:58:22 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/02/10 16:51:22 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,22 +56,15 @@ void	delete_t_surface(t_surface dest)
 
 void	free_t_surface(t_surface **dest)
 {
-	printf("0.0\n");	
 	delete_t_surface(**dest);
-	printf("0.1\n");	
 	ft_memdel((void**)dest);
-	printf("0.2\n");	
 }
 
 void	delete_t_texture(t_texture *dest)
 {
 	if (dest->surface != NULL)
 		free_t_surface(&dest->surface);
-	printf("before\n");
-	printf("ptr path = %p\n", &dest->path);
-	printf("ptr path = %p\n", dest->path);
 	ft_strdel(&dest->path);
-	printf("after\n");
 }
 
 void	free_t_texture(t_texture **dest)
@@ -82,8 +75,9 @@ void	free_t_texture(t_texture **dest)
 
 void	delete_t_letter(t_letter *dest)
 {
-	if (dest->let != NULL)
-		free_t_texture(&dest->let);
+	SDL_FreeSurface(dest->font);
+	ft_memdel((void**)&dest->let->surface);
+	ft_memdel((void**)&dest->let);
 }
 
 void	free_t_letter(t_letter **dest)
@@ -95,6 +89,7 @@ void	free_t_letter(t_letter **dest)
 void	delete_t_gui(t_gui dest)
 {
 	int	i;
+	int	j;
 
 	i = -1;
 	while (++i < 94)
@@ -103,12 +98,21 @@ void	delete_t_gui(t_gui dest)
 	while (++i < 20)
 		free_t_texture(&dest.menu[i]);
 	i = -1;
-	while (++i < 16)
+	while (++i < 11)
 		free_t_texture(&dest.text_weap[i]);
 	i = -1;
 	while (++i < 6)
 		free_t_texture(&dest.text_am[i]);
+	i = -1;
+	while (++i < 25)
+	{
+		j = -1;
+		while (++j < dest.len[i])
+			ft_strdel(&dest.path[i][j]);
+	}
 	free_t_texture(&dest.skybox);
+	ft_memdel((void**)dest.letter);
+	ft_memdel((void**)dest.menu);
 }
 
 void	free_t_gui(t_gui *dest)

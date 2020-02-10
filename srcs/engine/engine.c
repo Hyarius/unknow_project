@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   engine.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 15:01:07 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/07 13:38:24 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/02/10 14:33:42 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ t_engine	*initialize_t_engine(t_window *p_window)
 
 void		delete_t_engine(t_engine *dest)
 {
+	free_t_window(&dest->win);
 	free_t_visual_engine(&(dest)->visual_engine);
 	free_t_physic_engine(&(dest)->physic_engine);
 	free_t_user_engine(&(dest)->user_engine);

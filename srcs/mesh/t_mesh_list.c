@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_mesh_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:49:45 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/07 12:12:02 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/02/10 16:41:39 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,12 @@ void		delete_t_mesh_list(t_mesh_list *dest)
 		delete_t_mesh(t_mesh_list_get(dest, i));
 		i++;
 	}
+	if (i == 0)
+		ft_memdel((void**)&dest->mesh);
 }
 
 void		free_t_mesh_list(t_mesh_list **dest)
 {
 	delete_t_mesh_list(*dest);
-	ft_memdel((void**)&(*dest));
 	ft_memdel((void**)dest);
 }

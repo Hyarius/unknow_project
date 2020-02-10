@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:59:26 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/04 17:28:23 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/10 15:30:18 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,6 @@ typedef struct		s_visual_engine
 {
 	int				main_camera;
 	t_camera_list	*camera_list;
-	char			**path[25];
-	int				len[25];
 }					t_visual_engine;
 
 t_visual_engine		new_visual_engine(t_window *p_window);

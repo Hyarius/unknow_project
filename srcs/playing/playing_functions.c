@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 12:02:06 by jubeal            #+#    #+#             */
-/*   Updated: 2020/02/06 09:43:50 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/10 15:46:58 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	level_editing(t_camera *camera, t_gui *gui, t_engine *engine,
 	t_engine_render_camera(engine);
 	mesh_editing = select_mesh(engine->user_engine->keyboard,
 		engine->user_engine->player->camera->pos,
-		engine->visual_engine);
+		gui);
 	map_editor(camera, gui, engine, mesh_editing);
 }
 
