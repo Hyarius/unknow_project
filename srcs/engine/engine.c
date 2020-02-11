@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   engine.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 15:01:07 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/10 14:33:42 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/11 11:16:16 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_engine	new_engine(t_window *p_window)
 	result.win = p_window;
 	result.playing = 1;
 	result.menu_nbr = 0;
+	result.display_skybox = 0;
 	result.tick = 0;
 	result.difficulty = 1.0;
 	result.visual_engine = initialize_t_visual_engine(p_window);

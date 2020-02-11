@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_triangle.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 15:31:26 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/05 10:14:37 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/11 11:09:28 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,14 @@ void		sort_t_triangle_points(t_triangle *p_triangle)
 	if (p_triangle->a.y > p_triangle->b.y || (p_triangle->a.y == p_triangle->b.y
 										&& p_triangle->a.x > p_triangle->b.x))
 		swap_t_vec4(&(p_triangle->a), &(p_triangle->b));
+}
+
+t_vec4		triangle_center(t_triangle tri)
+{
+	t_vec4	ret;
+
+	ret = new_vec4((tri.a.x + tri.b.x + tri.c.x) / 3,
+					(tri.a.y + tri.b.y + tri.c.y) / 3,
+					(tri.a.z + tri.b.z + tri.c.z) / 3);
+	return (ret);
 }
