@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:46:16 by jubeal            #+#    #+#             */
-/*   Updated: 2020/02/05 10:14:37 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/12 10:42:07 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_face	new_face(void)
 	while (++i < 3)
 	{
 		result.color = new_color(1.0, 1.0, 1.0, 1.0);
-		result.index_vertices[i] = -1;
+		result.idx_verts[i] = -1;
 		result.index_uvs[i] = -1;
 	}
 	return (result);
@@ -40,9 +40,9 @@ t_face	*initialize_t_face(void)
 
 void	set_t_face_vertices(t_face *face, int a, int b, int c)
 {
-	face->index_vertices[0] = a;
-	face->index_vertices[1] = b;
-	face->index_vertices[2] = c;
+	face->idx_verts[0] = a;
+	face->idx_verts[1] = b;
+	face->idx_verts[2] = c;
 }
 
 void	set_t_face_uvs(t_face *face, int a, int b, int c)

@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:32:34 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/27 14:23:08 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/12 10:42:07 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ void	t_mesh_compute_normals(t_mesh *mesh)
 	while (++i < mesh->faces->size)
 	{
 		face = t_face_list_get(mesh->faces, i);
-		a = t_vec4_list_at(mesh->vertices, face->index_vertices[0]);
+		a = t_vec4_list_at(mesh->vertices, face->idx_verts[0]);
 		b = substract_vec4(t_vec4_list_at(mesh->vertices,
-											face->index_vertices[1]), a);
+											face->idx_verts[1]), a);
 		c = substract_vec4(t_vec4_list_at(mesh->vertices,
-											face->index_vertices[2]), a);
+											face->idx_verts[2]), a);
 		face->normale = normalize_t_vec4(cross_t_vec4(b, c));
 		t_vec4_list_push_back(mesh->normales, new_vec4(0, 0, 0));
 		t_vec4_list_push_back(mesh->normales, face->normale);
@@ -78,11 +78,11 @@ void	t_mesh_comp_next_vert_world(t_mesh *dest, t_vec4 axis)
 	int		i;
 
 	i = -1;
-	clean_t_vec4_list(dest->next_vertices_in_world);
+	clean_t_vec4_list(dest->next_vert);
 	next_pos = add_vec4(dest->pos,
 				mult_2_vec4(dest->force, axis));
 	while (++i < dest->vertices->size)
-		t_vec4_list_push_back(dest->next_vertices_in_world,
+		t_vec4_list_push_back(dest->next_vert,
 		add_vec4(t_vec4_list_at(dest->vertices, i), next_pos));
 }
 

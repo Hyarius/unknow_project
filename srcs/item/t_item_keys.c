@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 13:42:14 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/31 10:47:33 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/12 11:33:55 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,17 @@ t_item	create_color_card(int type)
 	item.name = NULL;
 	if (type == 1)
 	{
-		item.name = ft_strjoin("Card_", "red");
+		item.name = "Card_red";
 		item.pf = red_card;
 	}
 	else if (type == 2)
 	{
-		item.name = ft_strjoin("Card_", "blue");
+		item.name = "Card_blue";
 		item.pf = blue_card;
 	}
 	else if (type == 3)
 	{
-		item.name = ft_strjoin("Card_", "green");
+		item.name = "Card_green";
 		item.pf = green_card;
 	}
 	return (item);

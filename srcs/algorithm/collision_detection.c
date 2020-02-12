@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collision_detection.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 13:15:31 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/11 11:08:31 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/02/12 10:44:19 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,41 +17,37 @@ t_triangle		is_triangle_target(t_face *face, t_mesh *target)
 	t_triangle	result;
 
 	result.a = t_vec4_list_at(target->vertices_in_world,
-													face->index_vertices[0]);
+													face->idx_verts[0]);
 	result.b = t_vec4_list_at(target->vertices_in_world,
-													face->index_vertices[1]);
+													face->idx_verts[1]);
 	result.c = t_vec4_list_at(target->vertices_in_world,
-													face->index_vertices[2]);
+													face->idx_verts[2]);
 	return (result);
 }
 
-int				sat_test(t_face *face, t_mesh *target, t_mesh *moving_mesh)
+int				sat_test(t_face *face, t_mesh *target, t_mesh *mesh)
 {
-	t_triangle	tri_comp;
-	t_triangle	tri_tar;
-	t_face		*current;
+	t_triangle	comp;
+	t_triangle	tar;
+	t_face		*cur;
 	int			i;
 	float		dist;
 
-	tri_tar = is_triangle_target(face, target);
-	dist = fabs(calc_dist_vec4(moving_mesh->center, triangle_center(tri_tar)));
-	if (dist < fabs(calc_dist_vec4(tri_tar.a, tri_tar.b))
-	|| dist < fabs(calc_dist_vec4(tri_tar.a, tri_tar.c))
-	|| dist < fabs(calc_dist_vec4(tri_tar.c, tri_tar.b)))
+	tar = is_triangle_target(face, target);
+	dist = fabs(calc_dist_vec4(mesh->center, triangle_center(tar)));
+	if (dist < fabs(calc_dist_vec4(tar.a, tar.b)) || dist < fabs(calc_dist_vec4(
+		tar.a, tar.c)) || dist < fabs(calc_dist_vec4(tar.c, tar.b)))
 	{
 		i = -1;
-		while (++i < moving_mesh->faces->size)
+		while (++i < mesh->faces->size)
 		{
-			if (moving_mesh->next_vertices_in_world->size == 0)
+			if (mesh->next_vert->size == 0)
 				break ;
-			current = t_face_list_get(moving_mesh->faces, i);
-			tri_comp.a = t_vec4_list_at(moving_mesh->next_vertices_in_world,
-														current->index_vertices[0]);
-			tri_comp.b = t_vec4_list_at(moving_mesh->next_vertices_in_world,
-														current->index_vertices[1]);
-			tri_comp.c = t_vec4_list_at(moving_mesh->next_vertices_in_world,
-														current->index_vertices[2]);
-			if (triangles_intersection(tri_comp, tri_tar))
+			cur = t_face_list_get(mesh->faces, i);
+			comp.a = t_vec4_list_at(mesh->next_vert, cur->idx_verts[0]);
+			comp.b = t_vec4_list_at(mesh->next_vert, cur->idx_verts[1]);
+			comp.c = t_vec4_list_at(mesh->next_vert, cur->idx_verts[2]);
+			if (triangles_intersection(comp, tar))
 				return (BOOL_TRUE);
 		}
 	}

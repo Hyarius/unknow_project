@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 13:40:33 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/05 14:27:01 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/12 10:46:58 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_mesh			init_mesh(char **line_split)
 	vector[2] = new_vec4(ft_atof(line_split[10]),
 								ft_atof(line_split[11]),
 								ft_atof(line_split[12]));
-	mesh = create_primitive_cube(vector[0], vector[1], NULL,
+	mesh = create_cube(vector[0], vector[1], NULL,
 		ft_atof(line_split[9]));
 	t_mesh_rotate(&mesh, vector[2]);
 	mesh.hp = ft_atoi(line_split[17]);

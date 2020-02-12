@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 14:24:27 by jubeal            #+#    #+#             */
-/*   Updated: 2020/02/10 18:35:26 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/02/12 11:49:40 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void			exit_prog(t_engine **engine, t_gui **gui,
 														t_playing_funct **play)
 {
-	free_t_engine(engine);
 	free_t_gui(*gui);
 	ft_memdel((void**)play);
+	free_t_engine(engine);
 	Mix_CloseAudio();
 	Mix_Quit();
 	TTF_Quit();
@@ -101,7 +101,7 @@ int				main(int argc, char **argv)
 	gui = NULL;
 	playing_functions = initialize_prog(&gui, &engine, argv);
 	camera = t_camera_list_get(engine->visual_engine->camera_list, 0);
-	mesh = create_primitive_skybox(camera->pos, new_vec4(1.0, 1.0, 1.0),
+	mesh = create_skybox(camera->pos, new_vec4(1.0, 1.0, 1.0),
 						gui->skybox);
 	while (engine->playing != 0)
 	{
@@ -113,6 +113,11 @@ int				main(int argc, char **argv)
 		render_screen(engine);
 	}
 	exit_prog(&engine, &gui, &playing_functions);
-	ft_get_leaks("UNKNOW_PROJECT", "the end");
 	return (0);
+}
+
+void end(void)__attribute__((destructor));
+void end(void)
+{
+	ft_get_leaks("UNKNOW_PROJECT", "the end");
 }

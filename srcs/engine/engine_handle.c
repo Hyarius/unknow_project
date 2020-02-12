@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 11:44:08 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/06 14:08:42 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/12 12:02:25 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,24 @@ void		t_engine_handle_camera(t_engine *p_engine, t_window *p_win)
 void		t_engine_handle_event(t_camera *main_camera, t_gui *gui,
 														t_engine *engine)
 {
-	if (engine->playing == 2
+	static int	press = 0;
+
+	if (engine->playing == 2 && press == 0
 		&& get_key_state(engine->user_engine->keyboard, SDL_SCANCODE_P) == 1)
 	{
 		engine->playing = 3;
 		engine->menu_nbr = 4;
+		press = 1;
 	}
-	else if (engine->playing == 3
+	else if (engine->playing == 3 && press == 0
 		&& get_key_state(engine->user_engine->keyboard, SDL_SCANCODE_P) == 1)
+	{
 		engine->playing = 2;
+		press = 1;
+	}
+	else if (press == 1
+		&& get_key_state(engine->user_engine->keyboard, SDL_SCANCODE_P) == 0)
+		press = 0;
 	if (engine->playing != 2 && engine->playing != 4)
 		t_user_engine_handle_menu(main_camera, gui, engine);
 	else

@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 13:19:50 by adjouber          #+#    #+#             */
-/*   Updated: 2020/02/10 15:39:26 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/12 12:06:13 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,17 +68,16 @@ t_mesh			create_mesh_card(int index, t_mesh mesh)
 	ret = mesh;
 	if (index == 6 || index == 7 || index == 8)
 	{
-		if (index == 6)
+		if (index == 6 && (ret.hp = -1) == -1)
 			ret.name = "Card_red";
-		else if (index == 7)
+		else if (index == 7 && (ret.hp = -2) == -2)
 			ret.name = "Card_blue";
-		else if (index == 8)
+		else if (index == 8 && (ret.hp = -3) == -3)
 			ret.name = "Card_green";
 		ret.size = new_vec4(0.2, 0.05, 0.2);
 		ret.primitive = 1;
 		ret.collectible = 1;
 		ret.rotation = new_vec4(0.0, 0.0, 0.0);
-		ret.hp = -1;
 		ret.kinetic = 0.0;
 	}
 	return (ret);

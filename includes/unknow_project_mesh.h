@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:48:49 by spuisais          #+#    #+#             */
-/*   Updated: 2020/02/04 17:38:36 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/12 12:16:44 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct			s_mesh
 	t_texture			*texture;
 
 	t_vec4_list			*vertices_in_world;
-	t_vec4_list			*next_vertices_in_world;
+	t_vec4_list			*next_vert;
 
 	t_vec4_list			*vertices;
 	t_vec4_list			*uvs;
@@ -77,17 +77,17 @@ void					t_mesh_set_color(t_mesh *dest, t_color p_color);
 void					t_mesh_compute_normals(t_mesh *mesh);
 void					t_mesh_compute_bubble_box(t_mesh *mesh);
 void					t_mesh_move(t_mesh *dest, t_vec4 delta);
-void					t_mesh_activate_gravity(t_mesh *dest, float gravity);
+void					activate_gravity(t_mesh *dest, float gravity);
 void					t_mesh_apply_force(t_mesh *dest);
-t_mesh					create_primitive_cube(t_vec4 coord, t_vec4 size,
+t_mesh					create_cube(t_vec4 coord, t_vec4 size,
 							char *texture_path, float gravity);
-t_mesh					create_primitive_plane(t_vec4 pos, t_vec4 size,
+t_mesh					create_plane(t_vec4 pos, t_vec4 size,
 							char *texture_path, float gravity);
-t_mesh					create_primitive_vertical_plane(t_vec4 pos,
+t_mesh					create_vertical_plane(t_vec4 pos,
 							t_vec4 size, char *texture_path, float gravity);
-t_mesh					create_primitive_skybox(t_vec4 pos, t_vec4 size,
+t_mesh					create_skybox(t_vec4 pos, t_vec4 size,
 							t_texture *p_texture);
-t_mesh					create_primitive_cave(t_vec4 pos, t_vec4 size,
+t_mesh					create_cave(t_vec4 pos, t_vec4 size,
 							char *texture_path, float gravity);
 void					t_mesh_rotate(t_mesh *mesh, t_vec4 delta_angle);
 void					t_mesh_rotate_to(t_mesh *src, t_mesh *dest);

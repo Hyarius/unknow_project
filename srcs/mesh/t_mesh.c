@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_mesh.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:04:38 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/07 15:12:45 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/02/12 10:40:48 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_mesh	new_mesh(t_vec4 pos)
 	result.no_hitbox = 0;
 	result.hp = 0;
 	result.vertices_in_world = initialize_t_vec4_list();
-	result.next_vertices_in_world = initialize_t_vec4_list();
+	result.next_vert = initialize_t_vec4_list();
 	result.vertices = initialize_t_vec4_list();
 	result.uvs = initialize_t_vec4_list();
 	result.faces = initialize_t_face_list();
@@ -46,8 +46,8 @@ void	delete_t_mesh(t_mesh *mesh)
 	ft_strdel(&mesh->name);
 	if (mesh->vertices_in_world != NULL)
 		free_t_vec4_list(&mesh->vertices_in_world);
-	if (mesh->next_vertices_in_world != NULL)
-		free_t_vec4_list(&mesh->next_vertices_in_world);
+	if (mesh->next_vert != NULL)
+		free_t_vec4_list(&mesh->next_vert);
 	if (mesh->vertices != NULL)
 		free_t_vec4_list(&mesh->vertices);
 	if (mesh->normales != NULL)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_action.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 12:57:57 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/07 10:44:21 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/02/12 11:57:16 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,17 @@
 void	player_action2(t_keyboard *p_keyboard, t_engine *engine,
 													t_camera *camera)
 {
-	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_L]) == 1)
+	static int	press = 0;
+
+	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_L]) == 1
+		&& press == 0)
 	{
-		if (engine->user_engine->player->camera->body->kinetic != 0.0f)
-			t_mesh_activate_gravity(engine->user_engine->player->camera->body,
-									0.0f);
-		else
-			t_mesh_activate_gravity(engine->user_engine->player->camera->body,
-									100.0f);
+		engine->display_skybox = (engine->display_skybox == 0) ? 1 : 0;
+		press = 1;
 	}
+	else if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_L]) == 0
+		&& press == 1)
+		press = 0;
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_R]) == 1
 		&& camera->r_press == 0
 		&& engine->user_engine->player->current_weapon->mag_size

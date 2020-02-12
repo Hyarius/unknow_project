@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 16:17:47 by adjouber          #+#    #+#             */
-/*   Updated: 2020/02/10 10:27:27 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/12 12:30:32 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,17 +89,17 @@ char			**ft_strsplit(char const *s, char c)
 	i = -1;
 	len = ft_count_word(s, c);
 	if (s == NULL)
-		return (NULL);
+		error_exit(-8, "ft_strsplit, premier malloc");
 	while (ft_is_sep(*s, c))
 		s++;
 	if (!(tab = (char**)ft_memalloc(sizeof(char*) * (len + 1))))
-		return (NULL);
+		error_exit(-8, "ft_strsplit, premier malloc");
 	while (++i < len)
 	{
 		if (!(tab[i] = (char*)ft_memalloc(sizeof(char*) * (ft_let(s, c) + 1))))
 			ft_freetab(&tab);
 		if (!tab)
-			return (NULL);
+			error_exit(-8, "ft_strsplit, premier malloc");
 		ft_strncpy_end(tab[i], s, ft_let(s, c));
 		s += ft_let(s, c);
 		while (ft_is_sep(*s, c))

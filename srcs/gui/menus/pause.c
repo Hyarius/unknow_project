@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pause.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:46:46 by adjouber          #+#    #+#             */
-/*   Updated: 2020/02/10 18:44:36 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/02/12 13:51:24 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ void	pause_menu(t_engine *engine)
 				engine->menu_nbr = 5;
 			else if (pos.y > 45 && pos.y < 50)
 				engine->menu_nbr = 16;
-			else if (pos.y > 54 && pos.y < 59)
-				close_map(engine);
 			else if (pos.y > 64 && pos.y < 70)
 				engine->playing = 0;
 			Mix_PlayChannel(-1, engine->sound_engine->sounds[0], 0);

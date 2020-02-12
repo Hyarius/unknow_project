@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:53:50 by jubeal            #+#    #+#             */
-/*   Updated: 2020/02/05 10:14:37 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/12 10:34:34 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void			player_take_dmg(t_engine *engine, int dmg)
 	}
 }
 
-void		free_t_player(t_player **dest)
+void			free_t_player(t_player **dest)
 {
 	ft_memdel((void**)dest);
 }

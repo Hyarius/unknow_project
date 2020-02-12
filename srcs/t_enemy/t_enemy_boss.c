@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 14:13:47 by jubeal            #+#    #+#             */
-/*   Updated: 2020/01/21 11:03:24 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/12 10:46:58 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void			enemy_boss_spawn(t_engine *engine)
 				j = engine->tick;
 			if (engine->tick - j == 3)
 			{
-				mesh = create_primitive_cube(spawn_mine(target->pos),
+				mesh = create_cube(spawn_mine(target->pos),
 						new_vec4(0.3, 0.5, 0.3), NULL, 0.0);
 				t_mesh_set_color(&mesh, new_color(1.0, 1.0, 1.0, 1.0));
 				t_mesh_set_name(&mesh, "Enemy_mine");

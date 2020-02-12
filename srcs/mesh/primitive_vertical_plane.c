@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 11:26:12 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/12 12:16:44 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void		t_mesh_init_uv_point_primitive_vertical_plane(t_mesh *result)
 	t_mesh_add_uv(result, new_vec4(1.0f, 1.0f, 0.0f));
 }
 
-t_mesh		create_primitive_vertical_plane(t_vec4 pos, t_vec4 size,
+t_mesh		create_vertical_plane(t_vec4 pos, t_vec4 size,
 											char *texture_path, float gravity)
 {
 	t_mesh	result;
@@ -29,7 +29,7 @@ t_mesh		create_primitive_vertical_plane(t_vec4 pos, t_vec4 size,
 	result = new_mesh(pos);
 	result.primitive = 2;
 	result.size = new_vec4(size.x, size.y, size.z);
-	t_mesh_activate_gravity(&result, gravity);
+	activate_gravity(&result, gravity);
 	t_mesh_add_point(&result, new_vec4(-size.x, -size.z, 0.0));
 	t_mesh_add_point(&result, new_vec4(size.x, -size.z, 0.0));
 	t_mesh_add_point(&result, new_vec4(size.x, size.z, 0.0));

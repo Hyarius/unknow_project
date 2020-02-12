@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:10:18 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/10 15:40:24 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/12 10:34:07 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,5 @@ void			print_letter(t_camera *main_cam, t_gui *gui, char *str,
 															t_rectangle rec);
 void			free_t_gui(t_gui *dest);
 t_mesh_editing	select_mesh(t_keyboard *p_keyboard, t_vec4 pos, t_gui *gui);
-
 
 #endif

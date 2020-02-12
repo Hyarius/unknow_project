@@ -6,33 +6,11 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 15:40:16 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/10 15:08:30 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/12 12:37:24 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
-
-void		delete_t_window(t_window dest)
-{
-	int	i;
-
-	i = 0;
-	ft_memdel((void**)&dest.color_data);
-	ft_memdel((void**)&dest.vertex_data);
-	while (i < NB_THREAD_MAX)
-	{
-		delete_t_void_list(dest.data[i]);
-		i++;
-	}
-	SDL_DestroyWindow(dest.window);
-	SDL_GL_DeleteContext(dest.context);
-}
-
-void		free_t_window(t_window **dest)
-{
-	delete_t_window(**dest);
-	ft_memdel((void**)dest);
-}
 
 void		delete_t_view_port(t_view_port dest)
 {
