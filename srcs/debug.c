@@ -7,12 +7,12 @@ void	ft_get_leaks(char *prog_name, char *msg)
 
 	cmd = ft_strjoin("leaks ", prog_name);
 	tmp = cmd;
-	cmd = ft_strjoin(cmd, " | grep 'total leaked bytes'");
+	/*cmd = ft_strjoin(cmd, " | grep 'total leaked bytes'");*/
 	ft_putstr(msg);
 	ft_putchar('\n');
 	system(cmd);
 	ft_memdel((void**)&tmp);
-	ft_memdel((void**)&cmd);
+	/*ft_memdel((void**)&cmd);*/
 }
 
 void	*debug_malloc(size_t size, const char *file, int32_t line, const char *func)

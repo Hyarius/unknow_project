@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 12:49:02 by adjouber          #+#    #+#             */
-/*   Updated: 2020/02/05 11:51:00 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/12 10:37:26 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void		print_info_texture(t_camera *main_cam, t_gui *gui,
 											create_vec2(-0.3, -0.2)), color);
 	if (!(str = ft_strdup(&mesh_editing.path[27])))
 		error_exit(-70, "ft_strdup failed.");
-	print_letter(main_cam, gui, str, new_rectangle(create_vec2(0.72, 0.82), create_vec2(0.02, 0.15)));
+	print_letter(main_cam, gui, str, new_rectangle(create_vec2(0.72, 0.82),
+													create_vec2(0.02, 0.15)));
 }
 
 void		print_info_editing(t_camera *main_camera, t_keyboard *key,

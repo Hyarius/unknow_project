@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 16:16:48 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/10 14:58:17 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,23 +31,20 @@ void	init_triangle(t_triangle_list *tri_list, t_rectangle p_rec)
 void	draw_rectangle_texture_cpu(t_view_port *p_view_port, t_rectangle p_rec,
 														t_texture *p_texture)
 {
-	static t_triangle_list	*tri_list = NULL;
-	static t_uv_list		*uv_list = NULL;
-	t_uv					uv;
+	t_triangle_list	tri_list;
+	t_uv_list		uv_list;
+	t_uv			uv;
 
-	if (tri_list == NULL && uv_list == NULL)
-	{
-		uv_list = initialize_t_uv_list();
-		tri_list = initialize_t_triangle_list();
-	}
-	init_triangle(tri_list, p_rec);
+	uv_list = new_uv_list();
+	tri_list = new_triangle_list();
+	init_triangle(&tri_list, p_rec);
 	uv = new_uv(new_triangle(new_vec4(0, 1, 0),
 			new_vec4(1, 1, 0), new_vec4(0, 0, 0)), p_texture);
-	t_uv_list_push_back(uv_list, uv);
+	t_uv_list_push_back(&uv_list, uv);
 	uv = new_uv(new_triangle(new_vec4(1, 0, 0),
 			new_vec4(1, 1, 0), new_vec4(0, 0, 0)), p_texture);
-	t_uv_list_push_back(uv_list, uv);
-	multithreading_draw_triangle_texture_cpu(p_view_port, tri_list, uv_list);
-	clean_t_triangle_list(tri_list);
-	clean_t_uv_list(uv_list);
+	t_uv_list_push_back(&uv_list, uv);
+	multithreading_draw_triangle_texture_cpu(p_view_port, &tri_list, &uv_list);
+	delete_t_uv_list(uv_list);
+	delete_t_triangle_list(tri_list);
 }

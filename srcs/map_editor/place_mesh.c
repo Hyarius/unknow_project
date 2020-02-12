@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   place_mesh.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 14:17:25 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/31 14:39:09 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/02/12 10:46:58 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,16 +70,16 @@ void		place_mesh(t_engine *engine, t_mesh_editing edit)
 		{
 			if (edit.mesh.primitive == -1)
 			{
-				mesh = create_primitive_cube(edit.mesh.pos,
+				mesh = create_cube(edit.mesh.pos,
 					edit.mesh.size, NULL, edit.mesh.kinetic);
 				mesh.primitive = -1;
 			}
 			else
-				mesh = create_primitive_cube(edit.mesh.pos,
+				mesh = create_cube(edit.mesh.pos,
 					edit.mesh.size, edit.path, edit.mesh.kinetic);
 		}
 		else if (edit.mesh.primitive == 0)
-			mesh = create_primitive_plane(edit.mesh.pos,
+			mesh = create_plane(edit.mesh.pos,
 				edit.mesh.size, edit.path, edit.mesh.kinetic);
 		place_mesh_bis(engine, edit, &mesh);
 		set_collectible(&mesh, edit);

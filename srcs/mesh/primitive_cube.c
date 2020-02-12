@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   primitive_cube.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 11:10:43 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/28 12:54:13 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/02/12 12:16:44 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ static void	t_mesh_init_face_primitive_cube(t_mesh *result, t_face tmp_face1,
 	t_mesh_add_face(result, tmp_face2);
 }
 
-t_mesh		create_primitive_cube(t_vec4 pos, t_vec4 size,
+t_mesh		create_cube(t_vec4 pos, t_vec4 size,
 											char *texture_path, float gravity)
 {
 	t_mesh	result;
@@ -100,7 +100,7 @@ t_mesh		create_primitive_cube(t_vec4 pos, t_vec4 size,
 	result = new_mesh(pos);
 	result.primitive = 1;
 	result.size = new_vec4(size.x, size.y, size.z);
-	t_mesh_activate_gravity(&result, gravity);
+	activate_gravity(&result, gravity);
 	t_mesh_init_point_primitive_cube(&result, size);
 	t_mesh_init_uv_point_primitive_cube(&result);
 	tmp_face1 = new_face();

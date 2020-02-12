@@ -6,13 +6,13 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 11:05:41 by spuisais          #+#    #+#             */
-/*   Updated: 2020/02/06 10:15:53 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/12 12:33:47 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-int			create_face(t_mesh result, char **tab, char **line_split, int k)
+void		create_face(t_mesh result, char **tab, char **line_split, int k)
 {
 	t_face		tmp_face;
 	int			i;
@@ -23,8 +23,7 @@ int			create_face(t_mesh result, char **tab, char **line_split, int k)
 	i = -1;
 	while (++i < k)
 	{
-		if (!(tab = ft_strsplit(line_split[i + 1], '/')))
-			return (0);
+		tab = ft_strsplit(line_split[i + 1], '/');
 		index[i] = ft_atoi(tab[0]) - 1;
 		if (ft_tablen(tab) >= 2 && ft_strlen(tab[1]) != 0)
 			index_uv[i] = ft_atoi(tab[1]) - 1;
@@ -39,10 +38,9 @@ int			create_face(t_mesh result, char **tab, char **line_split, int k)
 		set_t_face_uvs(&tmp_face, index_uv[0], index_uv[2], index_uv[3]);
 		t_mesh_add_face(&result, tmp_face);
 	}
-	return (1);
 }
 
-int			read_obj(t_mesh result, char **line_split, t_vec4 size)
+void		read_obj(t_mesh result, char **line_split, t_vec4 size)
 {
 	char		**tab;
 
@@ -56,22 +54,17 @@ int			read_obj(t_mesh result, char **line_split, t_vec4 size)
 		t_mesh_add_uv(&result, new_vec4(atof(line_split[1]),
 						atof(line_split[2]), 0.0));
 	else if (ft_strcmp(line_split[0], "f") == 0)
-		if (!(create_face(result, tab, line_split, ft_tablen(line_split) - 1)))
-			return (0);
-	return (1);
+		create_face(result, tab, line_split, ft_tablen(line_split) - 1);
 }
 
-int			do_stuff(char *line, t_mesh result, t_vec4 size)
+void		do_stuff(char *line, t_mesh result, t_vec4 size)
 {
 	char		**line_split;
 
 	line_split = NULL;
-	if (!(line_split = ft_strsplit(line, ' ')))
-		return (0);
-	if (!(read_obj(result, line_split, size)))
-		return (0);
+	line_split = ft_strsplit(line, ' ');
+	read_obj(result, line_split, size);
 	ft_freetab(&line_split);
-	return (1);
 }
 
 t_mesh		read_obj_file(char *path, t_vec4 pos, t_vec4 size, char *txtr)
@@ -87,11 +80,7 @@ t_mesh		read_obj_file(char *path, t_vec4 pos, t_vec4 size, char *txtr)
 	while (get_next_line(fd, &line))
 	{
 		if (ft_strlen(line) != 0)
-			if (!do_stuff(line, result, size))
-			{
-				result.name = NULL;
-				return (result);
-			}
+			do_stuff(line, result, size);
 		ft_memdel((void**)&line);
 	}
 	if (txtr != NULL)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   physic_engine2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 13:16:09 by jubeal            #+#    #+#             */
-/*   Updated: 2020/02/07 13:38:30 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/02/10 11:08:52 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,8 @@ t_physic_engine	*initialize_t_physic_engine(void)
 
 void			delete_t_physic_engine(t_physic_engine dest)
 {
-	if (dest.mesh_list->size > 0)
-		free_t_mesh_list(&dest.mesh_list);
-	if (dest.item_list->size > 0)
-		free_t_item_list(&dest.item_list);
+	free_t_mesh_list(&dest.mesh_list);
+	free_t_item_list(&dest.item_list);
 }
 
 void			free_t_physic_engine(t_physic_engine **dest)

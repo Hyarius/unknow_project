@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save_menu.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:00:42 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/30 10:43:57 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/02/12 13:53:20 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void		save_pause_ter(t_engine *engine, t_vec2_int pos)
 	{
 		save_map(engine, 4);
 		if (engine->playing == 5)
-			close_map(engine);
+			engine->playing = 0;
 		if (engine->playing == 3)
 			engine->menu_nbr = 4;
 	}
@@ -26,7 +26,7 @@ void		save_pause_ter(t_engine *engine, t_vec2_int pos)
 	{
 		save_map(engine, 5);
 		if (engine->playing == 5)
-			close_map(engine);
+			engine->playing = 0;
 		if (engine->playing == 3)
 			engine->menu_nbr = 4;
 	}
@@ -45,7 +45,7 @@ void		save_pause_bis(t_engine *engine, t_vec2_int pos)
 	{
 		save_map(engine, 1);
 		if (engine->playing == 5)
-			close_map(engine);
+			engine->playing = 0;
 		if (engine->playing == 3)
 			engine->menu_nbr = 4;
 	}
@@ -53,7 +53,7 @@ void		save_pause_bis(t_engine *engine, t_vec2_int pos)
 	{
 		save_map(engine, 2);
 		if (engine->playing == 5)
-			close_map(engine);
+			engine->playing = 0;
 		if (engine->playing == 3)
 			engine->menu_nbr = 4;
 	}
@@ -61,7 +61,7 @@ void		save_pause_bis(t_engine *engine, t_vec2_int pos)
 	{
 		save_map(engine, 3);
 		if (engine->playing == 5)
-			close_map(engine);
+			engine->playing = 0;
 		if (engine->playing == 3)
 			engine->menu_nbr = 4;
 	}

@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 14:57:13 by spuisais          #+#    #+#             */
-/*   Updated: 2020/02/05 13:32:18 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/12 13:52:21 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,8 @@ void	game_over(t_engine *engine)
 	get_t_mouse_info(mou);
 	pos = create_vec2_int(mou->pos.x * 100 / WIN_X, mou->pos.y * 100 / WIN_Y);
 	if (t_mouse_state(mou) == 2)
-	{
-		if ((pos.x > 38 && pos.x < 61) && (pos.y > 86 && pos.y < 92))
-		{
-			engine->playing = 1;
-			engine->menu_nbr = 0;
-			close_map(engine);
-		}
-	}
+		if ((pos.x > 38 && pos.x < 61) && (pos.y > 91 && pos.y < 100))
+			engine->playing = 0;
 }
 
 void	end_screen(t_engine *engine)
@@ -40,14 +34,8 @@ void	end_screen(t_engine *engine)
 	get_t_mouse_info(mou);
 	pos = create_vec2_int(mou->pos.x * 100 / WIN_X, mou->pos.y * 100 / WIN_Y);
 	if (t_mouse_state(mou) == 2)
-	{
 		if ((pos.x > 85 && pos.x < 96) && (pos.y > 83 && pos.y < 96))
-		{
-			engine->playing = 1;
-			engine->menu_nbr = 0;
-			close_map(engine);
-		}
-	}
+			engine->playing = 0;
 }
 
 void	t_user_engine_handle_menu_next(t_engine *engine)

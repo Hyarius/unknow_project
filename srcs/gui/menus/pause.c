@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:46:46 by adjouber          #+#    #+#             */
-/*   Updated: 2020/02/04 17:33:53 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/12 13:51:24 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,10 @@
 
 void	close_map(t_engine *engine)
 {
-	free_t_item_list(&engine->physic_engine->item_list);
-	free_t_mesh_list(&engine->physic_engine->mesh_list);
-	free_t_camera_list(&engine->visual_engine->camera_list);
-	engine->physic_engine->mesh_list = initialize_t_mesh_list();
-	engine->physic_engine->item_list = initialize_t_item_list();
+	free_t_physic_engine(&engine->physic_engine);
+	free_t_visual_engine(&engine->visual_engine);
+	ft_memdel((void**)&engine->user_engine->player);
+	engine->physic_engine = initialize_t_physic_engine();
 	engine->visual_engine = initialize_t_visual_engine(engine->win);
 	create_minimap(engine);
 	engine->playing = 1;
@@ -43,8 +42,6 @@ void	pause_menu(t_engine *engine)
 				engine->menu_nbr = 5;
 			else if (pos.y > 45 && pos.y < 50)
 				engine->menu_nbr = 16;
-			else if (pos.y > 54 && pos.y < 59)
-				close_map(engine);
 			else if (pos.y > 64 && pos.y < 70)
 				engine->playing = 0;
 			Mix_PlayChannel(-1, engine->sound_engine->sounds[0], 0);

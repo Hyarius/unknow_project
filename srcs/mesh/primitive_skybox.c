@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 11:29:57 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 11:21:46 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/12 10:46:58 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ static void	t_mesh_init_face_primitive_skybox(t_mesh *result, t_face tmp_face1,
 	t_mesh_add_face(result, tmp_face2);
 }
 
-t_mesh		create_primitive_skybox(t_vec4 pos, t_vec4 size,
+t_mesh		create_skybox(t_vec4 pos, t_vec4 size,
 														t_texture *p_texture)
 {
 	t_mesh	result;

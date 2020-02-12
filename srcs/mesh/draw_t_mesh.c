@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:58:58 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 11:28:39 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/12 10:42:07 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ void		init_points_uv(t_mesh *mesh, t_face face, t_vec4 *points_uv)
 void		init_points(t_mesh *mesh, t_face face, t_vec4 *points)
 {
 	points[0] = add_vec4(t_vec4_list_at(mesh->vertices,\
-									face.index_vertices[0]), mesh->pos);
+									face.idx_verts[0]), mesh->pos);
 	points[1] = add_vec4(t_vec4_list_at(mesh->vertices,\
-									face.index_vertices[1]), mesh->pos);
+									face.idx_verts[1]), mesh->pos);
 	points[2] = add_vec4(t_vec4_list_at(mesh->vertices,\
-									face.index_vertices[2]), mesh->pos);
+									face.idx_verts[2]), mesh->pos);
 }
 
 t_triangle	init_triangle_clipped(t_mesh *mesh, t_camera *p_cam, int j)

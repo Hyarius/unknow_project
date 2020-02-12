@@ -6,13 +6,13 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 13:40:28 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/06 09:49:49 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/12 12:16:44 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-t_mesh			init_primitive(char **line_split, char *texture_path)
+t_mesh			init_primitive(char **line_split, char *path)
 {
 	t_mesh		mesh;
 	t_vec4		vec[2];
@@ -25,22 +25,18 @@ t_mesh			init_primitive(char **line_split, char *texture_path)
 	vec[1] = new_vec4(ft_atof(line_split[5]),
 							ft_atof(line_split[6]), ft_atof(line_split[7]));
 	if (ft_strcmp(line_split[0], "plane:") == 0 && ++test)
-		mesh = create_primitive_plane(vec[0], vec[1],
-					texture_path, ft_atof(line_split[9]));
+		mesh = create_plane(vec[0], vec[1], path, ft_atof(line_split[9]));
 	else if (ft_strcmp(line_split[0], "cube:") == 0 && ++test)
-		mesh = create_primitive_cube(vec[0], vec[1],
-					texture_path, ft_atof(line_split[9]));
+		mesh = create_cube(vec[0], vec[1], path, ft_atof(line_split[9]));
 	else if (ft_strcmp(line_split[0], "item:") == 0 && ++test)
 	{
-		mesh = create_primitive_cube(vec[0], vec[1],
-					texture_path, ft_atof(line_split[9]));
+		mesh = create_cube(vec[0], vec[1], path, ft_atof(line_split[9]));
 		mesh.collectible = 1;
 	}
 	else if (line_split[0][0] == '#' && ++test)
-		mesh = read_obj_file(&line_split[0][1], vec[0], vec[1],
-							texture_path);
+		mesh = read_obj_file(&line_split[0][1], vec[0], vec[1], path);
 	if (test)
-		t_mesh_activate_gravity(&mesh, ft_atof(line_split[9]));
+		activate_gravity(&mesh, ft_atof(line_split[9]));
 	return (mesh);
 }
 

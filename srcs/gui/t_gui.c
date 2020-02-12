@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_gui.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 15:58:51 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/07 14:58:22 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/02/12 12:22:08 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,30 @@
 
 t_gui	new_gui(void)
 {
-	t_gui	result;
+	t_gui	res;
 	int		idx;
 
-	if (!(result.letter = (t_letter **)ft_memalloc(sizeof(t_letter*) * 94)))
+	if (!(res.letter = (t_letter **)ft_memalloc(sizeof(t_letter*) * 94)))
 		error_exit(-29, "Can't ft_memalloc a t_surface");
-	if (!(result.menu = (t_texture **)ft_memalloc(sizeof(t_texture*) * 20)))
+	if (!(res.menu = (t_texture **)ft_memalloc(sizeof(t_texture*) * 20)))
 		error_exit(-29, "Can't ft_memalloc a t_surface");
 	idx = -1;
 	while (++idx < 94)
 	{
-		if (!(result.letter[idx] = (t_letter *)ft_memalloc(sizeof(t_letter))))
+		if (!(res.letter[idx] = (t_letter *)ft_memalloc(sizeof(t_letter))))
 			error_exit(-29, "Can't ft_memalloc a t_surface");
-		if (!(result.letter[idx]->let = (t_texture *)ft_memalloc(sizeof(t_texture))))
+		if (!(res.letter[idx]->let = (t_texture *)ft_memalloc(
+															sizeof(t_texture))))
 			error_exit(-29, "Can't ft_memalloc a t_surface");
-		if (!(result.letter[idx]->let->surface =\
-										(t_surface *)ft_memalloc(sizeof(t_surface))))
+		if (!(res.letter[idx]->let->surface =\
+								(t_surface *)ft_memalloc(sizeof(t_surface))))
 			error_exit(-29, "Can't ft_memalloc a t_surface");
 	}
-	result.idx = 8;
-	result.sens = 2;
-	result.key_press = 0;
-	result.info_print = 0;
-	return (result);
+	res.idx = 8;
+	res.sens = 2;
+	res.key_press = 0;
+	res.info_print = 0;
+	return (res);
 }
 
 t_gui	*initialize_t_gui(void)
@@ -47,74 +48,6 @@ t_gui	*initialize_t_gui(void)
 		error_exit(-13, "Can't create a t_gui");
 	*result = new_gui();
 	return (result);
-}
-
-void	delete_t_surface(t_surface dest)
-{
-	ft_memdel((void**)&dest.pixels);
-}
-
-void	free_t_surface(t_surface **dest)
-{
-	printf("0.0\n");	
-	delete_t_surface(**dest);
-	printf("0.1\n");	
-	ft_memdel((void**)dest);
-	printf("0.2\n");	
-}
-
-void	delete_t_texture(t_texture *dest)
-{
-	if (dest->surface != NULL)
-		free_t_surface(&dest->surface);
-	printf("before\n");
-	printf("ptr path = %p\n", &dest->path);
-	printf("ptr path = %p\n", dest->path);
-	ft_strdel(&dest->path);
-	printf("after\n");
-}
-
-void	free_t_texture(t_texture **dest)
-{
-	delete_t_texture(*dest);
-	ft_memdel((void**)dest);
-}
-
-void	delete_t_letter(t_letter *dest)
-{
-	if (dest->let != NULL)
-		free_t_texture(&dest->let);
-}
-
-void	free_t_letter(t_letter **dest)
-{
-	delete_t_letter(*dest);
-	ft_memdel((void**)dest);
-}
-
-void	delete_t_gui(t_gui dest)
-{
-	int	i;
-
-	i = -1;
-	while (++i < 94)
-		free_t_letter(&dest.letter[i]);
-	i = -1;
-	while (++i < 20)
-		free_t_texture(&dest.menu[i]);
-	i = -1;
-	while (++i < 16)
-		free_t_texture(&dest.text_weap[i]);
-	i = -1;
-	while (++i < 6)
-		free_t_texture(&dest.text_am[i]);
-	free_t_texture(&dest.skybox);
-}
-
-void	free_t_gui(t_gui *dest)
-{
-	delete_t_gui(*dest);
-	ft_memdel((void**)dest);
 }
 
 void	set_t_gui_texte(t_gui *gui)

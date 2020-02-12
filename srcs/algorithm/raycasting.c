@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 13:11:51 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/28 13:00:12 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/12 10:42:07 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_mesh	*cast_ray_next(t_vec4 pos, t_vec4 direction, t_mesh *mesh)
 	{
 		if ((mesh->no_hitbox == 0 || mesh->is_visible == 1)
 		&& intersect_triangle_by_segment(compose_t_triangle_from_t_mesh(mesh,
-			t_face_list_get(mesh->faces, k)->index_vertices), line,
+			t_face_list_get(mesh->faces, k)->idx_verts), line,
 				&intersection) == BOOL_TRUE)
 			return (mesh);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shoot_weapon.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 13:22:08 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/29 14:45:20 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/02/12 12:16:49 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ void	shoot_weapon2(t_engine *engine, t_weapon *weapon, t_mesh *target,
 			if (ft_strcmp(target->name, "wall_script") == 0)
 			{
 				Mix_PlayChannel(-1, engine->sound_engine->sounds[14], 0);
-				t_mesh_activate_gravity(
-					&engine->user_engine->player->hitbox, 0.0f);
+				activate_gravity(&engine->user_engine->player->hitbox, 0.0f);
 				weapon->index = 5;
 				change_weapon(engine->user_engine->keyboard,
 					engine->user_engine->player);
+				engine->display_skybox = 1;
 			}
 			destroy_mesh(target);
 		}

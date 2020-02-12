@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unknow_project_structure.h                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:40:11 by spuisais          #+#    #+#             */
-/*   Updated: 2020/02/07 15:09:26 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/02/12 12:25:58 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,12 @@ typedef struct	s_surface
 typedef struct	s_texture
 {
 	t_surface	*surface;
-	GLuint		id;
 	char		*path;
 	char		letter;
 }				t_texture;
 
 t_color			get_pixel_color(t_texture *texture, int x, int y);
+void			free_t_texture(t_texture **dest);
 
 typedef struct	s_uv
 {
@@ -79,7 +79,7 @@ t_uv			*initialize_t_uv(t_triangle p_triangle, t_texture *p_image);
 typedef struct	s_face
 {
 	t_color		color;
-	int			index_vertices[3];
+	int			idx_verts[3];
 	int			index_uvs[3];
 	t_vec4		normale;
 }				t_face;

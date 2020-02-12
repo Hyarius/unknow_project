@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:41:06 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/06 11:02:27 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/12 12:14:44 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "unknow_project_basic_list.h"
 
-#define ft_memalloc(X) debug_malloc( X, __FILE__, __LINE__, __func__)
+# define ft_memalloc(X) debug_malloc( X, __FILE__, __LINE__, __func__)
 void		*debug_malloc(size_t size, const char *file, int32_t line, const char *func);
 
 char		*ft_strnew(int size);

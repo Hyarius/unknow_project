@@ -1,0 +1,5 @@
+void end(void)__attribute__((destructor));
+void end(void)
+{
+	ft_get_leaks("UNKNOW_PROJECT", "the end");
+}

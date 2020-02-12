@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:33:36 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/05 16:44:35 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/12 12:16:44 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	t_mesh_apply_force(t_mesh *dest)
 	dest->center = add_vec4(dest->center, dest->force);
 }
 
-void	t_mesh_activate_gravity(t_mesh *dest, float gravity)
+void	activate_gravity(t_mesh *dest, float gravity)
 {
 	dest->kinetic = gravity;
 }

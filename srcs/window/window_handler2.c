@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 10:10:16 by jubeal            #+#    #+#             */
-/*   Updated: 2020/02/05 10:14:37 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/12 12:38:08 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ void		initialize_t_window2(t_window *win)
 		win->data[i] = new_void_list();
 	win->program_color = load_shaders("ressources/shader/color_shader.vert",
 								"ressources/shader/color_shader.frag");
-	win->program_texture = load_shaders("ressources/shader/texture_shader.vert",
-								"ressources/shader/texture_shader.frag");
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_DEPTH_TEST);
@@ -90,4 +88,25 @@ t_window	*initialize_t_window(char *p_name, int p_size_x, int p_size_y)
 	glGenBuffers(1, &win->alpha_buffer);
 	initialize_t_window2(win);
 	return (win);
+}
+
+void		delete_t_window(t_window dest)
+{
+	int	i;
+
+	i = 0;
+	ft_memdel((void**)&dest.color_data);
+	ft_memdel((void**)&dest.vertex_data);
+	while (i < NB_THREAD_MAX)
+	{
+		delete_t_void_list(dest.data[i]);
+		i++;
+	}
+	SDL_DestroyWindow(dest.window);
+}
+
+void		free_t_window(t_window **dest)
+{
+	delete_t_window(**dest);
+	ft_memdel((void**)dest);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unknow_project_geometry.h                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:11:02 by spuisais          #+#    #+#             */
-/*   Updated: 2020/01/20 16:12:25 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/02/11 11:00:23 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int				is_triangle_contact(t_triangle a, t_triangle b);
 int				is_triangle_contact(t_triangle a, t_triangle b);
 int				triangles_intersection(t_triangle tri1, t_triangle tri2);
 float			maximum_dist_triangles(t_triangle tri1, t_triangle tri2);
+t_vec4			triangle_center(t_triangle tri);
 
 typedef struct	s_line
 {

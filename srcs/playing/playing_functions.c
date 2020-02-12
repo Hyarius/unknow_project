@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 12:02:06 by jubeal            #+#    #+#             */
-/*   Updated: 2020/02/06 09:43:50 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/12 09:31:23 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,12 @@ void	display_title_screen(t_camera *camera, t_gui *gui, t_engine *engine,
 void	game_playing(t_camera *camera, t_gui *gui, t_engine *engine,
 																	t_mesh mesh)
 {
-	mesh.pos = camera->pos;
-	draw_t_mesh(camera, &mesh);
-	t_engine_render_camera(engine);
+	if (engine->display_skybox)
+	{
+		mesh.pos = camera->pos;
+		draw_t_mesh(camera, &mesh);
+		t_engine_render_camera(engine);
+	}
 	t_engine_apply_physic(engine);
 	t_engine_handle_camera(engine, engine->win);
 	t_engine_prepare_camera(engine);
@@ -74,7 +77,7 @@ void	level_editing(t_camera *camera, t_gui *gui, t_engine *engine,
 	t_engine_render_camera(engine);
 	mesh_editing = select_mesh(engine->user_engine->keyboard,
 		engine->user_engine->player->camera->pos,
-		engine->visual_engine);
+		gui);
 	map_editor(camera, gui, engine, mesh_editing);
 }
 
