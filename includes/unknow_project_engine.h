@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unknow_project_engine.h                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:45:15 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/11 11:16:35 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/02/13 11:48:33 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void				enemy_move(t_engine *engine);
 void				enemy_boss_look(t_engine *engine);
 void				enemy_boss_shoot(t_engine *engine);
 void				enemy_boss_spawn(t_engine *engine);
-void				save_map(t_engine *engine, int wich);
+void				save_map(t_engine *engine, int which);
 void				save_player(t_engine *engine, int fd);
 void				link_camera_to_mesh(t_engine *engine, int index,
 																t_mesh *mesh);
