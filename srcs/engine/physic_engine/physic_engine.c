@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 14:56:08 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/04 17:27:31 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/13 10:10:24 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,7 @@ void			can_move3(t_mesh *mesh, t_engine *engine, t_mesh *tar)
 		engine->menu_nbr = 19;
 	}
 	if (mesh_intersect(mesh, tar) == BOOL_TRUE
-		&& (ft_strcmp(tar->name, "stair") == 0
-		|| ft_strcmp(tar->name, "ressources/objets/stair.obj") == 0))
+		&& (ft_strcmp(tar->name, "stair") == 0))
 		mesh->force.y = 0.020;
 	else if (tar->collectible == 0)
 	{
@@ -109,6 +108,7 @@ void			can_move2(t_engine *engine, t_mesh *tar)
 				Mix_PlayChannel(-1, engine->sound_engine->sounds[23], 0);
 				t_mesh_set_visibility(tar, BOOL_FALSE);
 				tar->no_hitbox = 1;
+				break ;
 			}
 		}
 		j++;

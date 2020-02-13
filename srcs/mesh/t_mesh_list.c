@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:49:45 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/10 16:41:39 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/12 15:59:22 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,7 @@ void		delete_t_mesh_list(t_mesh_list *dest)
 		delete_t_mesh(t_mesh_list_get(dest, i));
 		i++;
 	}
-	if (i == 0)
-		ft_memdel((void**)&dest->mesh);
+	ft_memdel((void**)&dest->mesh);
 }
 
 void		free_t_mesh_list(t_mesh_list **dest)

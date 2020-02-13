@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:04:38 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/12 10:40:48 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/12 16:53:50 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,16 @@ t_mesh	new_mesh(t_vec4 pos)
 	return (result);
 }
 
+void	delete_t_face_list(t_face_list dest)
+{
+	ft_memdel((void**)&dest.face);
+}
+
 void	delete_t_mesh(t_mesh *mesh)
 {
+	int i;
+
+	i = -1;
 	ft_strdel(&mesh->name);
 	if (mesh->vertices_in_world != NULL)
 		free_t_vec4_list(&mesh->vertices_in_world);

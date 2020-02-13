@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 12:22:15 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/12 12:37:04 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/13 11:30:32 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ void	delete_t_gui(t_gui dest)
 	while (++i < 25 && (j = -1) == -1)
 	{
 		while (++j < dest.len[i])
-			ft_strdel(&dest.path[i][j]);
+			ft_strdel(&(dest.path[i][j]));
 		ft_memdel((void**)&dest.path[i]);
 	}
 	free_t_texture(&dest.skybox);
 	ft_memdel((void**)dest.letter);
-	ft_memdel((void**)dest.menu);
+	ft_memdel((void**)&dest.menu);
 }
 
 void	free_t_gui(t_gui *dest)

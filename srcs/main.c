@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 14:24:27 by jubeal            #+#    #+#             */
-/*   Updated: 2020/02/12 11:49:40 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/13 11:36:37 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,11 +113,6 @@ int				main(int argc, char **argv)
 		render_screen(engine);
 	}
 	exit_prog(&engine, &gui, &playing_functions);
+	ft_get_leaks("UNKNOW_PROJECT", "finfinfin");
 	return (0);
-}
-
-void end(void)__attribute__((destructor));
-void end(void)
-{
-	ft_get_leaks("UNKNOW_PROJECT", "the end");
 }

@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 15:06:45 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/10 15:44:03 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/12 15:37:21 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ t_visual_engine	*initialize_t_visual_engine(t_window *p_window)
 
 void			delete_t_visual_engine(t_visual_engine dest)
 {
-	if (dest.camera_list->size > 0)
-		free_t_camera_list(&dest.camera_list);
+	free_t_camera_list(&dest.camera_list);
 }
 
 void			free_t_visual_engine(t_visual_engine **dest)
