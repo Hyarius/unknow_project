@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unknow_project_basic.h                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:41:06 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/13 16:10:18 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/02/13 17:39:33 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ float		round_float(float x, unsigned int round);
 t_vec4		round_t_vec4(t_vec4 a, unsigned int round);
 void		ft_strdel(char **as);
 float		generate_float(float rmin, float rmax);
-int			is_number(char *s)
+int			is_number(char *s);
 void		check_map(char *path);
 
 #endif

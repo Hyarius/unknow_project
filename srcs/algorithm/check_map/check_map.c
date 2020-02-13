@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 11:09:05 by adjouber          #+#    #+#             */
-/*   Updated: 2020/02/13 16:14:03 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/02/13 18:11:25 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ int		check_item(char *s)
 	{
 		if (!(check_item2(s)))
 			return (0);
+		else
+			return (1);		
 	}
 	return (0);
 }
@@ -102,18 +104,21 @@ void	check_map(char *path)
 	int		idx;
 	char	*line;
 	char	**s;
+	int		i;
 
+	i = 0;
 	idx = 0;
 	if ((fd = open(path, O_RDONLY)) < 0)
 		error_exit(-7000, "impossible fd");
 	while (get_next_line(fd, &line) > 0)
 	{
+		i++;
 		if (ft_strlen(line) != 0)
 		{
 			if (!(s = ft_strsplit(line, ' ')))
 				error_exit(-1665, "error split");
 			if (!(map_checker(s, &idx)))
-				error_exit(-9999, "error in map");
+				error_exit(i, "error in map");
 			ft_freetab(&s);
 		}
 		ft_strdel(&line);
