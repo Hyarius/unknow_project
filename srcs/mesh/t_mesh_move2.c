@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_mesh_move2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 11:35:43 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/13 08:38:10 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/13 17:37:19 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	t_mesh_move_elevator(t_mesh *m, t_mesh *b)
 {
 	float	tmp;
 
-	if (m->door.tick <= 16 && m->door.move == 1)
+	if (m->door.tick <= 17 && m->door.move == 1)
 	{
 		if (m->door.state == 0)
 			tmp = 0.5f;
@@ -82,7 +82,7 @@ void	t_mesh_move_elevator(t_mesh *m, t_mesh *b)
 		m->pos = add_vec4(m->pos, new_vec4(0.0, tmp, 0.0));
 		m->center = add_vec4(m->center, new_vec4(0.0, tmp, 0.0));
 		m->door.tick++;
-		if (m->door.tick == 16)
+		if (m->door.tick == 17)
 			t_mesh_move_elevator_next(m, b, tmp);
 	}
 }
