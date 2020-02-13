@@ -6,24 +6,29 @@
 /*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 11:09:05 by adjouber          #+#    #+#             */
-/*   Updated: 2020/02/13 14:44:52 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/02/13 16:14:03 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unknow_project.h"
 
-int		is_number(char *s)
+int		check_item2(char *s)
 {
-	int	i;
-
-	i = 0;
-	while (s[i])
+	if (ft_strcmp(s, "Ammo_Pack") == '_')
 	{
-		if (s[i] < '0' && s[i] > '9')
+		if (s[10] == '0')
 			return (0);
-		i++;
+		if ((is_number(&s[10])))
+			return (1);
 	}
-	return (1);
+	else if (ft_strcmp(s, "Health_Pack") == '_')
+	{
+		if (s[12] == '0')
+			return (0);
+		if ((is_number(&s[12])))
+			return (1);
+	}
+	return (0);
 }
 
 int		check_item(char *s)
@@ -45,21 +50,27 @@ int		check_item(char *s)
 		if ((is_number(&s[11])))
 			return (1);
 	}
-	else if (ft_strcmp(s, "Ammo_Pack") == '_')
+	else
 	{
-		if (s[10] == '0')
+		if (!(check_item2(s)))
 			return (0);
-		if ((is_number(&s[10])))
-			return (1);
-	}
-	else if (ft_strcmp(s, "Health_Pack") == '_')
-	{
-		if (s[12] == '0')
-			return (0);
-		if ((is_number(&s[12])))
-			return (1);
 	}
 	return (0);
+}
+
+int		check_mesh(char **s)
+{
+	if (ft_tablen(s) != 18)
+	{
+		if (ft_tablen(s) != 19)
+			return (0);
+		if (ft_tablen(s) == 19 && (s[18][0] != '*' || s[18][0] != '#'))
+			return (0);
+	}
+	if (ft_strcmp(s[0], "item:") == 0)
+		if (!(check_item(s[1])))
+			return (0);
+	return (1);
 }
 
 int		map_checker(char **s, int *idx)
@@ -77,16 +88,8 @@ int		map_checker(char **s, int *idx)
 	else if (ft_strcmp(s[0], "cube:") == 0 || ft_strcmp(s[0], "plane:") == 0
 						|| ft_strcmp(s[0], "item:") == 0 || s[0][0] == '#')
 	{
-		if (ft_tablen(s) != 18)
-		{
-			if (ft_tablen(s) != 19)
-				return (0);
-			if (ft_tablen(s) == 19 && (s[18][0] != '*' || s[18][0] != '#'))
-				return (0);
-		}
-		if (ft_strcmp(s[0], "item:") == 0)
-			if (!(check_item(s[1])))
-				return (0);
+		if (!(check_mesh(s)))
+			return (0);
 	}
 	else
 		return (0);
