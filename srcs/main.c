@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 14:24:27 by jubeal            #+#    #+#             */
-/*   Updated: 2020/02/12 11:49:40 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/13 14:32:06 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ void			exit_prog(t_engine **engine, t_gui **gui,
 	Mix_Quit();
 	TTF_Quit();
 	SDL_Quit();
-	tar_ressources();
+	/*tar_ressources();*/
 }
 
 void			begin_prog(t_engine **engine, t_gui **gui, char **argv)
 {
 	t_window	*win;
 
-	untar_ressources();
+	/*untar_ressources();*/
 	start_sdl();
 	TTF_Init();
 	Mix_Init(MIX_INIT_OGG);
@@ -116,8 +116,8 @@ int				main(int argc, char **argv)
 	return (0);
 }
 
-void end(void)__attribute__((destructor));
+/*void end(void)__attribute__((destructor));
 void end(void)
 {
 	ft_get_leaks("UNKNOW_PROJECT", "the end");
-}
+}*/

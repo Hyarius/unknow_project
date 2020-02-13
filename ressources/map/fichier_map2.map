@@ -1,0 +1,28 @@
+plane: plane 0.0 0.0 0.0 20.0 0.0 20.0 ressources/assets/textures/metal_f.png 0.0 0.0 0.0 0.0 1.0 0.0 0.0 1.0    -1
+
+
+cube: Enemy_boss -16.0 0.00001 2.0 0.3 0.5 0.3 ressources/assets/textures/gaygory.png 0.0 0.0 90.0 0.0 0.0 0.0 0.0 1.0    50
+
+
+item: Ammo_Pack_1 -7.0 0.0 0.0   0.2 0.05 0.2   ressources/assets/textures/cube_test.png   0.0   0.0 0.0 0.0   0.3 0.3 0.3 1.0   -1
+
+
+item: Jet_Pack_2 -7.0 0.0 -6.0   0.2 0.05 0.2   NULL   0.0   0.0 0.0 0.0   0.8 0.8 0.5 1.0   -1
+
+
+item: Armor_Pack_2 -12.0 0.0 -6.0   0.2 0.05 0.2   ressources/assets/textures/armor.png   0.0   0.0 0.0 0.0   0.0 0.0 0.8 1.0   -1
+
+
+item: Health_Pack_2 -10.0 0.0 -6.0   0.2 0.05 0.2   ressources/assets/textures/health.png   0.0   0.0 0.0 0.0   0.8 0.0 0.0 1.0   -1
+
+
+player: Player 0.0 1.0 0.0 0.3 0.5 0.3 NULL 100.0 0.0 0.0 0.0 1.0 0.4 1.0 1.0 100 100 20 15 15 30 120 0 10 0 20 0 5 0 0 0
+
+
+item: Card_red -3.0 0.0 0.0   0.2 0.05 0.2   ressources/assets/textures/cube_test.png   0.0   0.0 0.0 0.0   0.3 0.3 0.3 1.0   -1
+
+
+item: Card_blue -2.0 0.0 0.0   0.2 0.05 0.2   ressources/assets/textures/cube_test.png   0.0   0.0 0.0 0.0   0.3 0.3 0.3 1.0   -1
+
+
+item: Card_green -1.0 0.0 0.0   0.2 0.05 0.2   ressources/assets/textures/cube_test.png   0.0   0.0 0.0 0.0   0.3 0.3 0.3 1.0   -1

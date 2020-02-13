@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:41:06 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/12 12:14:44 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/13 13:50:17 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,6 @@ float		round_float(float x, unsigned int round);
 t_vec4		round_t_vec4(t_vec4 a, unsigned int round);
 void		ft_strdel(char **as);
 float		generate_float(float rmin, float rmax);
+void		check_map(char *path);
 
 #endif
