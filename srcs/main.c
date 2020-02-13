@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 14:24:27 by jubeal            #+#    #+#             */
-/*   Updated: 2020/02/13 13:42:09 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/13 15:25:18 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void			begin_prog(t_engine **engine, t_gui **gui, char **argv)
 {
 	t_window	*win;
 
-	untar_ressources();
+	untar_ressources();*
 	start_sdl();
 	TTF_Init();
 	Mix_Init(MIX_INIT_OGG);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   play_menu.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:12:31 by adjouber          #+#    #+#             */
-/*   Updated: 2020/02/13 10:26:54 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/13 14:56:41 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ void	play_menu(t_camera *main_camera, t_engine *engine, int *play)
 	{
 		if (!path)
 			error_exit(-71, "Couldn't load map, exiting.");
+		check_map(path);
 		if (!load_map(main_camera, engine, path))
 		{
 			*play = 0;
