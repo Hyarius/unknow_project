@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 11:09:05 by adjouber          #+#    #+#             */
-/*   Updated: 2020/02/14 11:59:00 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/14 13:29:30 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int		check_mesh(char **s)
 	{
 		if (ft_tablen(s) != 19)
 			return (0);
-		if (ft_tablen(s) == 19 && (s[18][0] != '*' || s[18][0] != '#'))
+		if (ft_tablen(s) == 19 && (s[18][0] != '*' && s[18][0] != '#'))
 			return (0);
 	}
 	if (ft_strcmp(s[0], "item:") == 0)

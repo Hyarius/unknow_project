@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   play_menu.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:12:31 by adjouber          #+#    #+#             */
-/*   Updated: 2020/02/14 12:10:16 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/14 13:26:52 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	open_scenario_or_editor(t_vec2_int pos, t_engine *engine, char **path)
 		if (pos.y > 61 && pos.y < 69)
 		{
 			engine->playing = 4;
-			*path = ft_strdup("ressources/map/save2.map");
+			*path = ft_strdup("ressources/map/editing_map.map");
 		}
 		if (pos.y > 71 && pos.y < 79)
 			engine->menu_nbr = 0;
@@ -78,7 +78,7 @@ void	open_save(t_vec2_int pos, int *play, char **path)
 		if (pos.y > 39 && pos.y < 47)
 		{
 			*play = 2;
-			*path = ft_strdup("ressources/map/save2.map");
+			*path = ft_strdup("ressources/map/wolf.map");
 		}
 		if (pos.y > 49 && pos.y < 57)
 		{
