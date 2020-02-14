@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:45:15 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/13 11:48:33 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/14 11:43:31 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void				link_camera_to_mesh(t_engine *engine, int index,
 																t_mesh *mesh);
 t_mesh_editing		create_mesh_editing(int index, char *path);
 void				cast_mesh(t_engine *engine, t_mesh *mesh_editing);
-int					load_map(t_camera *main_camera, t_engine *engine,
+void				load_map(t_camera *main_camera, t_engine *engine,
 																char *path);
 void				t_mesh_move_door(t_mesh	*mesh, t_engine *engine);
 void				player_take_dmg(t_engine *engine, int dmg);

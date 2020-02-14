@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   play_menu.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:12:31 by adjouber          #+#    #+#             */
-/*   Updated: 2020/02/13 14:56:41 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/02/14 11:45:22 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ void	open_scenario_or_editor(t_vec2_int pos, t_engine *engine, char **path)
 		if (pos.y > 29 && pos.y < 37)
 		{
 			engine->menu_nbr = 17;
-			*path = ft_strdup("ressources/map/fichier_map.map");
+			*path = ft_strdup("ressources/map/chapter1.map");
 		}
 		if (pos.y > 39 && pos.y < 47)
 		{
 			engine->playing = 2;
-			*path = ft_strdup("ressources/map/fichier_map2.map");
+			*path = ft_strdup("ressources/map/chapter2.map");
 		}
 	}
 }
@@ -109,11 +109,7 @@ void	play_menu(t_camera *main_camera, t_engine *engine, int *play)
 		if (!path)
 			error_exit(-71, "Couldn't load map, exiting.");
 		check_map(path);
-		if (!load_map(main_camera, engine, path))
-		{
-			*play = 0;
-			return ;
-		}
+		load_map(main_camera, engine, path);
 		link_camera_to_mesh(engine, 0, t_engine_get_mesh(engine, 0));
 		ft_memdel((void**)&path);
 	}

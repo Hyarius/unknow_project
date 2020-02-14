@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 13:40:28 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/12 12:16:44 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/14 10:31:24 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,14 @@ void			set_mesh(t_mesh *mesh, char **line_split, t_player *p)
 {
 	t_mesh_rotate(mesh, new_vec4(ft_atof(line_split[10]),
 				ft_atof(line_split[11]), ft_atof(line_split[12])));
-	mesh->hp = (int)(ft_atoi(line_split[17]) * p->difficulty);
+	if (mesh->primitive == 10)
+		t_mesh_set_name(mesh, &line_split[0][1]);
+	else
+		t_mesh_set_name(mesh, line_split[1]);
+	mesh->hp = ft_atoi(line_split[17]);
+	if (ft_strcmp(mesh->name, "Enemy") == 0
+		|| ft_strcmp(mesh->name, "Enemy_boss") == 0)
+		mesh->hp = (int)(mesh->hp * p->difficulty);
 	if (ft_strcmp(line_split[ft_tablen(line_split) - 1], "*") == 0)
 		t_mesh_set_visibility(mesh, BOOL_FALSE);
 	if (ft_strcmp(line_split[ft_tablen(line_split) - 1], "#") == 0)
@@ -73,10 +80,6 @@ void			set_mesh(t_mesh *mesh, char **line_split, t_player *p)
 	else
 		mesh->no_hitbox = 0;
 	mesh->kinetic = ft_atof(line_split[9]);
-	if (mesh->primitive == 10)
-		t_mesh_set_name(mesh, &line_split[0][1]);
-	else
-		t_mesh_set_name(mesh, line_split[1]);
 }
 
 void			read_map(t_mesh mesh, t_mesh_list *r, char **s, t_player *p)

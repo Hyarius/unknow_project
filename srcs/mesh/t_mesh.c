@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:04:38 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/12 16:53:50 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/14 11:29:19 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,6 @@ t_mesh	new_mesh(t_vec4 pos)
 	result.rotation = new_vec4(0.0, 0.0, 0.0);
 	t_mesh_look_at(&result);
 	return (result);
-}
-
-void	delete_t_face_list(t_face_list dest)
-{
-	ft_memdel((void**)&dest.face);
 }
 
 void	delete_t_mesh(t_mesh *mesh)

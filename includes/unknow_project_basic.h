@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unknow_project_basic.h                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:41:06 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/13 17:39:33 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/02/14 11:20:02 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 # define UNKNOW_PROJECT_BASIC_H
 
 # include "unknow_project_basic_list.h"
-
-# define ft_memalloc(X) debug_malloc( X, __FILE__, __LINE__, __func__)
-void		*debug_malloc(size_t size, const char *file, int32_t line, const char *func);
 
 char		*ft_strnew(int size);
 int			ft_strlen(char *str);
@@ -54,7 +51,7 @@ void		ft_lstadd(t_list_fd **alst, t_list_fd *new);
 void		ft_lstdel(t_list_fd **alst, void (*del)(void *, size_t));
 void		ft_del_cont(void *content, size_t size);
 void		ft_memdel(void **ap);
-/*void		*ft_memalloc(size_t size);*/
+void		*ft_memalloc(size_t size);
 void		*ft_memcpy(void *dst, const void *src, size_t n);
 void		ft_lstdelone(t_list_fd **alst, void (*del)(void*, size_t));
 float		round_float(float x, unsigned int round);

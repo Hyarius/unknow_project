@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 13:39:37 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/13 11:06:33 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/14 11:28:34 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	save_status(t_player *player, t_mesh cu, int fd, char **str)
 void	save_player_pos(t_player *player, t_mesh current, int fd)
 {
 	char	*str;
+
 	if (!(str = ft_strdup("player: Player ")))
 		error_exit(-70, "ft_strdup failed.");
 	str = ft_strjoinf(str, ft_ftoa(current.pos.x), 3);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 14:24:27 by jubeal            #+#    #+#             */
-/*   Updated: 2020/02/13 17:39:41 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/02/14 11:30:03 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void			exit_prog(t_engine **engine, t_gui **gui,
 	Mix_Quit();
 	TTF_Quit();
 	SDL_Quit();
-	tar_ressources();
 }
 
 void			begin_prog(t_engine **engine, t_gui **gui, char **argv)
@@ -74,7 +73,7 @@ t_playing_funct	*initialize_prog(t_gui **gui, t_engine **engine, char **argv)
 	begin_prog(engine, gui, argv);
 	load_path_texture(*gui);
 	load_textures(*gui);
-	Mix_VolumeMusic(0);
+	Mix_VolumeMusic(MIX_MAX_VOLUME);
 	Mix_PlayMusic((*engine)->sound_engine->music[0], -1);
 	if (!(result = (t_playing_funct *)ft_memalloc(sizeof(t_playing_funct) * 6)))
 		error_exit(-56, "t_playing_funct can't be ft_memalloc");
@@ -113,6 +112,5 @@ int				main(int argc, char **argv)
 		render_screen(engine);
 	}
 	exit_prog(&engine, &gui, &playing_functions);
-	ft_get_leaks("UNKNOW_PROJECT", "finfinfin");
 	return (0);
 }
