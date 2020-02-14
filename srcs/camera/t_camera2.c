@@ -6,11 +6,11 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 14:17:00 by jubeal            #+#    #+#             */
-/*   Updated: 2020/02/13 09:53:12 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/14 11:59:01 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unknow_project.h"
+#include "wolf3d.h"
 
 void		handle_t_camera_view_by_mouse(t_camera *cam, t_mouse *p_mouse)
 {

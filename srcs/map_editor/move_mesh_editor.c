@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   move_mesh_editor.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 14:56:00 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/20 15:16:38 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/02/14 11:59:00 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unknow_project.h"
+#include "wolf3d.h"
 
 void		rotate_mesh(t_engine *engine)
 {

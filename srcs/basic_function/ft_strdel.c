@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 12:54:03 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/07 14:15:34 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/02/14 11:59:00 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unknow_project.h"
+#include "wolf3d.h"
 
 void	ft_strdel(char **as)
 {

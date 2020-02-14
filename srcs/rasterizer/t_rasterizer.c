@@ -6,11 +6,11 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:50:18 by jubeal            #+#    #+#             */
-/*   Updated: 2020/02/05 10:14:37 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/14 11:59:00 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unknow_project.h"
+#include "wolf3d.h"
 
 t_rasterizer	new_rasterizer(t_vec4 a, t_vec4 b, t_vec4 c)
 {

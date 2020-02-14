@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   error_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 15:37:21 by adjouber          #+#    #+#             */
-/*   Updated: 2019/10/31 15:37:22 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/02/14 11:59:00 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unknow_project.h"
+#include "wolf3d.h"
 
 void	error_exit(int error, char *message)
 {

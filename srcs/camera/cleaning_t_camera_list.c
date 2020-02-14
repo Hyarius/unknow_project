@@ -6,11 +6,11 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 14:31:22 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/12 15:59:41 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/14 11:59:01 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unknow_project.h"
+#include "wolf3d.h"
 
 void			free_t_camera_list(t_camera_list **dest)
 {

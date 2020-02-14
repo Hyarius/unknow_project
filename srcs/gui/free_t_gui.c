@@ -6,11 +6,11 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 12:22:15 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/13 11:30:32 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/14 11:59:00 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unknow_project.h"
+#include "wolf3d.h"
 
 void	delete_t_letter(t_letter *dest)
 {

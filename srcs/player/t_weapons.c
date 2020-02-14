@@ -6,11 +6,11 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 09:37:24 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/29 15:33:11 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/02/14 11:59:00 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unknow_project.h"
+#include "wolf3d.h"
 
 void			new_weapons3(int ammo, int total_ammo, t_weapon *result)
 {

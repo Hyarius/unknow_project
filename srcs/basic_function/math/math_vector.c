@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   math_vector.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 16:34:22 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/20 11:43:49 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/02/14 11:59:01 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unknow_project.h"
+#include "wolf3d.h"
 
 t_vec4		cross_t_vec4(t_vec4 a, t_vec4 b)
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   move_mesh_editor2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:18:22 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/20 15:18:58 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/02/14 11:59:00 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unknow_project.h"
+#include "wolf3d.h"
 
 void		equals_move(t_engine *engine)
 {

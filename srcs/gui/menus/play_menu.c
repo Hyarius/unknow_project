@@ -6,11 +6,11 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:12:31 by adjouber          #+#    #+#             */
-/*   Updated: 2020/02/14 11:45:22 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/14 12:10:16 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unknow_project.h"
+#include "wolf3d.h"
 
 void	synopsis_menu(t_engine *engine)
 {
@@ -32,7 +32,7 @@ void	open_scenario_or_editor(t_vec2_int pos, t_engine *engine, char **path)
 		if (pos.y > 61 && pos.y < 69)
 		{
 			engine->playing = 4;
-			*path = ft_strdup("ressources/map/save4.map");
+			*path = ft_strdup("ressources/map/save2.map");
 		}
 		if (pos.y > 71 && pos.y < 79)
 			engine->menu_nbr = 0;

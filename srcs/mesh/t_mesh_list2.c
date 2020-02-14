@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   t_mesh_list2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:58:08 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/07 13:38:51 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/02/14 11:59:01 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unknow_project.h"
+#include "wolf3d.h"
 
 t_mesh		t_mesh_list_at(t_mesh_list *dest, int index)
 {

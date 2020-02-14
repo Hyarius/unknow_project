@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   t_triangle_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 11:28:17 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 11:48:00 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/02/14 11:59:01 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unknow_project.h"
+#include "wolf3d.h"
 
 int			t_triangle_similarity(t_triangle p_a, t_triangle p_b)
 {

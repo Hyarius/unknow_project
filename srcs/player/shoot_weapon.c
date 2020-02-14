@@ -6,11 +6,11 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 13:22:08 by adjouber          #+#    #+#             */
-/*   Updated: 2020/02/14 10:43:00 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/14 11:59:00 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unknow_project.h"
+#include "wolf3d.h"
 
 void	animate_weapon(t_camera *cam, t_texture **texture_weapons,
 															t_weapon *weapon)

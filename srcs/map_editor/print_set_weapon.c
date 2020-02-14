@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   print_set_weapon.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 13:36:53 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/20 13:37:06 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/02/14 11:59:00 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unknow_project.h"
+#include "wolf3d.h"
 
 void		print_set_ar(t_camera *cam, t_gui *gui, t_player *plr)
 {

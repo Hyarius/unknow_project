@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   t_uv.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:45:08 by jubeal            #+#    #+#             */
-/*   Updated: 2020/02/07 15:08:18 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/02/14 11:59:00 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unknow_project.h"
+#include "wolf3d.h"
 
 t_uv	new_uv(t_triangle p_triangle, t_texture *p_texture)
 {

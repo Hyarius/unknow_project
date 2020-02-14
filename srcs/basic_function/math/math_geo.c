@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   math_geo.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 17:05:09 by adjouber          #+#    #+#             */
-/*   Updated: 2020/01/20 13:31:03 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/02/14 11:59:01 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unknow_project.h"
+#include "wolf3d.h"
 
 int			same_side(t_vec4 p1, t_vec4 p2, t_vec4 a, t_vec4 b)
 {

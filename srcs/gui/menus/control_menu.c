@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   control_menu.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 14:48:47 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/31 13:53:24 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/02/14 11:59:01 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unknow_project.h"
+#include "wolf3d.h"
 
 void		set_controls(t_camera *main_camera, t_gui *gui,
 											t_user_engine *user_engine, int key)

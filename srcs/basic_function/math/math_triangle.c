@@ -6,11 +6,11 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 14:03:34 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/20 13:50:48 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/02/14 11:59:01 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unknow_project.h"
+#include "wolf3d.h"
 
 int		intersect_triangle_by_segment2(float *f, t_vec4 *t_v,
 							t_triangle p_triangle, t_vec4 *intersection)

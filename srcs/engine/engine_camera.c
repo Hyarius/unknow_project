@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   engine_camera.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 11:40:31 by gboutin           #+#    #+#             */
-/*   Updated: 2020/01/28 14:23:29 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/02/14 11:59:01 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unknow_project.h"
+#include "wolf3d.h"
 
 void		t_engine_place_camera(t_engine *engine, int index,
 															t_vec4 p_new_pos)

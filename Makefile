@@ -1,4 +1,4 @@
-NAME=		UNKNOW_PROJECT
+NAME=		wolf3d
 
 ##
 ##		RESSOURCES

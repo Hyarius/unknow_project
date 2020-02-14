@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   camera_recovery_in_list.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <jubeal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 14:35:44 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/10 17:21:12 by jubeal           ###   ########.fr       */
+/*   Updated: 2020/02/14 11:59:01 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unknow_project.h"
+#include "wolf3d.h"
 
 t_camera		t_camera_list_at(t_camera_list *dest, int index)
 {
