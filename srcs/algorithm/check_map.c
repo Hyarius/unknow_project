@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/13 11:09:05 by adjouber          #+#    #+#             */
-/*   Updated: 2020/02/14 13:29:30 by spuisais         ###   ########.fr       */
+/*   Created: 2020/02/14 15:41:29 by gboutin           #+#    #+#             */
+/*   Updated: 2020/02/19 11:56:59 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void	check_map(char *path)
 	int		idx;
 	char	*line;
 	char	**s;
-
+	
 	idx = 0;
 	if ((fd = open(path, O_RDONLY)) < 0)
 		error_exit(-7000, "impossible fd");

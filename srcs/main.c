@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/24 14:24:27 by jubeal            #+#    #+#             */
-/*   Updated: 2020/02/14 11:59:00 by gboutin          ###   ########.fr       */
+/*   Created: 2020/02/14 15:52:12 by gboutin           #+#    #+#             */
+/*   Updated: 2020/02/19 13:36:18 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void			load_textures(t_gui *gui)
 	gui->text_weap[9] = png_load("ressources/assets/imgs/shotgun_shoot_0.png");
 	gui->text_weap[10] = png_load(
 						"ressources/assets/imgs/wall_destroyer_shoot_0.png");
-	gui->skybox = png_load("ressources/assets/textures/skybox.png");
+	gui->skybox = png_load("ressources/assets/textures/skybox1.png");
 }
 
 t_playing_funct	*initialize_prog(t_gui **gui, t_engine **engine, char **argv)

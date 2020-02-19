@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_mesh_set.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:30:47 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/14 11:59:01 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/19 14:55:24 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,16 @@ void	t_mesh_set_visibility(t_mesh *dest, int new_state)
 
 void	t_mesh_set_name(t_mesh *mesh, char *name)
 {
+	if (mesh != NULL && mesh->name != NULL)
+		ft_strdel(&mesh->name);
 	if (!(mesh->name = ft_strdup(name)))
 		error_exit(-70, "ft_strdup failed.");
 	if (ft_strcmp(mesh->name, "door") == 0
 		|| ft_strcmp(mesh->name, "elevator") == 0
 		|| ft_strcmp(mesh->name, "door_red") == 0
 		|| ft_strcmp(mesh->name, "door_blue") == 0
-		|| ft_strcmp(mesh->name, "door_green") == 0)
+		|| ft_strcmp(mesh->name, "door_green") == 0
+		|| ft_strcmp(mesh->name, "door_script") == 0)
 		mesh->door = new_door();
 	else if (ft_strcmp(mesh->name, "Enemy") == 0
 		|| ft_strcmp(mesh->name, "Enemy_boss") == 0)

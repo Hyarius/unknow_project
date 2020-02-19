@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_sounds.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:41:59 by spuisais          #+#    #+#             */
-/*   Updated: 2020/02/14 11:59:01 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/18 10:01:21 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ Mix_Music		**load_music(void)
 	nb_music = 1;
 	if (!(music = (Mix_Music**)ft_memalloc(sizeof(Mix_Music*) * nb_music)))
 		error_exit(66, "Couldn't ft_memalloc array of music (load_music)");
-	music[0] = Mix_LoadMUS("ressources/assets/sounds/IG_theme.ogg");
+	music[0] = Mix_LoadMUS("ressources/assets/musics/IG_theme.ogg");
 	i = 0;
 	while (i < nb_music)
 		if (!music[i++])

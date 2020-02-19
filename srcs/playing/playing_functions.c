@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   playing_functions.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/24 12:02:06 by jubeal            #+#    #+#             */
-/*   Updated: 2020/02/14 11:59:01 by gboutin          ###   ########.fr       */
+/*   Created: 2020/02/14 15:49:17 by gboutin           #+#    #+#             */
+/*   Updated: 2020/02/19 14:57:27 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	game_playing(t_camera *camera, t_gui *gui, t_engine *engine,
 										engine, gui->text_weap);
 	enemy_look(engine);
 	enemy_shoot(engine);
+	enemy_boss_shoot(engine);
+	enemy_boss_spawn(engine);
 	drawing_front_hp(camera, engine->user_engine->player);
 	drawing_front_mun(camera, gui->text_am, engine->user_engine->player);
 	drawing_front_weapons(camera, gui->text_weap,

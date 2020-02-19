@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/20 14:17:25 by adjouber          #+#    #+#             */
-/*   Updated: 2020/02/14 11:59:00 by gboutin          ###   ########.fr       */
+/*   Created: 2020/02/14 15:47:39 by gboutin           #+#    #+#             */
+/*   Updated: 2020/02/14 16:34:44 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void		set_collectible(t_mesh *mesh, t_mesh_editing edit)
 	if (mesh->collectible == 1)
 	{
 		str = ft_itoa(i);
-		mesh->name = ft_strjoinf(mesh->name, str, 2);
+		mesh->name = ft_strjoinf(mesh->name, str, 3);
 		i++;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_enemy_boss.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/15 14:13:47 by jubeal            #+#    #+#             */
-/*   Updated: 2020/02/14 11:59:01 by gboutin          ###   ########.fr       */
+/*   Created: 2020/02/14 15:50:32 by gboutin           #+#    #+#             */
+/*   Updated: 2020/02/19 14:33:36 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void			enemy_boss_shoot(t_engine *engine)
 		{
 			if (target->tick == -5)
 				target->tick = engine->tick;
-			if (engine->tick % target->tick == 6)
+			if (engine->tick - target->tick == 6)
 			{
 				mesh = cast_ray(engine, target->camera->pos,
 						target->camera->forward, "Enemy_boss");

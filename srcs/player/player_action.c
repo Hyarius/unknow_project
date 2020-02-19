@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_action.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 12:57:57 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/14 11:59:00 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/19 14:46:20 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,27 @@ void	player_action2(t_keyboard *p_keyboard, t_engine *engine,
 	}
 }
 
+void	door_script(t_engine *engine, t_mesh **door, t_mesh *target)
+{
+	t_mesh	*mesh;
+	int		i;
+
+	i = 0;
+	if (ft_strcmp(target->name, "door_script") == 0)
+	{
+		while (i < engine->physic_engine->mesh_list->size)
+		{
+			mesh = t_mesh_list_get(engine->physic_engine->mesh_list, i);
+			if (ft_strcmp(mesh->name, "Enemy_wait") == 0)
+				break;
+			i++;
+		}
+		t_mesh_set_name(mesh, "Enemy_boss");
+		target->door.move = 1;
+		door[0] = target;
+	}
+}
+
 void	player_action3(t_camera *camera, t_engine *engine, t_mesh **door,
 																t_mesh *target)
 {
@@ -57,6 +78,8 @@ void	player_action3(t_camera *camera, t_engine *engine, t_mesh **door,
 			target->door.move = 1;
 			door[0] = target;
 		}
+		else
+			door_script(engine, door, target);
 	}
 	if (camera->body != target && target->bubble_radius
 			+ camera->body->bubble_radius
