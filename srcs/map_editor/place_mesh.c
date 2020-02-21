@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 15:47:39 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/14 16:34:44 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/20 14:08:38 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,9 @@ void		set_collectible(t_mesh *mesh, t_mesh_editing edit)
 	static int	i = 1;
 
 	mesh->collectible = edit.mesh.collectible;
-	if (mesh->collectible == 1)
+	if (mesh->collectible == 1 && ft_strcmp(mesh->name, "Card_red") != 0
+								&& ft_strcmp(mesh->name, "Card_blue") != 0
+								&& ft_strcmp(mesh->name, "Card_green") != 0)
 	{
 		str = ft_itoa(i);
 		mesh->name = ft_strjoinf(mesh->name, str, 3);

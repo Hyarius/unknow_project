@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 15:48:12 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/14 15:48:13 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/19 16:11:00 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ t_mesh			create_mesh_ladder_platform(int index, t_mesh mesh)
 	if (index == 18)
 	{
 		ret.name = "ladder";
-		ret.size = new_vec4(1.0, 2.0, -0.01);
+		ret.size = new_vec4(0.2, 4.0, 0.05);
 		ret.primitive = 1;
 		ret.collectible = 0;
 		ret.rotation = new_vec4(0.0, 0.0, 0.0);

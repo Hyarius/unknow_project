@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 13:40:28 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/14 11:59:00 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/19 15:47:37 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void			set_mesh(t_mesh *mesh, char **line_split, t_player *p)
 		t_mesh_set_name(mesh, line_split[1]);
 	mesh->hp = ft_atoi(line_split[17]);
 	if (ft_strcmp(mesh->name, "Enemy") == 0
-		|| ft_strcmp(mesh->name, "Enemy_boss") == 0)
+		|| ft_strcmp(mesh->name, "Enemy_wait") == 0)
 		mesh->hp = (int)(mesh->hp * p->difficulty);
 	if (ft_strcmp(line_split[ft_tablen(line_split) - 1], "*") == 0)
 		t_mesh_set_visibility(mesh, BOOL_FALSE);

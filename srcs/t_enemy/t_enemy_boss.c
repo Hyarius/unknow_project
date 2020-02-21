@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_enemy_boss.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 15:50:32 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/19 14:33:36 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/02/19 15:59:20 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void			enemy_boss_shoot(t_engine *engine)
 		target = t_mesh_list_get(engine->physic_engine->mesh_list, i);
 		if (ft_strcmp(target->name, "Enemy_boss") == 0)
 		{
-			if (target->tick == -5)
+			if (target->tick == 0)
 				target->tick = engine->tick;
 			if (engine->tick - target->tick == 6)
 			{
@@ -83,7 +83,7 @@ void			enemy_boss_spawn(t_engine *engine)
 			{
 				mesh = create_cube(spawn_mine(target->pos),
 						new_vec4(0.3, 0.5, 0.3), NULL, 0.0);
-				t_mesh_set_color(&mesh, new_color(1.0, 1.0, 1.0, 1.0));
+				t_mesh_set_color(&mesh, new_color(0.0, 0.0, 0.0, 1.0));
 				t_mesh_set_name(&mesh, "Enemy_mine");
 				mesh.hp = 10;
 				t_engine_add_mesh(engine, mesh);

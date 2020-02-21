@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 15:41:29 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/19 11:56:59 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/02/20 14:14:11 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void	check_map(char *path)
 	int		idx;
 	char	*line;
 	char	**s;
-	
+
 	idx = 0;
 	if ((fd = open(path, O_RDONLY)) < 0)
 		error_exit(-7000, "impossible fd");

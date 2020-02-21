@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 15:45:09 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/14 15:45:09 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/21 16:46:55 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 void		delete_t_cam(t_camera dest)
 {
+	static int	i = 0;
+
+	i++;
 	if (dest.body != NULL)
 		free_t_mesh(&dest.body);
 	free_t_view_port(&dest.view_port);

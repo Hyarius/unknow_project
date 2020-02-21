@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_action.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 12:57:57 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/19 14:46:20 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/02/20 14:12:24 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,11 @@ void	door_script(t_engine *engine, t_mesh **door, t_mesh *target)
 		{
 			mesh = t_mesh_list_get(engine->physic_engine->mesh_list, i);
 			if (ft_strcmp(mesh->name, "Enemy_wait") == 0)
-				break;
+				break ;
 			i++;
 		}
 		t_mesh_set_name(mesh, "Enemy_boss");
+		t_mesh_set_name(target, "door");
 		target->door.move = 1;
 		door[0] = target;
 	}
@@ -78,8 +79,7 @@ void	player_action3(t_camera *camera, t_engine *engine, t_mesh **door,
 			target->door.move = 1;
 			door[0] = target;
 		}
-		else
-			door_script(engine, door, target);
+		door_script(engine, door, target);
 	}
 	if (camera->body != target && target->bubble_radius
 			+ camera->body->bubble_radius

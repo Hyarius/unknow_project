@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 16:01:06 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/14 16:01:07 by gboutin          ###   ########.fr       */
+/*   Updated: 2020/02/21 16:45:43 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 # define BUFF_SIZE 1
 
-# define PUSH_SIZE 150
+# define PUSH_SIZE 250
 
 # define MOUSE_BUTTON 3
 # define MOUSE_NULL -1

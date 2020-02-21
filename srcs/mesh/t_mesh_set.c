@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_mesh_set.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:30:47 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/19 14:55:24 by spuisais         ###   ########.fr       */
+/*   Updated: 2020/02/19 15:47:54 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,6 @@ void	t_mesh_set_name(t_mesh *mesh, char *name)
 		|| ft_strcmp(mesh->name, "door_script") == 0)
 		mesh->door = new_door();
 	else if (ft_strcmp(mesh->name, "Enemy") == 0
-		|| ft_strcmp(mesh->name, "Enemy_boss") == 0)
+		|| ft_strcmp(mesh->name, "Enemy_wait") == 0)
 		mesh->tick = 0;
 }
