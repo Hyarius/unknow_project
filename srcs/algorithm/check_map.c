@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 15:41:29 by gboutin           #+#    #+#             */
-/*   Updated: 2020/02/20 14:14:11 by adjouber         ###   ########.fr       */
+/*   Updated: 2020/02/24 15:47:43 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,11 @@ int		check_mesh(char **s)
 
 int		map_checker(char **s, int *idx)
 {
+	static int i = 0;
+
+	i++;
+	if (i >= 249)
+		return (0);
 	if (s[0][0] == '/' || s[0][0] == '*')
 		return (1);
 	if (ft_strcmp(s[0], "player:") == 0)
