@@ -1,4 +1,4 @@
-NAME		=	wolf3d
+NAME		=	doom-nukem
 
 RED =		\033[1;31m
 CYAN =		\033[1;36m
